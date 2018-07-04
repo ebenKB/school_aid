@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="504.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.newAttendanceSheetController">
+   <children>
+      <Pane fx:id="root" layoutY="-1.0" prefHeight="73.0" prefWidth="504.0">
+         <children>
+            <Label fx:id="dateLabel" layoutX="19.0" layoutY="12.0" prefHeight="50.0" prefWidth="470.0" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <HBox layoutX="80.0" layoutY="144.0" prefHeight="36.0" prefWidth="342.0" spacing="40.0">
+         <children>
+            <Button fx:id="useSystemDate" mnemonicParsing="false" prefHeight="36.0" prefWidth="142.0" text="Use System Date">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="useNewDate" mnemonicParsing="false" prefHeight="36.0" prefWidth="163.0" text="Use New Date">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <JFXDatePicker fx:id="datePicker" layoutX="89.0" layoutY="200.0" prefHeight="50.0" prefWidth="324.0" visible="false" />
+      <HBox layoutX="54.0" layoutY="283.0" prefHeight="39.0" prefWidth="406.0" spacing="30.0">
+         <children>
+            <Button fx:id="close" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" text="CLOSE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="save" mnemonicParsing="false" prefHeight="39.0" prefWidth="113.0" text="SAVE DATE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="createSheet" layoutX="124.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="139.0" text="NEW SHEET">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/attendance.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

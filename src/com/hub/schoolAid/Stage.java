@@ -1,0 +1,105 @@
+package com.hub.schoolAid;
+
+import javax.persistence.*;
+import java.util.List;
+
+/**
+ * Created by HUBKB.S on 11/20/2017.
+ */
+@Entity(name="Class")
+public class Stage {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    //other fields variables
+    private String name;
+    private int classValue;
+    private int num_on_roll;
+    private Double feeding_fee;
+    private Double feesToPay;
+
+    @ManyToMany
+    private List<Course> course;
+
+    //constructor
+    public Stage (){
+
+    }
+
+    public Stage (Stage stage){
+        this.setName(stage.getName());
+        this.setNum_on_roll(stage.getNum_on_roll());
+    }
+
+    //getters and setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getNum_on_roll() {
+        return num_on_roll;
+    }
+
+    public void setNum_on_roll(int num_on_roll) {
+        this.num_on_roll = num_on_roll;
+    }
+
+    public int getClassValue() {
+        return classValue;
+    }
+
+    public void setClassValue(int classValue) {
+        this.classValue = classValue;
+    }
+
+    public Double getFeeding_fee() {
+        return feeding_fee;
+    }
+
+    public void setFeeding_fee(Double feeding_fee) {
+        this.feeding_fee = feeding_fee;
+    }
+
+    public Double getFeesToPay() {
+        return feesToPay;
+    }
+
+    public void setFeesToPay(Double feesToPay) {
+        this.feesToPay = feesToPay;
+    }
+
+    public List<Course> getCourse() {
+        return course;
+    }
+
+    public void setCourse(List<Course> course) {
+        this.course = course;
+    }
+
+    public Boolean isGreater(Stage stage1, Stage stage2){
+        return stage1.getClassValue() > stage2.getClassValue();
+    }
+
+    public Boolean isEqual(Stage stage1,Stage stage2){
+        return (stage1.getClassValue() == stage2.getClassValue());
+    }
+
+    @Override
+    public String toString() {
+        return this.getName();
+    }
+}

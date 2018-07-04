@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.CheckListView?>
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="796.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SubjectFormController">
+   <children>
+      <ListView fx:id="subjectListView" layoutX="480.0" layoutY="85.0" prefHeight="360.0" prefWidth="276.0" />
+      <HBox layoutX="494.0" layoutY="469.0" prefHeight="27.0" prefWidth="262.0" spacing="40.0">
+         <children>
+            <Button fx:id="remove" mnemonicParsing="false" prefHeight="28.0" prefWidth="86.0" text="Remove" visible="false" />
+            <Button fx:id="save" mnemonicParsing="false" prefHeight="28.0" prefWidth="99.0" text="Save" />
+         </children>
+      </HBox>
+      <Label alignment="CENTER" layoutX="176.0" layoutY="22.0" prefHeight="27.0" prefWidth="412.0" text="CREATE NEW SUBJECT" textAlignment="CENTER" textFill="#fcf9f9">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <FlowPane hgap="20.0" layoutX="39.0" layoutY="85.0" prefHeight="400.0" prefWidth="253.0" vgap="10.0">
+         <children>
+            <CheckListView fx:id="classChckListView" prefHeight="327.0" prefWidth="240.0" />
+            <TextField fx:id="subjectName" prefHeight="35.0" prefWidth="240.0" promptText="Name of Subject" />
+            <HBox alignment="CENTER" spacing="20.0">
+               <children>
+                  <Button fx:id="clear" mnemonicParsing="false" prefHeight="28.0" prefWidth="99.0" text="Clear" />
+                  <Button fx:id="add" mnemonicParsing="false" prefHeight="28.0" prefWidth="109.0" text="Add" />
+               </children>
+            </HBox>
+         </children>
+      </FlowPane>
+      <Separator layoutX="385.0" layoutY="91.0" opacity="0.2" orientation="VERTICAL" prefHeight="317.0" prefWidth="0.0" />
+   </children>
+</AnchorPane>

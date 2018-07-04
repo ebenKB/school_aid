@@ -1,0 +1,244 @@
+
+* {
+    -fx-primary : #2A2E37;
+    -fx-secondary : #FFFF8D;
+    -fx-primarytext : #B2B2B2;
+    -fx-blue: #1976D2;
+    -fx-red: #FF0000;
+}
+
+#root{
+    -fx-background-color: -fx-primary;
+}
+
+#buttonCotainer{
+    -fx-background-color: #888888;
+}
+#tableInfo{
+    -fx-background-color: #888888;
+}
+
+#headerPane{
+    -fx-background-color: #aaaaaa;
+}
+
+#btnlogout{
+    -fx-background-radius: 8000px;
+}
+
+#uploadImg{
+    -fx-background-color: #aaddee;
+}
+
+#menubar{
+    -fx-background-color: #888888;
+    -fx-font: #ffffff;
+    -fx-font-size: 14px;
+}
+#progressLabel{
+    -fx-font: #ffffff;
+    -fx-font-size: 14px;
+}
+
+
+#progressLabel{
+    -fx-text-fill: #ffffff;
+}
+
+#vbox .menu-button{
+    -fx-background-color: derive(-fx-primary, 120%)
+}
+
+#buttonCotainer{
+
+}
+
+#vbox .menu-button:hover{
+    -fx-background-color: derive(-fx-primary, 20%);
+    -fx-text-fill: #ffffff;
+}
+
+.menu-item:hover{
+    -fx-background-color: derive(-fx-primary, 20%);
+
+}
+.root .combo-box{
+    -fx-background-color: derive(-fx-primary,0%) ;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: #fff;
+    /*-fx-background-color: #ffffff;*/
+}
+
+.root .combo-box .cell{
+    -fx-text-fill: #fff;
+    -fx-background-color: derive(-fx-primary,30%);
+}
+
+.root .combo-box .label{
+    -fx-background-color: derive(-fx-primary,30%);
+    -fx-text-fill: #fff;
+}
+.root .combo-box .combo-box-popup .list-view{
+    -fx-background-color:#fff;
+}
+
+.root .combo-box .combo-box-popup .list-view :hover{
+    -fx-background-color: derive(-fx-primary,120%);
+    -fx-text-fill: derive(-fx-primary,30%);
+}
+
+#dob{
+    -fx-font-size: 14px;
+    /*-fx-text-fill: #000;*/
+    -fx-background-color: derive(-fx-primary,30%);
+}
+
+#dob .label .text-field{
+    -fx-background-color: #fff;
+    -fx-text-fill: derive(-fx-primary,30%);
+}
+
+#dob .month-year-pane{
+    -fx-background-color:derive(-fx-primary,30%);
+}
+#dob .text-field{
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: #fff;
+    /*-fx-control-inner-background: red;*/
+}
+
+#dob .button{
+    -fx-font-size: 10px;
+    -fx-text-fill: derive(-fx-primary,30%);;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: normal;
+    -fx-max-width: 20px;
+    -fx-background-color: derive(-fx-primary,30%);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+
+#header{
+}
+#imageViewPane{
+    /*-fx-background-radius: 4000;*/
+    /*-fx-border-radius: 4000;*/
+    -fx-border-color: #fff;
+    -fx-background-color: derive(-fx-primary,0%);
+}
+#root .button {
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+#reportForm{
+    -fx-background-color: derive(-fx-primary,30%);
+}
+.button :hover{
+    -fx-background-color: #fffff;
+}
+
+.context-menu{
+    -fx-background-color: derive(-fx-primary, 170%)
+}
+.table-view{
+    -fx-cell-size: 20;
+}
+.table-view .cell :hover{
+    /*-fx-background-color: derive(-fx-primary, 200%)*/
+}
+
+#root .text-field{
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-background-color: -fx-primary;
+    -fx-font-weight: bold;
+    -fx-text-alignment: right;
+}
+
+/*#saleItems, #amountPaid, #balance, #feesBalance,#feedingFeeCredit{*/
+    /*-fx-background-color: derive(-fx-primary,30%);*/
+    /*-fx-font-size: 16px;*/
+    /*-fx-font-weight: bold;*/
+    /*-fx-text-alignment: right;*/
+/*}*/
+
+#root .list-view{
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+}
+/*salesListView*/
+/*#salesListView{*/
+    /*-fx-background-color: -fx-primary;*/
+    /*-fx-text-fill: white;*/
+/*}*/
+
+#root .list-cell:selected {
+    -fx-background-color: derive(-fx-primary,30%);
+}
+
+#root .list-cell {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+}
+
+#root .label {
+    -fx-text-fill:#fff
+}
+
+#stdDetailsTabPane .headers-region{
+    -fx-background-color: derive(-fx-primary,30%);
+}
+
+#stdDetailsTabPane .tab-header-background{
+    -fx-background-color: derive(-fx-primary,30%);
+}
+
+#attendanceForm{
+    -fx-background-color: -fx-primary;
+}
+
+#studentImage {
+    -fx-background-radius: 100%;
+}
+
+#fees,#totalNumOnRoll {
+    -fx-font-size: 100px;
+    -fx-font-weight: bold;
+    -fx-background-color: -fx-primary;
+}
+
+
+#totalNumOnRoll {
+    -fx-font-size: 100px;
+    -fx-font-weight: bold;
+    -fx-background-color: -fx-primary;
+    -fx-border-color:  #fff;
+}
+
+#feedingToggle .label{
+    -fx-text-fill: #fff;
+}
+
+
+/*#salesListView .list-cell:hover {*/
+    /*-fx-background-color:#fff;*/
+    /*-fx-text-fill: derive(-fx-primary,30%) ;*/
+/*}*/
+
+.jfx-rippler {
+    -jfx-rippler-fill: #fff408;
+}
+
+.table-view {
+    -fx-font-size: 16px;
+    -fx-text-alignment: center;
+}
+.table-view :hover{
+    -fx-background-color:derive(-fx-primary,120%);
+    -fx-text-fill: #fff;
+}

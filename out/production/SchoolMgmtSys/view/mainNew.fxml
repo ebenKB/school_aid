@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="parent" maxHeight="-Infinity" maxWidth="950.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="INHERIT" prefHeight="643.0" prefWidth="950.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainController">
+   <children>
+      <FlowPane layoutX="1.0" layoutY="34.0" prefHeight="593.0" prefWidth="922.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+         <children>
+            <HBox spacing="25.0">
+               <children>
+                  <Pane prefHeight="515.0" prefWidth="320.0">
+                     <children>
+                        <VBox layoutY="32.0" spacing="15.0">
+                           <children>
+                              <JFXTextField fx:id="surname" focusColor="#fafbfc" labelFloat="true" maxWidth="330.0" minWidth="330.0" prefHeight="35.0" prefWidth="330.0" promptText="SUR NAME" />
+                              <JFXTextField fx:id="fname" focusColor="#fafbfc" labelFloat="true" maxWidth="330.0" minWidth="330.0" prefHeight="35.0" prefWidth="330.0" promptText="FIRST NAME" />
+                              <JFXTextField fx:id="oname" focusColor="#fafbfc" labelFloat="true" layoutX="10.0" layoutY="60.0" maxWidth="330.0" minWidth="330.0" prefHeight="35.0" prefWidth="330.0" promptText="OTHER NAMES" />
+                           </children>
+                        </VBox>
+                        <JFXComboBox fx:id="classCombo" layoutX="5.0" layoutY="170.0" prefHeight="43.0" prefWidth="310.0" promptText="SELECT CLASS/FORM" />
+                        <JFXDatePicker fx:id="dob" accessibleRoleDescription="DATE OF BIRTH" defaultColor="#f9fcfb" layoutX="14.0" layoutY="247.0" prefHeight="43.0" prefWidth="299.0" />
+                        <HBox layoutX="23.0" layoutY="319.0" spacing="50.0">
+                           <children>
+                              <RadioButton fx:id="male" mnemonicParsing="false" text="MALE" textFill="#fcf9f9" />
+                              <RadioButton fx:id="female" mnemonicParsing="false" text="FEMALE" textFill="#fcfafa" />
+                           </children>
+                        </HBox>
+                        <Text layoutX="23.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Does your child have any allergy?" />
+                        <HBox layoutX="25.0" layoutY="424.0" prefHeight="17.0" prefWidth="155.0" spacing="65.0">
+                           <children>
+                              <RadioButton fx:id="no" mnemonicParsing="false" text="NO" textFill="WHITE">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="allergyRadiobtn" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="yes" mnemonicParsing="false" text="YES" textFill="WHITE" toggleGroup="$allergyRadiobtn" />
+                           </children>
+                        </HBox>
+                        <JFXTextArea fx:id="allergy" layoutX="7.0" layoutY="470.0" maxWidth="310.0" minWidth="299.0" prefHeight="79.0" prefWidth="299.0" promptText="IF YES, SPECIFY" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="544.0" prefWidth="320.0">
+                     <children>
+                        <VBox layoutY="32.0" spacing="15.0">
+                           <children>
+                              <JFXTextField fx:id="parentName" focusColor="#fafbfc" labelFloat="true" maxWidth="330.0" minWidth="330.0" prefHeight="35.0" prefWidth="330.0" promptText="PARENT / GUARDIAN NAME" />
+                              <JFXTextField fx:id="contact" focusColor="#fafbfc" labelFloat="true" maxWidth="330.0" minWidth="330.0" prefHeight="35.0" prefWidth="330.0" promptText="CONTACT" />
+                              <JFXTextField fx:id="occupation" focusColor="#fafbfc" labelFloat="true" layoutX="10.0" layoutY="60.0" maxWidth="330.0" minWidth="330.0" prefHeight="35.0" prefWidth="330.0" promptText="OCCUPATION" />
+                              <JFXTextField focusColor="#fafbfc" labelFloat="true" layoutX="10.0" layoutY="110.0" maxWidth="330.0" minWidth="330.0" onAction="#address" prefHeight="35.0" prefWidth="330.0" promptText="RESIDENCE" />
+                              <JFXTextField fx:id="landmark" focusColor="#fafbfc" labelFloat="true" layoutX="10.0" layoutY="160.0" maxWidth="330.0" minWidth="330.0" prefHeight="35.0" prefWidth="330.0" promptText="MAJOR LANDMARK" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="579.0" prefWidth="249.0">
+                     <children>
+                        <ImageView fx:id="image" fitHeight="101.0" fitWidth="104.0" layoutX="62.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/login-avatar.png" />
+                           </image>
+                        </ImageView>
+                        <Button layoutX="55.0" layoutY="195.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="114.0" text="Upload Image" />
+                        <HBox layoutX="62.0" layoutY="502.0" spacing="15.0">
+                           <children>
+                              <Button fx:id="cancel" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="Cancel" />
+                              <Button fx:id="save" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="Register" />
+                           </children>
+                        </HBox>
+                        <ImageView fitHeight="291.0" fitWidth="454.0" layoutX="-340.0" layoutY="313.0" opacity="0.22" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/logo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </children>
+      </FlowPane>
+      <Pane prefHeight="43.0" prefWidth="950.0" style="-fx-background-color: FFFFFF;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text layoutX="246.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NEW STUDENT REGISTRATION FORM" textAlignment="CENTER" wrappingWidth="463.6201171875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="43.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/logo.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+   </children>
+   
+</AnchorPane>
