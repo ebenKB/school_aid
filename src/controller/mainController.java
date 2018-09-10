@@ -4,6 +4,7 @@ package controller;
 
 import com.hub.schoolAid.*;
 import com.jfoenix.controls.JFXTextField;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
@@ -57,6 +58,12 @@ public class mainController implements Initializable{
     private VBox vbox;
 
     @FXML
+    private FontAwesomeIconView menuToggle;
+
+    @FXML
+    private FontAwesomeIconView eye;
+
+    @FXML
     private AnchorPane buttonCotainer;
 
     @FXML
@@ -64,6 +71,9 @@ public class mainController implements Initializable{
 
     @FXML
     private AnchorPane menuButtonsPane;
+
+    @FXML
+    private AnchorPane tablePane;
 
     @FXML
     private HBox buttonHBox;
@@ -129,7 +139,7 @@ public class mainController implements Initializable{
     private  TableColumn<Student,String> idCol;
 
     @FXML
-    private AnchorPane tableInfo;
+    private HBox tableInfo;
 
     @FXML
     private TextField totalStudents;
@@ -285,6 +295,7 @@ public class mainController implements Initializable{
             getAllStudents();
             studentTableView.setItems(data);
             totalStudents.setText(String.valueOf(data.size()));
+            tableInfo.setVisible(true);
 //        }else
 //            studentTableView.setVisible(Boolean.TRUE);
     }
@@ -314,10 +325,11 @@ public class mainController implements Initializable{
         return response;
     }
 
-    private void toggleTableView_ImagePane(){
-        studentTableView.setVisible(Boolean.FALSE);
-        imagePane.setVisible(Boolean.TRUE);
-        studentImage.setImage(null);
+    private void toggleTableView(){
+        if(studentTableView.isVisible()){
+            studentTableView.setVisible(Boolean.FALSE);
+        }else
+        studentTableView.setVisible(Boolean.TRUE);
     }
 
     private void showNewTermForm(){
@@ -342,7 +354,7 @@ public class mainController implements Initializable{
        PauseTransition show = new PauseTransition(Duration.seconds(5));
         show.setOnFinished(event -> {
 //            termDao =new TermDao();
-            System.out.print("the show transition is done playng...");
+
           try{
               termDao.getCurrentTerm();
           }catch (NoResultException e){
@@ -389,12 +401,7 @@ public class mainController implements Initializable{
             return row;
         });
 
-        //hide the table and show the image pane
-        menuButtonsPane.setOnMouseClicked(event -> {
-            toggleTableView_ImagePane();
-        });
-
-//      parent.setOnMouseClicked(event -> toggleTableView_ImagePane());
+        eye.setOnMouseClicked(event -> toggleTableView());
 
         //show the form to register a new student
         regMenu.setOnAction(event -> {
@@ -423,7 +430,7 @@ public class mainController implements Initializable{
                 javafx.stage.Stage stage = new javafx.stage.Stage();
                 stage.setScene(scene);
                 stage.initStyle(StageStyle.UTILITY);
-//                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initModality(Modality.APPLICATION_MODAL);
                 stage.setTitle("");
                 stage.show();
             } catch (IOException e) {
@@ -439,7 +446,6 @@ public class mainController implements Initializable{
             Task task = new Task() {
                 @Override
                 protected Object call() {
-                    imagePane.setVisible(Boolean.FALSE);
                     populateTableView();
                     return null;
                 }
@@ -452,7 +458,8 @@ public class mainController implements Initializable{
                 myProgressIndicator.hideProgress();
             });
             task.setOnFailed(e ->{
-                System.out.println("The task failed while fetching data...");
+                myProgressIndicator.hideProgress();
+               notification.notifyError("an error occurred while fetching the records","Error!");
             } );
 
             new Thread(task).start();
@@ -468,10 +475,9 @@ public class mainController implements Initializable{
 
             if(response.isPresent() && response.get() ==ButtonType.YES){
                Optional<ButtonType>response2 =showWarning("You cannot undo this action.\n Do you want to continue?","Delete student");
-               if(response2 .isPresent() && response.get() == ButtonType.YES){
+               if(response2 .isPresent() && response2.get() == ButtonType.YES){
                    try {
                        studentDao.deleteStudent(studentTableView.getSelectionModel().getSelectedItem());
-                       System.out.print("You have deleted a student from the database...");
                        notification.notifySuccess("Student records deleted","Success");
                        refresh();
                    }catch (HibernateException e){
@@ -540,6 +546,12 @@ public class mainController implements Initializable{
 
         assessment.setOnAction(event -> showAssessmentForm());
         logout.setOnAction(event -> Initializer.getInitializerInstance().showLoginForm());
+
+        menuToggle.setOnMouseClicked(e->{
+            if (vbox.isVisible())
+                vbox.setVisible(Boolean.FALSE);
+            else vbox.setVisible(Boolean.TRUE);
+        });
 
         BooleanProperty mouseMoving = new SimpleBooleanProperty();
         mouseMoving.addListener(new ChangeListener<Boolean>() {

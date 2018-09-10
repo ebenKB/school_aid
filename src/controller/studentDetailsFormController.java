@@ -2,7 +2,7 @@ package controller;
 
 import com.hub.schoolAid.*;
 import com.jfoenix.controls.*;
-import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -10,17 +10,25 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import org.controlsfx.control.ToggleSwitch;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.channels.FileChannel;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -34,13 +42,22 @@ public class studentDetailsFormController implements Initializable{
     private Tab profileTable;
 
     @FXML
+    private JFXComboBox<Student.FeedingStatus> paymentMode;
+
+    @FXML
     private Tab parentTab;
 
     @FXML
     private Tab accountTab;
 
     @FXML
+    private  Tab feedingTab;
+
+    @FXML
     private ImageView studentImage;
+
+    @FXML
+    private Hyperlink changeImage;
 
     @FXML
     private JFXTextField fname;
@@ -85,8 +102,10 @@ public class studentDetailsFormController implements Initializable{
     private Label changesCounter;
 
     @FXML
-    private MaterialDesignIconView padlock;
+    private FontAwesomeIconView padlock;
 
+    @FXML
+    private CheckBox editFeeding;
 
     @FXML
     private JFXTextField parentName;
@@ -130,12 +149,16 @@ public class studentDetailsFormController implements Initializable{
     @FXML
     private TextField  feedingFeeCredit;
 
+    @FXML
+    private JFXTextField feedingAcc;
 
-    //  mainController mainController;
+
+    //mainController mainController;
     private Student student;
     private Student newStudent;
     private int counter=0;
     private int parentChanges= 0;
+    URI path;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -143,6 +166,7 @@ public class studentDetailsFormController implements Initializable{
         btnEditable.setOnMouseClicked(event -> {
             if(btnEditable.isSelected()){
                 newStudent=new Student();
+                newStudent.setAccount(student.getAccount());
                 newStudent.setParent(student.getParent());
                 padlock.setVisible(Boolean.FALSE);
                 fname.setEditable(Boolean.TRUE);
@@ -155,6 +179,9 @@ public class studentDetailsFormController implements Initializable{
                 parentOccupation.setEditable(Boolean.TRUE);
                 parentLandMark.setEditable(Boolean.TRUE);
                 parentAdd.setEditable(Boolean.TRUE);
+                editFeeding.setVisible(Boolean.TRUE);
+                changeImage.setVisible(Boolean.TRUE);
+                paymentMode.setDisable(false);
                 infoLable.setText("In Editing Mode.");
                 infoLable.setTextFill(Color.valueOf("#3CCC13"));
             }else{
@@ -170,9 +197,27 @@ public class studentDetailsFormController implements Initializable{
                 parentOccupation.setEditable(Boolean.FALSE);
                 parentLandMark.setEditable(Boolean.FALSE);
                 parentAdd.setEditable(Boolean.FALSE);
+                editFeeding.setVisible(Boolean.FALSE);
+                changeImage.setVisible(Boolean.FALSE);
+                paymentMode.setDisable(true);
                 infoLable.setText("Editing is Locked.");
                 infoLable.setTextFill(Color.valueOf("#fc0303"));
             }
+        });
+
+        editFeeding.setOnAction(e->{
+            if(editFeeding.isSelected()){
+               Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"",ButtonType.YES,ButtonType.NO);
+               alert.setTitle("Enable editing");
+               alert.setHeaderText("You are about to change the feeding fee for this student.\n" +
+                       "If you change the feeding fee, the student will be charged with the new amount.\n" +
+                       "Are you sure you want to continue ?");
+               Optional<ButtonType>result =alert.showAndWait();
+               if(result.isPresent() &&  result.get()==ButtonType.YES)
+                   feedingAcc.setEditable(true);
+               else editFeeding.setSelected(false);
+
+            }else feedingAcc.setEditable(false);
         });
 
         fname.focusedProperty().addListener(new ChangeListener<Boolean>() {
@@ -307,6 +352,118 @@ public class studentDetailsFormController implements Initializable{
             }
         });
 
+
+//        feedingAcc.focusedProperty().addListener(new ChangeListener<Boolean>() {
+//            Boolean changed=false;
+//            int numChanges=0;
+//            @Override
+//            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+//               if(feedingAcc.isEditable()){
+//                   if(!newValue){
+//                       if(! feedingAcc.getText().trim().equals(student.getAccount().getFeedingFeeToPay())){
+//                           changed=true;
+//                           if(numChanges==0){
+//                               numChanges=1;
+//                               updateChangeCounter(numChanges);
+//                               newStudent.getAccount().setFeedingFeeToPay(Double.valueOf(feedingAcc.getText().trim()));
+//                           }
+//                           showChangesLabel();
+//                       }else {
+//                           if(changed){
+//                               revertChanges(numChanges);
+//                               newStudent.getAccount().setFeedingFeeToPay(0.0);
+//                               changed=false;
+//                               showChangesLabel();
+//                               numChanges=0;
+//                           }
+//                       }
+//                   }else{
+//                       feedingAcc.setOnKeyTyped(event -> {
+//                           if(!btnEditable.isSelected()){
+//                               notifyEditLock();
+//                           }
+//                       });
+//                   }
+//               }
+//            }
+//        });
+
+        feedingAcc.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            Boolean changed=false;
+            int numChanges=0;
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+
+                  if(!newValue && (newStudent !=null) && (newStudent.getAccount()!=null) && (editFeeding.isSelected())){
+
+                      if(Double.valueOf(feedingAcc.getText().trim())  != student.getAccount().getFeedingFeeToPay() ){
+                          changed=true;
+                          if(numChanges==0){
+                              numChanges=1;
+                              updateChangeCounter(numChanges);
+                              newStudent.getAccount().setFeedingFeeToPay(Double.valueOf(feedingAcc.getText().trim()));
+                          }
+                          showChangesLabel();
+                      }else {
+                          if(changed){
+                              revertChanges(numChanges);
+                              newStudent.getAccount().setFeedingFeeToPay(0.0);
+                              changed=false;
+                              showChangesLabel();
+                              numChanges=0;
+                          }
+                      }
+                  }else{
+                      feedingAcc.setOnKeyTyped(event -> {
+                          if(!btnEditable.isSelected() || editFeeding.isSelected()){
+                              notifyEditLock();
+                          }
+                      });
+                  }
+            }
+        });
+
+//        paymentMode.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student.FeedingStatus>() {
+//            Boolean changed=false;
+//            int numChanges=0;
+//
+//            @Override
+//            public void changed(ObservableValue<? extends Student.FeedingStatus> observable, Student.FeedingStatus oldValue, Student.FeedingStatus newValue) {
+//
+//            }
+//        });
+       paymentMode.focusedProperty().addListener(new ChangeListener<Boolean>() {
+           Boolean changed=false;
+           int numChanges=0;
+           @Override
+           public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+               if(!newValue){
+                   if(! paymentMode.getSelectionModel().getSelectedItem().equals(student.getFeedingStatus())){
+                       changed=true;
+                       if(numChanges==0){
+                           numChanges=1;
+                           updateChangeCounter(numChanges);
+                           newStudent.setFeedingStatus(paymentMode.getSelectionModel().getSelectedItem());
+                       }
+                       showChangesLabel();
+                   }else {
+                       if(changed){
+                           revertChanges(numChanges);
+                           newStudent.setFeedingStatus(null);
+                           changed=false;
+                           showChangesLabel();
+                           numChanges=0;
+                       }
+                   }
+               }else{
+                   oname.setOnKeyTyped(event -> {
+                       if(!btnEditable.isSelected()){
+                           notifyEditLock();
+                       }
+                   });
+               }
+           }
+       });
         phone.setOnKeyTyped(event -> {
             promptEditNotAllowed();
         });
@@ -440,33 +597,37 @@ public class studentDetailsFormController implements Initializable{
             int numChanges=0;
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(!newValue){
-                    if(! parentAdd.getText().trim().equals(student.getParent().getAddress())){
-                        changed=true;
-                        parentChanges+=1;
-                        if(numChanges==0){
-                            numChanges=1;
-                            updateChangeCounter(numChanges);
-                            newStudent.getParent().getAddress().setHomeAddress(parentAdd.getText().trim());
-                        }
-                        showChangesLabel();
-                    }else {
-                        if(changed){
-                            revertChanges(numChanges);
-                            newStudent.getParent().getAddress().setHomeAddress(null);
-                            changed=false;
-                            showChangesLabel();
-                            numChanges=0;
-                            parentChanges-=1;
-                        }
-                    }
-                }else{
-                    parentAdd.setOnKeyTyped(event -> {
-                        if(!btnEditable.isSelected()){
-                            notifyEditLock();
-                        }
-                    });
-                }
+               try{
+                   if(!newValue){
+                       if(! parentAdd.getText().trim().equals(student.getParent().getAddress())){
+                           changed=true;
+                           parentChanges+=1;
+                           if(numChanges==0){
+                               numChanges=1;
+                               updateChangeCounter(numChanges);
+                               newStudent.getParent().getAddress().setHomeAddress(parentAdd.getText().trim());
+                           }
+                           showChangesLabel();
+                       }else {
+                           if(changed){
+                               revertChanges(numChanges);
+                               newStudent.getParent().getAddress().setHomeAddress(null);
+                               changed=false;
+                               showChangesLabel();
+                               numChanges=0;
+                               parentChanges-=1;
+                           }
+                       }
+                   }else{
+                       parentAdd.setOnKeyTyped(event -> {
+                           if(!btnEditable.isSelected()){
+                               notifyEditLock();
+                           }
+                       });
+                   }
+               }catch (Exception e){
+
+               }
             }
         });
 
@@ -566,7 +727,7 @@ public class studentDetailsFormController implements Initializable{
                 alert.setHeaderText(counter+" "+"unsaved Changes");
                 Optional<ButtonType> result = alert.showAndWait();
                 if(result.isPresent() && result.get() == ButtonType.YES){
-                   //close the form
+                    ((Node)(event).getSource()).getScene().getWindow();
                 }
             }
         });
@@ -596,7 +757,7 @@ public class studentDetailsFormController implements Initializable{
                             System.out.print("trying to save student...");
                             studentDao.updateStudentRecord(student);
                         }
-                        System.out.print("we are returning null");
+
                         return true;
                     }
                 };
@@ -643,11 +804,24 @@ public class studentDetailsFormController implements Initializable{
                   if(balance.getText().trim().isEmpty() || amountPaid.getText().trim().isEmpty()){
                     setAccountTabDetails();
                   }
+                }else if(newValue==feedingTab){
+                    prepareFeedingRecords();
                 }
             }
         });
 
+        close.setOnAction(e->{
+            Utils.closeEvent(e);
+        });
 
+        changeImage.setOnAction(e->{
+            Alert alert =new Alert(Alert.AlertType.CONFIRMATION,"",ButtonType.YES,ButtonType.NO);
+            alert.setTitle("Change Image");
+            alert.setHeaderText("Your are about to change the image for"+" "+student.getFirstname()+"\nAre you sure you want to continue ?");
+            Optional<ButtonType>result = alert.showAndWait();
+            if(result.isPresent() && result.get() == ButtonType.YES)
+                path=ImageHandler.openImageFile(studentImage);
+        });
     }
 
     private void updateFeedingFee() {
@@ -667,7 +841,6 @@ public class studentDetailsFormController implements Initializable{
 
     private void prepareRecordsToSave() {
         //set the new changes to the student obj
-        System.out.print("Preparing student records...");
         if(newStudent.getFirstname()!=null)
             student.setFirstname(newStudent.getFirstname());
         if(newStudent.getLastname() !=null)
@@ -675,9 +848,13 @@ public class studentDetailsFormController implements Initializable{
         if(newStudent.getOthername() !=null)
             student.setOthername(newStudent.getOthername());
 
+        //check if there is a new Image
+        ImageHandler imageHandler =new ImageHandler();
+        imageHandler.setStudentImage(student,path);
+
         //check if the parent's records changed
         if(parentChanges>0){
-            System.out.print("we are  setting the parent fields");
+
             if(newStudent.getParent().getname() !=null)
                  student.getParent().setname(newStudent.getParent().getname());
             if(newStudent.getParent().getTelephone() !=null)
@@ -689,6 +866,16 @@ public class studentDetailsFormController implements Initializable{
             if(newStudent.getParent().getAddress().getLandmark()!=null)
                 student.getParent().getAddress().setLandmark(newStudent.getParent().getAddress().getLandmark());
         }
+
+
+//        Alert alert =new Alert(Alert.AlertType.CONFIRMATION,"",ButtonType.YES,ButtonType.NO);
+//        alert.setTitle("Change Image");
+//        alert.setHeaderText("Your are about to set an image for"+" "+student.getFirstname()+"\nAre you sure you want to continue ?");
+//        Optional<ButtonType>result = alert.showAndWait();
+//        if(result.isPresent() && result.get() ==ButtonType.YES){
+//            ImageHandler imageHandler =new ImageHandler();
+//            imageHandler.setStudentImage(newStudent,path);
+//        }
     }
 
     private void refreshFields(){
@@ -736,7 +923,7 @@ public class studentDetailsFormController implements Initializable{
                 total++;
                 payment+=s.getAmountPaid();
                 bal+=(s.getTotalcost()-s.getAmountPaid());
-                data.add(s.getItem().getName());
+                data.add(s.getItem().getName()+"\t"+ "("+s.getItem().getQty()+"piece(s)"+ "*"+s.getItem().getCost()+"="+s.getTotalcost()+")");
             }
         }
         checkListView.setOnAction(event -> {
@@ -766,11 +953,6 @@ public class studentDetailsFormController implements Initializable{
         feesBalance.setText(String.valueOf(student.getAccount().getFeeToPay()));
         feedingFeeCredit.setText(String.valueOf(student.getAccount().getFeedingFeeCredit()));
 
-
-        if(student.getPayFeeding())
-            feedingToggle.setSelected(Boolean.TRUE);
-        else feedingToggle.setSelected(Boolean.FALSE);
-
         if(bal>0){
             //Change the indicator background to red else change to green;
             indicator.setStyle("-fx-background-color: red");
@@ -782,6 +964,25 @@ public class studentDetailsFormController implements Initializable{
             checkListView.setVisible(Boolean.TRUE);
         }
     }
+
+
+    private void prepareFeedingRecords(){
+        if(student.getPayFeeding()){
+            feedingToggle.setSelected(Boolean.TRUE);
+        }
+        else feedingToggle.setSelected(Boolean.FALSE);
+
+        feedingAcc.setText(String.valueOf(student.getAccount().getFeedingFeeToPay()));
+
+        if(paymentMode.getItems().isEmpty()){
+            paymentMode.getItems().add(Student.FeedingStatus.DAILY);
+            paymentMode.getItems().add(Student.FeedingStatus.WEEKLY);
+            paymentMode.getItems().add(Student.FeedingStatus.MONTHLY);
+            paymentMode.getItems().add(Student.FeedingStatus.TERMLY);
+        }
+        paymentMode.getSelectionModel().select(student.getFeedingStatus());
+    }
+
     public void setStudent(Student student) {
         this.student = student;
         setStudentTabDetails();
@@ -820,4 +1021,5 @@ public class studentDetailsFormController implements Initializable{
         infoLable.setText("Editing is not enabled for this field.");
         infoLable.setTextFill(Color.valueOf("#ffcd05"));
     }
+
 }

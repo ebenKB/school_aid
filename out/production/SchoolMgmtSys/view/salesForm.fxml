@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -68,5 +69,11 @@
       </HBox>
       <ListView fx:id="studentListView" layoutX="85.0" layoutY="178.0" prefHeight="203.0" prefWidth="419.0" visible="false" />
       <TextField fx:id="studentName" layoutX="61.0" layoutY="148.0" prefHeight="25.0" prefWidth="189.0" promptText="Enter name of Student" visible="false" />
+      <Text fill="#f20606" layoutX="62.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unit Cost                                 Quantity                                  Total Cost" wrappingWidth="404.00000619888306" />
+      <Label fx:id="infoLabel" alignment="CENTER" layoutX="50.0" layoutY="455.0" prefHeight="35.0" prefWidth="510.0" textAlignment="CENTER" textFill="#ff0101">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

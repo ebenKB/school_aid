@@ -4,7 +4,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @Entity
 public class Assessment {
@@ -13,7 +13,7 @@ public class Assessment {
 
     }
 
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Double classScore;
@@ -93,5 +93,11 @@ public class Assessment {
 
     public void  createReport(Assessment assessment){
 
+    }
+
+    @Override
+    public String toString() {
+        String msg = this.classScore+"\n"+this.getExamScore()+"\n"+this.getGrade()+"\n"+this.getCourse();
+        return msg;
     }
 }

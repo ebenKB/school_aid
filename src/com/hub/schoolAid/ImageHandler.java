@@ -1,11 +1,23 @@
 package com.hub.schoolAid;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.channels.FileChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 /**
  * This program demonstrates how to resize an image.
@@ -67,34 +79,61 @@ public class ImageHandler {
         resize(inputImagePath, outputImagePath, scaledWidth, scaledHeight);
     }
 
-    /**
-     * Test resizing images
-     */
-//    public static void main(String[] args) {
-//        String inputImagePath = "D:/Photo/Puppy.jpg";
-//        String outputImagePath1 = "D:/Photo/Puppy_Fixed.jpg";
-//        String outputImagePath2 = "D:/Photo/Puppy_Smaller.jpg";
-//        String outputImagePath3 = "D:/Photo/Puppy_Bigger.jpg";
-//
-//        try {
-//            // resize to a fixed width (not proportional)
-//            int scaledWidth = 1024;
-//            int scaledHeight = 768;
-//            ImageResizer.resize(inputImagePath, outputImagePath1, scaledWidth, scaledHeight);
-//
-//            // resize smaller by 50%
-//            double percent = 0.5;
-//            ImageResizer.resize(inputImagePath, outputImagePath2, percent);
-//
-//            // resize bigger by 50%
-//            percent = 1.5;
-//            ImageResizer.resize(inputImagePath, outputImagePath3, percent);
-//
-//        } catch (IOException ex) {
-//            System.out.println("Error resizing the image.");
-//            ex.printStackTrace();
-//        }
-//    }
+    public  static  void saveImage(Long imageSize, Path source, Path newdir) throws IOException {
+        //resize bigger image
+        if(imageSize <= 250000){
+            Files.copy(source, newdir.resolve(source.getFileName()), REPLACE_EXISTING);
+        }else if(imageSize <= 1000000){
+            ImageHandler.resize(source.toString(),newdir.resolve(source.getFileName()).toString() ,0.4);
+        }else if (imageSize <= 2000000){
+            ImageHandler.resize(source.toString(),newdir.resolve(source.getFileName()).toString() ,0.25);
+        }else if(imageSize <= 5000000){
+            ImageHandler.resize(source.toString(),newdir.resolve(source.getFileName()).toString() ,0.15);
+        }else{
+            ImageHandler.resize(source.toString(),newdir.resolve(source.getFileName()).toString() ,150,200);
+        }
+    }
 
+    public static URI openImageFile(ImageView image){
+        URI path =null;
+        FileChooser fileChooser=new FileChooser();
+        javafx.stage.Stage stage = new javafx.stage.Stage();
+        try {
+            path=fileChooser.showOpenDialog(stage).toURI();
+
+        }catch (NullPointerException e){
+           Notification.getNotificationInstance().notifyError("You didn't select any image","Empty selection");
+        }
+
+        if(path==null){
+            return null;
+        }
+        image.setImage(new Image(path.toString()));
+       return path;
+    }
+
+    public  void setStudentImage(Student std,URI path){
+        if(path != null){
+            try {
+                Path source = Paths.get(path);
+                Path newdir = Paths.get(getClass().getResource(Utils.studentImgPath).toURI());
+                FileChannel fileChannel = FileChannel.open(source);
+                Long imageSize = fileChannel.size();
+
+                saveImage(imageSize,source,newdir);
+
+                std.setImage(String.valueOf(source.getFileName()));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static Boolean deleteOldImage(){
+        return false;
+    }
 }
 

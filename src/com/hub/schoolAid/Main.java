@@ -14,6 +14,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
+
         Initializer initializer = Initializer.getInitializerInstance();
         //Initialize the system defaults
         Task task = new Task() {

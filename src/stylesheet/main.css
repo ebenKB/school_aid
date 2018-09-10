@@ -5,17 +5,23 @@
     -fx-primarytext : #B2B2B2;
     -fx-blue: #1976D2;
     -fx-red: #FF0000;
+    -fx-yellow:#FFBB11;
 }
 
-#root{
+#root,#parent{
     -fx-background-color: -fx-primary;
 }
 
 #buttonCotainer{
-    -fx-background-color: #888888;
+    /*-fx-background-color: #888888;*/
+    -fx-background-color: derive(-fx-blue, 90%);
 }
-#tableInfo{
-    -fx-background-color: #888888;
+
+#tableInfo .text-field{
+    /*-fx-background-color: #888888;*/
+    -fx-text-fill: #fff;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
 }
 
 #headerPane{
@@ -31,11 +37,23 @@
 }
 
 #menubar{
-    -fx-background-color: #888888;
+    /*-fx-background-color: #888888;*/
+    -fx-background-color: -fx-primary;
     -fx-font: #ffffff;
     -fx-font-size: 14px;
 }
-#progressLabel{
+
+#menubar .label{
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+}
+
+#menubar .menu .menu-item .label{
+    -fx-text-fill: #000;
+}
+
+
+#progressLabel,#stdInfoLabel{
     -fx-font: #ffffff;
     -fx-font-size: 14px;
 }
@@ -46,11 +64,13 @@
 }
 
 #vbox .menu-button{
-    -fx-background-color: derive(-fx-primary, 120%)
+    -fx-background-color: derive(-fx-primary, 35%)
 }
 
-#buttonCotainer{
 
+
+#separator{
+    -fx-background-color: -fx-yellow;
 }
 
 #vbox .menu-button:hover{
@@ -58,10 +78,33 @@
     -fx-text-fill: #ffffff;
 }
 
-.menu-item:hover{
-    -fx-background-color: derive(-fx-primary, 20%);
-
+#vbox .menu-button .label{
+    -fx-text-fill: #000;
 }
+
+#vbox .menu-button .label,#stdInfoLabel{
+    -fx-text-fill: #fff;
+}
+
+#vbox .menu-button .menu-item{
+    -fx-text-fill: #000;
+    /*-fx-background-color: derive(-fx-primary, 20%);*/
+}
+/*#vbox .menu-button {*/
+    /*-fx-background-color: derive(-fx-primary, 20%);*/
+/*}*/
+#vbox .menu-item{
+    -fx-background-color: derive(-fx-primary, 120%);
+}
+#vbox .menu-item:focused{
+    -fx-text-fill: #000;
+    -fx-background-color: derive(-fx-primary, 20%);
+}
+
+#vbox .menu-item:hover{
+    -fx-background-color: derive(-fx-primary, 20%);
+}
+
 .root .combo-box{
     -fx-background-color: derive(-fx-primary,0%) ;
     -fx-text-fill: #ffffff;
@@ -87,6 +130,9 @@
     -fx-text-fill: derive(-fx-primary,30%);
 }
 
+#menuButtonsPane{
+    -fx-background-color: derive(-fx-primary,220%);
+}
 #dob{
     -fx-font-size: 14px;
     /*-fx-text-fill: #000;*/
@@ -94,7 +140,7 @@
 }
 
 #dob .label .text-field{
-    -fx-background-color: #fff;
+    -fx-background-color: #000;
     -fx-text-fill: derive(-fx-primary,30%);
 }
 
@@ -103,6 +149,12 @@
 }
 #dob .text-field{
     -fx-background-color: -fx-primary;
+    -fx-text-fill: #fff;
+    /*-fx-control-inner-background: red;*/
+}
+
+#dob .label{
+    -fx-background-color:derive(-fx-primary,30%);
     -fx-text-fill: #fff;
     /*-fx-control-inner-background: red;*/
 }
@@ -120,14 +172,16 @@
 
 #header{
 }
+
 #imageViewPane{
     /*-fx-background-radius: 4000;*/
     /*-fx-border-radius: 4000;*/
     -fx-border-color: #fff;
     -fx-background-color: derive(-fx-primary,0%);
 }
+
 #root .button {
-    -fx-font-size: 12px;
+    -fx-font-size:12px;
     -fx-text-fill: white;
     -fx-font-family: "Arial Narrow";
     -fx-font-weight: bold;
@@ -138,6 +192,7 @@
 #reportForm{
     -fx-background-color: derive(-fx-primary,30%);
 }
+
 .button :hover{
     -fx-background-color: #fffff;
 }
@@ -148,28 +203,87 @@
 .table-view{
     -fx-cell-size: 20;
 }
+
+
 .table-view .cell :hover{
     /*-fx-background-color: derive(-fx-primary, 200%)*/
+}
+
+.table-row-cell:empty {
+    -fx-background-color: #ffffe0;
+}
+
+.table-row-cell:empty .table-cell {
+    -fx-border-width: 0px;
+}
+
+#feedingType.column-header{
+   -fx-background-color: -fx-blue;
+}
+
+#feedingType.column-header :hover{
+    -fx-background-color: -fx-blue;
+}
+
+#balCol.column-header  {
+ -fx-background-color: #ee2f17;
+}
+
+#balCol.column-header :hover{
+    -fx-background-color:#ee2f17 ;
+}
+
+#amntPaidCol.column-header{
+    -fx-background-color: #7bee7b;
+
+}
+
+#amntPaidCol.column-header  :hover{
+    -fx-background-color: #7bee7b;
+
+}
+
+#statusCol.column-header{
+    -fx-background-color: -fx-yellow;
+}
+
+#statusCol.column-header :hover{
+    -fx-background-color: -fx-yellow;
 }
 
 #root .text-field{
     -fx-text-fill: #ffffff;
     -fx-font-size: 14px;
-    -fx-background-color: -fx-primary;
+    /*-fx-background-color: derive(-fx-primary,130%);*/
     -fx-font-weight: bold;
     -fx-text-alignment: right;
 }
 
-/*#saleItems, #amountPaid, #balance, #feesBalance,#feedingFeeCredit{*/
-    /*-fx-background-color: derive(-fx-primary,30%);*/
-    /*-fx-font-size: 16px;*/
-    /*-fx-font-weight: bold;*/
-    /*-fx-text-alignment: right;*/
-/*}*/
+#gradeMenu .text-field{
+    -fx-background-color: derive(-fx-primary,130%);
+}
+
+#saleItems, #amountPaid, #balance, #feesBalance,#feedingFeeCredit,#feedingAcc,#totalStudents{
+    -fx-background-color: derive(-fx-primary,30%);
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-alignment: right;
+}
+
+#parentLandMark, .text-area{
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: #fff;
+    -fx-font-size: 16px;
+}
 
 #root .list-view{
     -fx-background-color: -fx-primary;
     -fx-text-fill: white;
+}
+
+.list-view :hover{
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: #fff;
 }
 /*salesListView*/
 /*#salesListView{*/
@@ -242,3 +356,4 @@
     -fx-background-color:derive(-fx-primary,120%);
     -fx-text-fill: #fff;
 }
+

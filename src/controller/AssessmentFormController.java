@@ -206,7 +206,6 @@ public class AssessmentFormController implements Initializable{
                 return new SimpleStringProperty("N/A");
             }
         });
-//      assmntTableView.getItems().clear();
         assmntTableView.setItems(assessments);
         assmntTableView.setVisible(Boolean.TRUE);
         assmntLabel.setVisible(Boolean.TRUE);
@@ -215,14 +214,6 @@ public class AssessmentFormController implements Initializable{
     }
     private void setTableViewColumns(){
         initAssessmentTable();
-//        Task setData = new Task() {
-//            @Override
-//            protected Object call() {
-//                initAssessmentTable();
-//                return true;
-//            }
-//        };
-//        new Thread(setData).start();
     }
 
     @Override
@@ -302,7 +293,6 @@ public class AssessmentFormController implements Initializable{
         });
 
         saveRecord.setOnAction(event->{
-            System.out.println("U clicked me...");
                Task saving =new Task() {
                    @Override
                    protected Object call() throws Exception {

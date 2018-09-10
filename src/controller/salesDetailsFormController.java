@@ -2,6 +2,7 @@ package controller;
 
 import com.hub.schoolAid.*;
 import com.jfoenix.controls.JFXRadioButton;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.PauseTransition;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -71,7 +72,11 @@ public class salesDetailsFormController implements Initializable{
     private TableColumn<Sales, String> balCol;
 
     @FXML
-    private TableColumn<?, ?> dateCol;
+    private TableColumn<Sales, String> dateCol;
+
+
+    @FXML
+    private FontAwesomeIconView presentIcon;
 
     @FXML
     private ListView<Student> studentListView;
@@ -123,7 +128,7 @@ public class salesDetailsFormController implements Initializable{
     private TableColumn<AttendanceTemporary, String> isPresentCol;
 
     @FXML
-    private TableColumn<AttendanceTemporary, String> statusCol;
+    private TableColumn<Sales, String> statusCol;
 
     @FXML
     private Pane headerPane;
@@ -162,74 +167,43 @@ public class salesDetailsFormController implements Initializable{
 
     public void populateStudentTable(){
 
-        tagCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<AttendanceTemporary, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<AttendanceTemporary, String> param) {
-                return new SimpleStringProperty(param.getValue().getStudent().getPayFeeding() ? "YES":"NO");
-            }
-        });
+        tagCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getStudent().getPayFeeding() ? "YES":"NO"));
 
-        feedingType.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<AttendanceTemporary, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<AttendanceTemporary, String> param) {
-                if(param.getValue().getStudent().getFeedingStatus()== Student.FeedingStatus.DAILY)
-                    param.getTableColumn().setStyle("-fx-background-color:blue");
-                return new SimpleStringProperty(param.getValue().getStudent().getFeedingStatus().toString());
-            }
-        });
-        studentNameCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<AttendanceTemporary, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<AttendanceTemporary, String> param) {
-                return new SimpleStringProperty(param.getValue().getStudent().getFirstname() +" "+
-                        param.getValue().getStudent().getOthername()+ " " + param.getValue().getStudent().getLastname());
-            }
-        });
+        feedingType.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getStudent().getFeedingStatus().toString()));
 
-        feeding.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<AttendanceTemporary, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<AttendanceTemporary, String> param) {
-                if( !param.getValue().getStudent().getPayFeeding())
-                    return new SimpleStringProperty("0");
-                return new SimpleStringProperty(param.getValue().getFeedingFee()>0 ? param.getValue().getFeedingFee().toString():param.getValue().getStudent().getStage().getFeeding_fee().toString());
-//                String buttonText = item ? "Check out" : "Check in";
-            }
+        studentNameCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getStudent().getFirstname() +" "+
+                param.getValue().getStudent().getOthername()+ " " + param.getValue().getStudent().getLastname()));
+
+        feeding.setCellValueFactory(param -> {
+            if( !param.getValue().getStudent().getPayFeeding())
+                return new SimpleStringProperty("0");
+            return new SimpleStringProperty(param.getValue().getFeedingFee()>0 ? param.getValue().getFeedingFee().toString():param.getValue().getStudent().getStage().getFeeding_fee().toString());
+
         });
 
         feeding.setCellFactory(TextFieldTableCell.forTableColumn());
-        feeding.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<AttendanceTemporary, String>>() {
-            @Override
-            public void handle(TableColumn.CellEditEvent<AttendanceTemporary, String> event) {
-                Student st =event.getRowValue().getStudent();
-                if(st.getFeedingStatus() == Student.FeedingStatus.DAILY && (Double.valueOf(event.getNewValue()) > st.getAccount().getFeedingFeeToPay())){
-                    WindowsSounds.playWindowsSound();
-                    populateStudentTable();
-                    return;
-                }
-                    event.getTableView().getItems().get(event.getTablePosition().getRow()).setFeedingFee(Double.valueOf(event.getNewValue()));
-                    populateStudentTable();
+        feeding.setOnEditCommit(event -> {
+            Student st =event.getRowValue().getStudent();
+            if(st.getFeedingStatus() == Student.FeedingStatus.DAILY && (Double.valueOf(event.getNewValue()) > st.getAccount().getFeedingFeeToPay())){
+                WindowsSounds.playWindowsSound();
+                populateStudentTable();
+                return;
             }
+                event.getTableView().getItems().get(event.getTablePosition().getRow()).setFeedingFee(Double.valueOf(event.getNewValue()));
+                populateStudentTable();
         });
-        statusCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<AttendanceTemporary, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<AttendanceTemporary, String> param) {
-//                return new SimpleStringProperty(String.valueOf(param.getValue().getStudent().getStage().getFeeding_fee()));
-                return new SimpleStringProperty(param.getValue().isPresent() ? "PAID" :"NOT PAID");
-            }
-        });
+//        statusCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<AttendanceTemporary, String>, ObservableValue<String>>() {
+//            @Override
+//            public ObservableValue<String> call(TableColumn.CellDataFeatures<AttendanceTemporary, String> param) {
+////                return new SimpleStringProperty(String.valueOf(param.getValue().getStudent().getStage().getFeeding_fee()));
+//                return new SimpleStringProperty(param.getValue().isPresent() ? "PAID" :"NOT PAID");
+//
+//            }
+//        });
 
-        classNameCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<AttendanceTemporary, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<AttendanceTemporary, String> param) {
-                return new SimpleStringProperty(param.getValue().getStudent().getStage().getName());
-            }
-        });
+        classNameCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getStudent().getStage().getName()));
 
-        isPresentCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<AttendanceTemporary, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<AttendanceTemporary, String> param) {
-                return new SimpleStringProperty(param.getValue().isPresent() ? "PRESENT" : "ABSENT");
-            }
-        });
+        isPresentCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().isPresent() ? "PRESENT" : "ABSENT"));
 
         addButtonToTable(actionCol);
         studentTableView.setItems(attendanceTemporaries);
@@ -295,7 +269,7 @@ public class salesDetailsFormController implements Initializable{
                     {
                         btn.setOnAction((ActionEvent event) -> {
                             Student st = studentTableView.getItems().get(getIndex()).getStudent();
-//                          toggleButton(btn,getIndex());
+
                             //check if the student has balance
                             if(st.getFeedingStatus() != Student.FeedingStatus.DAILY){
                                 if(st.getAccount().getFeedingFeeCredit()<=0){
@@ -353,101 +327,76 @@ public class salesDetailsFormController implements Initializable{
     private void populateSalesTable(){
         infoLabel.setText("");
         if(! salesdata.isEmpty()){
-//            nameCol.setVisible(Boolean.FALSE);
             nameLable.setText(salesdata.get(0).getStudent().toString());
-           nameCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Sales, String>, ObservableValue<String>>() {
-               @Override
-               public ObservableValue<String> call(TableColumn.CellDataFeatures<Sales, String> param) {
-                   Sales sales = param.getValue();
-                   return new SimpleStringProperty(sales.getStudent().toString());
-               }
+           nameCol.setCellValueFactory(param -> {
+               Sales sales = param.getValue();
+               return new SimpleStringProperty(sales.getStudent().toString());
            });
-           itemCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Sales, String>, ObservableValue<String>>() {
-               @Override
-               public ObservableValue<String> call(TableColumn.CellDataFeatures<Sales, String> param) {
-                   Sales sales = param.getValue();
-                   return new SimpleStringProperty(sales.getItem().getName());
-               }
+           itemCol.setCellValueFactory(param -> {
+               Sales sales = param.getValue();
+               return new SimpleStringProperty(sales.getItem().getName());
            });
 
-          unitPriceCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Sales, String>, ObservableValue<String>>() {
-              @Override
-              public ObservableValue<String> call(TableColumn.CellDataFeatures<Sales, String> param) {
-                Sales sales =param.getValue();
-                  return new SimpleStringProperty(sales.getItem().getCost().toString());
-              }
+          unitPriceCol.setCellValueFactory(param -> {
+            Sales sales =param.getValue();
+              return new SimpleStringProperty(sales.getItem().getCost().toString());
           });
 
-          qtyCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Sales, String>, ObservableValue<String>>() {
-              @Override
-              public ObservableValue<String> call(TableColumn.CellDataFeatures<Sales, String> param) {
-                Sales sales  = param.getValue();
-                  return new SimpleStringProperty(String.valueOf(sales.getItem().getQty()).toString());
-              }
+          qtyCol.setCellValueFactory(param -> {
+            Sales sales  = param.getValue();
+              return new SimpleStringProperty(String.valueOf(sales.getItem().getQty()).toString());
           });
 
-          amntPaidCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Sales, String>, ObservableValue<String>>() {
-              @Override
-              public ObservableValue<String> call(TableColumn.CellDataFeatures<Sales, String> param) {
-                  if(param.getValue().getAmountPaid()==param.getValue().getTotalcost())
-                      amntPaidCol.setStyle("-fx-background-color:green");
-                  else
-                      amntPaidCol.setStyle("-fx-background-color:red");
-                  return new SimpleStringProperty(String.valueOf(param.getValue().getAmountPaid()));
-              }
+          amntPaidCol.setCellValueFactory(param -> {
+//              if(param.getValue().getAmountPaid()==param.getValue().getTotalcost())
+//                  amntPaidCol.setStyle("-fx-background-color:green");
+//              else
+//                  amntPaidCol.setStyle("-fx-background-color:red");
+              return new SimpleStringProperty(String.valueOf(param.getValue().getAmountPaid()));
           });
-          totalCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Sales, String>, ObservableValue<String>>() {
-              @Override
-              public ObservableValue<String> call(TableColumn.CellDataFeatures<Sales, String> param) {
-                  Sales sales  = param.getValue();
-                  return new SimpleStringProperty(sales.getTotalcost().toString());
-              }
+          totalCol.setCellValueFactory(param -> {
+              Sales sales  = param.getValue();
+              return new SimpleStringProperty(sales.getTotalcost().toString());
           });
 
-          balCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Sales, String>, ObservableValue<String>>() {
-              @Override
-              public ObservableValue<String> call(TableColumn.CellDataFeatures<Sales, String> param) {
-                  Sales sales  = param.getValue();
-                  Double bal = sales.getItem().getCost() - sales.getAmountPaid();
-                  return new SimpleStringProperty(bal.toString());
-              }
+          balCol.setCellValueFactory(param -> {
+              Sales sales  = param.getValue();
+              Double bal = (sales.getTotalcost() - sales.getAmountPaid() * -1);
+              return new SimpleStringProperty(bal.toString());
           });
-           salesTableView.setItems(salesdata);
-//           salesdata.clear();
+
+         dateCol.setCellValueFactory(param -> {
+             if(param.getValue().getDate() ==null){
+                 return new SimpleStringProperty("NOT FOUND");
+             }
+             return new SimpleStringProperty(param.getValue().getDate().toString());
+         });
+
+          statusCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAmountPaid() < param.getValue().getTotalcost()? "OWING" : "PAID"));
+
+          salesTableView.setItems(salesdata);
        }else {
             infoLabel.setText("There is no sale for this student..");
         }
+        salesTableView.setVisible(true);
     }
-
-    /**
-     * this method takes two table views, and then shows the first and hides the second
-     * @param tableView1 the table view that you want to see
-     * @param tableView2 the table view that you want to hide.
-     */
-
-//    private void toggleTableView(TableView tableView1,TableView tableView2){
-//        if(!tableView1 .isVisible()){
-//            tableView1.setVisible(Boolean.TRUE);
-//            tableView2.setVisible(Boolean.FALSE);
-//        }
-//    }
 
     /**
      * this method switches between two the sales table view and the student table view
      */
-    private void toggleTableView(){
-        if (salesTableView.isVisible()){
-            salesTableView.setVisible(false);
-            studentTableView.setVisible(Boolean.TRUE);
-            loadData.setVisible(Boolean.TRUE);
-            allSales.setVisible(Boolean.FALSE);
-        }else{
-            studentTableView.setVisible(Boolean.FALSE);
-            salesTableView.setVisible(Boolean.TRUE);
-            loadData.setVisible(Boolean.FALSE);
-            allSales.setVisible(Boolean.TRUE);
-        }
-    }
+//    private void toggleTableView(){
+//        if (salesTableView.isVisible()){
+//            salesTableView.setVisible(false);
+//            studentTableView.setVisible(Boolean.TRUE);
+//            loadData.setVisible(Boolean.TRUE);
+//            allSales.setVisible(Boolean.FALSE);
+//        }else{
+//            studentTableView.setVisible(Boolean.FALSE);
+//            salesTableView.setVisible(Boolean.TRUE);
+//            loadData.setVisible(Boolean.FALSE);
+//            allSales.setVisible(Boolean.TRUE);
+//        }
+//    }
 
     /**
      * this method shows the form that is used to create a new attendance
@@ -471,10 +420,6 @@ public class salesDetailsFormController implements Initializable{
         }
     }
 
-    public void initStudentTable(){
-
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         PauseTransition pauseTransition = new PauseTransition(Duration.seconds(3));
@@ -487,24 +432,18 @@ public class salesDetailsFormController implements Initializable{
         pauseTransition.play();
 
         //show the total number of students present
-        presentCounter.addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-               presentLbl.setText(presentCounter.getValue().toString());
-            }
+        presentCounter.addListener((observable, oldValue, newValue) -> {
+           presentLbl.setText(presentCounter.getValue().toString()+"/"+(attendanceTemporaries.size()));
+           presentIcon.setVisible(Boolean.TRUE);
         });
 
-        radioToggle.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-           @Override
-           public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-//               toggleTableView();
-               if(newValue==salesRadio){
-                   showSalesTable();
-               }else{
-                   showAttendanceTable();
-               }
-           }
-       });
+        radioToggle.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue==salesRadio){
+                showSalesTable();
+            }else{
+                showAttendanceTable();
+            }
+        });
 
         salesPane.setOnMouseClicked(event -> {
             studentListView.setVisible(Boolean.FALSE);
@@ -517,27 +456,26 @@ public class salesDetailsFormController implements Initializable{
         });
 
         try{
-            studentListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {
-                @Override
-                public void changed(ObservableValue<? extends Student> observable, Student oldValue, Student newValue) {
-                    if(studentListView.getSelectionModel().getSelectedItem() !=null){
-                        if(radioToggle.getSelectedToggle()==salesRadio){
-                          fetchSalesData(studentListView.getSelectionModel().getSelectedItem());
-                        }else{
-                            //show the attendance table
-                            String name = studentListView.getSelectionModel().getSelectedItem().getFirstname();
+            studentListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if(studentListView.getSelectionModel().getSelectedItem() !=null){
+                    if(radioToggle.getSelectedToggle()==salesRadio){
+                      fetchSalesData(studentListView.getSelectionModel().getSelectedItem());
+
+                    }else{
+                        //show the attendance table
+                        String name = studentListView.getSelectionModel().getSelectedItem().getFirstname();
 //                                    studentListView.getSelectionModel().getSelectedItem().getOthername()+
 //                                    studentListView.getSelectionModel().getSelectedItem().getLastname();
 
-                            List<Student> students = studentDao.getStudentByName(name);
-                            if(students !=null){
-                                studentdata.addAll(students);
-                            }
-                            studentListView.setVisible(Boolean.FALSE);
-//                          toggleTableView(studentTableView,salesTableView);
-                            showAttendanceTable();
-                            populateStudentTable();
+                        List<Student> students = studentDao.getStudentByName(name);
+                        if(students !=null){
+                            studentdata.addAll(students);
                         }
+                        studentListView.setVisible(Boolean.FALSE);
+
+//                      toggleTableView(studentTableView,salesTableView);
+                        showAttendanceTable();
+                        populateStudentTable();
                     }
                 }
             });
@@ -578,8 +516,6 @@ public class salesDetailsFormController implements Initializable{
                 if(event.getClickCount()==2){
                     //listening for double click
                     if(!studentTableView.getItems().isEmpty()){
-
-                        System.out.print("We got a double count...");
                          makePayment();
                     }
                 }
@@ -610,12 +546,7 @@ public class salesDetailsFormController implements Initializable{
             if(!studentdata.isEmpty()){
                 studentListView.setVisible(Boolean.TRUE);
                 studentListView.getItems().addAll(studentdata);
-                studentListView.setCellFactory(new Callback<ListView<Student>, ListCell<Student>>() {
-                    @Override
-                    public ListCell<Student> call(ListView<Student> param) {
-                        return new StudentCell();
-                    }
-                });
+                studentListView.setCellFactory(param -> new StudentCell());
                 studentdata.clear();
                 salesTableView.getItems().clear();
             }else{
@@ -637,42 +568,48 @@ public class salesDetailsFormController implements Initializable{
     }
 
     private void makePayment() {
-        TextInputDialog input = new TextInputDialog();
-        Sales sales = salesTableView.getSelectionModel().getSelectedItem();
-        student= sales.getStudent();
-        ImageView imageView =new ImageView();
-        Image image =new Image("assets/sale.png");
-        imageView.setImage(image);
-        imageView.setFitWidth(100);
-        imageView.setFitHeight(120);
-        input.setGraphic(imageView);
-        input.setTitle("New Payment");
-        input.setContentText("How much is the student paying?");
-        input.setHeaderText("Add Payment for\n"+student.getFirstname()+ " "+student.getLastname()+" "+student.getLastname()+" "+"["+student.getStage().getName()+"]\n" +
-                "as payment for "+sales.getItem().getName().toUpperCase());
-        Optional<String> result = input.showAndWait();
+        try{
+            TextInputDialog input = new TextInputDialog();
+            Sales sales = salesTableView.getSelectionModel().getSelectedItem();
+            student= sales.getStudent();
+            ImageView imageView =new ImageView();
+            Image image =new Image("assets/sale.png");
+            imageView.setImage(image);
+            imageView.setFitWidth(100);
+            imageView.setFitHeight(120);
+            input.setGraphic(imageView);
+            input.setTitle("New Payment");
+            input.setContentText("How much is the student paying?");
+            input.setHeaderText("Add Payment for\n"+student.getFirstname()+ " "+student.getLastname()+" "+student.getLastname()+" "+"["+student.getStage().getName()+"]\n" +
+                    "as payment for "+sales.getItem().getName().toUpperCase());
+            Optional<String> result = input.showAndWait();
 
-        if(result.isPresent() && result.get()!=null){
-            Alert alert =new Alert(Alert.AlertType.CONFIRMATION,"",ButtonType.YES,ButtonType.NO);
-            alert.setHeaderText("Are you sure you want to make payment of "+result.get()+"\nfor"+" "+sales.getItem().getName()+"\n");
-            Optional<ButtonType>result2 = alert.showAndWait();
+            if(result.isPresent() && result.get()!=null){
+                Alert alert =new Alert(Alert.AlertType.CONFIRMATION,"",ButtonType.YES,ButtonType.NO);
+                alert.setHeaderText("Are you sure you want to make payment of "+result.get()+"\nfor"+" "+sales.getItem().getName()+"\n");
+                Optional<ButtonType>result2 = alert.showAndWait();
 
-            if(result2.isPresent()&& result2.get()==ButtonType.YES){
-                Task payment = new Task() {
-                    @Override
-                    protected Object call() {
-                        salesDao.payForSales(sales,Double.valueOf(result.get()));
-                        return null;
-                    }
-                };
-                payment.setOnRunning(event -> MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Updating sales..."));
-                payment.setOnSucceeded(event -> {
-                    MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
-                    Notification.getNotificationInstance().notifySuccess("The record has been updated","success");
-                });
-                payment.setOnFailed(event -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
-                new Thread(payment).start();
+                if(result2.isPresent()&& result2.get()==ButtonType.YES){
+                    Task payment = new Task() {
+                        @Override
+                        protected Object call() {
+                            salesDao.payForSales(sales,Double.valueOf(result.get()));
+                            return null;
+                        }
+                    };
+                    payment.setOnRunning(event -> MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Updating sales..."));
+                    payment.setOnSucceeded(event -> {
+                        MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+                        Notification.getNotificationInstance().notifySuccess("The record has been updated","success");
+                        populateSalesTable();
+                    });
+                    payment.setOnFailed(event -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+                    new Thread(payment).start();
+                }
             }
+
+        }catch (Exception e){
+            //log the error
         }
     }
 

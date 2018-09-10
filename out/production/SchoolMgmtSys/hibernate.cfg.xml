@@ -19,7 +19,7 @@
         <property name="dialect">org.hibernate.dialect.MySQL57Dialect</property>
          <!--<property name="dialect">org.hibernate.dialect.SQLiteDialect</property>-->
         <!-- Enable Hibernate's automatic session context management -->
-        <property name="current_session_context_class">thread</property>
+        <!--<property name="current_session_context_class">thread</property>-->
         <!-- Disable the second-level cache  -->
         <!--<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>-->
 
@@ -38,5 +38,7 @@
         <mapping class="com.hub.schoolAid.Address"/>
         <mapping class="com.hub.schoolAid.Item"/>
         <mapping class="com.hub.schoolAid.Term"/>
+        <mapping class="com.hub.schoolAid.Grade"/>
+        <mapping class="com.hub.schoolAid.Assessment"/>
 	</session-factory>
 </hibernate-configuration>

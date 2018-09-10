@@ -10,6 +10,7 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
+import javax.rmi.CORBA.Util;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -121,6 +123,7 @@ public class studentController implements Initializable{
     private StudentDao studentDao;
     private Notification notification=Notification.getNotificationInstance();
     Pattern text = Pattern.compile("");
+    private  List<Student> existing =null;
 
     /**
      *  this determines whether there is a restriction in the system or not
@@ -146,12 +149,11 @@ public class studentController implements Initializable{
      * @param textField the text field to validate
      * @param min the minimum characters required for the text field.
      */
-    private void validateTextBox(TextField textField,int min){
+    private void checkTextBoxLength(TextField textField,int min){
 
         if(textField.getText().trim().matches("[a-zA-Z\\s\\$]+")){
             //check if the name is short
             if(textField.getText().trim().length()<=min){
-                //the first name is too short
 
                 showErrorPane(textField.getAccessibleText()+" "+"is too short");
                 infoLabel.setTextFill(Color.valueOf("#fc0303"));
@@ -222,7 +224,7 @@ public class studentController implements Initializable{
 
         if(oname.getText().trim().length()>0){
             if(oname.getText().trim().matches("[a-zA-Z+\\s\\$]") && oname.getText().trim().length()<1){
-                showErrorPane("First name is too short");
+                showErrorPane("Other  name is too short");
                 infoLabel.setTextFill(Color.valueOf("#fc0303"));
                 return false;
             }
@@ -284,6 +286,7 @@ public class studentController implements Initializable{
             Optional<ButtonType>result = alert.showAndWait();
             return result.isPresent() && result.get() == ButtonType.YES;
         }
+
         return true;
     }
 
@@ -316,26 +319,26 @@ public class studentController implements Initializable{
 
         //validate the major fields on focus
         fname.setOnKeyReleased(event -> {
-           validateTextBox(fname,4);
+           checkTextBoxLength(fname,2);
         });
 
         surname.setOnKeyReleased(event -> {
-            validateTextBox(surname,3);
+            checkTextBoxLength(surname,3);
         });
 
         oname.setOnKeyReleased(event -> {
-            validateTextBox(oname,2);
+            checkTextBoxLength(oname,2);
         });
 
         parentName.setOnKeyReleased(event -> {
-            validateTextBox(parentName,4);
+            checkTextBoxLength(parentName,3);
         });
 
-        occupation.setOnKeyReleased(event -> validateTextBox(occupation,4));
+        occupation.setOnKeyReleased(event -> checkTextBoxLength(occupation,3));
 
-        address.setOnKeyReleased(event -> validateTextBox(address,4));
+        address.setOnKeyReleased(event -> checkTextBoxLength(address,3));
 
-        landmark.setOnKeyReleased(event -> validateTextBox(landmark,5));
+        landmark.setOnKeyReleased(event -> checkTextBoxLength(landmark,5));
 
         allergyRadiobtn.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
@@ -347,20 +350,20 @@ public class studentController implements Initializable{
         });
 
         uploadImg.setOnAction(event -> {
-            FileChooser fileChooser=new FileChooser();
-            javafx.stage.Stage stage = new javafx.stage.Stage();
-             try {
-                 path=fileChooser.showOpenDialog(stage).toURI();
-
-             }catch (NullPointerException e){
-                 notification.notifyError("You didn't select any image","Empty selection");
-             }
-
-            if(path==null){
-                return;
-            }
-            System.out.print("this is the image path to set:"+path.toString());
-            image.setImage(new Image(path.toString()));
+            path =ImageHandler.openImageFile(image);
+//            FileChooser fileChooser=new FileChooser();
+//            javafx.stage.Stage stage = new javafx.stage.Stage();
+//             try {
+//                 path=fileChooser.showOpenDialog(stage).toURI();
+//
+//             }catch (NullPointerException e){
+//                 notification.notifyError("You didn't select any image","Empty selection");
+//             }
+//
+//            if(path==null){
+//                return;
+//            }
+//            image.setImage(new Image(path.toString()));
 
         });
 
@@ -373,95 +376,38 @@ public class studentController implements Initializable{
         });
         //save a new student
         save.setOnAction((ActionEvent event) -> {
-            MyProgressIndicator myProgressIndicator = MyProgressIndicator.getMyProgressIndicatorInstance();
-
             if(validate()){
-                Task prepRecords = new Task() {
-                    @Override
-                    protected Object call() {
-                      prepareStudentRecords();
-                        return null;
-                    }
-                };
-                prepRecords.setOnRunning(event1 -> {
-                    myProgressIndicator.showActionProgress("Preparing student data...");
-                });
+               FinalizeRecords();
 
-                prepRecords.setOnSucceeded(e -> {
-                    myProgressIndicator.hideProgress();
-
-                    Task save = new Task() {
-                        @Override
-                        protected Object call() {
-                            try {
-                                studentDao =new StudentDao();
-                                studentDao.addNewStudent(student);
-//                                notification.notifySuccess("You added a new student","Success");
-                            }catch (Exception e){
-                                notification.notifyError("Sorry! an error occurred.","Error");
-                            }
-                            return null;
-                        }
-
-                    };
-                    save.setOnRunning(event2 -> {
-                        myProgressIndicator.showActionProgress("Saving student...");
-                    });
-                    save.setOnSucceeded(event2 -> {
-                        myProgressIndicator.hideProgress();
-                        notification.notifySuccess("You added a new student","Success");
-                    });
-
-                    save.setOnFailed(event1 -> {
-                        myProgressIndicator.hideProgress();
-                    });
-                    new Thread(save).start();
-                });
-
-                prepRecords.setOnFailed(event1 -> {
-                    myProgressIndicator.hideProgress();
-                });
-                new Thread(prepRecords).start();
+//                Task checkStudent =new Task() {
+//                    @Override
+//                    protected Object call() throws Exception {
+//                        studentDao =new StudentDao();
+//                        List <Student> data =studentDao.getStudent(student);
+//                        if(data.isEmpty()){
+//                            saveRecords();
+//                        }else{
+//                            Notification.getNotificationInstance().notifyError("A student with this name already exist in the same class","Duplicate Found");
+//                        }
+//                        return null;
+//                    }
+//                };
+//                checkStudent.setOnFailed(e->MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+//                checkStudent.setOnSucceeded(e->MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+//                checkStudent.setOnRunning(e->MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Checking if student exists.."));
+//                new Thread(checkStudent).start();
             }
         });
     }
 
-    private void prepareStudentRecords() {
+    private Boolean prepareStudentRecords() {
         student =  new Student();
         student.setFirstname(fname.getText().trim().toString().toUpperCase());
         student.setLastname(surname.getText().trim().toUpperCase());
         student.setOthername(oname.getText().trim().toUpperCase());
-        if(path != null){
-            try {
-                Path source = Paths.get(path);
-//                Path newdir = Paths.get("/assets/students");
-                Path newdir = Paths.get(getClass().getResource(Utils.studentImgPath).toURI());
-//                String newDir = "/assets/students";
-                FileChannel fileChannel = FileChannel.open(source);
-                Long imageSize = fileChannel.size();
+        ImageHandler imageHandler =new ImageHandler();
+        imageHandler.setStudentImage(student,path);
 
-                //resize bigger image
-                if(imageSize <= 250000){
-                    Files.copy(source, newdir.resolve(source.getFileName()), REPLACE_EXISTING);
-                }else if(imageSize <= 1000000){
-                    ImageHandler.resize(source.toString(),newdir.resolve(source.getFileName()).toString() ,0.4);
-                }else if (imageSize <= 2000000){
-                    ImageHandler.resize(source.toString(),newdir.resolve(source.getFileName()).toString() ,0.25);
-                }else if(imageSize <= 5000000){
-                    ImageHandler.resize(source.toString(),newdir.resolve(source.getFileName()).toString() ,0.15);
-                }else{
-                    ImageHandler.resize(source.toString(),newdir.resolve(source.getFileName()).toString() ,150,200);
-                }
-//                student.setImage(newdir.resolve(source.getFileName()).toString());
-//                student.setImage(String.valueOf(newdir.resolve(source.getFileName())));
-                student.setImage(String.valueOf(source.getFileName()));
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
-        }
         if(dob != null){
             student.setDob(dob.getValue());
             student.setStage(classCombo.getSelectionModel().getSelectedItem());
@@ -492,5 +438,136 @@ public class studentController implements Initializable{
 
         StudentAccount account =new StudentAccount();
         student.setAccount(account);
+
+
+        cancel.setOnAction(e->{
+            Utils.closeEvent(e);
+        });
+        studentDao=new StudentDao();
+        existing=studentDao.getStudent(student);
+        if(existing.isEmpty())
+            return true;
+        return  false;
+    }
+    private void clearStdField(){
+        fname.clear();
+        oname.clear();
+        surname.clear();
+        dob.setValue(null);
+        sexRadiobtn.getSelectedToggle().setSelected(false);
+        allergyRadiobtn.getSelectedToggle().setSelected(false);
+        classCombo.getSelectionModel().clearSelection();
+        allergy.clear();
+    }
+
+    private void clearParentField(){
+        parentName.clear();
+        contact.clear();
+        occupation.clear();
+        address.clear();
+        landmark.clear();
+        feedingCombo.getSelectionModel().select(Student.FeedingStatus.DAILY);
+    }
+
+//    private  Boolean exists(Student student){
+//        Task task =new Task() {
+//            @Override
+//            protected Object call() throws Exception {
+//                studentDao=new StudentDao();
+//                if(studentDao.getStudent(student)!=null){
+//                    return  true;
+//                }
+//                return null;
+//            }
+//        };
+//        task.setOnRunning(e->MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Checking if the student exists..."));
+//        task.setOnSucceeded(e->MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+//        task.setOnFailed(e->MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+//
+//        new Thread(task).start();
+//
+//        return false;
+//    }
+
+    private void FinalizeRecords(){
+        Task prepRecords = new Task() {
+            @Override
+            protected Object call() {
+                if(prepareStudentRecords())
+                    saveRecords();
+//                else{
+//                       javafx.stage.Stage stage=new javafx.stage.Stage();
+//                       Scene scene =new Scene(null);
+//                       stage.setScene(scene);
+//
+////                    Notification.getNotificationInstance().notifyError("Exisint","Duplicate");
+//                }
+                return null;
+            }
+        };
+        prepRecords.setOnRunning(event1 -> {
+            MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Preparing student data...");
+        });
+
+        prepRecords.setOnSucceeded(e -> {
+            MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+            //custom button
+            ButtonType buttonType =new ButtonType("Details");
+            if(! existing.isEmpty()){
+                Alert alert =new Alert(Alert.AlertType.WARNING,"",buttonType,ButtonType.YES,ButtonType.NO);
+                alert.setTitle("Duplicate Entry");
+                alert.setHeaderText(existing.size()+" "+"Student(s)found with the same details.");
+                alert.setContentText("Do you want to clear the fields and save another student?");
+                Optional<ButtonType> result = alert.showAndWait();
+
+                if(result.isPresent() && result.get() == ButtonType.YES)
+                   clearStdField();
+                else if(result.isPresent() && result.get() ==buttonType){
+                    ListView<String> listView =new ListView();
+                    for (Student s : existing){
+                        listView.getItems().add(s.toString());
+                        listView.setVisible(Boolean.TRUE);
+                    }
+                }
+            }
+        });
+
+        prepRecords.setOnFailed(event1 -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+        new Thread(prepRecords).start();
+    }
+
+    private void saveRecords(){
+        Task save = new Task() {
+            @Override
+            protected Object call() {
+                try {
+                    studentDao =new StudentDao();
+                    studentDao.addNewStudent(student);
+                }catch (Exception e){
+                    notification.notifyError("Sorry! an error occurred.","Error");
+                }
+                return null;
+            }
+
+        };
+        save.setOnRunning(event2 -> {
+            MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Saving student...");
+        });
+
+        save.setOnSucceeded(event2 -> {
+            MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+            notification.notifySuccess("You added a new student","Success");
+//            clearStdField();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"",ButtonType.YES,ButtonType.NO);
+            alert.setTitle("Clear Fields");
+            alert.setHeaderText("Do you want to clear the Parent fields?\nIf you want to save another student with the \n " +
+                    "same parent, click NO otherwise click YES.");
+            Optional<ButtonType>result = alert.showAndWait();
+            if(result.isPresent() && result.get() == ButtonType.YES)
+                clearParentField();
+        });
+
+        save.setOnFailed(event1 -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+        new Thread(save).start();
     }
 }

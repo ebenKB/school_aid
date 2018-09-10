@@ -11,11 +11,11 @@ import javax.persistence.*;
  * Created by HUBKB.S on 11/20/2017.
  */
 public class HibernateUtil {
-//    private static  SessionFactory sessionFactory;
+//  private static  SessionFactory sessionFactory;
 
     private static final String PERSISTENCE_UNIT_NAME ="MY_PERSISTENCE";
     private static EntityManagerFactory factory;
-//    @PersistenceContext(name = PERSISTENCE_UNIT_NAME)
+//  @PersistenceContext(name = PERSISTENCE_UNIT_NAME)
     private static EntityManager em;
 
 

@@ -1,6 +1,7 @@
 package controller;
 
 import com.hub.schoolAid.*;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -22,6 +25,16 @@ public class viewAttendanceController implements Initializable{
 
     @FXML
     private AnchorPane attendanceForm;
+
+    @FXML
+    private AnchorPane leftStack;
+
+    @FXML
+    private HBox detailsHbox;
+
+    @FXML
+    private JFXButton btnDetails;
+
 
     @FXML
     private JFXRadioButton todayAttendance;
@@ -57,13 +70,21 @@ public class viewAttendanceController implements Initializable{
     private ListView<Student> stdListView;
 
     @FXML
-    private TextField total;
+    private Label total;
+
+    @FXML
+    private Label feedingTotal;
+
+    @FXML
+    private FlowPane statsPane;
 
     @FXML
     private JFXRadioButton classAttendance;
 
     @FXML
     private JFXComboBox<Stage> classCombo;
+
+    private Double totalFeedingPaid =0.0;
 
         @Override
         public void initialize(URL location, ResourceBundle resources) {
@@ -137,6 +158,16 @@ public class viewAttendanceController implements Initializable{
                 }else{
                     hideListView();
                 }
+                hideStatsPane();
+            });
+
+            stdAttendance.focusedProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                   if(oldValue && ! (stdListView.isVisible())){
+                       showStatsPane();
+                   }
+                }
             });
 
             stdListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {
@@ -156,61 +187,105 @@ public class viewAttendanceController implements Initializable{
     }
 
     private void populateTableView(List<Attendance>data){
+        if(data !=null){
             attendanceTableView.getItems().clear();
-        stdCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Attendance, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Attendance, String> param) {
-                return new SimpleStringProperty(param.getValue().getStudent().toString());
+            stdCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Attendance, String>, ObservableValue<String>>() {
+                @Override
+                public ObservableValue<String> call(TableColumn.CellDataFeatures<Attendance, String> param) {
+                    return new SimpleStringProperty(param.getValue().getStudent().toString());
+                }
+            });
+
+            presentCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Attendance, String>, ObservableValue<String>>() {
+                @Override
+                public ObservableValue<String> call(TableColumn.CellDataFeatures<Attendance, String> param) {
+                    return new SimpleStringProperty("YES");
+                }
+            });
+
+            feedingCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Attendance, String>, ObservableValue<String>>() {
+                @Override
+                public ObservableValue<String> call(TableColumn.CellDataFeatures<Attendance, String> param) {
+                    return new SimpleStringProperty(String.valueOf(param.getValue().getFeedingFee()));
+                }
+            });
+
+            dateCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Attendance, String>, ObservableValue<String>>() {
+                @Override
+                public ObservableValue<String> call(TableColumn.CellDataFeatures<Attendance, String> param) {
+
+                    return new SimpleStringProperty(String.valueOf(param.getValue().getDate().toString()));
+                }
+            });
+
+            stageCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Attendance, String>, ObservableValue<String>>() {
+                @Override
+                public ObservableValue<String> call(TableColumn.CellDataFeatures<Attendance, String> param) {
+                    return new SimpleStringProperty(param.getValue().getStudent().getStage().getName());
+                }
+            });
+            attendanceTableView.getItems().addAll(data);
+
+            for(Attendance at:data){
+                totalFeedingPaid+=at.getFeedingFee();
             }
+
+            feedingTotal.setText(totalFeedingPaid.toString());
+            total.setText(String.valueOf(data.size()));
+            hideStdList();
+        }
+
+        leftStack.setOnMouseClicked(e->{
+            hideStdList();
+            showStatsPane();
         });
 
-        presentCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Attendance, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Attendance, String> param) {
-                return new SimpleStringProperty("YES");
+        btnDetails.setOnAction(e->{
+            if(detailsHbox.isVisible()){
+                detailsHbox.setVisible(false);
+            }else{
+                detailsHbox.setVisible(true);
             }
         });
-
-        feedingCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Attendance, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Attendance, String> param) {
-                return new SimpleStringProperty(String.valueOf(param.getValue().getFeedingFee()));
-            }
-        });
-
-        dateCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Attendance, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Attendance, String> param) {
-
-                return new SimpleStringProperty(String.valueOf(param.getValue().getDate().toString()));
-            }
-        });
-
-        stageCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Attendance, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Attendance, String> param) {
-                return new SimpleStringProperty(param.getValue().getStudent().getStage().getName());
-            }
-        });
-        attendanceTableView.getItems().addAll(data);
-        total.setText(String.valueOf(data.size()));
     }
-private void hideClassDetails(){
-     classCombo.setVisible(Boolean.FALSE);
-}
+    private void hideClassDetails(){
+         classCombo.setVisible(Boolean.FALSE);
+    }
 
-private void showClassDetails(){
-     classCombo.setVisible(Boolean.TRUE);
-}
+    private void showClassDetails(){
+         classCombo.setVisible(Boolean.TRUE);
+    }
 
-private void hideListView(){
-     stdListView.setVisible(Boolean.FALSE);
-     stdAttendance.clear();
-}
+    private void hideListView(){
+         stdListView.setVisible(Boolean.FALSE);
+         stdAttendance.clear();
+    }
 
-private void showListView(){
-     stdListView.setVisible(Boolean.TRUE);
-}
-}
+    private void showListView(){
+         stdListView.setVisible(Boolean.TRUE);
+    }
+
+    private void toggleStats(){
+        if(statsPane.isVisible()){
+            statsPane.setVisible(false);
+        }else{
+            statsPane.setVisible(true);
+        }
+    }
+
+    private void hideStatsPane(){
+       statsPane.setVisible(false);
+    }
+
+    private void hideStdList(){
+       stdListView.setVisible(false);
+    }
+    private  void  showStatsPane(){
+        statsPane.setVisible(true);
+    }
+
+    }
+
+
 
 

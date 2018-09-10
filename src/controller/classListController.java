@@ -1,8 +1,11 @@
 package controller;
 
+import com.hub.schoolAid.Utils;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -80,5 +83,8 @@ public class classListController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         populateClassListTableView();
+       close.setOnAction(e->{
+           Utils.closeEvent(e);
+       });
     }
 }

@@ -3,6 +3,7 @@ package com.hub.schoolAid;
 
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by HUBKB.S on 11/20/2017.
@@ -22,16 +23,14 @@ public class Sales {
 
     private Double amountPaid = 0.0;
     private Double totalcost  = 0.0;
+    private Date date=new Date();
 
-    //every sales has a student and many students can have the same sale -- depracated
-//    @ManyToMany (mappedBy = "sales",fetch = FetchType.LAZY)
-//    private List<Student> student = new ArrayList<Student>();
 
       @OneToOne
       @JoinColumn(name ="student_sale_id")
       private Student student;
 
-//    //getters and setters
+   //getters and setters
     public Student getStudent() {
         return student;
     }
@@ -66,14 +65,6 @@ public class Sales {
         this.totalcost = totalcost;
     }
 
-//    public int getQty() {
-//        return qty;
-//    }
-//
-//    public void setQty(int qty) {
-//        this.qty = qty;
-//    }
-
     public Item getItem() {
         return item;
     }
@@ -81,6 +72,12 @@ public class Sales {
     public void setItem(Item item) {
         this.item = item;
     }
-    //methods
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

@@ -3,6 +3,7 @@ package com.hub.schoolAid;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Grade {
@@ -11,20 +12,19 @@ public class Grade {
 
     }
 
-    public Grade(char name){
+    public Grade(String name){
         this.setName(name);
     }
 
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private char name;
+    private String name;
     private String remark;
     private Double minMark;
     private Double maxMark;
 
     //getters
-
     public Long getId() {
         return id;
     }
@@ -33,11 +33,11 @@ public class Grade {
         this.id = id;
     }
 
-    public char getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(char name) {
+    public void setName(String name) {
         this.name = name;
     }
 

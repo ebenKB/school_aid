@@ -42,7 +42,6 @@ public class PDFMaker {
                  pageContentStream.endText();
                  pageContentStream.close();
              }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }

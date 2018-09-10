@@ -128,10 +128,10 @@ public class LoginFormController implements Initializable{
                     javafx.stage.Stage stage = new javafx.stage.Stage();
                     stage.setScene(scene);
                     stage.setMaximized(Boolean.TRUE);
-                    stage.setOnCloseRequest(e->{
-                        e.consume();
-                        System.out.println("main stage wants to close");
-                    });
+//                    stage.setOnCloseRequest(e->{
+//                        e.consume();
+//                        System.out.println("main stage wants to close");
+//                    });
                     stage.show();
 
                     //hide the old form

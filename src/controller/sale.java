@@ -64,6 +64,9 @@ public class sale implements Initializable{
     @FXML
     private TextField studentName;
 
+    @FXML
+    private Label infoLabel;
+
     private ObservableList<Student>data = FXCollections.observableArrayList();
     private StudentDao studentDao = new StudentDao();
     private SalesDao salesDao =new SalesDao();
@@ -186,65 +189,94 @@ public class sale implements Initializable{
             }
         });
 
+        unitCost.setOnKeyReleased(e->{
+           showCost();
+        });
+
+        qty.setOnKeyReleased(e->{
+           showCost();
+        });
+
         save.setOnAction(event -> {
-            if(saleType.getSelectedToggle() ==null){
-                Alert alert=new Alert( Alert.AlertType.WARNING,"",ButtonType.OK);
-                alert.setHeaderText("You have not selected a sale type.\nPlease select who you are selling the item to.");
-                alert.setTitle("Empty selection");
-                alert.show();
-            }else {
-                //create a new sale
-                Sales sale = new Sales();
-                Item item =new Item();
-                item.setCost(Double.valueOf(unitCost.getText().trim()));
-                item.setName(itemName.getText().trim());
+            if(isValid() && itemName.getText().length()>2){
+                if(saleType.getSelectedToggle() ==null){
+                    Alert alert=new Alert( Alert.AlertType.WARNING,"",ButtonType.OK);
+                    alert.setHeaderText("You have not selected a sale type.\nPlease select who you are selling the item to.");
+                    alert.setTitle("Empty selection");
+                    alert.show();
+                }else {
+                    //create a new sale
+                    Sales sale = new Sales();
+                    Item item =new Item();
+                    item.setCost(Double.valueOf(unitCost.getText().trim()));
+                    item.setName(itemName.getText().trim());
 
-//                sale.setItem(item);
-                item.setQty(Integer.parseInt(qty.getText().trim()));
-                sale.setTotalcost(item.getCost() * item.getQty());
+//              sale.setItem(item);
+                    item.setQty(Integer.parseInt(qty.getText().trim()));
+                    sale.setTotalcost(item.getCost() * item.getQty());
 
-//                Alert alert=new Alert( Alert.AlertType.WARNING,"",ButtonType.OK,ButtonType.CANCEL);
-//                alert.setHeaderText("You have not selected a sale type.\nPlease select who you are selling the item to.");
-//                alert.setTitle("Empty selection");
-//                Optional<ButtonType> result= alert.showAndWait();
-
-                Task task =  new Task() {
-                    @Override
-                    protected Object call() {
+                    Task task =  new Task() {
+                        @Override
+                        protected Object call() {
 
                             if(saleType.getSelectedToggle() ==individual){
                                 salesDao.createSale(sale,item, studentListView.getSelectionModel().getSelectedItem());
-//                                if(salesDao.createSale(sale,studentListView.getSelectionModel().getSelectedItem())){
-////                                    notification.notifySuccess("A new sale has been created","success");
-//                                }
+
                             }else if(saleType.getSelectedToggle()==someClass){
                                 salesDao.sellToClass(sale,item,classCombo.getSelectionModel().getSelectedItem());
-//                                if(salesDao.sellToClass(sale,item,classCombo.getSelectionModel().getSelectedItem())){
-//                                    notification.notifySuccess("Sales created for"+classCombo.getSelectionModel().getSelectedItem().getName(),"Success");
-//                                }
+
                             }else if(saleType.getSelectedToggle()==everyone){
                                 salesDao.sellToAllStudents(sale,item);
-//                                if(salesDao.sellToAllStudents(sale,item))
-//                                    notification.notifySuccess("Sales created for everyone","success");
                             }
                             //show confirmation message
 
-                        return null;
-                    }
-                };
-                task.setOnRunning(e -> progressIndicator.showActionProgress("Preparing sales") );
-                task.setOnSucceeded(e -> {
-                    progressIndicator.hideProgress();
-                    notification.notifySuccess("A new sale has been created","success");
-                });
+                            return null;
+                        }
+                    };
+                    task.setOnRunning(e -> progressIndicator.showActionProgress("Preparing sales") );
+                    task.setOnSucceeded(e -> {
+                        progressIndicator.hideProgress();
+                        notification.notifySuccess("A new sale has been created","success");
+                    });
 
-                task.setOnFailed(e->{
-                    notification.notifyError("Sorry an error occurred while creating sales","Fatal error");
-                    task.cancel();
-                    progressIndicator.hideProgress();
-                });
-                new Thread(task).start();
+                    task.setOnFailed(e->{
+                        notification.notifyError("Sorry an error occurred while creating sales","Fatal error");
+                        task.cancel();
+                        progressIndicator.hideProgress();
+                    });
+                    new Thread(task).start();
+                }
+            }else{
+                //show message - fields are empty
+                showError();
             }
         });
+    }
+
+    private void showError(){
+        infoLabel.setText("Fields are empty or you have entered an invalid character.");
+    }
+
+    private void clearError(){
+        infoLabel.setText("");
+    }
+    private void showCost() {
+        if(isValid()){
+           clearError();
+            Double sum = Double.valueOf(unitCost.getText().trim()) * Integer.parseInt(qty.getText().trim());
+            total.setText(sum.toString());
+        }else {
+            total.clear();
+            if(unitCost.getText().trim().length()>0 && qty.getText().trim().length()>0)
+                showError();
+        }
+    }
+
+    public Boolean isValid(){
+        if(qty.getText().trim().length()>0 && unitCost.getText().trim().length()>0)
+            if(((unitCost.getText().trim().length()>0 && unitCost.getText().trim().matches("\\d+\\.{1}\\d+"))||(unitCost.getText().trim().matches("\\d+")))
+                    &&((qty.getText().trim().matches("\\d+"))))
+                 return  true;
+        return false;
     }
 }

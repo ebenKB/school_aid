@@ -9,13 +9,12 @@ public class AssessmentDao {
     private EntityManager em;
 
     private void saveAssessment(Assessment assessment){
-        System.out.print("we are in the save...."+assessment.getStudent().toString());
+        GradeDao gradeDao =new GradeDao();
+        assessment.setGrade(gradeDao.getGrade((assessment.getClassScore()+assessment.getExamScore())));
         em=HibernateUtil.getEntityManager();
         HibernateUtil.begin();
         em.persist(assessment);
-        System.out.print("we have persisted the assessment"+assessment.getStudent().toString());
         HibernateUtil.commit();
-//        HibernateUtil.close();
     }
 
     private void saveAssessment(List<Assessment> assessments){
@@ -33,7 +32,6 @@ public class AssessmentDao {
     }
 
     public Boolean createAssessment(List <Assessment> assessment){
-        System.out.print("we have called the Assessment Dao to do Assessment...");
         try {
             saveAssessment(assessment);
             return true;
@@ -104,6 +102,21 @@ public class AssessmentDao {
     }
 
     public Boolean updateAssessment(Assessment assessment){
+          System.out.println("in the update assessment"+assessment.getId());
+//        Grade grade =new Grade();
+//        grade.setName('B');
+//        grade.setMinMark(60.0);
+//        grade.setMaxMark(70.0);
+//        grade.setRemark("Very Good");
+          GradeDao gradeDao =new GradeDao();
+          Grade grade =gradeDao.getGrade((assessment.getClassScore()+assessment.getExamScore()));
+            if(grade!=null){
+                assessment.setGrade(grade);
+            }
+
+//        System.out.println("this is the new data"+newAssessment.getGrade().getName()+newAssessment.getClassScore()+newAssessment.getExamScore());
+//        gradeDao.createGrade(grade);
+
         try{
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
@@ -112,9 +125,11 @@ public class AssessmentDao {
             newAssessment.setExamScore(assessment.getExamScore());
             newAssessment.setGrade(assessment.getGrade());
             HibernateUtil.commit();
-            HibernateUtil.close();
+//          HibernateUtil.close();
+            System.out.println("ending update assessment");
             return  true;
         }catch (Exception e){
+            e.printStackTrace();
             return  false;
         }
     }

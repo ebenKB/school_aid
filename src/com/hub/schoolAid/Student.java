@@ -1,15 +1,7 @@
 package com.hub.schoolAid;
 //import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
-import javafx.scene.image.Image;
-
-
-import javax.imageio.ImageIO;
 import javax.persistence.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
-
 import java.time.LocalDate;
-import java.util.Base64;
 import java.util.Set;
 
 /**
@@ -19,8 +11,8 @@ import java.util.Set;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-//    @GenericGenerator(name="sequence_stu",strategy = "model.Student_Id_Generator")
-//    @GeneratedValue(generator = "sequence_stu")
+//  @GenericGenerator(name="sequence_stu",strategy = "model.Student_Id_Generator")
+//  @GeneratedValue(generator = "sequence_stu")
     @Column (name = "student_id")
     private Long Id;
 

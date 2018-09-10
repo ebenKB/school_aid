@@ -57,6 +57,8 @@ public class StudentDao {
         newStd.setLastname(new_student.getLastname());
         newStd.setOthername(new_student.getOthername());
         newStd.setPayFeeding(new_student.getPayFeeding());
+        newStd.setFeedingStatus(new_student.getFeedingStatus());
+        newStd.getAccount().setFeedingFeeToPay(new_student.getAccount().getFeedingFeeToPay());
         newStd.setImage(new_student.getImage());
         newStd.setDob(new_student.getDob());
         newStd.setGender(new_student.getGender());
@@ -68,28 +70,35 @@ public class StudentDao {
         newStd.getParent().setTelephone(parent.getTelephone());
     }
 
+    public List <Student> getStudent (Student student){
+        System.out.println("this is the student"+student.toString());
+        String hql = "FROM students S WHERE S.firstname like ? and S.lastname like ? and  S.othername like ? and S.stage.name like ?";
+        em=HibernateUtil.getEntityManager();
+        HibernateUtil.begin();
+
+        List <Student> data = em.createQuery(hql).setParameter(0,student.getFirstname())
+                .setParameter(1,student.getLastname())
+                .setParameter(2,student.getOthername())
+                .setParameter(3,student.getStage().getName())
+                .getResultList();
+      for(Student s : data){
+          System.out.println("this is a student found"+s.toString());
+      }
+        return  data;
+    }
     /**
      *
      * @param id the id of the student that we want to get from the database
      * @return a list of the student
      */
     public Student getStudent(String id) throws HibernateException{
-//        session = HibernateUtil.getSession();
-//        session.beginTransaction();
-//        String hql = "FROM students S WHERE S.id = '"+ id +"' ";
-//        Query query = session.createQuery(hql);
-//        List results = query.list();
-//        return results;
           em=HibernateUtil.getEntityManager();
           HibernateUtil.begin();
           return  (Student)em.createQuery("from  students where +id+ like '"+id+"' ").getSingleResult();
     }
 
     public List <Student> getStudentByName(String name) throws HibernateException{
-//        session = HibernateUtil.getSession();
-//        session.beginTransaction();
-        String hql = "FROM students S WHERE S.firstname like '"+name+"%' OR S.lastname like '"+name+"%' OR S.othername like '"+name+"%' ";
-//        Query query = session.createQuery(hql);
+          String hql = "FROM students S WHERE S.firstname like '"+name+"%' OR S.lastname like '"+name+"%' OR S.othername like '"+name+"%' ";
           em=HibernateUtil.getEntityManager();
           HibernateUtil.begin();
 
@@ -98,10 +107,6 @@ public class StudentDao {
     }
 
     public List<Student> getStudentFromClass(Stage newStage) throws HibernateException{
-//        session = HibernateUtil.getSession();
-//        session.beginTransaction();
-//        String hql = "FROM students WHERE class_id = '"+ stage.getId() +"' ";
-//        Query query = session.createQuery(hql);
         em=HibernateUtil.getEntityManager();
         HibernateUtil.begin();
 //        List<Student> results = em.createQuery("FROM students WHERE +class_id+ like '"+ stage.getId() +"'").getResultList();
@@ -115,8 +120,6 @@ public class StudentDao {
      *          null if no student is found
      */
     public List<Student> getStudentFromClass(String stage)throws HibernateException{
-//        session = HibernateUtil.getSession();
-//        session.beginTransaction();
         em=HibernateUtil.getEntityManager();
         HibernateUtil.begin();
         String hql = "FROM students S WHERE S.class = '"+ stage +"' ";

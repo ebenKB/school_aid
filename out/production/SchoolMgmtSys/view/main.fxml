@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
-<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
@@ -33,7 +33,7 @@
             <AnchorPane fx:id="buttonCotainer" prefHeight="67.0" prefWidth="865.0" BorderPane.alignment="CENTER">
                <children>
                   <HBox fx:id="buttonHBox" layoutX="511.0" layoutY="35.0" spacing="15.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="35.0" />
-                  <MenuBar fx:id="menubar" layoutX="-3.0" layoutY="-2.0" prefHeight="30.0" prefWidth="351.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="-2.0">
+                  <MenuBar fx:id="menubar" layoutX="-3.0" layoutY="-2.0" prefHeight="33.0" prefWidth="865.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
                     <menus>
                       <Menu fx:id="fileMenu" mnemonicParsing="false" text="File">
                         <items>
@@ -63,11 +63,7 @@
                   </Separator>
                   <HBox alignment="CENTER" layoutX="706.0" layoutY="40.0" prefHeight="28.0" prefWidth="245.0" spacing="10.0" AnchorPane.rightAnchor="19.0">
                      <children>
-                        <ImageView fitHeight="25.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/login-avatar.png" />
-                           </image>
-                        </ImageView>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USER" size="24" />
                         <Text fx:id="userNameLabel" fill="#fffefe" strokeType="OUTSIDE" strokeWidth="0.0" text="User" wrappingWidth="82.13671875">
                            <font>
                               <Font size="14.0" />
@@ -108,7 +104,7 @@
             </AnchorPane>
          </top>
          <center>
-            <AnchorPane id="pane with image" maxHeight="2000.0" maxWidth="2000.0" prefHeight="544.0" prefWidth="664.0" BorderPane.alignment="CENTER">
+            <AnchorPane id="pane with image" fx:id="tablePane" maxHeight="2000.0" maxWidth="2000.0" prefHeight="544.0" prefWidth="467.0" BorderPane.alignment="CENTER">
                <children>
                   <TableView fx:id="studentTableView" layoutY="38.0" prefHeight="467.0" prefWidth="657.0" visible="false" AnchorPane.bottomAnchor="93.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="0.0">
                     <columns>
@@ -132,30 +128,31 @@
                         </ContextMenu>
                      </contextMenu>
                   </TableView>
-                  <AnchorPane fx:id="tableInfo" layoutY="427.0" prefHeight="65.0" prefWidth="664.0" visible="false" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <Pane layoutY="476.0" prefHeight="84.0" prefWidth="466.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0">
                      <children>
-                        <HBox layoutX="405.0" layoutY="14.0" spacing="5.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="42.0">
+                        <HBox fx:id="tableInfo" alignment="CENTER" layoutX="109.0" layoutY="42.0" prefHeight="44.0" prefWidth="356.0" spacing="20.0" visible="false">
                            <children>
-                              <Label prefHeight="37.0" prefWidth="115.0" text="Student(s) Found" textFill="WHITE">
+                              <Label fx:id="stdInfoLabel" prefHeight="37.0" prefWidth="115.0" text="Student(s) Found" textFill="WHITE">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="totalStudents" editable="false" prefHeight="39.0" prefWidth="97.0">
+                              <TextField fx:id="totalStudents" editable="false" prefHeight="44.0" prefWidth="137.0">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </TextField>
+                              <FontAwesomeIconView fx:id="eye" fill="WHITE" glyphName="EYE" size="20" wrappingWidth="20.0" />
                            </children>
                         </HBox>
                      </children>
-                  </AnchorPane>
+                  </Pane>
                </children></AnchorPane>
          </center>
          <left>
-            <AnchorPane fx:id="menuButtonsPane" minHeight="-Infinity" prefHeight="546.0" prefWidth="227.0" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="menuButtonsPane" minHeight="-Infinity" prefHeight="520.0" prefWidth="236.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox fx:id="vbox" layoutX="21.0" layoutY="40.0" prefHeight="415.0" prefWidth="180.0" spacing="20.0" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="40.0">
+                  <VBox fx:id="vbox" layoutX="21.0" layoutY="40.0" prefHeight="415.0" prefWidth="180.0" spacing="20.0" visible="false" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="40.0">
                      <children>
                         <HBox>
                            <children>
@@ -271,7 +268,7 @@
                                     </ImageView>
                                  </graphic>
                               </MenuItem>
-                              <MenuItem fx:id="newPayment" mnemonicParsing="false" text="Payment">
+                              <MenuItem fx:id="newPayment" mnemonicParsing="false" text="Payment/Attendance">
                                  <graphic>
                                     <ImageView fitHeight="35.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -331,11 +328,12 @@
                           <items>
                             <MenuItem fx:id="newSubject" mnemonicParsing="false" text="Add New Subject" />
                             <MenuItem fx:id="assessment" mnemonicParsing="false" text="Assessment" />
-                              <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                              <MenuItem fx:id="grade" mnemonicParsing="false" text="Add Grade" />
                           </items>
                         </MenuButton>
                      </children>
                   </VBox>
+                  <FontAwesomeIconView fx:id="menuToggle" glyphName="BARS" layoutX="13.0" layoutY="30.0" size="20" />
                </children>
             </AnchorPane>
          </left>
@@ -351,15 +349,7 @@
             </Pane>
          </right>
       </BorderPane>
-      <Pane fx:id="imagePane" layoutX="302.0" layoutY="93.0" minHeight="-Infinity" minWidth="-Infinity" opacity="0.15" prefHeight="504.0" prefWidth="565.0" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="302.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="93.0">
-         <children>
-            <ImageView fitHeight="518.0" fitWidth="558.0" layoutX="-5.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
-               <viewport>
-                  <Rectangle2D minX="100.0" minY="100.0" />
-               </viewport>
-            </ImageView>
-         </children>
-      </Pane>
+      <Pane fx:id="separator" layoutY="75.0" prefHeight="7.0" prefWidth="865.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    </children>
    
 </AnchorPane>

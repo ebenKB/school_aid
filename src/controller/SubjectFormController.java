@@ -68,7 +68,7 @@ public class SubjectFormController implements Initializable{
             course.setName(subjectName.getText().trim().toUpperCase());
             courses.add(course);
             clearSubjectField();
-        }
+        }else WindowsSounds.playWindowsSound();
     }
 
     private void clearSubjectField(){
