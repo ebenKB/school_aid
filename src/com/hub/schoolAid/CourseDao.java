@@ -21,7 +21,6 @@ public class CourseDao {
     public void  createNewCourse(List<Stage> stages,List<Course> courses){
         em =HibernateUtil.getEntityManager();
         HibernateUtil.begin();
-        System.out.print("\n\nwe are trying to persist data...");
         for(Course course:courses)
             em.persist(course);
 

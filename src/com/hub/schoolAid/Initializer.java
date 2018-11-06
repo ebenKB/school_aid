@@ -1,7 +1,9 @@
 package com.hub.schoolAid;
 
 import controller.LoginFormController;
+import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,6 +14,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.logging.Logger;
 
 public class Initializer {
 
@@ -29,7 +32,6 @@ public class Initializer {
     public void showLoginForm(){
         //show the login form
         try {
-            System.out.print("Trying to show the login form....");
             Parent root ;
             FXMLLoader fxmlLoader;
             fxmlLoader = new FXMLLoader(getClass().getResource("/view/LoginForm.fxml"));
@@ -44,10 +46,32 @@ public class Initializer {
             stage.setTitle("Login");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UNDECORATED);
-//            stage.setMaximized(Boolean.TRUE);
+//          stage.setMaximized(Boolean.TRUE);
             stage.show();
+
+            FadeTransition fade =new FadeTransition();
+            fade.setDuration(Duration.seconds(2));
+            fade.setNode(root);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+            fade.play();
+
+            TranslateTransition translateTransition = new TranslateTransition();
+            translateTransition.setDuration(Duration.seconds(2));
+            translateTransition.setNode(root);
+            translateTransition.setToX(-100);
+            translateTransition.setToZ(-80);
+            translateTransition.play();
+
+            TranslateTransition translateTransition2 = new TranslateTransition();
+            translateTransition2.setDuration(Duration.seconds(3));
+            translateTransition2.setNode(root);
+            translateTransition2.setToX(0);
+            translateTransition2.setToZ(0);
+            translateTransition2.play();
         } catch (IOException e) {
             e.printStackTrace();
+//            Logger.getLogger("Error with Login","");
         }
     }
 

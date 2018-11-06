@@ -22,6 +22,7 @@ public class Attendance {
 //  private int isPresent;
     private Double feedingFee;
     private LocalDate date;
+    private Boolean paidNow = false;
 
     //getters and setters
 
@@ -57,5 +58,13 @@ public class Attendance {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public Boolean getPaidNow() {
+        return paidNow;
+    }
+
+    public void setPaidNow(Boolean paidNow) {
+        this.paidNow = paidNow;
     }
 }

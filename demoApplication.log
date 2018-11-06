@@ -1,0 +1,834 @@
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Stage#47
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#112]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#396]
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select studentacc0_.account_id as account_1_13_0_, studentacc0_.feeToPay as feeToPay2_13_0_, studentacc0_.feedingFeeCredit as feedingF3_13_0_, studentacc0_.feedingFeeToPay as feedingF4_13_0_ from StudentAccount studentacc0_ where studentacc0_.account_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#397]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#397]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.StudentAccount#397
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select parent0_.Id as Id1_10_0_, parent0_.address_id as address_5_10_0_, parent0_.name as name2_10_0_, parent0_.occupation as occupati3_10_0_, parent0_.telephone as telephon4_10_0_, address1_.id as id1_9_1_, address1_.homeAddress as homeAddr2_9_1_, address1_.landmark as landmark3_9_1_ from Parents parent0_ left outer join Parent_Address address1_ on parent0_.address_id=address1_.id where parent0_.Id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#398]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#398]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#399]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#399]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Parent#398
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#396]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#428]
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select studentacc0_.account_id as account_1_13_0_, studentacc0_.feeToPay as feeToPay2_13_0_, studentacc0_.feedingFeeCredit as feedingF3_13_0_, studentacc0_.feedingFeeToPay as feedingF4_13_0_ from StudentAccount studentacc0_ where studentacc0_.account_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#429]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#429]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.StudentAccount#429
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select parent0_.Id as Id1_10_0_, parent0_.address_id as address_5_10_0_, parent0_.name as name2_10_0_, parent0_.occupation as occupati3_10_0_, parent0_.telephone as telephon4_10_0_, address1_.id as id1_9_1_, address1_.homeAddress as homeAddr2_9_1_, address1_.landmark as landmark3_9_1_ from Parents parent0_ left outer join Parent_Address address1_ on parent0_.address_id=address1_.id where parent0_.Id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#430]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#430]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#431]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#431]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Parent#430
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#428]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#476]
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select studentacc0_.account_id as account_1_13_0_, studentacc0_.feeToPay as feeToPay2_13_0_, studentacc0_.feedingFeeCredit as feedingF3_13_0_, studentacc0_.feedingFeeToPay as feedingF4_13_0_ from StudentAccount studentacc0_ where studentacc0_.account_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#477]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#477]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.StudentAccount#477
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select parent0_.Id as Id1_10_0_, parent0_.address_id as address_5_10_0_, parent0_.name as name2_10_0_, parent0_.occupation as occupati3_10_0_, parent0_.telephone as telephon4_10_0_, address1_.id as id1_9_1_, address1_.homeAddress as homeAddr2_9_1_, address1_.landmark as landmark3_9_1_ from Parents parent0_ left outer join Parent_Address address1_ on parent0_.address_id=address1_.id where parent0_.Id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#478]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#478]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#479]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#479]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Parent#478
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#476]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#480]
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select studentacc0_.account_id as account_1_13_0_, studentacc0_.feeToPay as feeToPay2_13_0_, studentacc0_.feedingFeeCredit as feedingF3_13_0_, studentacc0_.feedingFeeToPay as feedingF4_13_0_ from StudentAccount studentacc0_ where studentacc0_.account_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#481]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#481]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.StudentAccount#481
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select parent0_.Id as Id1_10_0_, parent0_.address_id as address_5_10_0_, parent0_.name as name2_10_0_, parent0_.occupation as occupati3_10_0_, parent0_.telephone as telephon4_10_0_, address1_.id as id1_9_1_, address1_.homeAddress as homeAddr2_9_1_, address1_.landmark as landmark3_9_1_ from Parents parent0_ left outer join Parent_Address address1_ on parent0_.address_id=address1_.id where parent0_.Id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#482]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#482]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#483]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#483]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Parent#482
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#480]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#488]
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select studentacc0_.account_id as account_1_13_0_, studentacc0_.feeToPay as feeToPay2_13_0_, studentacc0_.feedingFeeCredit as feedingF3_13_0_, studentacc0_.feedingFeeToPay as feedingF4_13_0_ from StudentAccount studentacc0_ where studentacc0_.account_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#489]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#489]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.StudentAccount#489
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select parent0_.Id as Id1_10_0_, parent0_.address_id as address_5_10_0_, parent0_.name as name2_10_0_, parent0_.occupation as occupati3_10_0_, parent0_.telephone as telephon4_10_0_, address1_.id as id1_9_1_, address1_.homeAddress as homeAddr2_9_1_, address1_.landmark as landmark3_9_1_ from Parents parent0_ left outer join Parent_Address address1_ on parent0_.address_id=address1_.id where parent0_.Id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#490]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#490]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#491]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#491]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Parent#490
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#488]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#1066]
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select studentacc0_.account_id as account_1_13_0_, studentacc0_.feeToPay as feeToPay2_13_0_, studentacc0_.feedingFeeCredit as feedingF3_13_0_, studentacc0_.feedingFeeToPay as feedingF4_13_0_ from StudentAccount studentacc0_ where studentacc0_.account_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#1067]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#1067]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.StudentAccount#1067
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select parent0_.Id as Id1_10_0_, parent0_.address_id as address_5_10_0_, parent0_.name as name2_10_0_, parent0_.occupation as occupati3_10_0_, parent0_.telephone as telephon4_10_0_, address1_.id as id1_9_1_, address1_.homeAddress as homeAddr2_9_1_, address1_.landmark as landmark3_9_1_ from Parents parent0_ left outer join Parent_Address address1_ on parent0_.address_id=address1_.id where parent0_.Id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#1068]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#1068]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#1069]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#1069]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Parent#1068
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#1066]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#1082]
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select studentacc0_.account_id as account_1_13_0_, studentacc0_.feeToPay as feeToPay2_13_0_, studentacc0_.feedingFeeCredit as feedingF3_13_0_, studentacc0_.feedingFeeToPay as feedingF4_13_0_ from StudentAccount studentacc0_ where studentacc0_.account_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#1083]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#1083]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.StudentAccount#1083
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select parent0_.Id as Id1_10_0_, parent0_.address_id as address_5_10_0_, parent0_.name as name2_10_0_, parent0_.occupation as occupati3_10_0_, parent0_.telephone as telephon4_10_0_, address1_.id as id1_9_1_, address1_.homeAddress as homeAddr2_9_1_, address1_.landmark as landmark3_9_1_ from Parents parent0_ left outer join Parent_Address address1_ on parent0_.address_id=address1_.id where parent0_.Id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#1084]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#1084]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#1085]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#1085]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Parent#1084
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#1082]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#2844]
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select studentacc0_.account_id as account_1_13_0_, studentacc0_.feeToPay as feeToPay2_13_0_, studentacc0_.feedingFeeCredit as feedingF3_13_0_, studentacc0_.feedingFeeToPay as feedingF4_13_0_ from StudentAccount studentacc0_ where studentacc0_.account_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#2845]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#2845]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.StudentAccount#2845
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select parent0_.Id as Id1_10_0_, parent0_.address_id as address_5_10_0_, parent0_.name as name2_10_0_, parent0_.occupation as occupati3_10_0_, parent0_.telephone as telephon4_10_0_, address1_.id as id1_9_1_, address1_.homeAddress as homeAddr2_9_1_, address1_.landmark as landmark3_9_1_ from Parents parent0_ left outer join Parent_Address address1_ on parent0_.address_id=address1_.id where parent0_.Id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#2846]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#2846]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#2847]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#2847]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Parent#2846
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#2844]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.QueryTranslatorImpl  - parse() - HQL: from com.hub.schoolAid.Assessment  A where  A.student.id =? and A.course.id=? 
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.ErrorCounter  - throwQueryException() : no errors
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.QueryTranslatorImpl  - --- HQL AST ---
+ \-[QUERY] Node: 'query'
+    +-[SELECT_FROM] Node: 'SELECT_FROM'
+    |  \-[FROM] Node: 'from'
+    |     \-[RANGE] Node: 'RANGE'
+    |        +-[DOT] Node: '.'
+    |        |  +-[DOT] Node: '.'
+    |        |  |  +-[DOT] Node: '.'
+    |        |  |  |  +-[IDENT] Node: 'com'
+    |        |  |  |  \-[IDENT] Node: 'hub'
+    |        |  |  \-[IDENT] Node: 'schoolAid'
+    |        |  \-[IDENT] Node: 'Assessment'
+    |        \-[ALIAS] Node: 'A'
+    \-[WHERE] Node: 'where'
+       \-[AND] Node: 'and'
+          +-[EQ] Node: '='
+          |  +-[DOT] Node: '.'
+          |  |  +-[DOT] Node: '.'
+          |  |  |  +-[IDENT] Node: 'A'
+          |  |  |  \-[IDENT] Node: 'student'
+          |  |  \-[IDENT] Node: 'id'
+          |  \-[PARAM] Node: '?'
+          \-[EQ] Node: '='
+             +-[DOT] Node: '.'
+             |  +-[DOT] Node: '.'
+             |  |  +-[IDENT] Node: 'A'
+             |  |  \-[IDENT] Node: 'course'
+             |  \-[IDENT] Node: 'id'
+             \-[PARAM] Node: '?'
+
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.antlr.HqlSqlBaseWalker  - select << begin [level=1, statement=select]
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.tree.FromElement  - FromClause{level=1} : com.hub.schoolAid.Assessment (A) -> assessment0_
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.tree.FromReferenceNode  - Resolved : A -> assessment0_.id
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.tree.DotNode  - getDataType() : student -> org.hibernate.type.ManyToOneType(com.hub.schoolAid.Student)
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.tree.DotNode  - dereferenceShortcut() : property id in com.hub.schoolAid.Assessment does not require a join.
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.tree.DotNode  - Unresolved property path is now 'student.id'
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.tree.FromReferenceNode  - Resolved : A.student -> assessment0_.student_asmnt_id
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.tree.DotNode  - getDataType() : student.id -> org.hibernate.type.LongType@13714119
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.tree.FromReferenceNode  - Resolved : A.student.id -> assessment0_.student_asmnt_id
+[JavaFX Application Thread] WARN  org.hibernate.hql.internal.ast.HqlSqlWalker  - [DEPRECATION] Encountered positional parameter near line 1, column 59 in HQL: [from com.hub.schoolAid.Assessment  A where  A.student.id =? and A.course.id=? ].  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.tree.FromReferenceNode  - Resolved : A -> assessment0_.id
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.tree.DotNode  - getDataType() : course -> org.hibernate.type.ManyToOneType(com.hub.schoolAid.Course)
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.tree.DotNode  - dereferenceShortcut() : property id in com.hub.schoolAid.Assessment does not require a join.
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.tree.DotNode  - Unresolved property path is now 'course.id'
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.tree.FromReferenceNode  - Resolved : A.course -> assessment0_.course_id
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.tree.DotNode  - getDataType() : course.id -> org.hibernate.type.LongType@13714119
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.tree.FromReferenceNode  - Resolved : A.course.id -> assessment0_.course_id
+[JavaFX Application Thread] WARN  org.hibernate.hql.internal.ast.HqlSqlWalker  - [DEPRECATION] Encountered positional parameter near line 1, column 77 in HQL: [from com.hub.schoolAid.Assessment  A where  A.student.id =? and A.course.id=? ].  Positional parameter are considered deprecated; use named parameters or JPA-style positional parameters instead.
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.antlr.HqlSqlBaseWalker  - select : finishing up [level=1, statement=select]
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.HqlSqlWalker  - processQuery() :  ( SELECT ( FromClause{level=1} Assessment assessment0_ ) ( where ( and ( = ( assessment0_.student_asmnt_id ( assessment0_.student_asmnt_id assessment0_.id student ) id ) ? ) ( = ( assessment0_.course_id ( assessment0_.course_id assessment0_.id course ) id ) ? ) ) ) )
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.HqlSqlWalker  - Derived SELECT clause created.
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.util.JoinProcessor  - Using FROM fragment [Assessment assessment0_]
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.antlr.HqlSqlBaseWalker  - select >> end [level=1, statement=select]
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.QueryTranslatorImpl  - --- SQL AST ---
+ \-[SELECT] QueryNode: 'SELECT'  querySpaces (Assessment)
+    +-[SELECT_CLAUSE] SelectClause: '{derived select clause}'
+    |  +-[SELECT_EXPR] SelectExpressionImpl: 'assessment0_.id as id1_1_' {FromElement{explicit,not a collection join,not a fetch join,fetch non-lazy properties,classAlias=A,role=null,tableName=Assessment,tableAlias=assessment0_,origin=null,columns={,className=com.hub.schoolAid.Assessment}}}
+    |  \-[SQL_TOKEN] SqlFragment: 'assessment0_.classScore as classSco2_1_, assessment0_.course_id as course_i4_1_, assessment0_.examScore as examScor3_1_, assessment0_.grade as grade5_1_, assessment0_.student_asmnt_id as student_6_1_, assessment0_.term as term7_1_'
+    +-[FROM] FromClause: 'from' FromClause{level=1, fromElementCounter=1, fromElements=1, fromElementByClassAlias=[A], fromElementByTableAlias=[assessment0_], fromElementsByPath=[], collectionJoinFromElementsByPath=[], impliedElements=[]}
+    |  \-[FROM_FRAGMENT] FromElement: 'Assessment assessment0_' FromElement{explicit,not a collection join,not a fetch join,fetch non-lazy properties,classAlias=A,role=null,tableName=Assessment,tableAlias=assessment0_,origin=null,columns={,className=com.hub.schoolAid.Assessment}}
+    \-[WHERE] SqlNode: 'where'
+       \-[AND] SqlNode: 'and'
+          +-[EQ] BinaryLogicOperatorNode: '='
+          |  +-[DOT] DotNode: 'assessment0_.student_asmnt_id' {propertyName=id,dereferenceType=PRIMITIVE,getPropertyPath=student.id,path=A.student.id,tableAlias=assessment0_,className=com.hub.schoolAid.Assessment,classAlias=A}
+          |  |  +-[DOT] DotNode: 'assessment0_.student_asmnt_id' {propertyName=id,dereferenceType=UNKNOWN,getPropertyPath=student.id,path=A.student,tableAlias=assessment0_,className=com.hub.schoolAid.Assessment,classAlias=A}
+          |  |  |  +-[ALIAS_REF] IdentNode: 'assessment0_.id' {alias=A, className=com.hub.schoolAid.Assessment, tableAlias=assessment0_}
+          |  |  |  \-[IDENT] IdentNode: 'student' {originalText=student}
+          |  |  \-[IDENT] IdentNode: 'id' {originalText=id}
+          |  \-[PARAM] ParameterNode: '?' {ordinal=0, expectedType=org.hibernate.type.LongType@13714119}
+          \-[EQ] BinaryLogicOperatorNode: '='
+             +-[DOT] DotNode: 'assessment0_.course_id' {propertyName=id,dereferenceType=PRIMITIVE,getPropertyPath=course.id,path=A.course.id,tableAlias=assessment0_,className=com.hub.schoolAid.Assessment,classAlias=A}
+             |  +-[DOT] DotNode: 'assessment0_.course_id' {propertyName=id,dereferenceType=UNKNOWN,getPropertyPath=course.id,path=A.course,tableAlias=assessment0_,className=com.hub.schoolAid.Assessment,classAlias=A}
+             |  |  +-[ALIAS_REF] IdentNode: 'assessment0_.id' {alias=A, className=com.hub.schoolAid.Assessment, tableAlias=assessment0_}
+             |  |  \-[IDENT] IdentNode: 'course' {originalText=course}
+             |  \-[IDENT] IdentNode: 'id' {originalText=id}
+             \-[PARAM] ParameterNode: '?' {ordinal=1, expectedType=org.hibernate.type.LongType@13714119}
+
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.ErrorCounter  - throwQueryException() : no errors
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.QueryTranslatorImpl  - HQL: from com.hub.schoolAid.Assessment  A where  A.student.id =? and A.course.id=? 
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.QueryTranslatorImpl  - SQL: select assessment0_.id as id1_1_, assessment0_.classScore as classSco2_1_, assessment0_.course_id as course_i4_1_, assessment0_.examScore as examScor3_1_, assessment0_.grade as grade5_1_, assessment0_.student_asmnt_id as student_6_1_, assessment0_.term as term7_1_ from Assessment assessment0_ where assessment0_.student_asmnt_id=? and assessment0_.course_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.hql.internal.ast.ErrorCounter  - throwQueryException() : no errors
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select assessment0_.id as id1_1_, assessment0_.classScore as classSco2_1_, assessment0_.course_id as course_i4_1_, assessment0_.examScore as examScor3_1_, assessment0_.grade as grade5_1_, assessment0_.student_asmnt_id as student_6_1_, assessment0_.term as term7_1_ from Assessment assessment0_ where assessment0_.student_asmnt_id=? and assessment0_.course_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.Loader  - Result set row: 0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.Loader  - Result row: EntityKey[com.hub.schoolAid.Assessment#4113]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Assessment#4113]
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select course0_.subject_id as subject_1_6_0_, course0_.name as name2_6_0_ from Course course0_ where course0_.subject_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Course#3850]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Course#3850]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Course#3850
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select grade0_.id as id1_7_0_, grade0_.maxMark as maxMark2_7_0_, grade0_.minMark as minMark3_7_0_, grade0_.name as name4_7_0_, grade0_.remark as remark5_7_0_ from Grade grade0_ where grade0_.id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Grade#2587]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Grade#2587]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Grade#2587
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select student0_.student_id as student_1_15_0_, student0_.student_acc as student12_15_0_, student0_.age as age2_15_0_, student0_.dob as dob3_15_0_, student0_.feedingStatus as feedingS4_15_0_, student0_.firstname as firstnam5_15_0_, student0_.gender as gender6_15_0_, student0_.lastname as lastname7_15_0_, student0_.othername as othernam8_15_0_, student0_.parent_Id as parent_13_15_0_, student0_.payFeeding as payFeedi9_15_0_, student0_.paySchoolFees as payScho10_15_0_, student0_.reg_date as reg_dat11_15_0_, student0_.class_id as class_i14_15_0_, studentacc1_.account_id as account_1_13_1_, studentacc1_.feeToPay as feeToPay2_13_1_, studentacc1_.feedingFeeCredit as feedingF3_13_1_, studentacc1_.feedingFeeToPay as feedingF4_13_1_, parent2_.Id as Id1_10_2_, parent2_.address_id as address_5_10_2_, parent2_.name as name2_10_2_, parent2_.occupation as occupati3_10_2_, parent2_.telephone as telephon4_10_2_, address3_.id as id1_9_3_, address3_.homeAddress as homeAddr2_9_3_, address3_.landmark as landmark3_9_3_, stage4_.id as id1_4_4_, stage4_.classValue as classVal2_4_4_, stage4_.feeding_fee as feeding_3_4_4_, stage4_.feesToPay as feesToPa4_4_4_, stage4_.name as name5_4_4_, stage4_.num_on_roll as num_on_r6_4_4_ from students student0_ left outer join StudentAccount studentacc1_ on student0_.student_acc=studentacc1_.account_id left outer join Parents parent2_ on student0_.parent_Id=parent2_.Id left outer join Parent_Address address3_ on parent2_.address_id=address3_.id left outer join Class stage4_ on student0_.class_id=stage4_.id where student0_.student_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#112]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#112]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#113]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#113]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#114]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#114]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#115]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#115]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Student#112
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Assessment#4113]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select assessment0_.id as id1_1_, assessment0_.classScore as classSco2_1_, assessment0_.course_id as course_i4_1_, assessment0_.examScore as examScor3_1_, assessment0_.grade as grade5_1_, assessment0_.student_asmnt_id as student_6_1_, assessment0_.term as term7_1_ from Assessment assessment0_ where assessment0_.student_asmnt_id=? and assessment0_.course_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.Loader  - Result set row: 0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.Loader  - Result row: EntityKey[com.hub.schoolAid.Assessment#4114]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Assessment#4114]
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select course0_.subject_id as subject_1_6_0_, course0_.name as name2_6_0_ from Course course0_ where course0_.subject_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Course#3850]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Course#3850]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Course#3850
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select grade0_.id as id1_7_0_, grade0_.maxMark as maxMark2_7_0_, grade0_.minMark as minMark3_7_0_, grade0_.name as name4_7_0_, grade0_.remark as remark5_7_0_ from Grade grade0_ where grade0_.id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Grade#2587]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Grade#2587]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Grade#2587
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select student0_.student_id as student_1_15_0_, student0_.student_acc as student12_15_0_, student0_.age as age2_15_0_, student0_.dob as dob3_15_0_, student0_.feedingStatus as feedingS4_15_0_, student0_.firstname as firstnam5_15_0_, student0_.gender as gender6_15_0_, student0_.lastname as lastname7_15_0_, student0_.othername as othernam8_15_0_, student0_.parent_Id as parent_13_15_0_, student0_.payFeeding as payFeedi9_15_0_, student0_.paySchoolFees as payScho10_15_0_, student0_.reg_date as reg_dat11_15_0_, student0_.class_id as class_i14_15_0_, studentacc1_.account_id as account_1_13_1_, studentacc1_.feeToPay as feeToPay2_13_1_, studentacc1_.feedingFeeCredit as feedingF3_13_1_, studentacc1_.feedingFeeToPay as feedingF4_13_1_, parent2_.Id as Id1_10_2_, parent2_.address_id as address_5_10_2_, parent2_.name as name2_10_2_, parent2_.occupation as occupati3_10_2_, parent2_.telephone as telephon4_10_2_, address3_.id as id1_9_3_, address3_.homeAddress as homeAddr2_9_3_, address3_.landmark as landmark3_9_3_, stage4_.id as id1_4_4_, stage4_.classValue as classVal2_4_4_, stage4_.feeding_fee as feeding_3_4_4_, stage4_.feesToPay as feesToPa4_4_4_, stage4_.name as name5_4_4_, stage4_.num_on_roll as num_on_r6_4_4_ from students student0_ left outer join StudentAccount studentacc1_ on student0_.student_acc=studentacc1_.account_id left outer join Parents parent2_ on student0_.parent_Id=parent2_.Id left outer join Parent_Address address3_ on parent2_.address_id=address3_.id left outer join Class stage4_ on student0_.class_id=stage4_.id where student0_.student_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#396]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#396]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#397]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#397]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#398]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#398]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#399]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#399]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Student#396
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Assessment#4114]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select assessment0_.id as id1_1_, assessment0_.classScore as classSco2_1_, assessment0_.course_id as course_i4_1_, assessment0_.examScore as examScor3_1_, assessment0_.grade as grade5_1_, assessment0_.student_asmnt_id as student_6_1_, assessment0_.term as term7_1_ from Assessment assessment0_ where assessment0_.student_asmnt_id=? and assessment0_.course_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.Loader  - Result set row: 0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.Loader  - Result row: EntityKey[com.hub.schoolAid.Assessment#4115]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Assessment#4115]
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select course0_.subject_id as subject_1_6_0_, course0_.name as name2_6_0_ from Course course0_ where course0_.subject_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Course#3850]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Course#3850]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Course#3850
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select student0_.student_id as student_1_15_0_, student0_.student_acc as student12_15_0_, student0_.age as age2_15_0_, student0_.dob as dob3_15_0_, student0_.feedingStatus as feedingS4_15_0_, student0_.firstname as firstnam5_15_0_, student0_.gender as gender6_15_0_, student0_.lastname as lastname7_15_0_, student0_.othername as othernam8_15_0_, student0_.parent_Id as parent_13_15_0_, student0_.payFeeding as payFeedi9_15_0_, student0_.paySchoolFees as payScho10_15_0_, student0_.reg_date as reg_dat11_15_0_, student0_.class_id as class_i14_15_0_, studentacc1_.account_id as account_1_13_1_, studentacc1_.feeToPay as feeToPay2_13_1_, studentacc1_.feedingFeeCredit as feedingF3_13_1_, studentacc1_.feedingFeeToPay as feedingF4_13_1_, parent2_.Id as Id1_10_2_, parent2_.address_id as address_5_10_2_, parent2_.name as name2_10_2_, parent2_.occupation as occupati3_10_2_, parent2_.telephone as telephon4_10_2_, address3_.id as id1_9_3_, address3_.homeAddress as homeAddr2_9_3_, address3_.landmark as landmark3_9_3_, stage4_.id as id1_4_4_, stage4_.classValue as classVal2_4_4_, stage4_.feeding_fee as feeding_3_4_4_, stage4_.feesToPay as feesToPa4_4_4_, stage4_.name as name5_4_4_, stage4_.num_on_roll as num_on_r6_4_4_ from students student0_ left outer join StudentAccount studentacc1_ on student0_.student_acc=studentacc1_.account_id left outer join Parents parent2_ on student0_.parent_Id=parent2_.Id left outer join Parent_Address address3_ on parent2_.address_id=address3_.id left outer join Class stage4_ on student0_.class_id=stage4_.id where student0_.student_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#428]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#428]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#429]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#429]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#430]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#430]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#431]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#431]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Student#428
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Assessment#4115]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select assessment0_.id as id1_1_, assessment0_.classScore as classSco2_1_, assessment0_.course_id as course_i4_1_, assessment0_.examScore as examScor3_1_, assessment0_.grade as grade5_1_, assessment0_.student_asmnt_id as student_6_1_, assessment0_.term as term7_1_ from Assessment assessment0_ where assessment0_.student_asmnt_id=? and assessment0_.course_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.Loader  - Result set row: 0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.Loader  - Result row: EntityKey[com.hub.schoolAid.Assessment#4116]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Assessment#4116]
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select course0_.subject_id as subject_1_6_0_, course0_.name as name2_6_0_ from Course course0_ where course0_.subject_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Course#3850]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Course#3850]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Course#3850
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select student0_.student_id as student_1_15_0_, student0_.student_acc as student12_15_0_, student0_.age as age2_15_0_, student0_.dob as dob3_15_0_, student0_.feedingStatus as feedingS4_15_0_, student0_.firstname as firstnam5_15_0_, student0_.gender as gender6_15_0_, student0_.lastname as lastname7_15_0_, student0_.othername as othernam8_15_0_, student0_.parent_Id as parent_13_15_0_, student0_.payFeeding as payFeedi9_15_0_, student0_.paySchoolFees as payScho10_15_0_, student0_.reg_date as reg_dat11_15_0_, student0_.class_id as class_i14_15_0_, studentacc1_.account_id as account_1_13_1_, studentacc1_.feeToPay as feeToPay2_13_1_, studentacc1_.feedingFeeCredit as feedingF3_13_1_, studentacc1_.feedingFeeToPay as feedingF4_13_1_, parent2_.Id as Id1_10_2_, parent2_.address_id as address_5_10_2_, parent2_.name as name2_10_2_, parent2_.occupation as occupati3_10_2_, parent2_.telephone as telephon4_10_2_, address3_.id as id1_9_3_, address3_.homeAddress as homeAddr2_9_3_, address3_.landmark as landmark3_9_3_, stage4_.id as id1_4_4_, stage4_.classValue as classVal2_4_4_, stage4_.feeding_fee as feeding_3_4_4_, stage4_.feesToPay as feesToPa4_4_4_, stage4_.name as name5_4_4_, stage4_.num_on_roll as num_on_r6_4_4_ from students student0_ left outer join StudentAccount studentacc1_ on student0_.student_acc=studentacc1_.account_id left outer join Parents parent2_ on student0_.parent_Id=parent2_.Id left outer join Parent_Address address3_ on parent2_.address_id=address3_.id left outer join Class stage4_ on student0_.class_id=stage4_.id where student0_.student_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#476]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#476]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#477]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#477]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#478]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#478]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#479]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#479]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Student#476
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Assessment#4116]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select assessment0_.id as id1_1_, assessment0_.classScore as classSco2_1_, assessment0_.course_id as course_i4_1_, assessment0_.examScore as examScor3_1_, assessment0_.grade as grade5_1_, assessment0_.student_asmnt_id as student_6_1_, assessment0_.term as term7_1_ from Assessment assessment0_ where assessment0_.student_asmnt_id=? and assessment0_.course_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.Loader  - Result set row: 0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.Loader  - Result row: EntityKey[com.hub.schoolAid.Assessment#4117]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Assessment#4117]
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select course0_.subject_id as subject_1_6_0_, course0_.name as name2_6_0_ from Course course0_ where course0_.subject_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Course#3850]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Course#3850]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Course#3850
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select student0_.student_id as student_1_15_0_, student0_.student_acc as student12_15_0_, student0_.age as age2_15_0_, student0_.dob as dob3_15_0_, student0_.feedingStatus as feedingS4_15_0_, student0_.firstname as firstnam5_15_0_, student0_.gender as gender6_15_0_, student0_.lastname as lastname7_15_0_, student0_.othername as othernam8_15_0_, student0_.parent_Id as parent_13_15_0_, student0_.payFeeding as payFeedi9_15_0_, student0_.paySchoolFees as payScho10_15_0_, student0_.reg_date as reg_dat11_15_0_, student0_.class_id as class_i14_15_0_, studentacc1_.account_id as account_1_13_1_, studentacc1_.feeToPay as feeToPay2_13_1_, studentacc1_.feedingFeeCredit as feedingF3_13_1_, studentacc1_.feedingFeeToPay as feedingF4_13_1_, parent2_.Id as Id1_10_2_, parent2_.address_id as address_5_10_2_, parent2_.name as name2_10_2_, parent2_.occupation as occupati3_10_2_, parent2_.telephone as telephon4_10_2_, address3_.id as id1_9_3_, address3_.homeAddress as homeAddr2_9_3_, address3_.landmark as landmark3_9_3_, stage4_.id as id1_4_4_, stage4_.classValue as classVal2_4_4_, stage4_.feeding_fee as feeding_3_4_4_, stage4_.feesToPay as feesToPa4_4_4_, stage4_.name as name5_4_4_, stage4_.num_on_roll as num_on_r6_4_4_ from students student0_ left outer join StudentAccount studentacc1_ on student0_.student_acc=studentacc1_.account_id left outer join Parents parent2_ on student0_.parent_Id=parent2_.Id left outer join Parent_Address address3_ on parent2_.address_id=address3_.id left outer join Class stage4_ on student0_.class_id=stage4_.id where student0_.student_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#480]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#480]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#481]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#481]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#482]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#482]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#483]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#483]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Student#480
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Assessment#4117]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select assessment0_.id as id1_1_, assessment0_.classScore as classSco2_1_, assessment0_.course_id as course_i4_1_, assessment0_.examScore as examScor3_1_, assessment0_.grade as grade5_1_, assessment0_.student_asmnt_id as student_6_1_, assessment0_.term as term7_1_ from Assessment assessment0_ where assessment0_.student_asmnt_id=? and assessment0_.course_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.Loader  - Result set row: 0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.Loader  - Result row: EntityKey[com.hub.schoolAid.Assessment#4118]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Assessment#4118]
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select course0_.subject_id as subject_1_6_0_, course0_.name as name2_6_0_ from Course course0_ where course0_.subject_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Course#3850]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Course#3850]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Course#3850
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select student0_.student_id as student_1_15_0_, student0_.student_acc as student12_15_0_, student0_.age as age2_15_0_, student0_.dob as dob3_15_0_, student0_.feedingStatus as feedingS4_15_0_, student0_.firstname as firstnam5_15_0_, student0_.gender as gender6_15_0_, student0_.lastname as lastname7_15_0_, student0_.othername as othernam8_15_0_, student0_.parent_Id as parent_13_15_0_, student0_.payFeeding as payFeedi9_15_0_, student0_.paySchoolFees as payScho10_15_0_, student0_.reg_date as reg_dat11_15_0_, student0_.class_id as class_i14_15_0_, studentacc1_.account_id as account_1_13_1_, studentacc1_.feeToPay as feeToPay2_13_1_, studentacc1_.feedingFeeCredit as feedingF3_13_1_, studentacc1_.feedingFeeToPay as feedingF4_13_1_, parent2_.Id as Id1_10_2_, parent2_.address_id as address_5_10_2_, parent2_.name as name2_10_2_, parent2_.occupation as occupati3_10_2_, parent2_.telephone as telephon4_10_2_, address3_.id as id1_9_3_, address3_.homeAddress as homeAddr2_9_3_, address3_.landmark as landmark3_9_3_, stage4_.id as id1_4_4_, stage4_.classValue as classVal2_4_4_, stage4_.feeding_fee as feeding_3_4_4_, stage4_.feesToPay as feesToPa4_4_4_, stage4_.name as name5_4_4_, stage4_.num_on_roll as num_on_r6_4_4_ from students student0_ left outer join StudentAccount studentacc1_ on student0_.student_acc=studentacc1_.account_id left outer join Parents parent2_ on student0_.parent_Id=parent2_.Id left outer join Parent_Address address3_ on parent2_.address_id=address3_.id left outer join Class stage4_ on student0_.class_id=stage4_.id where student0_.student_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#488]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#488]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#489]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#489]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#490]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#490]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#491]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#491]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Student#488
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Assessment#4118]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select assessment0_.id as id1_1_, assessment0_.classScore as classSco2_1_, assessment0_.course_id as course_i4_1_, assessment0_.examScore as examScor3_1_, assessment0_.grade as grade5_1_, assessment0_.student_asmnt_id as student_6_1_, assessment0_.term as term7_1_ from Assessment assessment0_ where assessment0_.student_asmnt_id=? and assessment0_.course_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.Loader  - Result set row: 0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.Loader  - Result row: EntityKey[com.hub.schoolAid.Assessment#4119]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Assessment#4119]
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select course0_.subject_id as subject_1_6_0_, course0_.name as name2_6_0_ from Course course0_ where course0_.subject_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Course#3850]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Course#3850]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Course#3850
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select student0_.student_id as student_1_15_0_, student0_.student_acc as student12_15_0_, student0_.age as age2_15_0_, student0_.dob as dob3_15_0_, student0_.feedingStatus as feedingS4_15_0_, student0_.firstname as firstnam5_15_0_, student0_.gender as gender6_15_0_, student0_.lastname as lastname7_15_0_, student0_.othername as othernam8_15_0_, student0_.parent_Id as parent_13_15_0_, student0_.payFeeding as payFeedi9_15_0_, student0_.paySchoolFees as payScho10_15_0_, student0_.reg_date as reg_dat11_15_0_, student0_.class_id as class_i14_15_0_, studentacc1_.account_id as account_1_13_1_, studentacc1_.feeToPay as feeToPay2_13_1_, studentacc1_.feedingFeeCredit as feedingF3_13_1_, studentacc1_.feedingFeeToPay as feedingF4_13_1_, parent2_.Id as Id1_10_2_, parent2_.address_id as address_5_10_2_, parent2_.name as name2_10_2_, parent2_.occupation as occupati3_10_2_, parent2_.telephone as telephon4_10_2_, address3_.id as id1_9_3_, address3_.homeAddress as homeAddr2_9_3_, address3_.landmark as landmark3_9_3_, stage4_.id as id1_4_4_, stage4_.classValue as classVal2_4_4_, stage4_.feeding_fee as feeding_3_4_4_, stage4_.feesToPay as feesToPa4_4_4_, stage4_.name as name5_4_4_, stage4_.num_on_roll as num_on_r6_4_4_ from students student0_ left outer join StudentAccount studentacc1_ on student0_.student_acc=studentacc1_.account_id left outer join Parents parent2_ on student0_.parent_Id=parent2_.Id left outer join Parent_Address address3_ on parent2_.address_id=address3_.id left outer join Class stage4_ on student0_.class_id=stage4_.id where student0_.student_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#1066]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#1066]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#1067]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#1067]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#1068]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#1068]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#1069]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#1069]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Student#1066
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Assessment#4119]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select assessment0_.id as id1_1_, assessment0_.classScore as classSco2_1_, assessment0_.course_id as course_i4_1_, assessment0_.examScore as examScor3_1_, assessment0_.grade as grade5_1_, assessment0_.student_asmnt_id as student_6_1_, assessment0_.term as term7_1_ from Assessment assessment0_ where assessment0_.student_asmnt_id=? and assessment0_.course_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.Loader  - Result set row: 0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.Loader  - Result row: EntityKey[com.hub.schoolAid.Assessment#4120]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Assessment#4120]
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select course0_.subject_id as subject_1_6_0_, course0_.name as name2_6_0_ from Course course0_ where course0_.subject_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Course#3850]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Course#3850]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Course#3850
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select student0_.student_id as student_1_15_0_, student0_.student_acc as student12_15_0_, student0_.age as age2_15_0_, student0_.dob as dob3_15_0_, student0_.feedingStatus as feedingS4_15_0_, student0_.firstname as firstnam5_15_0_, student0_.gender as gender6_15_0_, student0_.lastname as lastname7_15_0_, student0_.othername as othernam8_15_0_, student0_.parent_Id as parent_13_15_0_, student0_.payFeeding as payFeedi9_15_0_, student0_.paySchoolFees as payScho10_15_0_, student0_.reg_date as reg_dat11_15_0_, student0_.class_id as class_i14_15_0_, studentacc1_.account_id as account_1_13_1_, studentacc1_.feeToPay as feeToPay2_13_1_, studentacc1_.feedingFeeCredit as feedingF3_13_1_, studentacc1_.feedingFeeToPay as feedingF4_13_1_, parent2_.Id as Id1_10_2_, parent2_.address_id as address_5_10_2_, parent2_.name as name2_10_2_, parent2_.occupation as occupati3_10_2_, parent2_.telephone as telephon4_10_2_, address3_.id as id1_9_3_, address3_.homeAddress as homeAddr2_9_3_, address3_.landmark as landmark3_9_3_, stage4_.id as id1_4_4_, stage4_.classValue as classVal2_4_4_, stage4_.feeding_fee as feeding_3_4_4_, stage4_.feesToPay as feesToPa4_4_4_, stage4_.name as name5_4_4_, stage4_.num_on_roll as num_on_r6_4_4_ from students student0_ left outer join StudentAccount studentacc1_ on student0_.student_acc=studentacc1_.account_id left outer join Parents parent2_ on student0_.parent_Id=parent2_.Id left outer join Parent_Address address3_ on parent2_.address_id=address3_.id left outer join Class stage4_ on student0_.class_id=stage4_.id where student0_.student_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#1082]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#1082]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#1083]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#1083]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#1084]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#1084]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#1085]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#1085]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Student#1082
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Assessment#4120]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select assessment0_.id as id1_1_, assessment0_.classScore as classSco2_1_, assessment0_.course_id as course_i4_1_, assessment0_.examScore as examScor3_1_, assessment0_.grade as grade5_1_, assessment0_.student_asmnt_id as student_6_1_, assessment0_.term as term7_1_ from Assessment assessment0_ where assessment0_.student_asmnt_id=? and assessment0_.course_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.Loader  - Result set row: 0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.Loader  - Result row: EntityKey[com.hub.schoolAid.Assessment#4121]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Assessment#4121]
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select course0_.subject_id as subject_1_6_0_, course0_.name as name2_6_0_ from Course course0_ where course0_.subject_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Course#3850]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Course#3850]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Course#3850
+[JavaFX Application Thread] DEBUG org.hibernate.SQL  - select student0_.student_id as student_1_15_0_, student0_.student_acc as student12_15_0_, student0_.age as age2_15_0_, student0_.dob as dob3_15_0_, student0_.feedingStatus as feedingS4_15_0_, student0_.firstname as firstnam5_15_0_, student0_.gender as gender6_15_0_, student0_.lastname as lastname7_15_0_, student0_.othername as othernam8_15_0_, student0_.parent_Id as parent_13_15_0_, student0_.payFeeding as payFeedi9_15_0_, student0_.paySchoolFees as payScho10_15_0_, student0_.reg_date as reg_dat11_15_0_, student0_.class_id as class_i14_15_0_, studentacc1_.account_id as account_1_13_1_, studentacc1_.feeToPay as feeToPay2_13_1_, studentacc1_.feedingFeeCredit as feedingF3_13_1_, studentacc1_.feedingFeeToPay as feedingF4_13_1_, parent2_.Id as Id1_10_2_, parent2_.address_id as address_5_10_2_, parent2_.name as name2_10_2_, parent2_.occupation as occupati3_10_2_, parent2_.telephone as telephon4_10_2_, address3_.id as id1_9_3_, address3_.homeAddress as homeAddr2_9_3_, address3_.landmark as landmark3_9_3_, stage4_.id as id1_4_4_, stage4_.classValue as classVal2_4_4_, stage4_.feeding_fee as feeding_3_4_4_, stage4_.feesToPay as feesToPa4_4_4_, stage4_.name as name5_4_4_, stage4_.num_on_roll as num_on_r6_4_4_ from students student0_ left outer join StudentAccount studentacc1_ on student0_.student_acc=studentacc1_.account_id left outer join Parents parent2_ on student0_.parent_Id=parent2_.Id left outer join Parent_Address address3_ on parent2_.address_id=address3_.id left outer join Class stage4_ on student0_.class_id=stage4_.id where student0_.student_id=?
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[JavaFX Application Thread] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#2844]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#2844]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#2845]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#2845]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#2846]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#2846]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#2847]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#2847]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Stage#47]
+[JavaFX Application Thread] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[JavaFX Application Thread] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Student#2844
+[JavaFX Application Thread] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Assessment#4121]
+[Thread-8] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[Thread-8] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[Thread-8] DEBUG org.hibernate.hql.internal.ast.QueryTranslatorImpl  - parse() - HQL: from com.hub.schoolAid.Grade  G where  ?1 >=G.minMark  and ?2 <= G.maxMark 
+[Thread-8] DEBUG org.hibernate.hql.internal.ast.ErrorCounter  - throwQueryException() : no errors
+[Thread-8] DEBUG org.hibernate.hql.internal.ast.QueryTranslatorImpl  - --- HQL AST ---
+ \-[QUERY] Node: 'query'
+    +-[SELECT_FROM] Node: 'SELECT_FROM'
+    |  \-[FROM] Node: 'from'
+    |     \-[RANGE] Node: 'RANGE'
+    |        +-[DOT] Node: '.'
+    |        |  +-[DOT] Node: '.'
+    |        |  |  +-[DOT] Node: '.'
+    |        |  |  |  +-[IDENT] Node: 'com'
+    |        |  |  |  \-[IDENT] Node: 'hub'
+    |        |  |  \-[IDENT] Node: 'schoolAid'
+    |        |  \-[IDENT] Node: 'Grade'
+    |        \-[ALIAS] Node: 'G'
+    \-[WHERE] Node: 'where'
+       \-[AND] Node: 'and'
+          +-[GE] Node: '>='
+          |  +-[PARAM] Node: '?'
+          |  |  \-[NUM_INT] Node: '1'
+          |  \-[DOT] Node: '.'
+          |     +-[IDENT] Node: 'G'
+          |     \-[IDENT] Node: 'minMark'
+          \-[LE] Node: '<='
+             +-[PARAM] Node: '?'
+             |  \-[NUM_INT] Node: '2'
+             \-[DOT] Node: '.'
+                +-[IDENT] Node: 'G'
+                \-[IDENT] Node: 'maxMark'
+
+[Thread-8] DEBUG org.hibernate.hql.internal.antlr.HqlSqlBaseWalker  - select << begin [level=1, statement=select]
+[Thread-8] DEBUG org.hibernate.hql.internal.ast.tree.FromElement  - FromClause{level=1} : com.hub.schoolAid.Grade (G) -> grade0_
+[Thread-8] DEBUG org.hibernate.hql.internal.ast.tree.FromReferenceNode  - Resolved : G -> grade0_.id
+[Thread-8] DEBUG org.hibernate.hql.internal.ast.tree.DotNode  - getDataType() : minMark -> org.hibernate.type.DoubleType@7b53c335
+[Thread-8] DEBUG org.hibernate.hql.internal.ast.tree.FromReferenceNode  - Resolved : G.minMark -> grade0_.minMark
+[Thread-8] DEBUG org.hibernate.hql.internal.ast.tree.FromReferenceNode  - Resolved : G -> grade0_.id
+[Thread-8] DEBUG org.hibernate.hql.internal.ast.tree.DotNode  - getDataType() : maxMark -> org.hibernate.type.DoubleType@7b53c335
+[Thread-8] DEBUG org.hibernate.hql.internal.ast.tree.FromReferenceNode  - Resolved : G.maxMark -> grade0_.maxMark
+[Thread-8] DEBUG org.hibernate.hql.internal.antlr.HqlSqlBaseWalker  - select : finishing up [level=1, statement=select]
+[Thread-8] DEBUG org.hibernate.hql.internal.ast.HqlSqlWalker  - processQuery() :  ( SELECT ( FromClause{level=1} Grade grade0_ ) ( where ( and ( >= ? ( grade0_.minMark grade0_.id minMark ) ) ( <= ? ( grade0_.maxMark grade0_.id maxMark ) ) ) ) )
+[Thread-8] DEBUG org.hibernate.hql.internal.ast.HqlSqlWalker  - Derived SELECT clause created.
+[Thread-8] DEBUG org.hibernate.hql.internal.ast.util.JoinProcessor  - Using FROM fragment [Grade grade0_]
+[Thread-8] DEBUG org.hibernate.hql.internal.antlr.HqlSqlBaseWalker  - select >> end [level=1, statement=select]
+[Thread-8] DEBUG org.hibernate.hql.internal.ast.QueryTranslatorImpl  - --- SQL AST ---
+ \-[SELECT] QueryNode: 'SELECT'  querySpaces (Grade)
+    +-[SELECT_CLAUSE] SelectClause: '{derived select clause}'
+    |  +-[SELECT_EXPR] SelectExpressionImpl: 'grade0_.id as id1_7_' {FromElement{explicit,not a collection join,not a fetch join,fetch non-lazy properties,classAlias=G,role=null,tableName=Grade,tableAlias=grade0_,origin=null,columns={,className=com.hub.schoolAid.Grade}}}
+    |  \-[SQL_TOKEN] SqlFragment: 'grade0_.maxMark as maxMark2_7_, grade0_.minMark as minMark3_7_, grade0_.name as name4_7_, grade0_.remark as remark5_7_'
+    +-[FROM] FromClause: 'from' FromClause{level=1, fromElementCounter=1, fromElements=1, fromElementByClassAlias=[G], fromElementByTableAlias=[grade0_], fromElementsByPath=[], collectionJoinFromElementsByPath=[], impliedElements=[]}
+    |  \-[FROM_FRAGMENT] FromElement: 'Grade grade0_' FromElement{explicit,not a collection join,not a fetch join,fetch non-lazy properties,classAlias=G,role=null,tableName=Grade,tableAlias=grade0_,origin=null,columns={,className=com.hub.schoolAid.Grade}}
+    \-[WHERE] SqlNode: 'where'
+       \-[AND] SqlNode: 'and'
+          +-[GE] BinaryLogicOperatorNode: '>='
+          |  +-[NAMED_PARAM] ParameterNode: '?' {name=1, expectedType=org.hibernate.type.DoubleType@7b53c335}
+          |  \-[DOT] DotNode: 'grade0_.minMark' {propertyName=minMark,dereferenceType=PRIMITIVE,getPropertyPath=minMark,path=G.minMark,tableAlias=grade0_,className=com.hub.schoolAid.Grade,classAlias=G}
+          |     +-[ALIAS_REF] IdentNode: 'grade0_.id' {alias=G, className=com.hub.schoolAid.Grade, tableAlias=grade0_}
+          |     \-[IDENT] IdentNode: 'minMark' {originalText=minMark}
+          \-[LE] BinaryLogicOperatorNode: '<='
+             +-[NAMED_PARAM] ParameterNode: '?' {name=2, expectedType=org.hibernate.type.DoubleType@7b53c335}
+             \-[DOT] DotNode: 'grade0_.maxMark' {propertyName=maxMark,dereferenceType=PRIMITIVE,getPropertyPath=maxMark,path=G.maxMark,tableAlias=grade0_,className=com.hub.schoolAid.Grade,classAlias=G}
+                +-[ALIAS_REF] IdentNode: 'grade0_.id' {alias=G, className=com.hub.schoolAid.Grade, tableAlias=grade0_}
+                \-[IDENT] IdentNode: 'maxMark' {originalText=maxMark}
+
+[Thread-8] DEBUG org.hibernate.hql.internal.ast.ErrorCounter  - throwQueryException() : no errors
+[Thread-8] DEBUG org.hibernate.hql.internal.ast.QueryTranslatorImpl  - HQL: from com.hub.schoolAid.Grade  G where  ?1 >=G.minMark  and ?2 <= G.maxMark 
+[Thread-8] DEBUG org.hibernate.hql.internal.ast.QueryTranslatorImpl  - SQL: select grade0_.id as id1_7_, grade0_.maxMark as maxMark2_7_, grade0_.minMark as minMark3_7_, grade0_.name as name4_7_, grade0_.remark as remark5_7_ from Grade grade0_ where ?>=grade0_.minMark and ?<=grade0_.maxMark
+[Thread-8] DEBUG org.hibernate.hql.internal.ast.ErrorCounter  - throwQueryException() : no errors
+[Thread-8] DEBUG org.hibernate.SQL  - select grade0_.id as id1_7_, grade0_.maxMark as maxMark2_7_, grade0_.minMark as minMark3_7_, grade0_.name as name4_7_, grade0_.remark as remark5_7_ from Grade grade0_ where ?>=grade0_.minMark and ?<=grade0_.maxMark
+[Thread-8] DEBUG org.hibernate.loader.Loader  - Result set row: 0
+[Thread-8] DEBUG org.hibernate.loader.Loader  - Result row: EntityKey[com.hub.schoolAid.Grade#2587]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Grade#2587]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Grade#2587]
+[Thread-8] DEBUG org.hibernate.SQL  - select assessment0_.id as id1_1_0_, assessment0_.classScore as classSco2_1_0_, assessment0_.course_id as course_i4_1_0_, assessment0_.examScore as examScor3_1_0_, assessment0_.grade as grade5_1_0_, assessment0_.student_asmnt_id as student_6_1_0_, assessment0_.term as term7_1_0_, course1_.subject_id as subject_1_6_1_, course1_.name as name2_6_1_, grade2_.id as id1_7_2_, grade2_.maxMark as maxMark2_7_2_, grade2_.minMark as minMark3_7_2_, grade2_.name as name4_7_2_, grade2_.remark as remark5_7_2_, student3_.student_id as student_1_15_3_, student3_.student_acc as student12_15_3_, student3_.age as age2_15_3_, student3_.dob as dob3_15_3_, student3_.feedingStatus as feedingS4_15_3_, student3_.firstname as firstnam5_15_3_, student3_.gender as gender6_15_3_, student3_.lastname as lastname7_15_3_, student3_.othername as othernam8_15_3_, student3_.parent_Id as parent_13_15_3_, student3_.payFeeding as payFeedi9_15_3_, student3_.paySchoolFees as payScho10_15_3_, student3_.reg_date as reg_dat11_15_3_, student3_.class_id as class_i14_15_3_, studentacc4_.account_id as account_1_13_4_, studentacc4_.feeToPay as feeToPay2_13_4_, studentacc4_.feedingFeeCredit as feedingF3_13_4_, studentacc4_.feedingFeeToPay as feedingF4_13_4_, parent5_.Id as Id1_10_5_, parent5_.address_id as address_5_10_5_, parent5_.name as name2_10_5_, parent5_.occupation as occupati3_10_5_, parent5_.telephone as telephon4_10_5_, stage6_.id as id1_4_6_, stage6_.classValue as classVal2_4_6_, stage6_.feeding_fee as feeding_3_4_6_, stage6_.feesToPay as feesToPa4_4_6_, stage6_.name as name5_4_6_, stage6_.num_on_roll as num_on_r6_4_6_, term7_.id as id1_16_7_, term7_.end_date as end_date2_16_7_, term7_.name as name3_16_7_, term7_.start_date as start_da4_16_7_, term7_.status as status5_16_7_, term7_.today as today6_16_7_ from Assessment assessment0_ left outer join Course course1_ on assessment0_.course_id=course1_.subject_id left outer join Grade grade2_ on assessment0_.grade=grade2_.id left outer join students student3_ on assessment0_.student_asmnt_id=student3_.student_id left outer join StudentAccount studentacc4_ on student3_.student_acc=studentacc4_.account_id left outer join Parents parent5_ on student3_.parent_Id=parent5_.Id left outer join Class stage6_ on student3_.class_id=stage6_.id left outer join Term term7_ on assessment0_.term=term7_.id where assessment0_.id=?
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Assessment#4115]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Assessment#4115]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Course#3850]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Course#3850]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#428]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#428]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#429]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#429]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#430]
+[Thread-8] DEBUG org.hibernate.SQL  - select address0_.id as id1_9_0_, address0_.homeAddress as homeAddr2_9_0_, address0_.landmark as landmark3_9_0_ from Parent_Address address0_ where address0_.id=?
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#431]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#431]
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[Thread-8] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Address#431
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#430]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Stage#47]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Stage#47]
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[Thread-8] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Assessment#4115
+[Thread-8] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - committing
+[Thread-8] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener  - Processing flush-time cascades
+[Thread-8] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener  - Dirty checking collections
+[Thread-8] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener  - Flushed: 0 insertions, 0 updates, 0 deletions to 1 objects
+[Thread-8] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener  - Flushed: 0 (re)creations, 0 updates, 0 removals to 0 collections
+[Thread-8] DEBUG org.hibernate.internal.util.EntityPrinter  - Listing entities:
+[Thread-8] DEBUG org.hibernate.internal.util.EntityPrinter  - com.hub.schoolAid.Grade{name=B, minMark=70.0, remark=Very Good, id=2587, maxMark=89.0}
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl  - Initiating JDBC connection release from afterTransaction
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl  - Initiating JDBC connection release from afterTransaction
+[Thread-8] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[Thread-8] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[Thread-8] DEBUG org.hibernate.SQL  - select grade0_.id as id1_7_, grade0_.maxMark as maxMark2_7_, grade0_.minMark as minMark3_7_, grade0_.name as name4_7_, grade0_.remark as remark5_7_ from Grade grade0_ where ?>=grade0_.minMark and ?<=grade0_.maxMark
+[Thread-8] DEBUG org.hibernate.loader.Loader  - Result set row: 0
+[Thread-8] DEBUG org.hibernate.loader.Loader  - Result row: EntityKey[com.hub.schoolAid.Grade#2587]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Grade#2587]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Grade#2587]
+[Thread-8] DEBUG org.hibernate.SQL  - select assessment0_.id as id1_1_0_, assessment0_.classScore as classSco2_1_0_, assessment0_.course_id as course_i4_1_0_, assessment0_.examScore as examScor3_1_0_, assessment0_.grade as grade5_1_0_, assessment0_.student_asmnt_id as student_6_1_0_, assessment0_.term as term7_1_0_, course1_.subject_id as subject_1_6_1_, course1_.name as name2_6_1_, grade2_.id as id1_7_2_, grade2_.maxMark as maxMark2_7_2_, grade2_.minMark as minMark3_7_2_, grade2_.name as name4_7_2_, grade2_.remark as remark5_7_2_, student3_.student_id as student_1_15_3_, student3_.student_acc as student12_15_3_, student3_.age as age2_15_3_, student3_.dob as dob3_15_3_, student3_.feedingStatus as feedingS4_15_3_, student3_.firstname as firstnam5_15_3_, student3_.gender as gender6_15_3_, student3_.lastname as lastname7_15_3_, student3_.othername as othernam8_15_3_, student3_.parent_Id as parent_13_15_3_, student3_.payFeeding as payFeedi9_15_3_, student3_.paySchoolFees as payScho10_15_3_, student3_.reg_date as reg_dat11_15_3_, student3_.class_id as class_i14_15_3_, studentacc4_.account_id as account_1_13_4_, studentacc4_.feeToPay as feeToPay2_13_4_, studentacc4_.feedingFeeCredit as feedingF3_13_4_, studentacc4_.feedingFeeToPay as feedingF4_13_4_, parent5_.Id as Id1_10_5_, parent5_.address_id as address_5_10_5_, parent5_.name as name2_10_5_, parent5_.occupation as occupati3_10_5_, parent5_.telephone as telephon4_10_5_, stage6_.id as id1_4_6_, stage6_.classValue as classVal2_4_6_, stage6_.feeding_fee as feeding_3_4_6_, stage6_.feesToPay as feesToPa4_4_6_, stage6_.name as name5_4_6_, stage6_.num_on_roll as num_on_r6_4_6_, term7_.id as id1_16_7_, term7_.end_date as end_date2_16_7_, term7_.name as name3_16_7_, term7_.start_date as start_da4_16_7_, term7_.status as status5_16_7_, term7_.today as today6_16_7_ from Assessment assessment0_ left outer join Course course1_ on assessment0_.course_id=course1_.subject_id left outer join Grade grade2_ on assessment0_.grade=grade2_.id left outer join students student3_ on assessment0_.student_asmnt_id=student3_.student_id left outer join StudentAccount studentacc4_ on student3_.student_acc=studentacc4_.account_id left outer join Parents parent5_ on student3_.parent_Id=parent5_.Id left outer join Class stage6_ on student3_.class_id=stage6_.id left outer join Term term7_ on assessment0_.term=term7_.id where assessment0_.id=?
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Assessment#4116]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Assessment#4116]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Course#3850]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Course#3850]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#476]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#476]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#477]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#477]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#478]
+[Thread-8] DEBUG org.hibernate.SQL  - select address0_.id as id1_9_0_, address0_.homeAddress as homeAddr2_9_0_, address0_.landmark as landmark3_9_0_ from Parent_Address address0_ where address0_.id=?
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#479]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#479]
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[Thread-8] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Address#479
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#478]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Stage#47]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Stage#47]
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[Thread-8] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Assessment#4116
+[Thread-8] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - committing
+[Thread-8] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener  - Processing flush-time cascades
+[Thread-8] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener  - Dirty checking collections
+[Thread-8] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener  - Flushed: 0 insertions, 0 updates, 0 deletions to 1 objects
+[Thread-8] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener  - Flushed: 0 (re)creations, 0 updates, 0 removals to 0 collections
+[Thread-8] DEBUG org.hibernate.internal.util.EntityPrinter  - Listing entities:
+[Thread-8] DEBUG org.hibernate.internal.util.EntityPrinter  - com.hub.schoolAid.Grade{name=B, minMark=70.0, remark=Very Good, id=2587, maxMark=89.0}
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl  - Initiating JDBC connection release from afterTransaction
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl  - Initiating JDBC connection release from afterTransaction
+[Thread-8] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[Thread-8] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[Thread-8] DEBUG org.hibernate.SQL  - select grade0_.id as id1_7_, grade0_.maxMark as maxMark2_7_, grade0_.minMark as minMark3_7_, grade0_.name as name4_7_, grade0_.remark as remark5_7_ from Grade grade0_ where ?>=grade0_.minMark and ?<=grade0_.maxMark
+[Thread-8] DEBUG org.hibernate.loader.Loader  - Result set row: 0
+[Thread-8] DEBUG org.hibernate.loader.Loader  - Result row: EntityKey[com.hub.schoolAid.Grade#2586]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Grade#2586]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Grade#2586]
+[Thread-8] DEBUG org.hibernate.SQL  - select assessment0_.id as id1_1_0_, assessment0_.classScore as classSco2_1_0_, assessment0_.course_id as course_i4_1_0_, assessment0_.examScore as examScor3_1_0_, assessment0_.grade as grade5_1_0_, assessment0_.student_asmnt_id as student_6_1_0_, assessment0_.term as term7_1_0_, course1_.subject_id as subject_1_6_1_, course1_.name as name2_6_1_, grade2_.id as id1_7_2_, grade2_.maxMark as maxMark2_7_2_, grade2_.minMark as minMark3_7_2_, grade2_.name as name4_7_2_, grade2_.remark as remark5_7_2_, student3_.student_id as student_1_15_3_, student3_.student_acc as student12_15_3_, student3_.age as age2_15_3_, student3_.dob as dob3_15_3_, student3_.feedingStatus as feedingS4_15_3_, student3_.firstname as firstnam5_15_3_, student3_.gender as gender6_15_3_, student3_.lastname as lastname7_15_3_, student3_.othername as othernam8_15_3_, student3_.parent_Id as parent_13_15_3_, student3_.payFeeding as payFeedi9_15_3_, student3_.paySchoolFees as payScho10_15_3_, student3_.reg_date as reg_dat11_15_3_, student3_.class_id as class_i14_15_3_, studentacc4_.account_id as account_1_13_4_, studentacc4_.feeToPay as feeToPay2_13_4_, studentacc4_.feedingFeeCredit as feedingF3_13_4_, studentacc4_.feedingFeeToPay as feedingF4_13_4_, parent5_.Id as Id1_10_5_, parent5_.address_id as address_5_10_5_, parent5_.name as name2_10_5_, parent5_.occupation as occupati3_10_5_, parent5_.telephone as telephon4_10_5_, stage6_.id as id1_4_6_, stage6_.classValue as classVal2_4_6_, stage6_.feeding_fee as feeding_3_4_6_, stage6_.feesToPay as feesToPa4_4_6_, stage6_.name as name5_4_6_, stage6_.num_on_roll as num_on_r6_4_6_, term7_.id as id1_16_7_, term7_.end_date as end_date2_16_7_, term7_.name as name3_16_7_, term7_.start_date as start_da4_16_7_, term7_.status as status5_16_7_, term7_.today as today6_16_7_ from Assessment assessment0_ left outer join Course course1_ on assessment0_.course_id=course1_.subject_id left outer join Grade grade2_ on assessment0_.grade=grade2_.id left outer join students student3_ on assessment0_.student_asmnt_id=student3_.student_id left outer join StudentAccount studentacc4_ on student3_.student_acc=studentacc4_.account_id left outer join Parents parent5_ on student3_.parent_Id=parent5_.Id left outer join Class stage6_ on student3_.class_id=stage6_.id left outer join Term term7_ on assessment0_.term=term7_.id where assessment0_.id=?
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Assessment#4117]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Assessment#4117]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Course#3850]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Course#3850]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#480]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#480]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#481]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#481]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#482]
+[Thread-8] DEBUG org.hibernate.SQL  - select address0_.id as id1_9_0_, address0_.homeAddress as homeAddr2_9_0_, address0_.landmark as landmark3_9_0_ from Parent_Address address0_ where address0_.id=?
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#483]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#483]
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[Thread-8] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Address#483
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#482]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Stage#47]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Stage#47]
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[Thread-8] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Assessment#4117
+[Thread-8] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - committing
+[Thread-8] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener  - Processing flush-time cascades
+[Thread-8] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener  - Dirty checking collections
+[Thread-8] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener  - Flushed: 0 insertions, 0 updates, 0 deletions to 1 objects
+[Thread-8] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener  - Flushed: 0 (re)creations, 0 updates, 0 removals to 0 collections
+[Thread-8] DEBUG org.hibernate.internal.util.EntityPrinter  - Listing entities:
+[Thread-8] DEBUG org.hibernate.internal.util.EntityPrinter  - com.hub.schoolAid.Grade{name=A, minMark=90.0, remark=Excellent, id=2586, maxMark=100.0}
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl  - Initiating JDBC connection release from afterTransaction
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl  - Initiating JDBC connection release from afterTransaction
+[Thread-8] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[Thread-8] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[Thread-8] DEBUG org.hibernate.SQL  - select grade0_.id as id1_7_, grade0_.maxMark as maxMark2_7_, grade0_.minMark as minMark3_7_, grade0_.name as name4_7_, grade0_.remark as remark5_7_ from Grade grade0_ where ?>=grade0_.minMark and ?<=grade0_.maxMark
+[Thread-8] DEBUG org.hibernate.SQL  - select assessment0_.id as id1_1_0_, assessment0_.classScore as classSco2_1_0_, assessment0_.course_id as course_i4_1_0_, assessment0_.examScore as examScor3_1_0_, assessment0_.grade as grade5_1_0_, assessment0_.student_asmnt_id as student_6_1_0_, assessment0_.term as term7_1_0_, course1_.subject_id as subject_1_6_1_, course1_.name as name2_6_1_, grade2_.id as id1_7_2_, grade2_.maxMark as maxMark2_7_2_, grade2_.minMark as minMark3_7_2_, grade2_.name as name4_7_2_, grade2_.remark as remark5_7_2_, student3_.student_id as student_1_15_3_, student3_.student_acc as student12_15_3_, student3_.age as age2_15_3_, student3_.dob as dob3_15_3_, student3_.feedingStatus as feedingS4_15_3_, student3_.firstname as firstnam5_15_3_, student3_.gender as gender6_15_3_, student3_.lastname as lastname7_15_3_, student3_.othername as othernam8_15_3_, student3_.parent_Id as parent_13_15_3_, student3_.payFeeding as payFeedi9_15_3_, student3_.paySchoolFees as payScho10_15_3_, student3_.reg_date as reg_dat11_15_3_, student3_.class_id as class_i14_15_3_, studentacc4_.account_id as account_1_13_4_, studentacc4_.feeToPay as feeToPay2_13_4_, studentacc4_.feedingFeeCredit as feedingF3_13_4_, studentacc4_.feedingFeeToPay as feedingF4_13_4_, parent5_.Id as Id1_10_5_, parent5_.address_id as address_5_10_5_, parent5_.name as name2_10_5_, parent5_.occupation as occupati3_10_5_, parent5_.telephone as telephon4_10_5_, stage6_.id as id1_4_6_, stage6_.classValue as classVal2_4_6_, stage6_.feeding_fee as feeding_3_4_6_, stage6_.feesToPay as feesToPa4_4_6_, stage6_.name as name5_4_6_, stage6_.num_on_roll as num_on_r6_4_6_, term7_.id as id1_16_7_, term7_.end_date as end_date2_16_7_, term7_.name as name3_16_7_, term7_.start_date as start_da4_16_7_, term7_.status as status5_16_7_, term7_.today as today6_16_7_ from Assessment assessment0_ left outer join Course course1_ on assessment0_.course_id=course1_.subject_id left outer join Grade grade2_ on assessment0_.grade=grade2_.id left outer join students student3_ on assessment0_.student_asmnt_id=student3_.student_id left outer join StudentAccount studentacc4_ on student3_.student_acc=studentacc4_.account_id left outer join Parents parent5_ on student3_.parent_Id=parent5_.Id left outer join Class stage6_ on student3_.class_id=stage6_.id left outer join Term term7_ on assessment0_.term=term7_.id where assessment0_.id=?
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Assessment#4118]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Assessment#4118]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Course#3850]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Course#3850]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#488]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#488]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#489]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#489]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#490]
+[Thread-8] DEBUG org.hibernate.SQL  - select address0_.id as id1_9_0_, address0_.homeAddress as homeAddr2_9_0_, address0_.landmark as landmark3_9_0_ from Parent_Address address0_ where address0_.id=?
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#491]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#491]
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[Thread-8] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Address#491
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#490]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Stage#47]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Stage#47]
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[Thread-8] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Assessment#4118
+[Thread-8] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - committing
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl  - Initiating JDBC connection release from afterTransaction
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl  - Initiating JDBC connection release from afterTransaction
+[Thread-8] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[Thread-8] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[Thread-8] DEBUG org.hibernate.SQL  - select grade0_.id as id1_7_, grade0_.maxMark as maxMark2_7_, grade0_.minMark as minMark3_7_, grade0_.name as name4_7_, grade0_.remark as remark5_7_ from Grade grade0_ where ?>=grade0_.minMark and ?<=grade0_.maxMark
+[Thread-8] DEBUG org.hibernate.loader.Loader  - Result set row: 0
+[Thread-8] DEBUG org.hibernate.loader.Loader  - Result row: EntityKey[com.hub.schoolAid.Grade#2587]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Grade#2587]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Grade#2587]
+[Thread-8] DEBUG org.hibernate.SQL  - select assessment0_.id as id1_1_0_, assessment0_.classScore as classSco2_1_0_, assessment0_.course_id as course_i4_1_0_, assessment0_.examScore as examScor3_1_0_, assessment0_.grade as grade5_1_0_, assessment0_.student_asmnt_id as student_6_1_0_, assessment0_.term as term7_1_0_, course1_.subject_id as subject_1_6_1_, course1_.name as name2_6_1_, grade2_.id as id1_7_2_, grade2_.maxMark as maxMark2_7_2_, grade2_.minMark as minMark3_7_2_, grade2_.name as name4_7_2_, grade2_.remark as remark5_7_2_, student3_.student_id as student_1_15_3_, student3_.student_acc as student12_15_3_, student3_.age as age2_15_3_, student3_.dob as dob3_15_3_, student3_.feedingStatus as feedingS4_15_3_, student3_.firstname as firstnam5_15_3_, student3_.gender as gender6_15_3_, student3_.lastname as lastname7_15_3_, student3_.othername as othernam8_15_3_, student3_.parent_Id as parent_13_15_3_, student3_.payFeeding as payFeedi9_15_3_, student3_.paySchoolFees as payScho10_15_3_, student3_.reg_date as reg_dat11_15_3_, student3_.class_id as class_i14_15_3_, studentacc4_.account_id as account_1_13_4_, studentacc4_.feeToPay as feeToPay2_13_4_, studentacc4_.feedingFeeCredit as feedingF3_13_4_, studentacc4_.feedingFeeToPay as feedingF4_13_4_, parent5_.Id as Id1_10_5_, parent5_.address_id as address_5_10_5_, parent5_.name as name2_10_5_, parent5_.occupation as occupati3_10_5_, parent5_.telephone as telephon4_10_5_, stage6_.id as id1_4_6_, stage6_.classValue as classVal2_4_6_, stage6_.feeding_fee as feeding_3_4_6_, stage6_.feesToPay as feesToPa4_4_6_, stage6_.name as name5_4_6_, stage6_.num_on_roll as num_on_r6_4_6_, term7_.id as id1_16_7_, term7_.end_date as end_date2_16_7_, term7_.name as name3_16_7_, term7_.start_date as start_da4_16_7_, term7_.status as status5_16_7_, term7_.today as today6_16_7_ from Assessment assessment0_ left outer join Course course1_ on assessment0_.course_id=course1_.subject_id left outer join Grade grade2_ on assessment0_.grade=grade2_.id left outer join students student3_ on assessment0_.student_asmnt_id=student3_.student_id left outer join StudentAccount studentacc4_ on student3_.student_acc=studentacc4_.account_id left outer join Parents parent5_ on student3_.parent_Id=parent5_.Id left outer join Class stage6_ on student3_.class_id=stage6_.id left outer join Term term7_ on assessment0_.term=term7_.id where assessment0_.id=?
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Assessment#4119]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Assessment#4119]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Course#3850]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Course#3850]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#1066]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#1066]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#1067]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#1067]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#1068]
+[Thread-8] DEBUG org.hibernate.SQL  - select address0_.id as id1_9_0_, address0_.homeAddress as homeAddr2_9_0_, address0_.landmark as landmark3_9_0_ from Parent_Address address0_ where address0_.id=?
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#1069]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#1069]
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[Thread-8] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Address#1069
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#1068]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Stage#47]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Stage#47]
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[Thread-8] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Assessment#4119
+[Thread-8] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - committing
+[Thread-8] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener  - Processing flush-time cascades
+[Thread-8] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener  - Dirty checking collections
+[Thread-8] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener  - Flushed: 0 insertions, 0 updates, 0 deletions to 1 objects
+[Thread-8] DEBUG org.hibernate.event.internal.AbstractFlushingEventListener  - Flushed: 0 (re)creations, 0 updates, 0 removals to 0 collections
+[Thread-8] DEBUG org.hibernate.internal.util.EntityPrinter  - Listing entities:
+[Thread-8] DEBUG org.hibernate.internal.util.EntityPrinter  - com.hub.schoolAid.Grade{name=B, minMark=70.0, remark=Very Good, id=2587, maxMark=89.0}
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl  - Initiating JDBC connection release from afterTransaction
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl  - Initiating JDBC connection release from afterTransaction
+[Thread-8] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[Thread-8] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[Thread-8] DEBUG org.hibernate.engine.jdbc.spi.SqlExceptionHelper  - Unable to acquire JDBC Connection [n/a]
+java.sql.SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30002ms.
+	at com.zaxxer.hikari.pool.HikariPool.createTimeoutException(HikariPool.java:548)
+	at com.zaxxer.hikari.pool.HikariPool.getConnection(HikariPool.java:186)
+	at com.zaxxer.hikari.pool.HikariPool.getConnection(HikariPool.java:145)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:83)
+	at org.hibernate.hikaricp.internal.HikariCPConnectionProvider.getConnection(HikariCPConnectionProvider.java:77)
+	at org.hibernate.internal.NonContextualJdbcConnectionAccess.obtainConnection(NonContextualJdbcConnectionAccess.java:35)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.acquireConnectionIfNeeded(LogicalConnectionManagedImpl.java:115)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.getPhysicalConnection(LogicalConnectionManagedImpl.java:145)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.getConnectionForTransactionManagement(LogicalConnectionManagedImpl.java:263)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.begin(LogicalConnectionManagedImpl.java:271)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.begin(JdbcResourceLocalTransactionCoordinatorImpl.java:214)
+	at org.hibernate.engine.transaction.internal.TransactionImpl.begin(TransactionImpl.java:56)
+	at com.hub.schoolAid.HibernateUtil.begin(HibernateUtil.java:36)
+	at com.hub.schoolAid.GradeDao.getGrade(GradeDao.java:55)
+	at com.hub.schoolAid.AssessmentDao.updateAssessment(AssessmentDao.java:181)
+	at controller.AssessmentFormController.saveAssessment(AssessmentFormController.java:343)
+	at controller.AssessmentFormController.access$100(AssessmentFormController.java:32)
+	at controller.AssessmentFormController$4.call(AssessmentFormController.java:297)
+	at javafx.concurrent.Task$TaskCallable.call(Task.java:1423)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:745)
+[Thread-8] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper  - SQL Error: 0, SQLState: null
+[Thread-8] ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper  - HikariPool-1 - Connection is not available, request timed out after 30002ms.
+[Thread-8] DEBUG org.hibernate.SQL  - select assessment0_.id as id1_1_0_, assessment0_.classScore as classSco2_1_0_, assessment0_.course_id as course_i4_1_0_, assessment0_.examScore as examScor3_1_0_, assessment0_.grade as grade5_1_0_, assessment0_.student_asmnt_id as student_6_1_0_, assessment0_.term as term7_1_0_, course1_.subject_id as subject_1_6_1_, course1_.name as name2_6_1_, grade2_.id as id1_7_2_, grade2_.maxMark as maxMark2_7_2_, grade2_.minMark as minMark3_7_2_, grade2_.name as name4_7_2_, grade2_.remark as remark5_7_2_, student3_.student_id as student_1_15_3_, student3_.student_acc as student12_15_3_, student3_.age as age2_15_3_, student3_.dob as dob3_15_3_, student3_.feedingStatus as feedingS4_15_3_, student3_.firstname as firstnam5_15_3_, student3_.gender as gender6_15_3_, student3_.lastname as lastname7_15_3_, student3_.othername as othernam8_15_3_, student3_.parent_Id as parent_13_15_3_, student3_.payFeeding as payFeedi9_15_3_, student3_.paySchoolFees as payScho10_15_3_, student3_.reg_date as reg_dat11_15_3_, student3_.class_id as class_i14_15_3_, studentacc4_.account_id as account_1_13_4_, studentacc4_.feeToPay as feeToPay2_13_4_, studentacc4_.feedingFeeCredit as feedingF3_13_4_, studentacc4_.feedingFeeToPay as feedingF4_13_4_, parent5_.Id as Id1_10_5_, parent5_.address_id as address_5_10_5_, parent5_.name as name2_10_5_, parent5_.occupation as occupati3_10_5_, parent5_.telephone as telephon4_10_5_, stage6_.id as id1_4_6_, stage6_.classValue as classVal2_4_6_, stage6_.feeding_fee as feeding_3_4_6_, stage6_.feesToPay as feesToPa4_4_6_, stage6_.name as name5_4_6_, stage6_.num_on_roll as num_on_r6_4_6_, term7_.id as id1_16_7_, term7_.end_date as end_date2_16_7_, term7_.name as name3_16_7_, term7_.start_date as start_da4_16_7_, term7_.status as status5_16_7_, term7_.today as today6_16_7_ from Assessment assessment0_ left outer join Course course1_ on assessment0_.course_id=course1_.subject_id left outer join Grade grade2_ on assessment0_.grade=grade2_.id left outer join students student3_ on assessment0_.student_asmnt_id=student3_.student_id left outer join StudentAccount studentacc4_ on student3_.student_acc=studentacc4_.account_id left outer join Parents parent5_ on student3_.parent_Id=parent5_.Id left outer join Class stage6_ on student3_.class_id=stage6_.id left outer join Term term7_ on assessment0_.term=term7_.id where assessment0_.id=?
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Assessment#4120]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Assessment#4120]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Course#3850]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Course#3850]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Student#1082]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Student#1082]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.StudentAccount#1083]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.StudentAccount#1083]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Parent#1084]
+[Thread-8] DEBUG org.hibernate.SQL  - select address0_.id as id1_9_0_, address0_.homeAddress as homeAddr2_9_0_, address0_.landmark as landmark3_9_0_ from Parent_Address address0_ where address0_.id=?
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.ResultSetProcessorImpl  - Starting ResultSet row #0
+[Thread-8] DEBUG org.hibernate.loader.plan.exec.process.internal.EntityReferenceInitializerImpl  - On call to EntityIdentifierReaderImpl#resolve, EntityKey was already known; should only happen on root returns with an optional identifier specified
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Address#1085]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Address#1085]
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[Thread-8] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Address#1085
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Parent#1084]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Resolving associations for [com.hub.schoolAid.Stage#47]
+[Thread-8] DEBUG org.hibernate.engine.internal.TwoPhaseLoad  - Done materializing entity [com.hub.schoolAid.Stage#47]
+[Thread-8] DEBUG org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl  - HHH000387: ResultSet's statement was not registered
+[Thread-8] DEBUG org.hibernate.loader.entity.plan.AbstractLoadPlanBasedEntityLoader  - Done entity load : com.hub.schoolAid.Assessment#4120
+[Thread-8] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - rollback() called on an inactive transaction
+[Thread-11] DEBUG org.hibernate.engine.transaction.internal.TransactionImpl  - begin
+[Thread-11] DEBUG org.hibernate.engine.jdbc.spi.SqlExceptionHelper  - Unable to acquire JDBC Connection [n/a]
+java.sql.SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30000ms.
+	at com.zaxxer.hikari.pool.HikariPool.createTimeoutException(HikariPool.java:548)
+	at com.zaxxer.hikari.pool.HikariPool.getConnection(HikariPool.java:186)
+	at com.zaxxer.hikari.pool.HikariPool.getConnection(HikariPool.java:145)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:83)
+	at org.hibernate.hikaricp.internal.HikariCPConnectionProvider.getConnection(HikariCPConnectionProvider.java:77)
+	at org.hibernate.internal.NonContextualJdbcConnectionAccess.obtainConnection(NonContextualJdbcConnectionAccess.java:35)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.acquireConnectionIfNeeded(LogicalConnectionManagedImpl.java:115)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.getPhysicalConnection(LogicalConnectionManagedImpl.java:145)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.getConnectionForTransactionManagement(LogicalConnectionManagedImpl.java:263)
+	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.begin(LogicalConnectionManagedImpl.java:271)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.begin(JdbcResourceLocalTransactionCoordinatorImpl.java:214)
+	at org.hibernate.engine.transaction.internal.TransactionImpl.begin(TransactionImpl.java:56)
+	at com.hub.schoolAid.HibernateUtil.begin(HibernateUtil.java:36)
+	at com.hub.schoolAid.StageDao.getGetAllStage(StageDao.java:16)
+	at controller.AssessmentFormController.initFilds(AssessmentFormController.java:147)
+	at controller.AssessmentFormController.access$000(AssessmentFormController.java:32)
+	at controller.AssessmentFormController$1.call(AssessmentFormController.java:226)
+	at javafx.concurrent.Task$TaskCallable.call(Task.java:1423)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.lang.Thread.run(Thread.java:745)
+[Thread-11] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper  - SQL Error: 0, SQLState: null
+[Thread-11] ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper  - HikariPool-1 - Connection is not available, request timed out after 30000ms.

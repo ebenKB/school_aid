@@ -60,7 +60,7 @@ public class UserAccountController implements Initializable{
                       //there is already a user with the given name. Please try with another name...
                   }
 
-                  System.out.print("we have created a user now...");
+
 
                   //log the user in
                   loginFormController.authenticateUser(event,user);

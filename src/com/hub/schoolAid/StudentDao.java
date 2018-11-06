@@ -7,6 +7,7 @@ package com.hub.schoolAid;
 import org.hibernate.HibernateException;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -14,21 +15,43 @@ public class StudentDao {
     //private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 //    private Session session;
     private static EntityManager em;
+    private StageDao stageDao;
 
     //methods to interface with the database
-    public Boolean addNewStudent(Student student) {
+    public Boolean addNewStudent(Student student,StudentDetails details) {
         try{
-            student.getStage().setNum_on_roll(student.getStage().getNum_on_roll()+1);
+
+//            System.out.println("The student stage is:" +student.getStage().getName()+ "and num on roll is"+ student.getStage().getNum_on_roll());
+//            student.getStage().setNum_on_roll(student.getStage().getNum_on_roll()+1);
+
+//           if(details.getImage() !=null){
+//               details.setStudent(student);
+//               HibernateUtil.save(StudentDetails.class,details);
+//           }
+
+//          HibernateUtil.commit();
             student.setAge(student.calcAge(student.getDob()));
-            student.getAccount().setFeeToPay(((student.getStage().getFeesToPay())*-1));
+
+            if(student.getPaySchoolFees()){
+                student.getAccount().setFeeToPay(((student.getStage().getFeesToPay())*-1));
+            }else{
+                student.getAccount().setFeeToPay(0.00);
+            }
             student.getAccount().setFeedingFeeToPay(student.getStage().getFeeding_fee());
-            HibernateUtil.commit();
+//            HibernateUtil.commit();
             student.setPayFeeding(true);
             student.setReg_date(LocalDate.now());
             HibernateUtil.save(Student.class,student);
-            HibernateUtil.close();
+
+            stageDao=new StageDao();
+            stageDao.addStudent(student.getStage());
+
+            if(details.getImage() !=null){
+                StudentDetailsDao studentDetailsDao =new StudentDetailsDao();
+                studentDetailsDao.addImage(student,details.getImage());
+            }
         }catch (Exception e){
-//            e.printStackTrace();
+            e.printStackTrace();
             return false;
         }
         return true;
@@ -41,14 +64,17 @@ public class StudentDao {
     public Boolean updateStudentRecord(Student new_student) throws HibernateException{
         setStdRecsToUpdate(new_student);
         HibernateUtil.commit();
+        HibernateUtil.close();
         return true;
     }
     public Boolean updateStudentRecord(Student new_student,Parent parent){
         setStdRecsToUpdate(new_student);
         setParentRecsToUpdate(new_student,parent);
         HibernateUtil.commit();
+        HibernateUtil.close();
         return true;
     }
+
     private void setStdRecsToUpdate(Student new_student){
         em=HibernateUtil.getEntityManager();
         Student newStd = em.find(Student.class,new_student.getId());
@@ -59,9 +85,10 @@ public class StudentDao {
         newStd.setPayFeeding(new_student.getPayFeeding());
         newStd.setFeedingStatus(new_student.getFeedingStatus());
         newStd.getAccount().setFeedingFeeToPay(new_student.getAccount().getFeedingFeeToPay());
-        newStd.setImage(new_student.getImage());
+//        newStd.setImage(new_student.getImage());
         newStd.setDob(new_student.getDob());
         newStd.setGender(new_student.getGender());
+        new_student.setReg_date(LocalDate.now());
         newStd.getParent().setname(new_student.getParent().getname());
     }
 
@@ -71,20 +98,23 @@ public class StudentDao {
     }
 
     public List <Student> getStudent (Student student){
-        System.out.println("this is the student"+student.toString());
-        String hql = "FROM students S WHERE S.firstname like ? and S.lastname like ? and  S.othername like ? and S.stage.name like ?";
-        em=HibernateUtil.getEntityManager();
-        HibernateUtil.begin();
+        try{
+            String hql = "FROM students S WHERE S.firstname like ? and S.lastname like ? and  S.othername like ? and S.stage.name like ?";
+            em=HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
 
-        List <Student> data = em.createQuery(hql).setParameter(0,student.getFirstname())
-                .setParameter(1,student.getLastname())
-                .setParameter(2,student.getOthername())
-                .setParameter(3,student.getStage().getName())
-                .getResultList();
-      for(Student s : data){
-          System.out.println("this is a student found"+s.toString());
-      }
-        return  data;
+            List <Student> data = em.createQuery(hql).setParameter(0,student.getFirstname())
+                    .setParameter(1,student.getLastname())
+                    .setParameter(2,student.getOthername())
+                    .setParameter(3,student.getStage().getName())
+                    .getResultList();
+            return  data;
+        }catch (Exception e){
+            e.printStackTrace();
+            return  null;
+        }finally {
+            em.close();
+        }
     }
     /**
      *
@@ -97,21 +127,54 @@ public class StudentDao {
           return  (Student)em.createQuery("from  students where +id+ like '"+id+"' ").getSingleResult();
     }
 
-    public List <Student> getStudentByName(String name) throws HibernateException{
-          String hql = "FROM students S WHERE S.firstname like '"+name+"%' OR S.lastname like '"+name+"%' OR S.othername like '"+name+"%' ";
-          em=HibernateUtil.getEntityManager();
-          HibernateUtil.begin();
+    public List <Student> getStudentByName(String name){
+         try {
+             String hql = "FROM students S WHERE S.firstname like '"+name+"%' OR S.lastname like '"+name+"%' OR S.othername like '"+name+"%' ";
+             em=HibernateUtil.getEntityManager();
+             HibernateUtil.begin();
 
-          List<Student> list =em.createQuery(hql).getResultList();
-          return list;
+             List<Student> list =em.createQuery(hql).getResultList();
+             return list;
+         }catch (HibernateException e){
+             e.printStackTrace();
+             return null;
+         }finally {
+             em.close();
+         }
     }
 
-    public List<Student> getStudentFromClass(Stage newStage) throws HibernateException{
-        em=HibernateUtil.getEntityManager();
-        HibernateUtil.begin();
-//        List<Student> results = em.createQuery("FROM students WHERE +class_id+ like '"+ stage.getId() +"'").getResultList();
-        List<Student> results = em.createQuery("FROM students S WHERE S.stage.id =? ").setParameter(0,newStage.getId()).getResultList();
-        return results;
+    @Transactional
+    public List <Student> getStudentByCategory(String cat){
+       try{
+           String hql = "FROM students S WHERE LOWER(S.firstname) like '"+cat.toLowerCase()+"%' OR LOWER(S.lastname) like '"+cat.toLowerCase()+"%' OR LOWER(S.othername) like '"+cat.toLowerCase()+"%' " +
+                   "OR lower(S.stage.name) like '"+cat.toLowerCase()+"%' OR lower(S.stage.name) like '%"+cat.toLowerCase()+"' order by  S.firstname ASC ";
+           em=HibernateUtil.getEntityManager();
+           HibernateUtil.begin();
+
+           List<Student> list =em.createQuery(hql).getResultList();
+           return list;
+       }catch (HibernateException e){
+           e.printStackTrace();
+           return null;
+       }
+       finally {
+           if(em == null)
+               em.close();
+       }
+    }
+
+    public List<Student> getStudentFromClass(Stage newStage){
+        try{
+            em=HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            List<Student> results = em.createQuery("FROM students S WHERE S.stage.id =? ").setParameter(0,newStage.getId()).getResultList();
+            return results;
+        }catch (HibernateException e){
+            e.printStackTrace();
+            return null;
+        }finally {
+            em.close();
+        }
     }
     /**
      *
@@ -155,9 +218,14 @@ public class StudentDao {
 
         HibernateUtil.begin();
         em.remove(s);
+
         HibernateUtil.commit();
         HibernateUtil.close();
-       return true;
+
+        //remove the image from file
+        StudentDetailsDao detailsDao =new StudentDetailsDao();
+        ImageHandler.deleteOldImage(detailsDao.getImage(student));
+        return true;
     }
     /**
      * delete and then their parent from the db

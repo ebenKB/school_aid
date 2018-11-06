@@ -39,8 +39,6 @@ public class ImageHandler {
     public static void resize(String inputImagePath,
                               String outputImagePath, int scaledWidth, int scaledHeight)
             throws IOException {
-        System.out.print("this is the input path"+" "+inputImagePath);
-        System.out.print("this is the output path"+" "+outputImagePath);
         // reads input image
         File inputFile = new File(inputImagePath);
         BufferedImage inputImage = ImageIO.read(inputFile);
@@ -109,21 +107,42 @@ public class ImageHandler {
             return null;
         }
         image.setImage(new Image(path.toString()));
+        image.setVisible(true);
+        System.out.println("this is the path"+path.toString());
        return path;
     }
 
-    public  void setStudentImage(Student std,URI path){
+//    public  void setStudentImage(Student std,URI path){
+//        if(path != null){
+//            try {
+//                Path source = Paths.get(path);
+//                Path newdir = Paths.get(getClass().getResource(Utils.studentImgPath).toURI());
+//                FileChannel fileChannel = FileChannel.open(source);
+//                Long imageSize = fileChannel.size();
+//
+//                saveImage(imageSize,source,newdir);
+//
+//                std.setImage(String.valueOf(source.getFileName()));
+//
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            } catch (URISyntaxException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+
+
+    public  void setStudentImage(StudentDetails details,URI path){
         if(path != null){
             try {
                 Path source = Paths.get(path);
                 Path newdir = Paths.get(getClass().getResource(Utils.studentImgPath).toURI());
                 FileChannel fileChannel = FileChannel.open(source);
                 Long imageSize = fileChannel.size();
-
                 saveImage(imageSize,source,newdir);
-
-                std.setImage(String.valueOf(source.getFileName()));
-
+                details.setImage(String.valueOf(source.getFileName()));
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (URISyntaxException e) {
@@ -132,8 +151,14 @@ public class ImageHandler {
         }
     }
 
-    private static Boolean deleteOldImage(){
-        return false;
+    public static Boolean deleteOldImage(String image){
+        try {
+            Files.delete(Paths.get(Utils.studentImgPath+image));
+            return true;
+        } catch (IOException e) {
+//            e.printStackTrace();
+            return false;
+        }
     }
 }
 

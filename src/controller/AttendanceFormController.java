@@ -30,8 +30,6 @@ public class AttendanceFormController implements Initializable{
     @FXML
     private TableColumn<?, ?> actionCol;
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

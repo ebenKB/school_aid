@@ -75,7 +75,6 @@ public class classListController implements Initializable{
         for(Stage stage:list){
             data.add(stage);
             counter+=stage.getNum_on_roll();
-            System.out.print("we are fetching data for the class list table view"+ stage.getName());
         }
         return counter;
     }

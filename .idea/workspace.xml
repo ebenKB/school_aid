@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="SchoolMgmtSys:jar" />
+      <artifact name="SchoolAid:jar" />
     </artifacts-to-build>
   </component>
   <component name="BookmarkManager">
@@ -10,151 +10,271 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/SchoolMgmtSys_jar.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/fontawesomefx_8.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/controller/GradeFormController.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/NewSchoolMgmtSys_jar.xml" afterPath="" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/StudentAccountDao.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDetails.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDetailsDao.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/controller/SalesItemFormController.java" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/SchoolMgmtSysjar.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Hibernate_mysql.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Hibernate_mysql.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/fontawesomefx_9.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/pdfbox_2_0_11.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/SchoolMgmtSys.iml" afterPath="$PROJECT_DIR$/SchoolMgmtSys.iml" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/META-INF/persistence.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Assessment.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Assessment.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/AssessmentDao.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/AssessmentDao.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Grade.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Grade.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/GradeDao.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/GradeDao.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/ImageHandler.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/ImageHandler.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Main$1.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Main$1.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Main.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Main.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/PDFMaker.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/PDFMaker.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Sales.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Sales.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Student$FeedingStatus.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Student$FeedingStatus.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Student.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Student.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/StudentDao.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/StudentDao.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Utils.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Utils.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AssessmentFormController$1.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AssessmentFormController$1.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AssessmentFormController$2.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AssessmentFormController$2.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AssessmentFormController$3.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AssessmentFormController$3.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AssessmentFormController$4.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AssessmentFormController$4.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AssessmentFormController$5.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AssessmentFormController$5.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AssessmentFormController.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AssessmentFormController.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/LoginFormController.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/LoginFormController.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/SubjectFormController.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/SubjectFormController.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/classListController.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/classListController.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$1.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$1.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$2.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$2.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$3.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$3.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$4.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$4.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$5.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$5.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$6.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$6.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$7.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$7.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/newAttendanceSheetController$1.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/newAttendanceSheetController$1.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/newAttendanceSheetController.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/newAttendanceSheetController.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$1.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$1.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$2.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$2.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$3.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$3.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$4.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$4.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$5.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$5.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$6.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$6.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$7.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$7.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$1.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$1.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$10.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$11.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$12.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$13.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$14.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$15.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$16.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$17.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$18.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$19.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$2.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$2.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$20.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$21.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$22.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$3.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$3.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$4.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$5.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$6.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$7.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$8.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$9$1.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$9.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentController$1.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentController$1.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentController$2.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentController$2.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentController$3.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentController$3.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentController$4.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentController$4.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentController.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentController.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$1.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$1.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$10.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$10.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$11.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$11.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$12.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$12.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$13.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$13.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$14.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$14.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$2.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$2.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$3.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$3.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$4.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$4.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$5.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$5.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$6.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$6.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$7.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$7.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$8.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$8.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$9.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$9.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$1$1.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$1$1.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$1$2.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$1$2.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$1.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$1.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$2.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$2.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$3.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$3.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$4.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$4.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$5.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$5.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$6.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$6.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$7.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$7.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$8.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$8.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController.class" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/hibernate.cfg.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/stylesheet/main.css" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/stylesheet/main.css" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/attendance.fxml" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/attendance.fxml" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/main.fxml" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/main.fxml" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/newAttendanceSheetForm.fxml" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/newAttendanceSheetForm.fxml" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/salesDetailsForm.fxml" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/salesDetailsForm.fxml" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/salesForm.fxml" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/salesForm.fxml" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/student.fxml" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/student.fxml" />
-      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/studentDetailsTabPane.fxml" afterPath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/studentDetailsTabPane.fxml" />
+      <change beforePath="$PROJECT_DIR$/SchoolMgmtSys.iml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/SchoolMgmtSys_jar/SchoolMgmtSys.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/META-INF/MANIFEST.MF" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/META-INF/persistence.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/SharingCart-greycartplus.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/attendance.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/cancel.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/class 2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/class.jpg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/class.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/delete.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/ghc.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/login-avatar.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/logo.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/logout.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/mat.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/new.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/parent.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/pay.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/sale.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/search.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/sendMessage.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/shopping_cart.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/stud.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/students.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/students/IMG_4624.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/students/IMG_4625.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/students/IMG_4626.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/students/IMG_4631.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/students/IMG_4632.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/students/IMG_4634.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/students/IMG_4639.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/students/IMG_4643.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/students/IMG_4656.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/students/IMG_4658.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/students/IMG_4723.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/students/IMG_4770.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/students/Leo.jpg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/studentsIMG_4634.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/studentsIMG_4641.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/success.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/assets/update.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Address.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/App.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/AppDao.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Assessment.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/AssessmentDao.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Attendance.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/AttendanceDao.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/AttendanceTemporary.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/AttendanceTemporaryDao.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Course.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/CourseDao.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/CustomCombo$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/CustomCombo$2.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/CustomCombo.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Grade.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/GradeDao.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/HibernateUtil.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/ImageHandler.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Initializer.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Item.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/ItemDao.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Logger.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Main$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Main.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/MyProgressIndicator.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Notification.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/PDFMaker.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Parent.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Sales.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/SalesDao.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Staff.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Stage.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/StageDao.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Student$FeedingStatus.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Student.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/StudentAccount.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/StudentCell.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/StudentDao.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Term.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/TermDao.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/TransactionDetails.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/User.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/UserDao.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/Utils.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/com/hub/schoolAid/WindowsSounds.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AssessmentFormController$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AssessmentFormController$2.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AssessmentFormController$3.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AssessmentFormController$4.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AssessmentFormController$5.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AssessmentFormController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AttendanceFormController$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/AttendanceFormController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/GradeFormController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/LoginFormController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/SubjectFormController$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/SubjectFormController$2.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/SubjectFormController$3.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/SubjectFormController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/TermController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/UserAccountController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/classFormController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/classListController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$2.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$3.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$4.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$5.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$6.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController$7.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/mainController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/newAttendanceSheetController$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/newAttendanceSheetController$2.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/newAttendanceSheetController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$2.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$3.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$4.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$5.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$6.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale$7.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/sale.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$1$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$2.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController$3.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/salesDetailsFormController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentController$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentController$2.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentController$3.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentController$4.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$10.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$11.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$12.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$13.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$14.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$15.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$16.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$2.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$3.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$4.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$5.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$6.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$7.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$8.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController$9.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/studentDetailsFormController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$1$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$1$2.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$2.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$3.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$4.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$5.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$6.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$7.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$8.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController$9.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/controller/viewAttendanceController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/hibernate.cfg.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/students/IMG_4624.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/students/IMG_4625.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/students/IMG_4626.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/students/IMG_4631.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/students/IMG_4632.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/students/IMG_4634.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/students/IMG_4639.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/students/IMG_4643.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/students/IMG_4656.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/students/IMG_4658.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/stylesheet/main.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/LoginForm.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/PaymentForm.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/Term.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/UserAccountForm.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/assessment.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/attendance.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/classForm.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/classListForm.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/gradeForm.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/main.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/main2.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/mainNew.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/newAttendanceSheetForm.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/parent.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/progress.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/salesDetailsForm.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/salesForm.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/stageForm.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/student.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/student2.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/studentDetailsForm.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/studentDetailsTabPane.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolMgmtSys/view/subject.fxml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdf" afterPath="" />
       <change beforePath="$PROJECT_DIR$/src/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/src/META-INF/persistence.xml" />
-      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/Assessment.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/Assessment.java" />
+      <change beforePath="$PROJECT_DIR$/src/assets/students/IMG_4624.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/assets/students/IMG_4625.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/assets/students/IMG_4626.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/assets/students/IMG_4631.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/assets/students/IMG_4632.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/assets/students/IMG_4634.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/assets/students/IMG_4639.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/assets/students/IMG_4643.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/assets/students/IMG_4656.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/assets/students/IMG_4658.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/assets/studentsIMG_4634.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/assets/studentsIMG_4641.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/App.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/App.java" />
       <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/AssessmentDao.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/AssessmentDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/Attendance.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/Attendance.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceDao.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporary.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporary.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporaryDao.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporaryDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/CourseDao.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/CourseDao.java" />
       <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/Grade.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/Grade.java" />
       <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/GradeDao.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/GradeDao.java" />
       <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/HibernateUtil.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/HibernateUtil.java" />
       <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/ImageHandler.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/ImageHandler.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/Initializer.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/Initializer.java" />
       <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/Main.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/Main.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/Notification.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/Notification.java" />
       <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/PDFMaker.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/PDFMaker.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/Sales.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/Sales.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/SalesDao.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/SalesDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/StageDao.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/StageDao.java" />
       <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/Student.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/Student.java" />
       <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/TermDao.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/TermDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionDetails.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/UserDao.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/UserDao.java" />
       <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/Utils.java" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/Utils.java" />
       <change beforePath="$PROJECT_DIR$/src/controller/AssessmentFormController.java" afterPath="$PROJECT_DIR$/src/controller/AssessmentFormController.java" />
+      <change beforePath="$PROJECT_DIR$/src/controller/AttendanceFormController.java" afterPath="$PROJECT_DIR$/src/controller/AttendanceFormController.java" />
+      <change beforePath="$PROJECT_DIR$/src/controller/GradeFormController.java" afterPath="$PROJECT_DIR$/src/controller/GradeFormController.java" />
       <change beforePath="$PROJECT_DIR$/src/controller/LoginFormController.java" afterPath="$PROJECT_DIR$/src/controller/LoginFormController.java" />
-      <change beforePath="$PROJECT_DIR$/src/controller/SubjectFormController.java" afterPath="$PROJECT_DIR$/src/controller/SubjectFormController.java" />
+      <change beforePath="$PROJECT_DIR$/src/controller/UserAccountController.java" afterPath="$PROJECT_DIR$/src/controller/UserAccountController.java" />
       <change beforePath="$PROJECT_DIR$/src/controller/classListController.java" afterPath="$PROJECT_DIR$/src/controller/classListController.java" />
       <change beforePath="$PROJECT_DIR$/src/controller/mainController.java" afterPath="$PROJECT_DIR$/src/controller/mainController.java" />
       <change beforePath="$PROJECT_DIR$/src/controller/newAttendanceSheetController.java" afterPath="$PROJECT_DIR$/src/controller/newAttendanceSheetController.java" />
-      <change beforePath="$PROJECT_DIR$/src/controller/sale.java" afterPath="$PROJECT_DIR$/src/controller/sale.java" />
       <change beforePath="$PROJECT_DIR$/src/controller/salesDetailsFormController.java" afterPath="$PROJECT_DIR$/src/controller/salesDetailsFormController.java" />
       <change beforePath="$PROJECT_DIR$/src/controller/studentController.java" afterPath="$PROJECT_DIR$/src/controller/studentController.java" />
       <change beforePath="$PROJECT_DIR$/src/controller/studentDetailsFormController.java" afterPath="$PROJECT_DIR$/src/controller/studentDetailsFormController.java" />
       <change beforePath="$PROJECT_DIR$/src/controller/viewAttendanceController.java" afterPath="$PROJECT_DIR$/src/controller/viewAttendanceController.java" />
       <change beforePath="$PROJECT_DIR$/src/stylesheet/main.css" afterPath="$PROJECT_DIR$/src/stylesheet/main.css" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginForm.fxml" afterPath="$PROJECT_DIR$/src/view/LoginForm.fxml" />
       <change beforePath="$PROJECT_DIR$/src/view/attendance.fxml" afterPath="$PROJECT_DIR$/src/view/attendance.fxml" />
+      <change beforePath="$PROJECT_DIR$/src/view/gradeForm.fxml" afterPath="$PROJECT_DIR$/src/view/gradeForm.fxml" />
       <change beforePath="$PROJECT_DIR$/src/view/main.fxml" afterPath="$PROJECT_DIR$/src/view/main.fxml" />
       <change beforePath="$PROJECT_DIR$/src/view/newAttendanceSheetForm.fxml" afterPath="$PROJECT_DIR$/src/view/newAttendanceSheetForm.fxml" />
       <change beforePath="$PROJECT_DIR$/src/view/salesDetailsForm.fxml" afterPath="$PROJECT_DIR$/src/view/salesDetailsForm.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/view/salesForm.fxml" afterPath="$PROJECT_DIR$/src/view/salesForm.fxml" />
       <change beforePath="$PROJECT_DIR$/src/view/student.fxml" afterPath="$PROJECT_DIR$/src/view/student.fxml" />
-      <change beforePath="$PROJECT_DIR$/src/view/studentDetailsTabPane.fxml" afterPath="$PROJECT_DIR$/src/view/studentDetailsTabPane.fxml" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -170,6 +290,9 @@
     <SUITE FILE_PATH="coverage/SchoolMgmtSys$Main_.coverage" NAME="Main  Coverage Results" MODIFIED="1518834253416" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/SchoolAid_1_1_1$Main.coverage" NAME="Main Coverage Results" MODIFIED="1540585364229" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>model.*</FILTER>
+    </SUITE>
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -180,9 +303,11 @@
     <option name="GROUP_SCHEMA" value="true" />
     <option name="GROUP_CONTENTS" value="false" />
     <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_TABLE_DETAILS" value="true" />
     <option name="SHOW_EMPTY_GROUPS" value="false" />
     <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
     <expand />
     <select />
   </component>
@@ -228,38 +353,103 @@
     <option name="hideWarnings" value="true" />
     <option name="HIDE_WARNINGS" value="true" />
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="128671093">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="7" />
+          <entry key="project.open.time.101" value="1" />
+          <entry key="project.open.time.55" value="1" />
+          <entry key="project.open.time.63" value="1" />
+          <entry key="project.open.time.67" value="1" />
+          <entry key="project.open.time.74" value="2" />
+          <entry key="project.open.time.78" value="1" />
+          <entry key="project.open.time.79" value="1" />
+          <entry key="project.open.time.82" value="1" />
+          <entry key="project.open.time.83" value="1" />
+          <entry key="project.open.time.84" value="1" />
+          <entry key="project.open.time.85" value="2" />
+          <entry key="project.open.time.92" value="1" />
+          <entry key="project.open.time.99" value="1" />
+          <entry key="project.opened" value="15" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="1641" />
+          <entry key="xml" value="36" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="1641" />
+          <entry key="XML" value="36" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="13" />
+          <entry key="xml" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="13" />
+          <entry key="XML" value="3" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="-67842411">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="5" />
+          <entry key="project.open.time.46" value="1" />
+          <entry key="project.open.time.49" value="1" />
+          <entry key="project.open.time.6" value="1" />
+          <entry key="project.open.time.68" value="1" />
+          <entry key="project.open.time.75" value="1" />
+          <entry key="project.open.time.77" value="1" />
+          <entry key="project.open.time.87" value="2" />
+          <entry key="project.open.time.97" value="1" />
+          <entry key="project.opened" value="10" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="5884" />
+          <entry key="xml" value="24" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="5884" />
+          <entry key="XML" value="24" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="25" />
+          <entry key="xml" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="25" />
+          <entry key="XML" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FavoritesManager">
     <favorites_list name="JavaFxApplication" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Utils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Utils.java">
+      <file leaf-file-name="persistence.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/META-INF/persistence.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="22" column="9" lean-forward="false" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Student.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Student.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="901">
-              <caret line="55" column="36" lean-forward="false" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/stylesheet/main.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2601">
-              <caret line="153" column="1" lean-forward="false" selection-start-line="153" selection-start-column="1" selection-end-line="153" selection-end-column="1" />
+            <state relative-caret-position="680">
+              <caret line="40" column="84" lean-forward="false" selection-start-line="40" selection-start-column="84" selection-end-line="40" selection-end-column="84" />
               <folding />
             </state>
           </provider>
@@ -268,53 +458,31 @@
       <file leaf-file-name="salesDetailsFormController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/salesDetailsFormController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9622">
-              <caret line="603" column="45" lean-forward="false" selection-start-line="603" selection-start-column="45" selection-end-line="603" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sale.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/sale.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3077">
-              <caret line="205" column="33" lean-forward="false" selection-start-line="205" selection-start-column="33" selection-end-line="205" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="studentController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/controller/studentController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="523" column="19" lean-forward="false" selection-start-line="523" selection-start-column="19" selection-end-line="523" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="studentDetailsFormController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/studentDetailsFormController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2550">
-              <caret line="181" column="53" lean-forward="false" selection-start-line="181" selection-start-column="53" selection-end-line="181" selection-end-column="53" />
+            <state relative-caret-position="2703">
+              <caret line="204" column="90" lean-forward="false" selection-start-line="204" selection-start-column="90" selection-end-line="204" selection-end-column="90" />
               <folding>
-                <element signature="e#40512#40513#0" expanded="true" />
-                <element signature="e#40539#40540#0" expanded="true" />
-                <element signature="e#40580#40581#0" expanded="true" />
-                <element signature="e#40609#40610#0" expanded="true" />
+                <element signature="e#36666#36667#0" expanded="true" />
+                <element signature="e#36715#36716#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AttendanceFormController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/AttendanceFormController.java">
+      <file leaf-file-name="AssessmentDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/AssessmentDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="46" column="13" lean-forward="false" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="13" />
+            <state relative-caret-position="2873">
+              <caret line="173" column="106" lean-forward="false" selection-start-line="173" selection-start-column="106" selection-end-line="173" selection-end-column="106" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GradeDao.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/GradeDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="341">
+              <caret line="51" column="39" lean-forward="false" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -323,8 +491,61 @@
       <file leaf-file-name="StudentDao.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1173">
-              <caret line="73" column="21" lean-forward="false" selection-start-line="73" selection-start-column="21" selection-end-line="73" selection-end-column="21" />
+            <state relative-caret-position="935">
+              <caret line="60" column="57" lean-forward="false" selection-start-line="60" selection-start-column="54" selection-end-line="60" selection-end-column="57" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HibernateUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/HibernateUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="646">
+              <caret line="42" column="66" lean-forward="false" selection-start-line="42" selection-start-column="66" selection-end-line="42" selection-end-column="66" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AppDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/AppDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AssessmentFormController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/AssessmentFormController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5355">
+              <caret line="344" column="78" lean-forward="false" selection-start-line="344" selection-start-column="78" selection-end-line="344" selection-end-column="78" />
+              <folding>
+                <element signature="e#7620#7621#0" expanded="true" />
+                <element signature="e#7657#7658#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PDFMaker.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/PDFMaker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4335">
+              <caret line="273" column="21" lean-forward="false" selection-start-line="273" selection-start-column="21" selection-end-line="273" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GlassViewEventHandler.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/javafx-src.zip!/com/sun/javafx/tk/quantum/GlassViewEventHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6052">
+              <caret line="414" column="0" lean-forward="false" selection-start-line="414" selection-start-column="0" selection-end-line="414" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -342,36 +563,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>feedingType</find>
-      <find>total</find>
-      <find>sale.set</find>
-      <find>popul</find>
-      <find>The record has</find>
-      <find>if(is</find>
-      <find>added a</find>
-      <find>feeding</find>
-      <find>isValid</find>
-      <find>valid</find>
-      <find>validate</find>
-      <find>first name is too short</find>
-      <find>2</find>
-      <find>3</find>
-      <find>validateTextBox</find>
-      <find>Thread</find>
-      <find>cle</find>
-      <find>clearS</find>
-      <find>clearSt</find>
-      <find>save.setOnA</find>
-      <find>save</find>
+      <find>amount</find>
+      <find>an error occ</find>
+      <find>payl</find>
+      <find>vB</find>
+      <find>radio</find>
+      <find>vBoxAttendance</find>
+      <find>loadD</find>
+      <find>this is the</find>
+      <find>this</find>
+      <find>this is</find>
       <find>this is the s</find>
-      <find>clear</find>
-      <find>clea</find>
-      <find>prepare</find>
-      <find>dupli</find>
-      <find>System.o</find>
-      <find>System.out</find>
-      <find>System.out.p</find>
-      <find>saveRe</find>
+      <find>ths is the size of the search18</find>
+      <find>ths is the size of the search11</find>
+      <find>searching for studnt ABENA KE</find>
+      <find>searching for studnt PAU</find>
+      <find>searching for studnt PAULINA</find>
+      <find>searching for studnt PAUL</find>
+      <find>searching for studnt SIB</find>
+      <find>searching for studnt SIBA</find>
+      <find>searching for studnt PAULI</find>
+      <find>searching for studnt PAULIN</find>
+      <find>sort</find>
+      <find>popula</find>
+      <find>up</find>
+      <find>loo</find>
+      <find>loopin</find>
+      <find>upd</find>
+      <find>edited</find>
+      <find>loop</find>
+      <find>looping</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -390,57 +611,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TermDao.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Attendance.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/controller/mainController.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Subject.java" />
-        <option value="$PROJECT_DIR$/src/view/subject.fxml" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/customListCell.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/User.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/UserDao.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Stage.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/CustomListCell.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/CustomCellFactory.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/CourseListCell.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StageListCell.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentCell.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentCellFactory.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Course.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/CourseDao.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Initializer.java" />
-        <option value="$PROJECT_DIR$/src/controller/LoginFormController.java" />
-        <option value="$PROJECT_DIR$/src/view/main.fxml" />
-        <option value="$PROJECT_DIR$/src/view/main2.fxml" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/PDFMaker.java" />
-        <option value="$PROJECT_DIR$/src/controller/classListController.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Utils.java" />
         <option value="$PROJECT_DIR$/src/controller/SubjectFormController.java" />
-        <option value="$PROJECT_DIR$/src/controller/AssessmentFormController.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/AssessmentDao.java" />
         <option value="$PROJECT_DIR$/.idea/artifacts/NewSchoolMgmtSys_jar.xml" />
         <option value="$PROJECT_DIR$/out/production/SchoolMgmtSys/META-INF/persistence.xml" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Assessment.java" />
         <option value="$PROJECT_DIR$/out/production/SchoolMgmtSys/hibernate.cfg.xml" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Grade.java" />
         <option value="$PROJECT_DIR$/src/controller/gradeFormController.java" />
-        <option value="$PROJECT_DIR$/src/controller/GradeFormController.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/GradeDao.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/ImageHandler.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/HibernateUtil.java" />
         <option value="$PROJECT_DIR$/src/hibernate.cfg.xml" />
-        <option value="$PROJECT_DIR$/src/controller/viewAttendanceController.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Sales.java" />
-        <option value="$PROJECT_DIR$/src/controller/mainController.java" />
-        <option value="$PROJECT_DIR$/src/controller/newAttendanceSheetController.java" />
-        <option value="$PROJECT_DIR$/src/META-INF/persistence.xml" />
-        <option value="$PROJECT_DIR$/src/controller/studentDetailsFormController.java" />
-        <option value="$PROJECT_DIR$/src/controller/salesDetailsFormController.java" />
         <option value="$PROJECT_DIR$/src/controller/sale.java" />
-        <option value="$PROJECT_DIR$/src/stylesheet/main.css" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Student.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/SalesDao.java" />
+        <option value="$PROJECT_DIR$/src/controller/SalesItemFormController.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentImage.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentImageDao.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/App.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Initializer.java" />
+        <option value="$PROJECT_DIR$/src/controller/LoginFormController.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDetails.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDetailsDao.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StageDao.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Notification.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/ImageHandler.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporary.java" />
+        <option value="$PROJECT_DIR$/src/controller/studentDetailsFormController.java" />
         <option value="$PROJECT_DIR$/src/controller/studentController.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Attendance.java" />
+        <option value="$PROJECT_DIR$/src/controller/AttendanceFormController.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Student.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionDetails.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLoggerDao.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLogger.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/GradeDao.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Grade.java" />
+        <option value="$PROJECT_DIR$/src/controller/GradeFormController.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporaryDao.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Utils.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/UserDao.java" />
+        <option value="$PROJECT_DIR$/src/log4j.properties" />
+        <option value="$PROJECT_DIR$/src/controller/newAttendanceSheetController.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TermDao.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceDao.java" />
+        <option value="$PROJECT_DIR$/src/controller/mainController.java" />
+        <option value="$PROJECT_DIR$/src/controller/viewAttendanceController.java" />
+        <option value="$PROJECT_DIR$/src/stylesheet/main.css" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java" />
+        <option value="$PROJECT_DIR$/src/META-INF/persistence.xml" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/PDFMaker.java" />
+        <option value="$PROJECT_DIR$/src/controller/salesDetailsFormController.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/HibernateUtil.java" />
+        <option value="$PROJECT_DIR$/src/controller/AssessmentFormController.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/AssessmentDao.java" />
       </list>
     </option>
   </component>
@@ -451,10 +672,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="width" value="814" />
-    <option name="height" value="907" />
+    <option name="height" value="867" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectReloadState">
@@ -475,69 +696,43 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="SchoolMgmtSys" type="1abcf292:AndroidViewProjectNode" />
-              <item name="SchoolMgmtSys" type="1039202d:NonAndroidModuleNode" />
-            </path>
-            <path>
-              <item name="SchoolMgmtSys" type="1abcf292:AndroidViewProjectNode" />
-              <item name="SchoolMgmtSys" type="1039202d:NonAndroidModuleNode" />
-              <item name="java" type="b5c1fe26:NonAndroidSourceTypeNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="SchoolMgmtSys" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SchoolMgmtSys" type="462c0819:PsiDirectoryNode" />
+              <item name="SchoolAid 1.1.1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SchoolAid 1.1.1" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="SchoolMgmtSys" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SchoolMgmtSys" type="462c0819:PsiDirectoryNode" />
+              <item name="SchoolAid 1.1.1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SchoolAid 1.1.1" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="SchoolMgmtSys" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SchoolMgmtSys" type="462c0819:PsiDirectoryNode" />
+              <item name="SchoolAid 1.1.1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SchoolAid 1.1.1" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="schoolAid" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="SchoolMgmtSys" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SchoolMgmtSys" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SchoolMgmtSys" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SchoolMgmtSys" type="462c0819:PsiDirectoryNode" />
+              <item name="SchoolAid 1.1.1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SchoolAid 1.1.1" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="META-INF" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="SchoolMgmtSys" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SchoolMgmtSys" type="462c0819:PsiDirectoryNode" />
+              <item name="SchoolAid 1.1.1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SchoolAid 1.1.1" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="stylesheet" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="SchoolMgmtSys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SchoolAid 1.1.1" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-            <path>
-              <item name="SchoolMgmtSys" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Hibernate&amp;mysql" type="70bed36:NamedLibraryElementNode" />
             </path>
           </expand>
           <select />
@@ -546,28 +741,29 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="OverrideImplement.combined" value="false" />
-    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="recentsLimit" value="5" />
-    <property name="MemberChooser.sorted" value="false" />
-    <property name="MemberChooser.showClasses" value="true" />
+    <property name="AnalyzeApkAction.lastApkPath" value="$PROJECT_DIR$" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="dynamic.classpath" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="OverrideImplement.combined" value="false" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://F:/Eben.KB/Java Projects/SchoolMgmtSys/src/com/hub/schoolAid/Item.java&#10;sal&#9;PSI&#9;JAVA://model.Sales" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
-    <property name="js.eslint.eslintPackage" value="" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540623221939" />
+    <property name="dynamic.classpath" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SMSHub" />
+    <property name="js.eslint.eslintPackage" value="" />
+    <property name="last_opened_file_path" value="F:/SOFTWARE/Core Java Libraries/slf4j-api-1.7.10.jar!/" />
+    <property name="nodejs_interpreter_path" value="node" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.notifications" />
-    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://F:/Eben.KB/Java Projects/SchoolMgmtSys/src/model/TermDao.java&#10;sal&#9;PSI&#9;JAVA://model.Sales" />
+    <property name="project.structure.side.proportion" value="0.2863585" />
+    <property name="recentsLimit" value="5" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="AnalyzeApkAction.lastApkPath" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -604,188 +800,50 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main2">
+  <component name="RunManager">
     <configuration default="true" type="Applet" factoryName="Applet">
-      <module />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="file://$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="ALTERNATIVE_JRE_PATH" value="10.0" />
+      <option name="WIDTH" value="0" />
+      <option name="HEIGHT" value="0" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <module />
+      <method>
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="Main " type="Application" factoryName="Application" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" runner="idea">
         <pattern>
           <option name="PATTERN" value="model.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="model.Main" />
+      <option name="MAIN_CLASS_NAME" value="com.hub.schoolAid.Main" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="C:\Program Files\Java\jdk1.8.0_91\jre" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="SchoolMgmtSys" />
-      <envs />
-    </configuration>
-    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.hub.schMgmtSys.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="com.hub.schMgmtSys.model.Main" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="SchoolMgmtSys" />
+      <module name="SchoolAid" />
       <envs />
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="sample.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="sample.Main" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="SchoolMgmtSys" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-    </configuration>
-    <configuration name="Main2" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.hub.schoolAid.Main" />
+      <module name="SchoolAid" />
+      <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.hub.schoolAid.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="com.hub.schoolAid.Main" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="SchoolMgmtSys" />
-      <envs />
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.hub.schoolAid.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="com.hub.schoolAid.Main" />
-      <option name="VM_PARAMETERS" value="--add-modules java.xml.bind" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="SchoolMgmtSys" />
-      <envs />
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="model.Main" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="SchoolMgmtSys" />
-      <envs />
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="model.Main" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="SchoolMgmtSys" />
-      <envs />
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="model.Main" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="SchoolMgmtSys" />
-      <envs />
-    </configuration>
-    <configuration name="StudentTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.hub.schMgmtSys.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="com.hub.schMgmtSys.model.StudentTest" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="SchoolMgmtSys" />
-      <envs />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -800,135 +858,9 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
-    </configuration>
-    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
-      <setting name="vmparams" value="" />
-      <setting name="cmdLine" value="run-app" />
-      <setting name="passParentEnv" value="true" />
-      <setting name="launchBrowser" value="true" />
-      <setting name="launchBrowserUrl" value="" />
-      <setting name="depsClasspath" value="false" />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration default="true" type="JarApplication" factoryName="JAR Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="ALTERNATIVE_JRE_PATH" value="10.0" />
-      <envs />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-    </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-    </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
-      <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file id="idea.log" enabled="true" />
-    </configuration>
-    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
-      <module name="" />
-      <option name="DEPLOY" value="true" />
-      <option name="ARTIFACT_NAME" value="" />
-      <option name="PM_INSTALL_OPTIONS" value="" />
-      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
-      <option name="MODE" value="default_activity" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="DEBUGGER_TYPE" value="Java" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <Java />
-      <Profilers>
-        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
-        <option name="GAPID_ENABLED" value="false" />
-        <option name="GAPID_DISABLE_PCS" value="false" />
-        <option name="SUPPORT_LIB_ENABLED" value="true" />
-        <option name="INSTRUMENTATION_ENABLED" value="true" />
-      </Profilers>
-      <option name="DEEP_LINK" value="" />
-      <option name="ACTIVITY_CLASS" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="EXTRA_OPTIONS" value="" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="DEBUGGER_TYPE" value="Java" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <Java />
-      <Profilers>
-        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
-        <option name="GAPID_ENABLED" value="false" />
-        <option name="GAPID_DISABLE_PCS" value="false" />
-        <option name="SUPPORT_LIB_ENABLED" value="true" />
-        <option name="INSTRUMENTATION_ENABLED" value="true" />
-      </Profilers>
-      <method />
+      <method>
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -954,7 +886,9 @@
       </option>
       <envs />
       <patterns />
-      <method />
+      <method>
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="ArquillianTestNG" factoryName="">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -987,134 +921,114 @@
       <envs />
       <properties />
       <listeners />
-      <method />
+      <method>
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration default="true" type="Cold Fusion runner description" factoryName="Cold Fusion" custom_browser="" web_path="">
-      <method />
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="passParentEnv" value="true" />
+      <setting name="launchBrowser" value="true" />
+      <setting name="launchBrowserUrl" value="" />
+      <setting name="depsClasspath" value="false" />
     </configuration>
-    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+    <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="myFilePath" />
-      <option name="GLUE" />
-      <option name="myNameFilter" />
-      <option name="myGeneratedName" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
+      <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
       <envs />
-      <method />
+      <patterns />
+      <method>
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
-      <option name="BCName" value="" />
-      <option name="IOSSimulatorSdkPath" value="" />
-      <option name="adlOptions" value="" />
-      <option name="airProgramParameters" value="" />
-      <option name="appDescriptorForEmulator" value="Android" />
-      <option name="debugTransport" value="USB" />
-      <option name="debuggerSdkRaw" value="BC SDK" />
-      <option name="emulator" value="NexusOne" />
-      <option name="emulatorAdlOptions" value="" />
-      <option name="fastPackaging" value="true" />
-      <option name="fullScreenHeight" value="0" />
-      <option name="fullScreenWidth" value="0" />
-      <option name="launchUrl" value="false" />
-      <option name="launcherParameters">
-        <LauncherParameters>
-          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
-          <option name="launcherType" value="OSDefault" />
-          <option name="newPlayerInstance" value="false" />
-          <option name="playerPath" value="FlashPlayerDebugger.exe" />
-        </LauncherParameters>
-      </option>
-      <option name="mobileRunTarget" value="Emulator" />
-      <option name="moduleName" value="" />
-      <option name="overriddenMainClass" value="" />
-      <option name="overriddenOutputFileName" value="" />
-      <option name="overrideMainClass" value="false" />
-      <option name="runTrusted" value="true" />
-      <option name="screenDpi" value="0" />
-      <option name="screenHeight" value="0" />
-      <option name="screenWidth" value="0" />
-      <option name="url" value="http://" />
-      <option name="usbDebugPort" value="7936" />
-      <method />
-    </configuration>
-    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
-      <option name="BCName" value="" />
-      <option name="launcherParameters">
-        <LauncherParameters>
-          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
-          <option name="launcherType" value="OSDefault" />
-          <option name="newPlayerInstance" value="false" />
-          <option name="playerPath" value="FlashPlayerDebugger.exe" />
-        </LauncherParameters>
-      </option>
-      <option name="moduleName" value="" />
-      <option name="trusted" value="true" />
-      <method />
-    </configuration>
-    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list />
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <method />
-    </configuration>
-    <configuration default="true" type="Java Scratch" factoryName="Java Scratch">
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="SCRATCH_FILE_ID" value="0" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="10.0" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method>
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
-      <config-file value="" />
-      <node-interpreter value="project" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
-      <method />
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
       <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="SchoolMgmtSys" />
-      <envs />
+      <predefined_log_file id="idea.log" enabled="true" />
+      <method>
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
+      <method />
     </configuration>
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="filePath" />
       <option name="vmParameters" />
       <option name="alternativeJrePath" />
@@ -1122,31 +1036,35 @@
       <option name="passParentEnvs" value="true" />
       <option name="workingDirectory" />
       <option name="isAlternativeJrePathEnabled" value="false" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
       <module name="" />
-      <envs />
-      <method />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
-    </configuration>
-    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
-      <command value="run" />
-      <scripts />
-      <node-interpreter value="project" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
-      <method />
-    </configuration>
-    <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
-      <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-interpreter>project</node-interpreter>
@@ -1156,18 +1074,9 @@
       <arguments />
       <envs />
     </configuration>
-    <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-      <item index="1" class="java.lang.String" itemvalue="Application.Main2" />
-      <item index="2" class="java.lang.String" itemvalue="Application.StudentTest" />
-      <item index="3" class="java.lang.String" itemvalue="Application.Main (1)" />
-      <item index="4" class="java.lang.String" itemvalue="Application.Main " />
-    </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Application.Main " />
-        <item index="1" class="java.lang.String" itemvalue="Application.Main (1)" />
-        <item index="2" class="java.lang.String" itemvalue="Application.StudentTest" />
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -1289,95 +1198,185 @@
       <workItem from="1536034406251" duration="4800000" />
       <workItem from="1536475400567" duration="1696000" />
       <workItem from="1536490736624" duration="576000" />
+      <workItem from="1536970324642" duration="14578000" />
+      <workItem from="1537005760151" duration="1766000" />
+      <workItem from="1537049842081" duration="8401000" />
+      <workItem from="1537674608395" duration="9787000" />
+      <workItem from="1537744019096" duration="6757000" />
+      <workItem from="1537843040651" duration="3423000" />
+      <workItem from="1537934203727" duration="1264000" />
+      <workItem from="1538019497058" duration="5243000" />
+      <workItem from="1538096907537" duration="12585000" />
+      <workItem from="1538181076030" duration="13395000" />
+      <workItem from="1538261290507" duration="5862000" />
+      <workItem from="1538297773440" duration="1214000" />
+      <workItem from="1538340134954" duration="254000" />
+      <workItem from="1538364915642" duration="4974000" />
+      <workItem from="1538451027439" duration="5276000" />
+      <workItem from="1538544499822" duration="79000" />
+      <workItem from="1538720211399" duration="582000" />
+      <workItem from="1538788591375" duration="11399000" />
+      <workItem from="1538880339413" duration="7114000" />
+      <workItem from="1539030287338" duration="9181000" />
+      <workItem from="1539116307317" duration="1339000" />
+      <workItem from="1539120170319" duration="5230000" />
+      <workItem from="1539150257089" duration="1736000" />
+      <workItem from="1539228899812" duration="1263000" />
+      <workItem from="1539230415290" duration="5330000" />
+      <workItem from="1539315896279" duration="4780000" />
+      <workItem from="1539308096198" duration="15222000" />
+      <workItem from="1539334133738" duration="5300000" />
+      <workItem from="1539341727192" duration="1248000" />
+      <workItem from="1539343604306" duration="5806000" />
+      <workItem from="1539405419542" duration="1394000" />
+      <workItem from="1539320762350" duration="14144000" />
+      <workItem from="1539350347878" duration="14174000" />
+      <workItem from="1539577549387" duration="3010000" />
+      <workItem from="1539866855129" duration="2896000" />
+      <workItem from="1539877583561" duration="971000" />
+      <workItem from="1539881449519" duration="560000" />
+      <workItem from="1540012798907" duration="5072000" />
+      <workItem from="1540057169117" duration="1826000" />
+      <workItem from="1540062429184" duration="228000" />
+      <workItem from="1540099490181" duration="3607000" />
+      <workItem from="1540186801172" duration="2952000" />
+      <workItem from="1540191451430" duration="1970000" />
+      <workItem from="1540220131736" duration="1308000" />
+      <workItem from="1540225746421" duration="724000" />
+      <workItem from="1540265954843" duration="7664000" />
+      <workItem from="1540279062519" duration="2179000" />
+      <workItem from="1540328655402" duration="736000" />
+      <workItem from="1540348197416" duration="9739000" />
+      <workItem from="1540365928662" duration="2451000" />
+      <workItem from="1540351233638" duration="691000" />
+      <workItem from="1540352090644" duration="5778000" />
+      <workItem from="1540450694626" duration="740000" />
+      <workItem from="1540452741127" duration="115000" />
+      <workItem from="1540453553202" duration="198000" />
+      <workItem from="1540436826402" duration="8885000" />
+      <workItem from="1540538426682" duration="3618000" />
+      <workItem from="1540595483547" duration="12749000" />
+      <workItem from="1540540164330" duration="2103000" />
+      <workItem from="1540547553373" duration="22105000" />
+      <workItem from="1540551591030" duration="6000" />
+      <workItem from="1540553326432" duration="25141000" />
+      <workItem from="1540844267195" duration="1901000" />
+      <workItem from="1540861093647" duration="3081000" />
+      <workItem from="1540777959810" duration="7665000" />
+      <workItem from="1540883396797" duration="551000" />
+      <workItem from="1540953580213" duration="744000" />
+      <workItem from="1540868162184" duration="6070000" />
+      <workItem from="1540875380203" duration="944000" />
+      <workItem from="1540969000315" duration="762000" />
+      <workItem from="1541018838212" duration="8828000" />
+      <workItem from="1541111514863" duration="637000" />
+      <workItem from="1541129967253" duration="4233000" />
+      <workItem from="1541213706070" duration="12900000" />
+      <workItem from="1541271385858" duration="32084000" />
+      <workItem from="1541353126924" duration="14133000" />
+      <workItem from="1541454104924" duration="7532000" />
+      <workItem from="1541481604028" duration="142000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1471494000" />
+    <option name="totallyTimeSpent" value="1903823000" />
+  </component>
+  <component name="TodoView" selected-index="2">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="916" extended-state="7" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3897883" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="0" y="249" width="1600" height="401" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.03362391" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="0" y="327" width="1600" height="245" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.154375" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14875" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0125" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40971357" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30510587" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31755915" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" x="0" y="331" width="1600" height="237" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38231632" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47837484" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32896462" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3897883" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="0" y="249" width="1600" height="401" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30510587" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14875" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0125" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4084507" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21544209" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" x="0" y="331" width="1600" height="237" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33872977" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="0" y="327" width="1600" height="245" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.051114023" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.214375" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38231632" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16875" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32896462" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -1398,19 +1397,24 @@
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/controller/salesDetailsFormController.java</url>
-          <line>268</line>
+          <url>file://$PROJECT_DIR$/src/controller/mainController.java</url>
+          <line>253</line>
           <properties />
-          <option name="timeStamp" value="5" />
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java</url>
-          <line>158</line>
+          <url>file://$PROJECT_DIR$/src/controller/studentDetailsFormController.java</url>
+          <line>882</line>
           <properties />
-          <option name="timeStamp" value="7" />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/hub/schoolAid/Main.java</url>
+          <line>52</line>
+          <properties />
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="9" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1419,386 +1423,363 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/view/main.fxml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="355" column="20" lean-forward="true" selection-start-line="355" selection-start-column="20" selection-end-line="355" selection-end-column="20" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="jar://F:/SOFTWARE/Core Java Libraries/pdfBox/pdfbox-1.8.15.jar!/org/apache/pdfbox/pdmodel/PDDocument.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2380">
-          <caret line="202" column="73" lean-forward="false" selection-start-line="202" selection-start-column="73" selection-end-line="202" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/PDFMaker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="43" column="14" lean-forward="false" selection-start-line="43" selection-start-column="14" selection-end-line="43" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/classListController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="86" column="29" lean-forward="false" selection-start-line="86" selection-start-column="29" selection-end-line="86" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/LoginFormController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="131" column="36" lean-forward="false" selection-start-line="131" selection-start-column="36" selection-end-line="131" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/TermController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-278">
-          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/UserAccountController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-617">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/SubjectFormController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="136" column="37" lean-forward="true" selection-start-line="136" selection-start-column="37" selection-end-line="136" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/CustomCombo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StageDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-464">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        <state relative-caret-position="122">
+          <caret line="38" column="48" lean-forward="true" selection-start-line="38" selection-start-column="48" selection-end-line="38" selection-end-column="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/TermDao.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Initializer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-631">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        <state relative-caret-position="289">
+          <caret line="31" column="32" lean-forward="false" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/UserDao.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Notification.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/ItemDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/CourseDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
-          <caret line="40" column="15" lean-forward="false" selection-start-line="40" selection-start-column="15" selection-end-line="40" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/SalesDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/artifacts/NewSchoolMgmtSys_jar.xml" />
-    <entry file="file://$PROJECT_DIR$/out/production/SchoolMgmtSys/META-INF/persistence.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/student.fxml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/AssessmentDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2074">
-          <caret line="125" column="58" lean-forward="false" selection-start-line="125" selection-start-column="11" selection-end-line="125" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Term.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Assessment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="5" column="27" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/artifacts/SchoolMgmtSys_jar.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/out/production/SchoolMgmtSys/hibernate.cfg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="21" lean-forward="false" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Grade.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/GradeFormController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1411">
-          <caret line="96" column="38" lean-forward="false" selection-start-line="96" selection-start-column="38" selection-end-line="96" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/GradeDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="25" column="37" lean-forward="false" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/javafx-src.zip!/javafx/scene/image/ImageView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="140" column="13" lean-forward="false" selection-start-line="140" selection-start-column="13" selection-end-line="140" selection-end-column="13" />
+        <state relative-caret-position="595">
+          <caret line="39" column="41" lean-forward="false" selection-start-line="39" selection-start-column="41" selection-end-line="39" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/ImageHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1989">
-          <caret line="135" column="21" lean-forward="false" selection-start-line="135" selection-start-column="21" selection-end-line="135" selection-end-column="21" />
+        <state relative-caret-position="2397">
+          <caret line="158" column="0" lean-forward="false" selection-start-line="158" selection-start-column="0" selection-end-line="158" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/sale.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2975">
+          <caret line="199" column="35" lean-forward="false" selection-start-line="199" selection-start-column="35" selection-end-line="199" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentAccountDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="30" lean-forward="false" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentAccount.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="42" column="16" lean-forward="false" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/studentDetailsFormController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17221">
+          <caret line="1048" column="0" lean-forward="false" selection-start-line="1048" selection-start-column="0" selection-end-line="1048" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/studentController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2737">
+          <caret line="192" column="137" lean-forward="false" selection-start-line="192" selection-start-column="137" selection-end-line="192" selection-end-column="137" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/MyProgressIndicator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-948">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="234">
+          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Student.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="15" column="43" lean-forward="false" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/HibernateUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="17" column="4" lean-forward="false" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/META-INF/MANIFEST.MF">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/hibernate.cfg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="10" column="70" lean-forward="false" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/AssessmentFormController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="31" column="13" lean-forward="false" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/salesDetailsForm.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="100" column="32" lean-forward="false" selection-start-line="100" selection-start-column="32" selection-end-line="100" selection-end-column="32" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/javafx-src.zip!/javafx/scene/control/Dialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="821" column="22" lean-forward="false" selection-start-line="821" selection-start-column="22" selection-end-line="821" selection-end-column="22" />
-          <folding />
+        <state relative-caret-position="-11">
+          <caret line="33" column="5" lean-forward="true" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Sales.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        <state relative-caret-position="374">
+          <caret line="23" column="27" lean-forward="false" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/newAttendanceSheetController.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/SalesDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="112" column="99" lean-forward="false" selection-start-line="112" selection-start-column="99" selection-end-line="112" selection-end-column="99" />
-          <folding />
+        <state relative-caret-position="17">
+          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/viewAttendanceController.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLogger.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1339">
-          <caret line="239" column="28" lean-forward="false" selection-start-line="239" selection-start-column="28" selection-end-line="239" selection-end-column="28" />
+        <state relative-caret-position="782">
+          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/mainController.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLoggerDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="428" column="14" lean-forward="false" selection-start-line="428" selection-start-column="14" selection-end-line="428" selection-end-column="14" />
-          <folding />
+        <state relative-caret-position="85">
+          <caret line="5" column="29" lean-forward="false" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/META-INF/persistence.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Grade.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="91" lean-forward="false" selection-start-line="28" selection-start-column="91" selection-end-line="28" selection-end-column="91" />
-          <folding />
+        <state relative-caret-position="303">
+          <caret line="35" column="29" lean-forward="false" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/GradeFormController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1547">
+          <caret line="109" column="30" lean-forward="false" selection-start-line="109" selection-start-column="30" selection-end-line="109" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="22" column="9" lean-forward="false" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+        <state relative-caret-position="425">
+          <caret line="34" column="19" lean-forward="false" selection-start-line="33" selection-start-column="14" selection-end-line="34" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/Temp1_src.zip/javax/xml/bind/JAXB.java" />
+    <entry file="file://$PROJECT_DIR$/src/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="53" column="13" lean-forward="false" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://F:/SOFTWARE/Core Java Libraries/javax.persistence.jar!/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/Temp1_sidebar-slideout-menu-3.zip/src/main/SidebarHoverEffect.java" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/Temp1_sidebar-slideout-menu-3.zip/src/root/FXMLRootController.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/UserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="14" column="61" lean-forward="false" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="39" lean-forward="false" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/javafx-src.zip!/javafx/scene/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="7592" column="22" lean-forward="false" selection-start-line="7592" selection-start-column="22" selection-end-line="7592" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporaryDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1190">
+          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/TermController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-234">
+          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/TermDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1462">
+          <caret line="94" column="24" lean-forward="false" selection-start-line="94" selection-start-column="24" selection-end-line="94" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/AttendanceFormController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="46" column="13" lean-forward="false" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="13" />
+        <state relative-caret-position="60">
+          <caret line="30" column="40" lean-forward="false" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="48" column="24" lean-forward="false" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/studentDetailsFormController.java">
+    <entry file="file://$PROJECT_DIR$/src/controller/newAttendanceSheetController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2550">
-          <caret line="181" column="53" lean-forward="false" selection-start-line="181" selection-start-column="53" selection-end-line="181" selection-end-column="53" />
-          <folding>
-            <element signature="e#40512#40513#0" expanded="true" />
-            <element signature="e#40539#40540#0" expanded="true" />
-            <element signature="e#40580#40581#0" expanded="true" />
-            <element signature="e#40609#40610#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="253">
+          <caret line="178" column="40" lean-forward="false" selection-start-line="178" selection-start-column="40" selection-end-line="178" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/salesDetailsFormController.java">
+    <entry file="file://$PROJECT_DIR$/demoApplication.log">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9622">
-          <caret line="603" column="45" lean-forward="false" selection-start-line="603" selection-start-column="45" selection-end-line="603" selection-end-column="45" />
+        <state relative-caret-position="-136877">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="643">
+          <caret line="65" column="31" lean-forward="false" selection-start-line="65" selection-start-column="31" selection-end-line="65" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Attendance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="719">
+          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/mainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10404">
+          <caret line="661" column="42" lean-forward="false" selection-start-line="661" selection-start-column="42" selection-end-line="661" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/sale.java">
+    <entry file="file://$PROJECT_DIR$/src/controller/viewAttendanceController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3077">
-          <caret line="205" column="33" lean-forward="false" selection-start-line="205" selection-start-column="33" selection-end-line="205" selection-end-column="33" />
-          <folding />
+        <state relative-caret-position="3519">
+          <caret line="233" column="27" lean-forward="false" selection-start-line="233" selection-start-column="27" selection-end-line="233" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/stylesheet/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2601">
-          <caret line="153" column="1" lean-forward="false" selection-start-line="153" selection-start-column="1" selection-end-line="153" selection-end-column="1" />
+        <state relative-caret-position="360">
+          <caret line="256" column="50" lean-forward="false" selection-start-line="256" selection-start-column="50" selection-end-line="256" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Student.java">
+    <entry file="file://$PROJECT_DIR$/src/controller/classFormController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="55" column="36" lean-forward="false" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
+        <state relative-caret-position="528">
+          <caret line="78" column="136" lean-forward="false" selection-start-line="78" selection-start-column="136" selection-end-line="78" selection-end-column="136" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/AppDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Assessment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="71">
+          <caret line="33" column="13" lean-forward="true" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/javafx-src.zip!/com/sun/javafx/tk/quantum/GlassViewEventHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6052">
+          <caret line="414" column="0" lean-forward="false" selection-start-line="414" selection-start-column="0" selection-end-line="414" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/META-INF/persistence.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="40" column="84" lean-forward="false" selection-start-line="40" selection-start-column="84" selection-end-line="40" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/PDFMaker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4335">
+          <caret line="273" column="21" lean-forward="false" selection-start-line="273" selection-start-column="21" selection-end-line="273" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/salesDetailsFormController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2703">
+          <caret line="204" column="90" lean-forward="false" selection-start-line="204" selection-start-column="90" selection-end-line="204" selection-end-column="90" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#36666#36667#0" expanded="true" />
+            <element signature="e#36715#36716#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/javafx-src.zip!/javafx/concurrent/Task.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/HibernateUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="943" column="22" lean-forward="false" selection-start-line="943" selection-start-column="22" selection-end-line="943" selection-end-column="22" />
+        <state relative-caret-position="646">
+          <caret line="42" column="66" lean-forward="false" selection-start-line="42" selection-start-column="66" selection-end-line="42" selection-end-column="66" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="73" column="21" lean-forward="false" selection-start-line="73" selection-start-column="21" selection-end-line="73" selection-end-column="21" />
+        <state relative-caret-position="935">
+          <caret line="60" column="57" lean-forward="false" selection-start-line="60" selection-start-column="54" selection-end-line="60" selection-end-column="57" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/studentController.java">
+    <entry file="file://$PROJECT_DIR$/src/controller/AssessmentFormController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="523" column="19" lean-forward="false" selection-start-line="523" selection-start-column="19" selection-end-line="523" selection-end-column="19" />
+        <state relative-caret-position="5355">
+          <caret line="344" column="78" lean-forward="false" selection-start-line="344" selection-start-column="78" selection-end-line="344" selection-end-column="78" />
+          <folding>
+            <element signature="e#7620#7621#0" expanded="true" />
+            <element signature="e#7657#7658#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/AssessmentDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2873">
+          <caret line="173" column="106" lean-forward="false" selection-start-line="173" selection-start-column="106" selection-end-line="173" selection-end-column="106" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/GradeDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="51" column="39" lean-forward="false" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -1812,15 +1793,15 @@
             <show-content>
               <type id="artifact" />
               <type id="jpa-descriptors" />
-              <type id="library" />
               <type id="javaee-facet-resources" />
+              <type id="library" />
             </show-content>
           </artifact-editor>
-          <last-edited>SchoolMgmtSys:jar</last-edited>
+          <last-edited>SchoolAid:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.2863585" />
                 <option value="0.5" />
               </list>
             </option>
@@ -1829,11 +1810,11 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>JPA (SchoolMgmtSys)|JPA</last-edited>
+          <last-edited>JPA (SchoolAid)|JPA</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.2863585" />
               </list>
             </option>
           </splitter-proportions>
@@ -1844,7 +1825,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.2863585" />
               </list>
             </option>
           </splitter-proportions>
@@ -1856,7 +1837,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.2863585" />
               </list>
             </option>
           </splitter-proportions>
@@ -1864,11 +1845,11 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>Hibernate|SchoolMgmtSys</last-edited>
+          <last-edited>JPA|SchoolAid</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.2863585" />
               </list>
             </option>
           </splitter-proportions>
@@ -1880,7 +1861,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.2863585" />
               </list>
             </option>
           </splitter-proportions>

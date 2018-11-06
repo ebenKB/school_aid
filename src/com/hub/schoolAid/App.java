@@ -13,14 +13,31 @@ public class App {
     private Long id;
 
     //pop up messages give the user some guides on start up
-    private int canShowPopUp;
-    private int canShowIntroHelp;
+    private Boolean canShowPopUp;
+    private Boolean canShowIntroHelp;
+    private Boolean hasInit;
 
-    public int getCanShowPopUp() {
+    public Boolean getCanShowPopUp() {
         return canShowPopUp;
     }
 
-    public void setCanShowPopUp(int canShowPopUp) {
+    public void setCanShowPopUp(Boolean canShowPopUp) {
         this.canShowPopUp = canShowPopUp;
+    }
+
+    public Boolean getCanShowIntroHelp() {
+        return canShowIntroHelp;
+    }
+
+    public void setCanShowIntroHelp(Boolean canShowIntroHelp) {
+        this.canShowIntroHelp = canShowIntroHelp;
+    }
+
+    public Boolean getHasInit() {
+        return hasInit;
+    }
+
+    public void setHasInit(Boolean hasInit) {
+        this.hasInit = hasInit;
     }
 }

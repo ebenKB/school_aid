@@ -1,7 +1,12 @@
 package controller;
 
 import com.hub.schoolAid.Grade;
+import com.hub.schoolAid.GradeDao;
+import com.hub.schoolAid.Notification;
+import com.hub.schoolAid.Utils;
+import com.jfoenix.controls.JFXProgressBar;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -53,6 +58,9 @@ public class GradeFormController implements Initializable{
     @FXML
     private Label infoLabel;
 
+    @FXML
+    private JFXProgressBar progressBar;
+
     private void showError(FontAwesomeIconView icon){
         icon.setVisible(Boolean.TRUE);
     }
@@ -87,14 +95,42 @@ public class GradeFormController implements Initializable{
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-      save.setOnAction(e->{
+        save.setOnAction(e->{
+            Task create = new Task() {
+                @Override
+                protected Object call() throws Exception {
+                    createGrade();
+                    return null;
+                }
+            };
+            create.setOnRunning(event -> progressBar.setVisible(true));
+            create.setOnSucceeded(event -> {
+                progressBar.setVisible(false);
+                Notification.getNotificationInstance().notifySuccess("You added a new grade","Success");
+                clearFields();
+            });
+            create.setOnFailed(event -> {
+                progressBar.setVisible(false);
+                Notification.getNotificationInstance().notifyError("An error occured while adding the grade","Failure");
+            });
+            new Thread(create).start();
+        });
 
-      });
+        close.setOnAction(event -> Utils.closeEvent(event));
     }
 
-    private void prepRecords(){
+    private void createGrade(){
         if(validate()){
-            Grade grade = new Grade();
+            Grade grade = new Grade(gradeText.getText().trim(),Double.valueOf(maxMark.getText().trim()),Double.valueOf(minMark.getText().trim()),remark.getText().trim());
+            GradeDao gradeDao = new GradeDao();
+            gradeDao.createGrade(grade);
         }
+    }
+
+    private void  clearFields (){
+        minMark.clear();
+        maxMark.clear();
+        remark.clear();
+        gradeText.clear();
     }
 }

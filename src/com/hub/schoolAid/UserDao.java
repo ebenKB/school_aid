@@ -12,9 +12,7 @@ public class UserDao {
     private Session session;
     EntityManager em;
 
-    public User getUser(User user) throws HibernateException{
-//        session = HibernateUtil.getSession();
-//        session.beginTransaction();
+    public User getUser(User user) throws HibernateException {
         try {
             em=HibernateUtil.getEntityManager();
 
@@ -23,10 +21,13 @@ public class UserDao {
             q.setParameter(2,user.getPassword());
             return (User) q.getSingleResult();
 
-        }finally {
-            System.out.print("this is the em:" +em);
-            em.close();
+        }catch (Exception e) {
+            return null;
         }
+//        finally {
+//           if(em != null)
+//               em.close();
+//        }
     }
 
     /**
@@ -41,19 +42,26 @@ public class UserDao {
     }
 
     public void createDefaultAdmin(){
-      em=HibernateUtil.getEntityManager();
-      HibernateUtil.begin();
-       try{
-           User user = (User)em.createQuery("from User").getSingleResult();
-       }catch (NoResultException e){
-           User user= new User();
-           user.setUsername("admin");
-           user.setPassword("1234");
-           user.setIsactive(true);
-           em.persist(user);
-           HibernateUtil.commit();
-           HibernateUtil.close();
-       }
+      try{
+          em=HibernateUtil.getEntityManager();
+          HibernateUtil.begin();
+          try{
+              User user = (User)em.createQuery("from User").getSingleResult();
+          }catch (NoResultException e){
+              User user= new User();
+              user.setUsername("admin");
+              user.setPassword("1234");
+              user.setIsactive(true);
+              em.persist(user);
+              HibernateUtil.commit();
+              HibernateUtil.close();
+          }
+      }catch (Exception e){
+
+      }finally {
+         if(em != null)
+             em.close();
+      }
     }
     public Boolean isExisting(String username) throws HibernateException{
         try {
@@ -61,6 +69,8 @@ public class UserDao {
             return true;
         }catch (NullPointerException n){
             return false;
+        }finally {
+            em.close();
         }
     }
 

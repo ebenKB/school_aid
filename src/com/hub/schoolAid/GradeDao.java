@@ -13,7 +13,6 @@ public class GradeDao {
 //        em.persist(grade);
 //        HibernateUtil.close();
           HibernateUtil.save(Grade.class,grade);
-          System.out.println("we saved a grade..");
     }
 
     private void saveGrade(List <Grade> grade){
@@ -51,15 +50,18 @@ public class GradeDao {
     }
 
     public Grade getGrade(double mark){
-        System.out.println("we are searching for a grade....");
-        em=HibernateUtil.getEntityManager();
-        HibernateUtil.begin();
-        Query q = em.createQuery("from Grade  G where  ?1 >=G.minMark  and ?2 <= G.maxMark ");
-//      70    74   80  >=     <=
-        q.setParameter(1,mark);
-        q.setParameter(2,mark);
-        Grade grade =(Grade) q.getSingleResult();
-        System.out.println("we got a grade" + grade.getName()+" "+grade.getRemark());
-        return  grade;
+        try {
+            em=HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            Query q = em.createQuery("from Grade  G where  ?1 >=G.minMark  and ?2 <= G.maxMark ");
+            q.setParameter(1,mark);
+            q.setParameter(2,mark);
+            Grade grade =(Grade) q.getSingleResult();
+            return  grade;
+        }catch (Exception e){
+            return new Grade("N/A","N/A");
+        }finally {
+            em.close();
+        }
     }
 }

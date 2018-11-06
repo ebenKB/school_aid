@@ -85,18 +85,6 @@ private EntityManager em;
             em.persist(newSale);
         }
         HibernateUtil.commit();
-
-////        sales.setItem(item);
-//        em=HibernateUtil.getEntityManager();
-//        HibernateUtil.begin();
-////        sales.setStudent(students);
-//        em.persist(sales);
-//        for(Student s:students){
-//            Student st= em.find(Student.class,s.getId());
-//            st.getSales().add(sales);
-//            sales.setStudent(s);
-//        }
-//        HibernateUtil.commit();
     }
 
     /**
@@ -115,7 +103,7 @@ private EntityManager em;
         em=HibernateUtil.getEntityManager();
         HibernateUtil.begin();
 //        String hql = "select s from Sales s JOIN s.student st where st.id =?";
-        String hql = "from Sales S where  S.student.id = ?";
+        String hql = "from Sales S where  S.student.id = ? order by S.item.name asc ";
 
         List<Sales> list = em.createQuery(hql).setParameter(0,std.getId()).getResultList();
         return list;
@@ -124,8 +112,7 @@ private EntityManager em;
     public List<Sales> getAllSalesOfStudent() throws HibernateException{
         em=HibernateUtil.getEntityManager();
         HibernateUtil.begin();
-//        String hql = "FROM Sales";
-        String hql = "select s from Sales s JOIN s.student st";
+        String hql = "select s from Sales s JOIN s.student st order by st.firstname asc ";
         List<Sales> sales= em.createQuery(hql).getResultList();
         return sales;
     }
@@ -144,5 +131,26 @@ private EntityManager em;
             return false;
         }
         return true;
+    }
+
+    public  List<Sales> getAllSales(){
+        em=HibernateUtil.getEntityManager();
+        HibernateUtil.begin();
+        return em.createQuery("from  Sales S order by S.item.name ASC ").getResultList();
+
+    }
+    public  Boolean updateSale(Sales sales){
+       try{
+           em=HibernateUtil.getEntityManager();
+           HibernateUtil.begin();
+           Sales s = (Sales) em.createQuery("from Sales  S where S.id =?").getSingleResult();
+           s.getItem().setCost(sales.getItem().getCost());
+           s.getItem().setQty(sales.getItem().getQty());
+           s.getItem().setName(sales.getItem().getName());
+           HibernateUtil.commit();
+           return  true;
+       }catch (Exception e){
+           return false;
+       }
     }
 }

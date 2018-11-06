@@ -482,11 +482,9 @@ public class studentDetailsFormController implements Initializable{
             int numChanges=0;
 
             private void allowParentChanges() {
-                System.out.print("listening to changes to the parent..........");
                 if(numChanges==0){
                     numChanges=1;
                     parentChanges +=1;
-                    System.out.print("this is  the changes: "+parentChanges);
                     updateChangeCounter(numChanges);
                     newStudent.getParent().setname(parentName.getText().trim());
                 }
@@ -751,10 +749,8 @@ public class studentDetailsFormController implements Initializable{
                     protected Object call() {
                         StudentDao studentDao=new StudentDao();
                         if(parentChanges>0){
-                            System.out.print("the parent changed..");
                             studentDao.updateStudentRecord(student,student.getParent());
                         }else{
-                            System.out.print("trying to save student...");
                             studentDao.updateStudentRecord(student);
                         }
 
@@ -781,10 +777,8 @@ public class studentDetailsFormController implements Initializable{
             });
 
             newRecs.setOnFailed(e->{
-                System.out.print("the new records task has failed");
                 MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
             });
-            System.out.print("we are starting the new records thread...");
             new Thread(newRecs).start();
         });
 
@@ -819,9 +813,45 @@ public class studentDetailsFormController implements Initializable{
             alert.setTitle("Change Image");
             alert.setHeaderText("Your are about to change the image for"+" "+student.getFirstname()+"\nAre you sure you want to continue ?");
             Optional<ButtonType>result = alert.showAndWait();
-            if(result.isPresent() && result.get() == ButtonType.YES)
+            if(result.isPresent() && result.get() == ButtonType.YES){
                 path=ImageHandler.openImageFile(studentImage);
+                if(path !=null){
+//                    counter ++;
+//                    showChangesLabel();
+                    //save the image for the student.
+                    Task saveImage =new Task() {
+                        @Override
+                        protected Object call() throws Exception {
+                           updateStudentImage();
+                            return null;
+                        }
+                    };
+                    saveImage.setOnRunning(event->{
+                        MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Saving student image");
+
+                    });
+                    saveImage.setOnSucceeded(event ->{
+                        MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+                        Notification.getNotificationInstance().notifySuccess("Image has been saved.","Success");
+                    });
+
+                    saveImage.setOnFailed(event -> {
+                        MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+                        Notification.getNotificationInstance().notifyError("A fatal error occurred while saving the image","Error");
+                        Utils.showTaskException(saveImage);
+                    });
+                    new Thread(saveImage).start();
+                }
+            }
         });
+    }
+
+    private void updateStudentImage() {
+        StudentDetails details =new StudentDetails();
+        ImageHandler imageHandler =new ImageHandler();
+        imageHandler.setStudentImage(details,path);
+        StudentDetailsDao detailsDao =new StudentDetailsDao();
+        detailsDao.updateDetilsIfExist(student,details);
     }
 
     private void updateFeedingFee() {
@@ -848,9 +878,10 @@ public class studentDetailsFormController implements Initializable{
         if(newStudent.getOthername() !=null)
             student.setOthername(newStudent.getOthername());
 
+        student.setFeedingStatus(newStudent.getFeedingStatus());
         //check if there is a new Image
-        ImageHandler imageHandler =new ImageHandler();
-        imageHandler.setStudentImage(student,path);
+ //        ImageHandler imageHandler =new ImageHandler();
+//        imageHandler.setStudentImage(student,path);
 
         //check if the parent's records changed
         if(parentChanges>0){
@@ -868,14 +899,6 @@ public class studentDetailsFormController implements Initializable{
         }
 
 
-//        Alert alert =new Alert(Alert.AlertType.CONFIRMATION,"",ButtonType.YES,ButtonType.NO);
-//        alert.setTitle("Change Image");
-//        alert.setHeaderText("Your are about to set an image for"+" "+student.getFirstname()+"\nAre you sure you want to continue ?");
-//        Optional<ButtonType>result = alert.showAndWait();
-//        if(result.isPresent() && result.get() ==ButtonType.YES){
-//            ImageHandler imageHandler =new ImageHandler();
-//            imageHandler.setStudentImage(newStudent,path);
-//        }
     }
 
     private void refreshFields(){
@@ -887,18 +910,24 @@ public class studentDetailsFormController implements Initializable{
 //      setAccountTabDetails();
     }
     private void setStudentTabDetails(){
-        //populate the image view
-        if(student.getImage()!=null){
+
+        try{
+            StudentDetailsDao detailsDao =new StudentDetailsDao();
+            if(detailsDao.getImage(student)!=null){
             //Image image = new Image(new FileInputStream(student.getImage()));
-            Image image = new Image(getClass().getResourceAsStream(Utils.studentImgPath+student.getImage()));
+            Image image = new Image(getClass().getResourceAsStream(Utils.studentImgPath+detailsDao.getImage(student)));
             studentImage.setImage(image);
-//            imgInfoLabel.setText("Image Not Found");
+            }
+        }catch (Exception e){
+            imgInfoLabel.setText("Image not found");
         }
+
         //populate student details view
         fname.setText(student.getFirstname());
         surname.setText(student.getLastname());
         oname.setText(student.getOthername());
         stage.setText(student.getStage().getName());
+        regDate.setText(student.getReg_date().toString());
         dob.setValue(student.getDob());
         phone.setText(student.getParent().getTelephone());
     }
@@ -965,7 +994,6 @@ public class studentDetailsFormController implements Initializable{
         }
     }
 
-
     private void prepareFeedingRecords(){
         if(student.getPayFeeding()){
             feedingToggle.setSelected(Boolean.TRUE);
@@ -979,6 +1007,8 @@ public class studentDetailsFormController implements Initializable{
             paymentMode.getItems().add(Student.FeedingStatus.WEEKLY);
             paymentMode.getItems().add(Student.FeedingStatus.MONTHLY);
             paymentMode.getItems().add(Student.FeedingStatus.TERMLY);
+            paymentMode.getItems().add(Student.FeedingStatus.PERIODIC);
+            paymentMode.getItems().add(Student.FeedingStatus.SEMI_PERIODIC);
         }
         paymentMode.getSelectionModel().select(student.getFeedingStatus());
     }
@@ -1016,10 +1046,10 @@ public class studentDetailsFormController implements Initializable{
         setStudent(student);
 
     }
+
     private void promptEditNotAllowed() {
         WindowsSounds.playWindowsSound();
         infoLable.setText("Editing is not enabled for this field.");
         infoLable.setTextFill(Color.valueOf("#ffcd05"));
     }
-
 }

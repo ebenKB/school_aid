@@ -11,7 +11,6 @@ public class AttendanceDao  {
     private EntityManager em;
 
     public Boolean moveAttendanceToMasterTable(){
-        System.out.print("moving records to master table");
        try{
            AttendanceTemporaryDao attendanceTemporaryDao = new AttendanceTemporaryDao();
            List <AttendanceTemporary> attendanceList = attendanceTemporaryDao.getTempAttendance();
@@ -21,6 +20,7 @@ public class AttendanceDao  {
                        Attendance attendance  =new Attendance();
                        attendance.setStudent(attendanceTemporary.getStudent());
                        attendance.setFeedingFee(attendanceTemporary.getFeedingFee());
+                       attendance.setPaidNow(attendanceTemporary.hasPaidNow());
                        attendance.setDate(attendanceTemporary.getDate());
                        HibernateUtil.save(Attendance.class,attendance);
                    }
@@ -44,6 +44,34 @@ public class AttendanceDao  {
         p.printStackTrace();
         return null;
       }
+      finally {
+         if(em ==null)
+             em.close();
+     }
+    }
+
+    public List<Attendance> getAllAttendance(LocalDate date){
+        try{
+            em=HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            return em.createQuery("from Attendance  A where A.date like ? order by  A.student.firstname asc").setParameter(0,date).getResultList();
+        }catch (Exception e){
+            return  null;
+        }finally {
+            em.close();
+        }
+    }
+
+    public List<Attendance> getAllAttendance(Stage stage){
+        try{
+            em=HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            return em.createQuery("from Attendance  A where A.student.stage.name like ? order by  A.student.firstname asc").setParameter(0,stage.getName()).getResultList();
+        }catch (Exception e){
+            return  null;
+        }finally {
+            em.close();
+        }
     }
 
     public List<Attendance> getStudentAttendance(int s){

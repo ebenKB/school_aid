@@ -113,7 +113,7 @@ public class AssessmentFormController implements Initializable{
     }
 
     private Boolean prepareAssessment(){
-        StudentDao studentDao =new StudentDao();
+        StudentDao studentDao = new StudentDao();
         List<Student> studentList =studentDao.getStudentFromClass(classCombo.getSelectionModel().getSelectedItem());
        if(studentList.size()<1)
            return false;
@@ -121,10 +121,12 @@ public class AssessmentFormController implements Initializable{
         Assessment assessment ;
         assessments.clear();
         ObservableList<Assessment> newAssessments =FXCollections.observableArrayList();
-        for (Student student:studentList){
-            assessment = assessmentDao.existAssessment(student,subjectCombo.getSelectionModel().getSelectedItem());
-//            Platform.runLater(()->students.add(student));
 
+        //check for all students whether they have assessment for the selected course.
+        for (Student student : studentList){
+            assessment = assessmentDao.existAssessment(student, subjectCombo.getSelectionModel().getSelectedItem());
+
+            //if the student does not have assessment for the selected course,create the assessment for the course.
             if(assessment==null){
                 assessment=new Assessment();
                 assessment.setStudent(student);
@@ -160,8 +162,9 @@ public class AssessmentFormController implements Initializable{
 
                 if(!editedAssessment.contains(newAssess)){
                     if(newAssess.getClassScore()!=Double.valueOf(event.getNewValue())){
-                        editedAssessment.add(newAssess);
-                        System.out.println("we added to edited assessmen:"+editedAssessment.size());
+                        if((newAssess.getClassScore()+newAssess.getExamScore() <=0) ) {
+                            editedAssessment.add(newAssess);
+                        }
                     }
                 }
             }
@@ -177,7 +180,6 @@ public class AssessmentFormController implements Initializable{
                 if(!editedAssessment.contains(newAssess)){
                     if(newAssess.getExamScore()!=Double.valueOf(event.getNewValue())){
                         editedAssessment.add(newAssess);
-                        System.out.println("we added to edited assessmen:"+editedAssessment.size());
                     }
                 }
             }
@@ -272,10 +274,6 @@ public class AssessmentFormController implements Initializable{
                 }
             };
             getData.setOnRunning(e->{
-//                    Platform.runLater(()->{
-//                        assessmentIndicator.progressProperty().bind(getData.progressProperty());
-//                        assessmentIndicator.setVisible(Boolean.TRUE);
-//                    });
                 assessmentIndicator.progressProperty().bind(getData.progressProperty());
                 assessmentIndicator.setVisible(Boolean.TRUE);
             });
@@ -337,20 +335,21 @@ public class AssessmentFormController implements Initializable{
                 showChangeLabel();
         });
 
-        close.setOnAction(e->PDFMaker.createReport());
+        close.setOnAction(e->PDFMaker.getPDFMakerInstance().createReportForAllStudents());
     }
 
     private void saveAssessment() {
         AssessmentDao assessmentDao =new AssessmentDao();
-        for (Assessment assessment:editedAssessment){
-            if((assessment.getClassScore()+assessment.getExamScore())<=100){
-                if(assessmentDao.updateAssessment(assessment))
-                    savedAssessment.add(assessment);
-            }else{
-                //show error cannot save assessment with score more than 100
-                Notification.getNotificationInstance().notifyError((assessment.getClassScore()+assessment.getExamScore())+"is greater than 100","Invalid marks");
-            }
-        }
+        savedAssessment.addAll(assessmentDao.updateAssessment(editedAssessment));
+//        for (Assessment assessment:editedAssessment){
+//            if((assessment.getClassScore()+assessment.getExamScore())<=100){
+//                if(assessmentDao.updateAssessment(assessment))
+//                    savedAssessment.add(assessment);
+//            }else{
+//                //show error cannot save assessment with score more than 100
+//                Notification.getNotificationInstance().notifyError((assessment.getClassScore()+assessment.getExamScore())+"is greater than 100","Invalid marks");
+//            }
+//        }
     }
 
     private void renderAssessmentData() {
@@ -373,6 +372,6 @@ public class AssessmentFormController implements Initializable{
     }
 
     public void closeStage(){
-        System.out.println("u want to close");
+
     }
 }

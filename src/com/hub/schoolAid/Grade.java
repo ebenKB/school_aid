@@ -24,7 +24,19 @@ public class Grade {
     private Double minMark;
     private Double maxMark;
 
-    //getters
+    public Grade(String name, String remark) {
+        this.setName(name);
+        this.setRemark(remark);
+    }
+
+    public  Grade (String name,Double max, Double min,String remark){
+        this.setName(name);
+        this.setMaxMark(max);
+        this.setMinMark(min);
+        this.setRemark(remark);
+    }
+
+    //  getters
     public Long getId() {
         return id;
     }

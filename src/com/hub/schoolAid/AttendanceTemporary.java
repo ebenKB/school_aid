@@ -18,6 +18,7 @@ public class AttendanceTemporary{
     private Double feedingFee;
     private LocalDate date;
     boolean present;
+    boolean paidNow = true;
 
 
     //getters and setters
@@ -59,8 +60,14 @@ public class AttendanceTemporary{
     }
 
     public void setDate(LocalDate date) {
-        System.out.print("this is the local date from the setter:"+date);
         this.date = date;
     }
 
+    public boolean hasPaidNow() {
+        return paidNow;
+    }
+
+    public void setPaidNow(boolean paidNow) {
+        this.paidNow = paidNow;
+    }
 }

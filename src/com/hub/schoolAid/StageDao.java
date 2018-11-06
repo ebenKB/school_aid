@@ -39,7 +39,7 @@ private EntityManager em;
     public Boolean isExistingStage(Stage stage){
 //        session = sessionFactory.getCurrentSession();
 //        session.beginTransaction();
-        String hql = "FROM Class C WHERE C.name like '"+stage.getName() +"' OR C.classValue ='"+ stage.getClassValue() +"' ";
+          String hql = "FROM Class C WHERE C.name like '"+stage.getName() +"' OR C.classValue ='"+ stage.getClassValue() +"'";
 //
 //        List<Stage> list =  session.createQuery(hql).getResultList();
 //
@@ -55,6 +55,15 @@ private EntityManager em;
         List<Stage> list = em.createQuery(hql).getResultList();
         return !list.isEmpty();
 
+    }
+
+    public Boolean addStudent(Stage stage){
+        em=HibernateUtil.getEntityManager();
+        HibernateUtil.begin();
+        Stage newStage = em.find(Stage.class,stage.getId());
+        newStage.setNum_on_roll((newStage.getNum_on_roll()+1));
+        HibernateUtil.commit();
+        return true;
     }
 
 //    public int getNumberOnRol(Stage stage){

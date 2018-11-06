@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SchoolMgmtSys.iml" filepath="$PROJECT_DIR$/SchoolMgmtSys.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SchoolAid.iml" filepath="$PROJECT_DIR$/SchoolAid.iml" />
     </modules>
   </component>
 </project>

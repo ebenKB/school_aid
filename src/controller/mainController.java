@@ -14,6 +14,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -27,6 +29,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -46,6 +49,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 public class mainController implements Initializable{
     @FXML
@@ -139,6 +143,10 @@ public class mainController implements Initializable{
     private  TableColumn<Student,String> idCol;
 
     @FXML
+    private MenuItem editSale;
+
+
+    @FXML
     private HBox tableInfo;
 
     @FXML
@@ -204,11 +212,16 @@ public class mainController implements Initializable{
     @FXML
     private  MenuItem assessment;
 
+    @FXML
+    private MenuItem grade;
+
 
 
 
     public static User user;
     private ObservableList<Student> data= FXCollections.observableArrayList();
+    private FilteredList<Student> filteredData = new FilteredList<>(data, e ->true);
+    private SortedList<Student> sortedList = new SortedList<>(filteredData);
     private StudentDao studentDao =new StudentDao();
     TermDao termDao= new TermDao();
     private Initializer initializer = Initializer.getInitializerInstance();
@@ -222,7 +235,7 @@ public class mainController implements Initializable{
 
     private void showRegStudentForm() {
         try {
-            Parent  root =  FXMLLoader.load(getClass().getResource("../view/student.fxml"));
+            Parent  root =  FXMLLoader.load(getClass().getResource("/view/student.fxml"));
             Scene scene= new Scene(root);
             javafx.stage.Stage stage = new javafx.stage.Stage();
             stage.setScene(scene);
@@ -251,55 +264,41 @@ public class mainController implements Initializable{
     }
 
     private void populateTableView(){
-//        if(studentTableView.getItems().isEmpty()||studentTableView.getItems().size()<data.size()){
-            nameCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Student, String>, ObservableValue<String>>() {
-                @Override
-                public ObservableValue<String> call(TableColumn.CellDataFeatures<Student, String> param) {
-                    return new SimpleStringProperty(param.getValue().getFirstname() +" "+param.getValue().getOthername()+ " "+ param.getValue().getLastname());
-                }
-            });
-
-            classCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Student, String>, ObservableValue<String>>() {
-                @Override
-                public ObservableValue<String> call(TableColumn.CellDataFeatures<Student, String> param) {
-                    Stage stage = param.getValue().getStage();
-
-                    return new SimpleStringProperty(stage.getName());
-                }
-            });
-
-            genderCol.setCellValueFactory(new PropertyValueFactory<Student,String>("gender"));
-
-
-            ageCol.setCellValueFactory(new PropertyValueFactory<Student,String>("age"));
-
-            parentCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Student, String>, ObservableValue<String>>() {
-                @Override
-                public ObservableValue<String> call(TableColumn.CellDataFeatures<Student, String> param) {
-                    com.hub.schoolAid.Parent parent = param.getValue().getParent();
-
-                    return new SimpleStringProperty(parent.getname());
-                }
-            });
-
-            idCol.setCellValueFactory(new PropertyValueFactory<Student,String >("Id"));
-
-            payFeeding.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Student, String>, ObservableValue<String>>() {
-                @Override
-                public ObservableValue<String> call(TableColumn.CellDataFeatures<Student, String> param) {
-                    return new SimpleStringProperty(param.getValue().getPayFeeding() ? "YES": "NO");
-                }
-            });
+            setTableData();
             studentTableView.setVisible(Boolean.TRUE);
-
             getAllStudents();
             studentTableView.setItems(data);
             totalStudents.setText(String.valueOf(data.size()));
             tableInfo.setVisible(true);
-//        }else
-//            studentTableView.setVisible(Boolean.TRUE);
+
     }
 
+    private void setTableData(){
+        // if(studentTableView.getItems().isEmpty()||studentTableView.getItems().size()<data.size()){
+        nameCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().toString()));
+
+        classCol.setCellValueFactory(param -> {
+            Stage stage = param.getValue().getStage();
+            return new SimpleStringProperty(stage.getName());
+        });
+
+        genderCol.setCellValueFactory(new PropertyValueFactory<>("gender"));
+
+
+        ageCol.setCellValueFactory(new PropertyValueFactory<>("age"));
+
+        parentCol.setCellValueFactory(param -> {
+            com.hub.schoolAid.Parent parent = param.getValue().getParent();
+
+            return new SimpleStringProperty(parent.getname());
+        });
+
+        idCol.setCellValueFactory(new PropertyValueFactory<>("Id"));
+
+        payFeeding.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getPayFeeding() ? "YES": "NO"));
+
+        studentTableView.setVisible(!studentTableView.isVisible());
+    }
     private List<Student> getAllStudents(){
         data.clear();
         try{
@@ -369,18 +368,26 @@ public class mainController implements Initializable{
             @Override
             public void changed(ObservableValue<? extends Student> observable, Student oldValue, Student newValue) {
                 if(studentTableView.getItems().size()>0){
-                    String img= Utils.studentImgPath+studentTableView.getSelectionModel().getSelectedItem().getImage();
-                    if(img !=null){
-                        URL url= getClass().getResource(studentTableView.getSelectionModel().getSelectedItem().getImage());
-                        //                          URL url= getClass().getResource(studentTableView.getSelectionModel().getSelectedItem().getImage());
+                    StudentDetailsDao detailsDao =new StudentDetailsDao();
+                    String img= Utils.studentImgPath+detailsDao.getImage(studentTableView.getSelectionModel().getSelectedItem());
+//                    String img= Utils.studentImgPath+studentTableView.getSelectionModel().getSelectedItem().getImage();
+                    try{
+                        if(img !=null){
+//                        URL url= getClass().getResource(studentTableView.getSelectionModel().getSelectedItem().getImage());
+                            //                          URL url= getClass().getResource(studentTableView.getSelectionModel().getSelectedItem().getImage());
 //                            Image image = new Image(new FileInputStream(getClass().getResourceAsStream(img).toString()));
-                        Image image = new Image(getClass().getResourceAsStream(img));
-//                      System.out.print("This is the file path "+studentTableView.getSelectionModel().getSelectedItem().getImage());
-                        imgLabel.setText("");
-                        studentImage.setImage(image);
-                        studentImage.setVisible(Boolean.TRUE);
-                    }else {
+                            Image image = new Image(getClass().getResourceAsStream(img));
+//
+                            imgLabel.setText("");
+                            studentImage.setImage(image);
+                            studentImage.setVisible(Boolean.TRUE);
+                        }else {
+                            imgLabel.setText("Image Does Not Exist");
+                            studentImage.setVisible(Boolean.FALSE);
+                        }
+                    }catch (NullPointerException e){
                         imgLabel.setText("Image Does Not Exist");
+                        studentImage.setVisible(Boolean.FALSE);
                     }
                 }
             }
@@ -399,6 +406,18 @@ public class mainController implements Initializable{
                 }
             });
             return row;
+        });
+
+        studentTableView.setOnKeyPressed(event -> {
+            if(event.getCode()== KeyCode.ENTER){
+                if(!studentTableView.getItems().isEmpty()){
+                    showStudentDetailsForm();
+                }
+            }else if(event.getCode()==KeyCode.DELETE){
+                if(!studentTableView.getItems().isEmpty()){
+                    deleteStudentData();
+                }
+            }
         });
 
         eye.setOnMouseClicked(event -> toggleTableView());
@@ -470,52 +489,20 @@ public class mainController implements Initializable{
         });
 
         delleteStudentContextMenu.setOnAction(event -> {
-        Optional<ButtonType>  response  = showWarning("You are about to delete a student.\n All records about this student including parent and sales information " +
-                "will be cleared.\n Do you want to continue?","Delete Student");
-
-            if(response.isPresent() && response.get() ==ButtonType.YES){
-               Optional<ButtonType>response2 =showWarning("You cannot undo this action.\n Do you want to continue?","Delete student");
-               if(response2 .isPresent() && response2.get() == ButtonType.YES){
-                   try {
-                       studentDao.deleteStudent(studentTableView.getSelectionModel().getSelectedItem());
-                       notification.notifySuccess("Student records deleted","Success");
-                       refresh();
-                   }catch (HibernateException e){
-                       notification.notifyError("Sorry! an error occurred while fetching students","Database Error");
-                    e.printStackTrace();
-                   }
-               }
-            }
+            deleteStudentData();
             return;
         });
 
         searchBox.setOnKeyReleased(event -> {
-            data.clear();
-            studentTableView.getItems().clear();
-            data.addAll(studentDao.getStudentByName(searchBox.getText().trim()));
-            populateTableView();
+            searchTable();
+//            data.clear();
+//            studentTableView.getItems().clear();
+//            data.addAll(studentDao.getStudentByCategory(searchBox.getText().trim()));
+//            setTableData();
+//            studentTableView.setItems(data);
+//            totalStudents.setText(String.valueOf(data.size()));
+//            tableInfo.setVisible(true);
         });
-
-//        viewStudentDetails.setOnAction(event -> {
-//            System.out.print("We are passing this student to the controller"+studentTableView.getSelectionModel().getSelectedItem().getFirstname());
-//            System.out.print("We are passing this student to the controller--image"+studentTableView.getSelectionModel().getSelectedItem().getImage());
-//            Parent root;
-//            FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("/view/studentDetailsForm.fxml"));
-//            try {
-//                root=fxmlLoader.load();
-//                studentDetailsFormController studentDetailsFormController = fxmlLoader.getController();
-//
-//                studentDetailsFormController.init(studentTableView.getSelectionModel().getSelectedItem());
-//                Scene scene = new Scene(root);
-//                javafx.stage.Stage stage = new javafx.stage.Stage();
-//                stage.setScene(scene);
-//                stage.initModality(Modality.APPLICATION_MODAL);
-//                stage.initStyle(StageStyle.UNDECORATED);
-//                stage.show();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
 
         viewStudentDetails.setOnAction(event -> {
             showStudentDetailsForm();
@@ -529,6 +516,7 @@ public class mainController implements Initializable{
                 stage.setScene(scene);
                 stage.initStyle(StageStyle.DECORATED);
                 stage.initModality(Modality.WINDOW_MODAL);
+                stage.setMaximized(Boolean.TRUE);
                 stage.setTitle("");
                 stage.show();
             } catch (IOException e) {
@@ -537,14 +525,19 @@ public class mainController implements Initializable{
         });
 
         viewAttendance.setOnAction(event -> {
-            AttendanceDao attendanceDao = new AttendanceDao();
-            List<Attendance> attendanceList  = attendanceDao.getAttendanceByDate(LocalDate.now());
-            showViewAttendanceForm(attendanceList);
+//            AttendanceDao attendanceDao = new AttendanceDao();
+//            List<Attendance> attendanceList  = attendanceDao.getAllAttendance();
+            showViewAttendanceForm();
         });
 
         newSubject.setOnAction(event -> showSubjectForm());
 
         assessment.setOnAction(event -> showAssessmentForm());
+
+        grade.setOnAction(event -> showGradeForm());
+
+        editSale.setOnAction(event   -> showSalesItemForm());
+
         logout.setOnAction(event -> Initializer.getInitializerInstance().showLoginForm());
 
         menuToggle.setOnMouseClicked(e->{
@@ -591,6 +584,55 @@ public class mainController implements Initializable{
 
     }
 
+    private void searchTable() {
+        searchBox.textProperty().addListener(((observable, oldValue, newValue) -> {
+            filteredData.setPredicate( (Predicate<? super  Student>) student ->{
+                if( newValue ==null || newValue.isEmpty() ) {
+                    return  true;
+                }
+
+                String lowerVal = newValue.toLowerCase();
+                if(student.getFirstname().toLowerCase().contains(lowerVal)){
+                    return  true;
+                }else if(student.getLastname().toLowerCase().contains(lowerVal)){
+                    return  true;
+                }else if(student.getLastname().toLowerCase().contains(lowerVal)){
+                    return  true;
+                }else if (student.toString().toLowerCase().contains(lowerVal));
+                return false;
+            });
+        }));
+
+        sortedList.comparatorProperty().bind(studentTableView.comparatorProperty());
+        studentTableView.setItems(sortedList);
+
+    }
+
+    private void deleteStudentData() {
+        Optional<ButtonType>  response  = showWarning("You are about to delete a student.\n All records about this student including parent and sales information " +
+                "will be cleared.\n Do you want to continue?","Delete Student");
+
+        if(response.isPresent() && response.get() ==ButtonType.YES){
+            Optional<ButtonType>response2 =showWarning("You cannot undo this action.\n Do you want to continue?","Delete student");
+            if(response2 .isPresent() && response2.get() == ButtonType.YES){
+                TextInputDialog inputDialog = new TextInputDialog();
+                inputDialog.setHeaderText("Permission Required");
+                inputDialog.setContentText("Enter the password for this user to continue");
+                Optional<String> result = inputDialog.showAndWait();
+                if(result.isPresent() && result.get().equals(LoginFormController.user.getPassword())){
+                    try {
+                        studentDao.deleteStudent(studentTableView.getSelectionModel().getSelectedItem());
+                        notification.notifySuccess("Student records deleted","Success");
+                        refresh();
+                    }catch (HibernateException e){
+                        notification.notifyError("Sorry! an error occurred while fetching students","Database Error");
+                        e.printStackTrace();
+                    }
+                }else Notification.getNotificationInstance().notifyError("Action denied","Error");
+            }
+        }
+    }
+
     private void showStudentDetailsForm() {
         Parent root;
         FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("/view/studentDetailsTabPane.fxml"));
@@ -610,13 +652,13 @@ public class mainController implements Initializable{
         }
     }
 
-    private void showViewAttendanceForm(List<Attendance> attendances){
+    private void showViewAttendanceForm(){
         Parent root;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/attendance.fxml"));
         try {
             root=fxmlLoader.load();
             viewAttendanceController viewAttendanceController = fxmlLoader.getController();
-            viewAttendanceController.init(attendances);
+            viewAttendanceController.init();
             Scene scene = new Scene(root);
             javafx.stage.Stage stage = new javafx.stage.Stage();
             stage.setScene(scene);
@@ -659,6 +701,38 @@ public class mainController implements Initializable{
         }
     }
 
+    private void showSalesItemForm() {
+        Parent root;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/salesItemForm.fxml"));
+        try {
+            root = fxmlLoader.load();
+            SalesItemFormController salesItemFormController = fxmlLoader.getController();
+            salesItemFormController.init();
+            Scene scene = new Scene(root);
+            javafx.stage.Stage stage = new javafx.stage.Stage();
+            stage.setScene(scene);
+//            stage.initModality(Modality.APPLICATION_MODAL);
+//            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void showGradeForm (){
+        Parent root;
+        FXMLLoader fxmlLoader =new FXMLLoader(getClass().getResource("/view/gradeForm.fxml"));
+        try {
+            root=fxmlLoader.load();
+            Scene scene =new Scene(root);
+            javafx.stage.Stage stage =new javafx.stage.Stage();
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.setTitle("New Grade");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

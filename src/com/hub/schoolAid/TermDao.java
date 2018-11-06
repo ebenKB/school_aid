@@ -35,9 +35,15 @@ public class TermDao {
     }
 
     public List<Term> getTerm() throws NoResultException{
-       em=HibernateUtil.getEntityManager();
-       HibernateUtil.begin();
-       return em.createQuery("from Term ").getResultList();
+       try{
+           em=HibernateUtil.getEntityManager();
+           HibernateUtil.begin();
+           return em.createQuery("from Term ").getResultList();
+       } catch (Exception e) {
+            return  null;
+       }finally {
+           em.close();
+       }
     }
 
     public Term getTerm(String name){
@@ -45,19 +51,25 @@ public class TermDao {
         session.beginTransaction();
         String hql ="FROM Term WHERE name = '"+name+"' ";
         Query query = session.createQuery(hql);
-        List<Term> terms = query.list();
+        List <Term> terms = query.list();
         Term t = null;
+
         for(Term term:terms){
             t=term;
         }
         return t;
     }
-    public Term getCurrentTerm() throws NoResultException{
+
+    public Term getCurrentTerm() throws NoResultException {
         em=HibernateUtil.getEntityManager();
         HibernateUtil.begin();
-//        try{
+        try{
             return (Term) em.createQuery("from Term where status =  1 ").getSingleResult();
-//        }catch ()
+        }catch (Exception e){
+            return  null;
+        }finally {
+//            em.close();
+        }
     }
 
     public LocalDate getCurrentDate(){
@@ -66,24 +78,20 @@ public class TermDao {
             HibernateUtil.begin();
             return  ((LocalDate) em.createQuery("SELECT today FROM Term where status=1").getSingleResult());
         }catch (NoResultException e){
-            System.out.print("an error occurred while fetching the current date");
             return null;
+        }finally {
+            em.close();
         }
     }
 
     public Boolean updateCurrentDate(LocalDate date){
        try{
-           em=HibernateUtil.getEntityManager();
-           HibernateUtil.begin();
            Term t= getCurrentTerm();
            t.setToday(date);
-           em.persist(t);
-//           System.out.print("this is the term that we just found:id= "+ t.getId());
-//           em.createQuery("update Term  set today ='"+date+"' where id = 2 ");
-           em.getTransaction().commit();
-//           HibernateUtil.commit();
+           HibernateUtil.commit();
            return true;
        }catch (Exception e){
+//           e.printStackTrace();
            return false;
        }
     }

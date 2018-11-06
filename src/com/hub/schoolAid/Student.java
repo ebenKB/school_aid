@@ -22,9 +22,9 @@ public class Student {
     private String othername;
     private  int age;
     private String gender;
-    private String image;
     private Boolean payFeeding;
-    public enum FeedingStatus{DAILY,WEEKLY,MONTHLY,TERMLY}
+    private Boolean paySchoolFees;
+    public enum FeedingStatus{DAILY,WEEKLY,MONTHLY,TERMLY,PERIODIC,SEMI_PERIODIC}
     private LocalDate reg_date;
     private LocalDate dob;
 
@@ -50,14 +50,7 @@ public class Student {
     private StudentAccount account;
 
     @Enumerated(EnumType.STRING)
-    private FeedingStatus feedingStatus;
-
-     //one student can have many sales
-//    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
-//    @JoinColumn(name = "student_sale_id", nullable = false,unique = true)
-//    private Set <Sales>sales;
-//      @OneToMany
-//      private List<Sales> sales =new ArrayList<Sales>();
+    private FeedingStatus feedingStatus = FeedingStatus.DAILY;
 
     //a student has several attendance
     @OneToMany(mappedBy = "student",cascade = CascadeType.ALL,orphanRemoval = true)
@@ -65,10 +58,6 @@ public class Student {
 
     @OneToMany(mappedBy = "student",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set <AttendanceTemporary> attendanceTemporary;
-
-//    @ManyToMany
-//    private Course course;
-
 
     //getters and setters
 
@@ -176,13 +165,29 @@ public class Student {
         this.dob = dob;
     }
 
-    public String getImage() {
-        return image;
+    public Boolean getPaySchoolFees() {
+        return paySchoolFees;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setPaySchoolFees(Boolean paySchoolFees) {
+        this.paySchoolFees = paySchoolFees;
     }
+
+//        public String getImage() {
+//        return image;
+//    }
+//
+//    public void setImage(String image) {
+//        this.image = image;
+//    }
+
+//    public StudentImage getImage() {
+//        return image;
+//    }
+//
+//    public void setImage(StudentImage image) {
+//        this.image = image;
+//    }
 
     public Set<Attendance> getAttendance() {
         return attendance;
@@ -225,9 +230,21 @@ public class Student {
     }
 
     public Boolean addNewFeedingFeeCredit(Double amnt){
-        System.out.print("\n\nCalled method to add new credit:"+amnt);
+        System.out.print("Adding new feeding creditn : "+amnt);
        try{
            this.getAccount().setFeedingFeeCredit(this.getAccount().getFeedingFeeCredit() + amnt);
+
+           /**
+            * for semi-periodic payment when the balance gets back to zero, hnge to student to daily.
+            */
+           if(this.getFeedingStatus() ==FeedingStatus.SEMI_PERIODIC){
+               if(this.getAccount().getFeedingFeeCredit() ==0){
+                   this.setFeedingStatus(FeedingStatus.DAILY);
+                   StudentDao studentDao =new StudentDao();
+                   studentDao.updateStudentRecord(this);
+                   studentDao =null;
+               }
+           }
        }catch (Exception e){
            e.printStackTrace();
            return false;
@@ -256,16 +273,18 @@ public class Student {
 //    }
 
     public int calcAge(LocalDate date){
+       if(date==null)
+           return 0;
         int age=0;
         age = LocalDate.now().getYear() - date.getYear();
         if(date.getMonth().getValue()<=LocalDate.now().getMonth().getValue())
             return age;
-       else return age-1;
+        else return age-1;
     }
 
     @Override
     public String toString() {
 
-        return this.getFirstname()+" "+this.getOthername()+" "+this.getLastname();
+        return this.getFirstname().toUpperCase()+" "+this.getOthername().toUpperCase()+" "+this.getLastname().toUpperCase();
     }
 }

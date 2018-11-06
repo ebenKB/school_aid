@@ -2,6 +2,7 @@ package com.hub.schoolAid;
 
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 

@@ -5,12 +5,14 @@ import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.util.Optional;
 
 public class Main extends Application {
 
     private static MyProgressIndicator myProgressIndicator = MyProgressIndicator.getMyProgressIndicatorInstance();
+    boolean connected=false;
 
     @Override
     public void start(Stage primaryStage) {
@@ -18,15 +20,18 @@ public class Main extends Application {
 
         Initializer initializer = Initializer.getInitializerInstance();
         //Initialize the system defaults
+//        HibernateUtil.initDB();
         Task task = new Task() {
+
             @Override
             protected Object call() {
-               try {
-                   HibernateUtil.initDB();
-               }catch (Exception e){
-                   e.printStackTrace();
-               }
+               connectToDB();
                 return null;
+            }
+
+            private void connectToDB() {
+                if(HibernateUtil.initDB())
+                    connected=true;
             }
         };
         task.setOnRunning(event -> myProgressIndicator.showInitProgress("Setting up system modules...",task));
@@ -34,17 +39,33 @@ public class Main extends Application {
             myProgressIndicator.hideProgress();
 
             //show the login form here
-            initializer.showLoginForm();
+            if(connected){
+                initializer.showLoginForm();
+            }else{
+              Alert alert =new Alert(Alert.AlertType.ERROR,"",ButtonType.OK);
+              alert.setTitle("Error");
+              alert.setHeaderText("Error Connecting to Database");
+              alert.setContentText("Could not reach Database server. \nMake sure the server is live and your connection is active.");
+
+              Optional<ButtonType>result =  alert.showAndWait();
+              if(result.isPresent()){
+                  System.exit(1);
+              }
+            }
         });
+
         task.setOnFailed(event -> {
             Alert   alert =  new Alert(Alert.AlertType.INFORMATION,"", ButtonType.OK);
             alert.setHeaderText("Start up error!");
             alert.setContentText("The system encountered an error while starting up.\nPlease close the application and try again.");
+            alert.initStyle(StageStyle.UNDECORATED);
             Optional<ButtonType> result =alert.showAndWait();
             if(result.isPresent()&&result.get() == ButtonType.OK){
                 System.exit(0);
             }
         });
+
+        Utils.showTaskException(task);
         new Thread(task).start();
     }
 

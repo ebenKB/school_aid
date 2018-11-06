@@ -1,7 +1,9 @@
 package controller;
 
 import com.hub.schoolAid.*;
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
@@ -12,27 +14,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
-
-import javax.rmi.CORBA.Util;
-import java.io.IOException;
+import javafx.stage.Modality;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.channels.FileChannel;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.regex.Pattern;
-
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class studentController implements Initializable{
 
@@ -117,7 +112,27 @@ public class studentController implements Initializable{
     @FXML
     private TextField fees;
 
+    @FXML
+    private RadioButton paysFees;
+
+    @FXML
+    private ToggleGroup schoolFeesToggle;
+
+    @FXML
+    private RadioButton noFees;
+
+    @FXML
+    private RadioButton feedingYes;
+
+    @FXML
+    private ToggleGroup radioTogglePayFeeding;
+
+    @FXML
+    private RadioButton feedingNo;
+
     private Student student;
+    private StudentDetails details;
+
     URI path;
     Parent parent;
     private StudentDao studentDao;
@@ -133,8 +148,6 @@ public class studentController implements Initializable{
 
     @FXML
     private VBox navStack[]=new VBox[3];
-
-    private int counter=0;
 
     private Boolean isValidUserDetails(Student student){
         return false;
@@ -153,7 +166,7 @@ public class studentController implements Initializable{
 
         if(textField.getText().trim().matches("[a-zA-Z\\s\\$]+")){
             //check if the name is short
-            if(textField.getText().trim().length()<=min){
+            if(textField.getText().trim().length()< min){
 
                 showErrorPane(textField.getAccessibleText()+" "+"is too short");
                 infoLabel.setTextFill(Color.valueOf("#fc0303"));
@@ -177,7 +190,7 @@ public class studentController implements Initializable{
     private void populateFeedingCombo(){
         //populate the feeding type
         feedingCombo.getItems().clear();
-        feedingCombo.getItems().addAll(Student.FeedingStatus.DAILY, Student.FeedingStatus.WEEKLY, Student.FeedingStatus.MONTHLY, Student.FeedingStatus.TERMLY);
+        feedingCombo.getItems().addAll(Student.FeedingStatus.DAILY, Student.FeedingStatus.PERIODIC, Student.FeedingStatus.SEMI_PERIODIC);
         feedingCombo.getSelectionModel().select(Student.FeedingStatus.DAILY);
     }
     private void customizeCombobox(){
@@ -195,7 +208,6 @@ public class studentController implements Initializable{
         if(surname.getText().trim().matches("[a-zA-Z\\s\\$]+") && surname.getText().trim().length()<3){
             showErrorPane("Surname name is too short");
             infoLabel.setTextFill(Color.valueOf("#fc0303"));
-            System.out.print(surname.getText().trim().length()+" ="+surname.getText());
             return false;
         }
 
@@ -246,6 +258,14 @@ public class studentController implements Initializable{
             infoLabel.setTextFill(Color.valueOf("#fc0303"));
                     return false;
         }
+
+        if(schoolFeesToggle.getSelectedToggle() ==null){
+            showErrorPane("Indicate whether the child will pay fees or not.");
+            infoLabel.setTextFill(Color.valueOf("#fc0303"));
+            return false;
+        }
+
+
         if(allergyRadiobtn.getSelectedToggle() ==null){
             showErrorPane("Please indicate whether the student has allergy or not");
             infoLabel.setTextFill(Color.valueOf("#fc0303"));
@@ -374,28 +394,11 @@ public class studentController implements Initializable{
                     fees.setText(String.valueOf(newValue.getFeesToPay()));
             }
         });
+
         //save a new student
         save.setOnAction((ActionEvent event) -> {
             if(validate()){
                FinalizeRecords();
-
-//                Task checkStudent =new Task() {
-//                    @Override
-//                    protected Object call() throws Exception {
-//                        studentDao =new StudentDao();
-//                        List <Student> data =studentDao.getStudent(student);
-//                        if(data.isEmpty()){
-//                            saveRecords();
-//                        }else{
-//                            Notification.getNotificationInstance().notifyError("A student with this name already exist in the same class","Duplicate Found");
-//                        }
-//                        return null;
-//                    }
-//                };
-//                checkStudent.setOnFailed(e->MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
-//                checkStudent.setOnSucceeded(e->MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
-//                checkStudent.setOnRunning(e->MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Checking if student exists.."));
-//                new Thread(checkStudent).start();
             }
         });
     }
@@ -405,15 +408,33 @@ public class studentController implements Initializable{
         student.setFirstname(fname.getText().trim().toString().toUpperCase());
         student.setLastname(surname.getText().trim().toUpperCase());
         student.setOthername(oname.getText().trim().toUpperCase());
-        ImageHandler imageHandler =new ImageHandler();
-        imageHandler.setStudentImage(student,path);
+
+        details =new StudentDetails();
+//      details.setStudent(student);
+         try{
+             ImageHandler imageHandler =new ImageHandler();
+             imageHandler.setStudentImage(details,path);
+         }catch (Exception e){
+             return false;
+         }
 
         if(dob != null){
             student.setDob(dob.getValue());
+        }
+        if(classCombo.getSelectionModel().getSelectedItem() !=null){
             student.setStage(classCombo.getSelectionModel().getSelectedItem());
         }
         student.setGender(getGender(sexRadiobtn));
         student.setFeedingStatus(feedingCombo.getSelectionModel().getSelectedItem());
+
+        if(schoolFeesToggle.getSelectedToggle()==paysFees){
+            student.setPaySchoolFees(true);
+        }else student.setPaySchoolFees(false);
+
+        if(radioTogglePayFeeding.getSelectedToggle() ==feedingYes){
+            student.setPayFeeding(true);
+        }else if(radioTogglePayFeeding.getSelectedToggle()==feedingNo)
+            student.setPayFeeding(false);
 
         //get the parent's details of the student
         parent=new Parent();
@@ -445,6 +466,7 @@ public class studentController implements Initializable{
         });
         studentDao=new StudentDao();
         existing=studentDao.getStudent(student);
+
         if(existing.isEmpty())
             return true;
         return  false;
@@ -458,6 +480,8 @@ public class studentController implements Initializable{
         allergyRadiobtn.getSelectedToggle().setSelected(false);
         classCombo.getSelectionModel().clearSelection();
         allergy.clear();
+        image.setVisible(false);
+        classCombo.getSelectionModel().clearSelection();
     }
 
     private void clearParentField(){
@@ -495,13 +519,6 @@ public class studentController implements Initializable{
             protected Object call() {
                 if(prepareStudentRecords())
                     saveRecords();
-//                else{
-//                       javafx.stage.Stage stage=new javafx.stage.Stage();
-//                       Scene scene =new Scene(null);
-//                       stage.setScene(scene);
-//
-////                    Notification.getNotificationInstance().notifyError("Exisint","Duplicate");
-//                }
                 return null;
             }
         };
@@ -511,10 +528,11 @@ public class studentController implements Initializable{
 
         prepRecords.setOnSucceeded(e -> {
             MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
-            //custom button
-            ButtonType buttonType =new ButtonType("Details");
+
+                //check if there are some records already with the same details.
             if(! existing.isEmpty()){
-                Alert alert =new Alert(Alert.AlertType.WARNING,"",buttonType,ButtonType.YES,ButtonType.NO);
+                ButtonType details =new ButtonType("Details");
+                Alert alert =new Alert(Alert.AlertType.WARNING,"",details,ButtonType.YES,ButtonType.NO);
                 alert.setTitle("Duplicate Entry");
                 alert.setHeaderText(existing.size()+" "+"Student(s)found with the same details.");
                 alert.setContentText("Do you want to clear the fields and save another student?");
@@ -522,18 +540,79 @@ public class studentController implements Initializable{
 
                 if(result.isPresent() && result.get() == ButtonType.YES)
                    clearStdField();
-                else if(result.isPresent() && result.get() ==buttonType){
-                    ListView<String> listView =new ListView();
-                    for (Student s : existing){
-                        listView.getItems().add(s.toString());
-                        listView.setVisible(Boolean.TRUE);
-                    }
+                else if(result.isPresent() && result.get() ==details){
+                   showExistingStudentList();
                 }
             }
         });
 
         prepRecords.setOnFailed(event1 -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+        Utils.showTaskException(prepRecords);
         new Thread(prepRecords).start();
+    }
+
+    private void showExistingStudentList() {
+        //create a list view and show the existing records on it
+        AnchorPane pane =new AnchorPane();
+        pane.setId("root");
+        pane.setPrefWidth(370);
+        pane.setPrefHeight(500);
+        ListView<String> listView =new ListView();
+
+        for (Student s : existing){
+            listView.getItems().add(s.toString());
+
+            javafx.stage.Stage stage =new javafx.stage.Stage();
+            Button save =new Button("Save Anyway");
+            Button cancel =new Button("Cancel");
+            Button back = new Button("Go Back");
+
+            HBox hBox =new HBox();
+            hBox.getChildren().addAll(back,cancel,save);
+            hBox.setSpacing(10.5);
+
+            VBox vBox=new VBox();
+            vBox.getChildren().addAll(listView,hBox);
+            vBox.setLayoutX(70);
+            vBox.setLayoutY(20);
+            vBox.setSpacing(15);
+            pane.getChildren().add(vBox);
+            Scene scene =new Scene(pane);
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Existing Records");
+            stage.setWidth(400);
+            stage.setHeight(500);
+            stage.show();
+
+            //make sure the user confirms the save action
+            save.setOnAction(event->{
+                Alert confirm =new Alert(Alert.AlertType.WARNING,"",ButtonType.CANCEL, ButtonType.YES);
+                confirm.setTitle("Warning");
+                confirm.setHeaderText("We have found some students with the same details.");
+                confirm.setContentText("If you continue to save, it can result in having duplicate entry.\n Are " +
+                        "you sure you want to SAVE this student?");
+
+                Optional<ButtonType> confirmSave = confirm.showAndWait();
+                if(confirmSave.isPresent() && confirmSave.get() ==ButtonType.YES){
+                    saveRecords();
+                    stage.close();
+                }
+            });
+
+            cancel.setOnAction(event -> {
+                Alert confirmCancel = new Alert(Alert.AlertType.WARNING,"",ButtonType.NO,ButtonType.YES);
+                confirmCancel.setTitle("Clear Fields");
+                confirmCancel.setHeaderText("If you cancel, all fields will be cleared.\nClick YES to continue.");
+                Optional<ButtonType> confirm = confirmCancel.showAndWait();
+                if(confirm.isPresent() && confirm.get() ==ButtonType.YES){
+                    stage.close();
+                    clearStdField();
+                    clearParentField();
+                }
+            });
+            back.setOnAction(event->stage.close());
+        }
     }
 
     private void saveRecords(){
@@ -542,13 +621,12 @@ public class studentController implements Initializable{
             protected Object call() {
                 try {
                     studentDao =new StudentDao();
-                    studentDao.addNewStudent(student);
+                    studentDao.addNewStudent(student,details);
                 }catch (Exception e){
                     notification.notifyError("Sorry! an error occurred.","Error");
                 }
                 return null;
             }
-
         };
         save.setOnRunning(event2 -> {
             MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Saving student...");
@@ -557,7 +635,8 @@ public class studentController implements Initializable{
         save.setOnSucceeded(event2 -> {
             MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
             notification.notifySuccess("You added a new student","Success");
-//            clearStdField();
+            clearStdField();
+
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"",ButtonType.YES,ButtonType.NO);
             alert.setTitle("Clear Fields");
             alert.setHeaderText("Do you want to clear the Parent fields?\nIf you want to save another student with the \n " +
@@ -565,9 +644,23 @@ public class studentController implements Initializable{
             Optional<ButtonType>result = alert.showAndWait();
             if(result.isPresent() && result.get() == ButtonType.YES)
                 clearParentField();
+
+            Task checkin = new Task() {
+                @Override
+                protected Object call() throws Exception {
+                    TermDao term =new TermDao();
+                    if (term.getCurrentDate().equals(LocalDate.now())){
+                    AttendanceTemporaryDao dao = new AttendanceTemporaryDao();
+                    dao.checkStudenIn(student);
+                    }
+                    return null;
+                }
+            };
+            new Thread(checkin).start();
         });
 
         save.setOnFailed(event1 -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+        Utils.showTaskException(save);
         new Thread(save).start();
     }
 }

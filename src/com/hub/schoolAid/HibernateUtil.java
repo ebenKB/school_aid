@@ -1,9 +1,5 @@
 package com.hub.schoolAid;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
 import javax.persistence.*;
 
 
@@ -11,44 +7,40 @@ import javax.persistence.*;
  * Created by HUBKB.S on 11/20/2017.
  */
 public class HibernateUtil {
-//  private static  SessionFactory sessionFactory;
-
     private static final String PERSISTENCE_UNIT_NAME ="MY_PERSISTENCE";
     private static EntityManagerFactory factory;
-//  @PersistenceContext(name = PERSISTENCE_UNIT_NAME)
     private static EntityManager em;
-
 
     public static Boolean initDB() {
         try
         {
             factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+            new UserDao().createDefaultAdmin();
+            return true;
         }catch (Exception e){
-            System.out.print("error in creating factory");
             e.printStackTrace();
             return  false;
         }
-        new UserDao().createDefaultAdmin();
-        return true;
     }
 
-    public static void init(){
-//        EntityManagerFactory factory= Persistence.createEntityManagerFactory("");
-    }
-//    public static Session getSession(){
-//        return sessionFactory.getCurrentSession();
-//    }
     public static EntityManager getEntityManager(){
-        em=factory.createEntityManager();
+//        if(em != null){
+//            em.close();
+//            em = null;
+//        }
+        em = factory.createEntityManager();
         return em;
     }
 
     public static void begin(){
-       em.getTransaction().begin();
+        em.getTransaction().begin();
     }
+
     public static void commit(){
         em.getTransaction().commit();
     }
+
+    public static void rollBack (){em.getTransaction().rollback();}
 
     public static <T> T save(Class<T> type, Object o){
         getEntityManager();
@@ -77,6 +69,10 @@ public class HibernateUtil {
     }
     public static void close(){
         em.close();
+    }
+
+    public static void closeDB(){
+        factory.close();
     }
 
     public static <T> T find(Class<T> type, Object obj){

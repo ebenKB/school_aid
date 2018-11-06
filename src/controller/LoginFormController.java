@@ -1,6 +1,8 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,10 +33,10 @@ public class LoginFormController implements Initializable{
     private JFXButton close;
 
     @FXML
-    private TextField username;
+    private JFXTextField username;
 
     @FXML
-    private PasswordField password;
+    private JFXPasswordField password;
 
     @FXML
     private JFXButton login;

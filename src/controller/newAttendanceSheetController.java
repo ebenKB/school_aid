@@ -166,7 +166,7 @@ public class newAttendanceSheetController implements Initializable{
                         main.attendanceRadio.setSelected(Boolean.TRUE);
 
                     }else{
-                        notification.notifyError("An error occured while preparing the records","Error!");
+                        notification.notifyError("An error occurred while preparing the records","Error!");
                     }
                     return null;
                 }
