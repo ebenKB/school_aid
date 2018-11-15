@@ -173,7 +173,9 @@ public class StudentDao {
             e.printStackTrace();
             return null;
         }finally {
-            em.close();
+//           if(em ==null) {
+//               em.close();
+//           }
         }
     }
     /**

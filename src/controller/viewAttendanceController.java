@@ -110,8 +110,8 @@ public class viewAttendanceController implements Initializable{
         generatePDF.setOnAction(e -> {
             Optional<Pair<LocalDate,LocalDate>> result = showPDFDialog();
            result.ifPresent(pair -> {
-                if(pair.getValue() ==null){
-                    PDFMaker.createAttendanceReport(pair.getValue(),attendanceList);
+                if(pair.getKey() != null){
+                    PDFMaker.getPDFMakerInstance().createAttendanceReport(pair.getKey(),attendanceList);
                 }else {
                     PDFMaker.createAttendanceReport(pair.getKey(),pair.getValue(),attendanceList);
                 }
@@ -119,29 +119,24 @@ public class viewAttendanceController implements Initializable{
         });
 
         //filter records here
-        viewToggle.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            @Override
-            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-            if(newValue == dateAttendance) {
-                //set default
-                datePicker.setValue(LocalDate.of(LocalDate.now().getYear(),LocalDate.now().getMonth(),(LocalDate.now().getDayOfMonth()-1)));
-                datePicker.setOnAction(e ->{
-                    if(datePicker.getValue() != null){
-                        filteredList.setPredicate( (Predicate < ? super  Attendance >) at ->{
-//
-                            if(at.getDate().toString().equals(datePicker.getValue().toString())){
-//                                    System.out.println( at.getDate().toString() +" = "+ datePicker.getValue().toString());
-                                return  true;
-                            }
-                            return  false;
-                        });
-                    }
-                });
-                bindTableRecord();
-                }else if(newValue == allAttendance) {
-                    filteredList.setPredicate((Predicate<? super Attendance>) at -> true);
-                    bindTableRecord();
+        viewToggle.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+        if(newValue == dateAttendance) {
+            //set default
+            datePicker.setValue(LocalDate.of(LocalDate.now().getYear(),LocalDate.now().getMonth(),(LocalDate.now().getDayOfMonth()-1)));
+            datePicker.setOnAction(e ->{
+                if(datePicker.getValue() != null){
+                    filteredList.setPredicate( (Predicate < ? super  Attendance >) at -> {//
+                        if(at.getDate().toString().equals(datePicker.getValue().toString())){//
+                            return  true;
+                        }
+                        return  false;
+                    });
                 }
+            });
+            bindTableRecord();
+            }else if(newValue == allAttendance) {
+                filteredList.setPredicate((Predicate<? super Attendance>) at -> true);
+                bindTableRecord();
             }
         });
 

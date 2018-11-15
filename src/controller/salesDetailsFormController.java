@@ -932,7 +932,7 @@ public class salesDetailsFormController implements Initializable{
 
     private void activateListView() {
         name.textProperty().addListener(((observable, oldValue, newValue) -> {
-            filteredAtt.setPredicate( (Predicate<? super  AttendanceTemporary>) at ->{
+            filteredAtt.setPredicate( (Predicate < ? super  AttendanceTemporary>) at ->{
                if( newValue == null || newValue.isEmpty() ) {
                    return  true;
                }

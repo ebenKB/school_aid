@@ -64,4 +64,10 @@ public class GradeDao {
             em.close();
         }
     }
+
+    public  List<Grade> getGrade() {
+        em =HibernateUtil.getEntityManager();
+        HibernateUtil.begin();
+        return  em.createQuery("From Grade G order by G.maxMark asc ").getResultList();
+    }
 }

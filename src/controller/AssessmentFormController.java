@@ -4,18 +4,14 @@ import com.hub.schoolAid.*;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import javafx.application.Platform;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -23,11 +19,12 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.util.Callback;
 
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 public class AssessmentFormController implements Initializable{
     @FXML
@@ -103,6 +100,14 @@ public class AssessmentFormController implements Initializable{
     private final SimpleListProperty listProperty  = new SimpleListProperty(students);
     private ObservableList<Assessment>editedAssessment = FXCollections.observableArrayList();
     private ObservableList<Assessment>savedAssessment = FXCollections.observableArrayList();
+    private ObservableList<Stage> stagesLoaded = FXCollections.observableArrayList();
+    private  ObservableList<Assessment> tempAssessment = FXCollections.observableArrayList();
+    private  ObservableList<Student> tempStudents = FXCollections.observableArrayList();
+    private  ObservableList <Course> coursesLoaded = FXCollections.observableArrayList();
+    FilteredList<Assessment> filteredAtt = new FilteredList<>(tempAssessment, e ->true);
+    SortedList<Assessment> sortedList = new SortedList<>(filteredAtt);
+
+
     private Boolean hasInit=false;
 
 
@@ -112,40 +117,108 @@ public class AssessmentFormController implements Initializable{
         return true;
     }
 
+//    private Boolean prepareAssessment2(){
+//     try {
+//         StudentDao studentDao = new StudentDao();
+//         List<Student> studentList = studentDao.getStudentFromClass(classCombo.getSelectionModel().getSelectedItem());
+//
+//          if(studentList.size()<1)
+//             return false;
+//
+//         Assessment assessment ;
+//         assessments.clear();
+//         ObservableList<Assessment> newAssessments = FXCollections.observableArrayList();
+//
+//         //check for all students whether they have assessment for the selected course.
+//         for (Student student : studentList){
+//             assessment = assessmentDao.existAssessment(student, subjectCombo.getSelectionModel().getSelectedItem());
+//
+//
+//             //if the student does not have assessment for the selected course,create the assessment for the course.
+//             if(assessment==null){
+//                 assessment=new Assessment();
+//                 assessment.setStudent(student);
+//                 assessment.setCourse(subjectCombo.getSelectionModel().getSelectedItem());
+//                 assessment.setClassScore(0.0);
+//                 assessment.setExamScore(0.0);
+//                 newAssessments.add(assessment);
+//             }
+//             assessments.add(assessment);
+//         }
+//         assessmentDao.createAssessment(newAssessments);
+//         return true;
+//     } catch (Exception e){
+//         return false;
+//     }
+//    }
+
     private Boolean prepareAssessment(){
-        StudentDao studentDao = new StudentDao();
-        List<Student> studentList =studentDao.getStudentFromClass(classCombo.getSelectionModel().getSelectedItem());
-       if(studentList.size()<1)
-           return false;
+     try {
+         loadStdRecords(classCombo.getSelectionModel().getSelectedItem(),subjectCombo.getSelectionModel().getSelectedItem());
+         ObservableList<Assessment> newAssessments = FXCollections.observableArrayList();
 
-        Assessment assessment ;
-        assessments.clear();
-        ObservableList<Assessment> newAssessments =FXCollections.observableArrayList();
+         if(tempAssessment.isEmpty()) {
+             //we have to create assessment for the students
+             System.out.println("cannot loop. We have to create for all students..");
+             for (Student std : tempStudents) {
+                 createNewAssessment(std,newAssessments);
+             }
+         }else {
+             for (Student std : tempStudents) {
+                 Boolean found = false;
+                 Iterator<Assessment> assessmentIterator = tempAssessment.iterator();
+                 while (assessmentIterator.hasNext() && ! found) {
+                     Assessment assessment = assessmentIterator.next();
 
-        //check for all students whether they have assessment for the selected course.
-        for (Student student : studentList){
-            assessment = assessmentDao.existAssessment(student, subjectCombo.getSelectionModel().getSelectedItem());
+                     if(assessment.getStudent().getId().equals(std.getId())) {
+                         found = true;
+                     } else if (!assessmentIterator.hasNext()) {
+                         System.out.println("searched to the end but not found");
+                         createNewAssessment(std,newAssessments);
+                         System.out.println("created a new assessment to be assigned..");
+                     }
+                 }
+             }
+         }
 
-            //if the student does not have assessment for the selected course,create the assessment for the course.
-            if(assessment==null){
-                assessment=new Assessment();
-                assessment.setStudent(student);
-                assessment.setCourse(subjectCombo.getSelectionModel().getSelectedItem());
-                assessment.setClassScore(0.0);
-                assessment.setExamScore(0.0);
-                newAssessments.add(assessment);
-            }
-            assessments.add(assessment);
-        }
-        assessmentDao.createAssessment(newAssessments);
-        return true;
+         if(newAssessments.size() > 0 ){
+             Task task =new Task() {
+                 @Override
+                 protected Object call() throws Exception {
+                     System.out.println("creating and saving assessments");
+                     if(assessmentDao.createAssessment(newAssessments)) {
+                         tempAssessment.addAll(newAssessments);
+                         assessments.addAll(newAssessments);
+                         newAssessments.clear();
+                     }
+                     return null;
+                 }
+             };
+             new Thread(task).start();
+             task.setOnRunning(e-> MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Creating Attendance records...Please wait"));
+             task.setOnSucceeded(e-> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+         }
+
+         return  true;
+     }catch (Exception e) {
+         return  false;
+     }
+    }
+
+    private void createNewAssessment(Student std, ObservableList<Assessment> newAssessments) {
+        Assessment assessment = new Assessment();
+        assessment.setStudent(std);
+        assessment.setCourse(subjectCombo.getSelectionModel().getSelectedItem());
+        assessment.setClassScore(0.0);
+        assessment.setExamScore(0.0);
+        newAssessments.add(assessment);
     }
 
     private void initFilds(){
         StageDao stageDao =new StageDao();
-        CourseDao courseDao =new CourseDao();
+//        CourseDao courseDao =new CourseDao();
         classCombo.getItems().addAll(stageDao.getGetAllStage());
-        subjectCombo.getItems().addAll(courseDao.getAllCourses());
+//        courses.addAll(courseDao.getAllCourses());
         stdListView.itemsProperty().bind(listProperty);
     }
 
@@ -155,20 +228,24 @@ public class AssessmentFormController implements Initializable{
 
         classScore.setCellFactory(TextFieldTableCell.forTableColumn());
         classScore.setOnEditCommit(event -> {
-            if(event.getNewValue().matches("[0-9]+\\.*") && Double.valueOf(event.getNewValue())>=0){
+            if(event.getNewValue().matches("[0-9]+\\.*") && Double.valueOf(event.getNewValue())>=0 && Double.valueOf(event.getNewValue())<=30 ){
                 Assessment newAssess = event.getTableView().getItems().get(event.getTablePosition().getRow());
                 newAssess.setClassScore(Double.valueOf(event.getNewValue()));
                 setTableViewColumns();
 
+                //tag item as edited
                 if(!editedAssessment.contains(newAssess)){
-                    if(newAssess.getClassScore()!=Double.valueOf(event.getNewValue())){
-                        if((newAssess.getClassScore()+newAssess.getExamScore() <=0) ) {
+                    if(newAssess.getClassScore()!= Double.valueOf(event.getNewValue())){
+                        if((newAssess.getClassScore() + newAssess.getExamScore() <= 100) ) {
                             editedAssessment.add(newAssess);
                         }
                     }
                 }
+            }else {
+                setTableViewColumns();
             }
         });
+
         classScore.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getClassScore().toString()));
         examScore.setCellFactory(TextFieldTableCell.forTableColumn());
         examScore.setOnEditCommit(event -> {
@@ -208,10 +285,15 @@ public class AssessmentFormController implements Initializable{
                 return new SimpleStringProperty("N/A");
             }
         });
-        assmntTableView.setItems(assessments);
+//        assmntTableView.setItems(assessments);
+//        assmntTableView.setVisible(Boolean.TRUE);
+//        assmntLabel.setVisible(Boolean.TRUE);
+//        totalStudents.setText(String.valueOf(assessments.size()));
+
+        assmntTableView.setItems(tempAssessment);
         assmntTableView.setVisible(Boolean.TRUE);
         assmntLabel.setVisible(Boolean.TRUE);
-        totalStudents.setText(String.valueOf(assessments.size()));
+        totalStudents.setText(String.valueOf(tempAssessment.size()));
 
     }
     private void setTableViewColumns(){
@@ -232,95 +314,89 @@ public class AssessmentFormController implements Initializable{
         init.setOnSucceeded(e->MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
         new Thread(init).start();
 
-        classCombo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->  renderAssessmentData());
+        classCombo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->  {
+            Stage stage = classCombo.getSelectionModel().getSelectedItem();
+            List<Course> courseList = stage.getCourse();
+           if(subjectCombo.getItems().size()>0){
+               subjectCombo.getItems().clear();
+           }
+            subjectCombo.getItems().addAll(courseList);
+            renderAssessmentData();
+        });
 
         subjectCombo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            renderAssessmentData();
-            subjectLabel.textProperty().bind(new SimpleStringProperty(subjectCombo.getSelectionModel().getSelectedItem().getName()));
+            if( newValue!= null){
+                renderAssessmentData();
+                subjectLabel.textProperty().bind(new SimpleStringProperty(subjectCombo.getSelectionModel().getSelectedItem().getName()));
+            }
         });
 
         searchStd.setOnKeyReleased((KeyEvent event) -> {
-            if(searchStd.getText().trim().length()>0){
-                Task getStd=new Task() {
-                    @Override
-                    protected Object call(){
-                        StudentDao studentDao=new StudentDao();
-                        List<Student>studentList =studentDao.getStudentByName(searchStd.getText().trim());
-                        Platform.runLater(()->{
-                            students.clear();
-                            students.addAll(studentList);
-                        });
-                        return null;
-                    }
-                };
-                getStd.setOnRunning(e-> Platform.runLater(()->progress.setVisible(Boolean.TRUE)));
-                getStd.setOnSucceeded(e->Platform.runLater(()->progress.setVisible(Boolean.FALSE)));
-                getStd.setOnFailed(e->Platform.runLater(()->progress.setVisible(Boolean.FALSE)));
-                new Thread(getStd).start();
-            }else
-                stdListView.getItems().clear();
+            activateSearch();
         });
 
-        stdListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            Task getData =new Task() {
-                @Override
-                protected Object call(){
-                    if(newValue!=null){
-                        assessments.clear();
-                        assessments.addAll(assessmentDao.getAssessment(newValue));
-                        setTableViewColumns();
-                    }
-                    return null;
-                }
-            };
-            getData.setOnRunning(e->{
-                assessmentIndicator.progressProperty().bind(getData.progressProperty());
-                assessmentIndicator.setVisible(Boolean.TRUE);
-            });
-            getData.setOnSucceeded(e->{
-                assessmentIndicator.setVisible(false);
-//                    Platform.runLater(()->assessmentIndicator.setVisible(false));
-                getData.cancel();
-            });
-            getData.setOnFailed(e->{
-//                  Platform.runLater(()->assessmentIndicator.setVisible(false));
-                assessmentIndicator.setVisible(false);
-                getData.cancel();
-            });
-            new Thread(getData).start();
-        });
+//        stdListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+//            Task getData =new Task() {
+//                @Override
+//                protected Object call(){
+//                    if(newValue!= null){
+//                        assessments.clear();
+//                        assessments.addAll(assessmentDao.getAssessment(newValue));
+//                        setTableViewColumns();
+//                    }
+//                    return null;
+//                }
+//            };
+//            getData.setOnRunning(e->{
+//                assessmentIndicator.progressProperty().bind(getData.progressProperty());
+//                assessmentIndicator.setVisible(Boolean.TRUE);
+//            });
+//            getData.setOnSucceeded(e->{
+//                assessmentIndicator.setVisible(false);
+////                    Platform.runLater(()->assessmentIndicator.setVisible(false));
+//                getData.cancel();
+//            });
+//            getData.setOnFailed(e->{
+////                  Platform.runLater(()->assessmentIndicator.setVisible(false));
+//                assessmentIndicator.setVisible(false);
+//                getData.cancel();
+//            });
+//            new Thread(getData).start();
+//        });
 
-        saveRecord.setOnAction(event->{
-               Task saving =new Task() {
-                   @Override
-                   protected Object call() throws Exception {
-                      saveAssessment();
-                       return null;
-                   }
-               };
-               new Thread(saving).start();
-               saving.setOnRunning(e->MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Saving Assessment..."));
-               saving.setOnSucceeded(e->{
-                   MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+        saveRecord.setOnAction(event -> {
+           Task saving =new Task() {
+               @Override
+               protected Object call() throws Exception {
+                  saveAssessment();
+                   return null;
+               }
+           };
+           new Thread(saving).start();
+           saving.setOnRunning(e->MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Saving Assessment..."));
+           saving.setOnSucceeded(e->{
+           MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
 
-                   Task checking=new Task() {
-                       @Override
-                       protected Object call() throws Exception {
-                           //check if all items were saved...
-                           editedAssessment.removeAll(savedAssessment);
-                           return null;
-                       }
-                   };
-                   new Thread(checking).start();
-                   checking.setOnRunning(e2->MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Finalizing..."));
-                   checking.setOnSucceeded(e2->{
-                       MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
-                       Notification.getNotificationInstance().notifySuccess("We have saved your records","Success");
-                       hideChangeLable();
-                   });
-                   checking.setOnFailed(e2->MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
-               });
-               saving.setOnFailed(e2->MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+           Task checking=new Task() {
+               @Override
+               protected Object call() throws Exception {
+                   //check if all items were saved...
+                   editedAssessment.removeAll(savedAssessment);
+                   return null;
+               }
+           };
+
+           new Thread(checking).start();
+           checking.setOnRunning(e2->MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Finalizing..."));
+           checking.setOnSucceeded(e2->{
+               MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+               Notification.getNotificationInstance().notifySuccess("We have saved your records","Success");
+               hideChangeLable();
+           });
+
+                checking.setOnFailed(e2->MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+           });
+           saving.setOnFailed(e2->MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
         });
 
         //Bind text properties to observable lists
@@ -353,12 +429,11 @@ public class AssessmentFormController implements Initializable{
     }
 
     private void renderAssessmentData() {
-        if(canSearch() && !hasInit){
-            if(prepareAssessment()){
-                setTableViewColumns();
-                hasInit=true;
-            }else Notification.getNotificationInstance().notifyError("Sorry something went wrong while processing the request.\nPlease try again","Error!");
-        }
+       if(canSearch()){
+           if(prepareAssessment()){
+               setTableViewColumns();
+           }else Notification.getNotificationInstance().notifyError("Sorry something went wrong while processing the request.\nPlease try again","Error!");
+       }
     }
 
     private void showChangeLabel(){
@@ -373,5 +448,58 @@ public class AssessmentFormController implements Initializable{
 
     public void closeStage(){
 
+    }
+
+    private void loadAssesmentRecords (){
+        assessments.clear();
+        assessments.addAll(assessmentDao.getAssessment());
+    }
+
+    private void loadAssesmentRecords (Stage stage){
+
+    }
+
+    private void loadStdRecords () {
+        StudentDao studentDao = new StudentDao();
+        students.addAll(studentDao.getAllStudents());
+    }
+
+    private void loadStdRecords (Stage stage,Course course) {
+        StudentDao studentDao = new StudentDao();
+        tempAssessment.clear();
+        tempStudents.clear();
+
+        if ((!coursesLoaded.contains(course)) ) {
+            System.out.println("we have to load the course");
+            tempStudents.addAll(studentDao.getStudentFromClass(stage));
+            tempAssessment.addAll(assessmentDao.getAssessment(course));
+            students.addAll(tempStudents);
+            assessments.addAll(tempAssessment);
+            stagesLoaded.add(stage);
+            coursesLoaded.add(course);
+        }else {
+            System.out.println("the course is already loaded...");
+            for (Assessment a: assessments ) {
+                if(a.getCourse().getName().toLowerCase().equals(course.getName().toLowerCase())  && a.getStudent().getStage().getId().equals(stage.getId())) {
+                    tempAssessment.add(a);
+                }
+            }
+        }
+    }
+
+    private void activateSearch() {
+        searchStd.textProperty().addListener(((observable, oldValue, newValue) -> {
+            filteredAtt.setPredicate( (Predicate< ? super Assessment>) at -> {
+                if( newValue == null || newValue.isEmpty() ) {
+                    return  true;
+                }
+
+                String lowerVal = newValue.toLowerCase();
+                return  viewAttendanceController.checkIfStudent(lowerVal, at.getStudent());
+            });
+        }));
+
+        sortedList.comparatorProperty().bind(assmntTableView.comparatorProperty());
+        assmntTableView.setItems(sortedList);
     }
 }

@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class AssessmentDao {
@@ -158,52 +159,59 @@ public class AssessmentDao {
 
     public List<Assessment> updateAssessment(List<Assessment> assessments)  {
         GradeDao gradeDao = new GradeDao();
-        Grade grade=null;
+//        Grade grade=null;
+        List<Grade> grades = gradeDao.getGrade();
         Assessment newAssessment =null;
         List <Assessment> updated = new ArrayList<>();
 
-        int totalSize = assessments.size();
-        int batchSize = 5 ;
+        int entityCount = assessments.size();
+        int batchSize = 25;
 
-        System.out.println("this is the total: "+totalSize);
-        for (Assessment assessment : assessments) {
-            em=HibernateUtil.getEntityManager();
-            HibernateUtil.begin();
-            System.out.println("looping over: "+assessment.getStudent().toString());
+        em =HibernateUtil.getEntityManager();
 
-//            if(assessments.indexOf(assessment) > 0 && assessments.indexOf(assessment) % batchSize == 0){
-//               em.flush();
-//               em.clear();
-//            }
-            try {
-                    //set the grade
-                    grade = gradeDao.getGrade((assessment.getClassScore()+assessment.getExamScore()));
-                    if(grade!=null){
-                    assessment.setGrade(grade);
 
-                    //set the assessment
-//                    if (!em.getTransaction().isActive())
-//                        HibernateUtil.begin();
+        try {
+           HibernateUtil.begin();
 
-                    newAssessment =  em.find(Assessment.class,assessment.getId());
-                    newAssessment.setClassScore(assessment.getClassScore());
-                    newAssessment.setExamScore(assessment.getExamScore());
-                    newAssessment.setGrade(assessment.getGrade());
+           for (int i = 0; i < entityCount; i++) {
+                if (i > 0 && i % batchSize == 0) {
                     HibernateUtil.commit();
-                    updated.add(newAssessment);
+                    HibernateUtil.begin();
+
+                    em.clear();
                 }
 
-            }catch (RuntimeException e) {
-                if(em.getTransaction().isActive()) {
-                    HibernateUtil.rollBack();
-                }
+               newAssessment = em.find(Assessment.class, assessments.get(i).getId());
+               newAssessment.setClassScore(assessments.get(i).getClassScore());
+               newAssessment.setExamScore(assessments.get(i).getExamScore());
 
-                e.printStackTrace();
-                return  updated;
+               Iterator<Grade> iterator = grades.iterator();
+               Boolean found =false;
+               Double total;
+               int counter =0;
 
-            } finally {
-                em.close();
+               while (iterator.hasNext() && !found) {
+                   System.out.println("looping : "+ ++counter + "time(s)");
+                   Grade grade = iterator.next();
+                   total = assessments.get(i).getClassScore() + assessments.get(i).getExamScore();
+                   if(total >= grade.getMinMark() && total<= grade.getMaxMark()) {
+                       newAssessment.setGrade(grade);
+                       found =true;
+                       counter =0;
+                   }
+               }
+
+//                HibernateUtil.commit();
+           }
+
+            HibernateUtil.commit();
+        } catch (RuntimeException e) {
+            if (HibernateUtil.getEntityManager().getTransaction().isActive()) {
+                HibernateUtil.getEntityManager().getTransaction().rollback();
             }
+            throw e;
+        } finally {
+            em.close();
         }
     return updated;
     }
