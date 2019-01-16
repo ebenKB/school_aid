@@ -21,7 +21,7 @@ public class AttendanceTemporaryDao {
      * @return
      * @throws HibernateException
      */
-    public Boolean checkStudenIn(Student student)throws HibernateException{
+    public Boolean checkStudenIn(Student student)throws HibernateException {
         AttendanceTemporary attendance =new AttendanceTemporary();
         attendance.setStudent(student);
         attendance.setDate(LocalDate.now());

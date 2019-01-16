@@ -332,8 +332,9 @@
                         <MenuButton mnemonicParsing="false" prefHeight="47.0" prefWidth="183.0" text="ACADEMICS">
                           <items>
                             <MenuItem fx:id="newSubject" mnemonicParsing="false" text="Add New Subject" />
-                            <MenuItem fx:id="assessment" mnemonicParsing="false" text="Assessment" />
                               <MenuItem fx:id="grade" mnemonicParsing="false" text="Add Grade" />
+                            <MenuItem fx:id="assessment" mnemonicParsing="false" text="Assessment Sheet" />
+                              <MenuItem fx:id="report" mnemonicParsing="false" text="Terminal Report" />
                           </items>
                         </MenuButton>
                      </children>

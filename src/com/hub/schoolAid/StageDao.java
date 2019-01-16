@@ -25,10 +25,6 @@ private EntityManager em;
 //    }
 
     public void addNewStage(Stage stage) {
-//        session = sessionFactory.getCurrentSession();
-//        session.beginTransaction();
-//        session.save(stage);
-//        session.getTransaction().commit();
         em=HibernateUtil.getEntityManager();
         HibernateUtil.begin();
         em.persist(stage);
@@ -37,8 +33,7 @@ private EntityManager em;
     }
 
     public Boolean isExistingStage(Stage stage){
-//        session = sessionFactory.getCurrentSession();
-//        session.beginTransaction();
+
           String hql = "FROM Class C WHERE C.name like '"+stage.getName() +"' OR C.classValue ='"+ stage.getClassValue() +"'";
 //
 //        List<Stage> list =  session.createQuery(hql).getResultList();

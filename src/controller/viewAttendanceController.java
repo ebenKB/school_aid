@@ -192,7 +192,7 @@ public class viewAttendanceController implements Initializable{
 
     private void filterAttendanceByText() {
         stdAttendance.textProperty().addListener(((observable, oldValue, newValue) -> {
-            filteredList.setPredicate( (Predicate<? super  Attendance>) at ->{
+            filteredList.setPredicate( (Predicate < ? super  Attendance > ) at ->{
                 if( newValue == null || newValue.isEmpty() ) {
                     return  true;
                 }

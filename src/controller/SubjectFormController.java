@@ -45,6 +45,9 @@ public class SubjectFormController implements Initializable{
     @FXML
     private Button remove;
 
+    @FXML
+    private CheckBox selectAll;
+
     private ObservableList<Stage> stages = FXCollections.observableArrayList();
     private ObservableList<Course>courses =FXCollections.observableArrayList();
     private final SimpleListProperty listProperty  = new SimpleListProperty(courses);
@@ -74,6 +77,7 @@ public class SubjectFormController implements Initializable{
     private void clearSubjectField(){
         subjectName.clear();
     }
+
     private void initSubjectListView(){
         subjectListView.itemsProperty().bind(listProperty);
         courses.addAll(courses);
@@ -145,6 +149,14 @@ public class SubjectFormController implements Initializable{
             public void changed(ObservableValue<? extends Course> observable, Course oldValue, Course newValue) {
                 if(newValue !=null)
                     remove.setVisible(Boolean.TRUE);
+            }
+        });
+
+        selectAll.setOnAction(e ->{
+            if(selectAll.isSelected()){
+                classChckListView.getCheckModel().checkAll();
+            }else {
+                classChckListView.getCheckModel().clearChecks();
             }
         });
 

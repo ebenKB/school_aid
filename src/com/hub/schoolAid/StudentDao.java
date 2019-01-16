@@ -282,4 +282,27 @@ public class StudentDao {
         }
         return true;
     }
+
+    public Boolean resetFeedingFee(Student student, Double amount) {
+        try {
+            //we cannot reset the feeding fee for students who do not pay feeding fee unless the new amount is 0.00
+//            if(!this.getPayFeeding() && amount != 0)
+//                return false;
+            StudentAccount studentAccount = em.find(StudentAccount.class,student.getAccount().getId());
+            studentAccount.setFeedingFeeCredit(amount);
+
+            if(student.getFeedingStatus() == Student.FeedingStatus.SEMI_PERIODIC) {
+                if(studentAccount.getFeedingFeeCredit() == 0) {
+                    student.setFeedingStatus(Student.FeedingStatus.DAILY);
+                }
+            }
+
+            HibernateUtil.commit();
+            HibernateUtil.close();
+
+            return true;
+        }catch (Exception e) {
+            return false;
+        }
+    }
 }

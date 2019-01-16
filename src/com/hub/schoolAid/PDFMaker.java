@@ -3,12 +3,14 @@ package com.hub.schoolAid;
 import be.quodlibet.boxable.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDCIDFontType0;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
@@ -16,13 +18,17 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
 
 public class PDFMaker {
-    private static PDFMaker pdfMakerInstance = new PDFMaker();
+    private static PDFMaker pdfMakerInstance;
 
     public static PDFMaker getPDFMakerInstance() {
+        if(pdfMakerInstance ==null) {
+            pdfMakerInstance =new PDFMaker();
+        }
+
         return pdfMakerInstance;
     }
 
@@ -32,97 +38,182 @@ public class PDFMaker {
 
     Double totalFeeding =0.0;
     int totalAttendance = 0;
-    public static void  createReportForAllStudents(){
-        PDDocument pdDocument = new PDDocument();
-        PDFont font = PDType1Font.HELVETICA_BOLD;
-        PDFont regText = PDType1Font.HELVETICA;
-        final int headerSize = 12;
-        final int contentSize =12;
-        StudentDao dao = new StudentDao();
-        List<Student> students = dao.getAllStudents();
-        AssessmentDao assessmentDao =new AssessmentDao();
-        ObservableList<Assessment> assessmentList = FXCollections.observableArrayList();
+
+    StudentDao dao = new StudentDao();
+    List<Student> students = dao.getAllStudents();
+    AssessmentDao assessmentDao =new AssessmentDao();
+    TerminalReportDao terminalReportDao =new TerminalReportDao();
+
+    PDDocument pdDocument = new PDDocument();
+    PDFont font = PDType1Font.HELVETICA_BOLD;
+    PDFont regText = PDType1Font.HELVETICA;
+    final int headerSize = 12;
+    final int contentSize =10;
+
+    public  PDDocument createReportForAllStudents(){
+//        PDDocument pdDocument = new PDDocument();
+//        PDFont font = PDType1Font.HELVETICA_BOLD;
+//        PDFont regText = PDType1Font.HELVETICA;
+//        final int headerSize = 12;
+//        final int contentSize =10;
+
+        ObservableList <Assessment> assessmentList = FXCollections.observableArrayList();
+        ObservableList <TerminalReport> reports = FXCollections.observableArrayList();
         assessmentList.addAll(assessmentDao.getAssessment());
+        reports.addAll(terminalReportDao.getReport());
+        String conduct;
+        String remark;
 
         try {
-             for(Student s:students){
-                 System.out.println("searching for studnt "+s.toString());
-//                 List<Assessment>assessments =assessmentDao.getAssessment(s);
-
+             for(TerminalReport report:reports) {
+                 if (report.getStudent().getStage().getName().toLowerCase().equals("class 4")) {
                  //prepare pdf document
                  PDPage pdPage = new PDPage(PDRectangle.A5);
                  PDRectangle mediaBox = pdPage.getMediaBox();
 
                  //add header text
                  String schName = "THE FATHER'S MERCY SCHOOL";
-                 String address ="Location: Sowutuom - Accra, Contact: 0275900513/ 0000000000";
+                 String address = "Location: Sowutuom - Accra, Contact: 0547 196 410 / 057";
                  String heading = "TERMINAL REPORT";
 
                  //student details
-                 String name = "Name: "+ s.toString().toUpperCase()+"                     Class: "+s.getStage().getName().toUpperCase();
-                 float nameGap = ((mediaBox.getWidth()) - (font.getStringWidth(name)/1000));
+                 String name = "Name: " + report.getStudent().toString().toUpperCase() + "                     Class: " + report.getStudent().getStage().getName().toUpperCase();
+                 String term = "Term ends: 21st Dec. 2018                Next Term Begins: 8th January, 2019";
+                 String attendance = "First Term Report        Attendance: .........out of.........";
+                 float nameGap = ((mediaBox.getWidth()) - (font.getStringWidth(name) / 1000));
 
                  pdDocument.addPage(pdPage);
 
                  float margin = 20;
-                 float yStartNewPage = pdPage.getMediaBox().getHeight() - ( margin + 105);
-                 float yStart = ( yStartNewPage );
+                 float yStartNewPage = pdPage.getMediaBox().getHeight() - margin;
+                 float yStart = (yStartNewPage - 105);
 
-                 float titleWidth = font.getStringWidth(schName)/1000 * headerSize ;
-                 float titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * headerSize ;
+                 float titleWidth = font.getStringWidth(schName) / 1000 * headerSize;
+                 float titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * headerSize;
 
-                 float startX = (mediaBox.getWidth() -titleWidth) /2;
+                 float startX = (mediaBox.getWidth() - titleWidth) / 2;
                  float startY = mediaBox.getHeight() - (margin + 10) - titleHeight;
-                 PDPageContentStream pageContentStream = new PDPageContentStream(pdDocument,pdPage);
+                 PDPageContentStream pageContentStream = new PDPageContentStream(pdDocument, pdPage);
 
-                 pageContentStream.beginText();
+//                 pageContentStream.addRect(0,mediaBox.getHeight()-50,mediaBox.getWidth(),(mediaBox.getHeight()-(mediaBox.getHeight()/1000)-50));
+//                 pageContentStream.beginText();
 
                  //show school name
-                 pageContentStream.newLineAtOffset(startX,startY);
-                 pageContentStream.setFont(font,headerSize);
-                 pageContentStream.setLeading(15f);
-                 pageContentStream.showText(schName);
-                 pageContentStream.newLine();
-                 pageContentStream.endText();
+//                 pageContentStream.newLineAtOffset(startX,startY);
+//                 pageContentStream.setFont(font,headerSize);
+//                 pageContentStream.setLeading(15f);
+//                 pageContentStream.showText(schName);
+//                 pageContentStream.newLine();
+//                 pageContentStream.endText();
 
                  //show address
-                 pageContentStream.beginText();
-                 pageContentStream.setFont(font,contentSize);
-                 titleWidth = font.getStringWidth(address)/1000 * contentSize ;
-                 titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * contentSize ;
-
-                 startX = (mediaBox.getWidth() -titleWidth) /2;
-                 startY = mediaBox.getHeight() - (margin +30) - titleHeight;
-
-                 pageContentStream.newLineAtOffset(startX,startY);
-                 pageContentStream.showText(address);
-                 pageContentStream.newLine();
-                 pageContentStream.endText();
+//                 pageContentStream.beginText();
+//                 pageContentStream.setFont(regText,contentSize);
+//                 titleWidth = font.getStringWidth(address)/1000 * contentSize ;
+//                 titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * contentSize ;
+//
+//                 startX = (mediaBox.getWidth() -titleWidth) /2;
+//                 startY = mediaBox.getHeight() - (margin +30) - titleHeight;
+//
+//                 pageContentStream.newLineAtOffset(startX,startY);
+//                 pageContentStream.showText(address);
+//                 pageContentStream.newLine();
+//                 pageContentStream.endText();
 
 
                  //show heading
-                 pageContentStream.beginText();
-                 pageContentStream.setFont(font,headerSize);
-                 titleWidth = font.getStringWidth(heading)/1000 * headerSize ;
-                 titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * headerSize ;
-
-                 startX = (mediaBox.getWidth() - titleWidth) /2;
-                 startY = mediaBox.getHeight() - (margin + 50) - titleHeight;
-                 pageContentStream.newLineAtOffset(startX,startY);
-                 pageContentStream.showText(heading);
-                 pageContentStream.newLine();
-                 pageContentStream.endText();
+//                 pageContentStream.beginText();
+//                 pageContentStream.setFont(font,headerSize);
+//                 titleWidth = font.getStringWidth(heading)/1000 * headerSize ;
+//                 titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * headerSize ;
+//
+//                 startX = (mediaBox.getWidth() - titleWidth) /2;
+//                 startY = mediaBox.getHeight() - (margin + 50) - titleHeight;
+//                 pageContentStream.newLineAtOffset(startX,startY);
+//                 pageContentStream.showText(heading);
+//                 pageContentStream.newLine();
+//                 pageContentStream.endText();
 
                  //add student details
                  pageContentStream.beginText();
-                 pageContentStream.setFont(font,contentSize);
-                 titleWidth = font.getStringWidth(name)/1000 * contentSize ;
-                 titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * contentSize ;
+                 pageContentStream.setFont(regText, contentSize);
+                 titleWidth = font.getStringWidth(name) / 1000 * contentSize;
+                 titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * contentSize;
 
-                 startX = (mediaBox.getWidth() - titleWidth) / 2;
-                 startY = mediaBox.getHeight() - (margin + 80) - titleHeight;
-                 pageContentStream.newLineAtOffset(startX,startY);
+                 startX = margin;
+                 startY = mediaBox.getHeight() - (margin + 50) - titleHeight;
+                 pageContentStream.newLineAtOffset(startX, startY);
                  pageContentStream.showText(name);
+                 pageContentStream.newLine();
+                 pageContentStream.endText();
+
+                 //add term ends
+                 pageContentStream.beginText();
+                 pageContentStream.setFont(regText, contentSize);
+                 titleWidth = font.getStringWidth(term) / 1000 * contentSize;
+                 titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * contentSize;
+
+                 startX = margin;
+                 startY = mediaBox.getHeight() - (margin + 70) - titleHeight;
+                 pageContentStream.newLineAtOffset(startX, startY);
+                 pageContentStream.showText(term);
+                 pageContentStream.newLine();
+                 pageContentStream.endText();
+
+                 //add attendance
+                 pageContentStream.beginText();
+                 pageContentStream.setFont(regText, contentSize);
+                 titleWidth = font.getStringWidth(attendance) / 1000 * contentSize;
+                 titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * contentSize;
+
+                 startX = margin;
+                 startY = mediaBox.getHeight() - (margin + 90) - titleHeight;
+                 pageContentStream.newLineAtOffset(startX, startY);
+                 pageContentStream.showText(attendance);
+                 pageContentStream.newLine();
+                 pageContentStream.endText();
+
+                 //add the conduct
+                 pageContentStream.beginText();
+                 conduct = "Calm and Respectful";
+                 startY = mediaBox.getHeight() - (margin + 480) - titleHeight;
+                 pageContentStream.newLineAtOffset(startX, startY);
+                 pageContentStream.setFont(regText, contentSize);
+                 pageContentStream.setLeading(15f);
+                 pageContentStream.showText("Pupil's conduct: " + report.getConduct());
+                 pageContentStream.newLine();
+                 pageContentStream.endText();
+
+                 //Add remark
+                 pageContentStream.beginText();
+                 remark = "Good performance, keep it up";
+                 startY = mediaBox.getHeight() - (margin + 500) - titleHeight;
+                 pageContentStream.newLineAtOffset(startX, startY);
+                 pageContentStream.setFont(regText, contentSize);
+                 pageContentStream.setLeading(15f);
+                 pageContentStream.showText("Head Teacher's remark: " + report.getHeadTracherRemark());
+                 pageContentStream.newLine();
+                 pageContentStream.endText();
+
+                 //Add newClass
+                 pageContentStream.beginText();
+                 String newClass = "Promoted To: ................";
+                 startY = mediaBox.getHeight() - (margin + 520) - titleHeight;
+                 pageContentStream.newLineAtOffset((startX), startY);
+                 pageContentStream.setFont(regText, contentSize);
+                 pageContentStream.setLeading(15f);
+                 pageContentStream.showText(newClass);
+                 pageContentStream.newLine();
+                 pageContentStream.endText();
+
+                 //Add signature
+                 pageContentStream.beginText();
+                 String signature = "Headmistress's signature: ..................";
+                 startY = mediaBox.getHeight() - (margin + 520) - titleHeight;
+                 pageContentStream.newLineAtOffset(startX + 220, startY);
+                 pageContentStream.setFont(regText, contentSize);
+                 pageContentStream.setLeading(15f);
+                 pageContentStream.showText(signature);
                  pageContentStream.newLine();
                  pageContentStream.endText();
 
@@ -131,101 +222,106 @@ public class PDFMaker {
                  float tableWidth = pdPage.getMediaBox().getWidth() - (2 * margin);
 
                  //add table
-                 BaseTable baseTable = new BaseTable(yStart,yStartNewPage,20,tableWidth,(margin),pdDocument,pdPage,true,true);
+                 BaseTable baseTable = new BaseTable(yStart, yStartNewPage, 20, tableWidth, (margin), pdDocument, pdPage, true, true);
 
                  //Create Header Row
-                 Row<PDPage>headerRow = baseTable.createRow(30f);
-                 Cell <PDPage> cell ;
-                 cell= headerRow.createCell(30,"SUBJECT");
+                 Row<PDPage> headerRow = baseTable.createRow(30f);
+                 Cell<PDPage> cell;
+                 cell = headerRow.createCell(30, "SUBJECT");
                  cell.setAlign(HorizontalAlignment.CENTER);
                  cell.setValign(VerticalAlignment.MIDDLE);
                  cell.setFillColor(Color.lightGray);
                  cell.setTextColor(Color.WHITE);
 
-                 cell=headerRow.createCell(14,"CLASS SCORE (30%)");
+                 cell = headerRow.createCell(14, "CLASS SCORE (30%)");
                  cell.setAlign(HorizontalAlignment.CENTER);
                  cell.setValign(VerticalAlignment.MIDDLE);
                  cell.setFillColor(Color.lightGray);
                  cell.setTextColor(Color.WHITE);
 
-                 cell = headerRow.createCell(14,"EXAM SCORE (70%)");
+                 cell = headerRow.createCell(14, "EXAM SCORE (70%)");
                  cell.setAlign(HorizontalAlignment.CENTER);
                  cell.setValign(VerticalAlignment.MIDDLE);
                  cell.setFillColor(Color.lightGray);
                  cell.setTextColor(Color.WHITE);
 
-                 cell=headerRow.createCell(10,"TOTAL (100%)");
+                 cell = headerRow.createCell(10, "TOTAL (100%)");
                  cell.setAlign(HorizontalAlignment.CENTER);
                  cell.setValign(VerticalAlignment.MIDDLE);
                  cell.setFillColor(Color.lightGray);
                  cell.setTextColor(Color.WHITE);
 
-                 cell = headerRow.createCell(12,"GRADE");
+                 cell = headerRow.createCell(12, "GRADE");
                  cell.setAlign(HorizontalAlignment.CENTER);
                  cell.setValign(VerticalAlignment.MIDDLE);
                  cell.setFillColor(Color.lightGray);
                  cell.setTextColor(Color.WHITE);
 
-                 cell = headerRow.createCell(20,"REMARK");
+                 cell = headerRow.createCell(20, "REMARK");
                  cell.setAlign(HorizontalAlignment.CENTER);
                  cell.setValign(VerticalAlignment.MIDDLE);
                  cell.setFillColor(Color.lightGray);
                  cell.setTextColor(Color.WHITE);
 
-//                 cell.setFont(PDType1Font.HELVETICA);
                  cell.setFillColor(Color.lightGray);
-//                 cell.setFontBold(PDType1Font.HELVETICA_BOLD);
                  cell.setAlign(HorizontalAlignment.CENTER);
                  cell.setValign(VerticalAlignment.MIDDLE);
                  cell.setTextColor(Color.WHITE);
                  baseTable.addHeaderRow(headerRow);
 
+                 //search for all the student's assessment
+                 List<Assessment> foundAss = searchAssessment(report.getStudent().getId(), assessmentList);
+                 if (foundAss.size() < 8) {
+                     int diff = 10 - foundAss.size();
+                     for (int i = 0; i < diff; i++) {
+                         System.out.println("adding onto stack..." + (10 - foundAss.size()));
+                         foundAss.add(new Assessment());
+                     }
+                 }
 
-               //search for all the student's assessment
-                List<Assessment>foundAss= searchAssessment(s.getId(),assessmentList);
+                 for (Assessment assessment : foundAss) {
+                     Row<PDPage> row = baseTable.createRow(24f);
 
-                 for (Assessment assessment:foundAss){
-                     Row<PDPage> row = baseTable.createRow(28f);
-                     cell = row.createCell(30,assessment.getCourse().getName());
+                     cell = row.createCell(30, assessment.getCourse() == null ? " " : assessment.getCourse().getName());
+                     cell.setAlign(HorizontalAlignment.LEFT);
+                     cell.setValign(VerticalAlignment.MIDDLE);
+
+                     cell = row.createCell(14, assessment.getClassScore() == null ? " " : assessment.getClassScore().toString());
                      cell.setAlign(HorizontalAlignment.CENTER);
                      cell.setValign(VerticalAlignment.MIDDLE);
 
-
-                     cell = row.createCell(14,assessment.getClassScore().toString());
+                     cell = row.createCell(14, assessment.getExamScore() == null ? " " : assessment.getExamScore().toString());
                      cell.setAlign(HorizontalAlignment.CENTER);
                      cell.setValign(VerticalAlignment.MIDDLE);
 
-
-                     cell = row.createCell(14,String.valueOf(assessment.getExamScore()));
+                     cell = row.createCell(10, (assessment.getExamScore() == null && assessment.getClassScore() == null) ? " " :
+                             String.valueOf((assessment.getClassScore() + assessment.getExamScore())));
                      cell.setAlign(HorizontalAlignment.CENTER);
                      cell.setValign(VerticalAlignment.MIDDLE);
+                     cell.setTextColor(Color.red);
 
-
-                     cell = row.createCell(10,String.valueOf((assessment.getClassScore() + assessment.getExamScore())));
+                     cell = row.createCell(12, assessment.getGrade() == null ? " " : assessment.getGrade().getName());
                      cell.setAlign(HorizontalAlignment.CENTER);
                      cell.setValign(VerticalAlignment.MIDDLE);
+                     cell.setTextColor(Color.red);
 
-
-                     cell = row.createCell(12,assessment.getGrade().getName());
-                     cell.setAlign(HorizontalAlignment.CENTER);
-                     cell.setValign(VerticalAlignment.MIDDLE);
-
-
-                     cell = row.createCell(20,assessment.getGrade().getRemark());
-                     cell.setAlign(HorizontalAlignment.CENTER);
+                     cell = row.createCell(20, assessment.getGrade() == null ? " " : assessment.getGrade().getRemark());
+                     cell.setAlign(HorizontalAlignment.LEFT);
                      cell.setValign(VerticalAlignment.MIDDLE);
                      assessmentList.remove(assessment);
                  }
                  baseTable.draw();
              }
+                generateAccountReport(pdDocument,report.getStudent());
+             }
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
             }
 
-        savePDFToLocation(pdDocument);
+       return pdDocument;
     }
 
-    private static void savePDFToLocation(PDDocument pdDocument) {
+    public static void savePDFToLocation(PDDocument pdDocument) {
         try{
             //choose a file location
             FileChooser fileChooser =new FileChooser();
@@ -237,8 +333,10 @@ public class PDFMaker {
                 pdDocument.save(file);
             pdDocument.close();
         }catch (Exception e){
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("error while saving file ");
         }
+
 
     }
 
@@ -251,6 +349,302 @@ public class PDFMaker {
     }
 
     public static  void createAttendanceReport (LocalDate from,LocalDate to,List<Attendance> attendanceList){
+
+    }
+
+    public  void createBillAndItemList(){
+        for(Student st: students) {
+            generateAccountReport(pdDocument, st);
+        }
+
+        savePDFToLocation(pdDocument);
+    }
+
+    private HashMap createItemList(Boolean isLower){
+        HashMap<String,String> itemList = new HashMap<String,String>();
+        if(isLower){
+            //Add items
+            itemList.put("Toilet Roll", "4 pieces");
+            itemList.put("Camel/Dettol Antiseptic", "1 Medium Size");
+            itemList.put("Powdered Soap", "1 kg");
+
+        }else{
+            //Add items
+            itemList.put("Toilet Roll", "2 pieces");
+            itemList.put("Powdered Soap", "500g");
+        }
+            return itemList;
+    }
+
+    private void generateAccountReport(PDDocument pdDocument,Student student){
+//        if(student.getAccount().getFeedingFeeCredit()<0 | student.getAccount().getFeeToPay()<0){
+            PDPage pdPage = new PDPage(PDRectangle.A5);
+            PDRectangle mediaBox = pdPage.getMediaBox();
+            pdDocument.addPage(pdPage);
+            PDPageContentStream pageContentStream = null;
+            PDFont font = PDType1Font.HELVETICA_BOLD;
+            PDFont regText = PDType1Font.HELVETICA;
+            final float headerSize = 13;
+            final float contentSize =12;
+            float margin = 20;
+
+            try {
+                pageContentStream = new PDPageContentStream(pdDocument,pdPage);
+
+                //add header text
+                String schName = "THE FATHER'S MERCY SCHOOL";
+                String address = "Location: Sowutuom - Accra, Contact: 0547 196 410 / 0579 459 173";
+                String heading = "STUDENT BILL FOR SECOND TERM";
+
+                //student details
+                String name = "Name: "+ student.toString().toUpperCase()+"                     Class: "+student.getStage().getName().toUpperCase();
+
+                //show school name
+                float titleWidth = font.getStringWidth(schName)/1000 * headerSize ;
+                float titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * headerSize ;
+                float startX = (mediaBox.getWidth() - titleWidth) /2;
+                float startY = mediaBox.getHeight() - (margin + 10) - titleHeight;
+
+                pageContentStream.beginText();
+                pageContentStream.newLineAtOffset(startX,startY);
+                pageContentStream.setFont(font,headerSize);
+                pageContentStream.setLeading(15f);
+                pageContentStream.showText(schName);
+                pageContentStream.newLine();
+                pageContentStream.endText();
+
+                //show heading
+                float yStartNewPage = pdPage.getMediaBox().getHeight() - margin;
+                float yStart = ( yStartNewPage - 105);
+
+                //show address
+                pageContentStream.beginText();
+                pageContentStream.setFont(regText,contentSize);
+                titleWidth = font.getStringWidth(address)/1000 * contentSize ;
+                titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * contentSize ;
+
+                startX = (mediaBox.getWidth() -titleWidth) /2;
+                startY = mediaBox.getHeight() - (margin +30) - titleHeight;
+
+                pageContentStream.newLineAtOffset(startX,startY);
+                pageContentStream.showText(address);
+                pageContentStream.newLine();
+                pageContentStream.endText();
+
+                //show heading
+                pageContentStream.beginText();
+                pageContentStream.setFont(font,headerSize);
+                titleWidth = font.getStringWidth(heading)/1000 * headerSize ;
+                titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * headerSize ;
+
+                startX = (mediaBox.getWidth() - titleWidth) /2;
+                startY = mediaBox.getHeight() - (margin + 60) - titleHeight;
+                pageContentStream.newLineAtOffset(startX,startY);
+                pageContentStream.showText(heading);
+                pageContentStream.newLine();
+                pageContentStream.endText();
+
+                //add student details
+                pageContentStream.beginText();
+                pageContentStream.setFont(regText,contentSize);
+                titleWidth = font.getStringWidth(name)/1000 * contentSize ;
+                titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * contentSize ;
+
+                startX = margin;
+                startY = mediaBox.getHeight() - (margin + 90) - titleHeight;
+                pageContentStream.newLineAtOffset(startX,startY);
+                pageContentStream.showText(name);
+                pageContentStream.newLine();
+                pageContentStream.endText();
+
+                pageContentStream.close();
+
+
+                //add table
+                float tableWidth = pdPage.getMediaBox().getWidth() - (2 * margin);
+                BaseTable baseTable = new BaseTable(yStart,yStartNewPage,20,tableWidth,(margin),pdDocument,pdPage,true,true);
+
+                //Create Header Row
+                Row<PDPage>headerRow = baseTable.createRow(32f);
+
+                float bigSize = 65;
+                float smallSize = 35;
+                Double total = 0.00;
+
+                Cell <PDPage> cell ;
+
+                cell= headerRow.createCell(bigSize,"ITEM");
+
+                cell.setAlign(HorizontalAlignment.CENTER);
+                cell.setValign(VerticalAlignment.MIDDLE);
+                cell.setFillColor(Color.lightGray);
+                cell.setTextColor(Color.WHITE);
+//                cell.setFont(font);
+                cell.setFontSize(13);
+                cell.setFont(PDType1Font.HELVETICA_BOLD);
+
+                cell=headerRow.createCell(smallSize,"AMOUNT");
+                cell.setAlign(HorizontalAlignment.CENTER);
+                cell.setValign(VerticalAlignment.MIDDLE);
+                cell.setFillColor(Color.lightGray);
+                cell.setTextColor(Color.WHITE);
+//                cell.setFont(font);
+                cell.setFontSize(13);
+                cell.setFont(PDType1Font.HELVETICA_BOLD);
+
+                if( student.getPayFeeding() && student.getAccount().getFeedingFeeCredit() < 0){
+                    Row < PDPage > row = baseTable.createRow(30f);
+                    cell = row.createCell(bigSize,"Feeding Fee Arrears");
+                    cell.setAlign(HorizontalAlignment.LEFT);
+                    cell.setValign(VerticalAlignment.MIDDLE);
+                    cell.setFontSize(12);
+
+                    cell = row.createCell(smallSize,String.valueOf(student.getAccount().getFeedingFeeCredit() * -1));
+                    total+=(student.getAccount().getFeedingFeeCredit() * - 1);
+                    System.out.println("This is the total:"+ total);
+                    cell.setAlign(HorizontalAlignment.RIGHT);
+                    cell.setValign(VerticalAlignment.MIDDLE);
+                    cell.setFontSize(12);
+                }
+
+                //only for students who do not pay school fees
+                if(! student.getPaySchoolFees()) {
+                    Row < PDPage > row2 = baseTable.createRow(30f);
+                    cell = row2.createCell(bigSize,"First Aid / Maintenance");
+                    cell.setAlign(HorizontalAlignment.LEFT);
+                    cell.setValign(VerticalAlignment.MIDDLE);
+                    cell.setFontSize(12);
+
+                    cell = row2.createCell(smallSize,"20.00");
+                    total+=20.00;
+                    cell.setAlign(HorizontalAlignment.RIGHT);
+                    cell.setValign(VerticalAlignment.MIDDLE);
+                    cell.setFontSize(12);
+                }
+
+                if(student.getPaySchoolFees() && student.getAccount().getFeeToPay()< 0) {
+                    Row < PDPage > row3 = baseTable.createRow(30f);
+
+                    cell = row3.createCell(bigSize,"School Fees Arrears");
+                    cell.setAlign(HorizontalAlignment.LEFT);
+                    cell.setValign(VerticalAlignment.MIDDLE);
+                    cell.setFontSize(12);
+
+                    cell = row3.createCell(smallSize,String.valueOf((student.getAccount().getFeeToPay())*-1));
+                    total+=(student.getAccount().getFeeToPay() * -1);
+                    cell.setAlign(HorizontalAlignment.RIGHT);
+                    cell.setValign(VerticalAlignment.MIDDLE);
+                    cell.setFontSize(12);
+                }
+
+                if(student.getPaySchoolFees()){
+                    Row < PDPage > row4 = baseTable.createRow(30f);
+
+                    cell = row4.createCell(bigSize,"School Fees");
+                    cell.setAlign(HorizontalAlignment.LEFT);
+                    cell.setValign(VerticalAlignment.MIDDLE);
+                    cell.setFontSize(12);
+
+                    cell = row4.createCell(smallSize,String.valueOf((student.getStage().getFeesToPay())));
+                    total+=(student.getStage().getFeesToPay());
+                    cell.setAlign(HorizontalAlignment.RIGHT);
+                    cell.setValign(VerticalAlignment.MIDDLE);
+                    cell.setFontSize(12);
+                }
+
+                Row < PDPage > row5 = baseTable.createRow(30f);
+                cell = row5.createCell(bigSize,"Examination Fees");
+                cell.setAlign(HorizontalAlignment.LEFT);
+                cell.setValign(VerticalAlignment.MIDDLE);
+                cell.setFontSize(12);
+
+                if(student.getStage().getClassValue()  <= 2){
+                    cell = row5.createCell(smallSize,"10.00");
+                    total+=10.00;
+                    cell.setAlign(HorizontalAlignment.RIGHT);
+                    cell.setValign(VerticalAlignment.MIDDLE);
+                    cell.setFontSize(12);
+
+                }else if (student.getStage().getClassValue() <= 7) {
+                    cell = row5.createCell(smallSize,"12.00");
+                    total+=12.00;
+                    cell.setAlign(HorizontalAlignment.RIGHT);
+                    cell.setValign(VerticalAlignment.MIDDLE);
+                    cell.setFontSize(12);
+
+                }else{
+                    cell = row5.createCell(smallSize,"15.00");
+                    total+=15.00;
+                    cell.setAlign(HorizontalAlignment.RIGHT);
+                    cell.setValign(VerticalAlignment.MIDDLE);
+                    cell.setFontSize(12);
+
+                }
+
+                Row < PDPage > row6 = baseTable.createRow(30f);
+
+                cell = row6.createCell(bigSize,"TOTAL BILL");
+                cell.setAlign(HorizontalAlignment.LEFT);
+                cell.setValign(VerticalAlignment.MIDDLE);
+                cell.setFontSize(13);
+                cell.setFont(PDType1Font.HELVETICA_BOLD);
+
+
+                cell = row6.createCell(smallSize,"GHS "+ (String.valueOf(total)) );
+                cell.setAlign(HorizontalAlignment.RIGHT);
+                cell.setValign(VerticalAlignment.MIDDLE);
+                cell.setFillColor(Color.decode("#F5F4F4"));
+                cell.setFontSize(13);
+                cell.setFont(PDType1Font.HELVETICA_BOLD);
+
+
+               //add empty row
+                Row < PDPage > row7 = baseTable.createRow(30f);
+                row7.createCell(bigSize,"");
+                row7.createCell(smallSize,"");
+
+                //Add item list for the student
+                Row < PDPage > row8 = baseTable.createRow(30f);
+                cell = row8.createCell(bigSize, "ITEM LIST");
+                cell.setAlign(HorizontalAlignment.LEFT);
+                cell.setValign(VerticalAlignment.MIDDLE);
+                cell.setFillColor(Color.lightGray);
+                cell.setTextColor(Color.WHITE);
+                cell.setFont(font);
+                cell.setFontSize(13);
+
+                cell = row8.createCell(smallSize,"QUANTITY");
+                cell.setAlign(HorizontalAlignment.LEFT);
+                cell.setValign(VerticalAlignment.MIDDLE);
+                cell.setFillColor(Color.lightGray);
+                cell.setTextColor(Color.WHITE);
+                cell.setFont(font);
+                cell.setFontSize(13);
+
+                Set set;
+                if(student.getStage().getClassValue() < 4){
+                   set = createItemList(true).entrySet();
+               } else {
+                   set = createItemList(false).entrySet();
+               }
+
+                Iterator iterator = set.iterator();
+
+                while (iterator.hasNext()) {
+                    Map.Entry mapEntry = (Map.Entry)iterator.next();
+                    Row<PDPage> row =baseTable.createRow(30f);
+                    cell=row.createCell(bigSize, mapEntry.getKey().toString());
+                    cell.setFontSize(12);
+                    cell=row.createCell(smallSize, mapEntry.getValue().toString());
+                    cell.setFontSize(12);
+                }
+                baseTable.draw();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
+
+    public void createA4() {
 
     }
 
@@ -303,7 +697,7 @@ public class PDFMaker {
            titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * contentSize ;
 
            startX = (mediaBox.getWidth() -titleWidth) /2;
-           startY = mediaBox.getHeight() - (margin +30) - titleHeight;
+           startY = mediaBox.getHeight() - (margin + 30) - titleHeight;
 
            pageContentStream.newLineAtOffset(startX,startY);
            pageContentStream.showText(address);
@@ -333,6 +727,7 @@ public class PDFMaker {
            //Create Header Row
            Row<PDPage>headerRow = baseTable.createRow(15f);
            Cell <PDPage> cell ;
+//           cell.setFontSize(12);
            cell= headerRow.createCell(40,"STUDENT");
            cell.setAlign(HorizontalAlignment.CENTER);
            cell.setValign(VerticalAlignment.MIDDLE);

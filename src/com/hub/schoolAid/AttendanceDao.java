@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class AttendanceDao  {
-//    private Session session;
     private EntityManager em;
 
     public Boolean moveAttendanceToMasterTable(){

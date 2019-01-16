@@ -213,6 +213,9 @@ public class mainController implements Initializable{
     private  MenuItem assessment;
 
     @FXML
+    private MenuItem report;
+
+    @FXML
     private MenuItem grade;
 
 
@@ -346,6 +349,25 @@ public class mainController implements Initializable{
             e.printStackTrace();
         }
     }
+
+    private void showTerminalReport(){
+        Parent root;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/terminalReport.fxml"));
+        try {
+            root=fxmlLoader.load();
+            TerminalReportController controller = fxmlLoader.getController();
+            controller.init();
+            Scene scene = new Scene(root);
+            javafx.stage.Stage stage = new javafx.stage.Stage();
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Terminal Report");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         todayLabel.setText("Today is: "+ LocalDate.now().getDayOfWeek().toString());
@@ -533,6 +555,8 @@ public class mainController implements Initializable{
         newSubject.setOnAction(event -> showSubjectForm());
 
         assessment.setOnAction(event -> showAssessmentForm());
+
+        report.setOnAction(event -> showTerminalReport());
 
         grade.setOnAction(event -> showGradeForm());
 

@@ -96,11 +96,12 @@ public class AssessmentDao {
         return q.getResultList();
     }
 
-    public List<Assessment> getAssessment(Course course){
+    public List<Assessment> getAssessment(Course course,Stage stage){
         em = HibernateUtil.getEntityManager();
         HibernateUtil.begin();
-        Query q=em.createQuery("from Assessment  A where A.course.id=?");
+        Query q=em.createQuery("from Assessment  A where A.course.id=? and A.student.stage.id = ?");
         q.setParameter(0,course.getId());
+        q.setParameter(1,stage.getId());
         return q.getResultList();
     }
 
@@ -159,17 +160,13 @@ public class AssessmentDao {
 
     public List<Assessment> updateAssessment(List<Assessment> assessments)  {
         GradeDao gradeDao = new GradeDao();
-//        Grade grade=null;
         List<Grade> grades = gradeDao.getGrade();
         Assessment newAssessment =null;
         List <Assessment> updated = new ArrayList<>();
-
         int entityCount = assessments.size();
         int batchSize = 25;
 
         em =HibernateUtil.getEntityManager();
-
-
         try {
            HibernateUtil.begin();
 
@@ -190,8 +187,8 @@ public class AssessmentDao {
                Double total;
                int counter =0;
 
+               //find the corresponding grade for the assessment
                while (iterator.hasNext() && !found) {
-                   System.out.println("looping : "+ ++counter + "time(s)");
                    Grade grade = iterator.next();
                    total = assessments.get(i).getClassScore() + assessments.get(i).getExamScore();
                    if(total >= grade.getMinMark() && total<= grade.getMaxMark()) {
@@ -200,8 +197,6 @@ public class AssessmentDao {
                        counter =0;
                    }
                }
-
-//                HibernateUtil.commit();
            }
 
             HibernateUtil.commit();

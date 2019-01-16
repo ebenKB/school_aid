@@ -115,6 +115,9 @@ public class salesDetailsFormController implements Initializable{
     private MenuItem newPayment;
 
     @FXML
+    private MenuItem resetFeedingBal;
+
+    @FXML
     private MenuItem newAttendancePayment;
 
     @FXML
@@ -593,7 +596,7 @@ public class salesDetailsFormController implements Initializable{
 
             balCol.setCellValueFactory(param -> {
                 Sales sales  = param.getValue();
-                Double bal = (sales.getTotalcost() - sales.getAmountPaid() * -1);
+                Double bal = (sales.getTotalcost() - sales.getAmountPaid());
                 return new SimpleStringProperty(bal.toString());
             });
 
@@ -753,6 +756,13 @@ public class salesDetailsFormController implements Initializable{
             makePayment();
         });
 
+        resetFeedingBal.setOnAction(event -> {
+            AttendanceTemporary attendanceTemporary = studentTableView.getSelectionModel().getSelectedItem();
+            if(attendanceTemporary != null){
+                resetFeeding(attendanceTemporary.getStudent());
+            }
+        });
+
         newAttendancePayment.setOnAction(event -> {
             try{
                 AttendanceTemporary attendanceTemporary = studentTableView.getSelectionModel().getSelectedItem();
@@ -827,6 +837,20 @@ public class salesDetailsFormController implements Initializable{
                 totalFeeding.setVisible(true);
             }else totalFeeding.setVisible(false);
         });
+    }
+
+    private void resetFeeding(Student student) {
+        if(Utils.authorizeUser()) {
+            TextInputDialog amount = new TextInputDialog();
+            amount.setTitle("New Amount");
+            amount.setHeaderText("Enter the new Feeding Fee Balance:");
+            amount.setContentText("The feeding fee will be reset to this new value");
+            Optional<String> result = amount.showAndWait();
+            if(result.isPresent() && Double.valueOf(result.get()) != student.getAccount().getFeedingFeeCredit()) {
+//                StudentDao studentDao =new StudentDao();
+                studentDao.resetFeedingFee(student,Double.valueOf(result.get()));
+            }
+        }
     }
 
     private void loadData() {

@@ -224,21 +224,20 @@ public class Student {
     public Boolean hasFeedingCredit(){
         return this.getAccount().getFeedingFeeCredit()>0;
     }
+
     public Boolean debitFeedingAccount(Double amnt){
        this.getAccount().setFeedingFeeCredit(this.getAccount().getFeedingFeeCredit()-amnt);
        return  true;
     }
 
     public Boolean addNewFeedingFeeCredit(Double amnt){
-        System.out.print("Adding new feeding creditn : "+amnt);
        try{
            this.getAccount().setFeedingFeeCredit(this.getAccount().getFeedingFeeCredit() + amnt);
-
            /**
             * for semi-periodic payment when the balance gets back to zero, hnge to student to daily.
             */
-           if(this.getFeedingStatus() ==FeedingStatus.SEMI_PERIODIC){
-               if(this.getAccount().getFeedingFeeCredit() ==0){
+           if(this.getFeedingStatus() == FeedingStatus.SEMI_PERIODIC){
+               if(this.getAccount().getFeedingFeeCredit() == 0){
                    this.setFeedingStatus(FeedingStatus.DAILY);
                    StudentDao studentDao =new StudentDao();
                    studentDao.updateStudentRecord(this);
@@ -251,6 +250,26 @@ public class Student {
        }
        return true;
     }
+
+//    public Boolean resetFeedingFee(Double amount) {
+//        try {
+//            //we cannot reset the feeding fee for students who do not pay feeding fee unless the new amount is 0.00
+////            if(!this.getPayFeeding() && amount != 0)
+////                return false;
+//            this.getAccount().setFeedingFeeCredit(amount);
+//
+//            if(this.getFeedingStatus() == FeedingStatus.SEMI_PERIODIC) {
+//                if(this.getAccount().getFeedingFeeCredit() == 0) {
+//                    this.setFeedingStatus(FeedingStatus.DAILY);
+//                }
+//            }
+//            StudentDao studentDao =new StudentDao();
+//            studentDao.updateStudentRecord(this);
+//            return true;
+//        }catch (Exception e) {
+//            return false;
+//        }
+//    }
 
 //    public String  convertFileContentToBlob(String filePath) {
 //        ByteArrayOutputStream baos =null;

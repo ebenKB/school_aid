@@ -116,6 +116,7 @@
          <contextMenu>
             <ContextMenu>
               <items>
+                  <MenuItem fx:id="resetFeedingBal" mnemonicParsing="false" text="Reset Feeding Fee Balance" />
                 <MenuItem fx:id="newAttendancePayment" mnemonicParsing="false" text="Make Payment" />
               </items>
             </ContextMenu>
@@ -139,11 +140,11 @@
          <children>
             <VBox fx:id="fieldsBox" spacing="10.0" visible="false">
                <children>
-                  <HBox alignment="CENTER_LEFT" spacing="80.0">
+                  <HBox alignment="CENTER_LEFT" spacing="20.0">
                      <children>
-                        <CheckBox fx:id="debtCheck" mnemonicParsing="false" selected="true" text="TOTAL DEBT" textFill="#fbe704" />
-                        <CheckBox fx:id="creditCheck" mnemonicParsing="false" selected="true" text="TOTAL CREDIT" textFill="#fbe704" />
-                        <CheckBox fx:id="feedingCheck" layoutX="59.0" layoutY="10.0" mnemonicParsing="false" selected="true" text="FEEDING" textFill="#fbe704" />
+                        <CheckBox fx:id="debtCheck" mnemonicParsing="false" prefHeight="17.0" prefWidth="124.0" selected="true" text="TOTAL DEBT" textFill="#fbe704" />
+                        <CheckBox fx:id="creditCheck" mnemonicParsing="false" prefHeight="17.0" prefWidth="119.0" selected="true" text="TOTAL CREDIT" textFill="#fbe704" />
+                        <CheckBox fx:id="feedingCheck" layoutX="59.0" layoutY="10.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="106.0" selected="true" text="FEEDING" textFill="#fbe704" />
                      </children>
                   </HBox>
                   <HBox fx:id="filedsHbox" spacing="5.0">
@@ -169,7 +170,7 @@
             </VBox>
             <JFXButton fx:id="viewDetails" prefHeight="33.0" prefWidth="105.0" text="View" textFill="#fbfbfb">
                <graphic>
-                  <FontAwesomeIconView fx:id="eye" fill="#40bf15" glyphName="EYE" size="20" wrappingWidth="20.0" />
+                  <FontAwesomeIconView fx:id="eye" fill="#40bf15" glyphName="EYE" size="20" text="" wrappingWidth="20.0" />
                </graphic>
             </JFXButton>
          </children>

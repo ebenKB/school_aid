@@ -104,20 +104,21 @@ public class sale implements Initializable{
 
     private void customizeCombobox(){
         // Define rendering of the list of values in ComboBox drop down.
-        classCombo.setCellFactory((comboBox) -> {
-            return new ListCell<Stage>() {
-                @Override
-                protected void updateItem(Stage item, boolean empty) {
-                    super.updateItem(item, empty);
-
-                    if (item == null || empty) {
-                        setText(null);
-                    } else {
-                        setText(item.getName());
-                    }
-                }
-            };
-        });
+        CustomCombo.getInstance().overrideCombo(classCombo);
+//        classCombo.setCellFactory((comboBox) -> {
+//            return new ListCell<Stage>() {
+//                @Override
+//                protected void updateItem(Stage item, boolean empty) {
+//                    super.updateItem(item, empty);
+//
+//                    if (item == null || empty) {
+//                        setText(null);
+//                    } else {
+//                        setText(item.getName());
+//                    }
+//                }
+//            };
+//        });
 
 // Define rendering of selected value shown in ComboBox.
         classCombo.setConverter(new StringConverter<Stage>() {

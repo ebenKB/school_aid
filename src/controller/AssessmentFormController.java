@@ -6,6 +6,8 @@ import com.jfoenix.controls.JFXListView;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -19,6 +21,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.util.Pair;
 
 import java.net.URL;
 import java.util.Iterator;
@@ -103,7 +106,7 @@ public class AssessmentFormController implements Initializable{
     private ObservableList<Stage> stagesLoaded = FXCollections.observableArrayList();
     private  ObservableList<Assessment> tempAssessment = FXCollections.observableArrayList();
     private  ObservableList<Student> tempStudents = FXCollections.observableArrayList();
-    private  ObservableList <Course> coursesLoaded = FXCollections.observableArrayList();
+    private  ObservableList <Pair<Course,Stage>> coursesLoaded = FXCollections.observableArrayList();
     FilteredList<Assessment> filteredAtt = new FilteredList<>(tempAssessment, e ->true);
     SortedList<Assessment> sortedList = new SortedList<>(filteredAtt);
 
@@ -161,7 +164,7 @@ public class AssessmentFormController implements Initializable{
              //we have to create assessment for the students
              System.out.println("cannot loop. We have to create for all students..");
              for (Student std : tempStudents) {
-                 createNewAssessment(std,newAssessments);
+                 createNewAssessment(std, newAssessments);
              }
          }else {
              for (Student std : tempStudents) {
@@ -223,7 +226,7 @@ public class AssessmentFormController implements Initializable{
     }
 
     private void initAssessmentTable(){
-//        assmntTableView.getItems().clear();
+
         nameCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getStudent().toString()));
 
         classScore.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -302,6 +305,8 @@ public class AssessmentFormController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        activateSearch();
+
         Task init = new Task() {
             @Override
             protected Object call() {
@@ -313,6 +318,7 @@ public class AssessmentFormController implements Initializable{
         init.setOnFailed(e->MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
         init.setOnSucceeded(e->MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
         new Thread(init).start();
+
 
         classCombo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->  {
             Stage stage = classCombo.getSelectionModel().getSelectedItem();
@@ -335,6 +341,12 @@ public class AssessmentFormController implements Initializable{
             activateSearch();
         });
 
+        classCombo.selectionModelProperty().addListener(new ChangeListener<SingleSelectionModel<Stage>>() {
+            @Override
+            public void changed(ObservableValue<? extends SingleSelectionModel<Stage>> observable, SingleSelectionModel<Stage> oldValue, SingleSelectionModel<Stage> newValue) {
+                activateSearch();
+            }
+        });
 //        stdListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 //            Task getData =new Task() {
 //                @Override
@@ -411,7 +423,7 @@ public class AssessmentFormController implements Initializable{
                 showChangeLabel();
         });
 
-        close.setOnAction(e->PDFMaker.getPDFMakerInstance().createReportForAllStudents());
+        close.setOnAction(e->Utils.closeEvent(e));
     }
 
     private void saveAssessment() {
@@ -469,19 +481,34 @@ public class AssessmentFormController implements Initializable{
         tempAssessment.clear();
         tempStudents.clear();
 
-        if ((!coursesLoaded.contains(course)) ) {
+
+        if ((!coursesLoaded.contains(new Pair<>(course,stage)))){
             System.out.println("we have to load the course");
+
+//            tempAssessment.clear();
+
             tempStudents.addAll(studentDao.getStudentFromClass(stage));
-            tempAssessment.addAll(assessmentDao.getAssessment(course));
-            students.addAll(tempStudents);
+            List<Assessment> assessmentList = assessmentDao.getAssessment(course,stage);
+            for(Assessment as : assessmentList){
+                if(! tempAssessment.contains(as)){
+                    tempAssessment.add(as);
+                }
+            }
+//            tempAssessment.addAll(assessmentDao.getAssessment(course));
+            for(Student s:tempStudents) {
+                if(!students.contains(s)){
+                    students.add(s);
+                }
+            }
             assessments.addAll(tempAssessment);
             stagesLoaded.add(stage);
-            coursesLoaded.add(course);
+            coursesLoaded.add(new Pair<>(course,stage));
         }else {
             System.out.println("the course is already loaded...");
             for (Assessment a: assessments ) {
                 if(a.getCourse().getName().toLowerCase().equals(course.getName().toLowerCase())  && a.getStudent().getStage().getId().equals(stage.getId())) {
                     tempAssessment.add(a);
+                    setTableViewColumns();
                 }
             }
         }
@@ -499,7 +526,26 @@ public class AssessmentFormController implements Initializable{
             });
         }));
 
+//        classCombo.selectionModelProperty().addListener(new ChangeListener<SingleSelectionModel<Stage>>() {
+//            @Override
+//            public void changed(ObservableValue<? extends SingleSelectionModel<Stage>> observable, SingleSelectionModel<Stage> oldValue, SingleSelectionModel<Stage> newValue) {
+//                filteredAtt.setPredicate((Predicate<? super  Assessment>) at ->{
+//                    if(newValue ==null)
+//                        return true;
+//                    Stage stage = newValue.getSelectedItem();
+//                    return checkIfClass(stage,at.getStudent());
+//                });
+//            }
+//        });
+//
         sortedList.comparatorProperty().bind(assmntTableView.comparatorProperty());
         assmntTableView.setItems(sortedList);
+//    }
+
+//    private Boolean checkIfClass(Stage stage,Student student){
+//       if(student.getStage().getName().toLowerCase().contains(stage.getName().toLowerCase()))
+//           return true;
+//       return false;
     }
+
 }
