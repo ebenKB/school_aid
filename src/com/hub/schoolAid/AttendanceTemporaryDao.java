@@ -37,6 +37,7 @@ public class AttendanceTemporaryDao {
 
     public  void markPresent(AttendanceTemporary attendanceTemporary){
         attendanceTemporary.setPresent(Boolean.TRUE);
+        //check if the student pays feeding fee
         if(attendanceTemporary.getStudent().getPayFeeding()){
             if(attendanceTemporary.getStudent().getFeedingStatus() != Student.FeedingStatus.DAILY){
                 if(attendanceTemporary.getFeedingFee() > attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()){

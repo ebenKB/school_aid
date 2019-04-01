@@ -39,11 +39,11 @@ public class Utils {
     });
     }
 
-    public static void logPayment(Student student, String description, String paidBy, LocalDate date, Double amount){
-
-        TransactionLogger transactionLogger = new TransactionLogger(student.getId(),description,paidBy,date,amount);
-        TransactionLoggerDao loggerDao = new TransactionLoggerDao();
-        loggerDao.logTransaction(transactionLogger);
+    public static void logPayment(Student student, String description, String paidBy, Double amount){
+        TransactionLoggerDao.getTransactionLoggerDaoInstance().LogTransaction(student.getId(), paidBy, description, amount);
+//        TransactionLogger transactionLogger = new TransactionLogger(student.getId(),description,paidBy,date,amount);
+//        TransactionLoggerDao loggerDao = new TransactionLoggerDao();
+//        loggerDao.logTransaction(transactionLogger);
     }
 
     public static Boolean authorizeUser() {

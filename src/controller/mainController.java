@@ -46,6 +46,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -371,6 +372,28 @@ public class mainController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         todayLabel.setText("Today is: "+ LocalDate.now().getDayOfWeek().toString());
+        Task check =new Task() {
+            @Override
+            protected Object call() throws Exception {
+            Boolean canCheck =true;
+        while (canCheck){
+            if(data != null){
+                Iterator<Student>studentIterator = data.iterator();
+                while(studentIterator.hasNext()) {
+                    Student s = studentIterator.next();
+                    if(s.getAccount().getFeedingFeeCredit() < 0) {
+                        System.out.println(s.toString() + "is owing Feeding Fee");
+                    }
+                    if(!studentIterator.hasNext())
+                        canCheck=false;
+                }
+            }
+        }
+                return null;
+            }
+        };
+        new Thread(check).start();
+
         //check whether the term has been initialized
        PauseTransition show = new PauseTransition(Duration.seconds(5));
         show.setOnFinished(event -> {

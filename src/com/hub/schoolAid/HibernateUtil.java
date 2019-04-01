@@ -1,6 +1,11 @@
 package com.hub.schoolAid;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -14,11 +19,18 @@ public class HibernateUtil {
     public static Boolean initDB() {
         try
         {
-            factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+            Map map =new HashMap();
+            map.put("javax.persistence.jdbc.password", "thishubkbs*");
+            factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME, map);
             new UserDao().createDefaultAdmin();
             return true;
         }catch (Exception e){
             e.printStackTrace();
+            Alert alert =new Alert(Alert.AlertType.ERROR,"", ButtonType.OK);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error Connecting to Database");
+            alert.setContentText(e.toString());
+
             return  false;
         }
     }

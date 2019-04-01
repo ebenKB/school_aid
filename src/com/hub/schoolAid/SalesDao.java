@@ -53,6 +53,23 @@ private EntityManager em;
     }
 
     /**
+     *@param payFees when set to true, the sales will be added for only those who pay school fees,
+     *               When set to false, the sales will be added for only those who do not pay school fees.
+     *
+    **/
+    public Boolean sellToAllStudents(Sales sales,Item item, Boolean payFees)throws  HibernateException {
+        StudentDao studentDao = new StudentDao();
+        try {
+            List<Student> students = studentDao.getAllStudents(payFees);
+            sellToMany(students,sales,item);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
      * This method sells an item to a particular class
      * @param sales the sales to add
      * @param stage  the class you are selling the item to
@@ -81,7 +98,6 @@ private EntityManager em;
             newSale.setStudent(s);
             newSale.setTotalcost(sales.getTotalcost());
             newSale.setAmountPaid(sales.getAmountPaid());
-//            s.getSales().add(newSale);
             em.persist(newSale);
         }
         HibernateUtil.commit();

@@ -66,14 +66,14 @@ public class PDFMaker {
 
         try {
              for(TerminalReport report:reports) {
-                 if (report.getStudent().getStage().getName().toLowerCase().equals("class 4")) {
+                 if (report.getStudent().getStage().getName().toLowerCase().equals("form 2")) {
                  //prepare pdf document
                  PDPage pdPage = new PDPage(PDRectangle.A5);
                  PDRectangle mediaBox = pdPage.getMediaBox();
 
                  //add header text
                  String schName = "THE FATHER'S MERCY SCHOOL";
-                 String address = "Location: Sowutuom - Accra, Contact: 0547 196 410 / 057";
+                 String address = "Location: Sowutuom - Accra, Contact: ";
                  String heading = "TERMINAL REPORT";
 
                  //student details
@@ -393,7 +393,7 @@ public class PDFMaker {
 
                 //add header text
                 String schName = "THE FATHER'S MERCY SCHOOL";
-                String address = "Location: Sowutuom - Accra, Contact: 0547 196 410 / 0579 459 173";
+                String address = "Location: Sowutuom - Accra, Contact:";
                 String heading = "STUDENT BILL FOR SECOND TERM";
 
                 //student details
@@ -664,7 +664,7 @@ public class PDFMaker {
 
            //add header text
            String schName = "THE FATHER'S MERCY SCHOOL";
-           String address ="Location: Sowutuom - Accra, Contact: 0275900513/ 0000000000";
+           String address ="Location: Sowutuom - Accra, Contact:";
            String heading = "REPORT ON ATTENDANCE FOR" + " " + this.dateToString(date);
 
            pdDocument.addPage(pdPage);

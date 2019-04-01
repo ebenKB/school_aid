@@ -207,6 +207,24 @@ public class StudentDao {
            em.close();
         }
     }
+
+    public List<Student> getAllStudents(Boolean payFees)throws HibernateException{
+        List<Student> studentList;
+        try{
+            em=HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            studentList = em.createQuery("from students S where S.paySchoolFees = ? order by firstname asc ")
+                    .setParameter(0,payFees).getResultList();
+            return studentList;
+        }catch (HibernateException e){
+            e.printStackTrace();
+            return null;
+        }
+        finally {
+            em.close();
+        }
+    }
+
     /**
      *
      * @param student the student to remove from the database
@@ -275,21 +293,27 @@ public class StudentDao {
             StudentAccount studentAccount=em.find(StudentAccount.class,account.getId());
             studentAccount.setFeedingFeeCredit(account.getFeedingFeeCredit());
             studentAccount.setFeeToPay(account.getFeeToPay());
+
+            System.out.println("this is the student account"+ studentAccount);
             HibernateUtil.commit();
             HibernateUtil.close();
         }catch (Exception e){
+            System.out.println(e);
             return  false;
         }
         return true;
     }
 
     public Boolean resetFeedingFee(Student student, Double amount) {
+        System.out.println("we want to reset this student's account" + "amount: "+ amount);
         try {
             //we cannot reset the feeding fee for students who do not pay feeding fee unless the new amount is 0.00
 //            if(!this.getPayFeeding() && amount != 0)
 //                return false;
             StudentAccount studentAccount = em.find(StudentAccount.class,student.getAccount().getId());
             studentAccount.setFeedingFeeCredit(amount);
+            HibernateUtil.commit();
+            updateAccount(studentAccount);
 
             if(student.getFeedingStatus() == Student.FeedingStatus.SEMI_PERIODIC) {
                 if(studentAccount.getFeedingFeeCredit() == 0) {
@@ -297,7 +321,6 @@ public class StudentDao {
                 }
             }
 
-            HibernateUtil.commit();
             HibernateUtil.close();
 
             return true;

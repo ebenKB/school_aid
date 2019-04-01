@@ -384,3 +384,10 @@
     -fx-text-fill: #fff;
 }
 
+/*align figures in table to the right */
+#unitPriceCol,
+#amntPaidCol,
+#totlaCol,
+#balCol{
+    -fx-alignment: right;
+}

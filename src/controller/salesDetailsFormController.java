@@ -207,8 +207,10 @@ public class salesDetailsFormController implements Initializable{
     public ObservableList<Student> studentdata = FXCollections.observableArrayList();
 //    public ObservableList<Student> attendanceData = FXCollections.observableArrayList();
     public ObservableList<AttendanceTemporary> attendanceTemporaries = FXCollections.observableArrayList();
-    FilteredList<AttendanceTemporary> filteredAtt = new FilteredList<>(attendanceTemporaries,e ->true);
+    FilteredList<AttendanceTemporary> filteredAtt = new FilteredList<>(attendanceTemporaries, e ->true);
     SortedList<AttendanceTemporary> sortedList = new SortedList<>(filteredAtt);
+    FilteredList<Sales>filteredSales = new FilteredList<>(salesdata, e ->true);
+    SortedList<Sales>sortedSales = new SortedList<>(filteredSales);
 
     private Image successImg = new Image("/assets/success.png");
     ImageView imageView;
@@ -567,6 +569,7 @@ public class salesDetailsFormController implements Initializable{
                 Sales sales = param.getValue();
                 return new SimpleStringProperty(sales.getStudent().toString());
             });
+
             itemCol.setCellValueFactory(param -> {
                 Sales sales = param.getValue();
                 return new SimpleStringProperty(sales.getItem().getName());
@@ -601,7 +604,7 @@ public class salesDetailsFormController implements Initializable{
             });
 
             dateCol.setCellValueFactory(param -> {
-                if(param.getValue().getDate() ==null){
+                if(param.getValue().getDate() == null){
                     return new SimpleStringProperty("NOT FOUND");
                 }
                 return new SimpleStringProperty(param.getValue().getDate().toString());
@@ -673,7 +676,7 @@ public class salesDetailsFormController implements Initializable{
         salesTableView.setOnMouseClicked(event -> studentListView.setVisible(Boolean.FALSE));
 
         name.setOnKeyReleased(event -> {
-            activateListView();
+            activateSearch();
         });
 
         try{
@@ -694,14 +697,12 @@ public class salesDetailsFormController implements Initializable{
 
                         if(attendanceTemporaries !=null){
 //                            studentdata.clear();
-
                         }
                         studentListView.setVisible(Boolean.FALSE);
 
 //                      toggleTableView(studentTableView,salesTableView);
 //                        showAttendanceTable();
                         populateStudentTable();
-                        System.out.println("This is the total in the list:"+studentdata.size());
                     }
                 }
             });
@@ -728,7 +729,7 @@ public class salesDetailsFormController implements Initializable{
         studentTableView.getItems().addListener(new ListChangeListener<AttendanceTemporary>() {
             @Override
             public void onChanged(Change<? extends AttendanceTemporary> c) {
-                Alert alert =new Alert(Alert.AlertType.WARNING,"Something changed",ButtonType.OK);
+                Alert alert =new Alert(Alert.AlertType.WARNING, "Something changed",ButtonType.OK);
                 alert.show();
             }
         });
@@ -848,7 +849,7 @@ public class salesDetailsFormController implements Initializable{
             Optional<String> result = amount.showAndWait();
             if(result.isPresent() && Double.valueOf(result.get()) != student.getAccount().getFeedingFeeCredit()) {
 //                StudentDao studentDao =new StudentDao();
-                studentDao.resetFeedingFee(student,Double.valueOf(result.get()));
+                studentDao.resetFeedingFee(student, Double.valueOf(result.get()));
             }
         }
     }
@@ -922,7 +923,7 @@ public class salesDetailsFormController implements Initializable{
                 studentDao.updateAccount(attendanceTemporary.getStudent().getAccount());
 
                 Utils.logPayment(attendanceTemporary.getStudent(),"Feeding Fee Payment for"+" "+
-                        attendanceTemporary.getStudent().toString(),pair.getValue(),LocalDate.now(),amount );
+                        attendanceTemporary.getStudent().toString(),pair.getValue(),amount );
             });
 //            if(result.isPresent() && result.get() != null) {
 //                Double amount = Double.valueOf(result.get());
@@ -954,21 +955,34 @@ public class salesDetailsFormController implements Initializable{
 //        }
 //    }
 
-    private void activateListView() {
-        name.textProperty().addListener(((observable, oldValue, newValue) -> {
-            filteredAtt.setPredicate( (Predicate < ? super  AttendanceTemporary>) at ->{
-               if( newValue == null || newValue.isEmpty() ) {
-                   return  true;
-               }
+    private void activateSearch() {
+        if(attendanceRadio.isSelected()) {
+            name.textProperty().addListener(((observable, oldValue, newValue) -> {
+                filteredAtt.setPredicate( (Predicate < ? super  AttendanceTemporary>) at ->{
+                    if( newValue == null || newValue.isEmpty() ) {
+                        return  true;
+                    }
 
-               String lowerVal = newValue.toLowerCase();
-                 return  viewAttendanceController.checkIfStudent(lowerVal, at.getStudent());
-            });
-        }));
+                    String lowerVal = newValue.toLowerCase();
+                    return  viewAttendanceController.checkIfStudent(lowerVal, at.getStudent());
+                });
+            }));
+            sortedList.comparatorProperty().bind(studentTableView.comparatorProperty());
+            studentTableView.setItems(sortedList);
+        }else if(salesRadio.isSelected()) {
+            name.textProperty().addListener(((observable, oldValue, newValue) -> {
+                filteredSales.setPredicate( (Predicate < ? super Sales >) sale -> {
+                    if( newValue == null || newValue.isEmpty() ) {
+                        return  true;
+                    }
 
-        sortedList.comparatorProperty().bind(studentTableView.comparatorProperty());
-        studentTableView.setItems(sortedList);
-
+                    String lowerVal = newValue.toLowerCase();
+                    return  viewAttendanceController.checkIfStudent(lowerVal, sale.getStudent());
+                });
+            }));
+            sortedSales.comparatorProperty().bind(salesTableView.comparatorProperty());
+            salesTableView.setItems(sortedSales);
+        }
     }
 
     private void fetchSalesData(Student student) {
@@ -995,7 +1009,7 @@ public class salesDetailsFormController implements Initializable{
             input.setGraphic(imageView);
             input.setTitle("New Payment");
             input.setContentText("How much is the student paying?");
-            String description ="Add Payment for\n"+student.toString()+" "+"["+student.getStage().getName()+"]\n" +
+            String description = "Add Payment for\n"+student.toString()+" "+"["+student.getStage().getName()+"]\n" +
                     "as payment for "+sales.getItem().getName().toUpperCase();
             input.setHeaderText(description);
             Optional<String> result = input.showAndWait();
@@ -1005,21 +1019,24 @@ public class salesDetailsFormController implements Initializable{
                 alert.setHeaderText("Are you sure you want to make payment of "+result.get()+"\nfor"+" "+sales.getItem().getName()+"\n");
                 Optional<ButtonType>result2 = alert.showAndWait();
 
-                if(result2.isPresent()&& result2.get()==ButtonType.YES){
+                if(result2.isPresent()&& result2.get()== ButtonType.YES){
                     Task payment = new Task() {
                         @Override
                         protected Object call() {
-                            salesDao.payForSales(sales,Double.valueOf(result.get()));
+                            salesDao.payForSales(sales, Double.valueOf(result.get()));
+                            sales.setAmountPaid((sales.getAmountPaid()+Double.valueOf(result.get())));
+                            TransactionLoggerDao.getTransactionLoggerDaoInstance().LogTransaction(sales.getStudent().getId(), sales.getStudent().toString(), description, sales.getAmountPaid());
+
                             return null;
                         }
                     };
-                    payment.setOnRunning(event -> MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Updating sales..."));
+                    payment.setOnRunning(event -> MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Updating sales Record"));
                     payment.setOnSucceeded(event -> {
                         MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
                         Notification.getNotificationInstance().notifySuccess("The record has been updated","success");
                         populateSalesTable();
 
-                        Utils.logPayment(student,description,"",LocalDate.now(),Double.valueOf(result.get()) );
+                        Utils.logPayment(student, description,"", Double.valueOf(result.get()) );
                     });
                     payment.setOnFailed(event -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
                     new Thread(payment).start();
