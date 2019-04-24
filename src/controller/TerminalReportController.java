@@ -222,8 +222,6 @@ public class TerminalReportController implements Initializable {
                   didUpdateRow(row);
                 }
             });
-
-
             return row;
         });
 

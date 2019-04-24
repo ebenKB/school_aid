@@ -26,7 +26,10 @@ public class StudentConductDao {
               return null;
           }
       }catch (Exception e){
+          HibernateUtil.close();
           return null;
+      } finally {
+          HibernateUtil.close();
       }
     }
 

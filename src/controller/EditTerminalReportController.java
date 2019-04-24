@@ -55,6 +55,7 @@ public class EditTerminalReportController implements Initializable{
     FilteredList<StudentConduct> filteredList = new FilteredList<>(conducts, e -> true);
     FilteredList<Remark> filteredRemarks = new FilteredList<>(remarks, e -> true);
     SortedList<StudentConduct> sortedList = new SortedList<>(filteredList);
+    TerminalReportDao reportDao = new TerminalReportDao();
 
     public void init(TerminalReport report,TerminalReportController c){
         this.report = report;
@@ -67,7 +68,6 @@ public class EditTerminalReportController implements Initializable{
         if(isValid()) {
             this.report.setConduct(newConduct.getText().trim());
             this.report.setHeadTracherRemark(newRemark.getText().trim());
-            TerminalReportDao reportDao =new TerminalReportDao();
             reportDao.updateTerminalReport(this.report);
             terminalReportController.updateReportTable(report);
         }

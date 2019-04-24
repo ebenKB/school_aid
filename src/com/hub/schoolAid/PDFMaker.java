@@ -66,7 +66,7 @@ public class PDFMaker {
 
         try {
              for(TerminalReport report:reports) {
-                 if (report.getStudent().getStage().getName().toLowerCase().equals("form 2")) {
+                if (report.getStudent().getStage().getClassValue() == 13) { // start class condition check
                  //prepare pdf document
                  PDPage pdPage = new PDPage(PDRectangle.A5);
                  PDRectangle mediaBox = pdPage.getMediaBox();
@@ -76,10 +76,11 @@ public class PDFMaker {
                  String address = "Location: Sowutuom - Accra, Contact: ";
                  String heading = "TERMINAL REPORT";
 
-                 //student details
-                 String name = "Name: " + report.getStudent().toString().toUpperCase() + "                     Class: " + report.getStudent().getStage().getName().toUpperCase();
-                 String term = "Term ends: 21st Dec. 2018                Next Term Begins: 8th January, 2019";
-                 String attendance = "First Term Report        Attendance: .........out of.........";
+                 //student details\
+                 String name = "Name: " + report.getStudent().toString().toUpperCase() + "                Class: " + report.getStudent().getStage().getName().toUpperCase();
+                 String term = "Term ends: 17th August 2019                Next Term Begins: 7th May, 2019";
+//                 String attendance = "Second Term Report        Attendance: .........out of.........";
+                    String attendance = "Second Term Report";
                  float nameGap = ((mediaBox.getWidth()) - (font.getStringWidth(name) / 1000));
 
                  pdDocument.addPage(pdPage);
@@ -222,7 +223,8 @@ public class PDFMaker {
                  float tableWidth = pdPage.getMediaBox().getWidth() - (2 * margin);
 
                  //add table
-                 BaseTable baseTable = new BaseTable(yStart, yStartNewPage, 20, tableWidth, (margin), pdDocument, pdPage, true, true);
+                    // use ystart to push the table top or down
+                 BaseTable baseTable = new BaseTable(yStart-30, yStartNewPage, 20, tableWidth, (margin), pdDocument, pdPage, true, true);
 
                  //Create Header Row
                  Row<PDPage> headerRow = baseTable.createRow(30f);
@@ -231,50 +233,55 @@ public class PDFMaker {
                  cell.setAlign(HorizontalAlignment.CENTER);
                  cell.setValign(VerticalAlignment.MIDDLE);
                  cell.setFillColor(Color.lightGray);
-                 cell.setTextColor(Color.WHITE);
+                 cell.setTextColor(Color.BLACK);
 
                  cell = headerRow.createCell(14, "CLASS SCORE (30%)");
                  cell.setAlign(HorizontalAlignment.CENTER);
                  cell.setValign(VerticalAlignment.MIDDLE);
                  cell.setFillColor(Color.lightGray);
-                 cell.setTextColor(Color.WHITE);
+                 cell.setTextColor(Color.BLACK);
 
                  cell = headerRow.createCell(14, "EXAM SCORE (70%)");
                  cell.setAlign(HorizontalAlignment.CENTER);
                  cell.setValign(VerticalAlignment.MIDDLE);
                  cell.setFillColor(Color.lightGray);
-                 cell.setTextColor(Color.WHITE);
+                 cell.setTextColor(Color.BLACK);
 
                  cell = headerRow.createCell(10, "TOTAL (100%)");
                  cell.setAlign(HorizontalAlignment.CENTER);
                  cell.setValign(VerticalAlignment.MIDDLE);
                  cell.setFillColor(Color.lightGray);
-                 cell.setTextColor(Color.WHITE);
+                 cell.setTextColor(Color.BLACK);
 
                  cell = headerRow.createCell(12, "GRADE");
                  cell.setAlign(HorizontalAlignment.CENTER);
                  cell.setValign(VerticalAlignment.MIDDLE);
                  cell.setFillColor(Color.lightGray);
-                 cell.setTextColor(Color.WHITE);
+                 cell.setTextColor(Color.BLACK);
 
                  cell = headerRow.createCell(20, "REMARK");
                  cell.setAlign(HorizontalAlignment.CENTER);
                  cell.setValign(VerticalAlignment.MIDDLE);
                  cell.setFillColor(Color.lightGray);
-                 cell.setTextColor(Color.WHITE);
+                 cell.setTextColor(Color.BLACK);
 
                  cell.setFillColor(Color.lightGray);
                  cell.setAlign(HorizontalAlignment.CENTER);
                  cell.setValign(VerticalAlignment.MIDDLE);
-                 cell.setTextColor(Color.WHITE);
+                 cell.setTextColor(Color.BLACK);
                  baseTable.addHeaderRow(headerRow);
 
                  //search for all the student's assessment
                  List<Assessment> foundAss = searchAssessment(report.getStudent().getId(), assessmentList);
-                 if (foundAss.size() < 8) {
-                     int diff = 10 - foundAss.size();
+                     /**
+                      * make sure that every terminal report has at least 10 table rows.
+                      * if the student has less than eight subjects, we add excess table rows
+                      * to cater for the remaining table rows.
+                      */
+                 if (foundAss.size() < 12) {
+                     int diff = 12 - foundAss.size();
                      for (int i = 0; i < diff; i++) {
-                         System.out.println("adding onto stack..." + (10 - foundAss.size()));
+                         System.out.println("adding onto stack..." + (12 - foundAss.size()));
                          foundAss.add(new Assessment());
                      }
                  }
@@ -311,8 +318,8 @@ public class PDFMaker {
                      assessmentList.remove(assessment);
                  }
                  baseTable.draw();
-             }
-                generateAccountReport(pdDocument,report.getStudent());
+             } // end class condition check
+//                generateAccountReport(pdDocument,report.getStudent());
              }
             } catch (Exception e) {
 //                e.printStackTrace();
@@ -366,12 +373,12 @@ public class PDFMaker {
             //Add items
             itemList.put("Toilet Roll", "4 pieces");
             itemList.put("Camel/Dettol Antiseptic", "1 Medium Size");
-            itemList.put("Powdered Soap", "1 kg");
+            itemList.put("Powdered Soap Only", "1 kg");
 
         }else{
             //Add items
             itemList.put("Toilet Roll", "2 pieces");
-            itemList.put("Powdered Soap", "500g");
+            itemList.put("Powdered Soap Only", "500g");
         }
             return itemList;
     }
@@ -478,7 +485,7 @@ public class PDFMaker {
                 cell.setAlign(HorizontalAlignment.CENTER);
                 cell.setValign(VerticalAlignment.MIDDLE);
                 cell.setFillColor(Color.lightGray);
-                cell.setTextColor(Color.WHITE);
+                cell.setTextColor(Color.BLACK);
 //                cell.setFont(font);
                 cell.setFontSize(13);
                 cell.setFont(PDType1Font.HELVETICA_BOLD);
@@ -487,7 +494,7 @@ public class PDFMaker {
                 cell.setAlign(HorizontalAlignment.CENTER);
                 cell.setValign(VerticalAlignment.MIDDLE);
                 cell.setFillColor(Color.lightGray);
-                cell.setTextColor(Color.WHITE);
+                cell.setTextColor(Color.BLACK);
 //                cell.setFont(font);
                 cell.setFontSize(13);
                 cell.setFont(PDType1Font.HELVETICA_BOLD);
@@ -509,6 +516,7 @@ public class PDFMaker {
 
                 //only for students who do not pay school fees
                 if(! student.getPaySchoolFees()) {
+                    // add maintenance dues
                     Row < PDPage > row2 = baseTable.createRow(30f);
                     cell = row2.createCell(bigSize,"First Aid / Maintenance");
                     cell.setAlign(HorizontalAlignment.LEFT);
@@ -517,6 +525,19 @@ public class PDFMaker {
 
                     cell = row2.createCell(smallSize,"20.00");
                     total+=20.00;
+                    cell.setAlign(HorizontalAlignment.RIGHT);
+                    cell.setValign(VerticalAlignment.MIDDLE);
+                    cell.setFontSize(12);
+
+                    // add computer facility fee
+                    Row < PDPage > comp = baseTable.createRow(30f);
+                    cell = comp.createCell(bigSize,"Computer User Fee");
+                    cell.setAlign(HorizontalAlignment.LEFT);
+                    cell.setValign(VerticalAlignment.MIDDLE);
+                    cell.setFontSize(12);
+
+                    cell = comp.createCell(smallSize,"10.00");
+                    total+=10.00;
                     cell.setAlign(HorizontalAlignment.RIGHT);
                     cell.setValign(VerticalAlignment.MIDDLE);
                     cell.setFontSize(12);
@@ -609,7 +630,7 @@ public class PDFMaker {
                 cell.setAlign(HorizontalAlignment.LEFT);
                 cell.setValign(VerticalAlignment.MIDDLE);
                 cell.setFillColor(Color.lightGray);
-                cell.setTextColor(Color.WHITE);
+                cell.setTextColor(Color.BLACK);
                 cell.setFont(font);
                 cell.setFontSize(13);
 
@@ -617,14 +638,16 @@ public class PDFMaker {
                 cell.setAlign(HorizontalAlignment.LEFT);
                 cell.setValign(VerticalAlignment.MIDDLE);
                 cell.setFillColor(Color.lightGray);
-                cell.setTextColor(Color.WHITE);
+                cell.setTextColor(Color.BLACK);
                 cell.setFont(font);
                 cell.setFontSize(13);
 
                 Set set;
-                if(student.getStage().getClassValue() < 4){
+                // create items from creche - kg1
+                if(student.getStage().getClassValue() <= 4){
                    set = createItemList(true).entrySet();
                } else {
+                    // create item list from kg2 to jhs
                    set = createItemList(false).entrySet();
                }
 
@@ -722,7 +745,7 @@ public class PDFMaker {
 
            //add table
            float tableWidth = pdPage.getMediaBox().getWidth() - (2 * margin);
-           BaseTable baseTable = new BaseTable(yStart,yStartNewPage,20,tableWidth,(margin),pdDocument,pdPage,true,true);
+           BaseTable baseTable = new BaseTable(yStart ,yStartNewPage,20,tableWidth,(margin),pdDocument,pdPage,true,true);
 
            //Create Header Row
            Row<PDPage>headerRow = baseTable.createRow(15f);
@@ -732,37 +755,37 @@ public class PDFMaker {
            cell.setAlign(HorizontalAlignment.CENTER);
            cell.setValign(VerticalAlignment.MIDDLE);
            cell.setFillColor(Color.lightGray);
-           cell.setTextColor(Color.WHITE);
+           cell.setTextColor(Color.BLACK);
 
            cell=headerRow.createCell(14,"CLASS");
            cell.setAlign(HorizontalAlignment.CENTER);
            cell.setValign(VerticalAlignment.MIDDLE);
            cell.setFillColor(Color.lightGray);
-           cell.setTextColor(Color.WHITE);
+           cell.setTextColor(Color.BLACK);
 
            cell = headerRow.createCell(14,"PAID");
            cell.setAlign(HorizontalAlignment.CENTER);
            cell.setValign(VerticalAlignment.MIDDLE);
            cell.setFillColor(Color.lightGray);
-           cell.setTextColor(Color.WHITE);
+           cell.setTextColor(Color.BLACK);
 
            cell=headerRow.createCell(10,"AMOUNT PAID");
            cell.setAlign(HorizontalAlignment.CENTER);
            cell.setValign(VerticalAlignment.MIDDLE);
            cell.setFillColor(Color.lightGray);
-           cell.setTextColor(Color.WHITE);
+           cell.setTextColor(Color.BLACK);
 
 //           cell = headerRow.createCell(15,"DATE");
 //           cell.setAlign(HorizontalAlignment.CENTER);
 //           cell.setValign(VerticalAlignment.MIDDLE);
 //           cell.setFillColor(Color.lightGray);
-//           cell.setTextColor(Color.WHITE);
+//           cell.setTextColor(Color.BLACK);
 
 
            cell.setFillColor(Color.lightGray);
            cell.setAlign(HorizontalAlignment.CENTER);
            cell.setValign(VerticalAlignment.MIDDLE);
-           cell.setTextColor(Color.WHITE);
+           cell.setTextColor(Color.BLACK);
            baseTable.addHeaderRow(headerRow);
 
            for (Attendance attendance:attendanceList){
@@ -806,6 +829,12 @@ public class PDFMaker {
        savePDFToLocation(pdDocument);
     }
 
+    /**
+     * this function searches for all the assessment for one student and returns all the assessment for that student
+     * @param searchItem student id
+     * @param sortedAssessment
+     * @return assessment for the student
+     */
     private static  List<Assessment> searchAssessment(Long searchItem,List<Assessment> sortedAssessment){
         System.out.println("------------------------------------------------------------------");
         for (Assessment as:sortedAssessment) {
@@ -815,7 +844,9 @@ public class PDFMaker {
 
         List<Assessment> found = new ArrayList<>();
         System.out.println("SIZE OF THE SEARCH == " +sortedAssessment.size());
+        // loop through the sorted assessments
         for (int i=0; i < sortedAssessment.size(); i++){
+            // check if the assessment belongs to the student you are searching
             if(sortedAssessment.get(i).getStudent().getId().compareTo(searchItem)== 0){
                 Assessment assessment = sortedAssessment.get(i);
                 System.out.println(sortedAssessment.get(i).getStudent().getId() +" == "+searchItem+"at index: "+i +"SIZE ="+sortedAssessment.size());
@@ -879,13 +910,13 @@ public class PDFMaker {
            cell.setAlign(HorizontalAlignment.CENTER);
            cell.setValign(VerticalAlignment.MIDDLE);
            cell.setFillColor(Color.lightGray);
-           cell.setTextColor(Color.WHITE);
+           cell.setTextColor(Color.BLACK);
 
            cell=headerRow.createCell(30,"VALUE");
            cell.setAlign(HorizontalAlignment.CENTER);
            cell.setValign(VerticalAlignment.MIDDLE);
            cell.setFillColor(Color.lightGray);
-           cell.setTextColor(Color.WHITE);
+           cell.setTextColor(Color.BLACK);
 
            Row<PDPage> row = baseTable.createRow(10f);
            cell = row.createCell(40,"TOTAL FEEDING FEE");
