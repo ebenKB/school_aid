@@ -296,7 +296,7 @@ public class Student {
            return 0;
         int age=0;
         age = LocalDate.now().getYear() - date.getYear();
-        if(date.getMonth().getValue()<=LocalDate.now().getMonth().getValue())
+        if(date.getMonth().getValue() <= LocalDate.now().getMonth().getValue())
             return age;
         else return age-1;
     }

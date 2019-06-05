@@ -20,8 +20,8 @@ public class HibernateUtil {
         try
         {
             Map map =new HashMap();
-            map.put("javax.persistence.jdbc.password", "thishubkbs*");
-            factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME, map);
+//            map.put("javax.persistence.jdbc.password", "thishubkbs*");
+            factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
             new UserDao().createDefaultAdmin();
             return true;
         }catch (Exception e){

@@ -1,8 +1,8 @@
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
-     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
      http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
-     version="2.1">
+             version="2.1">
 
     <persistence-unit name="MY_PERSISTENCE">
         <description>
@@ -30,10 +30,10 @@
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/SchoolDBTest?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC" />
-            <property name="javax.persistence.jdbc.user" value="eben" />
-            <property name="javax.persistence.jdbc.password" value="thishubkbs*" />
-            <property name="hibernate.show_sql" value="false" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://remotemysql.com/p496rueDFN?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;useSSL=false" />
+            <property name="javax.persistence.jdbc.user" value="p496rueDFN" />
+            <property name="javax.persistence.jdbc.password" value="z4oZv2BKPc" />
+            <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="javax.persistence.jdbc.dialect" value="org.hibernate.dialect.MySQL55Dialect"/>
             <property name="hibernate.connection.provider_class" value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider" />

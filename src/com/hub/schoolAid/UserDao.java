@@ -59,8 +59,8 @@ public class UserDao {
       }catch (Exception e){
 
       }finally {
-         if(em != null)
-             em.close();
+//         if(em != null)
+//             em.close();
       }
     }
     public Boolean isExisting(String username) throws HibernateException{
