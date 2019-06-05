@@ -102,6 +102,7 @@ public class TerminalReportDao {
         return null;
     }
 
+
     public Boolean updateTerminalReport(TerminalReport report)  {
         try{
             em=HibernateUtil.getEntityManager();

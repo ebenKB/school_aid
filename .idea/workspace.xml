@@ -286,25 +286,12 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>newPay</find>
-      <find>new</find>
-      <find>addNew</find>
-      <find>The fa</find>
-      <find>gener</find>
-      <find>add payment</find>
-      <find>name</find>
-      <find>activa</find>
-      <find>popula</find>
-      <find>populate</find>
-      <find>studentNa</find>
-      <find>new p</find>
       <find>new payment</find>
       <find>newP</find>
       <find>how muc</find>
       <find>data</find>
       <find>Itera</find>
       <find>Iter</find>
-      <find>check</find>
       <find>col</find>
       <find>unitPrice</find>
       <find>feeding</find>
@@ -316,6 +303,19 @@
       <find>school</find>
       <find>reset</find>
       <find>updateA</find>
+      <find>term</find>
+      <find>init</find>
+      <find>cre</find>
+      <find>we want to reset</find>
+      <find>this is</find>
+      <find>powd</find>
+      <find>Term e</find>
+      <find>WHITE</find>
+      <find>rese</find>
+      <find>dao</find>
+      <find>popu</find>
+      <find>popul</find>
+      <find>check</find>
     </findStrings>
     <dirStrings>
       <dir>F:\SchoolAid 1.1.1</dir>
@@ -350,7 +350,6 @@
         <option value="$PROJECT_DIR$/src/controller/newAttendanceSheetController.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TermDao.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/GradeDao.java" />
-        <option value="$PROJECT_DIR$/src/controller/viewAttendanceController.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceDao.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StageDao.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TerminalReport.java" />
@@ -359,15 +358,10 @@
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentCell.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentConduct.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Remark.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TerminalReportDao.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentConductDao.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/RemarkDao.java" />
-        <option value="$PROJECT_DIR$/src/controller/EditTerminalReportController.java" />
         <option value="$PROJECT_DIR$/src/view/subject.fxml" />
         <option value="$PROJECT_DIR$/src/controller/SubjectFormController.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/AssessmentDao.java" />
         <option value="$PROJECT_DIR$/src/controller/AssessmentFormController.java" />
-        <option value="$PROJECT_DIR$/src/controller/TerminalReportController.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/SalesDao.java" />
         <option value="$PROJECT_DIR$/src/controller/sale.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLoggerDao.java" />
@@ -388,8 +382,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1680" />
-    <option name="height" value="1050" />
+    <option name="width" value="1920" />
+    <option name="height" value="1200" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectReloadState">
@@ -455,9 +449,12 @@
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.hub.schoolAid" />
-      <recent name="com.hub.schMgmtSys.model" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Eben.KB\Java Projects\SchoolMgmtSys\src\assets\students" />
+      <recent name="F:\Eben.KB\Java Projects\SchoolMgmtSys\src\students" />
+      <recent name="F:\Eben.KB\Java Projects\SchoolMgmtSys\src\com\hub\schoolAid" />
+      <recent name="F:\Eben.KB\Java Projects\SchoolMgmtSys\src\model" />
+      <recent name="F:\Eben.KB\Java Projects\SchoolMgmtSys\src\com\hub\schMgmtSys\assets\icons" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Eben.KB\Java Projects\SchoolMgmtSys\src\students" />
@@ -469,12 +466,9 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.hub.schMgmtSys.model" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\Eben.KB\Java Projects\SchoolMgmtSys\src\assets\students" />
-      <recent name="F:\Eben.KB\Java Projects\SchoolMgmtSys\src\students" />
-      <recent name="F:\Eben.KB\Java Projects\SchoolMgmtSys\src\com\hub\schoolAid" />
-      <recent name="F:\Eben.KB\Java Projects\SchoolMgmtSys\src\model" />
-      <recent name="F:\Eben.KB\Java Projects\SchoolMgmtSys\src\com\hub\schMgmtSys\assets\icons" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.hub.schoolAid" />
+      <recent name="com.hub.schMgmtSys.model" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -1508,11 +1502,12 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>JPA|SchoolAid</last-edited>
+          <last-edited>SchoolAid</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2863585" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

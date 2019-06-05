@@ -760,7 +760,10 @@ public class salesDetailsFormController implements Initializable{
         resetFeedingBal.setOnAction(event -> {
             AttendanceTemporary attendanceTemporary = studentTableView.getSelectionModel().getSelectedItem();
             if(attendanceTemporary != null){
+                System.out.println("this is the student we are passing"+ attendanceTemporary.getStudent().toString());
                 resetFeeding(attendanceTemporary.getStudent());
+
+                populateStudentTable();
             }
         });
 
@@ -850,6 +853,9 @@ public class salesDetailsFormController implements Initializable{
             if(result.isPresent() && Double.valueOf(result.get()) != student.getAccount().getFeedingFeeCredit()) {
 //                StudentDao studentDao =new StudentDao();
                 studentDao.resetFeedingFee(student, Double.valueOf(result.get()));
+
+                //update the results on the ui
+                student.getAccount().setFeedingFeeCredit(Double.valueOf(result.get()));
             }
         }
     }

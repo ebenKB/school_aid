@@ -287,6 +287,7 @@ public class StudentDao {
     }
 
     public Boolean updateAccount(StudentAccount account){
+        System.out.print("calling update account");
         try {
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
@@ -305,27 +306,32 @@ public class StudentDao {
     }
 
     public Boolean resetFeedingFee(Student student, Double amount) {
+        em = HibernateUtil.getEntityManager();
+        HibernateUtil.begin();
         System.out.println("we want to reset this student's account" + "amount: "+ amount);
         try {
             //we cannot reset the feeding fee for students who do not pay feeding fee unless the new amount is 0.00
 //            if(!this.getPayFeeding() && amount != 0)
 //                return false;
+            System.out.println(student.toString());
             StudentAccount studentAccount = em.find(StudentAccount.class,student.getAccount().getId());
             studentAccount.setFeedingFeeCredit(amount);
-            HibernateUtil.commit();
+//            HibernateUtil.commit();
             updateAccount(studentAccount);
 
             if(student.getFeedingStatus() == Student.FeedingStatus.SEMI_PERIODIC) {
                 if(studentAccount.getFeedingFeeCredit() == 0) {
                     student.setFeedingStatus(Student.FeedingStatus.DAILY);
+                    HibernateUtil.commit();
                 }
             }
-
-            HibernateUtil.close();
-
             return true;
         }catch (Exception e) {
+            e.printStackTrace();
             return false;
+        } finally {
+//            em.close();
+//            HibernateUtil.close();
         }
     }
 }

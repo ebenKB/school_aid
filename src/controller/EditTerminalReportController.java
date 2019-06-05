@@ -55,19 +55,23 @@ public class EditTerminalReportController implements Initializable{
     FilteredList<StudentConduct> filteredList = new FilteredList<>(conducts, e -> true);
     FilteredList<Remark> filteredRemarks = new FilteredList<>(remarks, e -> true);
     SortedList<StudentConduct> sortedList = new SortedList<>(filteredList);
+    TerminalReportDao reportDao = new TerminalReportDao();
 
     public void init(TerminalReport report,TerminalReportController c){
-        this.report = report;
+        this.report = report; // get the report that has to be edited
         this.terminalReportController = c;
         newConduct.setText(report.getConduct());
         newRemark.setText(report.getHeadTracherRemark());
     }
 
+    /**
+     * get an instance of terminal report, edit the details of the report and save the update report into the
+     * database.
+     */
     private void updateRecord (){
         if(isValid()) {
             this.report.setConduct(newConduct.getText().trim());
             this.report.setHeadTracherRemark(newRemark.getText().trim());
-            TerminalReportDao reportDao =new TerminalReportDao();
             reportDao.updateTerminalReport(this.report);
             terminalReportController.updateReportTable(report);
         }

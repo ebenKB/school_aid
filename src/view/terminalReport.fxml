@@ -25,11 +25,12 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="809.0">
                      <children>
-                        <AnchorPane layoutX="169.0" prefHeight="593.0" prefWidth="764.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="169.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane layoutX="40.0" prefHeight="540.0" prefWidth="835.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <TableView fx:id="reportTableView" layoutX="158.0" layoutY="50.0" prefHeight="431.0" prefWidth="696.0" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
                                 <columns>
-                                  <TableColumn fx:id="stdNameCol" prefWidth="246.0" text="STUDENT" />
+                                    <TableColumn fx:id="checkStudent" maxWidth="1000.0" prefWidth="42.0" text="[ ]" />
+                                  <TableColumn fx:id="stdNameCol" prefWidth="254.0" text="STUDENT" />
                                     <TableColumn fx:id="classCol" maxWidth="120.0" minWidth="100.0" prefWidth="120.0" text="CLASS" />
                                   <TableColumn fx:id="remarkCol" prefWidth="139.0" text="HEADMISSTRESS'S REMARK" />
                                     <TableColumn fx:id="conductCol" prefWidth="81.68011474609375" text="STUDENT'S CONDUCT" />
@@ -55,14 +56,15 @@
                                     <JFXButton fx:id="save" text="Save Changes" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER" layoutX="7.0" layoutY="2.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="2.0">
+                              <HBox alignment="CENTER" layoutX="148.0" layoutY="2.0" prefHeight="38.0" prefWidth="673.0" spacing="20.0" AnchorPane.leftAnchor="148.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="2.0">
                                  <children>
                                     <Text fill="#fc0606" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter student name or class to search e.g class 1" textAlignment="CENTER" wrappingWidth="265.13671875">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Text>
-                                    <TextField fx:id="search" prefHeight="31.0" prefWidth="419.0" promptText="Enter Student Name" />
+                                    <TextField fx:id="search" prefHeight="31.0" prefWidth="265.0" promptText="Enter Student Name" />
+                                    <JFXComboBox fx:id="reportFilter" prefHeight="31.0" prefWidth="156.0" promptText="Filter By Class" />
                                  </children>
                               </HBox>
                            </children>
