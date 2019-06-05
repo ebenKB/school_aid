@@ -212,7 +212,7 @@ public class viewAttendanceController implements Initializable{
             return true;
         }else if(student.getLastname().toLowerCase().contains(lowerVal)){
             return true;
-        }else if(student.getLastname().toLowerCase().contains(lowerVal)){
+        }else if(student.getOthername().toLowerCase().contains(lowerVal)){
             return true;
         }else if (student.toString().trim().replace(" ","").toLowerCase().contains(lowerVal.trim().replace(" ",""))){
             return true;

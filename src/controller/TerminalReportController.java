@@ -24,6 +24,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
+import javafx.util.Callback;
 import org.apache.pdfbox.pdmodel.PDDocument;
 
 import java.io.IOException;
@@ -46,6 +47,9 @@ public class TerminalReportController implements Initializable {
     private TableView<TerminalReport> reportTableView;
 
     @FXML
+    private TableColumn<?, ?> checkStudent;
+
+    @FXML
     private TableColumn<TerminalReport, String> stdNameCol;
 
     @FXML
@@ -62,6 +66,9 @@ public class TerminalReportController implements Initializable {
 
     @FXML
     private TableColumn<TerminalReport, String> classCol;
+
+    @FXML
+    private JFXComboBox<Stage> reportFilter;
 
     @FXML
     private JFXButton save;
@@ -120,10 +127,6 @@ public class TerminalReportController implements Initializable {
 
     public  void updateReportTable(TerminalReport newReport){
         if(currentReportIndex > -1) {
-
-//            TerminalReport report = reportTableView.getItems().get(currentReportIndex);
-//            report.setConduct(report.getConduct());
-//            report.setHeadTracherRemark(report.toString());
             terminalReports.get(currentReportIndex).setConduct(newReport.getConduct());
             terminalReports.get(currentReportIndex).setHeadTracherRemark(newReport.getHeadTracherRemark());
             populateTable();
@@ -158,6 +161,7 @@ public class TerminalReportController implements Initializable {
         conductCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getConduct()));
         remarkCol.setCellFactory(TextFieldTableCell.forTableColumn());
         remarkCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getHeadTracherRemark()));
+        addCheckBoxToTable(checkStudent);
         reportTableView.setItems(terminalReports);
     }
 
@@ -225,8 +229,8 @@ public class TerminalReportController implements Initializable {
             return row;
         });
 
-        generatePDF.setOnAction(e ->{
-
+        generatePDF.setOnAction(e -> {
+            // get all the items in the table and create pdf for them
             Task task = new Task() {
                 @Override
                 protected Object call() throws Exception {
@@ -260,5 +264,37 @@ public class TerminalReportController implements Initializable {
         }));
         sortedList.comparatorProperty().bind(reportTableView.comparatorProperty());
         reportTableView.setItems(sortedList);
+    }
+
+    private void addCheckBoxToTable(TableColumn column) {
+
+        Callback<TableColumn<Student, Void>, TableCell<Student, Void>> cellFactory = new Callback<TableColumn<Student, Void>, TableCell<Student, Void>>() {
+            @Override
+            public TableCell<Student, Void> call(final TableColumn<Student, Void> param) {
+                TableCell<Student, Void> cell = new TableCell<Student, Void>() {
+
+                    //create a checkbox for selecting or deselecting students
+                    public CheckBox check = new CheckBox("");
+
+
+                    {
+
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if(empty) {
+                            setGraphic(null);
+                        } else setGraphic(check);
+                    }
+
+
+                };
+                return cell;
+            }
+        };
+        column.setCellFactory(cellFactory);
     }
 }

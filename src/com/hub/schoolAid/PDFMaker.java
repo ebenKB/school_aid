@@ -25,8 +25,8 @@ public class PDFMaker {
     private static PDFMaker pdfMakerInstance;
 
     public static PDFMaker getPDFMakerInstance() {
-        if(pdfMakerInstance ==null) {
-            pdfMakerInstance =new PDFMaker();
+        if(pdfMakerInstance == null) {
+            pdfMakerInstance = new PDFMaker();
         }
 
         return pdfMakerInstance;

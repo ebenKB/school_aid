@@ -58,12 +58,16 @@ public class EditTerminalReportController implements Initializable{
     TerminalReportDao reportDao = new TerminalReportDao();
 
     public void init(TerminalReport report,TerminalReportController c){
-        this.report = report;
+        this.report = report; // get the report that has to be edited
         this.terminalReportController = c;
         newConduct.setText(report.getConduct());
         newRemark.setText(report.getHeadTracherRemark());
     }
 
+    /**
+     * get an instance of terminal report, edit the details of the report and save the update report into the
+     * database.
+     */
     private void updateRecord (){
         if(isValid()) {
             this.report.setConduct(newConduct.getText().trim());
