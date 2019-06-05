@@ -121,6 +121,9 @@ public class salesDetailsFormController implements Initializable{
     private MenuItem newAttendancePayment;
 
     @FXML
+    private MenuItem paySchoolFess;
+
+    @FXML
     public TableColumn<AttendanceTemporary, String> studentNameCol;
 
     @FXML
@@ -767,6 +770,7 @@ public class salesDetailsFormController implements Initializable{
             }
         });
 
+         // when a student is paying feeding fee in advance
         newAttendancePayment.setOnAction(event -> {
             try{
                 AttendanceTemporary attendanceTemporary = studentTableView.getSelectionModel().getSelectedItem();
@@ -785,6 +789,17 @@ public class salesDetailsFormController implements Initializable{
                 }
             }catch(Exception e){
                 Notification.getNotificationInstance().notifyError("You did not select any student","No selection.");
+            }
+        });
+
+        // when a student is paying school fees
+        paySchoolFess.setOnAction(event -> {
+            try {
+                Student st = studentTableView.getSelectionModel().getSelectedItem().getStudent();
+                paySchoolFees(st);
+                populateStudentTable();
+            } catch (Exception e) {
+                // log error here
             }
         });
 
@@ -886,41 +901,31 @@ public class salesDetailsFormController implements Initializable{
         owing.setCellFactory(column -> new TableCell<AttendanceTemporary, String>() {
             @Override
             protected void updateItem(String bal, boolean empty) {
-                super.updateItem(bal, empty);
+            super.updateItem(bal, empty);
 
-                setText(empty ? "" : getItem().toString());
-                setGraphic(null);
+            setText(empty ? "" : getItem().toString());
+            setGraphic(null);
 
-                TableRow<AttendanceTemporary> currentRow = getTableRow();
+            TableRow<AttendanceTemporary> currentRow = getTableRow();
 
-                if (!isEmpty()  && !currentRow.isEmpty()) {
-                    if(Double.valueOf(bal)<0 )
-                        currentRow.setStyle("-fx-background-color:#ff6a51");
-                    else if(Double.valueOf(bal)>0 ){
-                        currentRow.setStyle("-fx-background-color:#0ecc31");
-                    }
-                    else {
-                        currentRow.setStyle("");
-//                            currentRow.setStyle("-fx-background-color:#fff");
-                    }
-                }else {
+            if (!isEmpty()  && !currentRow.isEmpty()) {
+                if(Double.valueOf(bal)<0 )
+                    currentRow.setStyle("-fx-background-color:#ff6a51");
+                else if(Double.valueOf(bal) > 0 ){
+                    currentRow.setStyle("-fx-background-color:#0ecc31");
+                }
+                else {
                     currentRow.setStyle("");
                 }
+            } else {
+                currentRow.setStyle("");
+            }
             }
         });
-
     }
 
     private void makeAttendancePayment(AttendanceTemporary attendanceTemporary) {
-        if(attendanceTemporary != null){
-//            TextInputDialog textInputDialog  = new TextInputDialog();
-//            textInputDialog.setTitle("Add Feeding Fee");
-//            textInputDialog.setHeaderText("Add Feeding Fee");
-//            textInputDialog.setContentText("How much is the student paying?");
-//
-//            TextField text =new TextField();
-//            text.setPromptText("who paid?");
-//            textInputDialog.getDialogPane().getChildren().add(text);
+        if(attendanceTemporary != null) {
             Optional <Pair<String,String>> result = showCustomTextInputDiag(attendanceTemporary.getStudent());
 
             result.ifPresent(pair ->{
@@ -931,35 +936,19 @@ public class salesDetailsFormController implements Initializable{
                 Utils.logPayment(attendanceTemporary.getStudent(),"Feeding Fee Payment for"+" "+
                         attendanceTemporary.getStudent().toString(),pair.getValue(),amount );
             });
-//            if(result.isPresent() && result.get() != null) {
-//                Double amount = Double.valueOf(result.get());
-
-
-//            }
         }
     }
 
-//    private void activateListView() {
-//        studentListView.getItems().clear();
-//        if(name.getText().trim().length()>=1){
-//            try
-//            {
-//                studentdata.clear();
-//                studentdata.addAll(studentDao.getStudentByName(name.getText().trim()));
-//            }catch (HibernateException e){
-//                notification.notifyError("An error occurred while fetching students.\nPlease try again","Error!");
-//            }
-//            if(!studentdata.isEmpty()){
-//                studentListView.setVisible(Boolean.TRUE);
-//                studentListView.getItems().addAll(studentdata);
-//                studentListView.setCellFactory(param -> new StudentCell());
-//                studentdata.clear();
-//                salesTableView.getItems().clear();
-//            }else{
-//                studentListView.setVisible(Boolean.FALSE);
-//            }
-//        }
-//    }
+    private void paySchoolFees(Student st) {
+        Optional<Pair <String, String>> result = showCustomTextInputDiag(st);
+        result.ifPresent(pair -> {
+            Double amount = Double.valueOf(pair.getKey());
+            studentDao.paySchoolFee(st, amount);
+
+            // log the transaction
+            Utils.logPayment(student, "School Fees", pair.getValue(), amount);
+        });
+    }
 
     private void activateSearch() {
         if(attendanceRadio.isSelected()) {
@@ -1029,11 +1018,11 @@ public class salesDetailsFormController implements Initializable{
                     Task payment = new Task() {
                         @Override
                         protected Object call() {
-                            salesDao.payForSales(sales, Double.valueOf(result.get()));
-                            sales.setAmountPaid((sales.getAmountPaid()+Double.valueOf(result.get())));
-                            TransactionLoggerDao.getTransactionLoggerDaoInstance().LogTransaction(sales.getStudent().getId(), sales.getStudent().toString(), description, sales.getAmountPaid());
+                        salesDao.payForSales(sales, Double.valueOf(result.get()));
+                        sales.setAmountPaid((sales.getAmountPaid()+Double.valueOf(result.get())));
+                        TransactionLoggerDao.getTransactionLoggerDaoInstance().LogTransaction(sales.getStudent().getId(), sales.getStudent().toString(), description, sales.getAmountPaid());
 
-                            return null;
+                        return null;
                         }
                     };
                     payment.setOnRunning(event -> MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Updating sales Record"));
@@ -1083,14 +1072,13 @@ public class salesDetailsFormController implements Initializable{
         gridPane.setVgap(10);
         gridPane.setPadding(new Insets(20,15,10,10));
         gridPane.add(new Label("How much is the student paying? "),0,0);
-//        gridPane.add(new Label("Who is making the payment"),2,0);
 
+        // field for who is making the payment
         Label label = new Label("Who is making the payment");
         RadioButton self = new RadioButton("Student");
         self.setSelected(true);
         RadioButton parent = new RadioButton("Parent");
         RadioButton other = new RadioButton("Other");
-
         ToggleGroup toggleGroup = new ToggleGroup();
 
         self.setToggleGroup(toggleGroup);
@@ -1107,6 +1095,7 @@ public class salesDetailsFormController implements Initializable{
 
         gridPane.add(vBox,2,0);
 
+        //field for amount to pay
         TextField amount = new TextField();
         amount.setPromptText("Amount to pay");
 
@@ -1116,6 +1105,7 @@ public class salesDetailsFormController implements Initializable{
         gridPane.add(amount,0,1);
         gridPane.add(paidBy,2,1);
 
+        // radio button for type of payment
         dialog.getDialogPane().setContent(gridPane);
 
         //Request focus on the first text field
@@ -1138,7 +1128,7 @@ public class salesDetailsFormController implements Initializable{
         });
 
         //convert the results to amount and paid-by pair when ok is clicked
-        dialog.setResultConverter(dialogbtn ->{
+        dialog.setResultConverter(dialogbtn -> {
             if(dialogbtn == accept) {
                 return  new Pair<>(amount.getText(),paidBy.getText());
             }

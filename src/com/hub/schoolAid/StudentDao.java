@@ -117,7 +117,6 @@ public class StudentDao {
         }
     }
     /**
-     *
      * @param id the id of the student that we want to get from the database
      * @return a list of the student
      */
@@ -127,7 +126,7 @@ public class StudentDao {
           return  (Student)em.createQuery("from  students where +id+ like '"+id+"' ").getSingleResult();
     }
 
-    public List <Student> getStudentByName(String name){
+    public List <Student> getStudentByName(String name) {
          try {
              String hql = "FROM students S WHERE S.firstname like '"+name+"%' OR S.lastname like '"+name+"%' OR S.othername like '"+name+"%' ";
              em=HibernateUtil.getEntityManager();
@@ -333,5 +332,16 @@ public class StudentDao {
 //            em.close();
 //            HibernateUtil.close();
         }
+    }
+
+    public Boolean paySchoolFee(Student st, Double amount) {
+        if (st == null)
+            return false;
+        em=HibernateUtil.getEntityManager();
+        StudentAccount acc = em.find(StudentAccount.class, st.getAccount().getId());
+        acc.setFeeToPay((acc.getFeeToPay() + amount));
+        if(this.updateAccount(acc))
+            return true;
+        return false;
     }
 }

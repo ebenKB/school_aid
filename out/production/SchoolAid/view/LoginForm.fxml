@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.0" prefHeight="560.0" prefWidth="819.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginFormController">
+   <children>
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutX="199.0" layoutY="45.0" orientation="VERTICAL" prefHeight="417.0" prefWidth="450.0" vgap="25.0" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="45.0">
+         <children>
+            <Label fx:id="sessionLable" prefHeight="41.0" prefWidth="417.0" textFill="#fc0505">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Pane prefHeight="44.0" prefWidth="344.0" style="-fx-background-color: #000000;">
+               <children>
+                  <Text fill="WHITE" layoutX="39.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN PORTAL" wrappingWidth="125.00000475347042">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <JFXButton fx:id="close" layoutX="383.0" layoutY="-16.0" prefHeight="37.0" prefWidth="44.0" text="">
+                     <graphic>
+                        <ImageView fitHeight="34.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/cancel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <FontAwesomeIconView fill="#f8f2e2" glyphName="LOCK" layoutX="14.0" layoutY="31.0" size="20" wrappingWidth="25.0" />
+               </children>
+            </Pane>
+            <JFXTextField fx:id="username" focusColor="#65d0ff" promptText="Username" />
+            <JFXPasswordField fx:id="password" focusColor="#65d0ff" promptText="Password" />
+            <JFXButton fx:id="login" buttonType="RAISED" contentDisplay="TOP" defaultButton="true" prefHeight="38.0" prefWidth="125.0" ripplerFill="#29d2f0" style="-fx-background-color: #27d3f2;" text="Log in">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </FlowPane>
+      <HBox spacing="20.0" visible="false">
+         <children>
+            <Hyperlink fx:id="create" prefHeight="26.0" prefWidth="214.0" text="Create New Account ">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink fx:id="forgetPass" focusTraversable="false" text="Forgot Password?" />
+         </children>
+      </HBox>
+      <ImageView fitHeight="85.0" fitWidth="165.0" layoutX="14.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/logo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

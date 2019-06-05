@@ -205,6 +205,7 @@ public class Student {
         this.attendanceTemporary = attendanceTemporary;
     }
 
+
     public StudentAccount getAccount() {
         return account;
     }

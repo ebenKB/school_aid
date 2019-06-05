@@ -219,12 +219,9 @@ public class mainController implements Initializable{
     @FXML
     private MenuItem grade;
 
-
-
-
     public static User user;
     private ObservableList<Student> data= FXCollections.observableArrayList();
-    private FilteredList<Student> filteredData = new FilteredList<>(data, e ->true);
+    private FilteredList<Student> filteredData = new FilteredList <> (data, e ->true);
     private SortedList<Student> sortedList = new SortedList<>(filteredData);
     private StudentDao studentDao =new StudentDao();
     TermDao termDao= new TermDao();
@@ -255,7 +252,7 @@ public class mainController implements Initializable{
     private void showClassListForm(){
         try {
             Parent  root =  FXMLLoader.load(getClass().getResource("/view/classListForm.fxml"));
-            Scene scene= new Scene(root);
+            Scene scene = new Scene(root);
             javafx.stage.Stage stage = new javafx.stage.Stage();
             stage.setScene(scene);
             stage.initStyle(StageStyle.UTILITY);
@@ -303,7 +300,7 @@ public class mainController implements Initializable{
 
         studentTableView.setVisible(!studentTableView.isVisible());
     }
-    private List<Student> getAllStudents(){
+    private List<Student> getAllStudents() {
         data.clear();
         try{
             data.addAll(studentDao.getAllStudents());
@@ -319,7 +316,7 @@ public class mainController implements Initializable{
        populateTableView();
     }
 
-    private Optional <ButtonType> showWarning(String message, String header){
+    private Optional <ButtonType> showWarning(String message, String header) {
         Alert alert = new Alert(Alert.AlertType.WARNING,"",ButtonType.YES,ButtonType.NO);
         alert.setHeaderText(header);
         alert.setContentText(message);
@@ -328,14 +325,14 @@ public class mainController implements Initializable{
         return response;
     }
 
-    private void toggleTableView(){
-        if(studentTableView.isVisible()){
+    private void toggleTableView() {
+        if(studentTableView.isVisible()) {
             studentTableView.setVisible(Boolean.FALSE);
-        }else
+        } else
         studentTableView.setVisible(Boolean.TRUE);
     }
 
-    private void showNewTermForm(){
+    private void showNewTermForm() {
         //show a form to create a new term
         try {
             Parent  root =  FXMLLoader.load(getClass().getResource("/view/Term.fxml"));
@@ -389,7 +386,7 @@ public class mainController implements Initializable{
                 }
             }
         }
-                return null;
+            return null;
             }
         };
         new Thread(check).start();
@@ -507,6 +504,7 @@ public class mainController implements Initializable{
         });
 
         viewStudent.setOnAction(event -> {
+//            populateTableView();
             Task task = new Task() {
                 @Override
                 protected Object call() {
@@ -540,13 +538,6 @@ public class mainController implements Initializable{
 
         searchBox.setOnKeyReleased(event -> {
             searchTable();
-//            data.clear();
-//            studentTableView.getItems().clear();
-//            data.addAll(studentDao.getStudentByCategory(searchBox.getText().trim()));
-//            setTableData();
-//            studentTableView.setItems(data);
-//            totalStudents.setText(String.valueOf(data.size()));
-//            tableInfo.setVisible(true);
         });
 
         viewStudentDetails.setOnAction(event -> {
@@ -570,8 +561,6 @@ public class mainController implements Initializable{
         });
 
         viewAttendance.setOnAction(event -> {
-//            AttendanceDao attendanceDao = new AttendanceDao();
-//            List<Attendance> attendanceList  = attendanceDao.getAllAttendance();
             showViewAttendanceForm();
         });
 
@@ -608,27 +597,6 @@ public class mainController implements Initializable{
                 }
             }
         });
-
-//        PauseTransition pause = new PauseTransition(Duration.seconds(5));
-//        pause.setOnFinished(event ->{
-//            System.out.print("the pause transition is done...");
-//            mouseMoving.set(false);
-//        });
-//
-//        parent.setOnMouseMoved(event -> {
-//            mouseMoving.set(true);
-//            pause.playFromStart();
-//        });
-//        parent.setOnMouseEntered(event -> {
-//            mouseMoving.set(true);
-//            pause.playFromStart();
-//        });
-//
-//        parent.setOnMouseExited(event -> {
-//            mouseMoving.set(true);
-//            pause.playFromStart();
-//        });
-
     }
 
     private void searchTable() {
@@ -758,8 +726,6 @@ public class mainController implements Initializable{
             Scene scene = new Scene(root);
             javafx.stage.Stage stage = new javafx.stage.Stage();
             stage.setScene(scene);
-//            stage.initModality(Modality.APPLICATION_MODAL);
-//            stage.initStyle(StageStyle.UTILITY);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
