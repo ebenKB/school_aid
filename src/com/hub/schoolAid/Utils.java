@@ -56,5 +56,13 @@ public class Utils {
             return true;
         return false;
     }
+
+    public static Optional<ButtonType> showConfirmation(String title, String hd, String text) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
+        alert.setTitle(title);
+        alert.setHeaderText(hd);
+        alert.setContentText(text);
+        return alert.showAndWait();
+    }
 }
 

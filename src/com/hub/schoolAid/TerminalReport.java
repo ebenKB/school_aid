@@ -1,5 +1,8 @@
 package com.hub.schoolAid;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -8,6 +11,7 @@ public class TerminalReport {
     public TerminalReport(){
      this.setConduct("Satisfactory");
      this.setHeadTracherRemark("Satisfactory");
+     this.setSelected(false);
     }
     
     @Id
@@ -20,6 +24,12 @@ public class TerminalReport {
     private String conduct;
 
     private String headTracherRemark;
+
+//    @Transient
+//    private  Boolean isSelected;
+
+    @Transient
+    private BooleanProperty selected = new SimpleBooleanProperty(false);
 
     @OneToOne
     private Stage promotedTo;
@@ -72,5 +82,26 @@ public class TerminalReport {
 
     public void setAttendance(int attendance) {
         Attendance = attendance;
+    }
+
+//    public Boolean getSelected() {
+//        return isSelected;
+//    }
+
+//    public void setSelected(Boolean selected) {
+//        isSelected = selected;
+//    }
+
+
+    public boolean isSelected() {
+        return selected.get();
+    }
+
+    public BooleanProperty selectedProperty() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected.set(selected);
     }
 }

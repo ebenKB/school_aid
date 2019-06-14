@@ -121,7 +121,7 @@ public class salesDetailsFormController implements Initializable{
     private MenuItem newAttendancePayment;
 
     @FXML
-    private MenuItem paySchoolFess;
+    private MenuItem paySchoolFees;
 
     @FXML
     public TableColumn<AttendanceTemporary, String> studentNameCol;
@@ -379,7 +379,7 @@ public class salesDetailsFormController implements Initializable{
                                 alert.setContentText("Indicate whether the student is paying now or later.");
                                 alert.setHeaderText("Payment option ?");
                                 alert.show();
-                            }else {
+                            } else {
                                 //Creates an attendance temporary and assign it to st
                                 Student st = studentTableView.getItems().get(getIndex()).getStudent();
                                 AttendanceTemporary at = studentTableView.getItems().get(getIndex());
@@ -793,7 +793,7 @@ public class salesDetailsFormController implements Initializable{
         });
 
         // when a student is paying school fees
-        paySchoolFess.setOnAction(event -> {
+        paySchoolFees.setOnAction(event -> {
             try {
                 Student st = studentTableView.getSelectionModel().getSelectedItem().getStudent();
                 paySchoolFees(st);
@@ -876,7 +876,7 @@ public class salesDetailsFormController implements Initializable{
     }
 
     private void loadData() {
-//        studentTableView.getItems().clear();
+        // clear the current attendance records from memory and load new attendance records
         attendanceTemporaries.clear();
         attendanceTemporaries.addAll(attendanceTemporaryDao.getTempAttendance());
         if(!attendanceTemporaries.isEmpty()){
@@ -884,7 +884,7 @@ public class salesDetailsFormController implements Initializable{
         }else{
             notification.notifyError("No attendance found. Make sure you have created a new attendance sheet","Empty");
             showCreateAttendaceForm();
-            showDrawer();
+//            showDrawer();
         }
     }
 
@@ -926,7 +926,7 @@ public class salesDetailsFormController implements Initializable{
 
     private void makeAttendancePayment(AttendanceTemporary attendanceTemporary) {
         if(attendanceTemporary != null) {
-            Optional <Pair<String,String>> result = showCustomTextInputDiag(attendanceTemporary.getStudent());
+            Optional <Pair<String,String>> result = showCustomTextInputDiag(attendanceTemporary.getStudent(), "Pay Feeding Fee");
 
             result.ifPresent(pair ->{
                 Double amount = Double.valueOf(pair.getKey());
@@ -940,13 +940,18 @@ public class salesDetailsFormController implements Initializable{
     }
 
     private void paySchoolFees(Student st) {
-        Optional<Pair <String, String>> result = showCustomTextInputDiag(st);
+        Optional<Pair <String, String>> result = showCustomTextInputDiag(st, "Pay School Fees");
         result.ifPresent(pair -> {
             Double amount = Double.valueOf(pair.getKey());
-            studentDao.paySchoolFee(st, amount);
-
-            // log the transaction
-            Utils.logPayment(student, "School Fees", pair.getValue(), amount);
+            // take confirmation before adding the fees to the student account
+            Optional<ButtonType>confirm = Utils.showConfirmation("Confirm payment of school fees", "Payment for "+st.toString(), "Are you sure you want to confirm payment of school fees?");
+            if(confirm.isPresent() && confirm.get() == ButtonType.YES) {
+                if(studentDao.paySchoolFee(st, amount)) {
+                    Notification.getNotificationInstance().notifySuccess("Payment added for "+st.toString(), "Fees paid");
+                }
+                // log the transaction
+                Utils.logPayment(student, "School Fees", pair.getValue(), amount);
+            } else Notification.getNotificationInstance().notifyError("Fees payment cancelled", "Fees not added");
         });
     }
 
@@ -964,7 +969,7 @@ public class salesDetailsFormController implements Initializable{
             }));
             sortedList.comparatorProperty().bind(studentTableView.comparatorProperty());
             studentTableView.setItems(sortedList);
-        }else if(salesRadio.isSelected()) {
+        } else if(salesRadio.isSelected()) {
             name.textProperty().addListener(((observable, oldValue, newValue) -> {
                 filteredSales.setPredicate( (Predicate < ? super Sales >) sale -> {
                     if( newValue == null || newValue.isEmpty() ) {
@@ -1059,9 +1064,9 @@ public class salesDetailsFormController implements Initializable{
         totalFeedingPane.setVisible(Boolean.TRUE);
     }
 
-    private Optional<Pair<String, String>> showCustomTextInputDiag(Student student){
+    private Optional<Pair<String, String>> showCustomTextInputDiag(Student student, String title){
         Dialog<Pair<String,String>> dialog = new Dialog<>();
-        dialog.setTitle("Payment");
+        dialog.setTitle(title);
 
         //set the buttons
         ButtonType accept = new ButtonType("Make Payment", ButtonBar.ButtonData.OK_DONE);
@@ -1134,8 +1139,7 @@ public class salesDetailsFormController implements Initializable{
             }
             return null;
         });
-//        Optional<Pair<String,String>> result = dialog.showAndWait();
-//        return result;
+
         return dialog.showAndWait();
     }
 

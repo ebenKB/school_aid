@@ -8,7 +8,7 @@
     -fx-yellow:#FFBB11;
 }
 
-#root,#parent{
+#root, #parent, #salesPane {
     -fx-background-color: -fx-primary;
 }
 
@@ -48,10 +48,9 @@
     -fx-font-weight: bold;
 }
 
-#menubar .menu .menu-item .label{
-    -fx-text-fill: #000;
+#menubar .menu .menu-item .label, .context-menu .menu-item .label{
+    -fx-text-fill: #fff;
 }
-
 
 #progressLabel,#stdInfoLabel{
     -fx-font: #ffffff;
@@ -66,8 +65,6 @@
 #vbox .menu-button{
     -fx-background-color: derive(-fx-primary, 35%)
 }
-
-
 
 #separator{
     -fx-background-color: -fx-yellow;
@@ -93,8 +90,9 @@
 /*#vbox .menu-button {*/
     /*-fx-background-color: derive(-fx-primary, 20%);*/
 /*}*/
-#vbox .menu-item{
+#vbox .menu-item {
     -fx-background-color: derive(-fx-primary, 120%);
+    -fx-text-fill: -fx-blue;
 }
 #vbox .menu-item:focused{
     -fx-text-fill: #000;
@@ -150,7 +148,7 @@
 #dob .month-year-pane{
     -fx-background-color:derive(-fx-primary,30%);
 }
-#dob .text-field{
+#dob .text-field {
     -fx-background-color: -fx-primary;
     -fx-text-fill: #fff;
     /*-fx-control-inner-background: red;*/
@@ -198,12 +196,12 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(-fx-primary, 10%)
+    -fx-background-color: derive(-fx-primary, 10%);
 }
+
 .table-view {
     -fx-cell-size: 20;
 }
-
 
 .table-view .cell :hover {
     /*-fx-background-color: derive(-fx-primary, 200%)*/
@@ -309,7 +307,7 @@
     -fx-font-size: 16px;
 }
 
-#root .list-view{
+#root .list-view {
     -fx-background-color: -fx-primary;
     -fx-text-fill: white;
 }

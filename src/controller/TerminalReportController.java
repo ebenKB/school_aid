@@ -12,9 +12,11 @@ import com.jfoenix.controls.JFXTabPane;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -22,13 +24,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.util.Callback;
 import org.apache.pdfbox.pdmodel.PDDocument;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
@@ -48,6 +53,9 @@ public class TerminalReportController implements Initializable {
 
     @FXML
     private TableColumn<?, ?> checkStudent;
+
+//    @FXML
+//    private CheckBox selectAll;
 
     @FXML
     private TableColumn<TerminalReport, String> stdNameCol;
@@ -95,7 +103,7 @@ public class TerminalReportController implements Initializable {
     private  Button createBill;
 
     private ObservableList<Stage>stages = FXCollections.observableArrayList();
-    private ObservableList<Student>students=FXCollections.observableArrayList();
+    private ObservableList<Student>selectedStudents=FXCollections.observableArrayList();
     private ObservableList<TerminalReport>terminalReports=FXCollections.observableArrayList();
     private ObservableList<TerminalReport>updateReports = FXCollections.observableArrayList();
     FilteredList<TerminalReport> filteredAtt = new FilteredList<>(terminalReports, e ->true);
@@ -110,6 +118,15 @@ public class TerminalReportController implements Initializable {
         Task init =new Task() {
             @Override
             protected Object call() throws Exception {
+
+                // add checkbox to the column header
+                CheckBox selectAll = new CheckBox();
+                checkStudent.setGraphic(selectAll);
+                selectAll.setOnAction(e -> {
+                    if(selectAll.isSelected()) {
+                       selectAll();
+                    } else unSelectAll();
+                });
             refresh();
             if(terminalReports.isEmpty()) {
                 terminalReportDao = new TerminalReportDao();
@@ -154,7 +171,7 @@ public class TerminalReportController implements Initializable {
         classCombo.setItems(stages);
     }
 
-    private void populateTable(){
+    private void populateTable() {
         stdNameCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getStudent().toString()));
         classCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getStudent().getStage().toString()));
         conductCol.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -162,6 +179,7 @@ public class TerminalReportController implements Initializable {
         remarkCol.setCellFactory(TextFieldTableCell.forTableColumn());
         remarkCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getHeadTracherRemark()));
         addCheckBoxToTable(checkStudent);
+
         reportTableView.setItems(terminalReports);
     }
 
@@ -219,7 +237,7 @@ public class TerminalReportController implements Initializable {
             reportTableView.setItems(sortedList);
         });
 
-        reportTableView.setRowFactory(tv ->{
+        reportTableView.setRowFactory(tv -> {
             TableRow<TerminalReport>row = new TableRow <>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
@@ -229,29 +247,43 @@ public class TerminalReportController implements Initializable {
             return row;
         });
 
+
+
         generatePDF.setOnAction(e -> {
-            // get all the items in the table and create pdf for them
-            Task task = new Task() {
-                @Override
-                protected Object call() throws Exception {
-                    pdDocument= PDFMaker.getPDFMakerInstance().createReportForAllStudents();
-                    return null;
+//            for (Student s : selectedStudents) {
+//                System.out.println("Students who have been selected"+ s.toString());
+//            }
+
+            for(TerminalReport t: sortedList) {
+                if(t.isSelected()) {
+                    System.out.println("these are the selected records"+ t.getStudent().toString());
                 }
-            };
-            task.setOnRunning(event ->MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Generating Reports. Please wait...."));
-            task.setOnFailed(event-> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
-            task.setOnSucceeded(event -> {
-                MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
-                PDFMaker.savePDFToLocation(pdDocument);
-            });
-            new Thread(task).start();
+            }
+            // get all the items in the table and create pdf for them"
+//            Task task = new Task() {
+//                @Override
+//                protected Object call() throws Exception {
+//                    pdDocument= PDFMaker.getPDFMakerInstance().createReportForAllStudents();
+//                    return null;
+//                }
+//            };
+//            task.setOnRunning(event ->MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Generating Reports. Please wait...."));
+//            task.setOnFailed(event-> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+//            task.setOnSucceeded(event -> {
+//                MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+//                PDFMaker.savePDFToLocation(pdDocument);
+//            });
+//            new Thread(task).start();
         });
 
         createBill.setOnAction(event -> PDFMaker.getPDFMakerInstance().createBillAndItemList());
 
+
+
     }
 
     private void activateSearch() {
+        // search the table for records that match the text in the search box
         search.textProperty().addListener(((observable, oldValue, newValue) -> {
             filteredAtt.setPredicate( (Predicate< ? super TerminalReport>) at -> {
                 if( newValue == null || newValue.isEmpty() ) {
@@ -266,19 +298,48 @@ public class TerminalReportController implements Initializable {
         reportTableView.setItems(sortedList);
     }
 
+    private void selectAll () {
+       ObservableList<TerminalReport> reports = reportTableView.getItems();
+        for(TerminalReport t: reports) {
+            t.setSelected(true);
+        }
+        setDataToTable(reportTableView, reports);
+    }
+
+    private void unSelectAll() {
+        ObservableList<TerminalReport> reports = reportTableView.getItems();
+        for(TerminalReport t: reports) {
+            t.setSelected(false);
+        }
+        setDataToTable(reportTableView, reports);
+    }
+
+    private void setDataToTable(TableView t, ObservableList data) {
+//        t.setItems(data);
+        t.refresh();
+    }
+
     private void addCheckBoxToTable(TableColumn column) {
 
-        Callback<TableColumn<Student, Void>, TableCell<Student, Void>> cellFactory = new Callback<TableColumn<Student, Void>, TableCell<Student, Void>>() {
+        Callback<TableColumn<TerminalReport, Void>, TableCell<TerminalReport, Void>> cellFactory = new Callback<TableColumn<TerminalReport, Void>, TableCell<TerminalReport, Void>>() {
             @Override
-            public TableCell<Student, Void> call(final TableColumn<Student, Void> param) {
-                TableCell<Student, Void> cell = new TableCell<Student, Void>() {
+            public TableCell<TerminalReport, Void> call(final TableColumn<TerminalReport, Void> param) {
+                TableCell<TerminalReport, Void> cell = new TableCell<TerminalReport, Void>() {
 
                     //create a checkbox for selecting or deselecting students
                     public CheckBox check = new CheckBox("");
 
-
                     {
+                        // get the row index and update the selected property field
+                        check.setOnAction(e -> {
+                            TerminalReport t = reportTableView.getItems().get(getIndex());
+                            if(check.isSelected()) {
+                                t.setSelected(true);
 
+                            } else {
+                                t.setSelected(false);
+                            };
+                        });
                     }
 
                     @Override
@@ -287,10 +348,16 @@ public class TerminalReportController implements Initializable {
 
                         if(empty) {
                             setGraphic(null);
-                        } else setGraphic(check);
+                        } else {
+                            setGraphic(check);
+                            // check if the check box has to be activated or not
+                            if(param.getTableView().getItems().get(getIndex()).isSelected()) {
+                                check.setSelected(true);
+                            } else {
+                                check.setSelected(false);
+                            }
+                        };
                     }
-
-
                 };
                 return cell;
             }
@@ -298,3 +365,4 @@ public class TerminalReportController implements Initializable {
         column.setCellFactory(cellFactory);
     }
 }
+

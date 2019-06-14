@@ -34,7 +34,7 @@
             <property name="javax.persistence.jdbc.user" value="p496rueDFN" />
             <property name="javax.persistence.jdbc.password" value="z4oZv2BKPc" />
             <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="update" />
+<!--            <property name="hibernate.hbm2ddl.auto" value="update" />-->
             <property name="javax.persistence.jdbc.dialect" value="org.hibernate.dialect.MySQL55Dialect"/>
             <property name="hibernate.connection.provider_class" value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider" />
             <property name="hibernate.hikari.minimumIdle" value="5" />
@@ -42,6 +42,7 @@
             <property name="hibernate.hikari.idleTimeout" value="120000" />
             <property name="hibernate.hikari.LeakDetectionThreshold" value="60000"/>
             <property name="hibernate.hikari.connectionTimeout" value="30000"/>
+<!--            <property name="hibernate.physical_naming_strategy" value="com.huongdanjava.jpa.PhysicalNamingStrategyImpl" />-->
         </properties>
     </persistence-unit>
 </persistence>
