@@ -24,6 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -39,8 +40,12 @@ import java.util.function.Predicate;
 
 public class TerminalReportController implements Initializable {
 
+
     @FXML
-    private VBox root;
+    private AnchorPane root;
+
+    @FXML
+    private VBox options;
 
     @FXML
     private JFXTabPane stdDetailsTabPane;
@@ -103,7 +108,7 @@ public class TerminalReportController implements Initializable {
     private  Button createBill;
 
     private ObservableList<Stage>stages = FXCollections.observableArrayList();
-    private ObservableList<Student>selectedStudents=FXCollections.observableArrayList();
+    private ObservableList<TerminalReport>selectedReports=FXCollections.observableArrayList();
     private ObservableList<TerminalReport>terminalReports=FXCollections.observableArrayList();
     private ObservableList<TerminalReport>updateReports = FXCollections.observableArrayList();
     FilteredList<TerminalReport> filteredAtt = new FilteredList<>(terminalReports, e ->true);
@@ -247,33 +252,33 @@ public class TerminalReportController implements Initializable {
             return row;
         });
 
-
-
         generatePDF.setOnAction(e -> {
-//            for (Student s : selectedStudents) {
-//                System.out.println("Students who have been selected"+ s.toString());
-//            }
-
-            for(TerminalReport t: sortedList) {
+            selectedReports.clear();
+            for(TerminalReport t: reportTableView.getItems()) {
                 if(t.isSelected()) {
-                    System.out.println("these are the selected records"+ t.getStudent().toString());
+                    selectedReports.add(t);
                 }
             }
             // get all the items in the table and create pdf for them"
-//            Task task = new Task() {
-//                @Override
-//                protected Object call() throws Exception {
-//                    pdDocument= PDFMaker.getPDFMakerInstance().createReportForAllStudents();
-//                    return null;
-//                }
-//            };
-//            task.setOnRunning(event ->MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Generating Reports. Please wait...."));
-//            task.setOnFailed(event-> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
-//            task.setOnSucceeded(event -> {
-//                MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
-//                PDFMaker.savePDFToLocation(pdDocument);
-//            });
-//            new Thread(task).start();
+            Task task = new Task() {
+                @Override
+                protected Object call() throws Exception {
+                    // check if we are generating reports for all students
+                    if(selectedReports.isEmpty()) {
+                        pdDocument= PDFMaker.getPDFMakerInstance().createReport();
+                    } else  if(selectedReports.size() > 0) { // check if we are generating reports for only selected students
+                        pdDocument= PDFMaker.getPDFMakerInstance().createReport(selectedReports);
+                    }
+                    return null;
+                }
+            };
+            task.setOnRunning(event ->MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Generating Reports. Please wait...."));
+            task.setOnFailed(event-> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+            task.setOnSucceeded(event -> {
+                MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+                PDFMaker.savePDFToLocation(pdDocument);
+            });
+            new Thread(task).start();
         });
 
         createBill.setOnAction(event -> PDFMaker.getPDFMakerInstance().createBillAndItemList());
@@ -303,7 +308,7 @@ public class TerminalReportController implements Initializable {
         for(TerminalReport t: reports) {
             t.setSelected(true);
         }
-        setDataToTable(reportTableView, reports);
+        reportTableView.refresh();
     }
 
     private void unSelectAll() {
@@ -311,13 +316,9 @@ public class TerminalReportController implements Initializable {
         for(TerminalReport t: reports) {
             t.setSelected(false);
         }
-        setDataToTable(reportTableView, reports);
+        reportTableView.refresh();
     }
 
-    private void setDataToTable(TableView t, ObservableList data) {
-//        t.setItems(data);
-        t.refresh();
-    }
 
     private void addCheckBoxToTable(TableColumn column) {
 

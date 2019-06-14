@@ -12,19 +12,19 @@
     -fx-background-color: -fx-primary;
 }
 
-#buttonCotainer{
+#buttonCotainer {
     /*-fx-background-color: #888888;*/
     -fx-background-color: derive(-fx-blue, 90%);
 }
 
-#tableInfo .text-field{
+#tableInfo .text-field {
     /*-fx-background-color: #888888;*/
     -fx-text-fill: #fff;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
 }
 
-#headerPane{
+#headerPane {
     -fx-background-color: #aaaaaa;
 }
 
@@ -32,58 +32,58 @@
     -fx-background-radius: 8000px;
 }
 
-#uploadImg{
+#uploadImg {
     -fx-background-color: #aaddee;
 }
 
-#menubar{
+#menubar {
     /*-fx-background-color: #888888;*/
     -fx-background-color: -fx-primary;
     -fx-font: #ffffff;
     -fx-font-size: 14px;
 }
 
-#menubar .label{
+#menubar .label {
     -fx-text-fill: #fff;
     -fx-font-weight: bold;
 }
 
-#menubar .menu .menu-item .label, .context-menu .menu-item .label{
+#menubar .menu .menu-item .label, .context-menu .menu-item .label {
     -fx-text-fill: #fff;
 }
 
-#progressLabel,#stdInfoLabel{
+#progressLabel,#stdInfoLabel {
     -fx-font: #ffffff;
     -fx-font-size: 14px;
 }
 
 
-#progressLabel{
+#progressLabel {
     -fx-text-fill: #ffffff;
 }
 
-#vbox .menu-button{
+#vbox .menu-button {
     -fx-background-color: derive(-fx-primary, 35%)
 }
 
-#separator{
+#separator {
     -fx-background-color: -fx-yellow;
 }
 
-#vbox .menu-button:hover{
+#vbox .menu-button:hover {
     -fx-background-color: derive(-fx-primary, 20%);
     -fx-text-fill: #ffffff;
 }
 
-#vbox .menu-button .label{
+#vbox .menu-button .label {
     -fx-text-fill: #000;
 }
 
-#vbox .menu-button .label,#stdInfoLabel{
+#vbox .menu-button .label,#stdInfoLabel {
     -fx-text-fill: #fff;
 }
 
-#vbox .menu-button .menu-item{
+#vbox .menu-button .menu-item {
     -fx-text-fill: #000;
     /*-fx-background-color: derive(-fx-primary, 20%);*/
 }
@@ -94,32 +94,32 @@
     -fx-background-color: derive(-fx-primary, 120%);
     -fx-text-fill: -fx-blue;
 }
-#vbox .menu-item:focused{
+#vbox .menu-item:focused {
     -fx-text-fill: #000;
     -fx-background-color: derive(-fx-primary, 20%);
 }
 
-#vbox .menu-item:hover{
+#vbox .menu-item:hover {
     -fx-background-color: derive(-fx-primary, 20%);
 }
 
-.root .combo-box{
+.root .combo-box {
     -fx-background-color: derive(-fx-primary,0%) ;
     -fx-text-fill: #ffffff;
     -fx-prompt-text-fill: #fff;
     /*-fx-background-color: #ffffff;*/
 }
 
-.root .combo-box .cell{
+.root .combo-box .cell {
     -fx-text-fill: #fff;
     -fx-background-color: derive(-fx-primary,30%);
 }
 
-.root .combo-box .label{
+.root .combo-box .label {
     -fx-background-color: derive(-fx-primary,30%);
     -fx-text-fill: #fff;
 }
-.root .combo-box .combo-box-popup .list-view{
+.root .combo-box .combo-box-popup .list-view {
     -fx-background-color:#fff;
 }
 
@@ -128,24 +128,25 @@
     -fx-text-fill: derive(-fx-primary,30%);
 }
 
-.root .radio-button .label{
+.root .radio-button .label {
     -fx-background-color: derive(-fx-primary,220%);
 }
 
-#menuButtonsPane{
+#menuButtonsPane {
     -fx-background-color: derive(-fx-primary,220%);
 }
-#dob{
+
+#dob {
     -fx-font-size: 14px;
     -fx-background-color: derive(-fx-primary,30%);
 }
 
-#dob .label .text-field{
+#dob .label .text-field {
     -fx-background-color: #000;
     -fx-text-fill: derive(-fx-primary,30%);
 }
 
-#dob .month-year-pane{
+#dob .month-year-pane {
     -fx-background-color:derive(-fx-primary,30%);
 }
 #dob .text-field {
@@ -154,13 +155,13 @@
     /*-fx-control-inner-background: red;*/
 }
 
-#dob .label{
+#dob .label {
     -fx-background-color:derive(-fx-primary,30%);
     -fx-text-fill: #fff;
     /*-fx-control-inner-background: red;*/
 }
 
-#dob .button{
+#dob .button {
     -fx-font-size: 10px;
     -fx-text-fill: derive(-fx-primary,30%);;
     -fx-font-family: "Arial Narrow";
@@ -170,10 +171,10 @@
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 
-#header{
+#header {
 }
 
-#imageViewPane{
+#imageViewPane {
     -fx-border-color: #fff;
     -fx-background-color: derive(-fx-primary,0%);
 }
