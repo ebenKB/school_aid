@@ -59,7 +59,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Text>
-                                    <TextField fx:id="search" prefHeight="31.0" prefWidth="265.0" promptText="Enter Student Name" />
+                                    <TextField fx:id="search" prefHeight="31.0" prefWidth="265.0" promptText="Enter Student Name" style="-fx-text-fill: #000;" stylesheets="@../stylesheet/main.css" />
                                     <JFXComboBox fx:id="classCombo" prefHeight="31.0" prefWidth="156.0" promptText="Filter By Class" />
                                  </children>
                               </HBox>

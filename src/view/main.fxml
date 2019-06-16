@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ContextMenu?>
@@ -14,7 +13,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -27,11 +25,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="INHERIT" prefHeight="701.0" prefWidth="1096.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainController">
+<AnchorPane fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="INHERIT" prefHeight="888.0" prefWidth="1169.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainController">
    <children>
       <BorderPane fx:id="borderPane" prefHeight="582.0" prefWidth="865.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <AnchorPane fx:id="buttonCotainer" prefHeight="67.0" prefWidth="865.0" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="buttonCotainer" prefHeight="127.0" prefWidth="1096.0" BorderPane.alignment="CENTER">
                <children>
                   <HBox fx:id="buttonHBox" layoutX="511.0" layoutY="35.0" spacing="15.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="35.0" />
                   <MenuBar fx:id="menubar" layoutX="-3.0" layoutY="-2.0" prefHeight="33.0" prefWidth="865.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
@@ -83,7 +81,7 @@
                            </graphic></Hyperlink>
                      </children>
                   </HBox>
-                  <ImageView fitHeight="41.0" fitWidth="145.0" layoutX="7.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="96.0" fitWidth="208.0" layoutX="6.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../assets/logo.png" />
                      </image>
@@ -100,6 +98,13 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="601.0" layoutY="75.0" prefHeight="43.0" prefWidth="472.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="75.0">
+                     <children>
+                        <FontAwesomeIconView fill="#fdfeff" glyphName="SEARCH" size="20" text="" wrappingWidth="31.571428298950195" />
+                        <TextField fx:id="searchBox" alignment="CENTER" prefHeight="42.0" prefWidth="443.0" promptText="Search a student" />
+                        <!--<FontAwesomeIconView glyphName="SEARCH" size="25" wrappingWidth="23.214284896850586" />-->
                      </children>
                   </HBox>
                </children>
@@ -154,21 +159,8 @@
          <left>
             <AnchorPane fx:id="menuButtonsPane" minHeight="-Infinity" prefHeight="520.0" prefWidth="246.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox fx:id="vbox" layoutX="21.0" layoutY="40.0" prefHeight="415.0" prefWidth="180.0" spacing="20.0" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="40.0">
+                  <VBox fx:id="vbox" layoutX="21.0" layoutY="73.0" prefHeight="597.0" prefWidth="180.0" spacing="20.0" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="73.0">
                      <children>
-                        <HBox>
-                           <children>
-                              <JFXTextField fx:id="searchBox" alignment="CENTER" focusColor="#f4f4f5" maxWidth="229.0" minWidth="154.0" prefHeight="40.0" prefWidth="185.0" promptText="Search Student">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <tooltip>
-                                    <Tooltip text="Enter the search filter. e.g name or class to search for the student" />
-                                 </tooltip></JFXTextField>
-                              <FontAwesomeIconView fill="#0b8eeb" glyphName="SEARCH" size="20" />
-                              <!--<FontAwesomeIconView glyphName="SEARCH" size="25" wrappingWidth="23.214284896850586" />-->
-                           </children>
-                        </HBox>
                         <MenuButton fx:id="studentMenuButton" graphicTextGap="30.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="180.0" text="STUDENTS">
                           <items>
                             <MenuItem fx:id="regMenu" mnemonicParsing="false" text="Register New Student">
@@ -340,7 +332,7 @@
                         </MenuButton>
                      </children>
                   </VBox>
-                  <FontAwesomeIconView fx:id="menuToggle" glyphName="BARS" layoutX="13.0" layoutY="30.0" size="20" />
+                  <FontAwesomeIconView fx:id="menuToggle" glyphName="BARS" layoutX="24.0" layoutY="35.0" size="26" />
                </children>
             </AnchorPane>
          </left>
@@ -356,7 +348,7 @@
             </Pane>
          </right>
       </BorderPane>
-      <Pane fx:id="separator" layoutY="75.0" prefHeight="7.0" prefWidth="865.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Pane fx:id="separator" layoutY="121.0" prefHeight="7.0" prefWidth="865.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    </children>
    
 </AnchorPane>

@@ -146,7 +146,7 @@
                            </children>
                         </VBox>
                         <Separator layoutX="357.0" layoutY="29.0" maxWidth="-Infinity" opacity="0.28" orientation="VERTICAL" prefHeight="317.0" prefWidth="1.0" />
-                        <JFXButton layoutX="474.0" layoutY="188.0" prefHeight="44.0" prefWidth="174.0" text="Send Message To Parent">
+                        <JFXButton fx:id="sendSms" layoutX="474.0" layoutY="188.0" prefHeight="44.0" prefWidth="174.0" text="Send Message To Parent">
                            <graphic>
                               <ImageView fitHeight="31.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -195,7 +195,7 @@
                                     </VBox>
                                     <VBox spacing="20.0">
                                        <children>
-                                          <Button fx:id="btnEditFees" mnemonicParsing="false" prefHeight="27.0" prefWidth="82.0" text="Edit" />
+                                          <Button fx:id="editFees" mnemonicParsing="false" prefHeight="27.0" prefWidth="82.0" text="Edit" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -241,20 +241,33 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="feedingTab" text="FEEDING">
+            <Tab fx:id="feedingTab" text="PAYMENT">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ToggleSwitch fx:id="feedingToggle" layoutX="13.0" layoutY="14.0" prefHeight="30.0" prefWidth="186.0" text="Pays Feeding Fee" textFill="#f7e207">
-                           <tooltip>
-                              <Tooltip text="Does the student pay feeding fee?" />
-                           </tooltip>
-                        </ToggleSwitch>
+                        <VBox layoutX="13.0" layoutY="14.0" spacing="10.0">
+                           <children>
+                              <ToggleSwitch fx:id="feedingToggle" prefHeight="30.0" prefWidth="186.0" text="Pays Feeding Fee" textFill="#f7e207">
+                                 <tooltip>
+                                    <Tooltip text="Does the student pay feeding fee?" />
+                                 </tooltip>
+                              </ToggleSwitch>
+                              <ToggleSwitch fx:id="schFeesToggle" prefHeight="30.0" prefWidth="186.0" text="Pays School Fees" textFill="#f7e207">
+                                 <tooltip>
+                                    <Tooltip text="Does the student pay feeding fee?" />
+                                 </tooltip>
+                              </ToggleSwitch>
+                           </children>
+                        </VBox>
                         <CheckBox fx:id="editFeeding" layoutX="53.0" layoutY="109.0" mnemonicParsing="false" text="Click To Edit" textFill="WHITE" visible="false" />
-                        <JFXComboBox fx:id="paymentMode" disable="true" layoutX="26.0" layoutY="180.0" prefHeight="44.0" prefWidth="246.0" promptText="Payment Mode" />
-                        <Text fill="#f7e207" layoutX="16.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feeding Fee Amount" />
-                        <Text fill="#f7e207" layoutX="21.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feeding Fee Status" />
-                        <JFXTextField fx:id="feedingAcc" alignment="CENTER_RIGHT" editable="false" focusColor="#ffcd05" layoutX="157.0" layoutY="99.0" maxWidth="103.0" minWidth="103.0" prefHeight="38.0" prefWidth="103.0" />
+                        <JFXComboBox fx:id="paymentMode" disable="true" layoutX="26.0" layoutY="223.0" prefHeight="44.0" prefWidth="246.0" promptText="Payment Mode" />
+                        <HBox alignment="CENTER" layoutX="17.0" layoutY="118.0" spacing="20.0">
+                           <children>
+                              <Text fill="#f7e207" strokeType="OUTSIDE" strokeWidth="0.0" text="Feeding Fee Amount" />
+                              <JFXTextField fx:id="feedingAcc" alignment="CENTER_RIGHT" editable="false" focusColor="#ffcd05" maxWidth="103.0" minWidth="103.0" prefHeight="38.0" prefWidth="103.0" />
+                           </children>
+                        </HBox>
+                        <Text fill="#f7e207" layoutX="24.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feeding Fee Status" />
                      </children>
                   </AnchorPane>
               </content>

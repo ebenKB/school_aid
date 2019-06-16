@@ -178,7 +178,7 @@ public class mainController implements Initializable{
     private MenuItem delleteStudentContextMenu;
 
     @FXML
-    private JFXTextField searchBox;
+    private TextField searchBox;
 
     @FXML
     private MenuItem viewStudentDetails;
@@ -660,7 +660,6 @@ public class mainController implements Initializable{
         try {
             root=fxmlLoader.load();
             studentDetailsFormController studentDetailsFormController = fxmlLoader.getController();
-
             studentDetailsFormController.init(studentTableView.getSelectionModel().getSelectedItem());
             Scene scene = new Scene(root);
             javafx.stage.Stage stage = new javafx.stage.Stage();

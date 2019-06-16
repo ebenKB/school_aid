@@ -115,7 +115,7 @@ public class TerminalReportController implements Initializable {
     FilteredList<TerminalReport> filteredAtt = new FilteredList<>(terminalReports, e ->true);
     SortedList<TerminalReport> sortedList = new SortedList<>(filteredAtt);
     //create a checkbox for selecting or deselecting students
-    public CheckBox check = new CheckBox("");
+//    public CheckBox check;
     CheckBox selectAll = new CheckBox();
     private StudentDao studentDao;
     private TerminalReportDao terminalReportDao;
@@ -169,6 +169,9 @@ public class TerminalReportController implements Initializable {
     }
 
     private void setClass () {
+        Stage stage = new Stage();
+        stage.setName("--All Classes--");
+        stages.add(stage);
         classCombo.setItems(stages);
     }
 
@@ -240,11 +243,13 @@ public class TerminalReportController implements Initializable {
                     String lowerVal = newValue.getName().toLowerCase();
                     if(lowerVal.contains(at.getStudent().getStage().getName().toLowerCase()))
                         return true;
+                    else if(lowerVal.equals("--all classes--"))
+                        return true;
                     return false;
                 });
                 sortedList.comparatorProperty().bind(reportTableView.comparatorProperty());
                 reportTableView.setItems(sortedList);
-                check.setSelected(false);
+                unSelectAll();
             }
         });
 
@@ -317,7 +322,7 @@ public class TerminalReportController implements Initializable {
         }));
         sortedList.comparatorProperty().bind(reportTableView.comparatorProperty());
         reportTableView.setItems(sortedList);
-        check.setSelected(false);
+        unSelectAll();
     }
 
     private void selectAll () {
@@ -336,6 +341,7 @@ public class TerminalReportController implements Initializable {
         for(TerminalReport t: reports) {
             t.setSelected(false);
         }
+        selectAll.setSelected(false);
         reportTableView.refresh();
     }
 
@@ -345,6 +351,7 @@ public class TerminalReportController implements Initializable {
             @Override
             public TableCell<TerminalReport, Void> call(final TableColumn<TerminalReport, Void> param) {
                 TableCell<TerminalReport, Void> cell = new TableCell<TerminalReport, Void>() {
+                    CheckBox check = new CheckBox("");
                     {
                         // get the row index and update the selected property field
                         check.setOnAction(e -> {

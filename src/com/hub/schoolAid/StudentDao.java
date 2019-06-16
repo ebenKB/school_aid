@@ -329,7 +329,7 @@ public class StudentDao {
 
     // when the student is paying school fees
     public Boolean paySchoolFee(Student st, Double amount) {
-        if (st == null)
+        if (st == null || !st.getPaySchoolFees())
             return false;
         em=HibernateUtil.getEntityManager();
         StudentAccount acc = em.find(StudentAccount.class, st.getAccount().getId());
@@ -341,11 +341,11 @@ public class StudentDao {
 
     // when you want to add a new amount to the existing fees
     public Boolean updateSchoolFee(Student st, Double amount) {
-        if(amount.isNaN()) return false;
+        if(amount.isNaN() || !st.getPaySchoolFees()) return false;
         else {
             em = HibernateUtil.getEntityManager();
-            StudentAccount account = em.find(StudentAccount.class, st.getId());
-            account.setFeeToPay(account.getFeeToPay() + amount);
+            StudentAccount account = em.find(StudentAccount.class, st.getAccount().getId());
+            account.setFeeToPay( amount);
             if(this.updateAccount(account))
                 return true;
             return false;
@@ -354,8 +354,10 @@ public class StudentDao {
 
     // set the student school fees to it's original value
     public Boolean resetSchoolFees(Student st) {
+        if(!st.getPaySchoolFees())
+            return false;
         em=HibernateUtil.getEntityManager();
-        StudentAccount account = em.find(StudentAccount.class, st.getId());
+        StudentAccount account = em.find(StudentAccount.class, st.getAccount().getId());
         account.setFeeToPay((st.getStage().getFeesToPay() * -1));
         if(this.updateAccount(account))
             return true;
@@ -363,14 +365,14 @@ public class StudentDao {
     }
 
     // when you want to change the student's existing fees to a new amount;
-    public Boolean setSchoolFeeToPay(Student st, Double amount) {
-        if(amount.isNaN())
-            return false;
-        em=HibernateUtil.getEntityManager();
-        StudentAccount acc = em.find(StudentAccount.class, st);
-        acc.setFeeToPay(amount);
-        if(this.updateAccount(acc))
-            return true;
-        return false;
-    }
+//    public Boolean setSchoolFeeToPay(Student st, Double amount) {
+//        if(amount.isNaN() || st.getPaySchoolFees())
+//            return false;
+//        em=HibernateUtil.getEntityManager();
+//        StudentAccount acc = em.find(StudentAccount.class, st);
+//        acc.setFeeToPay(amount);
+//        if(this.updateAccount(acc))
+//            return true;
+//        return false;
+//    }
 }

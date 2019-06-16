@@ -295,13 +295,6 @@
     -fx-background-color: derive(-fx-primary,130%);
 }
 
-#saleItems, #amountPaid, #balance, #feesBalance,#feedingFeeCredit,#feedingAcc,#totalStudents {
-    -fx-background-color: derive(-fx-primary,30%);
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-text-alignment: right;
-}
-
 #parentLandMark, #allergy {
     -fx-background-color: -fx-primary;
     -fx-text-fill: #fff;
@@ -381,6 +374,19 @@
 .table-view :hover {
     -fx-background-color:derive(-fx-primary,120%);
     -fx-text-fill: #fff;
+}
+
+/*set text fields with dark background and white color*/
+#saleItems, #amountPaid, #balance, #feesBalance,#feedingFeeCredit,#feedingAcc,#totalStudents,#amount {
+    -fx-background-color: derive(-fx-primary,30%);
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-alignment: right;
+}
+
+/*set text fields with white background and dark color*/
+#searchBox {
+    -fx-text-fill: -fx-primary;
 }
 
 /*align figures in table to the right */

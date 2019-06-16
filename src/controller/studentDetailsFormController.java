@@ -9,8 +9,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,6 +20,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.controlsfx.control.ToggleSwitch;
 
 import java.io.FileInputStream;
@@ -90,6 +95,9 @@ public class studentDetailsFormController implements Initializable{
     private Button save;
 
     @FXML
+    private Button editFees;
+
+    @FXML
     private CheckBox btnEditable;
 
     @FXML
@@ -130,6 +138,9 @@ public class studentDetailsFormController implements Initializable{
 
     @FXML
     private ToggleSwitch feedingToggle;
+
+    @FXML
+    private ToggleSwitch schFeesToggle;
 
     @FXML
     private TextField amountPaid;
@@ -696,7 +707,7 @@ public class studentDetailsFormController implements Initializable{
                                    }
                                }
 
-                       }else{
+                       } else {
                            if(!student.getPayFeeding()){
                                Alert alert = new Alert(Alert.AlertType.WARNING,"",ButtonType.NO,ButtonType.YES);
                                alert.setTitle("Pay Feeding Fee");
@@ -713,7 +724,7 @@ public class studentDetailsFormController implements Initializable{
                        }
                    }
                });
-           }else{
+           }else {
                notifyEditLock();
                //revert change to the toggle
                if(feedingToggle.isSelected()){
@@ -722,6 +733,7 @@ public class studentDetailsFormController implements Initializable{
                    feedingToggle.setSelected(true);
            }
         });
+
         close.setOnAction(event -> {
             if(counter>0){
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"There are unsaved changes.\n Are you sure you want to close the form?", ButtonType.YES,ButtonType.NO);
@@ -807,11 +819,11 @@ public class studentDetailsFormController implements Initializable{
             }
         });
 
-        close.setOnAction(e->{
+        close.setOnAction(e-> {
             Utils.closeEvent(e);
         });
 
-        changeImage.setOnAction(e->{
+        changeImage.setOnAction(e-> {
             Alert alert =new Alert(Alert.AlertType.CONFIRMATION,"",ButtonType.YES,ButtonType.NO);
             alert.setTitle("Change Image");
             alert.setHeaderText("Your are about to change the image for"+" "+student.getFirstname()+"\nAre you sure you want to continue ?");
@@ -829,11 +841,11 @@ public class studentDetailsFormController implements Initializable{
                             return null;
                         }
                     };
-                    saveImage.setOnRunning(event->{
+                    saveImage.setOnRunning(event-> {
                         MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Saving student image");
 
                     });
-                    saveImage.setOnSucceeded(event ->{
+                    saveImage.setOnSucceeded(event -> {
                         MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
                         Notification.getNotificationInstance().notifySuccess("Image has been saved.","Success");
                     });
@@ -847,6 +859,8 @@ public class studentDetailsFormController implements Initializable{
                 }
             }
         });
+
+        editFees.setOnAction(event -> this.showEditFeesForm());
     }
 
     private void updateStudentImage() {
@@ -887,9 +901,8 @@ public class studentDetailsFormController implements Initializable{
 //        imageHandler.setStudentImage(student,path);
 
         //check if the parent's records changed
-        if(parentChanges>0){
-
-            if(newStudent.getParent().getname() !=null)
+        if(parentChanges > 0){
+            if(newStudent.getParent().getname() != null)
                  student.getParent().setname(newStudent.getParent().getname());
             if(newStudent.getParent().getTelephone() !=null)
                 student.getParent().setTelephone(parentPhone.getText().trim());
@@ -900,8 +913,6 @@ public class studentDetailsFormController implements Initializable{
             if(newStudent.getParent().getAddress().getLandmark()!=null)
                 student.getParent().getAddress().setLandmark(newStudent.getParent().getAddress().getLandmark());
         }
-
-
     }
 
     private void refreshFields(){
@@ -912,8 +923,8 @@ public class studentDetailsFormController implements Initializable{
         showChangesLabel();
 //      setAccountTabDetails();
     }
-    private void setStudentTabDetails(){
 
+    private void setStudentTabDetails(){
         try{
             StudentDetailsDao detailsDao =new StudentDetailsDao();
             if(detailsDao.getImage(student)!=null){
@@ -935,13 +946,14 @@ public class studentDetailsFormController implements Initializable{
         phone.setText(student.getParent().getTelephone());
     }
 
-    private void setPrentTabDetails(){
+    private void setPrentTabDetails() {
         parentName.setText(student.getParent().getname());
         parentPhone.setText(student.getParent().getTelephone());
         parentOccupation.setText(student.getParent().getOccupation());
         parentAdd.setText(student.getParent().getAddress().getHomeAddress());
         parentLandMark.setText(student.getParent().getAddress().getLandmark());
     }
+
     private void setAccountTabDetails(){
         SalesDao salesDao = new SalesDao();
         int total =0;
@@ -973,26 +985,26 @@ public class studentDetailsFormController implements Initializable{
         //set the text fields
         saleItems.setText(String.valueOf(total));
         amountPaid.setText(String.valueOf(payment));
-        if(student.getAccount().getFeeToPay()<0)
-             bal+=student.getAccount().getFeeToPay()*-1;
+        if(student.getAccount().getFeeToPay() < 0)
+             bal+=student.getAccount().getFeeToPay() * -1;
         else bal+=student.getAccount().getFeeToPay();
 
-        if(student.getAccount().getFeedingFeeToPay()<0)
-             bal+=student.getAccount().getFeedingFeeCredit()*-1;
+        if(student.getAccount().getFeedingFeeToPay() < 0)
+             bal+=student.getAccount().getFeedingFeeCredit() * -1;
         else bal+=student.getAccount().getFeedingFeeCredit();
 
         balance.setText(String.valueOf(bal));
         feesBalance.setText(String.valueOf(student.getAccount().getFeeToPay()));
         feedingFeeCredit.setText(String.valueOf(student.getAccount().getFeedingFeeCredit()));
 
-        if(bal>0){
+        if(bal < 0){
             //Change the indicator background to red else change to green;
             indicator.setStyle("-fx-background-color: red");
-        }else{
+        }else {
             indicator.setStyle("-fx-background-color: green");
         }
 
-        if(total>0){
+        if(total > 0){
             checkListView.setVisible(Boolean.TRUE);
         }
     }
@@ -1000,8 +1012,12 @@ public class studentDetailsFormController implements Initializable{
     private void prepareFeedingRecords(){
         if(student.getPayFeeding()){
             feedingToggle.setSelected(Boolean.TRUE);
-        }
-        else feedingToggle.setSelected(Boolean.FALSE);
+        } else feedingToggle.setSelected(Boolean.FALSE);
+
+
+        if(student.getPaySchoolFees()) {
+            schFeesToggle.setSelected(Boolean.TRUE);
+        } else schFeesToggle.setSelected(false);
 
         feedingAcc.setText(String.valueOf(student.getAccount().getFeedingFeeToPay()));
 
@@ -1021,8 +1037,8 @@ public class studentDetailsFormController implements Initializable{
         setStudentTabDetails();
     }
 
-    private void showChangesLabel(){
-        if(counter>0){
+    private void showChangesLabel() {
+        if(counter>0) {
             changesCounter.setText(String.valueOf(counter));
             changesLabel.setVisible(Boolean.TRUE);
             save.setDisable(Boolean.FALSE);
@@ -1053,5 +1069,23 @@ public class studentDetailsFormController implements Initializable{
         WindowsSounds.playWindowsSound();
         infoLable.setText("Editing is not enabled for this field.");
         infoLable.setTextFill(Color.valueOf("#ffcd05"));
+    }
+
+    private void showEditFeesForm() {
+        javafx.scene.Parent root;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/editFees.fxml"));
+        try {
+            root = fxmlLoader.load();
+            EditFeesController editFeesController = fxmlLoader.getController();
+            editFeesController.init(student);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        } catch (Exception e) {
+            return;
+        }
     }
 }
