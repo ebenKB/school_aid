@@ -1,6 +1,7 @@
 package controller;
 
 import com.hub.schoolAid.*;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -80,8 +81,8 @@ public class TerminalReportController implements Initializable {
     @FXML
     private TableColumn<TerminalReport, String> classCol;
 
-    @FXML
-    private JFXComboBox<Stage> reportFilter;
+//    @FXML
+//    private JFXComboBox<Stage> reportFilter;
 
     @FXML
     private JFXButton save;
@@ -113,6 +114,9 @@ public class TerminalReportController implements Initializable {
     private ObservableList<TerminalReport>updateReports = FXCollections.observableArrayList();
     FilteredList<TerminalReport> filteredAtt = new FilteredList<>(terminalReports, e ->true);
     SortedList<TerminalReport> sortedList = new SortedList<>(filteredAtt);
+    //create a checkbox for selecting or deselecting students
+    public CheckBox check = new CheckBox("");
+    CheckBox selectAll = new CheckBox();
     private StudentDao studentDao;
     private TerminalReportDao terminalReportDao;
     private StageDao stageDao;
@@ -124,14 +128,8 @@ public class TerminalReportController implements Initializable {
             @Override
             protected Object call() throws Exception {
 
-                // add checkbox to the column header
-                CheckBox selectAll = new CheckBox();
-                checkStudent.setGraphic(selectAll);
-                selectAll.setOnAction(e -> {
-                    if(selectAll.isSelected()) {
-                       selectAll();
-                    } else unSelectAll();
-                });
+            // add checkbox to the column header
+            checkStudent.setGraphic(selectAll);
             refresh();
             if(terminalReports.isEmpty()) {
                 terminalReportDao = new TerminalReportDao();
@@ -171,8 +169,6 @@ public class TerminalReportController implements Initializable {
     }
 
     private void setClass () {
-//        CustomCombo.getInstance().overrideCombo(classCombo);
-//        classCombo.getItems().clear();
         classCombo.setItems(stages);
     }
 
@@ -218,28 +214,38 @@ public class TerminalReportController implements Initializable {
             activateSearch();
         });
 
-        viewByClass.setOnAction(e ->{
-            System.out.println("We want to view by class...");
-            if(classCombo.getItems().isEmpty()){
+        // listen when a user selects or deselects all items
+        selectAll.setOnAction(e -> {
+            if(selectAll.isSelected()) {
+                selectAll();
+            } else unSelectAll();
+        });
+
+        // set the stages to the class combo box
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
                 setClass();
             }
         });
 
-        classCombo.selectionModelProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("the class has changed");
-            filteredAtt.setPredicate( (Predicate< ? super TerminalReport>) at -> {
-                if( newValue == null || newValue.isEmpty() ) {
-                    return  true;
-                }
+        classCombo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Stage>() {
+            @Override
+            public void changed(ObservableValue<? extends Stage> observable, Stage oldValue, Stage newValue) {
+                filteredAtt.setPredicate( (Predicate< ? super TerminalReport>) at -> {
+                    if( newValue == null ) {
+                        return  true;
+                    }
 
-                String lowerVal = newValue.getSelectedItem().getName().toLowerCase();
-                if(lowerVal.contains(at.getStudent().getStage().getName().toLowerCase()))
-                    return true;
-                return false;
-//                    return  viewAttendanceController.checkIfStudent(lowerVal, at.getStudent());
-            });
-            sortedList.comparatorProperty().bind(reportTableView.comparatorProperty());
-            reportTableView.setItems(sortedList);
+                    String lowerVal = newValue.getName().toLowerCase();
+                    if(lowerVal.contains(at.getStudent().getStage().getName().toLowerCase()))
+                        return true;
+                    return false;
+                });
+                sortedList.comparatorProperty().bind(reportTableView.comparatorProperty());
+                reportTableView.setItems(sortedList);
+                check.setSelected(false);
+            }
         });
 
         reportTableView.setRowFactory(tv -> {
@@ -253,12 +259,12 @@ public class TerminalReportController implements Initializable {
         });
 
         generatePDF.setOnAction(e -> {
-            selectedReports.clear();
-            for(TerminalReport t: reportTableView.getItems()) {
-                if(t.isSelected()) {
-                    selectedReports.add(t);
-                }
-            }
+//            selectedReports.clear();
+//            for(TerminalReport t: reportTableView.getItems()) {
+//                if(t.isSelected()) {
+//                    selectedReports.add(t);
+//                }
+//            }
             // get all the items in the table and create pdf for them"
             Task task = new Task() {
                 @Override
@@ -281,10 +287,20 @@ public class TerminalReportController implements Initializable {
             new Thread(task).start();
         });
 
-        createBill.setOnAction(event -> PDFMaker.getPDFMakerInstance().createBillAndItemList());
-
-
-
+        createBill.setOnAction(event -> {
+            if(selectedReports.isEmpty()) {
+                PDFMaker.getPDFMakerInstance().createBillAndItemList();
+            } else {
+                ObservableList<Student> students = FXCollections.observableArrayList();
+                for(TerminalReport r : reportTableView.getItems()) {
+                    if (r.isSelected()) {
+                        students.add(r.getStudent());
+                    }
+                }
+                // create the bill for the selected students
+                PDFMaker.getPDFMakerInstance().createBillAndItemList(students);
+            };
+        });
     }
 
     private void activateSearch() {
@@ -301,18 +317,22 @@ public class TerminalReportController implements Initializable {
         }));
         sortedList.comparatorProperty().bind(reportTableView.comparatorProperty());
         reportTableView.setItems(sortedList);
+        check.setSelected(false);
     }
 
     private void selectAll () {
        ObservableList<TerminalReport> reports = reportTableView.getItems();
+       selectedReports.clear();
         for(TerminalReport t: reports) {
             t.setSelected(true);
+            selectedReports.add(t);
         }
         reportTableView.refresh();
     }
 
     private void unSelectAll() {
         ObservableList<TerminalReport> reports = reportTableView.getItems();
+        selectedReports.clear();
         for(TerminalReport t: reports) {
             t.setSelected(false);
         }
@@ -321,28 +341,24 @@ public class TerminalReportController implements Initializable {
 
 
     private void addCheckBoxToTable(TableColumn column) {
-
         Callback<TableColumn<TerminalReport, Void>, TableCell<TerminalReport, Void>> cellFactory = new Callback<TableColumn<TerminalReport, Void>, TableCell<TerminalReport, Void>>() {
             @Override
             public TableCell<TerminalReport, Void> call(final TableColumn<TerminalReport, Void> param) {
                 TableCell<TerminalReport, Void> cell = new TableCell<TerminalReport, Void>() {
-
-                    //create a checkbox for selecting or deselecting students
-                    public CheckBox check = new CheckBox("");
-
                     {
                         // get the row index and update the selected property field
                         check.setOnAction(e -> {
                             TerminalReport t = reportTableView.getItems().get(getIndex());
                             if(check.isSelected()) {
                                 t.setSelected(true);
+                                selectedReports.add(t);
 
                             } else {
                                 t.setSelected(false);
+                                selectedReports.remove(t);
                             };
                         });
                     }
-
                     @Override
                     public void updateItem(Void item, boolean empty) {
                         super.updateItem(item, empty);
@@ -352,7 +368,7 @@ public class TerminalReportController implements Initializable {
                         } else {
                             setGraphic(check);
                             // check if the check box has to be activated or not
-                            if(param.getTableView().getItems().get(getIndex()).isSelected()) {
+                            if (param.getTableView().getItems().get(getIndex()).isSelected()) {
                                 check.setSelected(true);
                             } else {
                                 check.setSelected(false);

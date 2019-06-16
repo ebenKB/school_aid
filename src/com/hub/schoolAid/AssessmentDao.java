@@ -10,28 +10,27 @@ import java.util.List;
 public class AssessmentDao {
     private EntityManager em;
 
-    private Boolean saveAssessment(Assessment assessment){
+    private Boolean saveAssessment(Assessment assessment) {
        try {
-//           GradeDao gradeDao =new GradeDao();
-//           assessment.setGrade(gradeDao.getGrade((assessment.getClassScore()+assessment.getExamScore())));
            em=HibernateUtil.getEntityManager();
            HibernateUtil.begin();
            em.persist(assessment);
            HibernateUtil.commit();
            return  true;
        }catch (Exception e){
+           HibernateUtil.rollBack();
            return false;
        }finally {
            em.close();
        }
     }
 
-    private void saveAssessment(List<Assessment> assessments){
+    private void saveAssessment(List<Assessment> assessments) {
         for (Assessment  assessment:assessments)
             saveAssessment(assessment);
     }
 
-    public Boolean createAssessment(Assessment assessment){
+    public Boolean createAssessment(Assessment assessment) {
         try {
             saveAssessment(assessment);
             return true;
@@ -40,7 +39,7 @@ public class AssessmentDao {
         }
     }
 
-    public Boolean createAssessment(List <Assessment> assessment){
+    public Boolean createAssessment(List <Assessment> assessment) {
         try {
             saveAssessment(assessment);
             return true;
@@ -49,7 +48,7 @@ public class AssessmentDao {
         }
     }
 
-    public Boolean existAssessment(Stage stage, Course course){
+    public Boolean existAssessment(Stage stage, Course course) {
        try{
            em=HibernateUtil.getEntityManager();
            HibernateUtil.begin();
@@ -63,7 +62,7 @@ public class AssessmentDao {
        }
     }
 
-    public Assessment existAssessment(Student student, Course course){
+    public Assessment existAssessment(Student student, Course course) {
         em=HibernateUtil.getEntityManager();
         HibernateUtil.begin();
         try{
@@ -79,7 +78,7 @@ public class AssessmentDao {
         }
     }
 
-    public List<Assessment> getAssessment(Stage stage){
+    public List<Assessment> getAssessment(Stage stage) {
         em = HibernateUtil.getEntityManager();
         HibernateUtil.begin();
         Query q=em.createQuery("from Assessment  A where A.student.stage.id =? order by A.student.stage.classValue asc ");
@@ -87,7 +86,7 @@ public class AssessmentDao {
         return q.getResultList();
     }
 
-    public List<Assessment> getAssessment(Stage stage,Course course){
+    public List<Assessment> getAssessment(Stage stage,Course course) {
         em = HibernateUtil.getEntityManager();
         HibernateUtil.begin();
         Query q=em.createQuery("from Assessment  A where A.student.stage.id =? and A.course.id=? order by A.student.stage.classValue asc ");
@@ -96,7 +95,7 @@ public class AssessmentDao {
         return q.getResultList();
     }
 
-    public List<Assessment> getAssessment(Course course,Stage stage){
+    public List<Assessment> getAssessment(Course course,Stage stage) {
         em = HibernateUtil.getEntityManager();
         HibernateUtil.begin();
         Query q=em.createQuery("from Assessment  A where A.course.id=? and A.student.stage.id = ?");
@@ -105,7 +104,7 @@ public class AssessmentDao {
         return q.getResultList();
     }
 
-    public List<Assessment> getAssessment(Student student){
+    public List<Assessment> getAssessment(Student student) {
        try {
            em = HibernateUtil.getEntityManager();
            HibernateUtil.begin();
@@ -120,7 +119,7 @@ public class AssessmentDao {
        }
     }
 
-    public List<Assessment> getAssessment(){
+    public List<Assessment> getAssessment() {
         try {
             em = HibernateUtil.getEntityManager();
             HibernateUtil.begin();
@@ -134,7 +133,7 @@ public class AssessmentDao {
         }
     }
 
-    public Boolean updateAssessment(Assessment assessment){
+    public Boolean updateAssessment(Assessment assessment) {
           GradeDao gradeDao =new GradeDao();
           Grade grade = gradeDao.getGrade((assessment.getClassScore()+assessment.getExamScore()));
             if(grade!=null){

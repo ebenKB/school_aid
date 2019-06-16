@@ -84,6 +84,9 @@ public class studentDetailsFormController implements Initializable{
     private JFXButton close;
 
     @FXML
+    private Button btnEditFees;
+
+    @FXML
     private Button save;
 
     @FXML
@@ -311,7 +314,7 @@ public class studentDetailsFormController implements Initializable{
                     }
                 }else{
                     oname.setOnKeyTyped(event -> {
-                        if(!btnEditable.isSelected()){
+                        if(!btnEditable.isSelected()) {
                             notifyEditLock();
                         }
                     });
@@ -1044,7 +1047,6 @@ public class studentDetailsFormController implements Initializable{
 
     public void init(Student student)  {
         setStudent(student);
-
     }
 
     private void promptEditNotAllowed() {

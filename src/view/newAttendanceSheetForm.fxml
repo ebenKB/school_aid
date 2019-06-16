@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="504.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.newAttendanceSheetController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="548.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.newAttendanceSheetController">
    <children>
-      <Pane fx:id="root" layoutY="-1.0" prefHeight="73.0" prefWidth="504.0">
+      <Pane fx:id="root" layoutY="-1.0" prefHeight="73.0" prefWidth="548.0">
          <children>
             <Label fx:id="dateLabel" layoutX="19.0" layoutY="12.0" prefHeight="50.0" prefWidth="470.0" textFill="WHITE">
                <font>
@@ -22,7 +22,7 @@
             </Label>
          </children>
       </Pane>
-      <HBox layoutX="80.0" layoutY="144.0" prefHeight="36.0" prefWidth="342.0" spacing="40.0">
+      <HBox layoutX="103.0" layoutY="147.0" prefHeight="36.0" prefWidth="342.0" spacing="40.0">
          <children>
             <Button fx:id="useSystemDate" mnemonicParsing="false" prefHeight="36.0" prefWidth="142.0" text="Use System Date">
                <font>
@@ -37,7 +37,7 @@
          </children>
       </HBox>
       <JFXDatePicker fx:id="datePicker" layoutX="89.0" layoutY="200.0" prefHeight="50.0" prefWidth="324.0" promptText="Click to select a date" visible="false" />
-      <HBox layoutX="54.0" layoutY="283.0" prefHeight="39.0" prefWidth="406.0" spacing="30.0">
+      <HBox layoutX="54.0" layoutY="285.0" prefHeight="39.0" prefWidth="440.0" spacing="30.0">
          <children>
             <Button fx:id="close" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" text="CLOSE">
                <font>
@@ -47,7 +47,7 @@
                   <FontAwesomeIconView fill="#f80505" glyphName="CLOSE" size="18" />
                </graphic>
             </Button>
-            <Button fx:id="save" mnemonicParsing="false" prefHeight="39.0" prefWidth="113.0" text="SAVE DATE">
+            <Button fx:id="save" mnemonicParsing="false" prefHeight="42.0" prefWidth="124.0" text="SAVE DATE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -55,7 +55,7 @@
                   <FontAwesomeIconView fill="#08bc44" glyphName="FILE" size="15" />
                </graphic>
             </Button>
-            <Button fx:id="createSheet" layoutX="124.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="139.0" text="NEW SHEET">
+            <Button fx:id="createSheet" layoutX="124.0" layoutY="10.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="165.0" text="NEW REGISTER">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

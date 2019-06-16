@@ -219,6 +219,9 @@ public class mainController implements Initializable{
     @FXML
     private MenuItem grade;
 
+    @FXML
+    private MenuItem dateTime;
+
     public static User user;
     private ObservableList<Student> data= FXCollections.observableArrayList();
     private FilteredList<Student> filteredData = new FilteredList <> (data, e ->true);
@@ -228,6 +231,7 @@ public class mainController implements Initializable{
     private Initializer initializer = Initializer.getInitializerInstance();
     private Notification notification =Notification.getNotificationInstance();
     private MyProgressIndicator myProgressIndicator = MyProgressIndicator.getMyProgressIndicatorInstance();
+    private salesDetailsFormController salesDetailsFormController = new salesDetailsFormController();
 
     public void init(User user){
         mainController.user = user;
@@ -575,6 +579,8 @@ public class mainController implements Initializable{
         editSale.setOnAction(event   -> showSalesItemForm());
 
         logout.setOnAction(event -> Initializer.getInitializerInstance().showLoginForm());
+
+        dateTime.setOnAction(event ->  salesDetailsFormController.showCreateAttendaceForm());
 
         menuToggle.setOnMouseClicked(e->{
             if (vbox.isVisible())

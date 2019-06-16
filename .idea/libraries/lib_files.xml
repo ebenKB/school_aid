@@ -4,10 +4,6 @@
       <root url="jar://$PROJECT_DIR$/../../libs/boxable-1.5-RC.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../libs/guava-18.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../libs/pdfbox-2.0.11.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../libs/preflight-2.0.11.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../libs/pdfbox-debugger-2.0.11.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../libs/pdfbox-tools-2.0.11.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../libs/xmpbox-2.0.11.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../libs/fontbox-2.0.11.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../libs/jfoenix-1.10.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../libs/antlr-2.7.7.jar!/" />

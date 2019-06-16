@@ -3,14 +3,12 @@ package com.hub.schoolAid;
 import be.quodlibet.boxable.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
-import org.apache.pdfbox.pdmodel.font.PDCIDFontType0;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
@@ -39,8 +37,8 @@ public class PDFMaker {
     Double totalFeeding =0.0;
     int totalAttendance = 0;
 
-    StudentDao dao = new StudentDao();
-    List<Student> students = dao.getAllStudents();
+//    StudentDao dao = new StudentDao();
+//    List<Student> students = dao.getAllStudents();
     AssessmentDao assessmentDao =new AssessmentDao();
     TerminalReportDao terminalReportDao =new TerminalReportDao();
     ObservableList <Assessment> assessmentList = FXCollections.observableArrayList();
@@ -351,19 +349,21 @@ public class PDFMaker {
 
     }
 
-    public static void  createReport(List<Assessment> assessment){
-        PDDocument pdDocument = new PDDocument();
-        for(int i=0;i<=5;i++){
-            PDPage pdPage =new PDPage();
-            pdDocument.addPage(pdPage);
-        }
-    }
-
     public static  void createAttendanceReport (LocalDate from,LocalDate to,List<Attendance> attendanceList){
 
     }
 
-    public  void createBillAndItemList(){
+    public  void createBillAndItemList() {
+        StudentDao dao = new StudentDao();
+        List<Student> students = dao.getAllStudents();
+        for(Student st: students) {
+            generateAccountReport(pdDocument, st);
+        }
+
+        savePDFToLocation(pdDocument);
+    }
+
+    public void createBillAndItemList(ObservableList<Student>students) {
         for(Student st: students) {
             generateAccountReport(pdDocument, st);
         }
@@ -387,8 +387,8 @@ public class PDFMaker {
             return itemList;
     }
 
-    private void generateAccountReport(PDDocument pdDocument,Student student){
-//        if(student.getAccount().getFeedingFeeCredit()<0 | student.getAccount().getFeeToPay()<0){
+    private void generateAccountReport(PDDocument pdDocument, Student student) {
+//        if(student.getAccount().getFeedingFeeCredit() < 0 | student.getAccount().getFeeToPay() < 0) {
             PDPage pdPage = new PDPage(PDRectangle.A5);
             PDRectangle mediaBox = pdPage.getMediaBox();
             pdDocument.addPage(pdPage);
@@ -839,7 +839,7 @@ public class PDFMaker {
      * @param sortedAssessment
      * @return assessment for the student
      */
-    private static  List<Assessment> searchAssessment(Long searchItem,List<Assessment> sortedAssessment){
+    private static  List<Assessment> searchAssessment(Long searchItem,List<Assessment> sortedAssessment) {
         System.out.println("------------------------------------------------------------------");
         for (Assessment as:sortedAssessment) {
             System.out.println(as.getStudent().toString()+" ASS ID "+as.getId()+"STU ID: "+as.getStudent().getId());
@@ -870,7 +870,7 @@ public class PDFMaker {
     }
 
 
-    private String dateToString(LocalDate date){
+    private String dateToString(LocalDate date) {
         return  date.getDayOfWeek().toString().toUpperCase()+", "+date.getDayOfMonth()+"th "+date.getMonth().toString().toUpperCase()+" "+date.getYear();
     }
 

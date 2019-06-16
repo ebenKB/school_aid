@@ -4,6 +4,7 @@ package com.hub.schoolAid;
  * Created by HUBKB.S on 1/6/2018.
  */
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.hibernate.HibernateException;
 
 import javax.persistence.EntityManager;
@@ -285,37 +286,29 @@ public class StudentDao {
         HibernateUtil.close();
     }
 
-    public Boolean updateAccount(StudentAccount account){
-        System.out.print("calling update account");
+    public Boolean updateAccount(StudentAccount account) {
         try {
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
             StudentAccount studentAccount=em.find(StudentAccount.class,account.getId());
             studentAccount.setFeedingFeeCredit(account.getFeedingFeeCredit());
             studentAccount.setFeeToPay(account.getFeeToPay());
-
-            System.out.println("this is the student account"+ studentAccount);
             HibernateUtil.commit();
             HibernateUtil.close();
-        }catch (Exception e){
-            System.out.println(e);
+            return true;
+        } catch (Exception e){
+            HibernateUtil.rollBack();
             return  false;
         }
-        return true;
     }
 
     public Boolean resetFeedingFee(Student student, Double amount) {
         em = HibernateUtil.getEntityManager();
         HibernateUtil.begin();
-        System.out.println("we want to reset this student's account" + "amount: "+ amount);
         try {
             //we cannot reset the feeding fee for students who do not pay feeding fee unless the new amount is 0.00
-//            if(!this.getPayFeeding() && amount != 0)
-//                return false;
-            System.out.println(student.toString());
             StudentAccount studentAccount = em.find(StudentAccount.class,student.getAccount().getId());
             studentAccount.setFeedingFeeCredit(amount);
-//            HibernateUtil.commit();
             updateAccount(studentAccount);
 
             if(student.getFeedingStatus() == Student.FeedingStatus.SEMI_PERIODIC) {
@@ -334,12 +327,48 @@ public class StudentDao {
         }
     }
 
+    // when the student is paying school fees
     public Boolean paySchoolFee(Student st, Double amount) {
         if (st == null)
             return false;
         em=HibernateUtil.getEntityManager();
         StudentAccount acc = em.find(StudentAccount.class, st.getAccount().getId());
         acc.setFeeToPay((acc.getFeeToPay() + amount));
+        if(this.updateAccount(acc))
+            return true;
+        return false;
+    }
+
+    // when you want to add a new amount to the existing fees
+    public Boolean updateSchoolFee(Student st, Double amount) {
+        if(amount.isNaN()) return false;
+        else {
+            em = HibernateUtil.getEntityManager();
+            StudentAccount account = em.find(StudentAccount.class, st.getId());
+            account.setFeeToPay(account.getFeeToPay() + amount);
+            if(this.updateAccount(account))
+                return true;
+            return false;
+        }
+    }
+
+    // set the student school fees to it's original value
+    public Boolean resetSchoolFees(Student st) {
+        em=HibernateUtil.getEntityManager();
+        StudentAccount account = em.find(StudentAccount.class, st.getId());
+        account.setFeeToPay((st.getStage().getFeesToPay() * -1));
+        if(this.updateAccount(account))
+            return true;
+        return false;
+    }
+
+    // when you want to change the student's existing fees to a new amount;
+    public Boolean setSchoolFeeToPay(Student st, Double amount) {
+        if(amount.isNaN())
+            return false;
+        em=HibernateUtil.getEntityManager();
+        StudentAccount acc = em.find(StudentAccount.class, st);
+        acc.setFeeToPay(amount);
         if(this.updateAccount(acc))
             return true;
         return false;
