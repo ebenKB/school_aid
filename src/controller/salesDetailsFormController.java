@@ -346,13 +346,6 @@ public class salesDetailsFormController implements Initializable{
         }else{
             btn.setDisable(!btn2.isDisabled());
         }
-//        if(btn.isDisabled()){
-//            btn.setDisable(Boolean.FALSE);
-//            btn2.setDisable(Boolean.TRUE);
-//        }else if(btn2.isDisabled()){
-//            btn2.setDisable(Boolean.FALSE);
-//            btn.setDisable(Boolean.TRUE);
-//        }
     }
     private void addButtonToTable(TableColumn column) {
 
@@ -934,7 +927,7 @@ public class salesDetailsFormController implements Initializable{
                 studentDao.updateAccount(attendanceTemporary.getStudent().getAccount());
 
                 Utils.logPayment(attendanceTemporary.getStudent(),"Feeding Fee Payment for"+" "+
-                        attendanceTemporary.getStudent().toString(),pair.getValue(),amount );
+                        attendanceTemporary.getStudent().toString(),pair.getValue(),amount, TransactionType.FEEDING_FEE);
             });
         }
     }
@@ -950,7 +943,7 @@ public class salesDetailsFormController implements Initializable{
                     Notification.getNotificationInstance().notifySuccess("Payment added for "+st.toString(), "Fees paid");
                 }
                 // log the transaction
-                Utils.logPayment(student, "School Fees", pair.getValue(), amount);
+                Utils.logPayment(student, "School Fees", pair.getValue(), amount, TransactionType.SCHOOL_FEES);
             } else Notification.getNotificationInstance().notifyError("Fees payment cancelled", "Fees not added");
         });
     }
@@ -996,7 +989,7 @@ public class salesDetailsFormController implements Initializable{
         populateSalesTable();
     }
 
-    private void makePayment() {
+    private void makePayment() { // pay for an item that has been sold to a student
         try{
             TextInputDialog input = new TextInputDialog();
             Sales sales = salesTableView.getSelectionModel().getSelectedItem();
@@ -1014,18 +1007,18 @@ public class salesDetailsFormController implements Initializable{
             input.setHeaderText(description);
             Optional<String> result = input.showAndWait();
 
-            if(result.isPresent() && result.get()!=null){
-                Alert alert =new Alert(Alert.AlertType.CONFIRMATION,"",ButtonType.YES,ButtonType.NO);
+            if(result.isPresent() && result.get()!= null){
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"",ButtonType.YES,ButtonType.NO);
                 alert.setHeaderText("Are you sure you want to make payment of "+result.get()+"\nfor"+" "+sales.getItem().getName()+"\n");
                 Optional<ButtonType>result2 = alert.showAndWait();
 
-                if(result2.isPresent()&& result2.get()== ButtonType.YES){
+                if(result2.isPresent() && result2.get() == ButtonType.YES) {
                     Task payment = new Task() {
                         @Override
                         protected Object call() {
                         salesDao.payForSales(sales, Double.valueOf(result.get()));
                         sales.setAmountPaid((sales.getAmountPaid()+Double.valueOf(result.get())));
-                        TransactionLoggerDao.getTransactionLoggerDaoInstance().LogTransaction(sales.getStudent().getId(), sales.getStudent().toString(), description, sales.getAmountPaid());
+                        TransactionLoggerDao.getTransactionLoggerDaoInstance().LogTransaction(sales.getStudent().getId(), sales.getStudent().toString(), description, sales.getAmountPaid(), TransactionType.SALES);
 
                         return null;
                         }
@@ -1035,8 +1028,6 @@ public class salesDetailsFormController implements Initializable{
                         MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
                         Notification.getNotificationInstance().notifySuccess("The record has been updated","success");
                         populateSalesTable();
-
-                        Utils.logPayment(student, description,"", Double.valueOf(result.get()) );
                     });
                     payment.setOnFailed(event -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
                     new Thread(payment).start();

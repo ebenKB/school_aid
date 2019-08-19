@@ -30,6 +30,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="lib-files" level="project" />
+    <orderEntry type="library" name="pdfbox" level="project" />
+    <orderEntry type="library" name="jfoenix" level="project" />
+    <orderEntry type="library" name="controlsfx" level="project" />
+    <orderEntry type="library" name="fontawesomefx-8.9" level="project" />
+    <orderEntry type="library" name="javax.persistence" level="project" />
+    <orderEntry type="library" name="hibernate&amp;mysql" level="project" />
+    <orderEntry type="library" name="commons-logging-1.2" level="project" />
   </component>
 </module>

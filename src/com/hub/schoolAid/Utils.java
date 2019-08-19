@@ -1,13 +1,13 @@
 package com.hub.schoolAid;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import controller.LoginFormController;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.util.Callback;
 
 import java.io.InputStream;
 import java.time.LocalDate;
@@ -39,8 +39,8 @@ public class Utils {
     });
     }
 
-    public static void logPayment(Student student, String description, String paidBy, Double amount){
-        TransactionLoggerDao.getTransactionLoggerDaoInstance().LogTransaction(student.getId(), paidBy, description, amount);
+    public static void logPayment(Student student, String description, String paidBy, Double amount, TransactionType type){
+        TransactionLoggerDao.getTransactionLoggerDaoInstance().LogTransaction(student.getId(), paidBy, description, amount, type);
 //        TransactionLogger transactionLogger = new TransactionLogger(student.getId(),description,paidBy,date,amount);
 //        TransactionLoggerDao loggerDao = new TransactionLoggerDao();
 //        loggerDao.logTransaction(transactionLogger);
@@ -64,5 +64,34 @@ public class Utils {
         alert.setContentText(text);
         return alert.showAndWait();
     }
-}
+
+    public  static void addCheckBoxToTable(TableView tableView, TableColumn column, CheckBox checkBox) {
+        Callback<TableColumn<TerminalReport, Void>, TableCell<TerminalReport, Void>> cellFactory = new Callback<TableColumn<TerminalReport, Void>, TableCell<TerminalReport, Void>>() {
+            @Override
+            public TableCell<TerminalReport, Void> call(final TableColumn<TerminalReport, Void> param) {
+                TableCell<TerminalReport, Void> cell = new TableCell<TerminalReport, Void >() {
+//                    CheckBox check = new CheckBox("");
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if(empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(checkBox);
+                            // check if the check box has to be activated or not
+                            if (param.getTableView().getItems().get(getIndex()).isSelected()) {
+                                checkBox.setSelected(true);
+                            } else {
+                                checkBox.setSelected(false);
+                            }
+                        };
+                    }
+                };
+                return cell;
+            }
+        };
+        column.setCellFactory(cellFactory);
+    }
+ }
 

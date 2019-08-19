@@ -34,7 +34,7 @@ public class Main extends Application {
                     connected=true;
             }
         };
-        task.setOnRunning(event -> myProgressIndicator.showInitProgress("Setting up system modules...",task));
+        task.setOnRunning(event -> myProgressIndicator.showInitProgress("Setting up system modules...", task));
         task.setOnSucceeded(event -> {
             myProgressIndicator.hideProgress();
 
@@ -42,7 +42,7 @@ public class Main extends Application {
             if(connected){
                 initializer.showLoginForm();
             }else{
-              Alert alert =new Alert(Alert.AlertType.ERROR,"",ButtonType.OK);
+              Alert alert =new Alert(Alert.AlertType.ERROR,"", ButtonType.OK);
               alert.setTitle("Error");
               alert.setHeaderText("Error Connecting to Database");
               alert.setContentText("Could not reach Database server. \nMake sure the server is live and your connection is active.");

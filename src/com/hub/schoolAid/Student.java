@@ -31,17 +31,19 @@ public class Student {
     //constructors
     public Student(){
 
+        isSelected = false;
     }
 
     public Student(Student student){
        this.setFirstname(student.getFirstname());
        this.setStage(student.getStage());
+        isSelected = false;
     }
 
     @OneToOne(orphanRemoval = true,cascade = CascadeType.ALL)
     private Parent parent;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "class_id")
     private Stage stage;
 
@@ -56,8 +58,15 @@ public class Student {
     @OneToMany(mappedBy = "student",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<Attendance> attendance;
 
-    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL,orphanRemoval = true)
     private Set <AttendanceTemporary> attendanceTemporary;
+
+    @Transient
+    private Boolean isSelected;
+
+    // a student can have many assessments assigned to them
+//    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set <Assessment> assessments;
 
     //getters and setters
 
@@ -173,7 +182,15 @@ public class Student {
         this.paySchoolFees = paySchoolFees;
     }
 
-//        public String getImage() {
+    public Boolean getSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(Boolean selected) {
+        isSelected = selected;
+    }
+
+    //        public String getImage() {
 //        return image;
 //    }
 //
@@ -283,7 +300,7 @@ public class Student {
 //            res = baos.toByteArray();
 ////            encodedImage = Base64.encode(baos.toByteArray());
 //            encodedImage = Base64.getEncoder().encode(baos.toByteArray());
-//            System.out.println("The encoded image byte array is shown below.Please use this in your webpage image tag.\n"+encodedImage);
+//            System.out.println("The encoded image byte array is shown below.Please use this in your web page image tag.\n"+encodedImage);
 //        }
 //            catch(Exception e) {
 //                e.printStackTrace();

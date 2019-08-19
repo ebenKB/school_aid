@@ -100,10 +100,10 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="601.0" layoutY="75.0" prefHeight="43.0" prefWidth="472.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="75.0">
+                  <HBox alignment="CENTER" layoutX="601.0" layoutY="75.0" prefHeight="43.0" prefWidth="380.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="75.0">
                      <children>
                         <FontAwesomeIconView fill="#fdfeff" glyphName="SEARCH" size="20" text="" wrappingWidth="31.571428298950195" />
-                        <TextField fx:id="searchBox" alignment="CENTER" prefHeight="42.0" prefWidth="443.0" promptText="Search a student" />
+                        <TextField fx:id="searchBox" alignment="CENTER" prefHeight="33.0" prefWidth="347.0" promptText="Search a student" />
                         <!--<FontAwesomeIconView glyphName="SEARCH" size="25" wrappingWidth="23.214284896850586" />-->
                      </children>
                   </HBox>
@@ -211,6 +211,7 @@
                                     </ImageView>
                                  </graphic>
                               </MenuItem>
+                              <MenuItem fx:id="manageStudents" mnemonicParsing="false" text="Manage Students" />
                           </items>
                            <graphic>
                               <ImageView fitHeight="31.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
@@ -328,6 +329,13 @@
                               <MenuItem fx:id="grade" mnemonicParsing="false" text="Add Grade" />
                             <MenuItem fx:id="assessment" mnemonicParsing="false" text="Assessment Sheet" />
                               <MenuItem fx:id="report" mnemonicParsing="false" text="Terminal Report" />
+                          </items>
+                        </MenuButton>
+                        <MenuButton mnemonicParsing="false" prefHeight="43.0" prefWidth="184.0" text="ACCOUNT">
+                          <items>
+                              <MenuItem fx:id="generalAccount" mnemonicParsing="false" text="General Account" />
+                            <MenuItem mnemonicParsing="false" text="Action 1" />
+                            <MenuItem mnemonicParsing="false" text="Action 2" />
                           </items>
                         </MenuButton>
                      </children>

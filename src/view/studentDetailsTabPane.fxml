@@ -163,7 +163,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="620.0">
                      <children>
-                        <VBox fillWidth="false" layoutX="14.0" layoutY="44.0" prefHeight="371.0" prefWidth="734.0" spacing="25.0">
+                        <VBox fillWidth="false" layoutX="14.0" layoutY="44.0" prefHeight="371.0" prefWidth="734.0" spacing="19.0">
                            <children>
                               <VBox spacing="10.0">
                                  <children>
@@ -221,6 +221,12 @@
                                     <TextField fx:id="amountPaid" editable="false" prefHeight="30.0" prefWidth="114.0" />
                                  </children>
                               </HBox>
+                              <HBox layoutX="10.0" layoutY="324.0">
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="136.0" text="Sales balance" textFill="#fcfafa" />
+                                    <TextField fx:id="salesBalance" editable="false" prefHeight="30.0" prefWidth="114.0" />
+                                 </children>
+                              </HBox>
                               <HBox>
                                  <children>
                                     <Label prefHeight="30.0" prefWidth="136.0" text="Total Amount Owing" textFill="#fcfafa" />
@@ -274,7 +280,7 @@
             </Tab>
          </tabs>
       </JFXTabPane>
-      <Label fx:id="infoLable" layoutX="210.0" layoutY="459.0" prefHeight="30.0" prefWidth="431.0" textFill="#ffcd05">
+      <Label fx:id="infoLable" layoutX="266.0" layoutY="459.0" prefHeight="30.0" prefWidth="375.0" textFill="#ffcd05">
          <font>
             <Font size="14.0" />
          </font>

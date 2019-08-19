@@ -6,7 +6,7 @@ import java.time.LocalDate;
 /**
  * Created by HUBKB.S on 11/20/2017.
  */
-@Entity
+@Entity(name="attendance")
 //@MappedSuperclass
 public class Attendance {
     @Id

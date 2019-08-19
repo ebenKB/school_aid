@@ -8,6 +8,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.hibernate.HibernateException;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
@@ -51,8 +52,7 @@ public class StudentDao {
                 StudentDetailsDao studentDetailsDao =new StudentDetailsDao();
                 studentDetailsDao.addImage(student,details.getImage());
             }
-        }catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception e){
             return false;
         }
         return true;
@@ -86,7 +86,6 @@ public class StudentDao {
         newStd.setPayFeeding(new_student.getPayFeeding());
         newStd.setFeedingStatus(new_student.getFeedingStatus());
         newStd.getAccount().setFeedingFeeToPay(new_student.getAccount().getFeedingFeeToPay());
-//        newStd.setImage(new_student.getImage());
         newStd.setDob(new_student.getDob());
         newStd.setGender(new_student.getGender());
         new_student.setReg_date(LocalDate.now());
@@ -208,15 +207,15 @@ public class StudentDao {
         }
     }
 
-    public List<Student> getAllStudents(Boolean payFees)throws HibernateException{
+    public List<Student> getAllStudents(Boolean payFees)throws HibernateException {
         List<Student> studentList;
-        try{
+        try {
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
             studentList = em.createQuery("from students S where S.paySchoolFees = ? order by firstname asc ")
                     .setParameter(0,payFees).getResultList();
             return studentList;
-        }catch (HibernateException e){
+        } catch (HibernateException e) {
             e.printStackTrace();
             return null;
         }
@@ -230,13 +229,14 @@ public class StudentDao {
      * @param student the student to remove from the database
      * @return true if the delete operation was successful
      */
-    public Boolean deleteStudent(Student student)throws HibernateException
-    {
+    public Boolean deleteStudent(Student student)throws HibernateException {
         em=HibernateUtil.getEntityManager();
         Student s = em.find(Student.class,student.getId());
         s.getStage().setNum_on_roll(s.getStage().getNum_on_roll()-1);
 
         HibernateUtil.begin();
+
+        // check if the student will be removed permanently
         em.remove(s);
 
         HibernateUtil.commit();
@@ -247,31 +247,109 @@ public class StudentDao {
         ImageHandler.deleteOldImage(detailsDao.getImage(student));
         return true;
     }
+
+    /**
+     *
+     * @param student the student to remove from the database
+     * @param isPermanent By default, student records will be turned off when deleted. unless isPermament flag is set to true
+     * @return true if the delete operation was successful
+     */
+    public Boolean deleteStudent(Student student, Boolean isPermanent)throws HibernateException {
+        try {
+
+            if (isPermanent) {
+                this.deleteStudent(student);
+                return true;
+            } else  {
+                em=HibernateUtil.getEntityManager();
+                Student s = em.find(Student.class,student.getId());
+                s.getStage().setNum_on_roll(s.getStage().getNum_on_roll()-1);
+                HibernateUtil.begin();
+//            s.setIsDeleted(false);
+                HibernateUtil.commit();
+                HibernateUtil.close();
+                return true;
+            }
+        } catch (Exception e) {
+            return  false;
+        }
+    }
+
     /**
      * delete and then their parent from the db
      * promote a particular student to the next class
      * @param student
      */
-    public void promoteStudent(Student student) throws HibernateException{
+    public void promoteStudent(Student student) throws HibernateException {
         em=HibernateUtil.getEntityManager();
         HibernateUtil.begin();
-        Student s = em.find(Student.class,student.getId());
-        Stage newStage = (Stage) em.createQuery("from Class S where  S.classValue =?").setParameter(0,student.getStage().getClassValue()+1).getSingleResult();
-        s.setStage(newStage);
+        prepStdToPromote(student); // set new values
         HibernateUtil.commit();
         HibernateUtil.close();
     }
+
+    public Boolean promoteStudent(List<Student> students) {
+        Boolean status = false;
+        em = HibernateUtil.getEntityManager();
+        int entityCount = students.size();
+        int batchSize = 25;
+        try {
+            HibernateUtil.begin();
+            for (int i = 0; i < entityCount; i++) {
+                if (i > 0 && i % batchSize == 0) {
+                    HibernateUtil.commit();
+                    HibernateUtil.begin();
+                    em.clear();
+                }
+                Student student = students.get(i);
+                this.prepStdToPromote(student); // set new values
+                HibernateUtil.commit();
+            }
+            status = true;
+        } catch (RuntimeException e) {
+            if (HibernateUtil.getEntityManager().getTransaction().isActive()) {
+                HibernateUtil.getEntityManager().getTransaction().rollback();
+            }
+            throw e;
+        } catch (Exception e){
+            return status;
+        }finally {
+            em.close();
+        }
+        return  status;
+    }
+
     /**
      * promote all students in a particular class to the next class
      * @param stage
      */
-    public void promoteStudent(Stage stage)throws HibernateException{
+    public void promoteStudent(Stage stage)throws HibernateException {
         em = HibernateUtil.getEntityManager();
         HibernateUtil.begin();
         List<Student> students= em.createQuery("from students S where S.stage.classValue=?").setParameter(0,stage.getClassValue()).getResultList();
         for (Student s:students)
             promoteStudent(s);
         HibernateUtil.close();
+    }
+
+    private void prepStdToPromote(Student student) {
+        // get the new class for the student using the class value of the current class
+        String hql ="from Class S where S.classValue=?1";
+        Query query = em.createQuery(hql);
+        query.setParameter(1, student.getStage().getClassValue() + 1);
+        Stage newStage = (Stage) query.getSingleResult();
+
+        // update number on row
+        Stage preStage = em.find(Stage.class, student.getStage().getId());
+        preStage.setNum_on_roll(preStage.getNum_on_roll() - 1);
+        newStage.setNum_on_roll(newStage.getNum_on_roll() + 1);
+
+        // update student class id
+        hql = "UPDATE students S set S.stage = ?1 where S.id = ?2";
+        Query query2 = em.createQuery(hql)
+                .setParameter(1, newStage)
+                .setParameter(2, student.getId());
+        query2.executeUpdate();
     }
 
     /**

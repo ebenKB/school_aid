@@ -1,11 +1,9 @@
 package com.hub.schoolAid;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity
+@Entity(name = "app")
+
 public class App {
 
     @Id
@@ -16,6 +14,8 @@ public class App {
     private Boolean canShowPopUp;
     private Boolean canShowIntroHelp;
     private Boolean hasInit;
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Address address;
 
     public Boolean getCanShowPopUp() {
         return canShowPopUp;

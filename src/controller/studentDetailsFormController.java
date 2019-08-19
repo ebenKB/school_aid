@@ -149,6 +149,9 @@ public class studentDetailsFormController implements Initializable{
     private TextField balance;
 
     @FXML
+    private TextField salesBalance;
+
+    @FXML
     private JFXListView<String> salesListView;
 
     @FXML
@@ -959,16 +962,18 @@ public class studentDetailsFormController implements Initializable{
         int total =0;
         Double payment = 0.0;
         Double bal = 0.0;
+        Double salesBal = 0.0;
         ObservableList <String> data= FXCollections.observableArrayList();
         List<Sales> sales = salesDao.getAllSalesOfStudent(student);
 
-        if(sales.size()>0){
+        if(sales.size() > 0){
             for(Sales s: sales){
                 total++;
                 payment+=s.getAmountPaid();
-                bal+=(s.getTotalcost()-s.getAmountPaid());
+                salesBal+=((s.getTotalcost() - s.getAmountPaid())* -1);
                 data.add(s.getItem().getName()+"\t"+ "("+s.getItem().getQty()+"piece(s)"+ "*"+s.getItem().getCost()+"="+s.getTotalcost()+")");
             }
+            salesBalance.setText(String.valueOf(salesBal));
         }
         checkListView.setOnAction(event -> {
             if(checkListView.isSelected()){
@@ -985,14 +990,12 @@ public class studentDetailsFormController implements Initializable{
         //set the text fields
         saleItems.setText(String.valueOf(total));
         amountPaid.setText(String.valueOf(payment));
-        if(student.getAccount().getFeeToPay() < 0)
-             bal+=student.getAccount().getFeeToPay() * -1;
-        else bal+=student.getAccount().getFeeToPay();
+        bal+=student.getAccount().getFeeToPay();
 
         if(student.getAccount().getFeedingFeeToPay() < 0)
-             bal+=student.getAccount().getFeedingFeeCredit() * -1;
-        else bal+=student.getAccount().getFeedingFeeCredit();
+             bal+=(student.getAccount().getFeedingFeeCredit() * -1);
 
+        bal+= salesBal;  // sum up the balance
         balance.setText(String.valueOf(bal));
         feesBalance.setText(String.valueOf(student.getAccount().getFeeToPay()));
         feedingFeeCredit.setText(String.valueOf(student.getAccount().getFeedingFeeCredit()));
@@ -1000,11 +1003,11 @@ public class studentDetailsFormController implements Initializable{
         if(bal < 0){
             //Change the indicator background to red else change to green;
             indicator.setStyle("-fx-background-color: red");
-        }else {
+        } else {
             indicator.setStyle("-fx-background-color: green");
         }
 
-        if(total > 0){
+        if(total > 0) {
             checkListView.setVisible(Boolean.TRUE);
         }
     }
@@ -1013,7 +1016,6 @@ public class studentDetailsFormController implements Initializable{
         if(student.getPayFeeding()){
             feedingToggle.setSelected(Boolean.TRUE);
         } else feedingToggle.setSelected(Boolean.FALSE);
-
 
         if(student.getPaySchoolFees()) {
             schFeesToggle.setSelected(Boolean.TRUE);

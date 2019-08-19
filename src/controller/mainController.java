@@ -178,6 +178,9 @@ public class mainController implements Initializable{
     private MenuItem delleteStudentContextMenu;
 
     @FXML
+    private MenuItem manageStudents;
+
+    @FXML
     private TextField searchBox;
 
     @FXML
@@ -348,7 +351,7 @@ public class mainController implements Initializable{
             stage.setTitle("");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occured while showing the form", "Error");
         }
     }
 
@@ -367,6 +370,23 @@ public class mainController implements Initializable{
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void showManageStudentForm() {
+        try {
+            Parent root;
+            FXMLLoader fxmlLoader = new FXMLLoader((getClass().getResource("/view/manageStudents.fxml")));
+            root= fxmlLoader.load();
+            ManageStudentController manageStudentController = fxmlLoader.getController();
+            manageStudentController.init();
+            Scene scene = new Scene(root);
+            javafx.stage.Stage stage = new javafx.stage.Stage();
+            stage.setScene(scene);
+            stage.setTitle("Manage Students");
+            stage.show();
+        } catch (IOException e) {
+            Notification.getNotificationInstance().notifyError("An error occured while showing the form", "Error");
         }
     }
 
@@ -567,6 +587,8 @@ public class mainController implements Initializable{
         viewAttendance.setOnAction(event -> {
             showViewAttendanceForm();
         });
+
+        manageStudents.setOnAction(e-> showManageStudentForm());
 
         newSubject.setOnAction(event -> showSubjectForm());
 

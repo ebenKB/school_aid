@@ -31,9 +31,15 @@ public class Assessment {
     @JoinColumn(name = "student_asmnt_id")
     private Student student;
 
+//    @JoinColumn(name = "student_asmnt_id", nullable = false)
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private Student student;
+
     @OneToOne
     @JoinColumn(name = "term")
     private Term term;
+
+    private Boolean isDeleted = false;
 
     public Long getId() {
         return id;

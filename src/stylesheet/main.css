@@ -377,7 +377,7 @@
 }
 
 /*set text fields with dark background and white color*/
-#saleItems, #amountPaid, #balance, #feesBalance,#feedingFeeCredit,#feedingAcc,#totalStudents,#amount {
+#saleItems, #amountPaid, #balance, #feesBalance,#feedingFeeCredit,#feedingAcc,#totalStudents,#amount, #salesBalance {
     -fx-background-color: derive(-fx-primary,30%);
     -fx-font-size: 16px;
     -fx-font-weight: bold;

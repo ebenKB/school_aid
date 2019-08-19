@@ -21,13 +21,14 @@ public class TransactionLoggerDao {
         }
     }
 
-    public Boolean LogTransaction(Long student_id, String transactionBy, String description, Double transactionAmount) {
+    public Boolean LogTransaction(Long student_id, String transactionBy, String description, Double transactionAmount, TransactionType type) {
        TransactionLogger transaction = new TransactionLogger();
        transaction.setDate(LocalDate.now());
        transaction.setAmount(transactionAmount);
        transaction.setStudent_id(student_id);
        transaction.setDescription(description);
        transaction.setPaidBy(transactionBy);
+       transaction.setTransactionType(type);
 
         try {
             HibernateUtil.save(TransactionLogger.class,transaction);

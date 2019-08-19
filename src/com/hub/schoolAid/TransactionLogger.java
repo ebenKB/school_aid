@@ -27,6 +27,17 @@ public class TransactionLogger {
     private String paidBy;
     private Long Student_id;
 
+    @Enumerated(EnumType.STRING)
+    private TransactionType transactionType;
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
+
     public Long getId() {
         return id;
     }
@@ -70,6 +81,8 @@ public class TransactionLogger {
     public Long getStudent_id() {
         return Student_id;
     }
+
+
 
     public void setStudent_id(Long student_id) {
         Student_id = student_id;

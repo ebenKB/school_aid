@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="809.0" prefWidth="1212.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageStudentController">
+   <children>
+      <TableView fx:id="studentTableView" layoutY="143.0" prefHeight="599.0" prefWidth="1212.0" AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="143.0">
+        <columns>
+          <TableColumn fx:id="checkStudents" maxWidth="100.0" minWidth="70.0" prefWidth="59.0" />
+          <TableColumn fx:id="stdNameCol" minWidth="0.0" prefWidth="310.0" text="STUDENT" />
+        </columns>
+      </TableView>
+      <Text fill="#fcfcfc" layoutX="469.0" layoutY="69.203125" strokeType="OUTSIDE" strokeWidth="0.0" text="MANAGE STUDENTS" textAlignment="CENTER" wrappingWidth="261.11767578125" AnchorPane.leftAnchor="469.0" AnchorPane.rightAnchor="482.0" AnchorPane.topAnchor="46.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Pane layoutX="787.0" layoutY="86.0" prefHeight="49.0" prefWidth="419.0" AnchorPane.bottomAnchor="674.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="86.0">
+         <children>
+            <Button fx:id="promoteStudent" layoutY="11.0" mnemonicParsing="false" text="Promote Student" />
+         </children>
+      </Pane>
+      <Button fx:id="cancel" layoutX="946.0" layoutY="756.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="82.0" text="Cancel" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="184.0" />
+      <Pane layoutY="138.0" prefHeight="5.0" prefWidth="1212.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+   </children>
+</AnchorPane>

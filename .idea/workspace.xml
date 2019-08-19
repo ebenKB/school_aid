@@ -9,7 +9,67 @@
     <bookmark url="file://$PROJECT_DIR$/src/stylesheet/main.css" description="#tableInfo {&#10;    -fx-background-color: #888888;&#10;  ..." line="34" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/commons_logging_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/controlsfx.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/fontawesomefx_8_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/javax_persistence.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/jfoenix.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/pdfbox.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/Contact.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/ManageStudentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib_files.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/hibernate_mysql.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SchoolAid.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SchoolAid.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/Address.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/Address.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/AppDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/AppDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/Assessment.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/Assessment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/AssessmentDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/AssessmentDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/Attendance.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/Attendance.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/PDFMaker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/PDFMaker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/Student.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/StudentDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/StudentDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/com/hub/schoolAid/Utils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/controller/TerminalReportController$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/controller/TerminalReportController$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/controller/TerminalReportController$5$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/controller/TerminalReportController$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/controller/TerminalReportController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/controller/TerminalReportController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/controller/mainController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/controller/mainController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/controller/mainController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/controller/mainController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/controller/mainController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/controller/mainController$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/controller/mainController$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/controller/mainController$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/controller/mainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/controller/mainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/controller/studentDetailsFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/controller/studentDetailsFormController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/view/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/view/main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SchoolAid/view/terminalReport.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SchoolAid/view/terminalReport.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/AppDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/AppDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/Assessment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/Assessment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/AssessmentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/AssessmentDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/Attendance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/Attendance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/PDFMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/PDFMaker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/StudentAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/StudentAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLoggerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLoggerDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/TerminalReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/TerminalReportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/mainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/mainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/salesDetailsFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/salesDetailsFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/studentDetailsFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/studentDetailsFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stylesheet/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheet/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/studentDetailsTabPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/studentDetailsTabPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/terminalReport.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/terminalReport.fxml" afterDir="false" />
+    </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -95,10 +155,66 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/TerminalReportController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="333">
+              <caret line="125" column="24" lean-forward="true" selection-start-line="125" selection-start-column="24" selection-end-line="125" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLogger.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="483">
+              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+              <folding>
+                <element signature="e#838#839#0" expanded="true" />
+                <element signature="e#876#877#0" expanded="true" />
+                <element signature="e#947#948#0" expanded="true" />
+                <element signature="e#1001#1002#0" expanded="true" />
+                <element signature="e#1440#1441#0" expanded="true" />
+                <element signature="e#1473#1474#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/TransactionType.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLoggerDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="30" column="42" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controller/salesDetailsFormController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="311">
+              <caret line="652" selection-start-line="652" selection-end-line="652" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="597">
-              <caret line="356" column="12" selection-start-line="356" selection-start-column="12" selection-end-line="356" selection-end-column="12" />
+            <state relative-caret-position="423">
+              <caret line="408" column="19" selection-start-line="408" selection-start-column="19" selection-end-line="408" selection-end-column="19" />
               <folding>
                 <element signature="e#0#110#1" expanded="true" />
                 <element signature="e#0#45#0" expanded="true" />
@@ -108,8 +224,9 @@
                 <element signature="e#0#46#0" expanded="true" />
                 <element signature="e#0#36#0" expanded="true" />
                 <element signature="e#0#64#0" expanded="true" />
-                <element signature="e#0#35#1" expanded="true" />
                 <element signature="e#0#42#1" expanded="true" />
+                <element signature="e#0#34#1" expanded="true" />
+                <element signature="e#0#50#1" expanded="true" />
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
             </state>
@@ -117,96 +234,45 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/EditFeesController.java">
+        <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentAccount.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="589">
-              <caret line="73" column="108" selection-start-line="73" selection-start-column="108" selection-end-line="73" selection-end-column="108" />
+            <state relative-caret-position="180">
+              <caret line="12" column="42" lean-forward="true" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#512#513#0" expanded="true" />
-                <element signature="e#541#542#0" expanded="true" />
+                <element signature="e#973#974#0" expanded="true" />
+                <element signature="e#1029#1030#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/mainController.java">
+        <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="360" column="26" selection-start-line="360" selection-start-column="26" selection-end-line="360" selection-end-column="26" />
+            <state relative-caret-position="474">
+              <caret line="48" column="36" lean-forward="true" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#3345#4196#0" expanded="true" />
+                <element signature="e#4195#4196#0" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/stylesheet/main.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="815">
-              <caret line="387" column="10" selection-start-line="387" selection-start-column="10" selection-end-line="387" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/META-INF/persistence.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" column="90" lean-forward="true" selection-start-line="32" selection-start-column="64" selection-end-line="32" selection-end-column="90" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/META-INF/MANIFEST.MF">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/studentDetailsFormController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="1019" column="46" selection-start-line="1019" selection-start-column="46" selection-end-line="1019" selection-end-column="46" />
-              <folding>
-                <element signature="e#41977#41978#0" expanded="true" />
-                <element signature="e#42012#42013#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="351">
+              <caret line="992" column="48" lean-forward="true" selection-start-line="992" selection-start-column="48" selection-end-line="992" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/studentController.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/stylesheet/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/EditTerminalReportController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1500">
-              <caret line="133" column="64" selection-start-line="133" selection-start-column="64" selection-end-line="133" selection-end-column="64" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/TerminalReportController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="94">
-              <caret line="172" column="36" selection-start-line="172" selection-start-column="36" selection-end-line="172" selection-end-column="36" />
-              <folding>
-                <element signature="e#7414#7415#0" expanded="true" />
-                <element signature="e#7456#7457#0" expanded="true" />
-                <element signature="e#9065#9683#0" expanded="true" />
-                <element signature="e#9682#9683#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="595">
+              <caret line="397" column="1" lean-forward="true" selection-start-line="397" selection-start-column="1" selection-end-line="397" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -223,22 +289,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>addAll</find>
-      <find>.addAll</find>
-      <find>init</find>
-      <find>init()</find>
-      <find>addA</find>
-      <find>selectAll</find>
-      <find>desi</find>
-      <find>combo</find>
-      <find>show</find>
-      <find>ComboBox</find>
-      <find>classC</find>
-      <find>createSheet.set</find>
-      <find>setC</find>
-      <find>text</find>
-      <find>createRe</find>
-      <find>createBi</find>
       <find>selectA</find>
       <find>ComboB</find>
       <find>view</find>
@@ -253,6 +303,22 @@
       <find>activateS</find>
       <find>All cla</find>
       <find>text-fie</find>
+      <find>The sy</find>
+      <find>selected</find>
+      <find>selectedR</find>
+      <find>sorry</find>
+      <find>gener</find>
+      <find>general</find>
+      <find>Acc</find>
+      <find>GeneralAccountC</find>
+      <find>showMa</find>
+      <find>popula</find>
+      <find>TerminalReport</find>
+      <find>pay school fees</find>
+      <find>total</find>
+      <find>bala</find>
+      <find>balance</find>
+      <find>sales</find>
     </findStrings>
     <dirStrings>
       <dir>F:\SchoolAid 1.1.1</dir>
@@ -269,54 +335,56 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/controller/LoginFormController.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDetails.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDetailsDao.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Notification.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/ImageHandler.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporary.java" />
-        <option value="$PROJECT_DIR$/src/controller/studentController.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Attendance.java" />
-        <option value="$PROJECT_DIR$/src/controller/AttendanceFormController.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionDetails.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLogger.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Grade.java" />
-        <option value="$PROJECT_DIR$/src/controller/GradeFormController.java" />
-        <option value="$PROJECT_DIR$/src/log4j.properties" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TermDao.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/GradeDao.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceDao.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StageDao.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Conduct.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/ConductDao.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentCell.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentConduct.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Remark.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/RemarkDao.java" />
         <option value="$PROJECT_DIR$/src/view/subject.fxml" />
         <option value="$PROJECT_DIR$/src/controller/SubjectFormController.java" />
         <option value="$PROJECT_DIR$/src/controller/AssessmentFormController.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/SalesDao.java" />
         <option value="$PROJECT_DIR$/src/controller/sale.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLoggerDao.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporaryDao.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/HibernateUtil.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Main.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/UserDao.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Student.java" />
         <option value="$PROJECT_DIR$/src/view/salesDetailsForm.fxml" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Utils.java" />
-        <option value="$PROJECT_DIR$/src/controller/salesDetailsFormController.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TerminalReport.java" />
-        <option value="$PROJECT_DIR$/src/META-INF/persistence.xml" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/AssessmentDao.java" />
         <option value="$PROJECT_DIR$/src/controller/newAttendanceSheetController.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/PDFMaker.java" />
-        <option value="$PROJECT_DIR$/src/controller/mainController.java" />
         <option value="$PROJECT_DIR$/src/controller/EditFeesController.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java" />
-        <option value="$PROJECT_DIR$/src/controller/studentDetailsFormController.java" />
         <option value="$PROJECT_DIR$/src/controller/TerminalReportController.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/AppDao.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Address.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Attendance.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/PDFMaker.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/App.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporary.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Course.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Grade.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Item.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Remark.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Sales.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Staff.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentConduct.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDetails.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Term.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TerminalReport.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/User.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Contact.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/AssessmentDao.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Assessment.java" />
+        <option value="$PROJECT_DIR$/src/controller/mainController.java" />
+        <option value="$PROJECT_DIR$/src/META-INF/persistence.xml" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Student.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java" />
+        <option value="$PROJECT_DIR$/src/controller/ManageStudentController.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLogger.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLoggerDao.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionType.java" />
+        <option value="$PROJECT_DIR$/src/controller/salesDetailsFormController.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentAccount.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Utils.java" />
+        <option value="$PROJECT_DIR$/src/controller/studentDetailsFormController.java" />
         <option value="$PROJECT_DIR$/src/stylesheet/main.css" />
       </list>
     </option>
@@ -351,13 +419,13 @@
               <item name="schoolmgmtsys" type="b2602c69:ProjectViewProjectNode" />
               <item name="schoolmgmtsys" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="schoolAid" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="schoolmgmtsys" type="b2602c69:ProjectViewProjectNode" />
               <item name="schoolmgmtsys" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="stylesheet" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -380,14 +448,17 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://F:/Eben.KB/Java Projects/SchoolMgmtSys/src/com/hub/schoolAid/Item.java&#10;sal&#9;PSI&#9;JAVA://model.Sales" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540623221939" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562479316978" />
     <property name="dynamic.classpath" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -858,11 +929,18 @@
       <workItem from="1560430786440" duration="453000" />
       <workItem from="1560433239590" duration="17018000" />
       <workItem from="1560517359539" duration="29178000" />
+      <workItem from="1562333334251" duration="191000" />
+      <workItem from="1562335612062" duration="4551000" />
+      <workItem from="1562396441401" duration="5142000" />
+      <workItem from="1563695724177" duration="9741000" />
+      <workItem from="1565692400554" duration="292000" />
+      <workItem from="1565696512713" duration="17000" />
+      <workItem from="1565938361527" duration="37245000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2260287000" />
+    <option name="totallyTimeSpent" value="2319194000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -882,17 +960,17 @@
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Persistence" order="4" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.17039403" />
+      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.16080937" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info id="Image Layers" order="7" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.2820513" side_tool="true" weight="0.17256637" />
       <window_info anchor="bottom" id="Debug" order="1" weight="0.725832" />
-      <window_info anchor="bottom" id="Messages" order="2" weight="0.26460177" />
+      <window_info anchor="bottom" id="Messages" order="2" weight="0.26371682" />
       <window_info anchor="bottom" id="Java Enterprise" order="3" weight="0.1" />
       <window_info anchor="bottom" id="Version Control" order="4" />
-      <window_info anchor="bottom" id="Run" order="5" sideWeight="0.71794873" weight="0.0460177" />
+      <window_info active="true" anchor="bottom" id="Run" order="5" sideWeight="0.71794873" visible="true" weight="0.32743362" />
       <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.4993895" weight="0.32959184" />
-      <window_info anchor="bottom" id="Find" order="7" weight="0.2634338" />
+      <window_info anchor="bottom" id="Find" order="7" weight="0.26283187" />
       <window_info anchor="bottom" id="TODO" order="8" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
@@ -912,18 +990,20 @@
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Persistence" order="4" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.200625" />
+      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.16080937" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info id="Image Layers" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="0" side_tool="true" weight="0.32896462" />
-      <window_info anchor="bottom" id="Debug" order="1" />
-      <window_info anchor="bottom" id="Messages" order="2" weight="0.08256881" />
-      <window_info anchor="bottom" id="Java Enterprise" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.2820513" side_tool="true" weight="0.17256637" />
+      <window_info anchor="bottom" id="Debug" order="1" weight="0.725832" />
+      <window_info anchor="bottom" id="Messages" order="2" weight="0.26391554" />
+      <window_info anchor="bottom" id="Java Enterprise" order="3" weight="0.1" />
       <window_info anchor="bottom" id="Version Control" order="4" />
-      <window_info anchor="bottom" id="Run" order="5" weight="0.43250328" />
-      <window_info anchor="bottom" id="Terminal" order="6" />
-      <window_info anchor="bottom" id="Find" order="7" weight="0.52948886" />
+      <window_info active="true" anchor="bottom" id="Run" order="5" sideWeight="0.71794873" visible="true" weight="0.22300886" />
+      <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.4993895" weight="0.32959184" />
+      <window_info anchor="bottom" id="Find" order="7" weight="0.2634338" />
       <window_info anchor="bottom" id="TODO" order="8" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="10" />
       <window_info anchor="right" id="Palette" order="0" />
       <window_info anchor="right" id="Maven Projects" order="1" />
       <window_info anchor="right" id="Database" order="2" />
@@ -932,6 +1012,7 @@
       <window_info anchor="right" id="Coverage" order="5" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Maven" order="8" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -994,13 +1075,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/controller/mainController.java</url>
-          <line>258</line>
+          <line>261</line>
           <properties />
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/controller/studentDetailsFormController.java</url>
-          <line>899</line>
+          <line>902</line>
           <properties />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
@@ -1021,6 +1102,12 @@
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java</url>
+          <line>285</line>
+          <properties />
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -1029,322 +1116,415 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/ImageHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/AppDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="110" column="28" selection-start-line="110" selection-start-column="28" selection-end-line="110" selection-end-column="28" />
+        <state relative-caret-position="60">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentConductDao.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Address.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="140" selection-start-line="36" selection-start-column="140" selection-end-line="36" selection-end-column="140" />
+        <state relative-caret-position="135">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/demoApplication.log.1">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentDetailsDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="25123" column="83" selection-start-line="25123" selection-start-column="83" selection-end-line="25123" selection-end-column="83" />
+        <state relative-caret-position="60">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/demoApplication.log">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Course.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="121" selection-start-line="1" selection-start-column="121" selection-end-line="1" selection-end-column="121" />
+        <state relative-caret-position="60">
+          <caret line="5" column="7" lean-forward="true" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/subject.fxml">
-      <provider editor-type-id="text-editor" />
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/viewAttendanceController.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/CourseDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3111">
-          <caret line="209" column="19" selection-start-line="209" selection-start-column="19" selection-end-line="209" selection-end-column="19" />
+        <state relative-caret-position="60">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Stage.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/CustomCombo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="84" column="24" selection-start-line="84" selection-start-column="24" selection-end-line="84" selection-end-column="24" />
+        <state relative-caret-position="60">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/AssessmentFormController.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Grade.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8704">
-          <caret line="541" column="45" selection-start-line="540" selection-start-column="8" selection-end-line="541" selection-end-column="45" />
+        <state relative-caret-position="60">
+          <caret line="7" column="7" lean-forward="true" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/TerminalReportDao.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Item.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="64" column="19" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="19" />
+        <state relative-caret-position="60">
+          <caret line="6" column="7" lean-forward="true" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/SubjectFormController.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Notification.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2108">
-          <caret line="144" column="11" selection-start-line="144" selection-start-column="11" selection-end-line="144" selection-end-column="11" />
+        <state relative-caret-position="105">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Parent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/PDFMaker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1335">
+          <caret line="89" column="62" selection-start-line="89" selection-start-column="62" selection-end-line="89" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Remark.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="7" column="7" lean-forward="true" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/RemarkDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#37#1" expanded="true" />
+            <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Sales.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="11" column="7" lean-forward="true" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentAccountDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
+        <state relative-caret-position="30">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/SalesDao.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentConductDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLoggerDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="65" selection-start-line="14" selection-start-column="65" selection-end-line="14" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/MyProgressIndicator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="62" column="30" selection-start-line="62" selection-start-column="30" selection-end-line="62" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/javafx-src.zip!/com/sun/javafx/event/BasicEventDispatcher.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/javafx-src.zip!/com/sun/javafx/event/EventHandlerManager.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/javafx-src.zip!/com/sun/javafx/event/CompositeEventHandler.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporaryDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="58" column="59" selection-start-line="58" selection-start-column="59" selection-end-line="58" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentAccount.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
+        <state relative-caret-position="60">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
           <folding>
-            <element signature="e#973#974#0" expanded="true" />
-            <element signature="e#1029#1030#0" expanded="true" />
+            <element signature="e#0#44#0" expanded="true" />
+            <element signature="e#0#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentConduct.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="7" column="7" lean-forward="true" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+          <folding>
+            <element signature="e#378#379#0" expanded="true" />
+            <element signature="e#408#409#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#2836#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Term.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/TerminalReport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/TerminalReportDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="12" column="7" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/UserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Contact.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#301#302#0" expanded="true" />
+            <element signature="e#329#330#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="14" column="11" selection-start-line="13" selection-end-line="15" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Assessment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="27" column="24" lean-forward="true" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+          <folding>
+            <element signature="e#686#687#0" expanded="true" />
+            <element signature="e#711#712#0" expanded="true" />
+            <element signature="e#745#746#0" expanded="true" />
+            <element signature="e#773#774#0" expanded="true" />
+            <element signature="e#810#811#0" expanded="true" />
+            <element signature="e#843#844#0" expanded="true" />
+            <element signature="e#895#896#0" expanded="true" />
+            <element signature="e#939#940#0" expanded="true" />
+            <element signature="e#975#976#0" expanded="true" />
+            <element signature="e#1007#1008#0" expanded="true" />
+            <element signature="e#1057#1058#0" expanded="true" />
+            <element signature="e#1099#1100#0" expanded="true" />
+            <element signature="e#1132#1133#0" expanded="true" />
+            <element signature="e#1161#1162#0" expanded="true" />
+            <element signature="e#1205#1206#0" expanded="true" />
+            <element signature="e#1241#1242#0" expanded="true" />
+            <element signature="e#1272#1273#0" expanded="true" />
+            <element signature="e#1300#1301#0" expanded="true" />
+            <element signature="e#1341#1342#0" expanded="true" />
+            <element signature="e#1375#1376#0" expanded="true" />
+            <element signature="e#1410#1411#0" expanded="true" />
+            <element signature="e#1440#1441#0" expanded="true" />
+            <element signature="e#1487#1488#0" expanded="true" />
+            <element signature="e#1525#1526#0" expanded="true" />
+            <element signature="e#1554#1555#0" expanded="true" />
+            <element signature="e#1581#1582#0" expanded="true" />
+            <element signature="e#1619#1620#0" expanded="true" />
+            <element signature="e#1651#1652#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/manageStudents.fxml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/art-mani/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/mainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="590" column="39" selection-start-line="590" selection-start-column="39" selection-end-line="590" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Staff.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/META-INF/persistence.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="644">
+          <caret line="43" column="76" selection-start-line="43" selection-start-column="76" selection-end-line="43" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StageDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="36" column="16" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#39#1" expanded="true" />
+            <element signature="e#0#77#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Student_Id_Generator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#5452#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Stage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="16" column="27" lean-forward="true" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/ManageStudentController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="71" column="62" lean-forward="true" selection-start-line="71" selection-start-column="62" selection-end-line="71" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/AssessmentDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="167" column="28" selection-start-line="167" selection-start-column="28" selection-end-line="167" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Student.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
+          <folding>
+            <element signature="e#1937#1938#0" expanded="true" />
+            <element signature="e#1965#1966#0" expanded="true" />
+            <element signature="e#2006#2007#0" expanded="true" />
+            <element signature="e#2040#2041#0" expanded="true" />
+            <element signature="e#4206#4207#0" expanded="true" />
+            <element signature="e#4239#4240#0" expanded="true" />
+            <element signature="e#4288#4289#0" expanded="true" />
+            <element signature="e#4325#4326#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLogger.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="483">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#838#839#0" expanded="true" />
+            <element signature="e#876#877#0" expanded="true" />
+            <element signature="e#947#948#0" expanded="true" />
+            <element signature="e#1001#1002#0" expanded="true" />
+            <element signature="e#1440#1441#0" expanded="true" />
+            <element signature="e#1473#1474#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/RemarkDao.java">
+    <entry file="file://$PROJECT_DIR$/src/view/student.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/HibernateUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="82" selection-start-line="23" selection-start-column="82" selection-end-line="23" selection-end-column="82" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="23" selection-start-line="23" selection-end-line="68" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/UserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="61" column="5" selection-start-line="61" selection-start-column="5" selection-end-line="62" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#55#1" expanded="true" />
-            <element signature="e#0#9#1" expanded="true" />
-            <element signature="e#0#45#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="33" selection-start-line="33" selection-end-line="36" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/salesDetailsForm.fxml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="3" selection-start-line="22" selection-start-column="3" selection-end-line="22" selection-end-column="3" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Student.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Notification.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="40" column="28" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/terminalReport.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="50" column="54" selection-start-line="50" selection-start-column="54" selection-end-line="50" selection-end-column="54" />
+        <state relative-caret-position="310">
+          <caret line="176" column="90" selection-start-line="176" selection-start-column="90" selection-end-line="176" selection-end-column="90" />
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/TerminalReport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1035">
-          <caret line="99" column="47" selection-start-line="99" selection-start-column="47" selection-end-line="99" selection-end-column="47" />
-          <folding>
-            <element signature="e#1927#1928#0" expanded="true" />
-            <element signature="e#1964#1965#0" expanded="true" />
-            <element signature="e#2044#2045#0" expanded="true" />
-            <element signature="e#2093#2094#0" expanded="true" />
-            <element signature="e#2136#2137#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/newAttendanceSheetForm.fxml">
-      <provider editor-type-id="text-editor" />
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/AssessmentDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-284">
-          <caret line="12" column="58" selection-start-line="12" selection-start-column="58" selection-end-line="12" selection-end-column="58" />
-          <folding>
-            <element signature="e#0#97#1" expanded="true" />
-            <element signature="e#0#59#0" expanded="true" />
-            <element signature="e#0#86#0" expanded="true" />
-            <element signature="e#0#104#0" expanded="true" />
-            <element signature="e#0#65#1" expanded="true" />
-            <element signature="e#0#39#1" expanded="true" />
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/salesDetailsFormController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="627" column="11" selection-start-line="627" selection-start-column="11" selection-end-line="627" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/newAttendanceSheetController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="606">
-          <caret line="174" column="131" selection-start-line="174" selection-start-column="131" selection-end-line="174" selection-end-column="131" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/classListController.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/sale.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1320">
-          <caret line="109" column="18" selection-start-line="109" selection-start-column="12" selection-end-line="109" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/TermController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="56" column="107" lean-forward="true" selection-start-line="56" selection-start-column="107" selection-end-line="56" selection-end-column="107" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/PDFMaker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="389" column="62" selection-start-line="389" selection-start-column="62" selection-end-line="389" selection-end-column="62" />
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#17037#17052#0" expanded="true" />
+            <element signature="e#0#34#0" expanded="true" />
+            <element signature="e#0#72#1" expanded="true" />
+            <element signature="e#0#86#1" expanded="true" />
+            <element signature="e#0#58#0" expanded="true" />
+            <element signature="e#0#81#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/studentDetailsForm.fxml">
-      <provider editor-type-id="text-editor" />
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/studentController.java">
+    <entry file="file://$PROJECT_DIR$/src/controller/TerminalReportController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+        <state relative-caret-position="333">
+          <caret line="125" column="24" lean-forward="true" selection-start-line="125" selection-start-column="24" selection-end-line="125" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/EditTerminalReportController.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLoggerDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1500">
-          <caret line="133" column="64" selection-start-line="133" selection-start-column="64" selection-end-line="133" selection-end-column="64" />
+        <state relative-caret-position="450">
+          <caret line="30" column="42" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/EditFeesController.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/TransactionType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="73" column="108" selection-start-line="73" selection-start-column="108" selection-end-line="73" selection-end-column="108" />
+        <state relative-caret-position="120">
+          <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#512#513#0" expanded="true" />
-            <element signature="e#541#542#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="597">
-          <caret line="356" column="12" selection-start-line="356" selection-start-column="12" selection-end-line="356" selection-end-column="12" />
+        <state relative-caret-position="423">
+          <caret line="408" column="19" selection-start-line="408" selection-start-column="19" selection-end-line="408" selection-end-column="19" />
           <folding>
             <element signature="e#0#110#1" expanded="true" />
             <element signature="e#0#45#0" expanded="true" />
@@ -1354,72 +1534,54 @@
             <element signature="e#0#46#0" expanded="true" />
             <element signature="e#0#36#0" expanded="true" />
             <element signature="e#0#64#0" expanded="true" />
-            <element signature="e#0#35#1" expanded="true" />
             <element signature="e#0#42#1" expanded="true" />
+            <element signature="e#0#34#1" expanded="true" />
+            <element signature="e#0#50#1" expanded="true" />
             <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/studentDetailsTabPane.fxml">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentAccount.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="249" column="51" selection-start-line="249" selection-start-column="51" selection-end-line="249" selection-end-column="51" />
+        <state relative-caret-position="180">
+          <caret line="12" column="42" lean-forward="true" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
+          <folding>
+            <element signature="e#973#974#0" expanded="true" />
+            <element signature="e#1029#1030#0" expanded="true" />
+          </folding>
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="48" column="36" lean-forward="true" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
+          <folding>
+            <element signature="e#3345#4196#0" expanded="true" />
+            <element signature="e#4195#4196#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/salesDetailsFormController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="652" selection-start-line="652" selection-end-line="652" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/studentDetailsFormController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="1019" column="46" selection-start-line="1019" selection-start-column="46" selection-end-line="1019" selection-end-column="46" />
-          <folding>
-            <element signature="e#41977#41978#0" expanded="true" />
-            <element signature="e#42012#42013#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="351">
+          <caret line="992" column="48" lean-forward="true" selection-start-line="992" selection-start-column="48" selection-end-line="992" selection-end-column="48" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/mainController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="360" column="26" selection-start-line="360" selection-start-column="26" selection-end-line="360" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/TerminalReportController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
-          <caret line="172" column="36" selection-start-line="172" selection-start-column="36" selection-end-line="172" selection-end-column="36" />
-          <folding>
-            <element signature="e#7414#7415#0" expanded="true" />
-            <element signature="e#7456#7457#0" expanded="true" />
-            <element signature="e#9065#9683#0" expanded="true" />
-            <element signature="e#9682#9683#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/META-INF/MANIFEST.MF">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/art-mani/META-INF/MANIFEST.MF">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/stylesheet/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="815">
-          <caret line="387" column="10" selection-start-line="387" selection-start-column="10" selection-end-line="387" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/META-INF/persistence.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="90" lean-forward="true" selection-start-line="32" selection-start-column="64" selection-end-line="32" selection-end-column="90" />
+        <state relative-caret-position="595">
+          <caret line="397" column="1" lean-forward="true" selection-start-line="397" selection-start-column="1" selection-end-line="397" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -1439,6 +1601,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2863585" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -1446,7 +1609,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>Hibernate (SchoolAid)|Hibernate</last-edited>
+          <last-edited>Invalid</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1486,6 +1649,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2863585" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -1493,7 +1657,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>lib-files</last-edited>
+          <last-edited>commons-logging-1.2</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

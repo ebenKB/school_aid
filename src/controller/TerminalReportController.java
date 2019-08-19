@@ -264,32 +264,40 @@ public class TerminalReportController implements Initializable {
         });
 
         generatePDF.setOnAction(e -> {
-//            selectedReports.clear();
-//            for(TerminalReport t: reportTableView.getItems()) {
-//                if(t.isSelected()) {
-//                    selectedReports.add(t);
-//                }
-//            }
-            // get all the items in the table and create pdf for them"
-            Task task = new Task() {
-                @Override
-                protected Object call() throws Exception {
-                    // check if we are generating reports for all students
-                    if(selectedReports.isEmpty()) {
-                        pdDocument= PDFMaker.getPDFMakerInstance().createReport();
-                    } else  if(selectedReports.size() > 0) { // check if we are generating reports for only selected students
-                        pdDocument= PDFMaker.getPDFMakerInstance().createReport(selectedReports);
-                    }
-                    return null;
-                }
-            };
-            task.setOnRunning(event ->MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Generating Reports. Please wait...."));
-            task.setOnFailed(event-> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
-            task.setOnSucceeded(event -> {
-                MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+
+            System.out.println("we want to do report");
+            // check if we are generating reports for all students
+            if(selectedReports.isEmpty()) {
+                System.out.print("No selection was made");
+                pdDocument= PDFMaker.getPDFMakerInstance().createReport();
+            } else  if(selectedReports.size() > 0) { // check if we are generating reports for only selected students
+                System.out.println("we have selected" + selectedReports.size());
+                pdDocument= PDFMaker.getPDFMakerInstance().createReport(selectedReports);
                 PDFMaker.savePDFToLocation(pdDocument);
-            });
-            new Thread(task).start();
+            }
+            // get all the items in the table and create pdf for them"
+//            Task task = new Task() {
+//                @Override
+//                protected Object call() throws Exception {
+//                    System.out.println("we want to do report");
+//                    // check if we are generating reports for all students
+//                    if(selectedReports.isEmpty()) {
+//                        System.out.print("No selection was made");
+//                        pdDocument= PDFMaker.getPDFMakerInstance().createReport();
+//                    } else  if(selectedReports.size() > 0) { // check if we are generating reports for only selected students
+//                        System.out.println("we have selected" + selectedReports.size());
+//                        pdDocument= PDFMaker.getPDFMakerInstance().createReport(selectedReports);
+//                    }
+//                    return null;
+//                }
+//            };
+//            task.setOnRunning(event ->MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Generating Reports. Please wait...."));
+//            task.setOnFailed(event-> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+//            task.setOnSucceeded(event -> {
+//                MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+//                PDFMaker.savePDFToLocation(pdDocument);
+//            });
+//            new Thread(task).start();
         });
 
         createBill.setOnAction(event -> {

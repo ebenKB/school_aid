@@ -5,7 +5,7 @@ import javax.persistence.*;
 /**
  * Created by HUBKB.S on 11/20/2017.
  */
-@Entity(name = "Parent_Address")
+@Entity(name = "parent_address")
 @Embeddable
 public class Address {
     @Id

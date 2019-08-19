@@ -8,7 +8,7 @@ public class StudentAccount {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "account_id")
     private Long Id;
-    private double feeToPay=0.0;
+    private double feeToPay = 0.0; // school fee credit
     private double feedingFeeToPay = 0.0;
     private double feedingFeeCredit = 0.0;
 

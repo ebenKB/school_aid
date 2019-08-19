@@ -21,4 +21,7 @@ public class AppDao {
 //
 //        return false;
 //    }
+    public void changeContact() {    // update the contact details for the school
+
+    }
 }

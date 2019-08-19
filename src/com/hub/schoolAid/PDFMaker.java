@@ -43,7 +43,7 @@ public class PDFMaker {
     TerminalReportDao terminalReportDao =new TerminalReportDao();
     ObservableList <Assessment> assessmentList = FXCollections.observableArrayList();
 
-    PDDocument pdDocument = new PDDocument();
+    PDDocument pdDocument;
     PDFont font = PDType1Font.HELVETICA_BOLD;
     PDFont regText = PDType1Font.HELVETICA;
     final int headerSize = 12;
@@ -51,6 +51,8 @@ public class PDFMaker {
 
     // create report for all students
     public  PDDocument createReport() {
+        System.out.println("We called the functio to creat report");
+        pdDocument = new PDDocument();
         ObservableList <TerminalReport> reports = FXCollections.observableArrayList();
         assessmentList.addAll(assessmentDao.getAssessment());
         reports.addAll(terminalReportDao.getReport());
@@ -61,16 +63,25 @@ public class PDFMaker {
 
     // create report for selected students
     public PDDocument createReport(ObservableList<TerminalReport> reports) {
+        List<Student> students = FXCollections.observableArrayList();
+//        pdDocument = new PDDocument();
+        for(TerminalReport t: reports ) {
+            students.add(t.getStudent());
+            System.out.println("adding student to stack"+ t.toString());
+        }
+
         assessmentList.clear();
-        assessmentList.addAll(assessmentDao.getAssessment());
+        // get assessment of the selected students
+        assessmentList.addAll(assessmentDao.getAssessment(students));
         this.designReport(reports);
-        return null;
+        return pdDocument;
     }
 
     private void designReport(ObservableList<TerminalReport>reports) {
         try {
+            pdDocument = new PDDocument();
             for(TerminalReport report:reports) {
-                if (report.getStudent().getStage().getClassValue() == 13) { // start class condition check
+//                if (report.getStudent().getStage().getClassValue() > 0) { // start class condition check
                     //prepare pdf document
                     PDPage pdPage = new PDPage(PDRectangle.A5);
                     PDRectangle mediaBox = pdPage.getMediaBox();
@@ -82,10 +93,11 @@ public class PDFMaker {
 
                     //student details\
                     String name = "Name: " + report.getStudent().toString().toUpperCase() + "                Class: " + report.getStudent().getStage().getName().toUpperCase();
-                    String term = "Term ends: 17th August 2019                Next Term Begins: 7th May, 2019";
-//                 String attendance = "Second Term Report        Attendance: .........out of.........";
+                    String term = "Term ends: 17th August 2019                Next Term Begins: 3rd September, 2019";
+//                  String attendance = "Second Term Report        Attendance: .........out of.........";
                     String attendance = "Second Term Report";
                     float nameGap = ((mediaBox.getWidth()) - (font.getStringWidth(name) / 1000));
+
 
                     pdDocument.addPage(pdPage);
 
@@ -99,6 +111,8 @@ public class PDFMaker {
                     float startX = (mediaBox.getWidth() - titleWidth) / 2;
                     float startY = mediaBox.getHeight() - (margin + 10) - titleHeight;
                     PDPageContentStream pageContentStream = new PDPageContentStream(pdDocument, pdPage);
+
+
 
 //                 pageContentStream.addRect(0,mediaBox.getHeight()-50,mediaBox.getWidth(),(mediaBox.getHeight()-(mediaBox.getHeight()/1000)-50));
 //                 pageContentStream.beginText();
@@ -278,14 +292,13 @@ public class PDFMaker {
                     //search for all the student's assessment
                     List<Assessment> foundAss = searchAssessment(report.getStudent().getId(), assessmentList);
                     /**
-                     * make sure that every terminal report has at least 10 table rows.
-                     * if the student has less than eight subjects, we add excess table rows
+                     * make sure that every terminal report has at least 12 table rows.
+                     * if the student has less than 12 subjects, we add excess table rows
                      * to cater for the remaining table rows.
                      */
                     if (foundAss.size() < 12) {
                         int diff = 12 - foundAss.size();
                         for (int i = 0; i < diff; i++) {
-                            System.out.println("adding onto stack..." + (12 - foundAss.size()));
                             foundAss.add(new Assessment());
                         }
                     }
@@ -322,8 +335,8 @@ public class PDFMaker {
                         assessmentList.remove(assessment);
                     }
                     baseTable.draw();
-                } // end class condition check
-//                generateAccountReport(pdDocument,report.getStudent());
+                //} // end class condition check
+                generateAccountReport(pdDocument,report.getStudent());
             }
         } catch (Exception e) {
 //                e.printStackTrace();
@@ -342,7 +355,7 @@ public class PDFMaker {
                 pdDocument.save(file);
             pdDocument.close();
         }catch (Exception e){
-//            e.printStackTrace();
+            e.printStackTrace();
             System.out.println("error while saving file ");
         }
 
@@ -354,6 +367,7 @@ public class PDFMaker {
     }
 
     public  void createBillAndItemList() {
+        pdDocument = new PDDocument();
         StudentDao dao = new StudentDao();
         List<Student> students = dao.getAllStudents();
         for(Student st: students) {
@@ -364,6 +378,7 @@ public class PDFMaker {
     }
 
     public void createBillAndItemList(ObservableList<Student>students) {
+        pdDocument = new PDDocument();
         for(Student st: students) {
             generateAccountReport(pdDocument, st);
         }

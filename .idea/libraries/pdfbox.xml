@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="pdfbox">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../libs/boxable-1.5-RC.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../libs/pdfbox-2.0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../libs/guava-18.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../libs/fontbox-2.0.11.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <excluded>
+      <root url="jar:///Volumes/Files/boxable-1.5-RC.jar!/" />
+    </excluded>
+  </library>
+</component>

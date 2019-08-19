@@ -1,5 +1,7 @@
 package com.hub.schoolAid;
 
+import javafx.collections.FXCollections;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -132,6 +134,28 @@ public class AssessmentDao {
             em.close();
         }
     }
+
+    public List<Assessment> getAssessment(List<Student> students) {
+        List<Assessment> assessments = FXCollections.observableArrayList();
+        try {
+            em=HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            Query q;
+            for (Student st : students) {
+                q = em.createQuery("from Assessment  A where A.student.id=?");
+                q.setParameter(0, st.getId());
+                assessments.add((Assessment) q.getSingleResult());
+            }
+
+        } catch (Exception e) {
+
+        }
+        for(Assessment as: assessments) {
+            System.out.print("Assessment to return "+ as.toString());
+        }
+        return  assessments;
+    }
+
 
     public Boolean updateAssessment(Assessment assessment) {
           GradeDao gradeDao =new GradeDao();
