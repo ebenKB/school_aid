@@ -9,6 +9,7 @@ public class StudentAccount {
     @Column(name = "account_id")
     private Long Id;
     private double feeToPay = 0.0; // school fee credit
+    private double schFeesPaid =0.0; // amount that has been paid for school fees
     private double feedingFeeToPay = 0.0;
     private double feedingFeeCredit = 0.0;
 
@@ -42,5 +43,13 @@ public class StudentAccount {
 
     public void setFeedingFeeCredit(double feedingFeeCredit) {
         this.feedingFeeCredit = feedingFeeCredit;
+    }
+
+    public double getSchFeesPaid() {
+        return schFeesPaid;
+    }
+
+    public void setSchFeesPaid(double schFeesPaid) {
+        this.schFeesPaid = schFeesPaid;
     }
 }

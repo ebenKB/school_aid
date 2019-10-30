@@ -4,16 +4,19 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="548.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.newAttendanceSheetController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="622.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.newAttendanceSheetController">
    <children>
-      <Pane fx:id="root" layoutY="-1.0" prefHeight="73.0" prefWidth="548.0">
+      <Pane fx:id="root" layoutY="-1.0" prefHeight="73.0" prefWidth="622.0">
          <children>
             <Label fx:id="dateLabel" layoutX="19.0" layoutY="12.0" prefHeight="50.0" prefWidth="470.0" textFill="WHITE">
                <font>
@@ -22,7 +25,7 @@
             </Label>
          </children>
       </Pane>
-      <HBox layoutX="103.0" layoutY="147.0" prefHeight="36.0" prefWidth="342.0" spacing="40.0">
+      <HBox layoutX="80.0" layoutY="72.0" prefHeight="36.0" prefWidth="342.0" spacing="40.0">
          <children>
             <Button fx:id="useSystemDate" mnemonicParsing="false" prefHeight="36.0" prefWidth="142.0" text="Use System Date">
                <font>
@@ -36,8 +39,22 @@
             </Button>
          </children>
       </HBox>
-      <JFXDatePicker fx:id="datePicker" layoutX="89.0" layoutY="200.0" prefHeight="50.0" prefWidth="324.0" promptText="Click to select a date" visible="false" />
-      <HBox layoutX="54.0" layoutY="285.0" prefHeight="39.0" prefWidth="440.0" spacing="30.0">
+      <HBox layoutX="88.0" layoutY="151.0" spacing="50.0">
+         <children>
+            <VBox spacing="20.0">
+               <children>
+                  <RadioButton fx:id="todayRadio" mnemonicParsing="false" text="Create Records for Today">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="attendaceDateRadioGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="customDateRadio" mnemonicParsing="false" text="Create Records for another date" toggleGroup="$attendaceDateRadioGroup" />
+               </children>
+            </VBox>
+            <JFXDatePicker fx:id="datePicker" prefHeight="73.0" prefWidth="183.0" promptText="Click to select a date" visible="false" />
+         </children>
+      </HBox>
+      <HBox layoutX="67.0" layoutY="349.0" prefHeight="42.0" prefWidth="499.0" spacing="30.0">
          <children>
             <Button fx:id="close" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" text="CLOSE">
                <font>
@@ -47,7 +64,7 @@
                   <FontAwesomeIconView fill="#f80505" glyphName="CLOSE" size="18" />
                </graphic>
             </Button>
-            <Button fx:id="save" mnemonicParsing="false" prefHeight="42.0" prefWidth="124.0" text="SAVE DATE">
+            <Button fx:id="save" mnemonicParsing="false" prefHeight="42.0" prefWidth="124.0" text="SAVE DATE" visible="false">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -55,7 +72,7 @@
                   <FontAwesomeIconView fill="#08bc44" glyphName="FILE" size="15" />
                </graphic>
             </Button>
-            <Button fx:id="createSheet" layoutX="124.0" layoutY="10.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="165.0" text="NEW REGISTER">
+            <Button fx:id="createSheet" layoutX="124.0" layoutY="10.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="227.0" text="CREATE REGISTER">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

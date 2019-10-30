@@ -13,6 +13,8 @@ public class Main extends Application {
 
     private static MyProgressIndicator myProgressIndicator = MyProgressIndicator.getMyProgressIndicatorInstance();
     boolean connected=false;
+    private App appSettings;
+    private AppDao appDao = new AppDao();
 
     @Override
     public void start(Stage primaryStage) {
@@ -39,7 +41,19 @@ public class Main extends Application {
             myProgressIndicator.hideProgress();
 
             //show the login form here
-            if(connected){
+            if(connected) {
+                // Set app defaults if it has not been set
+                appSettings = AppDao.getAppSetting();
+                if (appSettings != null) {
+                    if (!appSettings.getHasInit()) {
+                        System.out.println("The app has not been initialized ...");
+                    } else {
+                        System.out.println("The app has been initialized ...");
+                    }
+                } else {
+                    System.out.println("The app is null");
+                    appDao.setDefault();
+                }
                 initializer.showLoginForm();
             }else{
               Alert alert =new Alert(Alert.AlertType.ERROR,"", ButtonType.OK);

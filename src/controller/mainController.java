@@ -181,6 +181,9 @@ public class mainController implements Initializable{
     private MenuItem manageStudents;
 
     @FXML
+    private MenuItem salesOverview;
+
+    @FXML
     private TextField searchBox;
 
     @FXML
@@ -214,6 +217,9 @@ public class mainController implements Initializable{
     private  MenuItem newSubject;
 
     @FXML
+    private MenuItem editStage;
+
+    @FXML
     private  MenuItem assessment;
 
     @FXML
@@ -225,6 +231,12 @@ public class mainController implements Initializable{
     @FXML
     private MenuItem dateTime;
 
+    @FXML
+    private MenuItem create_staff;
+
+    @FXML
+    private MenuItem view_staff;
+
     public static User user;
     private ObservableList<Student> data= FXCollections.observableArrayList();
     private FilteredList<Student> filteredData = new FilteredList <> (data, e ->true);
@@ -235,6 +247,8 @@ public class mainController implements Initializable{
     private Notification notification =Notification.getNotificationInstance();
     private MyProgressIndicator myProgressIndicator = MyProgressIndicator.getMyProgressIndicatorInstance();
     private salesDetailsFormController salesDetailsFormController = new salesDetailsFormController();
+    private App appSettings;
+    private AppDao appDao = new AppDao();
 
     public void init(User user){
         mainController.user = user;
@@ -351,7 +365,7 @@ public class mainController implements Initializable{
             stage.setTitle("");
             stage.show();
         } catch (IOException e) {
-            Notification.getNotificationInstance().notifyError("An error occured while showing the form", "Error");
+
         }
     }
 
@@ -379,41 +393,68 @@ public class mainController implements Initializable{
             FXMLLoader fxmlLoader = new FXMLLoader((getClass().getResource("/view/manageStudents.fxml")));
             root= fxmlLoader.load();
             ManageStudentController manageStudentController = fxmlLoader.getController();
-            manageStudentController.init();
+            if(!data.isEmpty()) {
+                manageStudentController.init(data);
+            } else {
+                manageStudentController.init();
+            }
+
             Scene scene = new Scene(root);
             javafx.stage.Stage stage = new javafx.stage.Stage();
             stage.setScene(scene);
             stage.setTitle("Manage Students");
             stage.show();
         } catch (IOException e) {
-            Notification.getNotificationInstance().notifyError("An error occured while showing the form", "Error");
+            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "Error");
         }
     }
 
+    private void showNewStaffForm() {
+        try {
+            Parent root;
+            FXMLLoader fxmlLoader = new FXMLLoader((getClass().getResource("/view/staff_reg.fxml")));
+            root = fxmlLoader.load();
+            StaffController staffController = fxmlLoader.getController();
+            staffController.init();
+
+            Scene scene = new Scene(root);
+            javafx.stage.Stage stage = new javafx.stage.Stage();
+            stage.setScene(scene);
+            stage.setTitle("Create new staff");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.setMaximized(false);
+            stage.show();
+        }catch (Exception e) {
+            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "Error");
+        }
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         todayLabel.setText("Today is: "+ LocalDate.now().getDayOfWeek().toString());
-        Task check =new Task() {
-            @Override
-            protected Object call() throws Exception {
-            Boolean canCheck =true;
-        while (canCheck){
-            if(data != null){
-                Iterator<Student>studentIterator = data.iterator();
-                while(studentIterator.hasNext()) {
-                    Student s = studentIterator.next();
-                    if(s.getAccount().getFeedingFeeCredit() < 0) {
-                        System.out.println(s.toString() + "is owing Feeding Fee");
-                    }
-                    if(!studentIterator.hasNext())
-                        canCheck=false;
-                }
-            }
-        }
-            return null;
-            }
-        };
-        new Thread(check).start();
+//        Task check =new Task() {
+//            @Override
+//            protected Object call() throws Exception {
+//            Boolean canCheck =true;
+//        while (canCheck){
+//            if(data != null){
+//                Iterator<Student>studentIterator = data.iterator();
+//                while(studentIterator.hasNext()) {
+//                    Student s = studentIterator.next();
+//                    if(s.getAccount().getFeedingFeeCredit() < 0) {
+//                        System.out.println(s.toString() + "is owing Feeding Fee");
+//                    }
+//                    if(!studentIterator.hasNext())
+//                        canCheck=false;
+//                }
+//            }
+//        }
+//            return null;
+//            }
+//        };
+//        new Thread(check).start();
 
         //check whether the term has been initialized
        PauseTransition show = new PauseTransition(Duration.seconds(5));
@@ -568,21 +609,38 @@ public class mainController implements Initializable{
             showStudentDetailsForm();
         });
 
+        salesOverview.setOnAction(event -> showSalesOverview());
+
+        create_staff.setOnAction(event -> this.showNewStaffForm());
+
         newPayment.setOnAction(event -> {
-            try {
-                Parent  root =  FXMLLoader.load(getClass().getResource("/view/salesDetailsForm.fxml"));
-                Scene scene= new Scene(root);
-                javafx.stage.Stage stage = new javafx.stage.Stage();
-                stage.setScene(scene);
-                stage.initStyle(StageStyle.DECORATED);
-                stage.initModality(Modality.WINDOW_MODAL);
-                stage.setMaximized(Boolean.TRUE);
-                stage.setTitle("");
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
+            // check the type of payment that the school uses
+//            try {
+//                Parent  root =  FXMLLoader.load(getClass().getResource("/view/salesDetailsForm.fxml"));
+//                Scene scene= new Scene(root);
+//                javafx.stage.Stage stage = new javafx.stage.Stage();
+//                stage.setScene(scene);
+//                stage.initStyle(StageStyle.DECORATED);
+//                stage.setMaximized(Boolean.TRUE);
+//                stage.setTitle("");
+//                stage.initModality(Modality.APPLICATION_MODAL);
+//                stage.show();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+
+            appSettings = AppDao.getAppSetting() ;
+            if (appSettings != null) {
+                if (appSettings.getFeedingType() == FeedingType.COUPON) {
+                    //show the coupon options here
+                    this.showPaymentOption("/view/feeding_form.fxml");
+                } else {
+                    // show form for those who use CASH
+                    this.showPaymentOption("/view/salesDetailsForm.fxml");
+                }
             }
         });
+
 
         viewAttendance.setOnAction(event -> {
             showViewAttendanceForm();
@@ -604,7 +662,7 @@ public class mainController implements Initializable{
 
         dateTime.setOnAction(event ->  salesDetailsFormController.showCreateAttendaceForm());
 
-        menuToggle.setOnMouseClicked(e->{
+        menuToggle.setOnMouseClicked(e-> {
             if (vbox.isVisible())
                 vbox.setVisible(Boolean.FALSE);
             else vbox.setVisible(Boolean.TRUE);
@@ -625,6 +683,8 @@ public class mainController implements Initializable{
                 }
             }
         });
+
+        editStage.setOnAction(event -> this.showEditStageForm());
     }
 
     private void searchTable() {
@@ -637,9 +697,9 @@ public class mainController implements Initializable{
                 String lowerVal = newValue.toLowerCase();
                 if(student.getFirstname().toLowerCase().contains(lowerVal)){
                     return  true;
-                }else if(student.getLastname().toLowerCase().contains(lowerVal)){
+                }else if(student.getLastname().toLowerCase().contains(lowerVal)) {
                     return  true;
-                }else if(student.getLastname().toLowerCase().contains(lowerVal)){
+                }else if(student.getLastname().toLowerCase().contains(lowerVal)) {
                     return  true;
                 }else if (student.toString().toLowerCase().contains(lowerVal));
                 return false;
@@ -648,7 +708,6 @@ public class mainController implements Initializable{
 
         sortedList.comparatorProperty().bind(studentTableView.comparatorProperty());
         studentTableView.setItems(sortedList);
-
     }
 
     private void deleteStudentData() {
@@ -706,7 +765,7 @@ public class mainController implements Initializable{
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             }
         }
@@ -769,6 +828,61 @@ public class mainController implements Initializable{
             stage.setScene(scene);
             stage.initStyle(StageStyle.UTILITY);
             stage.setTitle("New Grade");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showEditStageForm() {
+        Parent root;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/manageStage.fxml"));
+        try {
+            root = fxmlLoader.load();
+            ManageStageController controller = fxmlLoader.getController();
+            controller.init();
+            Scene scene = new Scene(root);
+            javafx.stage.Stage stage = new javafx.stage.Stage();
+            stage.setScene(scene);
+            stage.setTitle("Edit Stage");
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showSalesOverview () {
+        Parent root;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/salesSummary.fxml"));
+        try {
+            root = fxmlLoader.load();
+            SalesSummaryController controller = fxmlLoader.getController();
+            controller.init(null);
+            Scene scene = new Scene(root);
+            javafx.stage.Stage stage = new javafx.stage.Stage();
+            stage.setScene(scene);
+            stage.setTitle("Sales Overview");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showPaymentOption(String url) {
+        try {
+            Parent  root =  FXMLLoader.load(getClass().getResource(url));
+            Scene scene= new Scene(root);
+            javafx.stage.Stage stage = new javafx.stage.Stage();
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setMaximized(Boolean.TRUE);
+            stage.setTitle("");
+            stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

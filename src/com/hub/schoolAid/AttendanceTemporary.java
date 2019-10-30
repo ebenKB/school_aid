@@ -20,6 +20,10 @@ public class AttendanceTemporary{
     boolean present;
     boolean paidNow = true;
 
+    // add a transient property to attendance temporary
+    @Transient
+    private Boolean selected =false;
+
 
     //getters and setters
 
@@ -69,5 +73,13 @@ public class AttendanceTemporary{
 
     public void setPaidNow(boolean paidNow) {
         this.paidNow = paidNow;
+    }
+
+    public Boolean getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Boolean selected) {
+        this.selected = selected;
     }
 }

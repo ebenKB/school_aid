@@ -34,7 +34,7 @@ public class TerminalReport {
     @OneToOne
     private Stage promotedTo;
 
-    private int Attendance;
+//    private int Attendance;
 
     public Long getId() {
         return id;
@@ -76,22 +76,13 @@ public class TerminalReport {
         this.promotedTo = promotedTo;
     }
 
-    public int getAttendance() {
-        return Attendance;
-    }
-
-    public void setAttendance(int attendance) {
-        Attendance = attendance;
-    }
-
-//    public Boolean getSelected() {
-//        return isSelected;
+//    public int getAttendance() {
+//        return Attendance;
 //    }
-
-//    public void setSelected(Boolean selected) {
-//        isSelected = selected;
+//
+//    public void setAttendance(int attendance) {
+//        Attendance = attendance;
 //    }
-
 
     public boolean isSelected() {
         return selected.get();

@@ -22,16 +22,6 @@ public class StudentDao {
     //methods to interface with the database
     public Boolean addNewStudent(Student student,StudentDetails details) {
         try{
-
-//            System.out.println("The student stage is:" +student.getStage().getName()+ "and num on roll is"+ student.getStage().getNum_on_roll());
-//            student.getStage().setNum_on_roll(student.getStage().getNum_on_roll()+1);
-
-//           if(details.getImage() !=null){
-//               details.setStudent(student);
-//               HibernateUtil.save(StudentDetails.class,details);
-//           }
-
-//          HibernateUtil.commit();
             student.setAge(student.calcAge(student.getDob()));
 
             if(student.getPaySchoolFees()){
@@ -40,19 +30,20 @@ public class StudentDao {
                 student.getAccount().setFeeToPay(0.00);
             }
             student.getAccount().setFeedingFeeToPay(student.getStage().getFeeding_fee());
-//            HibernateUtil.commit();
             student.setPayFeeding(true);
             student.setReg_date(LocalDate.now());
-            HibernateUtil.save(Student.class,student);
+            student.setDeleted(false);
+            HibernateUtil.save(Student.class, student);
 
-            stageDao=new StageDao();
+            stageDao = new StageDao();
             stageDao.addStudent(student.getStage());
 
-            if(details.getImage() !=null){
+            if(details.getImage() !=null) {
                 StudentDetailsDao studentDetailsDao =new StudentDetailsDao();
                 studentDetailsDao.addImage(student,details.getImage());
             }
-        } catch (Exception e){
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
         return true;
@@ -62,12 +53,13 @@ public class StudentDao {
      * @param new_student the student that we want to update
      * @return true if the update was successful
      */
-    public Boolean updateStudentRecord(Student new_student) throws HibernateException{
+    public Boolean updateStudentRecord(Student new_student) throws HibernateException {
         setStdRecsToUpdate(new_student);
         HibernateUtil.commit();
         HibernateUtil.close();
         return true;
     }
+
     public Boolean updateStudentRecord(Student new_student,Parent parent){
         setStdRecsToUpdate(new_student);
         setParentRecsToUpdate(new_student,parent);
@@ -97,7 +89,7 @@ public class StudentDao {
         newStd.getParent().setTelephone(parent.getTelephone());
     }
 
-    public List <Student> getStudent (Student student){
+    public List <Student> getStudent (Student student) {
         try{
             String hql = "FROM students S WHERE S.firstname like ? and S.lastname like ? and  S.othername like ? and S.stage.name like ?";
             em=HibernateUtil.getEntityManager();
@@ -166,15 +158,16 @@ public class StudentDao {
         try{
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
-            List<Student> results = em.createQuery("FROM students S WHERE S.stage.id =? ").setParameter(0,newStage.getId()).getResultList();
+            List<Student> results = em.createQuery("FROM students S WHERE S.stage.id =? order by S.firstname asc ").setParameter(0,newStage.getId()).getResultList();
             return results;
         }catch (HibernateException e){
             e.printStackTrace();
             return null;
         }finally {
-//           if(em ==null) {
-//               em.close();
-//           }
+           if(em == null) {
+               em.clear();
+               em.close();
+           }
         }
     }
     /**
@@ -186,7 +179,7 @@ public class StudentDao {
     public List<Student> getStudentFromClass(String stage)throws HibernateException{
         em=HibernateUtil.getEntityManager();
         HibernateUtil.begin();
-        String hql = "FROM students S WHERE S.class = '"+ stage +"' ";
+        String hql = "FROM students S WHERE S.class = '"+ stage +"' order S.firstname asc";
         List results = em.createQuery(hql).getResultList();
         return results;
     }
@@ -265,7 +258,7 @@ public class StudentDao {
                 Student s = em.find(Student.class,student.getId());
                 s.getStage().setNum_on_roll(s.getStage().getNum_on_roll()-1);
                 HibernateUtil.begin();
-//            s.setIsDeleted(false);
+                s.setDeleted(true);
                 HibernateUtil.commit();
                 HibernateUtil.close();
                 return true;
@@ -280,15 +273,59 @@ public class StudentDao {
      * promote a particular student to the next class
      * @param student
      */
-    public void promoteStudent(Student student) throws HibernateException {
-        em=HibernateUtil.getEntityManager();
-        HibernateUtil.begin();
-        prepStdToPromote(student); // set new values
-        HibernateUtil.commit();
-        HibernateUtil.close();
+    public Boolean promoteStudent(Student student) throws HibernateException {
+        try {
+            em=HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            prepStdToUpdate(student, true, em); // set new values
+            HibernateUtil.commit();
+            HibernateUtil.close();
+            return  true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return  false;
+        }
     }
 
-    public Boolean promoteStudent(List<Student> students) {
+    public Boolean updateStudentStage(List<Student> students, Stage stage) {
+        int entityCount = students.size();
+        int batchSize =25;
+        em=HibernateUtil.getEntityManager();
+        HibernateUtil.begin();
+        try {
+            for (int i = 0; i < entityCount; i++) {
+                // clear the cache memory
+                if(i > 0 && i % batchSize == 0) {
+                    em.flush();
+                    em.clear();
+                }
+                Student student = students.get(i);
+                Stage prevStage = student.getStage();
+                if (student.getStage().getId() != stage.getId()) {
+                    student.setStage(stage);
+
+                    //update the number on row
+                    prevStage.setNum_on_roll(prevStage.getNum_on_roll() -1);
+                    stage.setNum_on_roll(stage.getNum_on_roll() + 1);
+                    em.merge(student);
+                    em.merge(stage);
+                    em.merge(prevStage);
+                }
+            }
+           HibernateUtil.commit();
+        } catch (Exception e) {
+            HibernateUtil.rollBack();
+            return  false;
+        } finally {
+            em.close();
+        }
+        return false;
+    }
+
+    public Boolean updateStudentStage(List<Student> students, Boolean isPromotion) {
+        StageDao stageDao = new StageDao();
+        List<Stage> stages = stageDao.getGetAllStage();
+
         Boolean status = false;
         em = HibernateUtil.getEntityManager();
         int entityCount = students.size();
@@ -297,13 +334,15 @@ public class StudentDao {
             HibernateUtil.begin();
             for (int i = 0; i < entityCount; i++) {
                 if (i > 0 && i % batchSize == 0) {
-                    HibernateUtil.commit();
-                    HibernateUtil.begin();
+                    em.flush();
                     em.clear();
                 }
                 Student student = students.get(i);
-                this.prepStdToPromote(student); // set new values
-                HibernateUtil.commit();
+                if (isPromotion) {
+                    this.prepStdToUpdate(student, true, em); // set new values
+                } else {
+                    this.prepStdToUpdate(student, false, em); // set new values
+                }
             }
             status = true;
         } catch (RuntimeException e) {
@@ -312,11 +351,25 @@ public class StudentDao {
             }
             throw e;
         } catch (Exception e){
+            e.printStackTrace();
             return status;
         }finally {
             em.close();
         }
         return  status;
+    }
+
+    public Boolean demoteStudent(Student student) {
+        try {
+            em = HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            prepStdToUpdate(student, false, em);
+            HibernateUtil.commit();
+            HibernateUtil.close();
+            return  true;
+        } catch (Exception e) {
+            return  false;
+        }
     }
 
     /**
@@ -332,25 +385,100 @@ public class StudentDao {
         HibernateUtil.close();
     }
 
-    private void prepStdToPromote(Student student) {
+    /**
+     * The method is used to prepare datails for promoting or demoting a student
+     * @param student the student we want to promote or demote
+     * @param isPromotion If true, we demote the student otherwise demote the student
+     * @param em the connection string to the database provider.
+     */
+    private Boolean prepStdToUpdate(Student student, Boolean isPromotion, EntityManager em) {
+        System.out.println("Preparing students to update");
+        String hql= null;
+        Query query=null;
+        Stage newStage=null;
+        StageDao stageDao = new StageDao();
+        stageDao.syncNumberOnRow();
+        Boolean didUpdate = false;
+
         // get the new class for the student using the class value of the current class
-        String hql ="from Class S where S.classValue=?1";
-        Query query = em.createQuery(hql);
-        query.setParameter(1, student.getStage().getClassValue() + 1);
-        Stage newStage = (Stage) query.getSingleResult();
+        if (isPromotion) {
+            System.out.println("It is promotion");
+            didUpdate = false;
+            /**
+             * find a student class for the student by finding the old class and add 1 to the class value
+             */
+            if(stageDao.existStage(stageDao.getGetAllStage(), (student.getStage().getClassValue() + 1))) {
+                try {
+                    System.out.println("we found a class ");
+                    hql = "from Class S where S.classValue = ?1";
+                    query = em.createQuery(hql);
+                    System.out.println("Creating query");
+                    query.setParameter(1, student.getStage().getClassValue() + 1);
+                    newStage = (Stage) query.getSingleResult();
+                    didUpdate = true;
+                } catch (Exception e){
+                    return false;
+                }
+            } else  {
+                return false;
+            }
+        } else {
+            didUpdate = false;
+            hql ="from Class S where S.classValue = ?1";
+            query = em.createQuery(hql);
+            query.setParameter(1, student.getStage().getClassValue() - 1);
+            newStage = (Stage) query.getSingleResult();
+            didUpdate = true;
+        }
 
-        // update number on row
-        Stage preStage = em.find(Stage.class, student.getStage().getId());
-        preStage.setNum_on_roll(preStage.getNum_on_roll() - 1);
-        newStage.setNum_on_roll(newStage.getNum_on_roll() + 1);
+        if (didUpdate) {
+            try {
+                // update number on row
+                Stage preStage = em.find(Stage.class, student.getStage().getId());
+                preStage.setNum_on_roll(preStage.getNum_on_roll() - 1);
+                newStage.setNum_on_roll(newStage.getNum_on_roll() + 1);
 
-        // update student class id
-        hql = "UPDATE students S set S.stage = ?1 where S.id = ?2";
-        Query query2 = em.createQuery(hql)
-                .setParameter(1, newStage)
-                .setParameter(2, student.getId());
-        query2.executeUpdate();
+                // make changes ready to be saved to the database
+                em.merge(newStage);
+                em.merge(preStage);
+
+                // update student class id
+                hql = "UPDATE students S set S.stage = ?1 where S.id = ?2";
+
+                Query q = em.createQuery(hql);
+                q.setParameter(1, newStage);
+                q.setParameter(2, student.getId());
+                q.executeUpdate();
+
+                // update the school fees for the student
+                if (student.getPaySchoolFees()) {
+                    student.getAccount().setFeeToPay(newStage.getFeesToPay());
+                }
+
+                // commit the records
+                em.getTransaction().commit();
+            } catch (Exception e) {
+                HibernateUtil.rollBack();
+            }
+        }
+        return true;
     }
+
+//    private void updateStudentStageAttrs(Student s, Stage stage, EntityManager em) {
+//        String hql;
+//        Query query;
+//        hql ="from Class S where S.id = ?1";
+//        query = em.createQuery(hql);
+//        query.setParameter(1, stage.getId());
+//
+//        Stage newStage = (Stage) query.getSingleResult();
+//
+//        hql = "UPDATE students S set S.stage = ?1 where S.id = ?2";
+//        Query q = em.createQuery(hql)
+//                .setParameter(1, newStage)
+//                .setParameter(2, s.getId());
+//        q.executeUpdate();
+//    }
 
     /**
      *  promotes every student in the school to the next class
@@ -371,6 +499,7 @@ public class StudentDao {
             StudentAccount studentAccount=em.find(StudentAccount.class,account.getId());
             studentAccount.setFeedingFeeCredit(account.getFeedingFeeCredit());
             studentAccount.setFeeToPay(account.getFeeToPay());
+            studentAccount.setSchFeesPaid(account.getSchFeesPaid());
             HibernateUtil.commit();
             HibernateUtil.close();
             return true;
@@ -411,15 +540,19 @@ public class StudentDao {
             return false;
         em=HibernateUtil.getEntityManager();
         StudentAccount acc = em.find(StudentAccount.class, st.getAccount().getId());
-        acc.setFeeToPay((acc.getFeeToPay() + amount));
+//        acc.setFeeToPay((acc.getFeeToPay() + amount));
+
+        // update the student's record with the total amount of fees paid.
+        acc.setSchFeesPaid(acc.getSchFeesPaid() + amount);
         if(this.updateAccount(acc))
             return true;
         return false;
     }
 
-    // when you want to add a new amount to the existing fees
+    // when you want to set a new amount for the current fees
     public Boolean updateSchoolFee(Student st, Double amount) {
-        if(amount.isNaN() || !st.getPaySchoolFees()) return false;
+        if(amount.isNaN() || !st.getPaySchoolFees())
+            return false;
         else {
             em = HibernateUtil.getEntityManager();
             StudentAccount account = em.find(StudentAccount.class, st.getAccount().getId());
@@ -437,6 +570,8 @@ public class StudentDao {
         em=HibernateUtil.getEntityManager();
         StudentAccount account = em.find(StudentAccount.class, st.getAccount().getId());
         account.setFeeToPay((st.getStage().getFeesToPay() * -1));
+        // reset the amount paid to 0
+        account.setSchFeesPaid(0.0);
         if(this.updateAccount(account))
             return true;
         return false;
@@ -453,4 +588,5 @@ public class StudentDao {
 //            return true;
 //        return false;
 //    }
+
 }

@@ -169,6 +169,9 @@ public class studentDetailsFormController implements Initializable{
     @FXML
     private JFXTextField feedingAcc;
 
+    @FXML
+    private Hyperlink schFeesSummary;
+
 
     //mainController mainController;
     private Student student;
@@ -687,28 +690,28 @@ public class studentDetailsFormController implements Initializable{
                    @Override
                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                        if(!feedingToggle.isSelected()){
-                               Alert alert = new Alert(Alert.AlertType.WARNING,"",ButtonType.YES,ButtonType.NO);
-                               alert.setHeaderText("Turn Feeding Fee Off");
-                               alert.setContentText("If you turn feeding fee off, the student will not be charged for feeding fee.\n" +
-                                       "Are you sure you want to turn this option off?");
-                               Optional<ButtonType>result =  alert.showAndWait();
-                               if(result.isPresent() && result.get() == ButtonType.YES){
-                                   TextInputDialog inputDialog = new TextInputDialog();
-                                   inputDialog.setTitle("Authentication");
-                                   inputDialog.setHeaderText("Enter your password to continue...");
-                                   inputDialog.setContentText("To confirm this is you, we need to confirm your password");
-                                   Optional<String> input = inputDialog.showAndWait();
-                                   if(input.isPresent() && input.get() !=null){
-                                       if(input.get().equals(LoginFormController.user.getPassword())){
-                                           feedingToggle.setSelected(Boolean.FALSE);
-                                           student.setPayFeeding(false);
+                           Alert alert = new Alert(Alert.AlertType.WARNING,"",ButtonType.YES,ButtonType.NO);
+                           alert.setHeaderText("Turn Feeding Fee Off");
+                           alert.setContentText("If you turn feeding fee off, the student will not be charged for feeding fee.\n" +
+                                   "Are you sure you want to turn this option off?");
+                           Optional<ButtonType>result =  alert.showAndWait();
+                           if(result.isPresent() && result.get() == ButtonType.YES){
+                               TextInputDialog inputDialog = new TextInputDialog();
+                               inputDialog.setTitle("Authentication");
+                               inputDialog.setHeaderText("Enter your password to continue...");
+                               inputDialog.setContentText("To confirm this is you, we need to confirm your password");
+                               Optional<String> input = inputDialog.showAndWait();
+                               if(input.isPresent() && input.get() !=null){
+                                   if(input.get().equals(LoginFormController.user.getPassword())){
+                                       feedingToggle.setSelected(Boolean.FALSE);
+                                       student.setPayFeeding(false);
 //                                           Notification.getNotificationInstance().notifySuccess("");
-                                            updateFeedingFee();
-                                       }else{
-                                           Notification.getNotificationInstance().notifyError("Wrong User password","Authentication Failed");
-                                       }
+                                        updateFeedingFee();
+                                   }else{
+                                       Notification.getNotificationInstance().notifyError("Wrong User password","Authentication Failed");
                                    }
                                }
+                           }
 
                        } else {
                            if(!student.getPayFeeding()){
@@ -864,6 +867,8 @@ public class studentDetailsFormController implements Initializable{
         });
 
         editFees.setOnAction(event -> this.showEditFeesForm());
+
+        schFeesSummary.setOnAction(event -> Utils.showSummaryForm(student));
     }
 
     private void updateStudentImage() {
@@ -939,14 +944,16 @@ public class studentDetailsFormController implements Initializable{
             imgInfoLabel.setText("Image not found");
         }
 
-        //populate student details view
-        fname.setText(student.getFirstname());
-        surname.setText(student.getLastname());
-        oname.setText(student.getOthername());
-        stage.setText(student.getStage().getName());
-        regDate.setText(student.getReg_date().toString());
-        dob.setValue(student.getDob());
-        phone.setText(student.getParent().getTelephone());
+        if(student != null) {
+            //populate student details view
+            fname.setText(student.getFirstname());
+            surname.setText(student.getLastname());
+            oname.setText(student.getOthername());
+            stage.setText(student.getStage().getName());
+            regDate.setText(student.getReg_date().toString());
+            dob.setValue(student.getDob());
+            phone.setText(student.getParent().getTelephone());
+        }
     }
 
     private void setPrentTabDetails() {
@@ -959,7 +966,7 @@ public class studentDetailsFormController implements Initializable{
 
     private void setAccountTabDetails(){
         SalesDao salesDao = new SalesDao();
-        int total =0;
+        int total = 0;
         Double payment = 0.0;
         Double bal = 0.0;
         Double salesBal = 0.0;
@@ -992,15 +999,16 @@ public class studentDetailsFormController implements Initializable{
         amountPaid.setText(String.valueOf(payment));
         bal+=student.getAccount().getFeeToPay();
 
-        if(student.getAccount().getFeedingFeeToPay() < 0)
-             bal+=(student.getAccount().getFeedingFeeCredit() * -1);
+        if(student.getAccount().getFeedingFeeCredit() < 0)
+            bal+=(student.getAccount().getFeedingFeeCredit());
+//             bal+=(student.getAccount().getFeedingFeeCredit() * -1);
 
         bal+= salesBal;  // sum up the balance
         balance.setText(String.valueOf(bal));
         feesBalance.setText(String.valueOf(student.getAccount().getFeeToPay()));
         feedingFeeCredit.setText(String.valueOf(student.getAccount().getFeedingFeeCredit()));
 
-        if(bal < 0){
+        if(bal < 0) {
             //Change the indicator background to red else change to green;
             indicator.setStyle("-fx-background-color: red");
         } else {
@@ -1012,7 +1020,7 @@ public class studentDetailsFormController implements Initializable{
         }
     }
 
-    private void prepareFeedingRecords(){
+    private void prepareFeedingRecords() {
         if(student.getPayFeeding()){
             feedingToggle.setSelected(Boolean.TRUE);
         } else feedingToggle.setSelected(Boolean.FALSE);
@@ -1089,5 +1097,27 @@ public class studentDetailsFormController implements Initializable{
         } catch (Exception e) {
             return;
         }
+    }
+
+//    private void showSummaryForm() {
+//        javafx.scene.Parent root;
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/schFeesSummary.fxml"));
+//        try {
+//            root = fxmlLoader.load();
+//            SchFeesSummaryController controller = fxmlLoader.getController();
+//            controller.init(student);
+//            Scene scene = new Scene(root);
+//            Stage stage = new Stage();
+//            stage.setScene(scene);
+//            stage.initModality(Modality.APPLICATION_MODAL);
+//            stage.initStyle(StageStyle.UTILITY);
+//            stage.show();
+//        } catch (Exception e) {
+//            return;
+//        }
+//    }
+
+    private void showGeneralForm(String url) {
+
     }
 }

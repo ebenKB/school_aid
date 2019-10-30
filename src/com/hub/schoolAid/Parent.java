@@ -24,7 +24,6 @@ public class Parent {
     @OneToOne(orphanRemoval = true,cascade = CascadeType.ALL)
     private Address address;
 
-
     //getters and setters
 
     public Long getId() {

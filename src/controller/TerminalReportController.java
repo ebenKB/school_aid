@@ -58,7 +58,7 @@ public class TerminalReportController implements Initializable {
     private TableView<TerminalReport> reportTableView;
 
     @FXML
-    private TableColumn<?, ?> checkStudent;
+    private TableColumn<?, ?> checkStudents;
 
 //    @FXML
 //    private CheckBox selectAll;
@@ -129,13 +129,14 @@ public class TerminalReportController implements Initializable {
             protected Object call() throws Exception {
 
             // add checkbox to the column header
-            checkStudent.setGraphic(selectAll);
+
             refresh();
             if(terminalReports.isEmpty()) {
                 terminalReportDao = new TerminalReportDao();
                 terminalReportDao.createTerminalReport();
             }
             populateTable();
+            checkStudents.setGraphic(selectAll);  // add a button to select all records
             return null;
             }
         };
@@ -152,6 +153,7 @@ public class TerminalReportController implements Initializable {
             populateTable();
         }
     }
+
     private void refresh() {
         terminalReportDao = new TerminalReportDao();
         stageDao = new StageDao();
@@ -164,6 +166,7 @@ public class TerminalReportController implements Initializable {
             return;
         updateReports.add(report);
     }
+
     private void saveUpdate(){
         terminalReportDao.updateTerminalReport(updateReports);
     }
@@ -182,7 +185,7 @@ public class TerminalReportController implements Initializable {
         conductCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getConduct()));
         remarkCol.setCellFactory(TextFieldTableCell.forTableColumn());
         remarkCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getHeadTracherRemark()));
-        addCheckBoxToTable(checkStudent);
+        addCheckBoxToTable(checkStudents);
 
         reportTableView.setItems(terminalReports);
     }

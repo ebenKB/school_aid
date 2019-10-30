@@ -47,6 +47,7 @@
             <ContextMenu>
               <items>
                 <MenuItem fx:id="newPayment" mnemonicParsing="false" text="New Payment" />
+                  <MenuItem fx:id="feesSummary" mnemonicParsing="false" text="Fees Summary" />
               </items>
             </ContextMenu>
          </contextMenu>
@@ -112,6 +113,7 @@
                   <MenuItem fx:id="resetFeedingBal" mnemonicParsing="false" text="Reset Feeding Fee Balance" />
                 <MenuItem fx:id="newAttendancePayment" mnemonicParsing="false" text="Pay Feeding Fee" />
                   <MenuItem fx:id="paySchoolFees" mnemonicParsing="false" text="Pay School Fee" />
+                  <MenuItem fx:id="schFeesSummary" mnemonicParsing="false" text="Fees Summary" />
               </items>
             </ContextMenu>
          </contextMenu>
@@ -130,7 +132,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <HBox fx:id="totalFeedingPane" alignment="CENTER" layoutX="390.0" layoutY="580.0" prefHeight="116.0" prefWidth="603.0" spacing="10.0" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="259.0">
+      <HBox fx:id="totalFeedingPane" alignment="CENTER" layoutX="390.0" layoutY="580.0" prefHeight="116.0" prefWidth="603.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="259.0">
          <children>
             <VBox fx:id="fieldsBox" spacing="10.0" visible="false">
                <children>

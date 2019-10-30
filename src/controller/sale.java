@@ -75,6 +75,9 @@ public class sale implements Initializable{
     private RadioButton payFees;
 
     @FXML
+    private RadioButton allStudents;
+
+    @FXML
     private ToggleGroup fees;
 
     @FXML
@@ -189,7 +192,7 @@ public class sale implements Initializable{
 
         save.setOnAction(event -> {
             if(isValid() && itemName.getText().length()>2){
-                if(saleType.getSelectedToggle() ==null){
+                if(saleType.getSelectedToggle() == null){
                     Alert alert=new Alert( Alert.AlertType.WARNING,"",ButtonType.OK);
                     alert.setHeaderText("You have not selected a sale type.\nPlease select who you are selling the item to.");
                     alert.setTitle("Empty selection");
@@ -208,17 +211,22 @@ public class sale implements Initializable{
                         @Override
                         protected Object call() {
 
-                            if(saleType.getSelectedToggle() ==individual){
+                            if(saleType.getSelectedToggle() == individual){
                                 salesDao.createSale(sale,item, studentListView.getSelectionModel().getSelectedItem());
 
-                            }else if(saleType.getSelectedToggle()==someClass){
+                            } else if(saleType.getSelectedToggle()==someClass){
                                 salesDao.sellToClass(sale,item,classCombo.getSelectionModel().getSelectedItem());
 
-                            }else if(saleType.getSelectedToggle()==everyone){
+                            }else if(saleType.getSelectedToggle()== everyone){
                                 if(payFees.isSelected()) {
+                                    // sell to those who pay fees
                                     salesDao.sellToAllStudents(sale,item,true);
                                 }else if(noFees.isSelected()){
+                                    // sell to those who do not pay fees
                                     salesDao.sellToAllStudents(sale, item, false);
+                                } else if (allStudents.isSelected()){
+                                    // sell to everyone
+                                    salesDao.sellToAllStudents(sale,item);
                                 }
                             }
                             //show confirmation message
@@ -259,13 +267,13 @@ public class sale implements Initializable{
             total.setText(sum.toString());
         }else {
             total.clear();
-            if(unitCost.getText().trim().length()>0 && qty.getText().trim().length()>0)
+            if(unitCost.getText().trim().length() > 0 && qty.getText().trim().length()>0)
                 showError();
         }
     }
 
     public Boolean isValid(){
-        if(everyone.isSelected() && fees.getSelectedToggle() == null)
+        if((everyone.isSelected()) && (fees.getSelectedToggle() == null))
             return false;
 
         if(qty.getText().trim().length()>0 && unitCost.getText().trim().length()>0)

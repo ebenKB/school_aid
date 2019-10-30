@@ -8,8 +8,5 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES />
-    <excluded>
-      <root url="jar:///Volumes/Files/boxable-1.5-RC.jar!/" />
-    </excluded>
   </library>
 </component>

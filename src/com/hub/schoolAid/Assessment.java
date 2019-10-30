@@ -27,7 +27,7 @@ public class Assessment {
     @JoinColumn(name = "grade")
     private Grade grade;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "student_asmnt_id")
     private Student student;
 

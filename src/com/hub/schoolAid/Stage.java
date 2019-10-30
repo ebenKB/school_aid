@@ -22,14 +22,26 @@ public class Stage {
     @ManyToMany
     private List<Course> course;
 
+    @ManyToMany(mappedBy = "classes", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private List<Staff> staffs;
     //constructor
-    public Stage (){
+    public Stage () {
 
     }
 
     public Stage (Stage stage){
         this.setName(stage.getName());
         this.setNum_on_roll(stage.getNum_on_roll());
+    }
+
+    @OneToMany(mappedBy = "stage")
+    private List<Student> students;
+
+    @PreRemove
+    public void checkReviewAssociationBeforeRemoval() {
+        if (!this.students.isEmpty()) {
+            throw new RuntimeException("Can't remove a stage that has students.");
+        }
     }
 
     //getters and setters
@@ -96,6 +108,14 @@ public class Stage {
 
     public Boolean isEqual(Stage stage1,Stage stage2){
         return (stage1.getClassValue() == stage2.getClassValue());
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
     @Override

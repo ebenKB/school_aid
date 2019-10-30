@@ -55,17 +55,18 @@ public class TerminalReportDao {
         try {
             HibernateUtil.begin();
             //begin a batch process
-            for(int i=0; i<entityCount; i++) {
+            for(int i=0; i < entityCount; i++) {
                 //do this in batches of 25
-                if(i>0&& i%batchSize ==0) {
-                    HibernateUtil.commit();
-                    HibernateUtil.begin();
+                if(i > 0 && i % batchSize == 0) {
+//                    HibernateUtil.commit();
+//                    HibernateUtil.begin();
+                    em.flush();
                     em.clear();
                 }
-                System.out.println("creating report for: " +list.get(i).toString());
                 TerminalReport terminalReport = new TerminalReport();
                 terminalReport.setStudent(list.get(i));
                 em.persist(terminalReport);
+//                HibernateUtil.commit();  // commnented this out
             }
             HibernateUtil.commit();
             return  true;
@@ -109,7 +110,7 @@ public class TerminalReportDao {
             HibernateUtil.begin();
             TerminalReport newReport = em.find(TerminalReport.class,report.getId());
             if(newReport != null){
-                newReport.setAttendance(report.getAttendance());
+//                newReport.setAttendance(report.getAttendance());
                 newReport.setConduct(report.getConduct());
                 newReport.setHeadTracherRemark(report.getHeadTracherRemark());
                 newReport.setPromotedTo(report.getPromotedTo());
@@ -135,8 +136,9 @@ public class TerminalReportDao {
             HibernateUtil.begin();
             for (int i=0;i<entityCount;i++){
                 if(i>0 && i%batchSize==0){
-                    HibernateUtil.commit();
-                    HibernateUtil.begin();
+//                    HibernateUtil.commit();
+//                    HibernateUtil.begin();
+                    em.flush();
                     em.clear();
                 }
                 //find report and update
@@ -205,7 +207,7 @@ public class TerminalReportDao {
         }
     }
 
-    public Boolean isUpToDate(){
+    public Boolean isUpToDate() {
         //if the total number of report is equal to the total number of students return true else return false;
         return true;
     }

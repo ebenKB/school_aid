@@ -195,9 +195,9 @@ public class AssessmentDao {
 
            for (int i = 0; i < entityCount; i++) {
                 if (i > 0 && i % batchSize == 0) {
-                    HibernateUtil.commit();
-                    HibernateUtil.begin();
-
+//                    HibernateUtil.commit();
+//                    HibernateUtil.begin();
+                    em.flush();
                     em.clear();
                 }
 

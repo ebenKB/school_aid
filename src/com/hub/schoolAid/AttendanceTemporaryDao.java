@@ -1,5 +1,6 @@
 package com.hub.schoolAid;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.hibernate.HibernateException;
@@ -8,12 +9,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 public class AttendanceTemporaryDao {
 
     private EntityManager em;
     private ObservableList<AttendanceTemporary> attendanceList= FXCollections.observableArrayList();
+
     /**
      * This method saves students to a temporary attendance table
      * the data is then moved to the master table after the close of the day
@@ -21,109 +24,346 @@ public class AttendanceTemporaryDao {
      * @return
      * @throws HibernateException
      */
-    public Boolean checkStudenIn(Student student)throws HibernateException {
-        AttendanceTemporary attendance =new AttendanceTemporary();
+    public Boolean checkStudenIn(Student student, LocalDate date) throws HibernateException {
+        AttendanceTemporary attendance = new AttendanceTemporary();
         attendance.setStudent(student);
-        attendance.setDate(LocalDate.now());
+        attendance.setDate(date);
         attendance.setPresent(Boolean.FALSE);
         if(student.getPayFeeding())
             attendance.setFeedingFee(student.getAccount().getFeedingFeeToPay());
-//          attendance.setFeedingFee(student.getStage().getFeeding_fee());
         else attendance.setFeedingFee(0.0);
         HibernateUtil.save(AttendanceTemporary.class,attendance);
         return true;
     }
 
-
-    public  void markPresent(AttendanceTemporary attendanceTemporary){
-        attendanceTemporary.setPresent(Boolean.TRUE);
-        //check if the student pays feeding fee
-        if(attendanceTemporary.getStudent().getPayFeeding()){
-            if(attendanceTemporary.getStudent().getFeedingStatus() != Student.FeedingStatus.DAILY){
-                if(attendanceTemporary.getFeedingFee() > attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()){
-                    //the student is paying in excess so save the balance and set the feeding fee to the amount
-                    attendanceTemporary.getStudent().addNewFeedingFeeCredit((attendanceTemporary.getFeedingFee()-attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()));
-//                   attendanceTemporary.setFeedingFee(attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay());
-                    attendanceTemporary.setFeedingFee(attendanceTemporary.getFeedingFee());
-                }else {
-                    //if a periodic or semi periodic student pays for only a day even though they may be owing for previous days --add
-                    if(attendanceTemporary.hasPaidNow() && attendanceTemporary.getFeedingFee() == attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()){
-                        attendanceTemporary.setFeedingFee(attendanceTemporary.getFeedingFee());
+    public void markPresent(AttendanceTemporary attendanceTemporary) {
+        // check if the student pays feeding fee
+        if (attendanceTemporary.getStudent().getPayFeeding()) {
+            // check if the student is paying now
+            if (attendanceTemporary.hasPaidNow()) {
+                // the student is paying now - check if the amount the student is paying is equal to what they have to pay
+                if(attendanceTemporary.getFeedingFee() == attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()) {
+                    // the student is paying what they have to pay -- MARK THE STUDENT PRESENT
+                    // check if the student can be set to DAILY
+                    if(attendanceTemporary.getStudent().getAccount().getFeedingFeeCredit() == 0 ) {
+                        // change the status of the student to DAILY
+                        attendanceTemporary.getStudent().setFeedingStatus(Student.FeedingStatus.DAILY);
                     }
-                    else attendanceTemporary.getStudent().debitFeedingAccount(attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()); //--added else
-                }
-            }else {
-                if( !attendanceTemporary.hasPaidNow()){
-                    //mark the student present, set the feeding fee to zero and then debit the student
-                    attendanceTemporary.getStudent().debitFeedingAccount(attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay());
-                }else if(attendanceTemporary.hasPaidNow()){
-                    //check if the student is paying in excess of what they should pay for a day
-                    if(attendanceTemporary.getFeedingFee() > attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()){
-                        attendanceTemporary.getStudent().addNewFeedingFeeCredit((attendanceTemporary.getFeedingFee()-attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()));
-                        attendanceTemporary.setFeedingFee(attendanceTemporary.getFeedingFee());
 
-                        StudentDao studentDao = new StudentDao();
-                        studentDao.updateAccount(attendanceTemporary.getStudent().getAccount());
+                } else {
+                    // the student is not paying what they have to pay for the day.
+                    Double diff = attendanceTemporary.getFeedingFee() - attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay();
+                    attendanceTemporary.getStudent().updateFeedingAccount(diff);
 
-                        //consider changing the status of the student to periodic
-                        if(attendanceTemporary.getStudent().getAccount().getFeedingFeeCredit() > 0){
-                            attendanceTemporary.getStudent().setFeedingStatus(Student.FeedingStatus.SEMI_PERIODIC);
-                            studentDao.updateStudentRecord(attendanceTemporary.getStudent());
+                    // check if we have to change the student to periodic
+                    if (attendanceTemporary.getStudent().getAccount().getFeedingFeeCredit() != 0) {
+                        // check if the student is not already PERIODIC
+                        if (attendanceTemporary.getStudent().getFeedingStatus() == Student.FeedingStatus.DAILY) {
+                            // change the status of the student to PERIODIC
+                            attendanceTemporary.getStudent().setFeedingStatus(Student.FeedingStatus.PERIODIC);
                         }
                     }
                 }
+
+            } else {
+                // the student is not paying now - DEBIT the student with the amount supposed to be paid
+//                attendanceTemporary.getStudent().debitFeedingAccount(attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay());
+                // if the student is not paying now, then we must make sure the amount to debit is always the amount that the student is supposed to pay
+                attendanceTemporary.setFeedingFee(attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay());
+                attendanceTemporary.getStudent().debitFeedingAccount(attendanceTemporary.getFeedingFee());
+
+                // check if the student has status DAILY and change to PERIODIC
+                if (attendanceTemporary.getStudent().getAccount().getFeedingFeeCredit() != 0) {
+                    attendanceTemporary.getStudent().setFeedingStatus(Student.FeedingStatus.PERIODIC);
+                }
             }
-            StudentDao studentDao = new StudentDao();
-            studentDao.updateAccount(attendanceTemporary.getStudent().getAccount());
-        }else attendanceTemporary.setFeedingFee(0.0);
 
-        em=HibernateUtil.getEntityManager();
-        HibernateUtil.begin();
-        em.merge(attendanceTemporary);
-        HibernateUtil.commit();
-    }
-    public  Boolean markAbsent(AttendanceTemporary attendanceTemporary){
-        attendanceTemporary.setPresent(Boolean.FALSE);
-
-        if(attendanceTemporary.getStudent().getFeedingStatus()!= Student.FeedingStatus.DAILY) {
-            if(attendanceTemporary.getFeedingFee() > attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()){
-                attendanceTemporary.getStudent().addNewFeedingFeeCredit(
-                        (attendanceTemporary.getFeedingFee() - attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()) * -1);
-            }else{
-                if(attendanceTemporary.getFeedingFee() != attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()){   //--add
-                    attendanceTemporary.getStudent().addNewFeedingFeeCredit(attendanceTemporary.getFeedingFee());
-                } //--add
-
-                //--added this block
-                else if( (attendanceTemporary.getFeedingFee() == attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay())&& !attendanceTemporary.hasPaidNow()){
-                    attendanceTemporary.getStudent().addNewFeedingFeeCredit(attendanceTemporary.getFeedingFee());
-                } //-end add
-            }
-            attendanceTemporary.setFeedingFee(attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay());
-            StudentDao studentDao = new StudentDao();
-            studentDao.updateAccount(attendanceTemporary.getStudent().getAccount());
-        }else if((!attendanceTemporary.hasPaidNow())){
-            System.out.print("in 1st else marking absent with :"+attendanceTemporary.getFeedingFee());
-            attendanceTemporary.getStudent().addNewFeedingFeeCredit(attendanceTemporary.getFeedingFee());
-            StudentDao studentDao = new StudentDao();
-            studentDao.updateAccount(attendanceTemporary.getStudent().getAccount());
-        }else if(attendanceTemporary.hasPaidNow() && attendanceTemporary.getFeedingFee() > attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()){
-            System.out.print("in second else marking absent with :"+attendanceTemporary.getFeedingFee());
-            attendanceTemporary.getStudent().addNewFeedingFeeCredit( (attendanceTemporary.getFeedingFee() - attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()) * -1);
-            attendanceTemporary.setFeedingFee(attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay());
-            StudentDao studentDao = new StudentDao();
-            studentDao.updateAccount(attendanceTemporary.getStudent().getAccount());
+        } else {
+            // the student does not pay feeding fee - MARK THE STUDENT PRESENT AND DO NOTHING
+            attendanceTemporary.setFeedingFee(0.00);
         }
-        em=HibernateUtil.getEntityManager();
-        HibernateUtil.begin();
-        em.merge(attendanceTemporary);
-        HibernateUtil.commit();
-        return true;
+        try {
+            // COMMIT all changes
+            StudentDao studentDao = new StudentDao();
+            studentDao.updateStudentRecord(attendanceTemporary.getStudent());
+            studentDao.updateAccount(attendanceTemporary.getStudent().getAccount());
+            em = HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            attendanceTemporary.setPresent(true);
+            em.merge(attendanceTemporary);
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            HibernateUtil.rollBack();
+            em.close();
+            HibernateUtil.close();
+        }
+    }
+
+    public Boolean prepAttendanceRecords(AttendanceTemporary attendanceTemporary, Boolean isCheckIn) {
+        // set the fields for the attendance
+        if(isCheckIn) {
+            attendanceTemporary.setPresent(true);
+        } else {
+            attendanceTemporary.setPresent(false);
+        }
+
+        if (attendanceTemporary.getStudent().getPayFeeding()) {
+//            attendanceTemporary.setFeedingFee(attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay());
+
+        if(isCheckIn) {
+            // debit the student with the amount supposed to be paid
+            attendanceTemporary.getStudent().debitFeedingAccount(attendanceTemporary.getFeedingFee());
+        } else {
+            attendanceTemporary.getStudent().updateFeedingAccount(attendanceTemporary.getFeedingFee());
+        }
+
+            // check the new balance of the student
+            if((attendanceTemporary.getStudent().getAccount().getFeedingFeeCredit() > 0) ||(attendanceTemporary.getStudent().getAccount().getFeedingFeeCredit() < 0)) {
+                attendanceTemporary.getStudent().setFeedingStatus(Student.FeedingStatus.PERIODIC);
+            } else if(attendanceTemporary.getStudent().getAccount().getFeedingFeeCredit() ==0) {
+                attendanceTemporary.getStudent().setFeedingStatus(Student.FeedingStatus.DAILY);
+            }
+        }
+            return false;
+    }
+    public Boolean checkInWithCoupon(AttendanceTemporary attendanceTemporary) {
+        try {
+            em= HibernateUtil.getEntityManager();
+
+            if(attendanceTemporary.isPresent()) {
+                return false;
+            }
+                prepAttendanceRecords(attendanceTemporary, true);
+
+                // persist the changes to the
+                HibernateUtil.begin();
+                em.merge(attendanceTemporary.getStudent());
+                em.merge(attendanceTemporary);
+                HibernateUtil.commit();
+                return  true;
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public Boolean checkInWithCoupon(List<AttendanceTemporary>attendanceTemporaryList) {
+        try {
+            System.out.println("PERFORMING BATCH PROCESS ..."+ attendanceTemporaryList.size());
+            int batchSize = 25;
+            int totalRecords = attendanceTemporaryList.size();
+            em= HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+
+            // iterate the list
+            for(int i=0; i< totalRecords; i++) {
+                System.out.println("WORKING ON ITERATION ONE: "+ i);
+                if(i > 0 && i % batchSize == 0) {
+                    em.flush();
+                    em.clear();
+                }
+                AttendanceTemporary at = attendanceTemporaryList.get(i);
+                prepAttendanceRecords(at, true);
+
+                // save the updates to the database
+                em.merge(at);
+                em.merge(at.getStudent());
+            }
+            HibernateUtil.commit();
+            return true;
+        } catch (Exception e) {
+            HibernateUtil.rollBack();
+        } finally {
+//            em.clear();
+        }
+        return false;
+    }
+
+    public Boolean checkOutWithCoupon(List<AttendanceTemporary> attendanceTemporaryList) {
+        try {
+            int batchSize = 25;
+            int totalRecords = attendanceTemporaryList.size();
+            em = HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+
+            // iterate the list
+            for (int i=0; i < totalRecords; i++) {
+                if (i > 0 && i% batchSize == 0) {
+                    em.flush();
+                    em.clear();
+                }
+                AttendanceTemporary at = attendanceTemporaryList.get(i);
+                prepAttendanceRecords(at, false);
+
+                em.merge(at);
+                em.merge(at.getStudent());
+            }
+
+            HibernateUtil.commit();
+            return true;
+        } catch (Exception e) {
+
+        }
+        return false;
+    }
+
+    public Boolean checkOutWithCoupon() {
+        return false;
+    }
+
+
+    public void checkOut() {
+        System.out.println("We want to check out the student");
+    }
+
+//    public  void markPresent(AttendanceTemporary attendanceTemporary) {
+//        try {
+//            attendanceTemporary.setPresent(Boolean.TRUE);
+//            //check if the student pays feeding fee
+//            if(attendanceTemporary.getStudent().getPayFeeding()){
+//                // check if the student pays daily
+//                if(attendanceTemporary.getStudent().getFeedingStatus() != Student.FeedingStatus.DAILY) {
+//                    // check if the student is paying more than they have to pay for a day
+//                    if(attendanceTemporary.getFeedingFee() > attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()) {
+//                        //the student is paying in excess so save the balance and set the feeding fee to the amount
+//                        attendanceTemporary.getStudent().addNewFeedingFeeCredit((attendanceTemporary.getFeedingFee() - attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()));
+//                        // attendanceTemporary.setFeedingFee(attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay());
+//                        attendanceTemporary.setFeedingFee(attendanceTemporary.getFeedingFee());
+//                    } else {
+//                        // Check if the student is paying now or later. if a periodic or semi periodic student pays for only a day even though they may be owing for previous days, just check them in for today.
+//                        if(attendanceTemporary.hasPaidNow() && attendanceTemporary.getFeedingFee() == attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()){
+//                            attendanceTemporary.setFeedingFee(attendanceTemporary.getFeedingFee());
+//                        } else if (attendanceTemporary.hasPaidNow() && attendanceTemporary.getFeedingFee() < attendanceTemporary.getStudent().getAccount().getFeeToPay()) {
+//                            System.out.println(" PERIODIC: The student is paying less that they have to pay ");
+//                            Double dif = attendanceTemporary.getFeedingFee() - attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay();
+//                            attendanceTemporary.getStudent().debitFeedingAccount(dif);
+//
+//                        }
+//                        // the student is present but does not have feeding fee for today
+//                        else attendanceTemporary.getStudent().debitFeedingAccount(attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay());
+//                    }
+//                } else {
+//                    if( !attendanceTemporary.hasPaidNow()) {
+//                        //mark the student present, set the feeding fee to zero and then debit the student
+//                        attendanceTemporary.getStudent().debitFeedingAccount(attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay());
+//                    }else if(attendanceTemporary.hasPaidNow()){
+//                        //check if the student is paying in excess of what they should pay for a day
+//                        if(attendanceTemporary.getFeedingFee() > attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()){
+//                            attendanceTemporary.getStudent().addNewFeedingFeeCredit((attendanceTemporary.getFeedingFee() - attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()));
+////                            attendanceTemporary.setFeedingFee(attendanceTemporary.getFeedingFee());
+//
+//                            // update the student account details
+//                            StudentDao studentDao = new StudentDao();
+//                            studentDao.updateAccount(attendanceTemporary.getStudent().getAccount());
+//
+//                            //consider changing the status of the student to periodic
+//                            if(attendanceTemporary.getStudent().getAccount().getFeedingFeeCredit() > 0){
+//                                attendanceTemporary.getStudent().setFeedingStatus(Student.FeedingStatus.SEMI_PERIODIC);
+//                                studentDao.updateStudentRecord(attendanceTemporary.getStudent());
+//                            }
+//                        } else {
+//                            System.out.println("DAILY. Paying less than my daily amount");
+//                            double diff = attendanceTemporary.getFeedingFee() - attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay();
+//                            attendanceTemporary.getStudent().debitFeedingAccount(diff);
+//                            // get the account and debit the account
+//                        }
+//                    }
+//                }
+//                StudentDao studentDao = new StudentDao();
+//                studentDao.updateAccount(attendanceTemporary.getStudent().getAccount());
+//            } else attendanceTemporary.setFeedingFee(0.0); // the student does not pay feeding fee
+//
+//            em=HibernateUtil.getEntityManager();
+//            HibernateUtil.begin();
+//            em.merge(attendanceTemporary);
+//            HibernateUtil.commit();
+//        } catch (Exception e) {
+//            em.clear();
+//            HibernateUtil.close();
+//        } finally {
+//            em.clear();
+//            HibernateUtil.close();
+//            System.out.println("We have closed the connection"+ em);
+//        }
+//    }
+    public  Boolean markAbsent(AttendanceTemporary attendanceTemporary){
+        try {
+            attendanceTemporary.setPresent(Boolean.FALSE);
+
+            if(attendanceTemporary.getStudent().getFeedingStatus() != Student.FeedingStatus.DAILY) {
+                // check if the student paid in excess and then get the balance after subtracting feeding fee. make the balance negative and use the result to update the student account balance.
+                // The negative value cancels out the amount we added earlier to the student account
+                if(attendanceTemporary.getFeedingFee() > attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()){
+                    attendanceTemporary.getStudent().addNewFeedingFeeCredit(
+                            (attendanceTemporary.getFeedingFee() - attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()) * -1);
+                } else {
+                    // revert the feeding debit and add the amount we subtracted earlier to the feeding fee
+                    if(attendanceTemporary.getFeedingFee() != attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()){   //--add
+                        attendanceTemporary.getStudent().addNewFeedingFeeCredit(attendanceTemporary.getFeedingFee());
+                    } //--add
+
+                    // revert the feeding fee and tag the student as NOT PAID for today
+                    else if((attendanceTemporary.getFeedingFee() == attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()) && !attendanceTemporary.hasPaidNow()){
+                        attendanceTemporary.getStudent().addNewFeedingFeeCredit(attendanceTemporary.getFeedingFee());
+                    } //-end add
+                }
+                attendanceTemporary.setFeedingFee(attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay());
+                StudentDao studentDao = new StudentDao();
+                studentDao.updateAccount(attendanceTemporary.getStudent().getAccount());
+            } else if((!attendanceTemporary.hasPaidNow())){
+                attendanceTemporary.getStudent().addNewFeedingFeeCredit(attendanceTemporary.getFeedingFee());
+                StudentDao studentDao = new StudentDao();
+                studentDao.updateAccount(attendanceTemporary.getStudent().getAccount());
+            } else if(attendanceTemporary.hasPaidNow() && attendanceTemporary.getFeedingFee() > attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()){
+                attendanceTemporary.getStudent().addNewFeedingFeeCredit( (attendanceTemporary.getFeedingFee() - attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay()) * -1);
+                attendanceTemporary.setFeedingFee(attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay());
+                StudentDao studentDao = new StudentDao();
+                studentDao.updateAccount(attendanceTemporary.getStudent().getAccount());
+            }
+            em=HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            em.merge(attendanceTemporary);
+            HibernateUtil.commit();
+            return true;
+        }catch (Exception e) {
+            return false;
+        } finally {
+            em.clear();
+            HibernateUtil.close();
+        }
     }
     public List <AttendanceTemporary> getTempAttendance() {
-        em=HibernateUtil.getEntityManager();
-        HibernateUtil.begin();
-        return em.createQuery(" from AttendanceTemporary A order by A.student.firstname asc ").getResultList();
+        try {
+            em=HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            return em.createQuery(" from AttendanceTemporary A order by A.student.firstname asc ").getResultList();
+        } catch (Exception e) {
+            HibernateUtil.close();
+            em.clear();
+        } finally {
+            if (em == null) {
+                HibernateUtil.close();
+                em.clear();
+            }
+        }
+        return null;
+    }
+
+    public List<AttendanceTemporary> getTempAttendance(Stage stage){
+        try {
+            em = HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            String hql = "from AttendanceTemporary  A where A.student.id = ?1 order by A.student.firstname asc";
+            Query query = em.createQuery(hql);
+            query.setParameter(1, stage.getId());
+            return query.getResultList();
+        } catch (Exception e) {
+            return null;
+        } finally {
+            if(em == null) {
+                em.close();
+            }
+        }
     }
 
     public Boolean checkIfExisForToday(){
@@ -149,8 +389,8 @@ public class AttendanceTemporaryDao {
         return em.createQuery(" from AttendanceTemporary A where A.present=false ").getResultList();
     }
 
-    public Boolean deleteAllTempAttendance(){
-        try{
+    public Boolean deleteAllTempAttendance() {
+        try {
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
             List<AttendanceTemporary> list =getTempAttendance();
@@ -159,7 +399,7 @@ public class AttendanceTemporaryDao {
             }
             HibernateUtil.commit();
             return  true;
-        }catch (PersistenceException p){
+        } catch (PersistenceException p) {
             p.printStackTrace();
             return false;
         }
@@ -183,18 +423,68 @@ public class AttendanceTemporaryDao {
                     "or lower(at.student.lastname) like '%"+name.toLowerCase()+"' or lower(at.student.othername) like '%"+name+"' " +
                     "or lower(student.othername) like  '"+name+"' or lower(student.stage.name)  like  '"+name.toLowerCase()+"%'  " +
                     "or lower(student.stage.name)  like '%"+name.toLowerCase()+"' ").getResultList();
-        }catch (Exception e){
+        }catch (Exception e) {
             return null;
-        }finally {
-           if(em == null){
+        } finally {
+           if(em == null) {
                em.close();
                HibernateUtil.close();
            }
         }
     }
-    public void removeStudent(Student student){
+
+    public void removeStudent(Student student) {
         em=HibernateUtil.getEntityManager();
         HibernateUtil.begin();
         em.createQuery("delete from AttendanceTemporary  where '+student_id+' = '+student.id+' ").executeUpdate();
     }
+
+    public int checkAttendanceInterval() {
+        try {
+//            TermDao termDao = new TermDao();
+            int diff= 0;
+
+            if(TermDao.getCurrentDate() == LocalDate.now()) {
+                System.out.println("Checking if can create attendance");
+                return diff;
+            } else  {
+//                Use a singleton to return the current date
+                Period interval = Period.between(TermDao.getCurrentDate(), LocalDate.now());
+                diff = interval.getDays();
+                if ( (diff == 0) ||((diff > 0) && (diff < 15 && interval.getMonths() < 1 && interval.getYears() < 1)) ) {
+                    return diff;
+                } else {
+                    System.out.println("DIFF, MONTH, YEAR INTERVAL: "+ diff+ " "+ interval.getMonths()+ " "+ interval.getYears() );
+                    return -1;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -2;
+        }
+    }
+
+    public Boolean canCreateAttendance() {
+        if ( (this.checkAttendanceInterval() == 0)|| ((this.checkAttendanceInterval() > 0) && (this.checkAttendanceInterval() > 0) && (this.checkAttendanceInterval() < 15))) {
+            System.out.println("We can create an attendance"+ this.checkAttendanceInterval());
+            return true;
+        } else {
+            System.out.println("We CANNOT CREATE ATTENDANCE"+ this.checkAttendanceInterval());
+            return false;
+        }
+    }
+//    private Boolean canCreateNewAttendance() {
+//        if(termDao.getCurrentDate().equals(LocalDate.now())) {
+//            System.out.println("We can create a date for the attendance");
+//            return true;
+//        } else {
+//            Period interval = Period.between(termDao.getCurrentDate(), LocalDate.now());
+//            int diff= interval.getDays();
+//            System.out.println("This is the difference between the days"+ diff);
+//            if(diff > 0 && diff < 6 && interval.getMonths() < 1 && interval.getYears() < 1) {
+//                System.out.println("The difference is less than 6");
+//            }
+//        }
+//        return false;
+//    }
 }

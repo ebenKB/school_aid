@@ -207,7 +207,7 @@ public class viewAttendanceController implements Initializable{
     }
 
     //global search to find a match from table view for students
-    static boolean checkIfStudent(String lowerVal, Student student) {
+    public static boolean checkIfStudent(String lowerVal, Student student) {
         if(student.getFirstname().toLowerCase().contains(lowerVal)){
             return true;
         }else if(student.getLastname().toLowerCase().contains(lowerVal)){
@@ -286,7 +286,9 @@ public class viewAttendanceController implements Initializable{
             attendanceTableView.setItems(attendanceList);
             total.textProperty().bind(Bindings.size(attendanceTableView.getItems()).asString());
 
-            for(Attendance at:attendanceList){
+
+            // get all the attendance data that are currently showing
+            for(Attendance at:attendanceTableView.getItems()){
                if(at.getPaidNow()){
                    totalFeedingPaid+=at.getFeedingFee();
                }
@@ -401,7 +403,7 @@ public class viewAttendanceController implements Initializable{
         toggleGroup.selectedToggleProperty().addListener(((observable, oldValue, newValue) -> {
             if(newValue  == period) {
                 vBox2.setVisible(Boolean.TRUE);
-            }else vBox2.setVisible(Boolean.FALSE);
+            } else vBox2.setVisible(Boolean.FALSE);
         }));
 
         dialog.getDialogPane().setContent(gridPane);

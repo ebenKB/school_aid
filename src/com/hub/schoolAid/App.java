@@ -14,8 +14,13 @@ public class App {
     private Boolean canShowPopUp;
     private Boolean canShowIntroHelp;
     private Boolean hasInit;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private Address address;
+    private  Double feedingFee;
+
+    @Enumerated(EnumType.STRING)
+    private FeedingType feedingType;
+
+//    @OneToOne(cascade = CascadeType.PERSIST)
+//    private Address address;
 
     public Boolean getCanShowPopUp() {
         return canShowPopUp;
@@ -39,5 +44,21 @@ public class App {
 
     public void setHasInit(Boolean hasInit) {
         this.hasInit = hasInit;
+    }
+
+    public FeedingType getFeedingType() {
+        return feedingType;
+    }
+
+    public void setFeedingType(FeedingType feedingType) {
+        this.feedingType = feedingType;
+    }
+
+    public Double getFeedingFee() {
+        return feedingFee;
+    }
+
+    public void setFeedingFee(Double feedingFee) {
+        this.feedingFee = feedingFee;
     }
 }

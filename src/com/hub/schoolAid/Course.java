@@ -15,6 +15,9 @@ public class Course {
     @ManyToMany(mappedBy = "course")
     private List<Stage> stageList;
 
+    @ManyToMany(mappedBy = "courses")
+    private List<Staff>staffs;
+
     public Long getId() {
         return Id;
     }

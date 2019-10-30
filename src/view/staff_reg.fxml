@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.CheckComboBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="843.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StaffController">
+   <children>
+      <Pane fx:id="root" prefHeight="85.0" prefWidth="519.0" stylesheets="@../stylesheet/main.css">
+         <children>
+            <Text fill="#fffefe" layoutX="88.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STAFF REGISTRATION FORM" textAlignment="CENTER" wrappingWidth="321.4228515625">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <VBox layoutX="74.0" layoutY="153.0" prefHeight="591.0" prefWidth="377.0" spacing="40.0">
+         <children>
+            <VBox spacing="10.0">
+               <children>
+                  <Text fill="#1fa758" strokeType="OUTSIDE" strokeWidth="0.0" text="Personal Information">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Text>
+                  <Separator prefHeight="0.0" prefWidth="377.0" />
+               </children>
+            </VBox>
+            <JFXTextField fx:id="full_name" labelFloat="true" prefHeight="40.0" prefWidth="370.0" promptText="Enter fullname" />
+            <JFXTextField fx:id="contact" labelFloat="true" prefHeight="40.0" prefWidth="370.0" promptText="Contact" />
+            <VBox spacing="10.0">
+               <children>
+                  <Text fill="#1fa758" strokeType="OUTSIDE" strokeWidth="0.0" text="Address">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Text>
+                  <Separator prefHeight="0.0" prefWidth="377.0" />
+               </children>
+            </VBox>
+            <JFXTextField fx:id="home_address" labelFloat="true" prefHeight="40.0" prefWidth="370.0" promptText="Home Address" />
+            <JFXTextField fx:id="landmark" labelFloat="true" prefHeight="40.0" prefWidth="370.0" promptText="Landmark" />
+            <VBox fx:id="subjects" spacing="10.0">
+               <children>
+                  <Label text="Assign Subjects" />
+                  <CheckComboBox fx:id="coursesCombo" prefHeight="38.0" prefWidth="377.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="462.0" spacing="10.0">
+               <children>
+                  <Label text="Assign Classes" />
+                  <CheckComboBox fx:id="classesCombo" prefHeight="38.0" prefWidth="377.0" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <HBox layoutX="287.0" layoutY="759.0" prefHeight="40.0" prefWidth="166.0" spacing="20.0">
+         <children>
+            <JFXButton fx:id="cancel" prefHeight="40.0" prefWidth="75.0" text="Cancel" />
+            <JFXButton fx:id="save" prefHeight="40.0" prefWidth="70.0" text="Save" />
+         </children>
+      </HBox>
+      <Label fx:id="errorLabel" layoutX="74.0" layoutY="110.0" prefHeight="26.0" prefWidth="418.0" textFill="#f20808" />
+   </children>
+</AnchorPane>

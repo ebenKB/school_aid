@@ -1,6 +1,7 @@
 package com.hub.schoolAid;
 
 import be.quodlibet.boxable.*;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.FileChooser;
@@ -26,7 +27,6 @@ public class PDFMaker {
         if(pdfMakerInstance == null) {
             pdfMakerInstance = new PDFMaker();
         }
-
         return pdfMakerInstance;
     }
 
@@ -75,6 +75,133 @@ public class PDFMaker {
         assessmentList.addAll(assessmentDao.getAssessment(students));
         this.designReport(reports);
         return pdDocument;
+    }
+
+    private void prepPageWidthHeader(PDPageContentStream pageContentStream, Float margin, Float yStart, PDRectangle mediaBox) {
+        try {
+            String schName = "THE FATHER'S MERCY SCHOOL";
+            String address = "Location: Sowutuom - Accra, Contact: ";
+            String heading = "TERMINAL REPORT";
+
+            float titleWidth = font.getStringWidth(schName) / 1000 * headerSize;
+            float titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * headerSize;
+
+            float startX = (mediaBox.getWidth() - titleWidth) / 2;
+            float startY = mediaBox.getHeight() - (margin + 10) - titleHeight;
+
+            pageContentStream.setFont(PDType1Font.HELVETICA, 14);
+            pageContentStream.beginText();
+            pageContentStream.newLineAtOffset(startX, startY); // start writing from this line
+            pageContentStream.showText(schName);
+            pageContentStream.endText();
+//            createCenterText("FEEDING REPORT", mediaBox, margin, pageContentStream );
+        } catch (Exception e) {
+
+        }
+    }
+
+    private void createCenterText(String text, PDRectangle mediaBox, Float margin, PDPageContentStream pageContentStream) {
+        try {
+            float titleWidth = font.getStringWidth(text) / 1000 * headerSize;
+            float titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * headerSize;
+            float startX = (mediaBox.getWidth() - titleWidth) / 2;
+            float startY = mediaBox.getHeight() - (margin + 10) - titleHeight;
+
+            // set the text
+            pageContentStream.beginText();
+            pageContentStream.newLineAtOffset(startX, startY - 20);
+            pageContentStream.showText(text);
+            pageContentStream.endText();
+        } catch (Exception e) {
+
+        }
+    }
+
+    private void createHeaderRow(Row<PDPage>headerRow, String text, Float width) {
+        Cell<PDPage> cell;
+        cell = headerRow.createCell(width, text);
+        cell.setAlign(HorizontalAlignment.CENTER);
+        cell.setValign(VerticalAlignment.MIDDLE);
+        cell.setFillColor(Color.lightGray);
+        cell.setTextColor(Color.BLACK);
+    }
+
+    public PDDocument createAttendanceReport(List<com.hub.schoolAid.Stage> stages) throws Exception {
+
+            PDDocument pdDocument = new PDDocument();
+            List<Student>  students;
+            StudentDao studentDao = new StudentDao();
+
+            // create a new page for every class
+            for(com.hub.schoolAid.Stage stage : stages) {
+                PDPage page = new PDPage(PDRectangle.A4);
+                PDRectangle mediaBox = page.getMediaBox();
+                pdDocument.addPage(page);
+
+                PDPageContentStream pdPageContentStream = new PDPageContentStream(pdDocument, page);
+
+                // set page margins
+                float margin = 20;
+                float yStartNewPage = mediaBox.getHeight() - margin;
+                float yStart = (yStartNewPage - 105);
+
+                //Set alignment and add school header
+                prepPageWidthHeader(pdPageContentStream, margin, yStart, mediaBox);
+                createCenterText("FEEDING REPORT FOR "+ stage.toString().toUpperCase(), mediaBox, margin, pdPageContentStream );
+
+                // fetch the records from the database
+                students = studentDao.getStudentFromClass(stage);
+                if (students.size() > 0) {
+                    // Display the records in a table
+                    float tableWidth = page.getMediaBox().getWidth() - (2 * margin);
+                    BaseTable baseTable = new BaseTable(yStart - 30, yStartNewPage, 20, tableWidth, (margin), pdDocument, page, true, true);
+                    Row<PDPage> headerRow = baseTable.createRow(30f);
+
+                    createHeaderRow(headerRow, "STUDENT", (float) 30);
+                    createHeaderRow(headerRow, "BALANCE", (float) 20);
+                    createHeaderRow(headerRow, "MON", (float) 10);
+                    createHeaderRow(headerRow, "TUE", (float) 10);
+                    createHeaderRow(headerRow, "WED", (float) 10);
+                    createHeaderRow(headerRow, "THUR", (float) 10);
+                    createHeaderRow(headerRow, "FRI", (float) 10);
+                    baseTable.addHeaderRow(headerRow);
+
+                    // create rows for the table
+                    for (Student s : students) {
+                        Row<PDPage> row = baseTable.createRow(24f);
+                        Cell<PDPage> cell;
+
+                        cell = row.createCell(30, s.getFirstname() == null ? " " : s.getFirstname() + " " + s.getLastname() + " " + s.getOthername());
+                        cell.setAlign(HorizontalAlignment.LEFT);
+                        cell.setValign(VerticalAlignment.MIDDLE);
+
+                        cell = row.createCell(20, String.valueOf(s.getAccount().getFeedingFeeCredit()));
+                        cell.setAlign(HorizontalAlignment.CENTER);
+                        cell.setValign(VerticalAlignment.MIDDLE);
+                        getEmptyPageCellForFeeding(row);
+                        getEmptyPageCellForFeeding(row);
+                        getEmptyPageCellForFeeding(row);
+                        getEmptyPageCellForFeeding(row);
+                        getEmptyPageCellForFeeding(row);
+                    }
+                    // draw the table
+                    baseTable.draw();
+                }
+                pdPageContentStream.close();
+            }
+
+
+//            savePDFToLocation(pdDocument);
+            return pdDocument;
+    }
+
+    private Cell<PDPage> getEmptyPageCellForFeeding(Row<PDPage> row) {
+        Cell<PDPage> cell;
+        cell = row.createCell(10, "");
+        cell.setAlign(HorizontalAlignment.LEFT);
+        cell.setValign(VerticalAlignment.MIDDLE);
+
+        return cell;
     }
 
     private void designReport(ObservableList<TerminalReport>reports) {
@@ -247,6 +374,7 @@ public class PDFMaker {
                     //Create Header Row
                     Row<PDPage> headerRow = baseTable.createRow(30f);
                     Cell<PDPage> cell;
+
                     cell = headerRow.createCell(30, "SUBJECT");
                     cell.setAlign(HorizontalAlignment.CENTER);
                     cell.setValign(VerticalAlignment.MIDDLE);
@@ -344,22 +472,30 @@ public class PDFMaker {
     }
 
     public static void savePDFToLocation(PDDocument pdDocument) {
-        try{
-            //choose a file location
-            FileChooser fileChooser =new FileChooser();
-            fileChooser.setInitialFileName("Report");
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files",".pdf"));
-            fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("PDF Files",".pdf"));
-            File file  = fileChooser.showSaveDialog(new Stage());
-            if(file!=null)
-                pdDocument.save(file);
-            pdDocument.close();
-        }catch (Exception e){
-            e.printStackTrace();
-            System.out.println("error while saving file ");
-        }
+//        try{
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+        //choose a file location
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
 
-
+                FileChooser fileChooser =new FileChooser();
+                fileChooser.setInitialFileName("Report");
+                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files",".pdf"));
+                fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("PDF Files",".pdf"));
+                File file  = fileChooser.showSaveDialog(new Stage());
+                if(file!=null)
+                    try {
+                        pdDocument.save(file);
+                        pdDocument.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+            }
+        });
     }
 
     public static  void createAttendanceReport (LocalDate from,LocalDate to,List<Attendance> attendanceList){
@@ -622,7 +758,6 @@ public class PDFMaker {
                 }
 
                 Row < PDPage > row6 = baseTable.createRow(30f);
-
                 cell = row6.createCell(bigSize,"TOTAL BILL");
                 cell.setAlign(HorizontalAlignment.LEFT);
                 cell.setValign(VerticalAlignment.MIDDLE);

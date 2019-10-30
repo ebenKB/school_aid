@@ -31,17 +31,24 @@
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
 <!--            jdbc:mysql://localhost/SchoolDB-->
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://remotemysql.com/p496rueDFN?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;useSSL=false" />
-            <property name="javax.persistence.jdbc.user" value="p496rueDFN" />
-            <property name="javax.persistence.jdbc.password" value="z4oZv2BKPc" />
+<!--            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://remotemysql.com/p496rueDFN?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;useSSL=false" />-->
+<!--            <property name="javax.persistence.jdbc.user" value="p496rueDFN" />-->
+<!--            <property name="javax.persistence.jdbc.password" value="z4oZv2BKPc" />-->
+
+<!--        <property name="javax.persistence.jdbc.url" value="jdbc:mysql://macosa.cuyyxlqvuu5h.us-east-2.rds.amazonaws.com/macosa?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;useSSL=false" />-->
+<!--        <property name="javax.persistence.jdbc.user" value="ebenkb" />-->
+<!--        <property name="javax.persistence.jdbc.password" value="FoqFqNCaWYvB31AvZBbQ" />-->
 
 <!--            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/schooldb?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;useSSL=false" />-->
 <!--            <property name="javax.persistence.jdbc.user" value="eben" />-->
 <!--            <property name="javax.persistence.jdbc.password" value="thishubkbs*" />-->
 
+                <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/schooldb?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;useSSL=false" />
+                <property name="javax.persistence.jdbc.user" value="root" />
+                <property name="javax.persistence.jdbc.password" value="thishubkbs*" />
 
             <property name="hibernate.show_sql" value="true" />
-<!--            <property name="hibernate.hbm2ddl.auto" value="update" />-->
+            <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="javax.persistence.jdbc.dialect" value="org.hibernate.dialect.MySQL55Dialect"/>
             <property name="hibernate.connection.provider_class" value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider" />
             <property name="hibernate.hikari.minimumIdle" value="5" />
@@ -49,8 +56,7 @@
             <property name="hibernate.hikari.idleTimeout" value="120000" />
             <property name="hibernate.hikari.LeakDetectionThreshold" value="60000"/>
             <property name="hibernate.hikari.connectionTimeout" value="30000"/>
-<!--            <property name="hibernate.physical_naming_strategy" value="hibernate.implicit_naming_strategy" />-->
-<!--            <property name="hibernate.physical_naming_strategy" value="com.huongdanjava.jpa.PhysicalNamingStrategyImpl" />-->
+            <property name="hibernate.physical_naming_strategy" value="com.hub.schoolAid.PhysicalNamingStrategyImpl" />
         </properties>
     </persistence-unit>
 </persistence>

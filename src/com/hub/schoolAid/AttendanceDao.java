@@ -38,7 +38,7 @@ public class AttendanceDao  {
      try{
         em=HibernateUtil.getEntityManager();
         HibernateUtil.begin();
-        return em.createQuery("from Attendance order by date DESC ").getResultList();
+        return em.createQuery("from attendance  order by date DESC ").getResultList();
     }catch (PersistenceException p){
         p.printStackTrace();
         return null;
@@ -53,7 +53,7 @@ public class AttendanceDao  {
         try{
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
-            return em.createQuery("from Attendance  A where A.date like ? order by  A.student.firstname asc").setParameter(0,date).getResultList();
+            return em.createQuery("from attendance  A where A.date like ? order by  A.student.firstname asc").setParameter(0,date).getResultList();
         }catch (Exception e){
             return  null;
         }finally {
@@ -65,7 +65,7 @@ public class AttendanceDao  {
         try{
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
-            return em.createQuery("from Attendance  A where A.student.stage.name like ? order by  A.student.firstname asc").setParameter(0,stage.getName()).getResultList();
+            return em.createQuery("from attendance  A where A.student.stage.name like ? order by  A.student.firstname asc").setParameter(0,stage.getName()).getResultList();
         }catch (Exception e){
             return  null;
         }finally {
@@ -77,7 +77,7 @@ public class AttendanceDao  {
         try{
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
-            return em.createQuery("from Attendance A where A.student.id =? order by date desc ").setParameter(0,s).getResultList();
+            return em.createQuery("from attendance A where A.student.id =? order by date desc ").setParameter(0,s).getResultList();
         }catch (Exception e){
             return null;
         }
@@ -87,7 +87,7 @@ public class AttendanceDao  {
         try{
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
-            return em.createQuery("from Attendance where '"+date+"' like '"+date+"' order by feedingFee desc ").getResultList();
+            return em.createQuery("from attendance where '"+date+"' like '"+date+"' order by feedingFee desc ").getResultList();
         }catch (Exception e){
             return null;
         }

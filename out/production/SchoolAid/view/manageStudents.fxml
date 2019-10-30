@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="809.0" prefWidth="1212.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageStudentController">
    <children>
@@ -15,6 +16,7 @@
         <columns>
           <TableColumn fx:id="checkStudents" maxWidth="100.0" minWidth="70.0" prefWidth="59.0" />
           <TableColumn fx:id="stdNameCol" minWidth="0.0" prefWidth="310.0" text="STUDENT" />
+            <TableColumn fx:id="stage" prefWidth="122.0" text="Stage" />
         </columns>
       </TableView>
       <Text fill="#fcfcfc" layoutX="469.0" layoutY="69.203125" strokeType="OUTSIDE" strokeWidth="0.0" text="MANAGE STUDENTS" textAlignment="CENTER" wrappingWidth="261.11767578125" AnchorPane.leftAnchor="469.0" AnchorPane.rightAnchor="482.0" AnchorPane.topAnchor="46.0">
@@ -22,9 +24,22 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <Pane layoutX="787.0" layoutY="86.0" prefHeight="49.0" prefWidth="419.0" AnchorPane.bottomAnchor="674.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="86.0">
+      <HBox layoutX="815.0" layoutY="60.0" prefHeight="23.0" prefWidth="313.0" spacing="10.0">
          <children>
-            <Button fx:id="promoteStudent" layoutY="11.0" mnemonicParsing="false" text="Promote Student" />
+            <Button fx:id="promoteStudent" disable="true" mnemonicParsing="false" prefHeight="23.0" prefWidth="109.0" text="Promote " />
+            <Button fx:id="demoteStudent" disable="true" mnemonicParsing="false" text="Demote " />
+            <Button fx:id="setNewClass" disable="true" mnemonicParsing="false" prefHeight="23.0" prefWidth="90.0" text="Set Class" />
+         </children>
+      </HBox>
+      <Pane fx:id="optionsPane" layoutX="787.0" layoutY="86.0" prefHeight="650.0" prefWidth="328.0" visible="false" AnchorPane.bottomAnchor="73.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="86.0">
+         <children>
+            <ListView fx:id="classListView" layoutX="-6.0" layoutY="54.0" prefHeight="534.0" prefWidth="335.0" />
+            <HBox layoutX="127.0" layoutY="604.0" spacing="20.0">
+               <children>
+                  <Button fx:id="cancelUpdate" mnemonicParsing="false" prefHeight="28.0" prefWidth="82.0" text="Cancel" />
+                  <Button fx:id="updateClass" disable="true" mnemonicParsing="false" prefHeight="28.0" prefWidth="82.0" text="Save" />
+               </children>
+            </HBox>
          </children>
       </Pane>
       <Button fx:id="cancel" layoutX="946.0" layoutY="756.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="82.0" text="Cancel" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="184.0" />

@@ -30,21 +30,22 @@ public class Student {
 
     //constructors
     public Student(){
-
-        isSelected = false;
+        setSelected(false);
+        setDeleted(false);
     }
 
     public Student(Student student){
        this.setFirstname(student.getFirstname());
        this.setStage(student.getStage());
         isSelected = false;
+        setDeleted(false);
     }
 
-    @OneToOne(orphanRemoval = true,cascade = CascadeType.ALL)
+    @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
     private Parent parent;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "class_id")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
+//    @JoinColumn(name = "class_id")
     private Stage stage;
 
     @OneToOne(orphanRemoval = true,cascade = CascadeType.ALL)
@@ -55,18 +56,24 @@ public class Student {
     private FeedingStatus feedingStatus = FeedingStatus.DAILY;
 
     //a student has several attendance
-    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Attendance> attendance;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL,orphanRemoval = true)
     private Set <AttendanceTemporary> attendanceTemporary;
 
+    // every student has a terminal report
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true, orphanRemoval=true)
+    private TerminalReport terminalReport;
+
     @Transient
     private Boolean isSelected;
 
+    private Boolean isDeleted = false;
+
     // a student can have many assessments assigned to them
-//    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set <Assessment> assessments;
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set <Assessment> assessments;
 
     //getters and setters
 
@@ -142,7 +149,23 @@ public class Student {
         return Id;
     }
 
-//    public List<Sales> getSales() {
+    public TerminalReport getTerminalReport() {
+        return terminalReport;
+    }
+
+    public void setTerminalReport(TerminalReport terminalReport) {
+        this.terminalReport = terminalReport;
+    }
+
+    public Set<Assessment> getAssessments() {
+        return assessments;
+    }
+
+    public void setAssessments(Set<Assessment> assessments) {
+        this.assessments = assessments;
+    }
+
+    //    public List<Sales> getSales() {
 //        return sales;
 //    }
 //
@@ -188,6 +211,14 @@ public class Student {
 
     public void setSelected(Boolean selected) {
         isSelected = selected;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 
     //        public String getImage() {
@@ -244,11 +275,20 @@ public class Student {
     }
 
     public Boolean debitFeedingAccount(Double amnt){
-       this.getAccount().setFeedingFeeCredit(this.getAccount().getFeedingFeeCredit()-amnt);
+       this.getAccount().setFeedingFeeCredit(this.getAccount().getFeedingFeeCredit() - amnt);
        return  true;
     }
 
-    public Boolean addNewFeedingFeeCredit(Double amnt){
+    public Boolean updateFeedingAccount(Double amount) {
+        try {
+            this.getAccount().setFeedingFeeCredit(this.getAccount().getFeedingFeeCredit() + amount);
+            return true;
+        } catch (Exception e) {
+            return  false;
+        }
+    }
+
+    public Boolean addNewFeedingFeeCredit(Double amnt) {
        try{
            this.getAccount().setFeedingFeeCredit(this.getAccount().getFeedingFeeCredit() + amnt);
            /**

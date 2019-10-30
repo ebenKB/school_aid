@@ -25,7 +25,7 @@
                            <children>
                               <TableView fx:id="reportTableView" layoutX="158.0" layoutY="50.0" prefHeight="431.0" prefWidth="696.0" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
                                 <columns>
-                                    <TableColumn fx:id="checkStudent" maxWidth="800.0" prefWidth="30.0" />
+                                    <TableColumn fx:id="checkStudents" maxWidth="800.0" prefWidth="30.0" />
                                   <TableColumn fx:id="stdNameCol" prefWidth="256.0" text="STUDENT" />
                                     <TableColumn fx:id="classCol" maxWidth="120.0" minWidth="100.0" prefWidth="120.0" text="CLASS" />
                                   <TableColumn fx:id="remarkCol" prefWidth="139.0" text="HEADMISSTRESS'S REMARK" />

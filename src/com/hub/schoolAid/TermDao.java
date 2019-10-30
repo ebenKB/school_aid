@@ -12,9 +12,10 @@ import java.util.List;
 
 public class TermDao {
     Term term =new Term();
+    private static LocalDate currentDate;
 
     private Session session;
-    EntityManager em;
+    static EntityManager em;
 
     public Boolean createTerm(Term term) throws HibernateException {
        try {
@@ -66,22 +67,28 @@ public class TermDao {
         try{
             return (Term) em.createQuery("from Term where status =  1 ").getSingleResult();
         }catch (Exception e){
+            HibernateUtil.close();
             return  null;
         }finally {
 //            em.close();
         }
     }
 
-    public LocalDate getCurrentDate(){
-        try {
-            em=HibernateUtil.getEntityManager();
-            HibernateUtil.begin();
-            return  ((LocalDate) em.createQuery("SELECT today FROM Term where status=1").getSingleResult());
-        }catch (NoResultException e){
-            return null;
-        }finally {
-            em.close();
+    public static LocalDate getCurrentDate(){
+        if (currentDate == null) {
+            System.out.println("Going to the database");
+            try {
+                em=HibernateUtil.getEntityManager();
+                HibernateUtil.begin();
+                currentDate = ((LocalDate) em.createQuery("SELECT today FROM Term where status=1").getSingleResult());
+            }catch (NoResultException e){
+                return null;
+            }finally {
+                em.close();
+            }
         }
+        System.out.println("Not returning from the databse");
+        return currentDate;
     }
 
     public Boolean updateCurrentDate(LocalDate date){

@@ -2,16 +2,25 @@ package com.hub.schoolAid;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import controller.LoginFormController;
+import controller.SchFeesSummaryController;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class Utils {
     public static String  studentImgPath = "assets/students/";
@@ -65,33 +74,51 @@ public class Utils {
         return alert.showAndWait();
     }
 
-    public  static void addCheckBoxToTable(TableView tableView, TableColumn column, CheckBox checkBox) {
-        Callback<TableColumn<TerminalReport, Void>, TableCell<TerminalReport, Void>> cellFactory = new Callback<TableColumn<TerminalReport, Void>, TableCell<TerminalReport, Void>>() {
-            @Override
-            public TableCell<TerminalReport, Void> call(final TableColumn<TerminalReport, Void> param) {
-                TableCell<TerminalReport, Void> cell = new TableCell<TerminalReport, Void >() {
-//                    CheckBox check = new CheckBox("");
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
+    public static  void showSummaryForm(Student student) {
+        javafx.scene.Parent root;
+        FXMLLoader fxmlLoader = new FXMLLoader(Utils.class.getResource("/view/schFeesSummary.fxml"));
+        try {
+            root = fxmlLoader.load();
+            SchFeesSummaryController controller = fxmlLoader.getController();
+            controller.init(student);
+            Scene scene = new Scene(root);
+            javafx.stage.Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        } catch (Exception e) {
+            return;
+        }
+    }
 
-                        if(empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(checkBox);
-                            // check if the check box has to be activated or not
-                            if (param.getTableView().getItems().get(getIndex()).isSelected()) {
-                                checkBox.setSelected(true);
-                            } else {
-                                checkBox.setSelected(false);
-                            }
-                        };
-                    }
-                };
-                return cell;
-            }
-        };
-        column.setCellFactory(cellFactory);
+    public static void searchByNaame(TextField textField, FilteredList filteredList, SortedList sortedList, TableView tableView) {
+        textField.textProperty().addListener(((observable, oldValue, newValue) -> {
+            filteredList.setPredicate( (Predicate< ? super  AttendanceTemporary>) at ->{
+                if( newValue == null || newValue.isEmpty() ) {
+                    return  true;
+                }
+                String lowerVal = newValue.toLowerCase();
+                return  checkIfStudent(lowerVal, at.getStudent());
+            });
+        }));
+        sortedList.comparatorProperty().bind(tableView.comparatorProperty());
+        tableView.setItems(sortedList);
+    }
+
+    public static boolean checkIfStudent(String lowerVal, Student student) {
+        if(student.getFirstname().toLowerCase().contains(lowerVal)){
+            return true;
+        }else if(student.getLastname().toLowerCase().contains(lowerVal)){
+            return true;
+        }else if(student.getOthername().toLowerCase().contains(lowerVal)){
+            return true;
+        }else if (student.toString().trim().replace(" ","").toLowerCase().contains(lowerVal.trim().replace(" ",""))){
+            return true;
+        }else if (student.getStage().getName().trim().replace(" ","").toLowerCase().contains(lowerVal.trim().replace(" ",""))){
+            return true;
+        }
+        return false;
     }
  }
 

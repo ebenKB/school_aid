@@ -229,7 +229,7 @@
                                  </accelerator>
                               </MenuItem>
                               <MenuItem fx:id="viewAllClasses" mnemonicParsing="false" text="View All Classes" />
-                              <MenuItem mnemonicParsing="false" text="Edit Class" />
+                              <MenuItem fx:id="editStage" mnemonicParsing="false" text="Edit Class" />
                               <MenuItem mnemonicParsing="false" text="Remove Class" />
                            </items>
                            <graphic>
@@ -253,7 +253,7 @@
                               </ImageView>
                            </graphic>
                         </MenuButton>
-                        <MenuButton graphicTextGap="10.0" layoutX="5.0" layoutY="110.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="186.0" text="SALES &amp; PAYMENT">
+                        <MenuButton graphicTextGap="10.0" layoutX="5.0" layoutY="110.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="186.0" text="PAYMENT">
                            <items>
                               <MenuItem fx:id="newSale" mnemonicParsing="false" text="Sell an item">
                                  <accelerator>
@@ -267,7 +267,8 @@
                                     </ImageView>
                                  </graphic>
                               </MenuItem>
-                              <MenuItem fx:id="newPayment" mnemonicParsing="false" text="Payment/Attendance">
+                              <MenuItem fx:id="salesOverview" mnemonicParsing="false" text="Sales Overview" />
+                              <MenuItem fx:id="newPayment" mnemonicParsing="false" text="Payment/Feeding">
                                  <graphic>
                                     <ImageView fitHeight="35.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -336,6 +337,12 @@
                               <MenuItem fx:id="generalAccount" mnemonicParsing="false" text="General Account" />
                             <MenuItem mnemonicParsing="false" text="Action 1" />
                             <MenuItem mnemonicParsing="false" text="Action 2" />
+                          </items>
+                        </MenuButton>
+                        <MenuButton mnemonicParsing="false" prefHeight="44.0" prefWidth="183.0" text="STAFF">
+                          <items>
+                            <MenuItem fx:id="create_staff" mnemonicParsing="false" text="Create new" />
+                            <MenuItem fx:id="view_staff" mnemonicParsing="false" text="View all" />
                           </items>
                         </MenuButton>
                      </children>

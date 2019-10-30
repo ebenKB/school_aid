@@ -80,4 +80,10 @@ public class Sales {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        String msg = this.getItem().getName() + " for "+ this.getStudent().toString();
+        return msg;
+    }
 }

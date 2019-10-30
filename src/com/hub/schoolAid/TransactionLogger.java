@@ -10,12 +10,12 @@ public class TransactionLogger {
 
     }
 
-    public TransactionLogger(Long student_id,String description, String paidBy, LocalDate date, Double amount){
+    public TransactionLogger(Long transactionId_id,String description, String paidBy, LocalDate date, Double amount){
         this.setDescription(description);
         this.setPaidBy(paidBy);
         this.setAmount(amount);
         this.setDate(date);
-        this.setStudent_id(student_id);
+        this.setTransactionId(transactionId_id);
     }
 
     @Id
@@ -25,7 +25,8 @@ public class TransactionLogger {
     private LocalDate date;
     private String Description;
     private String paidBy;
-    private Long Student_id;
+//    private Long Student_id;
+    private Long TransactionId; // refers to the unique id for the item that has been saved into the database.
 
     @Enumerated(EnumType.STRING)
     private TransactionType transactionType;
@@ -78,13 +79,27 @@ public class TransactionLogger {
         this.paidBy = paidBy;
     }
 
-    public Long getStudent_id() {
-        return Student_id;
+//    public Long getStudent_id() {
+//        return Student_id;
+//    }
+
+    public Long getTransactionId() {
+        return TransactionId;
     }
 
+    public void setTransactionId(Long transactionId) {
+        TransactionId = transactionId;
+    }
+
+//    public void setStudent_id(Long student_id) {
+//        Student_id = student_id;
+//    }
 
 
-    public void setStudent_id(Long student_id) {
-        Student_id = student_id;
+    @Override
+    public String toString() {
+        return this.getDescription()+ ","+ "with an amount of"+ this.getAmount() ;
     }
 }
+
+

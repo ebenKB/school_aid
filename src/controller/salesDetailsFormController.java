@@ -38,6 +38,7 @@ import javafx.util.Duration;
 import javafx.util.Pair;
 import org.hibernate.HibernateException;
 
+import javax.rmi.CORBA.Util;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -124,6 +125,12 @@ public class salesDetailsFormController implements Initializable{
     private MenuItem paySchoolFees;
 
     @FXML
+    private MenuItem schFeesSummary;
+
+    @FXML
+    private MenuItem feesSummary;
+
+    @FXML
     public TableColumn<AttendanceTemporary, String> studentNameCol;
 
     @FXML
@@ -199,7 +206,7 @@ public class salesDetailsFormController implements Initializable{
     @FXML
     private BarChart<?, ?> chart;
 
-    private Student student =new Student();
+    private Student student = new Student();
     public StudentDao studentDao =new StudentDao();
     private SalesDao salesDao =new SalesDao();
     private TermDao termDao   =new TermDao();
@@ -220,38 +227,15 @@ public class salesDetailsFormController implements Initializable{
     private SimpleIntegerProperty presentCounter= new SimpleIntegerProperty();
 
     public void populateStudentTable(){
+        if (attendanceTemporaries.isEmpty())
+            return;
+
         try {
             tagCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getStudent().getPayFeeding() ? "YES":"NO"));
 
             owing.setCellValueFactory(param -> {
                 return  new SimpleStringProperty(String.valueOf(param.getValue().getStudent().getAccount().getFeedingFeeCredit()));
             });
-
-//            owing.setCellFactory(column -> new TableCell<AttendanceTemporary, String>() {
-//                @Override
-//                protected void updateItem(String bal, boolean empty) {
-//                    super.updateItem(bal, empty);
-//
-//                    setText(empty ? "" : getItem().toString());
-//                    setGraphic(null);
-//
-//                    TableRow<AttendanceTemporary> currentRow = getTableRow();
-//
-//                    if (!isEmpty()  && !currentRow.isEmpty()) {
-//                        if(Double.valueOf(bal)<0 )
-//                            currentRow.setStyle("-fx-background-color:#ff6a51");
-//                        else if(Double.valueOf(bal)>0 ){
-//                            currentRow.setStyle("-fx-background-color:#0ecc31");
-//                        }
-//                        else {
-//                            currentRow.setStyle("");
-////                            currentRow.setStyle("-fx-background-color:#fff");
-//                        }
-//                    }else {
-//                        currentRow.setStyle("");
-//                    }
-//                }
-//            });
 
             feedingType.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getStudent().getFeedingStatus().toString()));
 
@@ -261,8 +245,7 @@ public class salesDetailsFormController implements Initializable{
             feeding.setCellValueFactory(param -> {
                 if( !param.getValue().getStudent().getPayFeeding())
                     return new SimpleStringProperty("0");
-//            else if (param.getValue().getStudent().getAccount().getFeedingFeeCredit()>0 || param.getValue().getStudent().getFeedingStatus().equals(Student.FeedingStatus.PERIODIC))
-//                return  new SimpleStringProperty("0");
+
                 return new SimpleStringProperty(param.getValue().getFeedingFee()>0 ? param.getValue().getFeedingFee().toString():param.getValue().getStudent().getStage().getFeeding_fee().toString());
 
             });
@@ -284,14 +267,14 @@ public class salesDetailsFormController implements Initializable{
 
             addButtonToTable(actionCol);
             studentTableView.setItems(attendanceTemporaries);
-            applyTableStyle();
+            applyTableStyle(balCol);
             Double total = 0.0;
             Double debt = 0.0;
             Double credit = 0.0;
 
             //update the present counter
             presentCounter.setValue(0);
-            for(AttendanceTemporary at: attendanceTemporaries){
+            for(AttendanceTemporary at: attendanceTemporaries) {
                 if(at.isPresent()){
                     presentCounter.set(presentCounter.getValue()+1);
                     if(at.hasPaidNow()){
@@ -309,8 +292,8 @@ public class salesDetailsFormController implements Initializable{
             }
             totalFeeding.setText(total.toString());
         }catch (Exception e){
-//            e.printStackTrace();
-            Notification.getNotificationInstance().notifyError("An error occurred while preparing the table data","Error in Table field");
+            e.printStackTrace();
+//            Notification.getNotificationInstance().notifyError("An error occurred while preparing the table data","Error in Table field");
         }
     }
     /**
@@ -318,7 +301,7 @@ public class salesDetailsFormController implements Initializable{
      * @param btn the button that we want to hide or show
      * @param index the table row at which the item is located
      */
-    private void toggleButton(Button btn, int index){
+    private void toggleButton(Button btn, int index) {
         if(btn.getGraphic() ==null){
             imageView  = new ImageView(successImg);
 //            attendanceData.add(studentTableView.getItems().get(index));
@@ -357,6 +340,7 @@ public class salesDetailsFormController implements Initializable{
                     //create radio buttons
                     private  RadioButton paid= new RadioButton("PAY TODAY");
                     private  RadioButton payLater = new RadioButton("PAY LATER");
+
                     private  ToggleGroup payment = new ToggleGroup();
                     private  VBox vBox=new VBox();
 
@@ -366,6 +350,7 @@ public class salesDetailsFormController implements Initializable{
                     public HBox hBox   = new HBox();
 
                     {
+
                         btn.setOnAction((ActionEvent event) -> {
                             if(payment.getSelectedToggle()==null){
                                 Alert alert =new Alert(Alert.AlertType.INFORMATION,"",ButtonType.OK);
@@ -624,7 +609,7 @@ public class salesDetailsFormController implements Initializable{
         try {
             root=fxmlLoader.load();
             newAttendanceSheetController controller = fxmlLoader.getController();
-            controller.init(this);
+            controller.initCashController(this, FeedingType.CASH);
 
             Scene scene = new Scene(root);
             javafx.stage.Stage stage = new javafx.stage.Stage();
@@ -639,15 +624,29 @@ public class salesDetailsFormController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1.5));
+            pauseTransition.setOnFinished(event -> {
+                //CHECK IF TODAY IS A NEW DAY - show the form to create a new attendance sheet
+                if( ! termDao.getCurrentTerm().getToday().equals(LocalDate.now())){
+                    showCreateAttendaceForm();
 
-        PauseTransition pauseTransition = new PauseTransition(Duration.seconds(3));
-        pauseTransition.setOnFinished(event -> {
-            //show the form to create a new attendance sheet
-            if( ! termDao.getCurrentTerm().getToday().equals(LocalDate.now())){
-                showCreateAttendaceForm();
-            }
-        });
-        pauseTransition.play();
+                    // check if today is not SATURDAY OR SUNDAY
+                    LocalDate date = termDao.getCurrentTerm().getToday();
+                    System.out.println("This is the day of the week "+ date.getDayOfWeek().toString());
+                    if(date.getDayOfWeek().toString().toLowerCase().equals("sunday") || date.getDayOfWeek().toString().toLowerCase().equals("saturday")){
+                        showCreateAttendaceForm();
+                    } else {
+                        System.out.println("We have to create a new attendance sheet for the system..");
+                    }
+                }
+            });
+            pauseTransition.play();
+        } catch (NullPointerException n) {
+            Notification.getNotificationInstance().notifyError("If this error continues, contact your system administrator", "Fatal");
+        } catch (Exception e) {
+            Notification.getNotificationInstance().notifyError("Sorry! an error occurred", "System error");
+        }
 
         //show the total number of students present
         presentCounter.addListener((observable, oldValue, newValue) -> {
@@ -657,7 +656,7 @@ public class salesDetailsFormController implements Initializable{
 
         radioToggle.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             infoLabel.setText("");
-            if(newValue==salesRadio){
+            if(newValue==salesRadio) {
                 showSalesTable();
             }else{
                 showAttendanceTable();
@@ -820,10 +819,12 @@ public class salesDetailsFormController implements Initializable{
                 showCreateAttendaceForm();
         });
 
+
+        // apply custom style to the table
         sortedList.addListener(new ListChangeListener<AttendanceTemporary>() {
             @Override
             public void onChanged(Change<? extends AttendanceTemporary> c) {
-                applyTableStyle();
+                applyTableStyle(balCol);
             }
         });
 
@@ -848,6 +849,15 @@ public class salesDetailsFormController implements Initializable{
             if(feedingCheck.isSelected()){
                 totalFeeding.setVisible(true);
             }else totalFeeding.setVisible(false);
+        });
+
+        schFeesSummary.setOnAction(event -> Utils.showSummaryForm(student));
+
+        feesSummary.setOnAction(event -> Utils.showSummaryForm(student));
+
+        // show feeding fee summary when the user selects the feeding fee radio button
+        attendanceRadio.setOnAction(event -> {
+            totalFeedingPane.setVisible(true);
         });
     }
 
@@ -890,8 +900,8 @@ public class salesDetailsFormController implements Initializable{
         }
     }
 
-    private void applyTableStyle() {
-        owing.setCellFactory(column -> new TableCell<AttendanceTemporary, String>() {
+    public void applyTableStyle(TableColumn col) {
+        col.setCellFactory(column -> new TableCell<AttendanceTemporary, String>() {
             @Override
             protected void updateItem(String bal, boolean empty) {
             super.updateItem(bal, empty);
@@ -902,16 +912,18 @@ public class salesDetailsFormController implements Initializable{
             TableRow<AttendanceTemporary> currentRow = getTableRow();
 
             if (!isEmpty()  && !currentRow.isEmpty()) {
-                if(Double.valueOf(bal)<0 )
-                    currentRow.setStyle("-fx-background-color:#ff6a51");
+                if(Double.valueOf(bal) < 0 )
+                    currentRow.setStyle("-fx-background-color:#ffcccb");
+//                currentRow.getStyle().concat("-fx-background-color:#ffcccb");
                 else if(Double.valueOf(bal) > 0 ){
-                    currentRow.setStyle("-fx-background-color:#0ecc31");
+                    currentRow.setStyle("-fx-background-color:#d2f8d2");
+//                    currentRow.getStyle().concat("-fx-background-color:#ffcccb");
                 }
                 else {
-                    currentRow.setStyle("");
+                    currentRow.setStyle("-fx-background-color:#fff");
                 }
             } else {
-                currentRow.setStyle("");
+                currentRow.setStyle("-fx-background-color:#fff");
             }
             }
         });
@@ -948,7 +960,7 @@ public class salesDetailsFormController implements Initializable{
         });
     }
 
-    private void activateSearch() {
+    public void activateSearch() {
         if(attendanceRadio.isSelected()) {
             name.textProperty().addListener(((observable, oldValue, newValue) -> {
                 filteredAtt.setPredicate( (Predicate < ? super  AttendanceTemporary>) at ->{
@@ -1018,7 +1030,7 @@ public class salesDetailsFormController implements Initializable{
                         protected Object call() {
                         salesDao.payForSales(sales, Double.valueOf(result.get()));
                         sales.setAmountPaid((sales.getAmountPaid()+Double.valueOf(result.get())));
-                        TransactionLoggerDao.getTransactionLoggerDaoInstance().LogTransaction(sales.getStudent().getId(), sales.getStudent().toString(), description, sales.getAmountPaid(), TransactionType.SALES);
+                        TransactionLoggerDao.getTransactionLoggerDaoInstance().LogTransaction(sales.getId(), sales.getStudent().toString(), description, sales.getAmountPaid(), TransactionType.SALES);
 
                         return null;
                         }

@@ -1,22 +1,20 @@
 package controller;
 
-import com.hub.schoolAid.Utils;
+import com.hub.schoolAid.*;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import com.hub.schoolAid.Stage;
-import com.hub.schoolAid.StageDao;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class classListController implements Initializable{
@@ -34,6 +32,9 @@ public class classListController implements Initializable{
 
     @FXML
     private TableColumn<Stage, Double> feedingCol;
+
+    @FXML
+    private MenuItem autoUpdateClassSize;
 
     @FXML
     private JFXButton close;
@@ -84,6 +85,30 @@ public class classListController implements Initializable{
         populateClassListTableView();
        close.setOnAction(e->{
            Utils.closeEvent(e);
+       });
+
+       autoUpdateClassSize.setOnAction(event -> {
+           Alert alert = new Alert(Alert.AlertType.INFORMATION, "",ButtonType.OK, ButtonType.CANCEL);
+           alert.setTitle("Synchronize Class size");
+           alert.setContentText("Use this tool if you feel there is an error in the class size. \n It will check the various classes and update the number on row.\n If you want to continue to press OK");
+           Optional<ButtonType> result = alert.showAndWait();
+           if(result.isPresent() && result.get() == ButtonType.OK) {
+               Task task = new Task() {
+                   @Override
+                   protected Object call() throws Exception {
+                       StageDao stageDao = new StageDao();
+                       stageDao.syncNumberOnRow();
+                       return null;
+                   }
+               };
+               task.setOnRunning(event1 -> MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Synchronizing class size"));
+               task.setOnSucceeded(event1 -> {
+                   MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+                   Notification.getNotificationInstance().notifySuccess("Class size has been updated automatically", "Success");
+               });
+               task.setOnFailed(event1 -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+               new Thread(task).start();
+           }
        });
     }
 }

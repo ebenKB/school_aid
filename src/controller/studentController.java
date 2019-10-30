@@ -179,11 +179,14 @@ public class studentController implements Initializable{
         }
     }
     private void populateCombo(){
-        customizeCombobox();
         StageDao stageDao = new StageDao();
         List<Stage> list =stageDao.getGetAllStage();
-        for(Stage s:list){
-            classCombo.getItems().add(s);
+
+        if (list != null) {
+            customizeCombobox();
+            for(Stage s:list){
+                classCombo.getItems().add(s);
+            }
         }
     }
 
@@ -454,7 +457,12 @@ public class studentController implements Initializable{
         if(occupation !=null){
             parent.setOccupation(occupation.getText().trim().toUpperCase());
         }
-        parent.setAddress(homeaddress);
+
+        // check if there is an address for the parent
+        if (homeaddress.getLandmark().length() > 0 || homeaddress.getHomeAddress().length() > 0) {
+            parent.setAddress(homeaddress);
+        }
+
         student.setParent(parent);
 
         StudentAccount account =new StudentAccount();
@@ -611,18 +619,18 @@ public class studentController implements Initializable{
                     clearParentField();
                 }
             });
-            back.setOnAction(event->stage.close());
+            back.setOnAction(event -> stage.close());
         }
     }
 
-    private void saveRecords(){
+    private void saveRecords() {
         Task save = new Task() {
             @Override
             protected Object call() {
                 try {
                     studentDao =new StudentDao();
                     studentDao.addNewStudent(student,details);
-                }catch (Exception e){
+                } catch (Exception e){
                     notification.notifyError("Sorry! an error occurred.","Error");
                 }
                 return null;
@@ -645,13 +653,15 @@ public class studentController implements Initializable{
             if(result.isPresent() && result.get() == ButtonType.YES)
                 clearParentField();
 
+            // create an attendance for the new student
             Task checkin = new Task() {
                 @Override
                 protected Object call() throws Exception {
                     TermDao term =new TermDao();
+                    LocalDate date = LocalDate.now();
                     if (term.getCurrentDate().equals(LocalDate.now())){
-                    AttendanceTemporaryDao dao = new AttendanceTemporaryDao();
-                    dao.checkStudenIn(student);
+                        AttendanceTemporaryDao dao = new AttendanceTemporaryDao();
+                        dao.checkStudenIn(student, date);
                     }
                     return null;
                 }

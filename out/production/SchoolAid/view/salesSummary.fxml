@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="709.0" prefWidth="999.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SalesSummaryController">
+   <children>
+      <Pane fx:id="root" prefHeight="67.0" prefWidth="999.0">
+         <children>
+            <Text fill="#f80101" layoutX="850.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sales overview" />
+            <TextField fx:id="search" focusTraversable="false" layoutX="5.0" layoutY="20.0" prefHeight="31.0" prefWidth="293.0" promptText="enter item or student name to search" />
+         </children>
+      </Pane>
+      <SplitPane dividerPositions="0.320962888665998" layoutX="14.0" layoutY="68.0" prefHeight="641.0" prefWidth="999.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="68.0">
+        <items>
+          <AnchorPane fx:id="root" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ListView fx:id="salesListView" focusTraversable="false" layoutX="-14.0" layoutY="32.0" prefHeight="639.0" prefWidth="293.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children></AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ListView fx:id="saleDetailsListview" focusTraversable="false" prefHeight="641.0" prefWidth="444.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="0.0" />
+                  <VBox layoutX="453.0" layoutY="69.0" spacing="30.0" AnchorPane.bottomAnchor="203.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="69.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="43.0" text="Total" />
+                              <Label fx:id="itemCost" alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="121.0" textFill="#0ec31d">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <VBox>
+                           <children>
+                              <Label prefHeight="31.0" prefWidth="154.0" text="Total Amount Paid" />
+                              <TextField fx:id="totalPaid" alignment="CENTER_RIGHT" editable="false" focusTraversable="false" prefHeight="46.0" prefWidth="211.0" />
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label prefHeight="31.0" prefWidth="154.0" text="Balance" />
+                              <TextField fx:id="balance" alignment="CENTER_RIGHT" editable="false" focusTraversable="false" prefHeight="46.0" prefWidth="211.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <Button fx:id="close" focusTraversable="false" layoutX="611.0" layoutY="587.0" mnemonicParsing="false" text="Close" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="9.0" />
+               </children></AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

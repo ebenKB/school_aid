@@ -1,9 +1,15 @@
 package com.hub.schoolAid;
 
+import com.github.cliftonlabs.json_simple.JsonObject;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import jdk.nashorn.internal.parser.JSONParser;
 
 import javax.persistence.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +25,10 @@ public class HibernateUtil {
     public static Boolean initDB() {
         try
         {
-            Map map =new HashMap();
+//            readFile();
+            // read database properties from the file
+            Map map = new HashMap();
+//            map.put("javax.persistence.jdbc.user", "");
 //            map.put("javax.persistence.jdbc.password", "thishubkbs*");
             factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
             new UserDao().createDefaultAdmin();
@@ -35,16 +44,42 @@ public class HibernateUtil {
         }
     }
 
+    private static void readFile(){
+        System.out.println("Reading file");
+       try {
+           FileReader fileReader = new FileReader("src/database.properties");
+           String line = null;
+
+           // wrap the file reader in a buffered reader
+           BufferedReader bufferedReader = new BufferedReader(fileReader);
+           while((line = bufferedReader.readLine()) != null) {
+               System.out.println("Reading file" + line);
+           }
+
+           bufferedReader.close();
+       } catch (IOException e) {
+        e.printStackTrace();
+       }
+    }
+
+    public static  void readFileAsJson() {
+       try {
+           FileReader fileReader = new FileReader("");
+
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+    }
+
     public static EntityManager getEntityManager(){
 //        if(em != null){
 //            em.close();
-//            em = null;
 //        }
         em = factory.createEntityManager();
         return em;
     }
 
-    public static void begin(){
+    public static void begin() {
         em.getTransaction().begin();
     }
 

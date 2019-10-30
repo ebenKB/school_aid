@@ -19,3 +19,5 @@ public class StudentCell extends ListCell<Student> {
         setGraphic(null);
     }
 }
+
+

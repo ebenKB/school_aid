@@ -8,7 +8,7 @@
     -fx-yellow:#FFBB11;
 }
 
-#root, #parent, #salesPane {
+#root, #parent, #salesPane, #darkMenuBar {
     -fx-background-color: -fx-primary;
 }
 
@@ -149,6 +149,7 @@
 #dob .month-year-pane {
     -fx-background-color:derive(-fx-primary,30%);
 }
+
 #dob .text-field {
     -fx-background-color: -fx-primary;
     -fx-text-fill: #fff;
@@ -198,10 +199,24 @@
 
 .context-menu {
     -fx-background-color: derive(-fx-primary, 10%);
+    -fx-font-size: 16px;
 }
 
-.table-view {
-    -fx-cell-size: 20;
+/*.table-view {*/
+/*    -fx-cell-size: 20;*/
+/*}*/
+
+.table-view .table-row-cell {
+    -fx-cell-size: 60px;
+}
+
+.table-view .table-cell {
+    -fx-alignment: CENTER-LEFT;
+    /*continue from here*/
+}
+
+#balanceCol, #couponCol, #checkCol {
+    -fx-alignment: CENTER;
 }
 
 .table-view .cell :hover {
@@ -215,8 +230,17 @@
 .table-row-cell {
     -fx-border-color: derive(-fx-primary, 170%);
 }
+
 .table-row-cell:empty .table-cell {
     -fx-border-width: 0px;
+}
+
+/*.table-row-cell:selected {*/
+/*    -fx-background-color: #ddcdae;*/
+/*}*/
+
+.table-row-cell:selected .text {
+    -fx-fill: steelblue ;
 }
 
 #feedingType.column-header{
@@ -371,8 +395,8 @@
     -fx-text-alignment: center;
 }
 
-.table-view :hover {
-    -fx-background-color:derive(-fx-primary,120%);
+.table-view .table-row-cell :hover {
+    -fx-background-color:derive(-fx-primary, 120%);
     -fx-text-fill: #fff;
 }
 
