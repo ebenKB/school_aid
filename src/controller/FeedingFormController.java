@@ -24,6 +24,7 @@ import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import javafx.util.Pair;
 import org.apache.pdfbox.pdmodel.PDDocument;
 
 import java.io.IOException;
@@ -104,6 +105,22 @@ public class FeedingFormController implements Initializable {
     @FXML
     private Button printReport;
 
+    @FXML
+    private MenuItem payFeedingMenu;
+
+    @FXML
+    private MenuItem paySchoolFeesMenu;
+
+    @FXML
+    private ContextMenu contextMenu;
+
+    @FXML
+    private MenuItem resetFeedingFeeMenu;
+
+    @FXML
+    private MenuItem studentDetailsMenu;
+
+
     private CheckBox selectAll = new CheckBox();
 
     private ObservableList<Student>students = FXCollections.observableArrayList();
@@ -116,6 +133,7 @@ public class FeedingFormController implements Initializable {
     private newAttendanceSheetController attendanceSheetController = new newAttendanceSheetController();
     FilteredList<AttendanceTemporary> filteredAtt = new FilteredList<>(attendanceTemporaries, e ->true);
     SortedList<AttendanceTemporary> sortedList = new SortedList<>(filteredAtt);
+    mainController mainController;
     private List<Stage> stages;
 
     private App app;
@@ -132,7 +150,8 @@ public class FeedingFormController implements Initializable {
 //        this.attendanceTemporaries = attendanceTemporaries;
 //    }
 
-    public void init() {
+    public void init(mainController mainController) {
+        this.mainController = mainController;
         studentTableView.getSelectionModel().setCellSelectionEnabled(false);
 
 //        System.out.println("We are initing the controller");
@@ -200,8 +219,7 @@ public class FeedingFormController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.init();
-
+//        this.init();
         PauseTransition pauseTransition = new PauseTransition();
         pauseTransition.setDuration(Duration.seconds(1));
         pauseTransition.play();
@@ -327,10 +345,8 @@ public class FeedingFormController implements Initializable {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-//                                setCounterLabel();
-//                                unselectAll();
-//                                studentTableView.refresh();
                                 resetFields();
+                                Notification.getNotificationInstance().notifySuccess("Student(s) marked present", "Present");
                             }
                         });
                     });
@@ -350,7 +366,7 @@ public class FeedingFormController implements Initializable {
             if (selectedAttendance.size() > 0) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.CANCEL);
                 alert.setTitle("Checkout students");
-                alert.setHeaderText("You want to mark student(s) absent");
+                alert.setHeaderText("MARK ABSENT");
                 alert.setContentText("You want to checkout for "+ selectedAttendance.size()+" students\nAre you sure you want to continue?");
                 Optional<ButtonType>result = alert.showAndWait();
                 if(result.isPresent() && result.get() == ButtonType.YES) {
@@ -372,8 +388,7 @@ public class FeedingFormController implements Initializable {
                     task.setOnRunning(e -> MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Checking out students..."));
                     task.setOnSucceeded(e -> {
                         MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
-//                        unselectAll();
-//                        studentTableView.refresh();
+                        Notification.getNotificationInstance().notifyError("Student(s) marked absent", "Absent");
                         resetFields();
                     });
                     task.setOnFailed(e -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
@@ -389,6 +404,35 @@ public class FeedingFormController implements Initializable {
         refreshMenu.setOnAction(event -> refreshData());
 
         searchStudent.setOnKeyReleased(event -> Utils.searchByNaame(searchStudent, filteredAtt,sortedList,studentTableView));
+
+        resetFeedingFeeMenu.setOnAction(event -> {
+
+        });
+
+        studentDetailsMenu.setOnAction(event -> {
+            mainController.showStudentDetailsForm(studentTableView.getSelectionModel().getSelectedItem().getStudent());
+        });
+
+        payFeedingMenu.setOnAction(event -> {
+            try {
+                Student st = studentTableView.getSelectionModel().getSelectedItem().getStudent();
+                payFeedingFee(st);
+            } catch (Exception e) {
+                // log error here
+                e.printStackTrace();
+            }
+        });
+
+        paySchoolFeesMenu.setOnAction(event -> {
+            try {
+                Student st = studentTableView.getSelectionModel().getSelectedItem().getStudent();
+                salesDetailsFormController.paySchoolFees(st);
+                populateTableview();
+            } catch (Exception e) {
+                // log error here
+                e.printStackTrace();
+            }
+        });
 
         printReport.setOnAction(event -> {
             if(stages == null || stages.isEmpty()) {
@@ -413,6 +457,32 @@ public class FeedingFormController implements Initializable {
 //        sortedList.comparatorProperty().bind(studentTableView.comparatorProperty());
 //        studentTableView.setItems(sortedList);
 
+    }
+
+    private void payFeedingFee(Student st){
+        if(st.getPayFeeding()) {
+            Optional<Pair<String, String>> result = salesDetailsFormController.showCustomTextInputDiag(st, "Pay School Fees");
+            result.ifPresent(pair -> {
+                Double amount = Double.valueOf(pair.getKey());
+                // take confirmation before adding the fees to the student account
+                Optional<ButtonType>confirm = Utils.showConfirmation("Confirm payment of feeding fees", "Payment for "+st.toString(), "Are you sure you want to confirm payment of feeding fees?");
+                studentDao = new StudentDao();
+                if(confirm.isPresent() && confirm.get() == ButtonType.YES) {
+                    if(studentDao.payFeedingFee(amount, st)) {
+                        studentTableView.refresh();
+                        Notification.getNotificationInstance().notifySuccess("Payment added for "+st.toString(), "Fees paid");
+                        // log the transaction
+                        Utils.logPayment(st, "Feeding Fees", pair.getValue(), amount, TransactionType.FEEDING_FEE);
+                    }
+                } else Notification.getNotificationInstance().notifyError("Fees payment cancelled", "Fees not added");
+            });
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "", ButtonType.OK);
+            alert.setTitle("Error");
+            alert.setHeaderText("The student you have selected does not pay feeding fees");
+            alert.setContentText("If you want to continue, go to settings and update the student\'s records.");
+            alert.show();
+        }
     }
 
     private void showGenerateReportForm() {
@@ -532,7 +602,7 @@ public class FeedingFormController implements Initializable {
 private void selectAll() {
     selectedAttendance.clear();
     // select all students in the list
-    for (AttendanceTemporary at: attendanceTemporaries) {
+    for (AttendanceTemporary at: studentTableView.getItems()) {
         at.setSelected(true);
         selectedAttendance.add(at);
     }

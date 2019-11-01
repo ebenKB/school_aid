@@ -3,9 +3,12 @@ package com.hub.schoolAid;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import org.apache.commons.io.FileUtils;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -14,8 +17,11 @@ import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Blob;
 
+import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
+import javax.rmi.CORBA.Util;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
@@ -101,6 +107,8 @@ public class ImageHandler {
 
         }catch (NullPointerException e){
            Notification.getNotificationInstance().notifyError("You didn't select any image","Empty selection");
+        }catch (Exception e) {
+            System.out.println("an error has occurred..."+ e);
         }
 
         if(path==null){
@@ -112,6 +120,47 @@ public class ImageHandler {
        return path;
     }
 
+    public static  URI getImagePath(){
+        FileChooser fileChooser = new FileChooser();
+        try {
+            return fileChooser.showOpenDialog(new Stage()).toURI();
+        }catch (Exception e) {
+         return null;
+        }
+    }
+
+    public static byte[] changeToBLOB(URI filePath) throws IOException {
+        System.out.println("This is the file path"+ filePath);
+        byte[] fileContent = null;
+        try {
+            fileContent = FileUtils.readFileToByteArray(new File(filePath.getPath()));
+        } catch (IIOException e) {
+            throw new IOException ("Unable to convert file to byte array. " +
+                    e.getMessage());
+        }
+        return fileContent;
+    }
+
+
+    public static  void setImage(byte[] imageBytes, ImageView imageView) {
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(imageBytes);
+        imageView.setImage(new Image(inputStream));
+    }
+
+
+//    @Inject public void setSelection(@Optional final Contact contact){
+//        if (contact != null) {
+//            writableValue.setValue(contact);
+//            String jpegString=contact.getJpegString();
+//            byte[] imageBytes=Base64.decode(jpegString.getBytes());
+//            ByteArrayInputStream is=new ByteArrayInputStream(imageBytes);
+//            imageView.setImage(new Image(is));
+//        }
+//    }
+
+    public void writeBLOBToFile(Blob blob){
+//        Path newdir = Paths.get(getClass().getResource(Utils.studentImgPath).toURI());
+    }
 //    public  void setStudentImage(Student std,URI path){
 //        if(path != null){
 //            try {

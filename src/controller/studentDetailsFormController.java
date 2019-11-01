@@ -23,6 +23,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.apache.commons.io.FileUtils;
 import org.controlsfx.control.ToggleSwitch;
 
 import java.io.FileInputStream;
@@ -752,52 +753,59 @@ public class studentDetailsFormController implements Initializable{
         });
 
         save.setOnAction(event -> {
+            System.out.println("we want to save");
             Task newRecs  =  new Task() {
                 @Override
                 protected Object call() {
                     prepareRecordsToSave();
+                    StudentDao studentDao=new StudentDao();
+                    studentDao.updateStudentRecord(student);
+
                     return null;
                 }
             };
-            newRecs.setOnRunning(e-> {
+            newRecs.setOnRunning(e -> {
                 MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Preparing records to save...");
             });
 
             newRecs.setOnSucceeded(e ->{
                 MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
-                Task saveRecs = new Task() {
-                    @Override
-                    protected Object call() {
-                        StudentDao studentDao=new StudentDao();
-                        if(parentChanges>0){
-                            studentDao.updateStudentRecord(student,student.getParent());
-                        }else{
-                            studentDao.updateStudentRecord(student);
-                        }
-
-                        return true;
-                    }
-                };
-                saveRecs.setOnRunning(e2 ->{
-                    MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Updating student records");
-                });
-
-                saveRecs.setOnSucceeded(e2 ->{
-                    MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
-                    Notification.getNotificationInstance().notifySuccess("The record has been updated","Success!");
-                    refreshFields();
-                    setStudentTabDetails();
-                    setPrentTabDetails();
-                    setAccountTabDetails();
-                });
-
-                saveRecs.setOnFailed(e2->{
-                    MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
-                });
-                new Thread(saveRecs).start();
+                Notification.getNotificationInstance().notifySuccess("The record has been updated","Success!");
+//                MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+//                Task saveRecs = new Task() {
+//                    @Override
+//                    protected Object call() {
+//                        StudentDao studentDao=new StudentDao();
+//                        if(parentChanges>0){
+//                            studentDao.updateStudentRecord(student,student.getParent());
+//                        }else{
+//                            studentDao.updateStudentRecord(student);
+//                        }
+//
+//                        return true;
+//                    }
+//                };
+//                saveRecs.setOnRunning(e2 ->{
+//                    MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Updating student records");
+//                });
+//
+//                saveRecs.setOnSucceeded(e2 ->{
+//                    MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+//                    Notification.getNotificationInstance().notifySuccess("The record has been updated","Success!");
+//                    refreshFields();
+//                    setStudentTabDetails();
+//                    setPrentTabDetails();
+//                    setAccountTabDetails();
+//                });
+//
+//                saveRecs.setOnFailed(e2->{
+//                    MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+//                });
+//                new Thread(saveRecs).start();
             });
 
             newRecs.setOnFailed(e->{
+                Notification.getNotificationInstance().notifyError("Error while saving records","Error!");
                 MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
             });
             new Thread(newRecs).start();
@@ -835,34 +843,49 @@ public class studentDetailsFormController implements Initializable{
             alert.setHeaderText("Your are about to change the image for"+" "+student.getFirstname()+"\nAre you sure you want to continue ?");
             Optional<ButtonType>result = alert.showAndWait();
             if(result.isPresent() && result.get() == ButtonType.YES){
-                path=ImageHandler.openImageFile(studentImage);
-                if(path !=null){
-//                    counter ++;
-//                    showChangesLabel();
-                    //save the image for the student.
-                    Task saveImage =new Task() {
-                        @Override
-                        protected Object call() throws Exception {
-                           updateStudentImage();
-                            return null;
-                        }
-                    };
-                    saveImage.setOnRunning(event-> {
-                        MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Saving student image");
-
-                    });
-                    saveImage.setOnSucceeded(event -> {
-                        MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
-                        Notification.getNotificationInstance().notifySuccess("Image has been saved.","Success");
-                    });
-
-                    saveImage.setOnFailed(event -> {
-                        MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
-                        Notification.getNotificationInstance().notifyError("A fatal error occurred while saving the image","Error");
-                        Utils.showTaskException(saveImage);
-                    });
-                    new Thread(saveImage).start();
+                URI path = ImageHandler.getImagePath();
+                if(path != null) {
+                    try {
+                        byte [] imageBytes = ImageHandler.changeToBLOB(path);
+                        student.setPicture(imageBytes);
+                        studentImage.setImage(new Image(path.toString()));
+                        updateChangeCounter(1);
+                        showChangesLabel();
+                    } catch (IOException ex) {
+//                        ex.printStackTrace();
+                        Notification.getNotificationInstance().notifyError("Error processing image", "Error");
+                    }
                 }
+
+
+//                path=ImageHandler.openImageFile(studentImage);
+//                if(path !=null){
+////                    counter ++;
+////                    showChangesLabel();
+//                    //save the image for the student.
+//                    Task saveImage =new Task() {
+//                        @Override
+//                        protected Object call() throws Exception {
+//                           updateStudentImage();
+//                            return null;
+//                        }
+//                    };
+//                    saveImage.setOnRunning(event-> {
+//                        MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Saving student image");
+//
+//                    });
+//                    saveImage.setOnSucceeded(event -> {
+//                        MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+//                        Notification.getNotificationInstance().notifySuccess("Image has been saved.","Success");
+//                    });
+//
+//                    saveImage.setOnFailed(event -> {
+//                        MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+//                        Notification.getNotificationInstance().notifyError("A fatal error occurred while saving the image","Error");
+//                        Utils.showTaskException(saveImage);
+//                    });
+//                    new Thread(saveImage).start();
+//                }
             }
         });
 
@@ -934,12 +957,17 @@ public class studentDetailsFormController implements Initializable{
 
     private void setStudentTabDetails(){
         try{
-            StudentDetailsDao detailsDao =new StudentDetailsDao();
-            if(detailsDao.getImage(student)!=null){
-            //Image image = new Image(new FileInputStream(student.getImage()));
-            Image image = new Image(getClass().getResourceAsStream(Utils.studentImgPath+detailsDao.getImage(student)));
-            studentImage.setImage(image);
+            if (student.getPicture() != null) {
+                ImageHandler.setImage(student.getPicture(), studentImage);
+//                JavaFxImageConversion jx = new JavaFxImageConversion();
+//                studentImage.setImage(jx.getJavaFXImage(student.getPicture().clone(), 140, 149));
             }
+//            StudentDetailsDao detailsDao =new StudentDetailsDao();
+//            if(detailsDao.getImage(student)!=null){
+//            //Image image = new Image(new FileInputStream(student.getImage()));
+//            Image image = new Image(getClass().getResourceAsStream(Utils.studentImgPath+detailsDao.getImage(student)));
+//            studentImage.setImage(image);
+//            }
         }catch (Exception e){
             imgInfoLabel.setText("Image not found");
         }
@@ -1096,6 +1124,25 @@ public class studentDetailsFormController implements Initializable{
             stage.show();
         } catch (Exception e) {
             return;
+        }
+    }
+
+    private void showImagePreview() {
+        javafx.scene.Parent root;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/previewImage.fxml"));
+            root = fxmlLoader.load();
+            PreviewImageController controller = new PreviewImageController();
+            controller.initialize(this.student.getPicture(), this.student);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+
+        }catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

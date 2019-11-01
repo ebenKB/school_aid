@@ -17,7 +17,7 @@
          <children>
             <VBox spacing="20.0">
                <children>
-                  <JFXRadioButton fx:id="allClasses" prefHeight="17.0" prefWidth="216.0" text="All classes">
+                  <JFXRadioButton fx:id="allClasses" focusTraversable="false" prefHeight="17.0" prefWidth="216.0" text="All classes">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -25,7 +25,7 @@
                         <ToggleGroup fx:id="classToggle" />
                      </toggleGroup>
                   </JFXRadioButton>
-                  <JFXRadioButton fx:id="selectClasses" prefHeight="17.0" prefWidth="216.0" text="Select classes" toggleGroup="$classToggle">
+                  <JFXRadioButton fx:id="selectClasses" focusTraversable="false" prefHeight="17.0" prefWidth="216.0" text="Select classes" toggleGroup="$classToggle">
                      <font>
                         <Font size="18.0" />
                      </font>

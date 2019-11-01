@@ -8,7 +8,7 @@
     -fx-yellow:#FFBB11;
 }
 
-#root, #parent, #salesPane, #darkMenuBar {
+#root, #parent, #salesPane, #darkMenuBar, #darkPane {
     -fx-background-color: -fx-primary;
 }
 
@@ -409,9 +409,10 @@
 }
 
 /*set text fields with white background and dark color*/
-#searchBox {
+#searchBox,  #searchStudent {
     -fx-text-fill: -fx-primary;
 }
+
 
 /*align figures in table to the right */
 #unitPriceCol,

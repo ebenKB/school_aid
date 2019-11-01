@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
@@ -19,84 +20,94 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="1071.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="INHERIT" opacity="0.9" prefHeight="770.0" prefWidth="1071.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.studentController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="1153.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="INHERIT" opacity="0.9" prefHeight="855.0" prefWidth="1153.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.studentController">
    <children>
-      <FlowPane columnHalignment="CENTER" hgap="8.0" layoutX="17.0" layoutY="96.0" prefHeight="616.0" prefWidth="1054.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="96.0">
+      <FlowPane columnHalignment="CENTER" hgap="8.0" layoutX="16.0" layoutY="111.0" prefHeight="734.0" prefWidth="1126.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="111.0">
          <children>
-            <Pane prefHeight="605.0" prefWidth="320.0">
+            <Pane prefHeight="729.0" prefWidth="350.0">
                <children>
-                  <VBox layoutX="-3.0" layoutY="23.0" prefHeight="146.0" prefWidth="330.0" spacing="15.0">
+                  <VBox layoutX="-3.0" layoutY="23.0" prefHeight="695.0" prefWidth="331.0" spacing="40.0">
                      <children>
-                        <JFXTextField fx:id="surname" accessibleText="Surname" focusColor="#fafbfc" labelFloat="true" maxWidth="330.0" minWidth="309.0" prefHeight="45.0" prefWidth="330.0" promptText="SUR NAME">
+                        <VBox prefHeight="146.0" prefWidth="330.0" spacing="20.0">
+                           <children>
+                              <JFXTextField fx:id="surname" accessibleText="Surname" focusColor="#fafbfc" labelFloat="true" maxWidth="330.0" minWidth="309.0" prefHeight="45.0" prefWidth="330.0" promptText="SUR NAME">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXTextField fx:id="fname" accessibleText="First name" focusColor="#fafbfc" labelFloat="true" maxWidth="330.0" minWidth="330.0" prefHeight="35.0" prefWidth="330.0" promptText="FIRST NAME">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXTextField fx:id="oname" accessibleText="Other name" focusColor="#fafbfc" labelFloat="true" layoutX="10.0" layoutY="60.0" maxWidth="330.0" minWidth="330.0" prefHeight="35.0" prefWidth="330.0" promptText="OTHER NAMES">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXTextField fx:id="previousSchool" prefHeight="52.0" prefWidth="356.0" promptText="Previous School" />
+                           </children>
+                        </VBox>
+                        <ComboBox fx:id="classCombo" prefHeight="36.0" prefWidth="292.0" promptText="SELECT CLASS / FORM" />
+                        <JFXDatePicker fx:id="dob" accessibleRoleDescription="DATE OF BIRTH" defaultColor="#f9fcfb" editable="false" prefHeight="36.0" prefWidth="265.0" promptText="SELECT DATE OF BIRTH" />
+                        <HBox spacing="50.0">
+                           <children>
+                              <RadioButton fx:id="male" mnemonicParsing="false" text="MALE" textFill="#fcf9f9">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="sexRadiobtn" />
+                                 </toggleGroup>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="female" mnemonicParsing="false" text="FEMALE" textFill="#fcfafa" toggleGroup="$sexRadiobtn">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </RadioButton>
+                           </children>
+                        </HBox>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Does your child have any allergy?">
                            <font>
                               <Font size="13.0" />
                            </font>
-                        </JFXTextField>
-                        <JFXTextField fx:id="fname" accessibleText="First name" focusColor="#fafbfc" labelFloat="true" maxWidth="330.0" minWidth="330.0" prefHeight="35.0" prefWidth="330.0" promptText="FIRST NAME">
+                        </Text>
+                        <HBox prefHeight="18.0" prefWidth="239.0" spacing="65.0">
+                           <children>
+                              <RadioButton fx:id="no" mnemonicParsing="false" prefHeight="18.0" prefWidth="60.0" text="NO" textFill="WHITE">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="allergyRadiobtn" />
+                                 </toggleGroup>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="yes" mnemonicParsing="false" prefHeight="18.0" prefWidth="67.0" text="YES" textFill="WHITE" toggleGroup="$allergyRadiobtn">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </RadioButton>
+                           </children>
+                        </HBox>
+                        <JFXTextArea fx:id="allergy" accessibleText="Type of Allergy" focusColor="WHITE" maxWidth="331.0" minWidth="299.0" prefHeight="105.0" prefWidth="331.0" promptText="IF YES, SPECIFY" visible="false">
                            <font>
                               <Font size="13.0" />
                            </font>
-                        </JFXTextField>
-                        <JFXTextField fx:id="oname" accessibleText="Other name" focusColor="#fafbfc" labelFloat="true" layoutX="10.0" layoutY="60.0" maxWidth="330.0" minWidth="330.0" prefHeight="35.0" prefWidth="330.0" promptText="OTHER NAMES">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </JFXTextField>
+                        </JFXTextArea>
                      </children>
                   </VBox>
-                  <JFXDatePicker fx:id="dob" accessibleRoleDescription="DATE OF BIRTH" defaultColor="#f9fcfb" editable="false" layoutX="9.0" layoutY="248.0" prefHeight="36.0" prefWidth="265.0" promptText="SELECT DATE OF BIRTH" />
-                  <HBox layoutX="23.0" layoutY="319.0" spacing="50.0">
-                     <children>
-                        <RadioButton fx:id="male" mnemonicParsing="false" text="MALE" textFill="#fcf9f9">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="sexRadiobtn" />
-                           </toggleGroup>
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </RadioButton>
-                        <RadioButton fx:id="female" mnemonicParsing="false" text="FEMALE" textFill="#fcfafa" toggleGroup="$sexRadiobtn">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </RadioButton>
-                     </children>
-                  </HBox>
-                  <Text fill="WHITE" layoutX="23.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Does your child have any allergy?">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Text>
-                  <HBox layoutX="25.0" layoutY="424.0" prefHeight="18.0" prefWidth="239.0" spacing="65.0">
-                     <children>
-                        <RadioButton fx:id="no" mnemonicParsing="false" prefHeight="18.0" prefWidth="60.0" text="NO" textFill="WHITE">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="allergyRadiobtn" />
-                           </toggleGroup>
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </RadioButton>
-                        <RadioButton fx:id="yes" mnemonicParsing="false" prefHeight="18.0" prefWidth="67.0" text="YES" textFill="WHITE" toggleGroup="$allergyRadiobtn">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </RadioButton>
-                     </children>
-                  </HBox>
-                  <JFXTextArea fx:id="allergy" accessibleText="Type of Allergy" focusColor="WHITE" layoutX="7.0" layoutY="470.0" maxWidth="310.0" minWidth="299.0" prefHeight="90.0" prefWidth="310.0" promptText="IF YES, SPECIFY" visible="false">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </JFXTextArea>
-                  <ComboBox fx:id="classCombo" layoutX="7.0" layoutY="196.0" prefHeight="36.0" prefWidth="292.0" promptText="SELECT CLASS / FORM" />
+                  <ImageView fitHeight="75.0" fitWidth="265.0" layoutX="-11.0" layoutY="667.0" opacity="0.22" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/logo.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
-            <Pane prefHeight="544.0" prefWidth="320.0">
+            <Pane prefHeight="544.0" prefWidth="350.0">
                <children>
-                  <VBox layoutY="32.0" spacing="15.0">
+                  <VBox layoutY="20.0" prefHeight="293.0" prefWidth="330.0" spacing="20.0">
                      <children>
-                        <JFXTextField fx:id="parentName" accessibleText="Parent name" focusColor="#fafbfc" labelFloat="true" maxWidth="330.0" minWidth="308.0" prefHeight="36.0" prefWidth="308.0" promptText="PARENT / GUARDIAN NAME">
+                        <JFXTextField fx:id="parentName" accessibleText="Parent name" focusColor="#fafbfc" labelFloat="true" maxWidth="330.0" minWidth="308.0" prefHeight="25.0" prefWidth="330.0" promptText="PARENT / GUARDIAN NAME">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -111,28 +122,29 @@
                               <Font size="13.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="address" accessibleText="Residence" focusColor="#fafbfc" labelFloat="true" layoutX="10.0" layoutY="110.0" maxWidth="330.0" minWidth="330.0" prefHeight="35.0" prefWidth="330.0" promptText="RESIDENCE">
+                        <JFXTextField fx:id="address" accessibleText="Residence" focusColor="#fafbfc" labelFloat="true" layoutX="10.0" layoutY="110.0" maxWidth="330.0" minWidth="330.0" prefHeight="35.0" prefWidth="330.0" promptText="HOME ADDRESS(DIGITAL)">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="landmark" accessibleText="Landmark" focusColor="#fafbfc" labelFloat="true" layoutX="10.0" layoutY="160.0" maxWidth="330.0" minWidth="330.0" prefHeight="35.0" prefWidth="330.0" promptText="MAJOR LANDMARK">
+                        <JFXTextField fx:id="landmark" accessibleText="Landmark" focusColor="#fafbfc" labelFloat="true" layoutX="10.0" layoutY="160.0" maxWidth="330.0" minWidth="330.0" prefHeight="35.0" prefWidth="330.0" promptText="MAJOR LANDMARK / DESCRIPTION">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </JFXTextField>
+                        <JFXTextField fx:id="location" promptText="LOCATION" />
                      </children>
                   </VBox>
-                  <VBox layoutY="317.0" prefHeight="262.0" prefWidth="320.0" spacing="25.0">
+                  <VBox layoutY="359.0" prefHeight="352.0" prefWidth="320.0" spacing="25.0">
                      <children>
-                        <HBox>
+                        <HBox alignment="CENTER_LEFT">
                            <children>
-                              <Text fill="#eaecee" strokeType="OUTSIDE" strokeWidth="0.0" text="CHARGES" wrappingWidth="108.896484375">
+                              <Text fill="#eaecee" strokeType="OUTSIDE" strokeWidth="0.0" text="SCHOOL FEES CHARGES" wrappingWidth="238.896484375">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Text>
-                              <ImageView fitHeight="35.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="28.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/pay.png" />
                                  </image>
@@ -144,13 +156,13 @@
                            <children>
                               <Pane prefHeight="42.0" prefWidth="62.0">
                                  <children>
-                                    <ImageView fitHeight="43.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="35.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../assets/ghc.png" />
                                        </image></ImageView>
                                  </children>
                               </Pane>
-                              <TextField fx:id="fees" prefHeight="42.0" prefWidth="212.0" promptText="GHC 0.00" />
+                              <TextField fx:id="fees" prefHeight="42.0" prefWidth="212.0" promptText="0.00" />
                            </children>
                         </HBox>
                         <HBox prefHeight="43.0" prefWidth="320.0" spacing="40.0">
@@ -186,20 +198,57 @@
                   </VBox>
                </children>
             </Pane>
-            <Pane prefHeight="579.0" prefWidth="323.0">
+            <Pane prefHeight="738.0" prefWidth="407.0">
                <children>
                   <Button fx:id="uploadImg" layoutX="105.0" layoutY="197.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="114.0" text="Upload Image" />
-                  <HBox layoutX="92.0" layoutY="498.0" spacing="15.0">
+                  <HBox layoutX="162.0" layoutY="680.0" spacing="15.0">
                      <children>
                         <Button fx:id="cancel" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="Cancel" />
                         <Button fx:id="save" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="Register" />
                      </children>
                   </HBox>
-                  <Pane fx:id="imageViewPane" layoutX="53.0" layoutY="9.0" prefHeight="169.0" prefWidth="234.0">
+                  <Pane fx:id="imageViewPane" layoutX="38.0" layoutY="9.0" prefHeight="177.0" prefWidth="249.0">
                      <children>
-                        <ImageView fx:id="image" fitHeight="170.0" fitWidth="241.0" layoutX="-2.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="image" fitHeight="177.0" fitWidth="249.0" layoutX="-2.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
+                  <Text fill="#e8cc40" layoutX="15.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OPTIONAL - Two People who can pick up your ward" wrappingWidth="379.34228515625" />
+                  <VBox layoutX="14.0" layoutY="325.0" spacing="20.0">
+                     <children>
+                        <VBox spacing="20.0">
+                           <children>
+                              <HBox alignment="CENTER" spacing="20.0">
+                                 <children>
+                                    <Text fill="#c6c6c0" strokeType="OUTSIDE" strokeWidth="0.0" text="Person 1" />
+                                    <Separator opacity="0.36" prefHeight="5.0" prefWidth="292.0" />
+                                 </children>
+                              </HBox>
+                              <VBox prefHeight="106.0" prefWidth="364.0" spacing="20.0">
+                                 <children>
+                                    <JFXTextField fx:id="guardian_1_name" prefHeight="43.0" prefWidth="271.0" promptText="Name" />
+                                    <JFXTextField fx:id="guardian_1_contact" prefHeight="43.0" prefWidth="271.0" promptText="Contact" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox spacing="20.0">
+                           <children>
+                              <HBox alignment="CENTER" spacing="20.0">
+                                 <children>
+                                    <Text fill="#c6c6c0" strokeType="OUTSIDE" strokeWidth="0.0" text="Person 2" />
+                                    <Separator opacity="0.36" prefHeight="1.0" prefWidth="292.0" />
+                                 </children>
+                              </HBox>
+                              <VBox prefHeight="106.0" prefWidth="364.0" spacing="20.0">
+                                 <children>
+                                    <JFXTextField fx:id="guardian_2_name" prefHeight="43.0" prefWidth="271.0" promptText="Name" />
+                                    <JFXTextField fx:id="guardian_2_contact" prefHeight="43.0" prefWidth="271.0" promptText="Contact" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
                </children>
             </Pane>
          </children>
@@ -217,12 +266,7 @@
                </image>
             </ImageView>
          </children></Pane>
-      <ImageView fitHeight="211.0" fitWidth="562.0" layoutX="349.0" layoutY="360.0" opacity="0.22" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/logo.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="infoLabel" layoutX="36.0" layoutY="46.0" prefHeight="56.0" prefWidth="881.0" textFill="#fc0303">
+      <Label fx:id="infoLabel" layoutX="8.0" layoutY="46.0" prefHeight="56.0" prefWidth="699.0" textFill="#fc0303">
          <font>
             <Font size="18.0" />
          </font>

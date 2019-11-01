@@ -86,7 +86,7 @@
                         <Image url="@../assets/logo.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="termLabel" layoutX="330.0" layoutY="43.0" prefHeight="24.0" prefWidth="205.0" text="TERM " textFill="WHITE">
+                  <Label fx:id="termLabel" layoutX="731.0" layoutY="43.0" prefHeight="29.0" prefWidth="157.0" text="TERM " textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -100,10 +100,10 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="601.0" layoutY="75.0" prefHeight="43.0" prefWidth="380.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="75.0">
+                  <HBox alignment="CENTER" layoutX="223.0" layoutY="56.0" prefHeight="63.0" prefWidth="436.0" AnchorPane.leftAnchor="223.0" AnchorPane.topAnchor="56.0">
                      <children>
                         <FontAwesomeIconView fill="#fdfeff" glyphName="SEARCH" size="20" text="" wrappingWidth="31.571428298950195" />
-                        <TextField fx:id="searchBox" alignment="CENTER" prefHeight="33.0" prefWidth="347.0" promptText="Search a student" />
+                        <TextField fx:id="searchBox" alignment="CENTER" prefHeight="33.0" prefWidth="347.0" promptText="Search a student" style="-fx-background-radius: 100;" />
                         <!--<FontAwesomeIconView glyphName="SEARCH" size="25" wrappingWidth="23.214284896850586" />-->
                      </children>
                   </HBox>

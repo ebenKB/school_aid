@@ -474,19 +474,21 @@ public class mainController implements Initializable{
         studentTableView.getSelectionModel().selectedItemProperty().addListener( new ChangeListener<Student>() {
             @Override
             public void changed(ObservableValue<? extends Student> observable, Student oldValue, Student newValue) {
-                if(studentTableView.getItems().size()>0){
-                    StudentDetailsDao detailsDao =new StudentDetailsDao();
-                    String img= Utils.studentImgPath+detailsDao.getImage(studentTableView.getSelectionModel().getSelectedItem());
+                if(studentTableView.getItems().size() > 0){
+//                    StudentDetailsDao detailsDao =new StudentDetailsDao();
+//                    String img= Utils.studentImgPath+detailsDao.getImage(studentTableView.getSelectionModel().getSelectedItem());
 //                    String img= Utils.studentImgPath+studentTableView.getSelectionModel().getSelectedItem().getImage();
                     try{
-                        if(img !=null){
+                        if(studentTableView.getSelectionModel().getSelectedItem().getPicture() != null){
 //                        URL url= getClass().getResource(studentTableView.getSelectionModel().getSelectedItem().getImage());
                             //                          URL url= getClass().getResource(studentTableView.getSelectionModel().getSelectedItem().getImage());
 //                            Image image = new Image(new FileInputStream(getClass().getResourceAsStream(img).toString()));
-                            Image image = new Image(getClass().getResourceAsStream(img));
+//                            Image image = new Image(getClass().getResourceAsStream(img));
 //
                             imgLabel.setText("");
-                            studentImage.setImage(image);
+//                            studentImage.setImage(image);
+                            ImageHandler.setImage(studentTableView.getSelectionModel().getSelectedItem().getPicture(), studentImage);
+
                             studentImage.setVisible(Boolean.TRUE);
                         }else {
                             imgLabel.setText("Image Does Not Exist");
@@ -508,7 +510,7 @@ public class mainController implements Initializable{
                 if(event.getClickCount()==2){
                     //listening for double click
                     if(!studentTableView.getItems().isEmpty()){
-                        showStudentDetailsForm();
+                        showStudentDetailsForm(studentTableView.getSelectionModel().getSelectedItem());
                     }
                 }
             });
@@ -518,7 +520,7 @@ public class mainController implements Initializable{
         studentTableView.setOnKeyPressed(event -> {
             if(event.getCode()== KeyCode.ENTER){
                 if(!studentTableView.getItems().isEmpty()){
-                    showStudentDetailsForm();
+                    showStudentDetailsForm(studentTableView.getSelectionModel().getSelectedItem());
                 }
             }else if(event.getCode()==KeyCode.DELETE){
                 if(!studentTableView.getItems().isEmpty()){
@@ -606,7 +608,7 @@ public class mainController implements Initializable{
         });
 
         viewStudentDetails.setOnAction(event -> {
-            showStudentDetailsForm();
+            showStudentDetailsForm(studentTableView.getSelectionModel().getSelectedItem());
         });
 
         salesOverview.setOnAction(event -> showSalesOverview());
@@ -633,10 +635,10 @@ public class mainController implements Initializable{
             if (appSettings != null) {
                 if (appSettings.getFeedingType() == FeedingType.COUPON) {
                     //show the coupon options here
-                    this.showPaymentOption("/view/feeding_form.fxml");
+                    this.showPaymentOption("/view/feeding_form.fxml", FeedingType.COUPON);
                 } else {
                     // show form for those who use CASH
-                    this.showPaymentOption("/view/salesDetailsForm.fxml");
+                    this.showPaymentOption("/view/salesDetailsForm.fxml", FeedingType.CASH);
                 }
             }
         });
@@ -735,13 +737,13 @@ public class mainController implements Initializable{
         }
     }
 
-    private void showStudentDetailsForm() {
+    public void showStudentDetailsForm(Student student) {
         Parent root;
         FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("/view/studentDetailsTabPane.fxml"));
         try {
             root=fxmlLoader.load();
             studentDetailsFormController studentDetailsFormController = fxmlLoader.getController();
-            studentDetailsFormController.init(studentTableView.getSelectionModel().getSelectedItem());
+            studentDetailsFormController.init(student);
             Scene scene = new Scene(root);
             javafx.stage.Stage stage = new javafx.stage.Stage();
             stage.setScene(scene);
@@ -873,9 +875,18 @@ public class mainController implements Initializable{
         }
     }
 
-    private void showPaymentOption(String url) {
+    private void showPaymentOption(String url, FeedingType feedingType) {
+
+        Parent root;
         try {
-            Parent  root =  FXMLLoader.load(getClass().getResource(url));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(url));
+            root = fxmlLoader.load();
+
+            // check if we need to init a controller
+            if (feedingType == FeedingType.COUPON) {
+                FeedingFormController controller = fxmlLoader.getController();
+                controller.init(this);
+            }
             Scene scene= new Scene(root);
             javafx.stage.Stage stage = new javafx.stage.Stage();
             stage.setScene(scene);
@@ -884,9 +895,23 @@ public class mainController implements Initializable{
             stage.setTitle("");
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+
         }
+
+//        try {
+//            Parent  root =  FXMLLoader.load(getClass().getResource(url));
+//            Scene scene= new Scene(root);
+//            javafx.stage.Stage stage = new javafx.stage.Stage();
+//            stage.setScene(scene);
+//            stage.initStyle(StageStyle.DECORATED);
+//            stage.setMaximized(Boolean.TRUE);
+//            stage.setTitle("");
+//            stage.initModality(Modality.WINDOW_MODAL);
+//            stage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 }
 

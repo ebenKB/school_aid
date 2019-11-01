@@ -20,6 +20,7 @@ public class Parent {
     private String name;
     private String telephone;
     private String occupation;
+    private String relationToWard;
 
     @OneToOne(orphanRemoval = true,cascade = CascadeType.ALL)
     private Address address;

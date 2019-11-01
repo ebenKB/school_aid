@@ -1,7 +1,9 @@
 package com.hub.schoolAid;
 //import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import javax.persistence.*;
+import java.sql.Blob;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -16,6 +18,9 @@ public class Student {
     @Column (name = "student_id")
     private Long Id;
 
+    @Lob
+    private byte[] picture;
+
     //other attributes of the student
     private String firstname;
     private String lastname;
@@ -27,6 +32,7 @@ public class Student {
     public enum FeedingStatus{DAILY,WEEKLY,MONTHLY,TERMLY,PERIODIC,SEMI_PERIODIC}
     private LocalDate reg_date;
     private LocalDate dob;
+    private String previousSchool;
 
     //constructors
     public Student(){
@@ -44,7 +50,11 @@ public class Student {
     @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
     private Parent parent;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH})
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Guardian> guardian;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
 //    @JoinColumn(name = "class_id")
     private Stage stage;
 
@@ -165,6 +175,14 @@ public class Student {
         this.assessments = assessments;
     }
 
+    public String getPreviousSchool() {
+        return previousSchool;
+    }
+
+    public void setPreviousSchool(String previousSchool) {
+        this.previousSchool = previousSchool;
+    }
+
     //    public List<Sales> getSales() {
 //        return sales;
 //    }
@@ -219,6 +237,22 @@ public class Student {
 
     public void setDeleted(Boolean deleted) {
         isDeleted = deleted;
+    }
+
+    public byte[] getPicture() {
+        return picture;
+    }
+
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
+    }
+
+    public List<Guardian> getGuardian() {
+        return guardian;
+    }
+
+    public void setGuardian(List<Guardian> guardian) {
+        this.guardian = guardian;
     }
 
     //        public String getImage() {

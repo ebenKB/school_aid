@@ -20,7 +20,9 @@ public class StudentDao {
     private StageDao stageDao;
 
     //methods to interface with the database
-    public Boolean addNewStudent(Student student,StudentDetails details) {
+    public Boolean addNewStudent(Student student) {
+
+        System.out.println("CALLING METHOD TO ADD STUDENT...");
         try{
             student.setAge(student.calcAge(student.getDob()));
 
@@ -33,15 +35,16 @@ public class StudentDao {
             student.setPayFeeding(true);
             student.setReg_date(LocalDate.now());
             student.setDeleted(false);
+            System.out.println("This is the student: "+ student.getParent().toString());
             HibernateUtil.save(Student.class, student);
 
             stageDao = new StageDao();
             stageDao.addStudent(student.getStage());
 
-            if(details.getImage() !=null) {
-                StudentDetailsDao studentDetailsDao =new StudentDetailsDao();
-                studentDetailsDao.addImage(student,details.getImage());
-            }
+//            if(details.getImage() !=null) {
+//                StudentDetailsDao studentDetailsDao =new StudentDetailsDao();
+//                studentDetailsDao.addImage(student,details.getImage());
+//            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -54,10 +57,14 @@ public class StudentDao {
      * @return true if the update was successful
      */
     public Boolean updateStudentRecord(Student new_student) throws HibernateException {
-        setStdRecsToUpdate(new_student);
-        HibernateUtil.commit();
-        HibernateUtil.close();
-        return true;
+        try {
+            setStdRecsToUpdate(new_student);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("returning false");
+            return false;
+        }
     }
 
     public Boolean updateStudentRecord(Student new_student,Parent parent){
@@ -70,18 +77,21 @@ public class StudentDao {
 
     private void setStdRecsToUpdate(Student new_student){
         em=HibernateUtil.getEntityManager();
-        Student newStd = em.find(Student.class,new_student.getId());
         HibernateUtil.begin();
-        newStd.setFirstname(new_student.getFirstname());
-        newStd.setLastname(new_student.getLastname());
-        newStd.setOthername(new_student.getOthername());
-        newStd.setPayFeeding(new_student.getPayFeeding());
-        newStd.setFeedingStatus(new_student.getFeedingStatus());
-        newStd.getAccount().setFeedingFeeToPay(new_student.getAccount().getFeedingFeeToPay());
-        newStd.setDob(new_student.getDob());
-        newStd.setGender(new_student.getGender());
-        new_student.setReg_date(LocalDate.now());
-        newStd.getParent().setname(new_student.getParent().getname());
+        em.merge(new_student);
+        HibernateUtil.commit();
+
+//        Student newStd = em.find(Student.class,new_student.getId());
+//        newStd.setFirstname(new_student.getFirstname());
+//        newStd.setLastname(new_student.getLastname());
+//        newStd.setOthername(new_student.getOthername());
+//        newStd.setPayFeeding(new_student.getPayFeeding());
+//        newStd.setFeedingStatus(new_student.getFeedingStatus());
+//        newStd.getAccount().setFeedingFeeToPay(new_student.getAccount().getFeedingFeeToPay());
+//        newStd.setDob(new_student.getDob());
+//        newStd.setGender(new_student.getGender());
+//        new_student.setReg_date(LocalDate.now());
+//        newStd.getParent().setname(new_student.getParent().getname());
     }
 
     private void setParentRecsToUpdate(Student newStd, Parent parent){
@@ -104,7 +114,7 @@ public class StudentDao {
         }catch (Exception e){
             e.printStackTrace();
             return  null;
-        }finally {
+        } finally {
             em.close();
         }
     }
@@ -536,8 +546,11 @@ public class StudentDao {
 
     // when the student is paying school fees
     public Boolean paySchoolFee(Student st, Double amount) {
-        if (st == null || !st.getPaySchoolFees())
+        if (st == null || !st.getPaySchoolFees()){
+            System.out.println("The student does not pay school fees");
             return false;
+        }
+
         em=HibernateUtil.getEntityManager();
         StudentAccount acc = em.find(StudentAccount.class, st.getAccount().getId());
 //        acc.setFeeToPay((acc.getFeeToPay() + amount));
@@ -547,6 +560,25 @@ public class StudentDao {
         if(this.updateAccount(acc))
             return true;
         return false;
+    }
+
+    public Boolean payFeedingFee(Double amount, Student student){
+        System.out.println("We are paying school fees");
+        if ( student == null || amount == 0 | amount < 0) {
+            return false;
+        }
+        try {
+            // accept the payment
+            em= HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            student.updateFeedingAccount(amount);
+            em.merge(student);
+            HibernateUtil.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // when you want to set a new amount for the current fees

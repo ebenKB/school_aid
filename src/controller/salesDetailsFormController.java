@@ -944,20 +944,29 @@ public class salesDetailsFormController implements Initializable{
         }
     }
 
-    private void paySchoolFees(Student st) {
-        Optional<Pair <String, String>> result = showCustomTextInputDiag(st, "Pay School Fees");
-        result.ifPresent(pair -> {
-            Double amount = Double.valueOf(pair.getKey());
-            // take confirmation before adding the fees to the student account
-            Optional<ButtonType>confirm = Utils.showConfirmation("Confirm payment of school fees", "Payment for "+st.toString(), "Are you sure you want to confirm payment of school fees?");
-            if(confirm.isPresent() && confirm.get() == ButtonType.YES) {
-                if(studentDao.paySchoolFee(st, amount)) {
-                    Notification.getNotificationInstance().notifySuccess("Payment added for "+st.toString(), "Fees paid");
-                }
-                // log the transaction
-                Utils.logPayment(student, "School Fees", pair.getValue(), amount, TransactionType.SCHOOL_FEES);
-            } else Notification.getNotificationInstance().notifyError("Fees payment cancelled", "Fees not added");
-        });
+    public void paySchoolFees(Student st) {
+        // check if the student pays school fees
+        if(st.getPaySchoolFees()) {
+            Optional<Pair <String, String>> result = showCustomTextInputDiag(st, "Pay School Fees");
+            result.ifPresent(pair -> {
+                Double amount = Double.valueOf(pair.getKey());
+                // take confirmation before adding the fees to the student account
+                Optional<ButtonType>confirm = Utils.showConfirmation("Confirm payment of school fees", "Payment for "+st.toString(), "Are you sure you want to confirm payment of school fees?");
+                if(confirm.isPresent() && confirm.get() == ButtonType.YES) {
+                    if(studentDao.paySchoolFee(st, amount)) {
+                        Notification.getNotificationInstance().notifySuccess("Payment added for "+st.toString(), "Fees paid");
+                        // log the transaction
+                        Utils.logPayment(student, "School Fees", pair.getValue(), amount, TransactionType.SCHOOL_FEES);
+                    }
+                } else Notification.getNotificationInstance().notifyError("Fees payment cancelled", "Fees not added");
+            });
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "", ButtonType.OK);
+            alert.setTitle("Error");
+            alert.setHeaderText("The student you have selected does not pay school fees");
+            alert.setContentText("If you want to continue, go to settings and update the student\'s records.");
+            alert.show();
+        }
     }
 
     public void activateSearch() {
@@ -1067,7 +1076,7 @@ public class salesDetailsFormController implements Initializable{
         totalFeedingPane.setVisible(Boolean.TRUE);
     }
 
-    private Optional<Pair<String, String>> showCustomTextInputDiag(Student student, String title){
+    public Optional<Pair<String, String>> showCustomTextInputDiag(Student student, String title){
         Dialog<Pair<String,String>> dialog = new Dialog<>();
         dialog.setTitle(title);
 

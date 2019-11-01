@@ -13,8 +13,9 @@ public class Address {
     private Long id;
 
     //other attributes
-    private String homeAddress;
-    private String landmark;
+    private String homeAddress; // preferably digital address
+    private String landmark;    // a description or closest landmark to the address
+    private String location; // the exact place of the address
 
     //getters and setter
     public Long getId() {

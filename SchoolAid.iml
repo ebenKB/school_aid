@@ -38,5 +38,6 @@
     <orderEntry type="library" name="hibernate&amp;mysql" level="project" />
     <orderEntry type="library" name="commons-logging-1.2" level="project" />
     <orderEntry type="library" name="json-simple-3.1.0" level="project" />
+    <orderEntry type="library" name="commons-io-2.6" level="project" />
   </component>
 </module>

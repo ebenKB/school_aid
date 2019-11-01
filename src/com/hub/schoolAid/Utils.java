@@ -16,8 +16,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
+import org.apache.commons.io.FileUtils;
 
+import javax.imageio.IIOException;
+import javax.persistence.EntityManager;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Blob;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -25,6 +31,7 @@ import java.util.function.Predicate;
 public class Utils {
     public static String  studentImgPath = "assets/students/";
     public String  studentImgClassPath   = getClass().getResource( "/students/").toString();
+    private static LocalDate currentDate;
 
     public static void closeEvent(ActionEvent event){
         Alert alert  =new Alert(Alert.AlertType.CONFIRMATION,"", ButtonType.YES,ButtonType.NO);
@@ -120,5 +127,14 @@ public class Utils {
         }
         return false;
     }
+//    public static LocalDate getLocalDate(){
+//        if(currentDate == null) {
+//            EntityManager em;
+//            TermDao termDao = new TermDao();
+//            em = HibernateUtil.getEntityManager();
+//            HibernateUtil.begin();
+//            currentDate = termDao.
+//        }
+//    }
  }
 

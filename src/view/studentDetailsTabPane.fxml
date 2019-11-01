@@ -27,11 +27,11 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.ToggleSwitch?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="832.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.studentDetailsFormController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="886.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.studentDetailsFormController">
    <children>
-      <HBox fx:id="changesLabel" layoutX="758.0" layoutY="27.0" prefHeight="44.0" prefWidth="63.0" visible="false">
+      <HBox fx:id="changesLabel" layoutX="767.0" layoutY="48.0" prefHeight="50.0" prefWidth="64.0" visible="false">
          <children>
-            <Label fx:id="changesCounter" prefHeight="13.0" prefWidth="25.0" textFill="#43da40">
+            <Label fx:id="changesCounter" prefHeight="44.0" prefWidth="82.0" textFill="#43da40">
                <font>
                   <Font size="14.0" />
                </font>
@@ -42,45 +42,45 @@
             <Insets bottom="1.0" top="1.0" />
          </padding>
       </HBox>
-      <JFXTabPane fx:id="stdDetailsTabPane" layoutX="14.0" layoutY="14.0" prefHeight="510.0" prefWidth="744.0" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="74.0" AnchorPane.topAnchor="14.0">
+      <JFXTabPane fx:id="stdDetailsTabPane" layoutX="1.0" layoutY="14.0" prefHeight="595.0" prefWidth="886.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="14.0">
          <tabs>
             <Tab fx:id="profileTable" text="STUDENT PROFILE">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="660.0">
                      <children>
-                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="371.0" prefWidth="660.0">
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="788.0">
                            <children>
-                              <ImageView fx:id="studentImage" fitHeight="149.0" fitWidth="140.0" layoutX="23.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="studentImage" fitHeight="206.0" fitWidth="238.0" layoutX="23.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/login-avatar.png" />
                                  </image>
                               </ImageView>
-                              <VBox layoutX="206.0" layoutY="52.0" prefHeight="296.0" prefWidth="420.0" spacing="17.0" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="34.0" AnchorPane.topAnchor="52.0">
+                              <VBox layoutX="283.0" layoutY="52.0" prefHeight="303.0" prefWidth="471.0" spacing="17.0" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="283.0" AnchorPane.rightAnchor="34.0" AnchorPane.topAnchor="52.0">
                                  <children>
                                     <HBox prefHeight="36.0" prefWidth="417.0">
                                        <children>
-                                          <JFXTextField fx:id="fname" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="427.0" minWidth="179.0" prefHeight="36.0" prefWidth="427.0" promptText="Name">
+                                          <JFXTextField fx:id="fname" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="470.0" minWidth="179.0" prefHeight="36.0" prefWidth="470.0" promptText="Name">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </JFXTextField>
                                        </children>
                                     </HBox>
-                                    <HBox>
+                                    <HBox prefHeight="36.0" prefWidth="447.0" spacing="10.0">
                                        <children>
-                                          <JFXTextField fx:id="surname" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="351.0" minWidth="204.0" prefHeight="36.0" prefWidth="222.0" promptText="Sur name">
+                                          <JFXTextField fx:id="surname" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="351.0" minWidth="204.0" prefHeight="36.0" prefWidth="222.0" promptText="Surname">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </JFXTextField>
-                                          <JFXTextField fx:id="oname" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="422.0" minWidth="204.0" prefHeight="36.0" prefWidth="412.0" promptText="Othername(s)">
+                                          <JFXTextField fx:id="oname" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="422.0" minWidth="204.0" prefHeight="36.0" prefWidth="232.0" promptText="Othername(s)">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </JFXTextField>
                                        </children>
                                     </HBox>
-                                    <HBox>
+                                    <HBox spacing="10.0">
                                        <children>
                                           <JFXTextField fx:id="stage" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="351.0" minWidth="133.0" prefHeight="36.0" prefWidth="216.0" promptText="Class">
                                              <font>
@@ -90,12 +90,12 @@
                                           <JFXDatePicker fx:id="dob" editable="false" prefHeight="38.0" prefWidth="203.0" promptText="Date of Birth" />
                                        </children>
                                     </HBox>
-                                    <JFXTextField fx:id="regDate" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="420.0" minWidth="351.0" prefHeight="36.0" prefWidth="420.0" promptText="Date of Registration">
+                                    <JFXTextField fx:id="regDate" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="471.0" minWidth="351.0" prefHeight="36.0" prefWidth="471.0" promptText="Date of Registration">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextField fx:id="phone" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="420.0" minWidth="351.0" prefHeight="36.0" prefWidth="420.0" promptText="Parent's Contact">
+                                    <JFXTextField fx:id="phone" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="471.0" minWidth="351.0" prefHeight="36.0" prefWidth="471.0" promptText="Parent's Contact">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -103,40 +103,27 @@
                                  </children>
                               </VBox>
                               <FontAwesomeIconView />
-                              <Label fx:id="imgInfoLabel" layoutX="32.0" layoutY="233.0" textFill="#fc0808">
+                              <Label fx:id="imgInfoLabel" layoutX="32.0" layoutY="172.0" prefHeight="44.0" prefWidth="198.0" textFill="#fc0808">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Hyperlink fx:id="changeImage" alignment="CENTER" graphicTextGap="5.0" layoutX="43.0" layoutY="253.0" text="Change Image" visible="false">
+                              <Hyperlink fx:id="changeImage" alignment="CENTER" graphicTextGap="5.0" layoutX="35.0" layoutY="324.0" prefHeight="30.0" prefWidth="165.0" text="Change Image" textFill="#fcf9f9" visible="false" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="35.0">
                                  <graphic>
                                     <FontAwesomeIconView fill="WHITE" glyphName="EDIT" />
                                  </graphic>
                               </Hyperlink>
                            </children>
                         </AnchorPane>
-                        <HBox layoutX="196.0" layoutY="367.0" prefHeight="25.0" prefWidth="345.0" spacing="40.0">
-                           <children>
-                              <FontAwesomeIconView fx:id="padlock" fill="#e8e8e8" glyphName="LOCK" size="22" wrappingWidth="14.0" />
-                              <CheckBox fx:id="btnEditable" mnemonicParsing="false" prefHeight="7.0" prefWidth="139.0" text=" Enable Editing" textFill="#f2efef">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <tooltip>
-                                    <Tooltip text="Check this button if you want to allow changes to the form" />
-                                 </tooltip>
-                              </CheckBox>
-                           </children>
-                        </HBox>
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
             <Tab fx:id="parentTab" text="PARENT/GUARDIAN">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="821.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="596.0" prefWidth="886.0">
                      <children>
-                        <VBox layoutX="14.0" layoutY="66.0" prefHeight="346.0" prefWidth="246.0" spacing="20.0">
+                        <VBox layoutX="14.0" layoutY="66.0" prefHeight="390.0" prefWidth="325.0" spacing="20.0">
                            <children>
                               <JFXTextField fx:id="parentName" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="246.0" minWidth="246.0" prefHeight="40.0" prefWidth="246.0" promptText="Name of Parent/Guardian" />
                               <JFXTextField fx:id="parentOccupation" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="246.0" minWidth="246.0" prefHeight="40.0" prefWidth="246.0" promptText="Occupation of Parent/Guardian" />
@@ -146,7 +133,7 @@
                            </children>
                         </VBox>
                         <Separator layoutX="357.0" layoutY="29.0" maxWidth="-Infinity" opacity="0.28" orientation="VERTICAL" prefHeight="317.0" prefWidth="1.0" />
-                        <JFXButton fx:id="sendSms" layoutX="474.0" layoutY="188.0" prefHeight="44.0" prefWidth="174.0" text="Send Message To Parent">
+                        <JFXButton fx:id="sendSms" disable="true" layoutX="474.0" layoutY="188.0" prefHeight="44.0" prefWidth="174.0" text="Send Message To Parent">
                            <graphic>
                               <ImageView fitHeight="31.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -185,9 +172,9 @@
                                                 <TextField fx:id="feesBalance" editable="false" prefHeight="30.0" prefWidth="114.0" />
                                              </children>
                                           </HBox>
-                                          <Hyperlink fx:id="schFeesSummary" contentDisplay="RIGHT" prefHeight="19.0" prefWidth="59.0" text="summary">
+                                          <Hyperlink fx:id="schFeesSummary" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="111.0" text="View summary" textFill="#0fa5eb">
                                              <font>
-                                                <Font size="10.0" />
+                                                <Font size="14.0" />
                                              </font>
                                           </Hyperlink>
                                           <HBox>
@@ -284,11 +271,6 @@
             </Tab>
          </tabs>
       </JFXTabPane>
-      <Label fx:id="infoLable" layoutX="266.0" layoutY="459.0" prefHeight="30.0" prefWidth="375.0" textFill="#ffcd05">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
       <JFXButton fx:id="close" layoutX="474.0" layoutY="467.0" prefHeight="30.0" prefWidth="54.0" text="Close">
          <tooltip>
             <Tooltip text="Close the current form" />
@@ -297,5 +279,23 @@
          <tooltip>
             <Tooltip text="Do you want to save the new changes?" />
          </tooltip></Button>
+      <Label fx:id="infoLable" layoutX="237.0" layoutY="597.0" prefHeight="44.0" prefWidth="211.0" textFill="#ffcd05">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <HBox layoutX="14.0" layoutY="604.0" prefHeight="25.0" prefWidth="251.0" spacing="20.0">
+         <children>
+            <FontAwesomeIconView fx:id="padlock" fill="#e8e8e8" glyphName="LOCK" size="22" wrappingWidth="14.0" />
+            <CheckBox fx:id="btnEditable" mnemonicParsing="false" prefHeight="7.0" prefWidth="139.0" text=" Enable Editing" textFill="#f2efef">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <tooltip>
+                  <Tooltip text="Check this button if you want to allow changes to the form" />
+               </tooltip>
+            </CheckBox>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
