@@ -6,7 +6,6 @@
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
@@ -24,13 +23,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="attendanceForm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="901.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.viewAttendanceController">
+<AnchorPane fx:id="attendanceForm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="931.0" prefWidth="1145.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.viewAttendanceController">
    <children>
-      <SplitPane dividerPositions="0.24349881796690306" layoutX="69.0" layoutY="48.0" prefHeight="558.0" prefWidth="901.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+      <SplitPane dividerPositions="0.24349881796690306" layoutX="69.0" layoutY="75.0" prefHeight="847.0" prefWidth="1145.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
         <items>
-          <AnchorPane fx:id="leftStack" maxWidth="250.0" minHeight="0.0" minWidth="230.0" prefHeight="556.0" prefWidth="243.0">
+          <AnchorPane fx:id="leftStack" maxWidth="300.0" minHeight="0.0" minWidth="250.0" prefHeight="556.0" prefWidth="273.0">
                <children>
-                  <VBox layoutX="14.0" layoutY="27.0" spacing="20.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="27.0">
+                  <VBox layoutX="14.0" layoutY="27.0" spacing="20.0" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="27.0">
                      <children>
                         <JFXButton fx:id="generatePDF" graphicTextGap="10.0" prefHeight="44.0" prefWidth="208.0" text="Generate Report">
                            <graphic>
@@ -51,31 +50,35 @@
                               <ToggleGroup fx:id="viewToggle" />
                            </toggleGroup></JFXRadioButton>
                         <JFXRadioButton fx:id="yesterdayAttendance" text="Attendance For Yesterday" toggleGroup="$viewToggle" visible="false" />
-                        <JFXRadioButton fx:id="dateAttendance" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" text="Date" toggleGroup="$viewToggle">
+                        <JFXRadioButton fx:id="dateAttendance" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="31.0" prefWidth="226.0" text="Sort by Date" toggleGroup="$viewToggle">
                            <graphic>
                               <JFXDatePicker fx:id="datePicker" prefHeight="31.0" prefWidth="120.0" />
                            </graphic></JFXRadioButton>
                         <VBox alignment="CENTER_RIGHT" spacing="10.0">
                            <children>
-                              <JFXRadioButton fx:id="classAttendance" prefHeight="17.0" prefWidth="213.0" text="View By Class" toggleGroup="$viewToggle" />
-                              <JFXComboBox fx:id="classCombo" prefHeight="25.0" prefWidth="140.0" promptText="Select a class" visible="false" />
+                              <JFXRadioButton fx:id="classAttendance" prefHeight="17.0" prefWidth="239.0" text="Sort by Class" toggleGroup="$viewToggle" />
+                              <JFXComboBox fx:id="classCombo" prefHeight="27.0" prefWidth="183.0" promptText="Select a class" visible="false" />
                            </children>
                         </VBox>
                         <TextField fx:id="stdAttendance" prefHeight="28.0" prefWidth="191.0" promptText="Enter student name or class" />
                      </children>
                   </VBox>
                   <ListView fx:id="stdListView" layoutX="15.0" layoutY="226.0" prefHeight="262.0" prefWidth="196.0" visible="false" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="226.0" />
-                  <FlowPane fx:id="statsPane" layoutX="17.0" layoutY="384.0" prefHeight="159.0" prefWidth="200.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="384.0">
+                  <FlowPane fx:id="statsPane" layoutX="17.0" layoutY="384.0" prefHeight="159.0" prefWidth="200.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="13.0">
                      <children>
-                        <PieChart prefHeight="135.0" prefWidth="200.0" />
+                        <ImageView fx:id="studentImage" fitHeight="162.0" fitWidth="224.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                             
+                           </image>
+                        </ImageView>
                      </children>
                   </FlowPane>
                   <Separator layoutX="8.0" layoutY="386.0" prefHeight="3.0" prefWidth="213.0" />
                </children>
             </AnchorPane>
-          <AnchorPane fx:id="root" minHeight="0.0" minWidth="0.0" prefHeight="566.0" prefWidth="654.0">
+          <AnchorPane fx:id="root" minHeight="0.0" minWidth="0.0" prefHeight="811.0" prefWidth="790.0">
                <children>
-                  <TableView fx:id="attendanceTableView" layoutX="-45.0" layoutY="93.0" prefHeight="510.0" prefWidth="677.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="attendanceTableView" layoutX="-45.0" layoutY="93.0" prefHeight="510.0" prefWidth="677.0" stylesheets="@../stylesheet/main.css" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="stdCol" minWidth="110.0" prefWidth="200.0" text="STUDENT" />
                         <TableColumn fx:id="stageCol" prefWidth="90.0" text="CLASS" />
@@ -103,18 +106,23 @@
                         </Label>
                      </children>
                   </HBox>
-                  <JFXButton fx:id="btnDetails" layoutX="14.0" layoutY="517.0" prefHeight="28.0" prefWidth="76.0" text="Details" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="EYE" size="14" />
-                     </graphic>
-                  </JFXButton>
+                  <HBox layoutX="9.0" layoutY="801.0" prefHeight="43.0" prefWidth="169.0" spacing="20.0">
+                     <children>
+                        <JFXButton fx:id="btnDetails" prefHeight="28.0" prefWidth="76.0" text="Details">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="EYE" size="14" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="close" prefHeight="30.0" prefWidth="81.0" text="Close" />
+                     </children>
+                  </HBox>
                </children>
             </AnchorPane>
         </items>
       </SplitPane>
-      <Text fill="#f5f3f3" layoutX="199.0" layoutY="32.58203125" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="ALL ATTENDANCE RECORDS" textAlignment="CENTER" wrappingWidth="465.0000083744526" AnchorPane.bottomAnchor="580.0" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="237.0" AnchorPane.topAnchor="11.0">
+      <Text fill="#f5f3f3" layoutX="828.0" layoutY="28.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="ALL ATTENDANCE RECORDS" textAlignment="CENTER" wrappingWidth="302.0000083744526" AnchorPane.rightAnchor="14.999991625547409" AnchorPane.topAnchor="14.46484375">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Text>
    </children>

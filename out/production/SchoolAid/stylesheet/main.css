@@ -87,13 +87,16 @@
     -fx-text-fill: #000;
     /*-fx-background-color: derive(-fx-primary, 20%);*/
 }
+
 /*#vbox .menu-button {*/
     /*-fx-background-color: derive(-fx-primary, 20%);*/
 /*}*/
+
 #vbox .menu-item {
     -fx-background-color: derive(-fx-primary, 120%);
     -fx-text-fill: -fx-blue;
 }
+
 #vbox .menu-item:focused {
     -fx-text-fill: #000;
     -fx-background-color: derive(-fx-primary, 20%);
@@ -172,9 +175,6 @@
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 
-#header {
-}
-
 #imageViewPane {
     -fx-border-color: #fff;
     -fx-background-color: derive(-fx-primary,0%);
@@ -194,7 +194,7 @@
 }
 
 .button :hover{
-    -fx-background-color: #fffff;
+    -fx-background-color: #ffffff;
 }
 
 .context-menu {
@@ -205,6 +205,18 @@
 /*.table-view {*/
 /*    -fx-cell-size: 20;*/
 /*}*/
+
+.owing {
+    -fx-background-color:#ffcccb;
+    -fx-border-width: 1px;
+    /*-fx-border-color: derive(-fx-primary, 170%);*/
+}
+
+.not-owing {
+    -fx-background-color:#d2f8d2;
+    -fx-border-width: 1px;
+    /*-fx-border-color: derive(-fx-primary, 170%);*/
+}
 
 .table-view .table-row-cell {
     -fx-cell-size: 60px;
@@ -227,12 +239,13 @@
     -fx-background-color: #ffffe0;
 }
 
-.table-row-cell {
-    -fx-border-color: derive(-fx-primary, 170%);
-}
-
 .table-row-cell:empty .table-cell {
     -fx-border-width: 0px;
+}
+
+.table-view .table-row-cell {
+    -fx-border-color: derive(-fx-primary, 170%);
+    -fx-border-width: 1px;
 }
 
 /*.table-row-cell:selected {*/
@@ -240,7 +253,7 @@
 /*}*/
 
 .table-row-cell:selected .text {
-    -fx-fill: steelblue ;
+    -fx-fill: #fff ;
 }
 
 #feedingType.column-header{
@@ -296,6 +309,10 @@
     -fx-background-color: -fx-yellow;
 }
 
+.table-view.column-header{
+    -fx-text-fill: -fx-primary;
+}
+
 #root .text-field {
     -fx-text-fill: #ffffff;
     -fx-font-size: 14px;
@@ -344,8 +361,14 @@
     -fx-text-fill: white;
 }
 
+/*change all the labels for the root*/
 #root .label {
     -fx-text-fill:#fff
+}
+
+/*change the labels for all tableviews*/
+#root .table-view .label {
+    -fx-text-fill: -fx-primary;
 }
 
 #root #infoLabel {
@@ -398,6 +421,7 @@
 .table-view .table-row-cell :hover {
     -fx-background-color:derive(-fx-primary, 120%);
     -fx-text-fill: #fff;
+    -fx-border-width: 1px;
 }
 
 /*set text fields with dark background and white color*/
@@ -420,4 +444,13 @@
 #totlaCol,
 #balCol{
     -fx-alignment: right;
+}
+
+/*style custom labels*/
+.heading-label, .white-label {
+    -fx-text-fill: #fff;
+}
+.owing-label {
+    -fx-text-fill: #ff4e20;
+    -fx-font-size: 18px;
 }

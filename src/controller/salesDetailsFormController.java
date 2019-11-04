@@ -901,32 +901,30 @@ public class salesDetailsFormController implements Initializable{
     }
 
     public void applyTableStyle(TableColumn col) {
-        col.setCellFactory(column -> new TableCell<AttendanceTemporary, String>() {
-            @Override
-            protected void updateItem(String bal, boolean empty) {
-            super.updateItem(bal, empty);
+        try {
+            col.setCellFactory(column -> new TableCell<AttendanceTemporary, String>() {
+                @Override
+                protected void updateItem(String bal, boolean empty) {
+                    super.updateItem(bal, empty);
 
-            setText(empty ? "" : getItem().toString());
-            setGraphic(null);
+                    setText(empty ? "" : getItem().toString());
+                    setGraphic(null);
 
-            TableRow<AttendanceTemporary> currentRow = getTableRow();
-
-            if (!isEmpty()  && !currentRow.isEmpty()) {
-                if(Double.valueOf(bal) < 0 )
-                    currentRow.setStyle("-fx-background-color:#ffcccb");
-//                currentRow.getStyle().concat("-fx-background-color:#ffcccb");
-                else if(Double.valueOf(bal) > 0 ){
-                    currentRow.setStyle("-fx-background-color:#d2f8d2");
-//                    currentRow.getStyle().concat("-fx-background-color:#ffcccb");
+                    // clear all classes
+                    this.getTableRow().getStyleClass().remove("owing");
+                    this.getTableRow().getStyleClass().remove("not-owing");
+                    if (!isEmpty()) {
+                        if(Double.valueOf(bal) < 0 ){
+                            this.getTableRow().getStyleClass().add("owing");
+                        } else if(Double.valueOf(bal) > 0 ){
+                            this.getTableRow().getStyleClass().add("not-owing");
+                        }
+                    }
                 }
-                else {
-                    currentRow.setStyle("-fx-background-color:#fff");
-                }
-            } else {
-                currentRow.setStyle("-fx-background-color:#fff");
-            }
-            }
-        });
+            });
+        } catch (Exception e) {
+            System.out.println("an error occurred");
+        }
     }
 
     private void makeAttendancePayment(AttendanceTemporary attendanceTemporary) {

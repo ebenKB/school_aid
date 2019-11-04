@@ -3,13 +3,20 @@ package com.hub.schoolAid;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * A guardian is any person whether related to the student or not who can stand in for the parents in their absence
+ * In this context, we use the term Guardian to refer to any person who is mandated to pick up the child after school
+ */
 @Entity
 public class Guardian {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
+    @Column(unique = true)
     private String fullname;
+
+    @Column(unique = true)
     private String contact;
 
     @ManyToMany(mappedBy = "guardian")

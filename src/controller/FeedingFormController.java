@@ -106,6 +106,9 @@ public class FeedingFormController implements Initializable {
     private Button printReport;
 
     @FXML
+    private Button close;
+
+    @FXML
     private MenuItem payFeedingMenu;
 
     @FXML
@@ -166,42 +169,44 @@ public class FeedingFormController implements Initializable {
     }
 
     public void populateTableview() {
-        if (attendanceTemporaries != null) {
-            studentCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getStudent().getFirstname() +" "+
-                    param.getValue().getStudent().getOthername()+ " " + param.getValue().getStudent().getLastname()));
+        try {
+            if (attendanceTemporaries != null) {
+                studentCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getStudent().getFirstname() +" "+
+                        param.getValue().getStudent().getOthername()+ " " + param.getValue().getStudent().getLastname()));
 
-            classCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getStudent().getStage().getName()));
+                classCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getStudent().getStage().getName()));
 
-            attendanceCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().isPresent() ? "PRESENT" : "ABSENT"));
+                attendanceCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().isPresent() ? "PRESENT" : "ABSENT"));
 
-            balanceCol.setCellValueFactory(param -> {
-                return  new SimpleStringProperty(String.valueOf(param.getValue().getStudent().getAccount().getFeedingFeeCredit()));
-            });
+                balanceCol.setCellValueFactory(param -> {
+                    return  new SimpleStringProperty(String.valueOf(param.getValue().getStudent().getAccount().getFeedingFeeCredit()));
+                });
 
-            couponCol.setCellValueFactory(param -> {
-                // check the number of coupons that the students has
-                int coupons = 0;
-                if (param.getValue().getStudent().getAccount().getFeedingFeeCredit() > 0) {
-                    // get the stated amount for feeding fee in the application
-                    coupons = ((int) (param.getValue().getStudent().getAccount().getFeedingFeeCredit() / AppDao.getAppSetting().getFeedingFee()));
+                couponCol.setCellValueFactory(param -> {
+                    // check the number of coupons that the students has
+                    int coupons = 0;
+                    if (param.getValue().getStudent().getAccount().getFeedingFeeCredit() > 0) {
+                        // get the stated amount for feeding fee in the application
+                        coupons = ((int) (param.getValue().getStudent().getAccount().getFeedingFeeCredit() / param.getValue().getStudent().getAccount().getFeedingFeeToPay()));
 
-                }
-                return new SimpleStringProperty(String.valueOf(coupons));
-            });
+                    }
+                    return new SimpleStringProperty(String.valueOf(coupons));
+                });
 
-            statusCol.setCellValueFactory(param -> {
-                return new SimpleStringProperty(param.getValue().getStudent().getAccount().getFeedingFeeCredit() < 0 ? "OWING" : "PAID");
-            });
+                statusCol.setCellValueFactory(param -> {
+                    return new SimpleStringProperty(param.getValue().getStudent().getAccount().getFeedingFeeCredit() < 0 ? "OWING" : "PAID");
+                });
 
-            studentTableView.setItems(attendanceTemporaries);
-            salesDetailsFormController.applyTableStyle(balanceCol);
-
-            this.addCheckBoxToTable(checkCol);
-        } else {
-            Notification.getNotificationInstance().notifyError("No records found in table", "Empty records");
+                this.addCheckBoxToTable(checkCol);
+                studentTableView.setItems(attendanceTemporaries);
+                salesDetailsFormController.applyTableStyle(balanceCol);
+            } else {
+                Notification.getNotificationInstance().notifyError("No records found in table", "Empty records");
+            }
+            setCounterLabel();
+        } catch (Exception e) {
+            System.out.println("an error occurred in table view");
         }
-        studentTableView.refresh();
-        setCounterLabel();
     }
 
     private void fetchRecords() {
@@ -436,12 +441,13 @@ public class FeedingFormController implements Initializable {
 
         printReport.setOnAction(event -> {
             if(stages == null || stages.isEmpty()) {
-                System.out.println("We are fetching the stages ..");
                 stages = stageDao.getGetAllStage();
             }
             showGenerateReportForm();
         });
 
+        close.setOnAction(event -> Utils.closeEvent(event));
+        
 //        searchStudent.textProperty().addListener(((observable, oldValue, newValue) -> {
 //            filteredAtt.setPredicate( (Predicate< ? super  AttendanceTemporary>) at ->{
 //                if( newValue == null || newValue.isEmpty() ) {

@@ -12,6 +12,7 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.hibernate.HibernateException;
 
 import java.awt.*;
 import java.io.File;
@@ -22,6 +23,7 @@ import java.util.List;
 
 public class PDFMaker {
     private static PDFMaker pdfMakerInstance;
+    private App app = AppDao.getAppSetting();
 
     public static PDFMaker getPDFMakerInstance() {
         if(pdfMakerInstance == null) {
@@ -51,7 +53,6 @@ public class PDFMaker {
 
     // create report for all students
     public  PDDocument createReport() {
-        System.out.println("We called the functio to creat report");
         pdDocument = new PDDocument();
         ObservableList <TerminalReport> reports = FXCollections.observableArrayList();
         assessmentList.addAll(assessmentDao.getAssessment());
@@ -77,11 +78,10 @@ public class PDFMaker {
         return pdDocument;
     }
 
-    private void prepPageWidthHeader(PDPageContentStream pageContentStream, Float margin, Float yStart, PDRectangle mediaBox) {
+    private void prepPageWidthHeader(PDPageContentStream pageContentStream, Float margin, Float yStart, PDRectangle mediaBox, String title) {
         try {
-            String schName = "THE FATHER'S MERCY SCHOOL";
-            String address = "Location: Sowutuom - Accra, Contact: ";
-            String heading = "TERMINAL REPORT";
+            String schName = app.getName().toUpperCase();
+            String address = app.getAddress().toUpperCase() + ", "+ app.getContact();
 
             float titleWidth = font.getStringWidth(schName) / 1000 * headerSize;
             float titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * headerSize;
@@ -89,12 +89,38 @@ public class PDFMaker {
             float startX = (mediaBox.getWidth() - titleWidth) / 2;
             float startY = mediaBox.getHeight() - (margin + 10) - titleHeight;
 
-            pageContentStream.setFont(PDType1Font.HELVETICA, 14);
+//            pageContentStream.setFont(PDType1Font.HELVETICA, 14);
+            pageContentStream.setFont(regText,contentSize);
             pageContentStream.beginText();
             pageContentStream.newLineAtOffset(startX, startY); // start writing from this line
             pageContentStream.showText(schName);
             pageContentStream.endText();
-//            createCenterText("FEEDING REPORT", mediaBox, margin, pageContentStream );
+
+            // add the address
+             pageContentStream.beginText();
+             titleWidth = font.getStringWidth(address)/1000 * contentSize ;
+             titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * contentSize ;
+
+             startX = (mediaBox.getWidth() -titleWidth) /2;
+             startY = mediaBox.getHeight() - (margin +30) - titleHeight;
+
+             pageContentStream.newLineAtOffset(startX,startY);
+             pageContentStream.showText(address);
+             pageContentStream.newLine();
+             pageContentStream.endText();
+
+             // add title
+             pageContentStream.beginText();
+             pageContentStream.setFont(font, headerSize);
+             titleWidth = font.getStringWidth(title)/1000 * headerSize ;
+             titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * headerSize ;
+
+             startX = (mediaBox.getWidth() - titleWidth) /2;
+             startY = mediaBox.getHeight() - (margin + 50) - titleHeight;
+             pageContentStream.newLineAtOffset(startX,startY);
+             pageContentStream.showText(title);
+             pageContentStream.endText();
+             pageContentStream.close();
         } catch (Exception e) {
 
         }
@@ -146,52 +172,55 @@ public class PDFMaker {
                 float yStart = (yStartNewPage - 105);
 
                 //Set alignment and add school header
-                prepPageWidthHeader(pdPageContentStream, margin, yStart, mediaBox);
-                createCenterText("FEEDING REPORT FOR "+ stage.toString().toUpperCase(), mediaBox, margin, pdPageContentStream );
+                String title = "FEEDING REPORT FOR "+ stage.toString().toUpperCase();
+                prepPageWidthHeader(pdPageContentStream, margin, yStart, mediaBox, title);
+//                createCenterText("FEEDING REPORT FOR "+ stage.toString().toUpperCase(), mediaBox, margin, pdPageContentStream );
 
                 // fetch the records from the database
-                students = studentDao.getStudentFromClass(stage);
-                if (students.size() > 0) {
-                    // Display the records in a table
-                    float tableWidth = page.getMediaBox().getWidth() - (2 * margin);
-                    BaseTable baseTable = new BaseTable(yStart - 30, yStartNewPage, 20, tableWidth, (margin), pdDocument, page, true, true);
-                    Row<PDPage> headerRow = baseTable.createRow(30f);
+                try {
+                    students = studentDao.getStudentFromClass(stage);
+                    if (students.size() > 0) {
+                        // Display the records in a table
+                        float tableWidth = page.getMediaBox().getWidth() - (2 * margin);
+                        BaseTable baseTable = new BaseTable(yStart - 30, yStartNewPage, 20, tableWidth, (margin), pdDocument, page, true, true);
+                        Row<PDPage> headerRow = baseTable.createRow(30f);
 
-                    createHeaderRow(headerRow, "STUDENT", (float) 30);
-                    createHeaderRow(headerRow, "BALANCE", (float) 20);
-                    createHeaderRow(headerRow, "MON", (float) 10);
-                    createHeaderRow(headerRow, "TUE", (float) 10);
-                    createHeaderRow(headerRow, "WED", (float) 10);
-                    createHeaderRow(headerRow, "THUR", (float) 10);
-                    createHeaderRow(headerRow, "FRI", (float) 10);
-                    baseTable.addHeaderRow(headerRow);
+                        createHeaderRow(headerRow, "STUDENT", (float) 30);
+                        createHeaderRow(headerRow, "BALANCE", (float) 20);
+                        createHeaderRow(headerRow, "MON", (float) 10);
+                        createHeaderRow(headerRow, "TUE", (float) 10);
+                        createHeaderRow(headerRow, "WED", (float) 10);
+                        createHeaderRow(headerRow, "THUR", (float) 10);
+                        createHeaderRow(headerRow, "FRI", (float) 10);
+                        baseTable.addHeaderRow(headerRow);
 
-                    // create rows for the table
-                    for (Student s : students) {
-                        Row<PDPage> row = baseTable.createRow(24f);
-                        Cell<PDPage> cell;
+                        // create rows for the table
+                        for (Student s : students) {
+                            Row<PDPage> row = baseTable.createRow(24f);
+                            Cell<PDPage> cell;
 
-                        cell = row.createCell(30, s.getFirstname() == null ? " " : s.getFirstname() + " " + s.getLastname() + " " + s.getOthername());
-                        cell.setAlign(HorizontalAlignment.LEFT);
-                        cell.setValign(VerticalAlignment.MIDDLE);
+                            cell = row.createCell(30, s.getFirstname() == null ? " " : s.getFirstname() + " " + s.getLastname() + " " + s.getOthername());
+                            cell.setAlign(HorizontalAlignment.LEFT);
+                            cell.setValign(VerticalAlignment.MIDDLE);
 
-                        cell = row.createCell(20, String.valueOf(s.getAccount().getFeedingFeeCredit()));
-                        cell.setAlign(HorizontalAlignment.CENTER);
-                        cell.setValign(VerticalAlignment.MIDDLE);
-                        getEmptyPageCellForFeeding(row);
-                        getEmptyPageCellForFeeding(row);
-                        getEmptyPageCellForFeeding(row);
-                        getEmptyPageCellForFeeding(row);
-                        getEmptyPageCellForFeeding(row);
+                            cell = row.createCell(20, String.valueOf(s.getAccount().getFeedingFeeCredit()));
+                            cell.setAlign(HorizontalAlignment.CENTER);
+                            cell.setValign(VerticalAlignment.MIDDLE);
+                            getEmptyPageCellForFeeding(row);
+                            getEmptyPageCellForFeeding(row);
+                            getEmptyPageCellForFeeding(row);
+                            getEmptyPageCellForFeeding(row);
+                            getEmptyPageCellForFeeding(row);
+                        }
+                        // draw the table
+                        baseTable.draw();
                     }
-                    // draw the table
-                    baseTable.draw();
+                    pdPageContentStream.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new Exception(e);
                 }
-                pdPageContentStream.close();
             }
-
-
-//            savePDFToLocation(pdDocument);
             return pdDocument;
     }
 
@@ -214,9 +243,9 @@ public class PDFMaker {
                     PDRectangle mediaBox = pdPage.getMediaBox();
 
                     //add header text
-                    String schName = "THE FATHER'S MERCY SCHOOL";
-                    String address = "Location: Sowutuom - Accra, Contact: ";
-                    String heading = "TERMINAL REPORT";
+                    String schName = app.getName().toUpperCase();
+//                    String address = "Location: Sowutuom - Accra, Contact: ";
+//                    String heading = "TERMINAL REPORT";
 
                     //student details\
                     String name = "Name: " + report.getStudent().toString().toUpperCase() + "                Class: " + report.getStudent().getStage().getName().toUpperCase();
@@ -238,6 +267,8 @@ public class PDFMaker {
                     float startX = (mediaBox.getWidth() - titleWidth) / 2;
                     float startY = mediaBox.getHeight() - (margin + 10) - titleHeight;
                     PDPageContentStream pageContentStream = new PDPageContentStream(pdDocument, pdPage);
+
+                    prepPageWidthHeader(pageContentStream, margin, yStart, mediaBox, "");
 
 
 
@@ -499,7 +530,10 @@ public class PDFMaker {
     }
 
     public static  void createAttendanceReport (LocalDate from,LocalDate to,List<Attendance> attendanceList){
+        System.out.println("We want to preapre report with FROM and TO");
 
+        // loop through the attendance and compare the dates
+        //  the attendance date should be greater than or equal to FROM but less than TO or equal to TO
     }
 
     public  void createBillAndItemList() {
@@ -840,8 +874,7 @@ public class PDFMaker {
            PDRectangle mediaBox = pdPage.getMediaBox();
 
            //add header text
-           String schName = "THE FATHER'S MERCY SCHOOL";
-           String address ="Location: Sowutuom - Accra, Contact:";
+//           String schName = app.getName().toUpperCase();
            String heading = "REPORT ON ATTENDANCE FOR" + " " + this.dateToString(date);
 
            pdDocument.addPage(pdPage);
@@ -850,102 +883,30 @@ public class PDFMaker {
            float yStartNewPage = pdPage.getMediaBox().getHeight() - ( margin);
            float yStart = pdPage.getMediaBox().getHeight() - ( margin + 105);
 
-           float titleWidth = font.getStringWidth(schName)/1000 * headerSize ;
-           float titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * headerSize ;
-
-           float startX = (mediaBox.getWidth() -titleWidth) /2;
-           float startY = mediaBox.getHeight() - (margin + 10) - titleHeight;
            PDPageContentStream pageContentStream = new PDPageContentStream(pdDocument,pdPage);
-
-           pageContentStream.beginText();
-
-           //show school name
-           pageContentStream.newLineAtOffset(startX,startY);
-           pageContentStream.setFont(font,headerSize);
-           pageContentStream.setLeading(15f);
-           pageContentStream.showText(schName);
-           pageContentStream.newLine();
-           pageContentStream.endText();
-
-           //show address
-           pageContentStream.beginText();
-           pageContentStream.setFont(font,contentSize);
-           titleWidth = font.getStringWidth(address)/1000 * contentSize ;
-           titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * contentSize ;
-
-           startX = (mediaBox.getWidth() -titleWidth) /2;
-           startY = mediaBox.getHeight() - (margin + 30) - titleHeight;
-
-           pageContentStream.newLineAtOffset(startX,startY);
-           pageContentStream.showText(address);
-           pageContentStream.newLine();
-           pageContentStream.endText();
-
-
-           //show heading
-           pageContentStream.beginText();
-           pageContentStream.setFont(font,headerSize);
-           titleWidth = font.getStringWidth(heading)/1000 * headerSize ;
-           titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * headerSize ;
-
-           startX = (mediaBox.getWidth() - titleWidth) /2;
-           startY = mediaBox.getHeight() - (margin + 50) - titleHeight;
-           pageContentStream.newLineAtOffset(startX,startY);
-           pageContentStream.showText(heading);
-           pageContentStream.newLine();
-           pageContentStream.endText();
-
-           pageContentStream.close();
+           prepPageWidthHeader(pageContentStream, margin, yStart, mediaBox, heading);
+//           pageContentStream.close();
 
            //add table
-           float tableWidth = pdPage.getMediaBox().getWidth() - (2 * margin);
+           float tableWidth = pdPage.getMediaBox().getWidth() - ((2 * margin));
            BaseTable baseTable = new BaseTable(yStart ,yStartNewPage,20,tableWidth,(margin),pdDocument,pdPage,true,true);
 
            //Create Header Row
            Row<PDPage>headerRow = baseTable.createRow(15f);
            Cell <PDPage> cell ;
-//           cell.setFontSize(12);
-           cell= headerRow.createCell(40,"STUDENT");
-           cell.setAlign(HorizontalAlignment.CENTER);
-           cell.setValign(VerticalAlignment.MIDDLE);
-           cell.setFillColor(Color.lightGray);
-           cell.setTextColor(Color.BLACK);
-
-           cell=headerRow.createCell(14,"CLASS");
-           cell.setAlign(HorizontalAlignment.CENTER);
-           cell.setValign(VerticalAlignment.MIDDLE);
-           cell.setFillColor(Color.lightGray);
-           cell.setTextColor(Color.BLACK);
-
-           cell = headerRow.createCell(14,"PAID");
-           cell.setAlign(HorizontalAlignment.CENTER);
-           cell.setValign(VerticalAlignment.MIDDLE);
-           cell.setFillColor(Color.lightGray);
-           cell.setTextColor(Color.BLACK);
-
-           cell=headerRow.createCell(10,"AMOUNT PAID");
-           cell.setAlign(HorizontalAlignment.CENTER);
-           cell.setValign(VerticalAlignment.MIDDLE);
-           cell.setFillColor(Color.lightGray);
-           cell.setTextColor(Color.BLACK);
-
-//           cell = headerRow.createCell(15,"DATE");
-//           cell.setAlign(HorizontalAlignment.CENTER);
-//           cell.setValign(VerticalAlignment.MIDDLE);
-//           cell.setFillColor(Color.lightGray);
-//           cell.setTextColor(Color.BLACK);
 
 
-           cell.setFillColor(Color.lightGray);
-           cell.setAlign(HorizontalAlignment.CENTER);
-           cell.setValign(VerticalAlignment.MIDDLE);
-           cell.setTextColor(Color.BLACK);
+           createHeaderRow(headerRow, "STUDENT", (float) 40);
+           createHeaderRow(headerRow, "CLASS", (float)14);
+           createHeaderRow(headerRow, "PAID", (float)14);
+           createHeaderRow(headerRow, "AMOUNT PAID", (float)10);
+
            baseTable.addHeaderRow(headerRow);
 
            for (Attendance attendance:attendanceList){
                if(attendance.getDate().toString().equals(date.toString())){
                    Row<PDPage> row = baseTable.createRow(10f);
-                   cell = row.createCell(40,attendance.getStudent().toString());
+                   row.createCell(40,attendance.getStudent().toString());
 
                    cell = row.createCell(14,attendance.getStudent().getStage().getName());
                    cell.setAlign(HorizontalAlignment.CENTER);
@@ -957,20 +918,14 @@ public class PDFMaker {
 
 
                    if((attendance.getStudent().getPayFeeding() && attendance.getPaidNow())) {
-                       cell = row.createCell(10, String.valueOf(attendance.getFeedingFee()));
+                       row.createCell(10, String.valueOf(attendance.getFeedingFee()));
                        totalFeeding +=attendance.getFeedingFee();
 
-                   }else{
-                       cell = row.createCell(10, "0.00");
+                   } else{
+                       row.createCell(10, "0.00");
                    }
 
                    totalAttendance++;
-//                   cell.setAlign(HorizontalAlignment.CENTER);
-//                   cell.setValign(VerticalAlignment.MIDDLE);
-
-//                   cell = row.createCell(12,attendance.getDate().toString());
-//                   cell.setAlign(HorizontalAlignment.CENTER);
-//                   cell.setValign(VerticalAlignment.MIDDLE);
                }
            }
 

@@ -116,13 +116,13 @@ public class Utils {
     public static boolean checkIfStudent(String lowerVal, Student student) {
         if(student.getFirstname().toLowerCase().contains(lowerVal)){
             return true;
-        }else if(student.getLastname().toLowerCase().contains(lowerVal)){
+        } else if(student.getLastname().toLowerCase().contains(lowerVal)){
             return true;
-        }else if(student.getOthername().toLowerCase().contains(lowerVal)){
+        } else if(student.getOthername().toLowerCase().contains(lowerVal)){
             return true;
-        }else if (student.toString().trim().replace(" ","").toLowerCase().contains(lowerVal.trim().replace(" ",""))){
+        } else if (student.toString().trim().replace(" ","").toLowerCase().contains(lowerVal.trim().replace(" ",""))){
             return true;
-        }else if (student.getStage().getName().trim().replace(" ","").toLowerCase().contains(lowerVal.trim().replace(" ",""))){
+        } else if (student.getStage().getName().trim().replace(" ","").toLowerCase().contains(lowerVal.trim().replace(" ",""))){
             return true;
         }
         return false;

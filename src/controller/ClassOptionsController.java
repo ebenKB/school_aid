@@ -16,6 +16,7 @@ import javafx.scene.layout.Pane;
 import org.controlsfx.control.CheckComboBox;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -41,7 +42,7 @@ public class ClassOptionsController implements Initializable {
     @FXML
     private Pane root;
 
-    private List<Stage>stages;
+    private List<Stage>stages = new ArrayList<>();
     private List<Stage>selectedStages;
 
     public List<Stage> getStages() {
@@ -64,7 +65,16 @@ public class ClassOptionsController implements Initializable {
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                 if(newValue == selectClasses) {
                     classesComobo.setVisible(true);
-                } else classesComobo.setVisible(false);
+
+                    // clear all selection
+                    selectedStages.clear();
+                    classesComobo.getCheckModel().getCheckedItems().clear();
+                } else {
+                    classesComobo.setVisible(false);
+
+                    // select all classes
+                    selectedStages = stages;
+                }
             }
         });
 
@@ -92,7 +102,7 @@ public class ClassOptionsController implements Initializable {
                 } catch (Exception e) {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "", ButtonType.OK);
                     alert.setTitle("Error");
-                    alert.setHeaderText("Your request could not be processed.\n Please try again.");
+                    alert.setHeaderText("An error occurred while preparing the report.\n Please try again.");
                     alert.show();
                 }
             } else {

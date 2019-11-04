@@ -35,7 +35,6 @@ public class StudentDao {
             student.setPayFeeding(true);
             student.setReg_date(LocalDate.now());
             student.setDeleted(false);
-            System.out.println("This is the student: "+ student.getParent().toString());
             HibernateUtil.save(Student.class, student);
 
             stageDao = new StageDao();
@@ -164,15 +163,16 @@ public class StudentDao {
        }
     }
 
-    public List<Student> getStudentFromClass(Stage newStage){
+    public List<Student> getStudentFromClass(Stage newStage) throws Exception {
         try{
-            em=HibernateUtil.getEntityManager();
-            HibernateUtil.begin();
+            if(em==null) {
+                em=HibernateUtil.getEntityManager();
+                HibernateUtil.begin();
+            }
             List<Student> results = em.createQuery("FROM students S WHERE S.stage.id =? order by S.firstname asc ").setParameter(0,newStage.getId()).getResultList();
             return results;
         }catch (HibernateException e){
-            e.printStackTrace();
-            return null;
+            throw new HibernateException(e);
         }finally {
            if(em == null) {
                em.clear();

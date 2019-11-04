@@ -14,17 +14,17 @@ public class AppDao {
     public static App getAppSetting() {
         if(app ==  null) {
             try {
+                System.out.println("From the database");
                 em = HibernateUtil.getEntityManager();
                 HibernateUtil.begin();
                 Query query = em.createQuery("from app ");
                 app =(App) query.getSingleResult();
             }catch (Exception e) {
-                e.printStackTrace();
                 return null;
             } finally {
                 em.close();
             }
-        }
+        } else System.out.println("Not from the database");
         return app;
     }
 //    public static Boolean canShowPopUp(){
@@ -53,7 +53,7 @@ public class AppDao {
             app.setCanShowIntroHelp(true);
             app.setFeedingType(FeedingType.COUPON);
             app.setCanShowPopUp(true);
-            app.setFeedingFee(5.0);
+//            app.setFeedingFee(5.0);
             app.setHasInit(true);
 
             // save the records to the database
@@ -70,6 +70,19 @@ public class AppDao {
         }
     }
 
+    public Boolean createAppSettings(App app) {
+        if (app ==null)
+            return false;
+        try {
+            em = HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            HibernateUtil.save(App.class, app);
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 //    public App getAppSettings() {
 //        try {
 //            em = HibernateUtil.getEntityManager();

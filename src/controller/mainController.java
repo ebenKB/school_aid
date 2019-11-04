@@ -163,12 +163,6 @@ public class mainController implements Initializable{
     private MenuItem newSale;
 
     @FXML
-    private MenuItem deleteStudent;
-
-    @FXML
-    private MenuItem promoteStudent;
-
-    @FXML
     private MenuItem createClass;
 
     @FXML
@@ -237,8 +231,11 @@ public class mainController implements Initializable{
     @FXML
     private MenuItem view_staff;
 
+    @FXML
+    private Button schoolFees;
+
     public static User user;
-    private ObservableList<Student> data= FXCollections.observableArrayList();
+    private ObservableList<Student> data = FXCollections.observableArrayList();
     private FilteredList<Student> filteredData = new FilteredList <> (data, e ->true);
     private SortedList<Student> sortedList = new SortedList<>(filteredData);
     private StudentDao studentDao =new StudentDao();
@@ -427,6 +424,27 @@ public class mainController implements Initializable{
             stage.setMaximized(false);
             stage.show();
         }catch (Exception e) {
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "Error");
+        }
+    }
+
+    private void showSchoolFees() {
+        try {
+            Parent root;
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/school_fees_dashboard.fxml"));
+            root = fxmlLoader.load();
+            SchoolFeesFormController controller = fxmlLoader.getController();
+            controller.initialize(data);
+            Scene scene = new Scene(root);
+            javafx.stage.Stage stage = new javafx.stage.Stage();
+            stage.setScene(scene);
+            stage.setTitle("School Fees");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setMaximized(true);
+            stage.show();
+
+        } catch (Exception e) {
             e.printStackTrace();
             Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "Error");
         }
@@ -506,8 +524,8 @@ public class mainController implements Initializable{
 
         studentTableView.setRowFactory(param -> {
             final TableRow<Student> row = new TableRow<>();
-            row.setOnMouseClicked(event ->{
-                if(event.getClickCount()==2){
+            row.setOnMouseClicked(event -> {
+                if(event.getClickCount() == 2){
                     //listening for double click
                     if(!studentTableView.getItems().isEmpty()){
                         showStudentDetailsForm(studentTableView.getSelectionModel().getSelectedItem());
@@ -687,6 +705,8 @@ public class mainController implements Initializable{
         });
 
         editStage.setOnAction(event -> this.showEditStageForm());
+
+        schoolFees.setOnAction(event -> showSchoolFees());
     }
 
     private void searchTable() {

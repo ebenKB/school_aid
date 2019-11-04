@@ -465,7 +465,7 @@ public class AttendanceTemporaryDao {
     }
 
     public Boolean canCreateAttendance() {
-        if ( (this.checkAttendanceInterval() == 0)|| ((this.checkAttendanceInterval() > 0) && (this.checkAttendanceInterval() > 0) && (this.checkAttendanceInterval() < 15))) {
+        if ( (this.checkAttendanceInterval() == 1)|| ((this.checkAttendanceInterval() > 0) && (this.checkAttendanceInterval() < 15))) {
             System.out.println("We can create an attendance"+ this.checkAttendanceInterval());
             return true;
         } else {

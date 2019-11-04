@@ -1,9 +1,13 @@
 package com.hub.schoolAid;
 
+import controller.AppSettingsController;
 import javafx.application.Application;
 import javafx.concurrent.Task;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -44,18 +48,22 @@ public class Main extends Application {
             if(connected) {
                 // Set app defaults if it has not been set
                 appSettings = AppDao.getAppSetting();
+                AppSettingsController settingsController = new AppSettingsController();
                 if (appSettings != null) {
                     if (!appSettings.getHasInit()) {
                         System.out.println("The app has not been initialized ...");
+                        settingsController.showAppSettingsForm();
                     } else {
-                        System.out.println("The app has been initialized ...");
+                        System.out.println("The app has init");
+                        initializer.showLoginForm();
                     }
                 } else {
                     System.out.println("The app is null");
-                    appDao.setDefault();
+                    settingsController.showAppSettingsForm();
+//                    appDao.setDefault();
                 }
-                initializer.showLoginForm();
-            }else{
+//                initializer.showLoginForm();
+            }else {
               Alert alert =new Alert(Alert.AlertType.ERROR,"", ButtonType.OK);
               alert.setTitle("Error");
               alert.setHeaderText("Error Connecting to Database");

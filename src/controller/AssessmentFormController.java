@@ -22,6 +22,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Pair;
+import org.hibernate.HibernateException;
 
 import java.net.URL;
 import java.util.Iterator;
@@ -487,7 +488,12 @@ public class AssessmentFormController implements Initializable{
 
 //            tempAssessment.clear();
 
-            tempStudents.addAll(studentDao.getStudentFromClass(stage));
+            try {
+                tempStudents.addAll(studentDao.getStudentFromClass(stage));
+            } catch (Exception e) {
+                // an error occurred while fetching the records
+            }
+
             List<Assessment> assessmentList = assessmentDao.getAssessment(course,stage);
             for(Assessment as : assessmentList){
                 if(! tempAssessment.contains(as)){

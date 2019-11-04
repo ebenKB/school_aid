@@ -18,12 +18,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.util.Callback;
 import javafx.util.Pair;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
@@ -41,6 +44,9 @@ public class viewAttendanceController implements Initializable{
 
     @FXML
     private JFXButton btnDetails;
+
+    @FXML
+    private JFXButton close;
 
     @FXML
     private JFXRadioButton yesterdayAttendance;
@@ -85,6 +91,9 @@ public class viewAttendanceController implements Initializable{
     private Label feedingTotal;
 
     @FXML
+    private ImageView studentImage;
+
+    @FXML
     private FlowPane statsPane;
 
     @FXML
@@ -103,20 +112,25 @@ public class viewAttendanceController implements Initializable{
     ObservableList<Attendance> attendanceList = FXCollections.observableArrayList();
     FilteredList<Attendance> filteredList = new FilteredList<>(attendanceList, e -> true);
     SortedList <Attendance> sortedList = new SortedList<>(filteredList);
+    private List<Stage>stageList = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         stdAttendance.setOnKeyReleased(e -> filterAttendanceByText());
+
         generatePDF.setOnAction(e -> {
             Optional<Pair<LocalDate,LocalDate>> result = showPDFDialog();
            result.ifPresent(pair -> {
-                if(pair.getKey() != null){
+                if(pair.getKey() != null && pair.getValue() == null) {
+                    System.out.println("IN IF CONDITION: These are the values : "+ pair.getKey()+" " + pair.getValue());
                     PDFMaker.getPDFMakerInstance().createAttendanceReport(pair.getKey(),attendanceList);
-                }else {
+                } else {
                     PDFMaker.createAttendanceReport(pair.getKey(),pair.getValue(),attendanceList);
+                    System.out.println("IN ELSE CONDITION : These are the values : "+ pair.getKey()+" " + pair.getValue());
                 }
            });
         });
+
 
         //filter records here
         viewToggle.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
@@ -145,7 +159,12 @@ public class viewAttendanceController implements Initializable{
             public void changed(ObservableValue<? extends Stage> observable, Stage oldValue, Stage newValue) {
                 if(newValue !=null){
                     StudentDao studentDao = new StudentDao();
-                    stdListView.getItems().addAll(studentDao.getStudentFromClass(newValue));
+                    try {
+                        stdListView.getItems().addAll(studentDao.getStudentFromClass(newValue));
+                    } catch (Exception e) {
+//                        e.printStackTrace();
+                        Notification.getNotificationInstance().notifyError("An error occurred while fetching the records", "Error");
+                    }
                 }
             }
         });
@@ -171,6 +190,41 @@ public class viewAttendanceController implements Initializable{
                }
             }
         });
+
+        classAttendance.setOnAction(event -> {
+            System.out.println("we want to filter the attendance by class");
+            if(stageList.isEmpty() || stageList == null) {
+                // get all the class
+                StageDao stageDao = new StageDao();
+                stageList.addAll(stageDao.getGetAllStage());
+            }
+
+            // check if the combo box is empty
+            if(classCombo.getItems().isEmpty()) {
+                // set the classes to the combo box
+                classCombo.getItems().addAll(stageList);
+                classCombo.setVisible(true);
+            }
+        });
+
+        classCombo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Stage>() {
+            @Override
+            public void changed(ObservableValue<? extends Stage> observable, Stage oldValue, Stage newValue) {
+                System.out.println("This is the stage we have selected"+ newValue);
+                filteredList.setPredicate( (Predicate < ? super  Attendance > ) at ->{
+                    if( newValue == null ) {
+                        return  true;
+                    }
+
+                    String lowerVal = newValue.getName().toLowerCase();
+                    return  checkIfStudent(lowerVal, at.getStudent());
+                });
+                sortedList.comparatorProperty().bind(attendanceTableView.comparatorProperty());
+                attendanceTableView.setItems(sortedList);
+            }
+        });
+
+        close.setOnAction(event -> Utils.closeEvent(event));
 
 //            stdListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {
 //                @Override
@@ -373,6 +427,7 @@ public class viewAttendanceController implements Initializable{
 
         RadioButton date = new RadioButton("BY DATE");
         date.setSelected(Boolean.TRUE);
+
         RadioButton period = new RadioButton("PERIOD");
         ToggleGroup toggleGroup = new ToggleGroup();
         date.setToggleGroup(toggleGroup);

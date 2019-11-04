@@ -959,8 +959,7 @@ public class studentDetailsFormController implements Initializable{
         try{
             if (student.getPicture() != null) {
                 ImageHandler.setImage(student.getPicture(), studentImage);
-//                JavaFxImageConversion jx = new JavaFxImageConversion();
-//                studentImage.setImage(jx.getJavaFXImage(student.getPicture().clone(), 140, 149));
+
             }
 //            StudentDetailsDao detailsDao =new StudentDetailsDao();
 //            if(detailsDao.getImage(student)!=null){

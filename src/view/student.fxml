@@ -45,7 +45,7 @@
                                     <Font size="13.0" />
                                  </font>
                               </JFXTextField>
-                              <JFXTextField fx:id="previousSchool" prefHeight="52.0" prefWidth="356.0" promptText="Previous School" />
+                              <JFXTextField fx:id="previousSchool" focusColor="#fafbfc" prefHeight="52.0" prefWidth="356.0" promptText="Previous School" />
                            </children>
                         </VBox>
                         <ComboBox fx:id="classCombo" prefHeight="36.0" prefWidth="292.0" promptText="SELECT CLASS / FORM" />
@@ -117,6 +117,7 @@
                               <Font size="13.0" />
                            </font>
                         </JFXTextField>
+                        <JFXTextField fx:id="relationshipToWard" focusColor="#fafbfc" promptText="RELATION TO WARD" />
                         <JFXTextField fx:id="occupation" accessibleText="Occupation" focusColor="#fafbfc" labelFloat="true" layoutX="10.0" layoutY="60.0" maxWidth="330.0" minWidth="330.0" prefHeight="35.0" prefWidth="330.0" promptText="OCCUPATION">
                            <font>
                               <Font size="13.0" />
@@ -132,7 +133,7 @@
                               <Font size="13.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="location" promptText="LOCATION" />
+                        <JFXTextField fx:id="location" focusColor="#fafbfc" promptText="LOCATION" />
                      </children>
                   </VBox>
                   <VBox layoutY="359.0" prefHeight="352.0" prefWidth="320.0" spacing="25.0">
@@ -225,8 +226,8 @@
                               </HBox>
                               <VBox prefHeight="106.0" prefWidth="364.0" spacing="20.0">
                                  <children>
-                                    <JFXTextField fx:id="guardian_1_name" prefHeight="43.0" prefWidth="271.0" promptText="Name" />
-                                    <JFXTextField fx:id="guardian_1_contact" prefHeight="43.0" prefWidth="271.0" promptText="Contact" />
+                                    <JFXTextField fx:id="guardian_1_name" focusColor="#fafbfc" prefHeight="43.0" prefWidth="271.0" promptText="Name" />
+                                    <JFXTextField fx:id="guardian_1_contact" focusColor="#fafbfc" prefHeight="43.0" prefWidth="271.0" promptText="Contact" />
                                  </children>
                               </VBox>
                            </children>
@@ -241,8 +242,8 @@
                               </HBox>
                               <VBox prefHeight="106.0" prefWidth="364.0" spacing="20.0">
                                  <children>
-                                    <JFXTextField fx:id="guardian_2_name" prefHeight="43.0" prefWidth="271.0" promptText="Name" />
-                                    <JFXTextField fx:id="guardian_2_contact" prefHeight="43.0" prefWidth="271.0" promptText="Contact" />
+                                    <JFXTextField fx:id="guardian_2_name" focusColor="#fafbfc" prefHeight="43.0" prefWidth="271.0" promptText="Name" />
+                                    <JFXTextField fx:id="guardian_2_contact" focusColor="#fafbfc" prefHeight="43.0" prefWidth="271.0" promptText="Contact" />
                                  </children>
                               </VBox>
                            </children>

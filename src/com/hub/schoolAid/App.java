@@ -14,7 +14,12 @@ public class App {
     private Boolean canShowPopUp;
     private Boolean canShowIntroHelp;
     private Boolean hasInit;
-    private  Double feedingFee;
+    private String contact;
+    private String name;
+    private String motto;
+    private String address;
+    private String currencyType;
+
 
     @Enumerated(EnumType.STRING)
     private FeedingType feedingType;
@@ -54,11 +59,43 @@ public class App {
         this.feedingType = feedingType;
     }
 
-    public Double getFeedingFee() {
-        return feedingFee;
+    public Long getId() {
+        return id;
     }
 
-    public void setFeedingFee(Double feedingFee) {
-        this.feedingFee = feedingFee;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMotto() {
+        return motto;
+    }
+
+    public void setMotto(String motto) {
+        this.motto = motto;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
