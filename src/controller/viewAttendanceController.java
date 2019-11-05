@@ -162,7 +162,6 @@ public class viewAttendanceController implements Initializable{
                     try {
                         stdListView.getItems().addAll(studentDao.getStudentFromClass(newValue));
                     } catch (Exception e) {
-//                        e.printStackTrace();
                         Notification.getNotificationInstance().notifyError("An error occurred while fetching the records", "Error");
                     }
                 }
@@ -192,7 +191,6 @@ public class viewAttendanceController implements Initializable{
         });
 
         classAttendance.setOnAction(event -> {
-            System.out.println("we want to filter the attendance by class");
             if(stageList.isEmpty() || stageList == null) {
                 // get all the class
                 StageDao stageDao = new StageDao();

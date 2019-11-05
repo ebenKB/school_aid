@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -16,17 +20,17 @@
 
 <AnchorPane fx:id="darkPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0" prefWidth="1205.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SchoolFeesFormController">
    <children>
-      <Pane fx:id="separator" layoutY="114.0" prefHeight="7.0" prefWidth="1205.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Pane fx:id="separator" layoutY="112.0" prefHeight="7.0" prefWidth="1205.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <AnchorPane fx:id="root" prefHeight="112.0" prefWidth="1205.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox fx:id="actionsHBox" layoutX="962.0" layoutY="75.0" spacing="20.0" AnchorPane.rightAnchor="37.0" AnchorPane.topAnchor="75.0">
                <children>
-                  <Button fx:id="printStatement" mnemonicParsing="false" prefHeight="21.0" prefWidth="93.0" text="Print Statement" />
-                  <Button fx:id="printReport" mnemonicParsing="false" prefHeight="21.0" prefWidth="93.0" text="Print Report" />
+                  <Button fx:id="printStatement" disable="true" mnemonicParsing="false" prefHeight="21.0" prefWidth="93.0" text="Print Statement" />
+                  <Button fx:id="printReport" disable="true" mnemonicParsing="false" prefHeight="21.0" prefWidth="93.0" text="Print Report" />
                </children>
             </HBox>
             <TextField fx:id="searchBox" layoutX="32.0" layoutY="37.0" prefHeight="38.0" prefWidth="383.0" promptText="Enter name or class to search" style="-fx-background-radius: 100;" />
-            <Text fill="WHITE" layoutX="1043.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="School Fees" textAlignment="CENTER" wrappingWidth="124.4033203125" AnchorPane.rightAnchor="37.5966796875" AnchorPane.topAnchor="13.59765625">
+            <Text fill="#d3d0d0" layoutX="1043.0" layoutY="31.40234375" strokeType="OUTSIDE" strokeWidth="0.0" text="School Fees" textAlignment="CENTER" wrappingWidth="112.4033203125" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="14.0">
                <font>
                   <Font size="18.0" />
                </font>
@@ -35,9 +39,10 @@
       </AnchorPane>
       <TableView fx:id="studentTableview" layoutX="270.0" layoutY="155.0" prefHeight="601.0" prefWidth="613.0" AnchorPane.bottomAnchor="89.0" AnchorPane.leftAnchor="270.0" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="155.0">
         <columns>
-          <TableColumn fx:id="studentCol" minWidth="280.0" prefWidth="297.0" text="STUDENT" />
-          <TableColumn fx:id="classCol" maxWidth="2000.0" minWidth="70.0" prefWidth="242.0" text="CLASS" />
-            <TableColumn fx:id="balanceCol" maxWidth="2000.0" minWidth="70.0" prefWidth="75.0" text="BALANCE" />
+            <TableColumn fx:id="checkCol" maxWidth="100.0" minWidth="70.0" prefWidth="70.0" />
+          <TableColumn fx:id="studentCol" maxWidth="3000.0" minWidth="280.0" prefWidth="322.888916015625" text="STUDENT" />
+          <TableColumn fx:id="classCol" maxWidth="2000.0" minWidth="70.0" prefWidth="124.333251953125" text="CLASS" />
+            <TableColumn fx:id="balanceCol" maxWidth="2000.0" minWidth="94.3333740234375" prefWidth="119.0001220703125" text="BALANCE" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -45,27 +50,53 @@
       </TableView>
       <AnchorPane layoutX="947.0" layoutY="154.0" prefHeight="601.0" prefWidth="229.0" AnchorPane.bottomAnchor="90.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="154.0">
          <children>
-            <VBox layoutX="-1.0" spacing="40.0">
+            <VBox layoutX="-1.0" prefHeight="548.0" prefWidth="229.0" spacing="40.0">
                <children>
-                  <Label fx:id="imageLabel" alignment="CENTER" prefHeight="18.0" prefWidth="229.0" textFill="#ffd800" />
+                  <Label fx:id="imageLabel" alignment="CENTER" prefHeight="18.0" prefWidth="229.0" text="Image is not available" textFill="#ffd800" visible="false" />
                   <ImageView fx:id="studentImageview" fitHeight="154.0" fitWidth="229.0" pickOnBounds="true" preserveRatio="true" />
-                  <VBox fx:id="detailsVBox" prefHeight="400.0" prefWidth="207.0" />
+                  <VBox fx:id="detailsVBox" prefHeight="419.0" prefWidth="229.0" />
+                  <Hyperlink fx:id="viewPaymentDetails" prefHeight="25.0" prefWidth="240.0" text="View Payment Details" textFill="#ffd400" visible="false" />
                </children>
             </VBox>
          </children></AnchorPane>
       <JFXButton fx:id="close" layoutX="1091.0" layoutY="788.0" text="CLOSE" textFill="#f2eded" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="53.0" />
-      <HBox alignment="CENTER" layoutX="785.0" layoutY="775.0" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="280.0">
+      <HBox alignment="CENTER" layoutX="785.0" layoutY="775.0" spacing="10.0" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="280.0">
          <children>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Total" wrappingWidth="46.99999636411667">
                <font>
-                  <Font size="14.0" />
+                  <Font size="18.0" />
                </font>
             </Text>
-            <TextField fx:id="totalRecords" prefHeight="51.0" prefWidth="93.0">
+            <TextField fx:id="totalRecords" prefHeight="40.0" prefWidth="93.0">
                <font>
                   <Font name="Arial Black" size="24.0" />
                </font>
             </TextField>
+         </children>
+      </HBox>
+      <VBox layoutX="24.0" layoutY="154.0" prefHeight="76.0" prefWidth="218.0" spacing="20.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="154.0">
+         <children>
+            <JFXCheckBox fx:id="filter" prefHeight="27.0" prefWidth="149.0" text="Filter Records" textFill="#ababab" />
+            <HBox alignment="CENTER">
+               <children>
+                  <JFXComboBox fx:id="classCombo" prefHeight="34.0" prefWidth="180.0" promptText="Filter by class" visible="false" />
+                  <ProgressIndicator fx:id="progress" prefHeight="31.0" prefWidth="23.0" visible="false" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="270.0" layoutY="775.0" spacing="10.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="270.0">
+         <children>
+            <Text fill="#c6c5c5" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected" wrappingWidth="88.99999636411667">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Label fx:id="totalSelected" prefHeight="43.0" prefWidth="73.0" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
       </HBox>
    </children>

@@ -397,7 +397,6 @@
     -fx-background-color: -fx-primary;
 }
 
-
 #totalNumOnRoll {
     -fx-font-size: 100px;
     -fx-font-weight: bold;
@@ -433,7 +432,7 @@
 }
 
 /*set text fields with white background and dark color*/
-#searchBox,  #searchStudent {
+#searchBox,  #searchStudent, #root #searchBox {
     -fx-text-fill: -fx-primary;
 }
 

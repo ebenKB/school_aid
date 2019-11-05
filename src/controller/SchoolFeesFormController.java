@@ -2,12 +2,16 @@ package controller;
 
 import com.hub.schoolAid.*;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,6 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
+import javax.rmi.CORBA.Util;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -75,9 +80,33 @@ public class SchoolFeesFormController implements  Initializable {
     @FXML
     private Label imageLabel;
 
-//    private List<Student>students = new ArrayList<>();
+    @FXML
+    private Hyperlink viewPaymentDetails;
+
+    @FXML
+    private JFXCheckBox filter;
+
+    @FXML
+    private JFXComboBox<Stage> classCombo;
+
+    @FXML
+    private ProgressIndicator progress;
+
+    @FXML
+    private TableColumn<Student, String> checkCol;
+
+    @FXML
+    private Label totalSelected;
+
+
     private ObservableList<Student>students = FXCollections.observableArrayList();
+    private ObservableList<Stage>stages= FXCollections.observableArrayList();
     private StudentDao studentDao;
+    private CheckBox selectAll = new CheckBox();
+
+    FilteredList<Student> filteredAtt = new FilteredList<>(students, e ->true);
+    SortedList<Student> sortedList = new SortedList<>(filteredAtt);
+    private ObservableList<Student>selectedStudents = FXCollections.observableArrayList();
 
     public ObservableList<Student> getStudents() {
         return students;
@@ -99,9 +128,7 @@ public class SchoolFeesFormController implements  Initializable {
             this.students.addAll(students);
         } else {
             fetchRecord();
-            System.out.println("We want to fetch records here..");
         }
-
         populateTableview();
     }
 
@@ -143,6 +170,10 @@ public class SchoolFeesFormController implements  Initializable {
                 return new SimpleStringProperty(String.valueOf((student.getAccount().getSchFeesPaid() - student.getAccount().getSchFeesPaid())));
             }
         });
+
+        // add checkbox to all the rows
+        Utils.addCheckBoxToTable(checkCol, studentTableview, selectedStudents);
+
         // check if the data is not empty
         studentTableview.setItems(this.students);
         totalRecords.setText(String.valueOf(studentTableview.getItems().size()));
@@ -174,33 +205,156 @@ public class SchoolFeesFormController implements  Initializable {
         detailsVBox.getStyleClass().add("details-wrapper");
     }
 
+    private void enableButtons() {
+        printReport.setDisable(false);
+        printStatement.setDisable(false);
+    }
+
+    private void disableFields() {
+        printStatement.setDisable(true);
+        printReport.setDisable(true);
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        studentTableview.getItems().addListener(new ListChangeListener<Student>() {
-            @Override
-            public void onChanged(Change<? extends Student> c) {
-                totalRecords.setText(String.valueOf(studentTableview.getItems().size()));
-            }
-        });
+        checkCol.setGraphic(selectAll);
+//        studentTableview.getItems().addListener(new ListChangeListener<Student>() {
+//            @Override
+//            public void onChanged(Change<? extends Student> c) {
+//                totalRecords.setText(String.valueOf(studentTableview.getItems().size()));
+//            }
+//        });
 
+        // listen when a new table row is selected
         studentTableview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {
             @Override
             public void changed(ObservableValue<? extends Student> observable, Student oldValue, Student newValue) {
                 if(newValue != null && newValue != oldValue) {
+                    viewPaymentDetails.setVisible(true);
+
                     if(newValue.getPicture() != null) {
                         imageLabel.setVisible(false);
-//                        studentImageview.setVisible(true);
                         ImageHandler.setImage(newValue.getPicture(), studentImageview);
 
                         // show the details of the student
                         setDetails(newValue);
                     } else {
                         imageLabel.setVisible(true);
-//                        studentImageview.setVisible(false);
                         studentImageview.setImage(null);
                     }
                 }
             }
+        });
+
+        // listen when the filter check box is selected
+        filter.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    classCombo.setVisible(true);
+                    if(stages.isEmpty()) {
+                        // populate the stage
+                        Task task = new Task() {
+                            @Override
+                            protected Object call() throws Exception {
+                                StageDao stageDao = new StageDao();
+                                classCombo.getItems().addAll(stageDao.getGetAllStage());
+                                return null;
+                            }
+                        };
+                        task.setOnRunning(event -> progress.setVisible(true));
+                        task.setOnSucceeded(event -> progress.setVisible(false));
+                        task.setOnFailed(event -> progress.setVisible(false));
+                        new Thread(task).start();
+                    }
+                } else {
+                    classCombo.setVisible(false);
+                    classCombo.getSelectionModel().clearSelection();
+                }
+            }
+        });
+
+        // listen when a new class is selected
+        classCombo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Stage>() {
+            @Override
+            public void changed(ObservableValue<? extends Stage> observable, Stage oldValue, Stage newValue) {
+                if(newValue != null) {
+                    Utils.filterStudent(filteredAtt, sortedList, studentTableview, newValue.getName());
+
+                } else {
+                    Utils.filterStudent(filteredAtt, sortedList, studentTableview, null);
+                }
+                Utils.unSelectAll(studentTableview, students, selectedStudents, selectAll);
+            }
+        });
+
+        // listen to key changes in the search box
+        searchBox.setOnKeyReleased(event -> {
+            Utils.searchStudentByName(searchBox, filteredAtt, sortedList, studentTableview);
+            Utils.unSelectAll(studentTableview, students, selectedStudents, selectAll);
+        });
+
+        // show the school fees transaction details for a selected student
+        viewPaymentDetails.setOnAction(event -> {
+            Student student = studentTableview.getSelectionModel().getSelectedItem();
+            if(student != null) {
+                Utils.showSummaryForm(student);
+            }
+        });
+
+        selectAll.setOnAction(event -> {
+            if(selectAll.isSelected()) {
+                Utils.selectAll(studentTableview,students,selectedStudents);
+            } else {
+                Utils.unSelectAll(studentTableview, students, selectedStudents, selectAll);
+            }
+        });
+
+        // listen when new items are added to the list
+        selectedStudents.addListener(new ListChangeListener<Student>() {
+            @Override
+            public void onChanged(Change<? extends Student> c) {
+                totalSelected.setText(String.valueOf(selectedStudents.size()));
+
+                // check if there are any items selected
+                if(selectedStudents.size() > 0) {
+                    enableButtons();
+                } else disableFields();
+            }
+        });
+
+        sortedList.addListener(new ListChangeListener<Student>() {
+            @Override
+            public void onChanged(Change<? extends Student> c) {
+                if(!c.getList().isEmpty()) {
+                    totalRecords.setText(String.valueOf(c.getList().size()));
+                } else {
+                    totalRecords.setText(String.valueOf(students.size()));
+                }
+            }
+        });
+
+        studentTableview.setOnSort(event -> {
+            totalRecords.setText(String.valueOf(studentTableview.getItems().size()));
+        });
+
+        // select the student when the user double clicks on the row
+        studentTableview.setRowFactory(tv -> {
+            TableRow<Student> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if(event.getClickCount() == 2 && !row.isEmpty()) {
+                    Student st = row.getItem();
+                    st.setSelected(!st.getSelected());
+                    if (st.getSelected()) {
+                        selectedStudents.add(st);
+                    } else {
+                        selectedStudents.remove(st);
+                    }
+                    studentTableview.refresh();
+                }
+            });
+            return row;
         });
     }
 }

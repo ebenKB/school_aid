@@ -285,7 +285,9 @@ public class mainController implements Initializable{
     private void populateTableView(){
             setTableData();
             studentTableView.setVisible(Boolean.TRUE);
-            getAllStudents();
+            if(data.isEmpty()) {
+                getAllStudents();
+            }
             studentTableView.setItems(data);
             totalStudents.setText(String.valueOf(data.size()));
             tableInfo.setVisible(true);
@@ -324,7 +326,6 @@ public class mainController implements Initializable{
             data.addAll(studentDao.getAllStudents());
             return data;
         }catch (HibernateException e){
-            e.printStackTrace();
             notification.notifyError("Sorry! an error occurred while fetching students","Database Error");
         }
       return null;
@@ -429,6 +430,9 @@ public class mainController implements Initializable{
     }
 
     private void showSchoolFees() {
+        if(this.data.isEmpty()) {
+            getAllStudents();
+        }
         try {
             Parent root;
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/school_fees_dashboard.fxml"));

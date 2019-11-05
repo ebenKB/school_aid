@@ -3,6 +3,9 @@ package com.hub.schoolAid;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import controller.LoginFormController;
 import controller.SchFeesSummaryController;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.concurrent.Task;
@@ -102,13 +105,41 @@ public class Utils {
     public static void searchByNaame(TextField textField, FilteredList filteredList, SortedList sortedList, TableView tableView) {
         textField.textProperty().addListener(((observable, oldValue, newValue) -> {
             filteredList.setPredicate( (Predicate< ? super  AttendanceTemporary>) at ->{
-                if( newValue == null || newValue.isEmpty() ) {
+                if(newValue == null || newValue.isEmpty()) {
                     return  true;
                 }
                 String lowerVal = newValue.toLowerCase();
                 return  checkIfStudent(lowerVal, at.getStudent());
             });
         }));
+        sortedList.comparatorProperty().bind(tableView.comparatorProperty());
+        tableView.setItems(sortedList);
+    }
+
+    public static void searchStudentByName(TextField textField, FilteredList filteredList, SortedList sortedList, TableView tableView) {
+        textField.textProperty().addListener(((observable, oldValue, newValue) -> {
+            filteredList.setPredicate( (Predicate< ? super  Student>) st ->{
+                if(newValue == null || newValue.isEmpty()) {
+                    return  true;
+                }
+                String lowerVal = newValue.toLowerCase();
+                return  checkIfStudent(lowerVal, st);
+            });
+        }));
+        sortedList.comparatorProperty().bind(tableView.comparatorProperty());
+        tableView.setItems(sortedList);
+    }
+
+    public static void filterStudent(FilteredList filteredList, SortedList sortedList, TableView<Student> tableView, String newValue) {
+        filteredList.setPredicate((Predicate<? super Student>) st -> {
+            if(newValue == null) {
+                return true;
+            } else {
+                String lowerVal = newValue.toLowerCase();
+                return checkIfStudent(lowerVal, st);
+            }
+        });
+
         sortedList.comparatorProperty().bind(tableView.comparatorProperty());
         tableView.setItems(sortedList);
     }
@@ -127,14 +158,71 @@ public class Utils {
         }
         return false;
     }
-//    public static LocalDate getLocalDate(){
-//        if(currentDate == null) {
-//            EntityManager em;
-//            TermDao termDao = new TermDao();
-//            em = HibernateUtil.getEntityManager();
-//            HibernateUtil.begin();
-//            currentDate = termDao.
-//        }
-//    }
+
+    public static void addCheckBoxToTable(TableColumn column, TableView tableView, ObservableList selectedItems) {
+        Callback<TableColumn<Student, Void>, TableCell<Student, Void>> cellFactory = new Callback<TableColumn<Student, Void>, TableCell<Student, Void>>() {
+            @Override
+            public TableCell<Student, Void> call(final TableColumn<Student, Void> param) {
+                TableCell<Student, Void> cell = new TableCell<Student, Void>() {
+                    CheckBox check = new CheckBox("");
+                    {
+                        // get the row index and update the selected property field
+                        check.setOnAction(e -> {
+                            Student t = (Student) tableView.getItems().get(getIndex());
+                            if(check.isSelected()) {
+                                t.setSelected(true);
+                                selectedItems.add(t);
+                            } else {
+                                t.setSelected(false);
+                                selectedItems.remove(t);
+                            };
+                        });
+                    }
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if(empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(check);
+                            // check if the check box has to be activated or not
+                            if (param != null) {
+                                if (param.getTableView().getItems().get(getIndex()).getSelected()) {
+                                    check.setSelected(true);
+                                } else {
+                                    check.setSelected(false);
+                                }
+                            }
+                        };
+                    }
+                };
+                return cell;
+            }
+        };
+        column.setCellFactory(cellFactory);
+    }
+
+    public static void selectAll (TableView<Student> tableView, ObservableList<Student> students, ObservableList<Student>selectedStudents) {
+        // clear the selection counter in case it already has some items counted
+        selectedStudents.clear();
+        for (Student st: tableView.getItems()) {
+            st.setSelected(true);
+            selectedStudents.add(st);
+        }
+        tableView.refresh();
+    }
+
+    public static void unSelectAll(TableView tableView, ObservableList<Student> students, ObservableList<Student>selectedStudents, CheckBox checkBox) {
+        for (Student st: students) {
+            st.setSelected(false);
+            selectedStudents.remove(st);
+        }
+        selectedStudents.clear();
+        tableView.refresh();
+
+        // clear the selection from the checkbox that selects the items
+        checkBox.setSelected(false);
+    }
  }
 

@@ -955,18 +955,12 @@ public class studentDetailsFormController implements Initializable{
 //      setAccountTabDetails();
     }
 
+    // set the details on the student tab
     private void setStudentTabDetails(){
         try{
             if (student.getPicture() != null) {
                 ImageHandler.setImage(student.getPicture(), studentImage);
-
             }
-//            StudentDetailsDao detailsDao =new StudentDetailsDao();
-//            if(detailsDao.getImage(student)!=null){
-//            //Image image = new Image(new FileInputStream(student.getImage()));
-//            Image image = new Image(getClass().getResourceAsStream(Utils.studentImgPath+detailsDao.getImage(student)));
-//            studentImage.setImage(image);
-//            }
         }catch (Exception e){
             imgInfoLabel.setText("Image not found");
         }
@@ -983,6 +977,7 @@ public class studentDetailsFormController implements Initializable{
         }
     }
 
+    // set the details on the parent tab pane
     private void setPrentTabDetails() {
         parentName.setText(student.getParent().getname());
         parentPhone.setText(student.getParent().getTelephone());
@@ -991,6 +986,7 @@ public class studentDetailsFormController implements Initializable{
         parentLandMark.setText(student.getParent().getAddress().getLandmark());
     }
 
+    // set the details on the account tab pane
     private void setAccountTabDetails(){
         SalesDao salesDao = new SalesDao();
         int total = 0;
