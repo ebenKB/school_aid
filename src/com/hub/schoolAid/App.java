@@ -18,7 +18,9 @@ public class App {
     private String name;
     private String motto;
     private String address;
-    private String currencyType;
+    private String currencyType = "GHC";
+    private int maxCount;
+    private int currentCount;
 
 
     @Enumerated(EnumType.STRING)
@@ -97,5 +99,29 @@ public class App {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCurrencyType() {
+        return currencyType;
+    }
+
+    public void setCurrencyType(String currencyType) {
+        this.currencyType = currencyType;
+    }
+
+    public int getMaxCount() {
+        return maxCount;
+    }
+
+    public void setMaxCount(int maxCount) {
+        this.maxCount = maxCount;
+    }
+
+    public int getCurrentCount() {
+        return currentCount;
+    }
+
+    public void setCurrentCount(int currentCount) {
+        this.currentCount = currentCount;
     }
 }

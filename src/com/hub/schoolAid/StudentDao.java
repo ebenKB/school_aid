@@ -165,7 +165,7 @@ public class StudentDao {
 
     public List<Student> getStudentFromClass(Stage newStage) throws Exception {
         try{
-            if(em==null) {
+            if(em==null || !em.isOpen()) {
                 em=HibernateUtil.getEntityManager();
                 HibernateUtil.begin();
             }

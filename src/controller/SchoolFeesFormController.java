@@ -4,6 +4,7 @@ import com.hub.schoolAid.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -23,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+import org.apache.pdfbox.pdmodel.PDDocument;
 
 import javax.rmi.CORBA.Util;
 import java.net.URL;
@@ -258,8 +260,7 @@ public class SchoolFeesFormController implements  Initializable {
                         Task task = new Task() {
                             @Override
                             protected Object call() throws Exception {
-                                StageDao stageDao = new StageDao();
-                                classCombo.getItems().addAll(stageDao.getGetAllStage());
+                                getStage();
                                 return null;
                             }
                         };
@@ -356,6 +357,58 @@ public class SchoolFeesFormController implements  Initializable {
             });
             return row;
         });
+
+        printReport.setOnAction(event -> {
+            Task task = new Task() {
+                @Override
+                protected Object call() throws Exception {
+                    PDFMaker pdfMaker = PDFMaker.getPDFMakerInstance();
+                    PDDocument doc = pdfMaker.generateSchoolFeesReport(selectedStudents);
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            PDFMaker.savePDFToLocation(doc);
+                        }
+                    });
+                    return null;
+                }
+            };
+            task.setOnRunning(e -> {
+                MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Creating report. Please wait...");
+            });
+            task.setOnSucceeded(e -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+            task.setOnFailed(e -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+            new Thread(task).start();
+        });
+
+        printStatement.setOnAction(event -> {
+            try {
+//                getStage();
+                PDFMaker pdfMaker =PDFMaker.getPDFMakerInstance();
+                PDDocument doc = pdfMaker.generateSchoolFeesReport(selectedStudents);
+                PDFMaker.savePDFToLocation(doc);
+            } catch (Exception e) {
+                Notification.getNotificationInstance().notifyError("An error occurred while generating the report", "Error");
+            }
+        });
+    }
+
+    private void getStage() {
+        if(stages.isEmpty()) {
+            Task task = new Task() {
+                @Override
+                protected Object call() throws Exception {
+                    StageDao stageDao = new StageDao();
+                    stages.addAll(stageDao.getGetAllStage());
+                    classCombo.setItems(stages);
+                    return stages;
+                }
+            };
+            task.setOnRunning(event -> progress.setVisible(true));
+            task.setOnSucceeded(event -> progress.setVisible(false));
+            task.setOnFailed(event -> progress.setVisible(false));
+            new Thread(task).start();
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 package com.hub.schoolAid;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.hibernate.Session;
 
 import javax.persistence.EntityManager;
@@ -82,6 +83,29 @@ public class AppDao {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public Boolean increaseAppCounter(App app){
+        try {
+            em = HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            if((app.getCurrentCount() == app.getMaxCount())  || (app.getCurrentCount() > app.getMaxCount())) {
+                return false;
+            } else {
+                app.setCurrentCount((app.getCurrentCount() + 1));
+                em.merge(app);
+            }
+            return true;
+        }catch (Exception e){
+            HibernateUtil.rollBack();
+            return false;
+        }
+    }
+
+    public Boolean appCanBoot(App app) {
+        if(app.getMaxCount() > app.getCurrentCount()) {
+            return true;
+        }  else return false;
     }
 //    public App getAppSettings() {
 //        try {

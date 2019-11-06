@@ -74,8 +74,8 @@ public class TermDao {
         }
     }
 
-    public static LocalDate getCurrentDate(){
-        if (currentDate == null) {
+    public static LocalDate getCurrentDate(Boolean shouldRefresh){
+        if (currentDate == null || shouldRefresh) {
             System.out.println("Going to the database");
             try {
                 em=HibernateUtil.getEntityManager();
@@ -98,8 +98,13 @@ public class TermDao {
            HibernateUtil.commit();
            return true;
        }catch (Exception e){
-//           e.printStackTrace();
            return false;
        }
+    }
+
+    public static Boolean hasTermEnded(){
+        if (getCurrentDate(true).compareTo(LocalDate.now()) >= 0){
+            return false;
+        } else return true;
     }
 }

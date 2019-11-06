@@ -24,7 +24,63 @@ public class AttendanceTemporaryDao {
      * @return
      * @throws HibernateException
      */
-    public Boolean checkStudenIn(Student student, LocalDate date) throws HibernateException {
+    public Boolean createAttendanceSheet(Student student, LocalDate date) throws HibernateException {
+        try {
+            HibernateUtil.save(AttendanceTemporary.class,setAttendanceData(student, date));
+            return true;
+        } catch (Exception e) {
+            HibernateUtil.rollBack();
+            return false;
+        } finally {
+            HibernateUtil.close();
+        }
+    }
+
+    public Boolean createAttendanceSheet(List<Student>students, LocalDate date) throws HibernateException {
+        try {
+            if (students.size() < 1)
+                return false;
+
+            int batchSize = 25;
+            int entityCount = students.size();
+            em = HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            for(int i=0; i< entityCount; i++){
+                System.out.println("LOOPING: "+ i);
+                Student student = students.get(i);
+                AttendanceTemporary at = setAttendanceData(student, date);
+
+                System.out.println(at.getStudent().toString());
+                // check if we have reached the batch size and merge the records
+                if(i > 0 && i % batchSize == 0) {
+                    System.out.println("PERSISITING TO DATABASE : " + batchSize);
+                    em.flush();
+                    em.clear();
+                }
+
+                em.merge(at);
+            }
+            System.out.println("COMMITTING THE TRANSACTIONS");
+            HibernateUtil.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            HibernateUtil.rollBack();
+            return  false;
+        } finally {
+            if(em == null){
+                em.close();
+            }
+        }
+    }
+
+    /**
+     * prepare records for creating a new attendance
+     * @param student the student that we are creating the attendance for
+     * @param date the date that the attendace is created for
+     * @return attendance
+     */
+    private AttendanceTemporary setAttendanceData(Student student, LocalDate date) {
         AttendanceTemporary attendance = new AttendanceTemporary();
         attendance.setStudent(student);
         attendance.setDate(date);
@@ -32,10 +88,9 @@ public class AttendanceTemporaryDao {
         if(student.getPayFeeding())
             attendance.setFeedingFee(student.getAccount().getFeedingFeeToPay());
         else attendance.setFeedingFee(0.0);
-        HibernateUtil.save(AttendanceTemporary.class,attendance);
-        return true;
-    }
 
+        return attendance;
+    }
     public void markPresent(AttendanceTemporary attendanceTemporary) {
         // check if the student pays feeding fee
         if (attendanceTemporary.getStudent().getPayFeeding()) {
@@ -442,14 +497,15 @@ public class AttendanceTemporaryDao {
     public int checkAttendanceInterval() {
         try {
 //            TermDao termDao = new TermDao();
-            int diff= 0;
+            int diff = 0;
+            LocalDate date = TermDao.getCurrentDate(true);
 
-            if(TermDao.getCurrentDate() == LocalDate.now()) {
+            if(date == LocalDate.now()) {
                 System.out.println("Checking if can create attendance");
                 return diff;
             } else  {
 //                Use a singleton to return the current date
-                Period interval = Period.between(TermDao.getCurrentDate(), LocalDate.now());
+                Period interval = Period.between(date, LocalDate.now());
                 diff = interval.getDays();
                 if ( (diff == 0) ||((diff > 0) && (diff < 15 && interval.getMonths() < 1 && interval.getYears() < 1)) ) {
                     return diff;
@@ -459,7 +515,7 @@ public class AttendanceTemporaryDao {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return -2;
         }
     }

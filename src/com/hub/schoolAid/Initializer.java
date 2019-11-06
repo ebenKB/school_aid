@@ -86,15 +86,16 @@ public class Initializer {
 
     public Boolean isValidCurrentDate(){
         TermDao termDao = new TermDao();
-        if(termDao.getCurrentDate() == null){
+        LocalDate date = termDao.getCurrentDate(true);
+        if(date == null){
             return false;
-        }else if(termDao.getCurrentDate().isAfter(LocalDate.now())){
-            return false;
-        }
-        else if(termDao.getCurrentDate().isBefore(LocalDate.now())){
+        }else if(date.isAfter(LocalDate.now())){
             return false;
         }
-        else return termDao.getCurrentDate() == LocalDate.now();
+        else if(date.isBefore(LocalDate.now())){
+            return false;
+        }
+        else return date == LocalDate.now();
     }
 
     public void showCurrentDateForm(){

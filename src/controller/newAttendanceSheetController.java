@@ -83,7 +83,7 @@ public class newAttendanceSheetController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            LocalDate date = termDao.getCurrentDate();
+            LocalDate date = termDao.getCurrentDate(false);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
             String text = date.format(formatter);
 
@@ -95,11 +95,17 @@ public class newAttendanceSheetController implements Initializable{
         createSheet.setOnAction(event -> {
             if (attendaceDateRadioGroup.getSelectedToggle() != null) {
                 if (attendaceDateRadioGroup.getSelectedToggle() == todayRadio) {
-                    if (saveToday())
+                    if(confirmAttendance()) {
                         saveAttendanceRegister(event, LocalDate.now());
+                    }
+                    if (saveToday()) {
+                        Notification.getNotificationInstance().notifySuccess("Today\'s date has been updated", "Success");
+                    }
                 } else {
                     if(saveCustomDate()) {
-                        saveAttendanceRegister(event, datePicker.getValue());
+                        if(confirmAttendance()){
+                            saveAttendanceRegister(event, datePicker.getValue());
+                        }
                     }
                 }
             } else {
@@ -167,7 +173,7 @@ public class newAttendanceSheetController implements Initializable{
         try {
             if(datePicker.getValue() != null) {
                 if(termDao.updateCurrentDate(datePicker.getValue())){
-                    dateLabel.setText(termDao.getCurrentDate().toString());
+                    dateLabel.setText(termDao.getCurrentDate(false).toString());
                     Notification.getNotificationInstance().notifySuccess("Date has been updated successfully","Success");
                 }
             }else {
@@ -180,16 +186,36 @@ public class newAttendanceSheetController implements Initializable{
     }
 
     private Boolean saveToday() {
+        if( termDao.updateCurrentDate(LocalDate.now())){
+            notification.notifySuccess("Date settings have changed successfully"," success");
+            return true;
+        } else return false;
+
+
+//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"", ButtonType.YES,ButtonType.NO);
+//        alert.setTitle("Change App Date");
+//        alert.setHeaderText("Use today's date for App");
+//        alert.setContentText("Are you sure you want to use System date for app settings?");
+//        Optional<ButtonType>result= alert.showAndWait();
+//        if(result.isPresent()  && result.get() == ButtonType.YES){
+//            if( termDao.updateCurrentDate(LocalDate.now())){
+//                notification.notifySuccess("Date settings have changed successfully"," success");
+//                return true;
+//            } else return false;
+//        } else if(result.isPresent() && result.get() == ButtonType.NO){
+//            return false;
+//        }
+//        return false;
+    }
+
+    public Boolean confirmAttendance() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"", ButtonType.YES,ButtonType.NO);
-        alert.setTitle("Change App Date");
-        alert.setHeaderText("Use today's date for App");
-        alert.setContentText("Are you sure you want to use System date for app settings?");
+        alert.setTitle("Confirm action");
+        alert.setHeaderText("Create new records for feeding fee / attendance");
+        alert.setContentText("Are you sure you want to create new records?");
         Optional<ButtonType>result= alert.showAndWait();
-        if(result.isPresent()  && result.get() == ButtonType.YES){
-            if( termDao.updateCurrentDate(LocalDate.now())){
-                notification.notifySuccess("Date settings have changed successfully"," success");
-                return true;
-            } else return false;
+        if(result.isPresent() && result.get() == ButtonType.YES){
+            return true;
         } else if(result.isPresent() && result.get() == ButtonType.NO){
             return false;
         }
@@ -198,8 +224,9 @@ public class newAttendanceSheetController implements Initializable{
 
     private  Boolean saveCustomDate() {
         if(datePicker.getValue() != null) {
-            if(termDao.updateCurrentDate(datePicker.getValue())){
-                dateLabel.setText(termDao.getCurrentDate().toString());
+            LocalDate date= datePicker.getValue();
+            if(termDao.updateCurrentDate(date)){
+                dateLabel.setText(date.toString());
                 Notification.getNotificationInstance().notifySuccess("Date has been updated successfully","Success");
                 return true;
             } else return false;
@@ -226,8 +253,9 @@ public class newAttendanceSheetController implements Initializable{
             new Thread(task).start();
     }
     public void createNewAttendanceSheet(ActionEvent event, LocalDate date) {
-        AttendanceTemporaryDao dao = new AttendanceTemporaryDao();
-        if(dao.canCreateAttendance()) {
+        StudentDao studentDao = new StudentDao();
+        AttendanceTemporaryDao attendanceTemporaryDao = new AttendanceTemporaryDao();
+        if(attendanceTemporaryDao.canCreateAttendance()) {
             //move the previous attendance to master table
 //            if(attendanceDao.moveAttendanceToMasterTable()) {
 //                //create a new attendance for all the students and save them in attendance temp.
@@ -261,24 +289,11 @@ public class newAttendanceSheetController implements Initializable{
                 //move the previous attendance to master table
                 if(attendanceDao.moveAttendanceToMasterTable()) {
                     //create a new attendance for all the students and save them in attendance temp.
-                    StudentDao studentDao = new StudentDao();
-                    AttendanceTemporaryDao attendanceTemporaryDao = new AttendanceTemporaryDao();
                     List<Student> students = studentDao.getAllStudents();
-                    for(Student s: students){
-                        attendanceTemporaryDao.checkStudenIn(s, date);
-                    }
-                    //show the attendance sheet
-                    if (AppDao.getAppSetting().getFeedingType().equals(FeedingType.COUPON)) {
-                        couponController.attendanceTemporaries.clear();
-                        couponController.attendanceTemporaries.addAll(attendanceTemporaryDao.getTempAttendance());
-                        couponController.populateTableview();
-
-                    } else if (AppDao.getAppSetting().getFeedingType().equals(FeedingType.CASH)) {
-                        main.attendanceTemporaries.addAll(main.attendanceTemporaryDao.getTempAttendance());
-                        main.populateStudentTable();
-                        main.attendanceRadio.setSelected(Boolean.TRUE);
-                    }
-
+                    attendanceTemporaryDao.createAttendanceSheet(students, date);
+//                    for(Student s: students){
+//                        attendanceTemporaryDao.createAttendanceSheet(s, date);
+//                    }
                 } else {
                     notification.notifyError("An error occurred while preparing the records","Error!");
                 }
@@ -289,6 +304,18 @@ public class newAttendanceSheetController implements Initializable{
             task.setOnSucceeded(e -> {
                 MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
                 ((Node)(event).getSource()).getScene().getWindow().hide();
+
+                //show the attendance sheet
+                if (AppDao.getAppSetting().getFeedingType().equals(FeedingType.COUPON)) {
+                    couponController.attendanceTemporaries.clear();
+                    couponController.attendanceTemporaries.addAll(attendanceTemporaryDao.getTempAttendance());
+                    couponController.populateTableview();
+
+                } else if (AppDao.getAppSetting().getFeedingType().equals(FeedingType.CASH)) {
+                    main.attendanceTemporaries.addAll(main.attendanceTemporaryDao.getTempAttendance());
+                    main.populateStudentTable();
+                    main.attendanceRadio.setSelected(Boolean.TRUE);
+                }
             });
             task.setOnFailed(event1 -> {
                 notification.notifyError("Sorry!! Something went wrong.","Error while creating attendance sheet");
@@ -301,7 +328,7 @@ public class newAttendanceSheetController implements Initializable{
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Please set the date for today."  + "The date in the system is: " +termDao.getCurrentDate(),ButtonType.OK);
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Please set the date for today."  + "The date in the system is: " +termDao.getCurrentDate(false),ButtonType.OK);
                     alert.setHeaderText("Wrong Date");
                     alert.setTitle("Error");
                     alert.show();
@@ -311,11 +338,11 @@ public class newAttendanceSheetController implements Initializable{
     }
 
     private Boolean canCreateNewAttendance() {
-        if(termDao.getCurrentDate().equals(LocalDate.now())) {
+        if(termDao.getCurrentDate(false).equals(LocalDate.now())) {
             System.out.println("We can create a date for the attendance");
             return true;
         } else {
-            Period interval = Period.between(termDao.getCurrentDate(), LocalDate.now());
+            Period interval = Period.between(termDao.getCurrentDate(false), LocalDate.now());
             int diff= interval.getDays();
             System.out.println("This is the difference between the days"+ diff);
             if(diff > 0 && diff < 6 && interval.getMonths() < 1 && interval.getYears() < 1) {

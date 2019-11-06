@@ -43,7 +43,7 @@ public class ClassOptionsController implements Initializable {
     private Pane root;
 
     private List<Stage>stages = new ArrayList<>();
-    private List<Stage>selectedStages;
+    private List<Stage>selectedStages = new ArrayList<>();
 
     public List<Stage> getStages() {
         return stages;
@@ -67,8 +67,11 @@ public class ClassOptionsController implements Initializable {
                     classesComobo.setVisible(true);
 
                     // clear all selection
-                    selectedStages.clear();
-                    classesComobo.getCheckModel().getCheckedItems().clear();
+                    if(selectedStages != null){
+                        selectedStages.clear();
+                    }
+//                    classesComobo.getCheckModel().getCheckedItems().clear();
+                    classesComobo.getCheckModel().clearChecks();
                 } else {
                     classesComobo.setVisible(false);
 

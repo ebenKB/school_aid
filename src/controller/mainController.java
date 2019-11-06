@@ -13,6 +13,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -332,7 +333,20 @@ public class mainController implements Initializable{
     }
 
     private void refresh(){
-       populateTableView();
+        Task task = new Task() {
+            @Override
+            protected Object call() throws Exception {
+                getAllStudents();
+                return null;
+            }
+        };
+        task.setOnRunning(event -> MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Refreshing records..."));
+        task.setOnSucceeded(event -> {
+            MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+            populateTableView();
+        });
+        task.setOnFailed(event -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+        new Thread(task).start();
     }
 
     private Optional <ButtonType> showWarning(String message, String header) {
@@ -443,7 +457,7 @@ public class mainController implements Initializable{
             javafx.stage.Stage stage = new javafx.stage.Stage();
             stage.setScene(scene);
             stage.setTitle("School Fees");
-            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initModality(Modality.WINDOW_MODAL);
             stage.initStyle(StageStyle.DECORATED);
             stage.setMaximized(true);
             stage.show();
@@ -455,6 +469,7 @@ public class mainController implements Initializable{
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Utils utils = new Utils();
         todayLabel.setText("Today is: "+ LocalDate.now().getDayOfWeek().toString());
 //        Task check =new Task() {
 //            @Override
@@ -485,6 +500,7 @@ public class mainController implements Initializable{
 
           try{
               termDao.getCurrentTerm();
+              utils.showTrialForm();
           }catch (NoResultException e){
               showNewTermForm();
           }
@@ -636,6 +652,16 @@ public class mainController implements Initializable{
         salesOverview.setOnAction(event -> showSalesOverview());
 
         create_staff.setOnAction(event -> this.showNewStaffForm());
+
+        // activate the search box when the table view is filled with data
+        data.addListener(new ListChangeListener<Student>() {
+            @Override
+            public void onChanged(Change<? extends Student> c) {
+                if(!data.isEmpty()) {
+                    searchBox.setDisable(false);
+                } else searchBox.setDisable(true);
+            }
+        });
 
         newPayment.setOnAction(event -> {
             // check the type of payment that the school uses

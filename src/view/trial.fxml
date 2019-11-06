@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="701.0" prefWidth="937.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TrialController">
+   <children>
+      <AnchorPane fx:id="root" layoutY="-2.0" prefHeight="652.0" prefWidth="937.0" stylesheets="@../stylesheet/main.css" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+         <children>
+            <VBox alignment="CENTER" layoutX="249.0" layoutY="52.0" prefHeight="483.0" prefWidth="416.0" spacing="90.0">
+               <children>
+                  <ImageView fitHeight="69.0" fitWidth="174.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/logo.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="#239e10" strokeType="OUTSIDE" strokeWidth="0.0" text="You are using a Trial version of this Software">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="trialLabel" alignment="CENTER" graphicTextGap="30.0" prefHeight="40.0" prefWidth="416.0" text="Your Trial will expire in 7 day(s)" textAlignment="CENTER" textFill="#e82b2b">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="41.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/cancel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Button fx:id="continueTrial" contentDisplay="RIGHT" graphicTextGap="30.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="213.0" text="Continue with Trial">
+                     <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/play-button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <Text layoutX="416.0" layoutY="683.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Pane fx:id="separator" layoutY="649.0" prefHeight="58.0" prefWidth="937.0">
+         <children>
+            <Text layoutX="317.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact 0548086391 for further enquiries">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

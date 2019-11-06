@@ -244,14 +244,13 @@ public class FeedingFormController implements Initializable {
             task.setOnFailed(e -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
             new Thread(task).start();
 
-            // check whether the current date in the system matches today's data
+            // check whether the current date in the system matches today's date
             attendanceTemporaryDao = new AttendanceTemporaryDao();
             int interval = attendanceTemporaryDao.checkAttendanceInterval();
-            if ( interval != 0) {
-                System.out.println("we want to show the attendance form"+ interval);
+            if ( interval > 0 && interval < 15) {
                 // attendance does not exist
                 showCreateAttendanceForm();
-            } else if (interval == 1) {
+            } else {
                 // The attendance existing is for yesterday. - CREATE NEW ATTENDANCE FOR TODAY
 //                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
 //                alert.setTitle("Create new registry");
@@ -273,9 +272,6 @@ public class FeedingFormController implements Initializable {
 //                        new Thread(task).start();
 //                    }
 //                }
-            } else if(interval > 1 && interval < 15) {
-                // the attendance has been left ideal for a long time.
-                salesDetailsFormController.showCreateAttendaceForm();
             }
         });
 
@@ -443,8 +439,12 @@ public class FeedingFormController implements Initializable {
             if(stages == null || stages.isEmpty()) {
                 stages = stageDao.getGetAllStage();
             }
-            showGenerateReportForm();
+//            showGenerateReportForm();
+            Utils utils = new Utils();
+            utils.showGenerateReportForm(stages);
         });
+
+
 
         close.setOnAction(event -> Utils.closeEvent(event));
         
@@ -491,23 +491,23 @@ public class FeedingFormController implements Initializable {
         }
     }
 
-    private void showGenerateReportForm() {
-        javafx.scene.Parent root;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/selectClasses.fxml"));
-        try {
-            root=fxmlLoader.load();
-            ClassOptionsController controller = fxmlLoader.getController();
-            controller.init(stages);
-            Scene scene = new Scene(root);
-            javafx.stage.Stage stage = new javafx.stage.Stage();
-            stage.setScene(scene);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void showGenerateReportForm(ObservableList<Stage>stages) {
+//        javafx.scene.Parent root;
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/selectClasses.fxml"));
+//        try {
+//            root=fxmlLoader.load();
+//            ClassOptionsController controller = fxmlLoader.getController();
+//            controller.init(stages);
+//            Scene scene = new Scene(root);
+//            javafx.stage.Stage stage = new javafx.stage.Stage();
+//            stage.setScene(scene);
+//            stage.initModality(Modality.APPLICATION_MODAL);
+//            stage.initStyle(StageStyle.UNDECORATED);
+//            stage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
     private void showPrintDialogue() {
         javafx.scene.Parent root;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/attendancePrintNode.fxml"));
@@ -540,7 +540,7 @@ public class FeedingFormController implements Initializable {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
     private void setCounterLabel() {
@@ -556,7 +556,7 @@ public class FeedingFormController implements Initializable {
 
             // check whether the student is owing or not
             if(at.getStudent().getAccount().getFeedingFeeCredit()  > 0) {
-                credit +=at.getStudent().getAccount().getFeedingFeeCredit();
+                credit += at.getStudent().getAccount().getFeedingFeeCredit();
             } else totalDebit += at.getStudent().getAccount().getFeedingFeeCredit();
         }
         totalPresent.setText(String.valueOf(presentCounter) + " / " + totalSize);

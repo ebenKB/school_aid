@@ -104,7 +104,7 @@
                   <HBox alignment="CENTER" layoutX="223.0" layoutY="56.0" prefHeight="63.0" prefWidth="436.0" AnchorPane.leftAnchor="223.0" AnchorPane.topAnchor="56.0">
                      <children>
                         <FontAwesomeIconView fill="#fdfeff" glyphName="SEARCH" size="20" text="" wrappingWidth="31.571428298950195" />
-                        <TextField fx:id="searchBox" alignment="CENTER" prefHeight="33.0" prefWidth="347.0" promptText="Search a student" style="-fx-background-radius: 100;" />
+                        <TextField fx:id="searchBox" alignment="CENTER" disable="true" prefHeight="33.0" prefWidth="347.0" promptText="Search a student" style="-fx-background-radius: 100;" />
                         <!--<FontAwesomeIconView glyphName="SEARCH" size="25" wrappingWidth="23.214284896850586" />-->
                      </children>
                   </HBox>

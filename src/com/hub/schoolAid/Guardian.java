@@ -8,15 +8,18 @@ import java.util.List;
  * In this context, we use the term Guardian to refer to any person who is mandated to pick up the child after school
  */
 @Entity
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"fullname", "contact"}, name = "guardian_constraint")}
+)
 public class Guardian {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
-    @Column(unique = true)
+    @Column
     private String fullname;
 
-    @Column(unique = true)
+    @Column
     private String contact;
 
     @ManyToMany(mappedBy = "guardian")

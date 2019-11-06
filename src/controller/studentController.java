@@ -509,6 +509,10 @@ public class studentController implements Initializable{
             homeaddress.setLandmark(landmark.getText().trim().toUpperCase());
         }
 
+        if(relationshipToWard.getText().trim().length() > 0) {
+            parent.setRelationToWard(relationshipToWard.getText().trim());
+        }
+
         if(occupation !=null){
             parent.setOccupation(occupation.getText().trim().toUpperCase());
         }
@@ -759,10 +763,10 @@ public class studentController implements Initializable{
             Task checkin = new Task() {
                 @Override
                 protected Object call() throws Exception {
-                    TermDao term =new TermDao();
-                    if (term.getCurrentDate().equals(LocalDate.now())){
+                    TermDao term = new TermDao();
+                    if (term.getCurrentDate(true).equals(LocalDate.now())){
                         AttendanceTemporaryDao dao = new AttendanceTemporaryDao();
-                        dao.checkStudenIn(student, LocalDate.now());
+                        dao.createAttendanceSheet(student, LocalDate.now());
                     }
                     return null;
                 }

@@ -66,4 +66,12 @@ public class Parent {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    public String getRelationToWard() {
+        return relationToWard;
+    }
+
+    public void setRelationToWard(String relationToWard) {
+        this.relationToWard = relationToWard;
+    }
 }

@@ -1,6 +1,7 @@
 package com.hub.schoolAid;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import controller.ClassOptionsController;
 import controller.LoginFormController;
 import controller.SchFeesSummaryController;
 import javafx.beans.value.ChangeListener;
@@ -12,6 +13,7 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -28,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -223,6 +226,57 @@ public class Utils {
 
         // clear the selection from the checkbox that selects the items
         checkBox.setSelected(false);
+    }
+
+    public void showGenerateReportForm(List<com.hub.schoolAid.Stage> stages) {
+        javafx.scene.Parent root;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/selectClasses.fxml"));
+        try {
+            root=fxmlLoader.load();
+            ClassOptionsController controller = fxmlLoader.getController();
+            controller.init(stages);
+            Scene scene = new Scene(root);
+            javafx.stage.Stage stage = new javafx.stage.Stage();
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showTrialForm() {
+        Parent root;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/trial.fxml"));
+            root= fxmlLoader.load();
+            Scene scene = new Scene(root);
+
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setMaximized(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String formatDate(LocalDate date) {
+        if(date == null)
+            return "";
+
+        int day = date.getDayOfMonth();
+        String month = date.getMonth().toString();
+        String dayName = date.getDayOfWeek().toString();
+        int year = date.getYear();
+        return dayName+", "+month+ " "+ day+ ", "+ year;
+    }
+
+    public static void dispose(ActionEvent event) {
+        ((Node)(event).getSource()).getScene().getWindow().hide();
     }
  }
 
