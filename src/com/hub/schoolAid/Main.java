@@ -92,6 +92,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        Receipt receipt = new Receipt();
+        receipt.generateReceipt();
         launch(args);
     }
 }

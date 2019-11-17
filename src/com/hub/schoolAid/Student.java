@@ -76,6 +76,13 @@ public class Student {
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true, orphanRemoval=true)
     private TerminalReport terminalReport;
 
+    /**
+     * one class or stage can multiple Bills for previous terms and current term
+     * When a class is deleted, remove all the bills associated with the class
+     */
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Bill>bills;
+
     @Transient
     private Boolean isSelected;
 
@@ -395,7 +402,6 @@ public class Student {
 
     @Override
     public String toString() {
-
         return this.getFirstname().toUpperCase()+" "+this.getOthername().toUpperCase()+" "+this.getLastname().toUpperCase();
     }
 }

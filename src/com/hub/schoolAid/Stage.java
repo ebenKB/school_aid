@@ -24,6 +24,7 @@ public class Stage {
 
     @ManyToMany(mappedBy = "classes", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<Staff> staffs;
+
     //constructor
     public Stage () {
 

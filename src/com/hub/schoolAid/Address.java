@@ -16,6 +16,7 @@ public class Address {
     private String homeAddress; // preferably digital address
     private String landmark;    // a description or closest landmark to the address
     private String location; // the exact place of the address
+    private String email;
 
     //getters and setter
     public Long getId() {

@@ -1,4 +1,6 @@
 package controller;
+import com.hub.schoolAid.App;
+import com.hub.schoolAid.AppDao;
 import com.hub.schoolAid.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,10 +23,29 @@ public class TrialController implements Initializable {
     private Button continueTrial;
 
     @FXML
+    private Button close;
+
+    @FXML
     private Pane separator;
+
+    private AppDao appDao;
+//    private App app = new App();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        continueTrial.setOnAction(event -> Utils.dispose(event));
+        // disable the button
+        appDao = new AppDao();
+        if(!appDao.appCanBoot(AppDao.getAppSetting())) {
+            continueTrial.setDisable(true);
+            trialLabel.setText("Your trial period has ended");
+        }
+        continueTrial.setOnAction(event -> {
+            Utils.dispose(event);
+        });
+
+        close.setOnAction(event -> {
+            Utils.closeEvent(event);
+            System.exit(0);
+        });
     }
 }

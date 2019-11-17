@@ -520,8 +520,17 @@ public class AttendanceTemporaryDao {
         }
     }
 
-    public Boolean canCreateAttendance() {
-        if ( (this.checkAttendanceInterval() == 1)|| ((this.checkAttendanceInterval() > 0) && (this.checkAttendanceInterval() < 15))) {
+    public int checkAttendanceInterval(LocalDate date) {
+        // check if the date is not later than the already existing dates
+        LocalDate termDate = TermDao.getCurrentDate(true);
+        if(date.compareTo(termDate) < 1) {
+            return 0;
+        } else return checkAttendanceInterval();
+    }
+
+
+    public Boolean canCreateAttendance(LocalDate date) {
+        if ( (this.checkAttendanceInterval(date) == 1)|| ((this.checkAttendanceInterval(date) > 0) && (this.checkAttendanceInterval(date) < 15))) {
             System.out.println("We can create an attendance"+ this.checkAttendanceInterval());
             return true;
         } else {

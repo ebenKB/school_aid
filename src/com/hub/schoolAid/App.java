@@ -6,6 +6,11 @@ import javax.persistence.*;
 
 public class App {
 
+    public App() {
+        // set default app state
+        this.setRegistered(false);
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -21,6 +26,7 @@ public class App {
     private String currencyType = "GHC";
     private int maxCount;
     private int currentCount;
+    private Boolean isRegistered;
 
 
     @Enumerated(EnumType.STRING)
@@ -123,5 +129,13 @@ public class App {
 
     public void setCurrentCount(int currentCount) {
         this.currentCount = currentCount;
+    }
+
+    public Boolean getRegistered() {
+        return isRegistered;
+    }
+
+    public void setRegistered(Boolean registered) {
+        isRegistered = registered;
     }
 }

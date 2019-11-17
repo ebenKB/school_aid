@@ -119,6 +119,7 @@ public class SchoolFeesFormController implements  Initializable {
     }
 
     Label h = new Label("___________________________\n\nTRANSACTION DETAILS\n___________________________\n\n\n");
+    Label name = new Label();
     Label c = new Label();
     Label ad = new Label();
     Label ap = new Label();
@@ -179,32 +180,42 @@ public class SchoolFeesFormController implements  Initializable {
         // check if the data is not empty
         studentTableview.setItems(this.students);
         totalRecords.setText(String.valueOf(studentTableview.getItems().size()));
-        detailsVBox.getChildren().addAll(h,c,ad,ap,o);
+        detailsVBox.getChildren().addAll(name,h,c,ad,ap,o);
     }
 
     private void setDetails(Student student) {
-        // clear all the labels before setting the items
-        String cur = "GHC";
-        String amntDue;
-        if (student.getAccount().getFeeToPay() < 0) {
-            amntDue = "Total School Fees : "+String.valueOf((student.getAccount().getFeeToPay() * -1 ))+"\n\n";
-        } else {
-            amntDue = "Total School Fees : "+String.valueOf((student.getAccount().getFeeToPay()))+"\n\n";
-        }
+        // check if multiple students are not selected
+//        if(selectedStudents.size() == 1) {
+            detailsVBox.setVisible(true);
+            viewPaymentDetails.setVisible(true);
+            // clear all the labels before setting the items
+            String cur = "GHC";
+            String amntDue;
+            if (student.getAccount().getFeeToPay() < 0) {
+                amntDue = "Total School Fees : "+String.valueOf((student.getAccount().getFeeToPay() * -1 ))+"\n\n";
+            } else {
+                amntDue = "Total School Fees : "+String.valueOf((student.getAccount().getFeeToPay()))+"\n\n";
+            }
 
-        String owing = String.valueOf("Amount owing : "+ (student.getAccount().getFeeToPay() + student.getAccount().getSchFeesPaid()))+"\n\n";
+            String owing = String.valueOf("Amount owing : "+ (student.getAccount().getFeeToPay() + student.getAccount().getSchFeesPaid()))+"\n\n";
 
-        // set the labels
-        h.getStyleClass().add("heading-label");
-        c.setText(cur);
-        c.getStyleClass().add("white-label");
-        ad.setText(amntDue);
-        ad.getStyleClass().add("white-label");
-        ap.setText("Amount paid : "+ String.valueOf(student.getAccount().getSchFeesPaid())+"\n\n");
-        ap.getStyleClass().add("white-label");
-        o.setText(owing);
-        o.getStyleClass().add("owing-label");
-        detailsVBox.getStyleClass().add("details-wrapper");
+            // set the labels
+            h.getStyleClass().add("heading-label");
+            name.setText(studentTableview.getSelectionModel().getSelectedItem().toString()+"\n\n");
+            name.getStyleClass().add("heading-label");
+            c.setText(cur);
+            c.getStyleClass().add("white-label");
+            ad.setText(amntDue);
+            ad.getStyleClass().add("white-label");
+            ap.setText("Amount paid : "+ String.valueOf(student.getAccount().getSchFeesPaid())+"\n\n");
+            ap.getStyleClass().add("white-label");
+            o.setText(owing);
+            o.getStyleClass().add("owing-label");
+            detailsVBox.getStyleClass().add("details-wrapper");
+//        } else {
+//            detailsVBox.setVisible(false);
+//            viewPaymentDetails.setVisible(false);
+//        }
     }
 
     private void enableButtons() {
@@ -217,34 +228,35 @@ public class SchoolFeesFormController implements  Initializable {
         printReport.setDisable(true);
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         checkCol.setGraphic(selectAll);
-//        studentTableview.getItems().addListener(new ListChangeListener<Student>() {
-//            @Override
-//            public void onChanged(Change<? extends Student> c) {
-//                totalRecords.setText(String.valueOf(studentTableview.getItems().size()));
-//            }
-//        });
+        studentTableview.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         // listen when a new table row is selected
         studentTableview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {
             @Override
             public void changed(ObservableValue<? extends Student> observable, Student oldValue, Student newValue) {
                 if(newValue != null && newValue != oldValue) {
-                    viewPaymentDetails.setVisible(true);
 
-                    if(newValue.getPicture() != null) {
-                        imageLabel.setVisible(false);
-                        ImageHandler.setImage(newValue.getPicture(), studentImageview);
-
-                        // show the details of the student
+                    imageLabel.setVisible(false);
+                    // check if multiple students are not selected
+//                    if(!(selectedStudents.size() > 1)) {
+                        viewPaymentDetails.setVisible(true);
                         setDetails(newValue);
-                    } else {
-                        imageLabel.setVisible(true);
-                        studentImageview.setImage(null);
-                    }
+                        if(newValue.getPicture() != null) {
+                            ImageHandler.setImage(newValue.getPicture(), studentImageview);
+
+                            // show the details of the student
+                            setDetails(newValue);
+                        } else {
+                            imageLabel.setVisible(true);
+                            studentImageview.setImage(null);
+                        }
+//                    } else {
+//                        studentImageview.setImage(null);
+//                        detailsVBox.setVisible(false);
+//                    }
                 }
             }
         });
@@ -321,6 +333,7 @@ public class SchoolFeesFormController implements  Initializable {
                 // check if there are any items selected
                 if(selectedStudents.size() > 0) {
                     enableButtons();
+
                 } else disableFields();
             }
         });
@@ -382,15 +395,15 @@ public class SchoolFeesFormController implements  Initializable {
         });
 
         printStatement.setOnAction(event -> {
-            try {
-//                getStage();
-                PDFMaker pdfMaker =PDFMaker.getPDFMakerInstance();
-                PDDocument doc = pdfMaker.generateSchoolFeesReport(selectedStudents);
-                PDFMaker.savePDFToLocation(doc);
-            } catch (Exception e) {
-                Notification.getNotificationInstance().notifyError("An error occurred while generating the report", "Error");
-            }
+//            try {
+//                PDFMaker pdfMaker =PDFMaker.getPDFMakerInstance();
+//                PDDocument doc = pdfMaker.generateSchoolFeesReport(selectedStudents);
+//                PDFMaker.savePDFToLocation(doc);
+//            } catch (Exception e) {
+//                Notification.getNotificationInstance().notifyError("An error occurred while generating the report", "Error");
+//            }
         });
+        close.setOnAction(event -> Utils.closeEvent(event));
     }
 
     private void getStage() {

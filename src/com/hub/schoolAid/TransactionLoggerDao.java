@@ -33,6 +33,10 @@ public class TransactionLoggerDao {
        transaction.setPaidBy(transactionBy);
        transaction.setTransactionType(type);
 
+       // add a reciept number to to the transaction
+        Receipt receipt = new Receipt();
+        transaction.setReceipt(receipt);
+
         try {
             HibernateUtil.save(TransactionLogger.class,transaction);
             return true;

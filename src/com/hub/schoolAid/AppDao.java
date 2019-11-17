@@ -12,6 +12,10 @@ public class AppDao {
     private  static App app =null;
     private  static EntityManager em;
 
+    /**
+     *
+     * @return returns the current settings for the application
+     */
     public static App getAppSetting() {
         if(app ==  null) {
             try {
@@ -47,6 +51,10 @@ public class AppDao {
     }
 
 
+    /**
+     * creates default settins for the application
+     * @return
+     */
     public Boolean setDefault() {
         try {
             App app = new App();
@@ -54,7 +62,6 @@ public class AppDao {
             app.setCanShowIntroHelp(true);
             app.setFeedingType(FeedingType.COUPON);
             app.setCanShowPopUp(true);
-//            app.setFeedingFee(5.0);
             app.setHasInit(true);
 
             // save the records to the database
@@ -71,8 +78,15 @@ public class AppDao {
         }
     }
 
+    /**
+     * creates settings for the application
+     * The application uses the settings to determine its state at any point in time
+     * if settings are not specifies for the application, it creates it's own default settings
+     * @param app the app settings to create
+     * @return returns true if the settings was created successfully
+     */
     public Boolean createAppSettings(App app) {
-        if (app ==null)
+        if (app == null)
             return false;
         try {
             em = HibernateUtil.getEntityManager();
@@ -80,11 +94,20 @@ public class AppDao {
             HibernateUtil.save(App.class, app);
             return true;
         }catch (Exception e) {
-            e.printStackTrace();
             return false;
+        } finally {
+            if(em == null){
+                em.close();
+            }
         }
     }
 
+    /**
+     * increases the app counter by 1
+     * By default this method expects the instance of the currently running application
+     * @param app the app to update.
+     * @return returns true if the update was success otherwise false
+     */
     public Boolean increaseAppCounter(App app){
         try {
             em = HibernateUtil.getEntityManager();
@@ -95,6 +118,7 @@ public class AppDao {
                 app.setCurrentCount((app.getCurrentCount() + 1));
                 em.merge(app);
             }
+            HibernateUtil.commit();
             return true;
         }catch (Exception e){
             HibernateUtil.rollBack();
@@ -102,6 +126,11 @@ public class AppDao {
         }
     }
 
+    /**
+     * checks if the application can startup
+     * @param app the app that is currently ruunning
+     * @return returns true if the application can boot otherwise returns false
+     */
     public Boolean appCanBoot(App app) {
         if(app.getMaxCount() > app.getCurrentCount()) {
             return true;

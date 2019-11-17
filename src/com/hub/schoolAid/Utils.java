@@ -175,9 +175,11 @@ public class Utils {
                             if(check.isSelected()) {
                                 t.setSelected(true);
                                 selectedItems.add(t);
+//                                tableView.getSelectionModel().select(getIndex());
                             } else {
                                 t.setSelected(false);
                                 selectedItems.remove(t);
+//                                tableView.getSelectionModel().clearSelection(getIndex());
                             };
                         });
                     }
@@ -212,6 +214,7 @@ public class Utils {
         for (Student st: tableView.getItems()) {
             st.setSelected(true);
             selectedStudents.add(st);
+//            tableView.getSelectionModel().select(st);
         }
         tableView.refresh();
     }
@@ -220,6 +223,7 @@ public class Utils {
         for (Student st: students) {
             st.setSelected(false);
             selectedStudents.remove(st);
+//            tableView.getSelectionModel().clearSelection();
         }
         selectedStudents.clear();
         tableView.refresh();

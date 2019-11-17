@@ -235,6 +235,9 @@ public class mainController implements Initializable{
     @FXML
     private Button schoolFees;
 
+    @FXML
+    private Label trialLabel;
+
     public static User user;
     private ObservableList<Student> data = FXCollections.observableArrayList();
     private FilteredList<Student> filteredData = new FilteredList <> (data, e ->true);
@@ -245,8 +248,8 @@ public class mainController implements Initializable{
     private Notification notification =Notification.getNotificationInstance();
     private MyProgressIndicator myProgressIndicator = MyProgressIndicator.getMyProgressIndicatorInstance();
     private salesDetailsFormController salesDetailsFormController = new salesDetailsFormController();
-    private App appSettings;
     private AppDao appDao = new AppDao();
+    private App appSettings =AppDao.getAppSetting();
 
     public void init(User user){
         mainController.user = user;
@@ -494,13 +497,22 @@ public class mainController implements Initializable{
 //        new Thread(check).start();
 
         //check whether the term has been initialized
-       PauseTransition show = new PauseTransition(Duration.seconds(5));
+       PauseTransition show = new PauseTransition(Duration.seconds(1));
         show.setOnFinished(event -> {
 //            termDao =new TermDao();
-
-          try{
+          try {
               termDao.getCurrentTerm();
-              utils.showTrialForm();
+             if(!appDao.appCanBoot(appSettings))
+                 utils.showTrialForm();
+             else {
+                 appDao.increaseAppCounter(appSettings);
+                 int trialLeft = appSettings.getMaxCount() - appSettings.getCurrentCount();
+                 if(trialLeft < 14) {
+                     utils.showTrialForm();
+                     trialLabel.setText("You Trial will expire in about "+ (trialLeft) +" days");
+                     trialLabel.setVisible(true);
+                 }
+             }
           }catch (NoResultException e){
               showNewTermForm();
           }

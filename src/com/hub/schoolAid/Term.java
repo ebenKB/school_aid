@@ -17,10 +17,11 @@ public class Term {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
-    private LocalDate start_date;
-    private LocalDate end_date;
-    private LocalDate today;
+    private String name; // name is the name given to the term e.g first term or second term
+    private int value;
+    private LocalDate start_date; // the date that the term started
+    private LocalDate end_date; // the date that the term ended
+    private LocalDate today;    // the current day of the term
     /**
      *  0 means the term is
      *  1 means the term is current
@@ -74,5 +75,29 @@ public class Term {
 
     public void setToday(LocalDate today) {
         this.today = today;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public LocalDate getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(LocalDate start_date) {
+        this.start_date = start_date;
+    }
+
+    public LocalDate getEnd_date() {
+        return end_date;
+    }
+
+    public void setEnd_date(LocalDate end_date) {
+        this.end_date = end_date;
     }
 }

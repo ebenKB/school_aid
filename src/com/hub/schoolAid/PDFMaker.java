@@ -602,11 +602,6 @@ public class PDFMaker {
     }
 
     public static void savePDFToLocation(PDDocument pdDocument) {
-//        try{
-//
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
         //choose a file location
         Platform.runLater(new Runnable() {
             @Override
@@ -617,11 +612,15 @@ public class PDFMaker {
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files",".pdf"));
                 fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("PDF Files",".pdf"));
                 File file  = fileChooser.showSaveDialog(new Stage());
-                if(file!=null)
                     try {
-                        pdDocument.save(file);
-                        pdDocument.close();
+                        if(file != null) {
+                            pdDocument.save(file);
+                            pdDocument.close();
+                        } else {
+                            pdDocument.close();
+                        }
                     } catch (IOException e) {
+
                         e.printStackTrace();
                     }
             }

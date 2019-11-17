@@ -108,6 +108,11 @@
                         <!--<FontAwesomeIconView glyphName="SEARCH" size="25" wrappingWidth="23.214284896850586" />-->
                      </children>
                   </HBox>
+                  <Label fx:id="trialLabel" layoutX="731.0" layoutY="88.0" prefHeight="32.0" prefWidth="392.0" text="Your Trial will expire " textFill="RED" visible="false" AnchorPane.topAnchor="88.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </top>

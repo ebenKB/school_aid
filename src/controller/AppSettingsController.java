@@ -153,6 +153,10 @@ public class AppSettingsController implements Initializable {
             app.setCanShowIntroHelp(true);
         } else app.setCanShowIntroHelp(false);
 
+
+
+        app.setMaxCount(31); // set max count for trial
+        app.setCurrentCount(0);  // set initial count for trial
         AppDao appDao = new AppDao();
         if(appDao.createAppSettings(app));
     }
