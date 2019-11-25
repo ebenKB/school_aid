@@ -2,11 +2,31 @@ package com.hub.schoolAid;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BillDao {
     private EntityManager em;
 
+    /**
+     * creates a bill for all students
+     * @return
+     */
+    public Boolean createBill(Bill bill) throws Exception {
+        em = HibernateUtil.getEntityManager();
+        HibernateUtil.begin();
+
+        // create the bill for all
+        try {
+            // fetch all students from the database
+            StudentDao studentDao = new StudentDao();
+            List<Student>students = studentDao.getAllStudents(true);
+            createBill(students, bill);
+            return true;
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
     /**
      * Before creating a bill, set the date for next term for which you are creating the bill
      * @param students
@@ -20,13 +40,18 @@ public class BillDao {
             int batchSize = 25;
             em= HibernateUtil.getEntityManager();
             HibernateUtil.begin();
+            List<Student>selectedStudents = new ArrayList<>();
 
             // update the school fees amount to pay for all students for which the bill is being created for
             for(int i =0; i< entityCount; i++) {
                 Student st = students.get(i);
 
-                // update the student's account with the feeding fee to pay
-                st.getAccount().setSchFeesPaid(bill.getTotalBill());
+                // check if the student pays school fees
+                if(st.getPaySchoolFees()) {
+                    // update the student's account with the school fees to pay
+                    st.getAccount().setFeeToPay(bill.getTotalBill());
+                    selectedStudents.add(st);
+                }
 
                 // check if the batch size has been reached
                 if(i > 0 &&  i %batchSize == 0) {
@@ -37,7 +62,7 @@ public class BillDao {
                 HibernateUtil.save(Bill.class, bill);
                 em.merge(st);
             }
-            bill.setStudents(students);
+            bill.setStudents(selectedStudents);
             HibernateUtil.commit();
             return false;
         } catch (Exception e) {

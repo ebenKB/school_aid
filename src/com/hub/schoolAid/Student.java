@@ -29,6 +29,7 @@ public class Student {
     private String gender;
     private Boolean payFeeding;
     private Boolean paySchoolFees;
+    private Boolean hasAllergy;
     public enum FeedingStatus{DAILY,WEEKLY,MONTHLY,TERMLY,PERIODIC,SEMI_PERIODIC}
     private LocalDate reg_date;
     private LocalDate dob;
@@ -82,6 +83,9 @@ public class Student {
      */
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Bill>bills;
+
+    @ManyToMany(mappedBy = "student", cascade = {CascadeType.PERSIST})
+    private List<Allergy>allergies;
 
     @Transient
     private Boolean isSelected;
@@ -188,6 +192,22 @@ public class Student {
 
     public void setPreviousSchool(String previousSchool) {
         this.previousSchool = previousSchool;
+    }
+
+    public Boolean getHasAllergy() {
+        return hasAllergy;
+    }
+
+    public void setHasAllergy(Boolean hasAllergy) {
+        this.hasAllergy = hasAllergy;
+    }
+
+    public List<Allergy> getAllergies() {
+        return allergies;
+    }
+
+    public void setAllergies(List<Allergy> allergies) {
+        this.allergies = allergies;
     }
 
     //    public List<Sales> getSales() {

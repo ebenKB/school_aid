@@ -519,9 +519,21 @@ public class studentController implements Initializable{
         parent.setAddress(homeaddress);
         student.setParent(parent);
 
-        StudentAccount account =new StudentAccount();
+        StudentAccount account = new StudentAccount();
         student.setAccount(account);
 
+        // check if the student has an allergy
+        if(allergyRadiobtn.getSelectedToggle() == yes) {
+            if(allergy.getText().trim().length() > 0) {
+                student.setHasAllergy(true);
+                Allergy alg = new Allergy();
+                alg.setAllergy(allergy.getText().trim());
+                List<Allergy>allergies = new ArrayList<>();
+                allergies.add(alg);
+                student.setAllergies(allergies);
+
+            } else student.setHasAllergy(false);
+        } else student.setHasAllergy(false);
 
         cancel.setOnAction(e->{
             Utils.closeEvent(e);

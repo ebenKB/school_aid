@@ -48,6 +48,7 @@
                 </Menu>
               </menus>
             </MenuBar>
+            <Button fx:id="testPrint" layoutX="513.0" layoutY="38.0" mnemonicParsing="false" text="Test Print" />
          </children>
       </Pane>
       <TableView fx:id="studentTableView" layoutX="23.0" layoutY="102.0" prefHeight="681.0" prefWidth="1238.0" style="-fx-fixed-cell-size: 60; -fx-border-color: #fff;" styleClass="2" stylesheets="@../stylesheet/main.css" AnchorPane.bottomAnchor="94.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="102.0">

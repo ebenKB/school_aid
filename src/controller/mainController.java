@@ -233,6 +233,9 @@ public class mainController implements Initializable{
     private MenuItem view_staff;
 
     @FXML
+    private MenuItem studentBills;
+
+    @FXML
     private Button schoolFees;
 
     @FXML
@@ -287,14 +290,14 @@ public class mainController implements Initializable{
     }
 
     private void populateTableView(){
-            setTableData();
-            studentTableView.setVisible(Boolean.TRUE);
-            if(data.isEmpty()) {
-                getAllStudents();
-            }
-            studentTableView.setItems(data);
-            totalStudents.setText(String.valueOf(data.size()));
-            tableInfo.setVisible(true);
+        setTableData();
+        studentTableView.setVisible(Boolean.TRUE);
+        if(data.isEmpty()) {
+            getAllStudents();
+        }
+        studentTableView.setItems(data);
+        totalStudents.setText(String.valueOf(data.size()));
+        tableInfo.setVisible(true);
 
     }
 
@@ -335,7 +338,7 @@ public class mainController implements Initializable{
       return null;
     }
 
-    private void refresh(){
+    private void refresh() {
         Task task = new Task() {
             @Override
             protected Object call() throws Exception {
@@ -384,7 +387,7 @@ public class mainController implements Initializable{
         }
     }
 
-    private void showTerminalReport(){
+    private void showTerminalReport() {
         Parent root;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/terminalReport.fxml"));
         try {
@@ -470,6 +473,23 @@ public class mainController implements Initializable{
             Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "Error");
         }
     }
+
+    private void showBill() {
+        try {
+            Parent root;
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/showBills.fxml"));
+            root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            javafx.stage.Stage stage = new javafx.stage.Stage();
+            stage.setScene(scene);
+            stage.setTitle("Student Bill");
+            stage.setMaximized(true);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.show();
+        }catch (Exception e) {
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "Error");
+        }
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Utils utils = new Utils();
@@ -505,14 +525,23 @@ public class mainController implements Initializable{
              if(!appDao.appCanBoot(appSettings))
                  utils.showTrialForm();
              else {
-                 appDao.increaseAppCounter(appSettings);
+                 // check if the date is the same
+                 LocalDate date = appSettings.getLastOpened();
+                 if(date.isBefore(LocalDate.now()) || date.isAfter(LocalDate.now())) {
+                     appDao.increaseAppCounter(appSettings);
+                 }
+
                  int trialLeft = appSettings.getMaxCount() - appSettings.getCurrentCount();
                  if(trialLeft < 14) {
                      utils.showTrialForm();
-                     trialLabel.setText("You Trial will expire in about "+ (trialLeft) +" days");
+                     trialLabel.setText("You Trial will expire in "+ (trialLeft) +" days");
                      trialLabel.setVisible(true);
                  }
              }
+
+              // update the date
+              appSettings.setLastOpened(LocalDate.now());
+              AppDao.updateApp(appSettings);
           }catch (NoResultException e){
               showNewTermForm();
           }
@@ -749,6 +778,8 @@ public class mainController implements Initializable{
         editStage.setOnAction(event -> this.showEditStageForm());
 
         schoolFees.setOnAction(event -> showSchoolFees());
+
+        studentBills.setOnAction(event -> showBill());
     }
 
     private void searchTable() {

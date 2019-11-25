@@ -1,5 +1,6 @@
 package controller;
 
+import com.hub.schoolAid.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -14,14 +15,11 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
-import com.hub.schoolAid.Initializer;
-import com.hub.schoolAid.Notification;
-import com.hub.schoolAid.User;
-import com.hub.schoolAid.UserDao;
 
 import javax.persistence.NoResultException;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class LoginFormController implements Initializable{
@@ -114,42 +112,40 @@ public class LoginFormController implements Initializable{
 //        ((Node)(event).getSource()).getScene().getWindow().hide();
          UserDao userDao = new UserDao();
         try{
-            userDao.getUser(user);
+            User auth =userDao.getUser(user);
+            if(auth == null) {
+                Notification.getNotificationInstance().notifyError("User not found", "Invalid credentials");
+            } else {
 
             //log the user in
-            if( ! Initializer.isLoggedin){
-                Parent parent;
-                FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("/view/main.fxml"));
-                try {
-                    parent = fxmlLoader.load();
-                    mainController controller = fxmlLoader.getController();
-                    this.mainController=controller;
-                    controller.init(user);
+                if( ! Initializer.isLoggedin){
+                    Parent parent;
+                    FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("/view/main.fxml"));
+                    try {
+                        parent = fxmlLoader.load();
+                        mainController controller = fxmlLoader.getController();
+                        this.mainController=controller;
+                        controller.init(user);
 
-                    Scene scene = new Scene(parent);
-                    javafx.stage.Stage stage = new javafx.stage.Stage();
-                    stage.setScene(scene);
-                    stage.setMaximized(Boolean.TRUE);
-//                    stage.setOnCloseRequest(e->{
-//                        e.consume();
-//                        System.out.println("main stage wants to close");
-//                    });
-                    stage.show();
+                        Scene scene = new Scene(parent);
+                        javafx.stage.Stage stage = new javafx.stage.Stage();
+                        stage.setScene(scene);
+                        stage.setMaximized(Boolean.TRUE);
+                        stage.show();
 
-                    //hide the old form
+                        //hide the old form
+                        ((Node)(event).getSource()).getScene().getWindow().hide();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }finally {
+                        Initializer.isLoggedin=true;
+                        Initializer.isLocked=false;
+                    }
+                }
+                else{
                     ((Node)(event).getSource()).getScene().getWindow().hide();
-//                  Initializer.getInitializerInstance().haltSystem();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }finally {
-                    Initializer.isLoggedin=true;
                     Initializer.isLocked=false;
                 }
-            }
-            else{
-                ((Node)(event).getSource()).getScene().getWindow().hide();
-                Initializer.isLocked=false;
-//              Initializer.getInitializerInstance().haltSystem();
             }
         }catch (NoResultException e){
             notification.notifyError("Sorry! we didn't find any user with these credentials.\nPlease create an account","No user found");

@@ -25,7 +25,7 @@
             </Label>
          </children>
       </Pane>
-      <HBox layoutX="80.0" layoutY="72.0" prefHeight="36.0" prefWidth="342.0" spacing="40.0">
+      <HBox layoutX="80.0" layoutY="72.0" prefHeight="36.0" prefWidth="342.0" spacing="40.0" visible="false">
          <children>
             <Button fx:id="useSystemDate" mnemonicParsing="false" prefHeight="36.0" prefWidth="142.0" text="Use System Date">
                <font>

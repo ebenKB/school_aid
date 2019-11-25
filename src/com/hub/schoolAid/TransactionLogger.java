@@ -25,7 +25,7 @@ public class TransactionLogger {
     private LocalDate date;
     private String Description;
     private String paidBy;
-//    private Long Student_id;
+    private Long Student_id;
     private Long TransactionId; // refers to the unique id for the item that has been saved into the database.
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -88,6 +88,14 @@ public class TransactionLogger {
 
     public void setReceipt(Receipt receipt) {
         this.receipt = receipt;
+    }
+
+    public Long getStudent_id() {
+        return Student_id;
+    }
+
+    public void setStudent_id(Long student_id) {
+        Student_id = student_id;
     }
 
     //    public Long getStudent_id() {

@@ -32,6 +32,19 @@ public class AppDao {
         } else System.out.println("Not from the database");
         return app;
     }
+
+    public static Boolean updateApp(App app) {
+        try {
+            em = HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            em.merge(app);
+            HibernateUtil.commit();
+            return true;
+        } catch (Exception e) {;
+            return  false;
+        }
+
+    }
 //    public static Boolean canShowPopUp(){
 //        session = HibernateUtil.getSession();
 //        session.beginTransaction();

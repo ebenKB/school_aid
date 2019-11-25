@@ -48,14 +48,14 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="660.0">
                      <children>
-                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="788.0">
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="829.0">
                            <children>
                               <ImageView fx:id="studentImage" fitHeight="206.0" fitWidth="238.0" layoutX="23.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../assets/login-avatar.png" />
                                  </image>
                               </ImageView>
-                              <VBox layoutX="283.0" layoutY="52.0" prefHeight="303.0" prefWidth="471.0" spacing="17.0" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="283.0" AnchorPane.rightAnchor="34.0" AnchorPane.topAnchor="52.0">
+                              <VBox layoutX="283.0" layoutY="52.0" prefHeight="316.0" prefWidth="471.0" spacing="17.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="283.0" AnchorPane.rightAnchor="34.0" AnchorPane.topAnchor="52.0">
                                  <children>
                                     <HBox prefHeight="36.0" prefWidth="417.0">
                                        <children>
@@ -100,6 +100,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </JFXTextField>
+                                    <JFXTextArea fx:id="allergy" labelFloat="true" prefHeight="108.0" prefWidth="477.0" promptText="Student Allergy" visible="false" />
                                  </children>
                               </VBox>
                               <FontAwesomeIconView />
@@ -271,11 +272,11 @@
             </Tab>
          </tabs>
       </JFXTabPane>
-      <JFXButton fx:id="close" layoutX="474.0" layoutY="467.0" prefHeight="30.0" prefWidth="54.0" text="Close">
+      <JFXButton fx:id="close" layoutX="474.0" layoutY="500.0" prefHeight="30.0" prefWidth="54.0" text="Close">
          <tooltip>
             <Tooltip text="Close the current form" />
          </tooltip></JFXButton>
-      <Button fx:id="save" defaultButton="true" disable="true" layoutX="557.0" layoutY="467.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" text="Save Changes">
+      <Button fx:id="save" defaultButton="true" disable="true" layoutX="557.0" layoutY="500.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" text="Save Changes">
          <tooltip>
             <Tooltip text="Do you want to save the new changes?" />
          </tooltip></Button>

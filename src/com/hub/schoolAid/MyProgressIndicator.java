@@ -29,7 +29,7 @@ public class MyProgressIndicator {
     private  javafx.stage.Stage stage;
 
     //show progress
-    public  void showInitProgress(String message, Task task){
+    public  void showInitProgress(String message, Task task) {
         stage = new Stage();
         stage.initStyle(StageStyle.UNDECORATED);
         AnchorPane root = new AnchorPane();

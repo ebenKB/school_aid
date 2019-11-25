@@ -112,6 +112,13 @@
                      <font>
                         <Font size="16.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/cancel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Label>
                </children>
             </AnchorPane>
@@ -240,7 +247,7 @@
                               </ImageView>
                            </graphic>
                         </MenuButton>
-                        <MenuButton graphicTextGap="10.0" layoutX="5.0" layoutY="110.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="186.0" text="PAYMENT">
+                        <MenuButton graphicTextGap="10.0" layoutX="5.0" layoutY="110.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="186.0" text="ACCOUNTS">
                            <items>
                               <MenuItem fx:id="newSale" mnemonicParsing="false" text="Sell an item">
                                  <accelerator>
@@ -254,7 +261,7 @@
                                     </ImageView>
                                  </graphic>
                               </MenuItem>
-                              <MenuItem fx:id="salesOverview" mnemonicParsing="false" text="Edit Class Details" />
+                              <MenuItem fx:id="salesOverview" mnemonicParsing="false" text="View sales" />
                               <MenuItem fx:id="newPayment" mnemonicParsing="false" text="Payment/Feeding">
                                  <graphic>
                                     <ImageView fitHeight="35.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -271,14 +278,7 @@
                                        </image>
                                     </ImageView>
                                  </graphic></MenuItem>
-                              <MenuItem fx:id="deleteSale" mnemonicParsing="false" text="Delete Sale">
-                                 <graphic>
-                                    <ImageView fitHeight="35.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/delete.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic></MenuItem>
+                              <MenuItem fx:id="studentBills" mnemonicParsing="false" text="Student Bills" />
                            </items>
                            <graphic>
                               <ImageView fitHeight="31.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">

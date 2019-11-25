@@ -861,7 +861,7 @@ public class salesDetailsFormController implements Initializable{
         });
     }
 
-    private void resetFeeding(Student student) {
+    public void resetFeeding(Student student) {
         if(Utils.authorizeUser()) {
             TextInputDialog amount = new TextInputDialog();
             amount.setTitle("New Amount");

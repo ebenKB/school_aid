@@ -118,14 +118,18 @@ private EntityManager em;
      * @param std the student whose sales we want to get
      * @return returns all the sales of that student if any
      */
-    public List<Sales> getAllSalesOfStudent(Student std) throws  HibernateException{
-        em=HibernateUtil.getEntityManager();
-        HibernateUtil.begin();
-//        String hql = "select s from Sales s JOIN s.student st where st.id =?";
-        String hql = "from Sales S where  S.student.id = ? order by S.item.name asc ";
-
-        List<Sales> list = em.createQuery(hql).setParameter(0,std.getId()).getResultList();
-        return list;
+    public List<Sales> getAllSalesOfStudent(Student std) throws  HibernateException {
+        try {
+            em=HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            String hql = "from Sales S where  S.student.id = ? order by S.item.name asc ";
+            List<Sales> list = em.createQuery(hql).setParameter(0,std.getId()).getResultList();
+            return list;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            em.close();
+        }
     }
 
     public List<Sales> getAllSalesOfStudent() throws HibernateException{

@@ -174,6 +174,10 @@ public class studentDetailsFormController implements Initializable{
     private Hyperlink schFeesSummary;
 
 
+    @FXML
+    private JFXTextArea allergy;
+
+
     //mainController mainController;
     private Student student;
     private Student newStudent;
@@ -974,6 +978,12 @@ public class studentDetailsFormController implements Initializable{
             regDate.setText(student.getReg_date().toString());
             dob.setValue(student.getDob());
             phone.setText(student.getParent().getTelephone());
+
+            // -- consider rewriting this line --
+            if(student.getHasAllergy()) {
+                allergy.setVisible(true);
+                allergy.setText(student.getAllergies().get(0).getAllergy());
+            }
         }
     }
 
@@ -996,7 +1006,7 @@ public class studentDetailsFormController implements Initializable{
         ObservableList <String> data= FXCollections.observableArrayList();
         List<Sales> sales = salesDao.getAllSalesOfStudent(student);
 
-        if(sales.size() > 0){
+        if(sales != null && sales.size() > 0){
             for(Sales s: sales){
                 total++;
                 payment+=s.getAmountPaid();
@@ -1005,6 +1015,7 @@ public class studentDetailsFormController implements Initializable{
             }
             salesBalance.setText(String.valueOf(salesBal));
         }
+
         checkListView.setOnAction(event -> {
             if(checkListView.isSelected()){
                 if( salesListView.getItems().isEmpty()){

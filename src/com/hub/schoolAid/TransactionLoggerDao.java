@@ -32,6 +32,7 @@ public class TransactionLoggerDao {
        transaction.setDescription(description);
        transaction.setPaidBy(transactionBy);
        transaction.setTransactionType(type);
+       transaction.setStudent_id(trans_id);
 
        // add a reciept number to to the transaction
         Receipt receipt = new Receipt();
@@ -57,7 +58,7 @@ public class TransactionLoggerDao {
         try {
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
-           Query query = em.createQuery("from TransactionLogger T where T.transactionType = ?1 and T.TransactionId =?2");
+           Query query = em.createQuery("from TransactionLogger T where T.transactionType = ?1 and T.Student_id =?2");
            query.setParameter(1, type);
            query.setParameter(2, trans_id);
            List<TransactionLogger>transactions = query.getResultList();

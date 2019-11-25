@@ -67,7 +67,7 @@
                               </RadioButton>
                            </children>
                         </HBox>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Does your child have any allergy?">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Does your child have any allergy/special needs?">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -218,10 +218,10 @@
                      <children>
                         <VBox spacing="20.0">
                            <children>
-                              <HBox alignment="CENTER" spacing="20.0">
+                              <HBox alignment="CENTER" prefHeight="0.0" prefWidth="367.0" spacing="20.0">
                                  <children>
                                     <Text fill="#c6c6c0" strokeType="OUTSIDE" strokeWidth="0.0" text="Person 1" />
-                                    <Separator opacity="0.36" prefHeight="5.0" prefWidth="292.0" />
+                                    <Separator opacity="0.36" prefHeight="0.0" prefWidth="292.0" />
                                  </children>
                               </HBox>
                               <VBox prefHeight="106.0" prefWidth="364.0" spacing="20.0">
@@ -234,7 +234,7 @@
                         </VBox>
                         <VBox spacing="20.0">
                            <children>
-                              <HBox alignment="CENTER" spacing="20.0">
+                              <HBox alignment="CENTER" prefHeight="0.0" prefWidth="367.0" spacing="20.0">
                                  <children>
                                     <Text fill="#c6c6c0" strokeType="OUTSIDE" strokeWidth="0.0" text="Person 2" />
                                     <Separator opacity="0.36" prefHeight="1.0" prefWidth="292.0" />

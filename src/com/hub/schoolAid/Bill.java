@@ -15,13 +15,14 @@ public class Bill {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToMany
-    private List<Item>items;
-    private Double tutitionFee;
-    private Double totalBill;
-    private String academicYear;
-    private int createdBy;
-    private int createdFor;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Item>items;    // list of items contained in the bill e.g. sports dues, maintenance dues
+
+    private Double tuitionFee; // the total tuition fee for the bill
+    private Double totalBill;  // the total cost of the bill
+    private String academicYear; // the academic year for the bill
+    private int createdBy; // the term value for the term that created the bill
+    private int createdFor; // the term value for the term that the bill was created for
 
     @ManyToMany(mappedBy = "bills")
     private List<Student>students;
@@ -43,11 +44,11 @@ public class Bill {
     }
 
     public Double getTutitionFee() {
-        return tutitionFee;
+        return tuitionFee;
     }
 
     public void setTutitionFee(Double tutitionFee) {
-        this.tutitionFee = tutitionFee;
+        this.tuitionFee = tutitionFee;
     }
 
     public Double getTotalBill() {

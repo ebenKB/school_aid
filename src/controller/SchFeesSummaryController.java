@@ -60,10 +60,11 @@ public class SchFeesSummaryController implements Initializable{
 
             tlDao = new TransactionLoggerDao();
             logs.addAll(tlDao.getLog(TransactionType.SCHOOL_FEES, this.student.getId()));
+            System.out.println("The logs are: "+ logs.size());
             Double gross = 0.00;
 
             for (TransactionLogger logger : logs) {
-                createLabel(logger.getAmount(), logger.getDate());
+                createLabel(logger.getAmount(),logger.getPaidBy(), logger.getDate());
                 gross+=logger.getAmount();
             }
 
@@ -79,19 +80,28 @@ public class SchFeesSummaryController implements Initializable{
     }
 
 
-    private void createLabel(Double tAmount, LocalDate tDate) {
+    private void createLabel(Double tAmount, String paidBy, LocalDate tDate) {
         HBox hBox = new HBox();
-        Label date = new Label(tDate.toString());
-        date.setMinWidth(200);
+        Label date = new Label(Utils.formatDate(tDate));
+        date.setMinWidth(80);
         date.setAlignment(Pos.CENTER_LEFT);
         date.setPrefHeight(20);
+        date.getStyleClass().add("label-caption");
 
         Label amount = new Label(tAmount.toString());
         amount.setAlignment(Pos.CENTER_RIGHT);
         amount.setMinWidth(100);
         amount.setPrefHeight(20);
+        amount.getStyleClass().add("label-caption");
 
-        hBox.getChildren().addAll(date, amount);
+        Label by = new Label("\t\tpaid by "+ paidBy+"\t\t");
+        by.setAlignment(Pos.CENTER_LEFT);
+        by.setMinWidth(100);
+        by.setPrefHeight(20);
+        by.getStyleClass().add("label-caption");
+
+
+        hBox.getChildren().addAll(date, amount, by);
         hBox.setAlignment(Pos.CENTER_LEFT);
 
         // set the hbox to the scroll pane

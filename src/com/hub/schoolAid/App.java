@@ -1,6 +1,7 @@
 package com.hub.schoolAid;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity(name = "app")
 
@@ -9,6 +10,7 @@ public class App {
     public App() {
         // set default app state
         this.setRegistered(false);
+        this.setLastOpened(LocalDate.now());
     }
 
     @Id
@@ -27,6 +29,7 @@ public class App {
     private int maxCount;
     private int currentCount;
     private Boolean isRegistered;
+    private LocalDate lastOpened;
 
 
     @Enumerated(EnumType.STRING)
@@ -105,6 +108,14 @@ public class App {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public LocalDate getLastOpened() {
+        return lastOpened;
+    }
+
+    public void setLastOpened(LocalDate lastOpened) {
+        this.lastOpened = lastOpened;
     }
 
     public String getCurrencyType() {

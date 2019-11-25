@@ -98,15 +98,15 @@ public class newAttendanceSheetController implements Initializable{
                     if(confirmAttendance()) {
                         saveAttendanceRegister(event, LocalDate.now());
                     }
-                    if (saveToday()) {
-                        Notification.getNotificationInstance().notifySuccess("Today\'s date has been updated", "Success");
-                    }
+//                    if (saveToday()) {
+//                        Notification.getNotificationInstance().notifySuccess("Today\'s date has been updated", "Success");
+//                    }
                 } else {
-                    if(saveCustomDate()) {
+//                    if(saveCustomDate()) {
                         if(confirmAttendance()){
                             saveAttendanceRegister(event, datePicker.getValue());
                         }
-                    }
+//                    }
                 }
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "", ButtonType.OK);
@@ -255,7 +255,7 @@ public class newAttendanceSheetController implements Initializable{
     public void createNewAttendanceSheet(ActionEvent event, LocalDate date) {
         StudentDao studentDao = new StudentDao();
         AttendanceTemporaryDao attendanceTemporaryDao = new AttendanceTemporaryDao();
-        if(attendanceTemporaryDao.canCreateAttendance()) {
+        if(attendanceTemporaryDao.canCreateAttendance(date)) {
             //move the previous attendance to master table
 //            if(attendanceDao.moveAttendanceToMasterTable()) {
 //                //create a new attendance for all the students and save them in attendance temp.
@@ -328,7 +328,11 @@ public class newAttendanceSheetController implements Initializable{
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Please set the date for today."  + "The date in the system is: " +termDao.getCurrentDate(false),ButtonType.OK);
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "",ButtonType.OK);
+                    alert.setContentText("Please set the date for today."  + "The date in the system is: " +termDao.getCurrentDate(false)+ "\n\n"+
+                            "Make sure the date you have selected is correct and it is after "+ termDao.getCurrentDate(false)+"\n\n"+
+                            "The date you have selected should also not be ahead of today's date\n\n"+
+                            "If you think this is an error, please contact your system administrator.");
                     alert.setHeaderText("Wrong Date");
                     alert.setTitle("Error");
                     alert.show();

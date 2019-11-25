@@ -100,11 +100,15 @@ public class SchoolFeesFormController implements  Initializable {
     @FXML
     private Label totalSelected;
 
+    @FXML
+    private MenuItem paySchoolFees;
+
 
     private ObservableList<Student>students = FXCollections.observableArrayList();
     private ObservableList<Stage>stages= FXCollections.observableArrayList();
     private StudentDao studentDao;
     private CheckBox selectAll = new CheckBox();
+    private salesDetailsFormController salesDetailsFormController = new salesDetailsFormController();
 
     FilteredList<Student> filteredAtt = new FilteredList<>(students, e ->true);
     SortedList<Student> sortedList = new SortedList<>(filteredAtt);
@@ -197,7 +201,8 @@ public class SchoolFeesFormController implements  Initializable {
                 amntDue = "Total School Fees : "+String.valueOf((student.getAccount().getFeeToPay()))+"\n\n";
             }
 
-            String owing = String.valueOf("Amount owing : "+ (student.getAccount().getFeeToPay() + student.getAccount().getSchFeesPaid()))+"\n\n";
+            Double balance = student.getAccount().getFeeToPay() + student.getAccount().getSchFeesPaid();
+            String owing = String.valueOf("Balance : "+ (balance))+"\n\n";
 
             // set the labels
             h.getStyleClass().add("heading-label");
@@ -210,7 +215,13 @@ public class SchoolFeesFormController implements  Initializable {
             ap.setText("Amount paid : "+ String.valueOf(student.getAccount().getSchFeesPaid())+"\n\n");
             ap.getStyleClass().add("white-label");
             o.setText(owing);
-            o.getStyleClass().add("owing-label");
+            // check if the student is owing
+            if(balance < 0) {
+                o.getStyleClass().add("owing-label");
+            } else {
+                o.getStyleClass().add("credit-label");
+            }
+
             detailsVBox.getStyleClass().add("details-wrapper");
 //        } else {
 //            detailsVBox.setVisible(false);
@@ -369,6 +380,13 @@ public class SchoolFeesFormController implements  Initializable {
                 }
             });
             return row;
+        });
+
+        paySchoolFees.setOnAction(event -> {
+            Student student = studentTableview.getSelectionModel().getSelectedItem();
+            if(student != null) {
+                salesDetailsFormController.paySchoolFees(student);
+            }
         });
 
         printReport.setOnAction(event -> {

@@ -6,41 +6,50 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="739.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SchFeesSummaryController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SchFeesSummaryController">
    <children>
-      <Text layoutX="107.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Summary of School Fees Transactions" />
-      <Label fx:id="studentName" alignment="CENTER" layoutX="11.0" layoutY="85.0" prefHeight="24.0" prefWidth="451.0" textAlignment="CENTER">
+      <Pane layoutX="-2.0" layoutY="-3.0" prefHeight="71.0" prefWidth="652.0" styleClass="darkPane" stylesheets="@../stylesheet/main.css" />
+      <Text fill="WHITE" layoutX="107.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Summary of School Fees Transactions" textAlignment="CENTER" wrappingWidth="371.000005826354">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font size="18.0" />
+         </font></Text>
+      <Label fx:id="studentName" alignment="CENTER" layoutX="48.0" layoutY="93.0" prefHeight="27.0" prefWidth="566.0" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Black" size="18.0" />
          </font>
       </Label>
-      <HBox layoutX="48.0" layoutY="167.0" prefHeight="24.0" prefWidth="377.0" spacing="140.0">
+      <HBox layoutX="48.0" layoutY="167.0" prefHeight="24.0" prefWidth="371.0" spacing="20.0">
          <children>
-            <Label prefHeight="24.0" prefWidth="296.0" text="Total Fees Amount">
+            <Label prefHeight="24.0" prefWidth="251.0" text="This student is supposed to pay ">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="totalFees" alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="199.0" textFill="#f50202">
+            <Label fx:id="totalFees" alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="102.0">
                <font>
-                  <Font size="16.0" />
+                  <Font size="18.0" />
                </font>
             </Label>
          </children>
       </HBox>
-      <Separator layoutX="48.0" layoutY="199.0" prefHeight="0.0" prefWidth="360.0" />
-      <Separator layoutX="126.0" layoutY="114.0" prefWidth="200.0" />
-      <Button fx:id="close" layoutX="366.0" layoutY="658.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="63.0" text="close" />
-      <ScrollPane fx:id="scrollpane" layoutX="48.0" layoutY="220.0" prefHeight="305.0" prefWidth="371.0">
+      <Separator layoutX="48.0" layoutY="208.0" prefHeight="3.0" prefWidth="547.0" />
+      <HBox layoutX="376.0" layoutY="752.0" spacing="20.0">
+         <children>
+            <Button fx:id="close" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="close" />
+            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="129.0" text="Print Statement" />
+         </children>
+      </HBox>
+      <ScrollPane fx:id="scrollpane" layoutX="48.0" layoutY="240.0" prefHeight="399.0" prefWidth="547.0">
          <content>
-            <VBox fx:id="summaryBox" prefHeight="285.0" prefWidth="349.0" />
+            <VBox fx:id="summaryBox" prefHeight="395.0" prefWidth="540.0" />
          </content>
       </ScrollPane>
-      <HBox alignment="CENTER" layoutX="190.0" layoutY="533.0" spacing="10.0">
+      <HBox alignment="CENTER" layoutX="308.0" layoutY="661.0" prefHeight="35.0" prefWidth="235.0" spacing="10.0">
          <children>
             <Label text="Total Amount paid" />
             <Label fx:id="grossTotal" alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="106.0" textFill="#f50303">
@@ -50,16 +59,17 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="190.0" layoutY="578.0" spacing="10.0">
+      <HBox alignment="CENTER" layoutX="48.0" layoutY="661.0" spacing="10.0">
          <children>
-            <Label prefHeight="17.0" prefWidth="119.0" text="Balance" />
-            <Label fx:id="balance" alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="105.0" textFill="#f50303">
+            <Label prefHeight="17.0" prefWidth="59.0" text="Balance" />
+            <Label fx:id="balance" alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="89.0" textFill="#f50303">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
          </children>
       </HBox>
-      <Label fx:id="paysFees" alignment="CENTER" layoutX="38.0" layoutY="130.0" prefHeight="24.0" prefWidth="371.0" textFill="#ff0202" />
+      <Label fx:id="paysFees" alignment="CENTER" layoutX="94.0" layoutY="130.0" prefHeight="24.0" prefWidth="471.0" textFill="#ff0202" />
+      <Pane fx:id="separator" layoutX="-1.0" layoutY="80.0" prefHeight="10.0" prefWidth="645.0" styleClass="separator" />
    </children>
 </AnchorPane>

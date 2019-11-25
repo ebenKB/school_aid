@@ -27,6 +27,9 @@ public class AttendanceTemporaryDao {
     public Boolean createAttendanceSheet(Student student, LocalDate date) throws HibernateException {
         try {
             HibernateUtil.save(AttendanceTemporary.class,setAttendanceData(student, date));
+            // update the system date with the new date
+            TermDao termDao = new TermDao();
+            termDao.updateCurrentDate(date);
             return true;
         } catch (Exception e) {
             HibernateUtil.rollBack();
@@ -62,6 +65,10 @@ public class AttendanceTemporaryDao {
             }
             System.out.println("COMMITTING THE TRANSACTIONS");
             HibernateUtil.commit();
+
+            // update the system date with the new date
+            TermDao termDao = new TermDao();
+            termDao.updateCurrentDate(date);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -395,6 +402,7 @@ public class AttendanceTemporaryDao {
         } catch (Exception e) {
             HibernateUtil.close();
             em.clear();
+            e.printStackTrace();
         } finally {
             if (em == null) {
                 HibernateUtil.close();
@@ -496,7 +504,6 @@ public class AttendanceTemporaryDao {
 
     public int checkAttendanceInterval() {
         try {
-//            TermDao termDao = new TermDao();
             int diff = 0;
             LocalDate date = TermDao.getCurrentDate(true);
 
@@ -515,7 +522,7 @@ public class AttendanceTemporaryDao {
                 }
             }
         } catch (Exception e) {
-//            e.printStackTrace();
+            e.printStackTrace();
             return -2;
         }
     }
@@ -530,6 +537,10 @@ public class AttendanceTemporaryDao {
 
 
     public Boolean canCreateAttendance(LocalDate date) {
+        // check if the date provided is ahead of today
+        if(date.compareTo(LocalDate.now()) > 0) {
+            return false;
+        }
         if ( (this.checkAttendanceInterval(date) == 1)|| ((this.checkAttendanceInterval(date) > 0) && (this.checkAttendanceInterval(date) < 15))) {
             System.out.println("We can create an attendance"+ this.checkAttendanceInterval());
             return true;

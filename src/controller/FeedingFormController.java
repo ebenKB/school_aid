@@ -123,6 +123,9 @@ public class FeedingFormController implements Initializable {
     @FXML
     private MenuItem studentDetailsMenu;
 
+    @FXML
+    private Button testPrint;
+
 
     private CheckBox selectAll = new CheckBox();
 
@@ -407,7 +410,11 @@ public class FeedingFormController implements Initializable {
         searchStudent.setOnKeyReleased(event -> Utils.searchByNaame(searchStudent, filteredAtt,sortedList,studentTableView));
 
         resetFeedingFeeMenu.setOnAction(event -> {
-
+            Student student = studentTableView.getSelectionModel().getSelectedItem().getStudent();
+            if(student != null) {
+                salesDetailsFormController.resetFeeding(student);
+                studentTableView.refresh();
+            }
         });
 
         studentDetailsMenu.setOnAction(event -> {
@@ -417,6 +424,8 @@ public class FeedingFormController implements Initializable {
         payFeedingMenu.setOnAction(event -> {
             try {
                 Student st = studentTableView.getSelectionModel().getSelectedItem().getStudent();
+//                AttendanceTemporary at = studentTableView.getSelectionModel().getSelectedItem();
+//                at.setPaidNow(true);
                 payFeedingFee(st);
             } catch (Exception e) {
                 // log error here
@@ -431,7 +440,8 @@ public class FeedingFormController implements Initializable {
                 populateTableview();
             } catch (Exception e) {
                 // log error here
-                e.printStackTrace();
+//                e.printStackTrace();
+                Notification.getNotificationInstance().notifyError("Sorry an error occurred", "Error");
             }
         });
 
@@ -444,10 +454,11 @@ public class FeedingFormController implements Initializable {
             utils.showGenerateReportForm(stages);
         });
 
-
-
         close.setOnAction(event -> Utils.closeEvent(event));
-        
+
+        testPrint.setOnAction(event -> {
+            showPrintDialogue();
+        });
 //        searchStudent.textProperty().addListener(((observable, oldValue, newValue) -> {
 //            filteredAtt.setPredicate( (Predicate< ? super  AttendanceTemporary>) at ->{
 //                if( newValue == null || newValue.isEmpty() ) {
@@ -462,12 +473,11 @@ public class FeedingFormController implements Initializable {
 //        }));
 //        sortedList.comparatorProperty().bind(studentTableView.comparatorProperty());
 //        studentTableView.setItems(sortedList);
-
     }
 
     private void payFeedingFee(Student st){
         if(st.getPayFeeding()) {
-            Optional<Pair<String, String>> result = salesDetailsFormController.showCustomTextInputDiag(st, "Pay School Fees");
+            Optional<Pair<String, String>> result = salesDetailsFormController.showCustomTextInputDiag(st, "Pay Feeding Fees");
             result.ifPresent(pair -> {
                 Double amount = Double.valueOf(pair.getKey());
                 // take confirmation before adding the fees to the student account

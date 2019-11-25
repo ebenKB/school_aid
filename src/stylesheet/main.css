@@ -66,7 +66,7 @@
     -fx-background-color: derive(-fx-primary, 35%)
 }
 
-#separator {
+#separator, .separator {
     -fx-background-color: -fx-yellow;
 }
 
@@ -436,7 +436,6 @@
     -fx-text-fill: -fx-primary;
 }
 
-
 /*align figures in table to the right */
 #unitPriceCol,
 #amntPaidCol,
@@ -452,4 +451,12 @@
 .owing-label {
     -fx-text-fill: #ff4e20;
     -fx-font-size: 18px;
+}
+
+.credit-label {
+    -fx-text-fill: green
+}
+
+.label-caption {
+    -fx-font-size: 16px;
 }

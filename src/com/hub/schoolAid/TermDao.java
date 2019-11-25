@@ -76,18 +76,20 @@ public class TermDao {
 
     public static LocalDate getCurrentDate(Boolean shouldRefresh){
         if (currentDate == null || shouldRefresh) {
-            System.out.println("Going to the database");
             try {
                 em=HibernateUtil.getEntityManager();
                 HibernateUtil.begin();
                 currentDate = ((LocalDate) em.createQuery("SELECT today FROM Term where status=1").getSingleResult());
-            }catch (NoResultException e){
+            }catch (Exception e){
+                em.close();
                 return null;
             }finally {
-                em.close();
+                if(em == null) {
+                    em.close();
+                    HibernateUtil.close();
+                }
             }
         }
-        System.out.println("Not returning from the databse");
         return currentDate;
     }
 
