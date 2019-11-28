@@ -34,6 +34,8 @@ public class TransactionLoggerDao {
        transaction.setTransactionType(type);
        transaction.setStudent_id(trans_id);
 
+       System.out.println("This is the student who is doing the transaction"+ trans_id);
+
        // add a reciept number to to the transaction
         Receipt receipt = new Receipt();
         transaction.setReceipt(receipt);
@@ -51,21 +53,19 @@ public class TransactionLoggerDao {
     /**
      *
      * @param type The type of the transaction
-     * @param trans_id the transaction id
+     * @param student_id the transaction id
      * @return
      */
-    public List<TransactionLogger> getLog(TransactionType type, Long trans_id) {
+    public List<TransactionLogger> getLog(TransactionType type, Long student_id) {
         try {
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
-           Query query = em.createQuery("from TransactionLogger T where T.transactionType = ?1 and T.Student_id =?2");
+           Query query = em.createQuery("from TransactionLogger T where T.transactionType = ?1 and T.Student_id =?2 order by T.date desc ");
            query.setParameter(1, type);
-           query.setParameter(2, trans_id);
+           query.setParameter(2, student_id);
            List<TransactionLogger>transactions = query.getResultList();
            System.out.println("We got some transactions" + transactions.size());
            return transactions;
-
-
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -85,7 +85,7 @@ public class TransactionLoggerDao {
         try {
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
-            Query query = em.createQuery("from TransactionLogger T where T.transactionType = ?1");
+            Query query = em.createQuery("from TransactionLogger T where T.transactionType = ?1 order by T.date desc ");
             query.setParameter(1, type);
             return query.getResultList();
         } catch (Exception e) {
@@ -93,6 +93,23 @@ public class TransactionLoggerDao {
         }
         finally {
             HibernateUtil.close();
+        }
+    }
+
+
+    public List<TransactionLogger>getLog(Student student) {
+        try {
+            em = HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            Query query = em.createQuery("from TransactionLogger  T where T.Student_id =?1 order by T.transactionType asc");
+            query.setParameter(1, student.getId());
+            return query.getResultList();
+        }catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+            em.clear();
         }
     }
 }

@@ -12,6 +12,7 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.printing.PDFPrintable;
 import org.hibernate.HibernateException;
 
 import java.awt.*;
@@ -176,7 +177,7 @@ public class PDFMaker {
                 //Set alignment and add school header
                 String title = "FEEDING FEE REPORT FOR "+ stage.toString().toUpperCase();
                 prepPageWidthHeader(pdPageContentStream, margin, yStart, mediaBox, title);
-                createCenterText("Report Generated on : "+ Utils.formatDate(LocalDate.now()), mediaBox, margin, pdPageContentStream, false, 70.0);
+                createCenterText("Report Generated on : "+ Utils.formatDate(LocalDate.now(), false), mediaBox, margin, pdPageContentStream, false, 70.0);
 //                createCenterText("FEEDING REPORT FOR "+ stage.toString().toUpperCase(), mediaBox, margin, pdPageContentStream );
 
                 // fetch the records from the database
@@ -321,6 +322,143 @@ public class PDFMaker {
         // add the school header to the document
 
         return pdDocument;
+    }
+
+    public PDDocument generateStatement(Student student) {
+        TransactionLoggerDao transactionLoggerDao = new TransactionLoggerDao();
+        List<TransactionLogger>feesLog = transactionLoggerDao.getLog(TransactionType.SCHOOL_FEES, student.getId());
+        List<TransactionLogger>feeding = transactionLoggerDao.getLog(TransactionType.FEEDING_FEE, student.getId());
+        List<TransactionLogger>sales = transactionLoggerDao.getLog(TransactionType.SALES, student.getId());
+
+        pdDocument = new PDDocument();
+
+        // create a page and save all the items on it
+        PDPage page = new PDPage(PDRectangle.A4);
+        PDRectangle mediaBox = page.getMediaBox();
+        pdDocument.addPage(page);
+
+        // set page margins
+        float margin = 20;
+        float yStartNewPage = mediaBox.getHeight() - margin;
+        float yStart = (yStartNewPage - 105);
+
+        try {
+            PDPageContentStream pdPageContentStream = new PDPageContentStream(pdDocument, page);
+            String title = "ACCOUNT STATEMENT FOR "+ student.toString();
+            prepPageWidthHeader(pdPageContentStream, margin, yStart, mediaBox, title);
+
+            // Display the records in a table
+            float tableWidth = ((page.getMediaBox().getWidth() - (2 * margin)));
+
+            // [FIRST TABLE] -- set records for the first table
+            BaseTable baseTable = new BaseTable(yStart - 30, yStartNewPage, 20, tableWidth, (margin), pdDocument, page, true, true);
+            Double totalPayment=0.0;
+
+            // create rows for the SCHOOL FEES TRANSACTIONS
+            totalPayment = logTransactions(feesLog, baseTable, totalPayment);
+
+            // set the summary for all the records
+            prepTransactionBal(baseTable, totalPayment, student, TransactionType.SCHOOL_FEES);
+
+            // -- [SECOND TABLE] create rows for the SCHOOL FEEDING FEE TRANSACTIONS
+            totalPayment = logTransactions(feeding, baseTable, totalPayment);
+            prepTransactionBal(baseTable, totalPayment, student, TransactionType.FEEDING_FEE);
+
+            //--[THIRD TABLE] create rows for all sales transactions
+            totalPayment = logTransactions(sales, baseTable, totalPayment);
+            prepTransactionBal(baseTable, totalPayment, student, TransactionType.SALES);
+            baseTable.draw();
+
+            pdPageContentStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return  pdDocument;
+    }
+
+    private void prepTransactionBal(BaseTable baseTable, Double acumulator, Student student, TransactionType transactionType) {
+        double amountDue =0.0;
+
+        if(transactionType == TransactionType.SCHOOL_FEES) {
+            amountDue = student.getAccount().getFeeToPay();
+        } else if(transactionType == TransactionType.FEEDING_FEE) {
+            amountDue = 0.0;
+        }else if(transactionType == TransactionType.SALES) {
+            amountDue = 0.0;
+        }
+        Row<PDPage>pdPageRow = baseTable.createRow(30);
+        Cell<PDPage>cell;
+        cell = pdPageRow.createCell( 25, "TOTAL PAYMENTS");
+        cell.setAlign(HorizontalAlignment.LEFT);
+        cell.setValign(VerticalAlignment.MIDDLE);
+        cell.setFont(font);
+
+        cell = pdPageRow.createCell(15, acumulator.toString());
+        cell.setAlign(HorizontalAlignment.RIGHT);
+        cell.setValign(VerticalAlignment.MIDDLE);
+        cell.setFont(font);
+
+        // total fees
+        Row<PDPage>pdPageRow3 = baseTable.createRow(30);
+        cell = pdPageRow3.createCell( 25, "TOTAL FEES DUE");
+        cell.setAlign(HorizontalAlignment.LEFT);
+        cell.setValign(VerticalAlignment.MIDDLE);
+        cell.setFont(font);
+
+        // multiply the total fees due by -1 and change it to positive
+        cell = pdPageRow3.createCell(15,String.valueOf(student.getAccount().getFeeToPay() * -1));
+        cell.setAlign(HorizontalAlignment.RIGHT);
+        cell.setValign(VerticalAlignment.MIDDLE);
+        cell.setFont(font);
+
+        // check the balance
+        Row<PDPage>pdPageRow2 = baseTable.createRow(30);
+        Double bal = student.getAccount().getFeeToPay() + acumulator;
+        cell = pdPageRow2.createCell( 25, "BALANCE");
+        cell.setAlign(HorizontalAlignment.LEFT);
+        cell.setValign(VerticalAlignment.MIDDLE);
+        cell.setFont(font);
+
+        cell = pdPageRow2.createCell(15, bal.toString());
+        cell.setAlign(HorizontalAlignment.RIGHT);
+        cell.setValign(VerticalAlignment.MIDDLE);
+        cell.setFont(font);
+    }
+
+    private Double logTransactions(List<TransactionLogger> logs, BaseTable baseTable, Double accumulator) {
+        if(logs.size() > 0) {
+            // SET the table header rows
+            Row<PDPage> headerRow = baseTable.createRow(30f);
+            createHeaderRow(headerRow, "DATE", (float) 25);
+            createHeaderRow(headerRow, "AMOUNT PAID", (float) 15);
+            createHeaderRow(headerRow, "DESCRIPTION", (float) 35);
+            createHeaderRow(headerRow, "PAID BY", (float) 25);
+            baseTable.addHeaderRow(headerRow);
+            accumulator = 0.0;
+
+            for (TransactionLogger log : logs) {
+                Row<PDPage> row = baseTable.createRow(24);
+                Cell<PDPage>cell;
+                cell =row.createCell(25, Utils.formatDate(log.getDate(), false));
+                cell.setAlign(HorizontalAlignment.LEFT);
+                cell.setValign(VerticalAlignment.MIDDLE);
+
+                cell = row.createCell((float) 15, log.getAmount().toString());
+                cell.setAlign(HorizontalAlignment.RIGHT);
+                cell.setValign(VerticalAlignment.MIDDLE);
+                accumulator+=log.getAmount();
+
+
+                cell = row.createCell((float) 35, log.getDescription());
+                cell.setAlign(HorizontalAlignment.LEFT);
+                cell.setValign(VerticalAlignment.MIDDLE);
+
+                cell = row.createCell((float) 25, log.getPaidBy());
+                cell.setAlign(HorizontalAlignment.LEFT);
+                cell.setValign(VerticalAlignment.MIDDLE);
+            }
+        }
+        return accumulator;
     }
 
     private Cell<PDPage> getEmptyPageCellForFeeding(Row<PDPage> row) {
@@ -608,13 +746,14 @@ public class PDFMaker {
             public void run() {
 
                 FileChooser fileChooser =new FileChooser();
-                fileChooser.setInitialFileName("Report");
+                fileChooser.setInitialFileName("Report.pdf");
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files",".pdf"));
                 fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("PDF Files",".pdf"));
                 File file  = fileChooser.showSaveDialog(new Stage());
+                System.out.println("This is the file"+ file);
                     try {
                         if(file != null) {
-                            pdDocument.save(file);
+                            pdDocument.save(file+".pdf");
                             pdDocument.close();
                         } else {
                             pdDocument.close();
@@ -625,6 +764,10 @@ public class PDFMaker {
                     }
             }
         });
+    }
+
+    public static void printPDF(PDDocument pdDocument) {
+
     }
 
     public static  void createAttendanceReport (LocalDate from,LocalDate to,List<Attendance> attendanceList){

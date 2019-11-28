@@ -375,11 +375,13 @@
     -fx-text-fill: red;
 }
 
-#stdDetailsTabPane .headers-region {
+#stdDetailsTabPane .headers-region,
+.darkTabPane .headers-region {
     -fx-background-color: derive(-fx-primary,30%);
 }
 
-#stdDetailsTabPane .tab-header-background {
+#stdDetailsTabPane .tab-header-background,
+.darkTabPane .tab-header-background {
     -fx-background-color: derive(-fx-primary,30%);
 }
 
@@ -415,6 +417,10 @@
 .table-view {
     -fx-font-size: 16px;
     -fx-text-alignment: center;
+}
+
+.table-view.small-caption {
+    -fx-font-size: 13px;
 }
 
 .table-view .table-row-cell :hover {

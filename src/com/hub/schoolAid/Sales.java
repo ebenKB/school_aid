@@ -23,11 +23,10 @@ public class Sales {
 
     private Double amountPaid = 0.0;
     private Double totalcost  = 0.0;
-    private Date date=new Date();
-
+    private Date date = new Date();
 
       @OneToOne
-      @JoinColumn(name ="student_sale_id")
+      @JoinColumn(name = "student_sale_id")
       private Student student;
 
    //getters and setters

@@ -52,6 +52,7 @@ public class SchFeesSummaryController implements Initializable{
     private ObservableList<TransactionLogger> logs = FXCollections.observableArrayList();
     private TransactionLoggerDao tlDao;
 
+    // set default values for the for
     public void init(Student student) {
         this.student = student;
         studentName.setText(student.toString());
@@ -67,10 +68,6 @@ public class SchFeesSummaryController implements Initializable{
                 createLabel(logger.getAmount(),logger.getPaidBy(), logger.getDate());
                 gross+=logger.getAmount();
             }
-
-//            for (int i =0; i<20; i++) {
-//                createLabel(90.99, LocalDate.now());
-//            }
             grossTotal.setText(gross.toString());
             balance.setText((String.valueOf((student.getAccount().getFeeToPay() + gross))));
         } else {
@@ -82,7 +79,7 @@ public class SchFeesSummaryController implements Initializable{
 
     private void createLabel(Double tAmount, String paidBy, LocalDate tDate) {
         HBox hBox = new HBox();
-        Label date = new Label(Utils.formatDate(tDate));
+        Label date = new Label(Utils.formatDate(tDate, true));
         date.setMinWidth(80);
         date.setAlignment(Pos.CENTER_LEFT);
         date.setPrefHeight(20);

@@ -2,9 +2,7 @@ package controller;
 
 import com.hub.schoolAid.Utils;
 import javafx.fxml.Initializable;
-import javafx.print.PageLayout;
-import javafx.print.Paper;
-import javafx.print.PrinterJob;
+import javafx.print.*;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -54,11 +52,17 @@ public class PrintController implements Initializable {
     private Button confirmPrint;
 
     public void createPrintJob(){
-        date.setText(Utils.formatDate(LocalDate.now()));
+        date.setText(Utils.formatDate(LocalDate.now(), false));
         heading.setText("NEW CROSS ROADS AVR");
         receiptNo.setText("#DF0909ES");
         name.setText("Marie Porter");
-        details.setText("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
+        details.setText("Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
+                "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, " +
+                "when an unknown printer took a galley of type and scrambled it to make a type specimen book. " +
+                "It has survived not only five centuries, but also the leap into electronic typesetting, " +
+                "remaining essentially unchanged. It was popularised in the 1960s with the release of " +
+                "Letraset sheets containing Lorem Ipsum passages, and more recently with desktop " +
+                "publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
         details.setWrapText(true);
 
         // add the all the children to the print node
@@ -68,8 +72,9 @@ public class PrintController implements Initializable {
     private void printJob() {
         PrinterJob job = PrinterJob.createPrinterJob();
         if(job.showPageSetupDialog(null)){
-            System.out.println("FROM ROOT- : This is the printer that we got"+ job.getPrinter().getName());
-            if (job.printPage(printNode)) {
+            Printer printer = job.getPrinter();
+            PageLayout pageLayout = printer.createPageLayout(Paper.A5, PageOrientation.LANDSCAPE, Printer.MarginType.HARDWARE_MINIMUM);
+            if (job.printPage(pageLayout,printNode)) {
                 System.out.println("The job has been printed...");
                 job.endJob();
             } else {

@@ -81,7 +81,7 @@ public class Student {
      * one class or stage can multiple Bills for previous terms and current term
      * When a class is deleted, remove all the bills associated with the class
      */
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "students", cascade = CascadeType.REMOVE)
     private List<Bill>bills;
 
     @ManyToMany(mappedBy = "student", cascade = {CascadeType.PERSIST})

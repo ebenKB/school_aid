@@ -954,7 +954,7 @@ public class salesDetailsFormController implements Initializable{
                     if(studentDao.paySchoolFee(st, amount)) {
                         Notification.getNotificationInstance().notifySuccess("Payment added for "+st.toString(), "Fees paid");
                         // log the transaction
-                        Utils.logPayment(student, "School Fees", pair.getValue(), amount, TransactionType.SCHOOL_FEES);
+                        Utils.logPayment(st, "School Fees", pair.getValue(), amount, TransactionType.SCHOOL_FEES);
                     }
                 } else Notification.getNotificationInstance().notifyError("Fees payment cancelled", "Fees not added");
             });

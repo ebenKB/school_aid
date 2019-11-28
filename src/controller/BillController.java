@@ -156,6 +156,8 @@ public class BillController implements Initializable {
                 if(studentToggle.getSelectedToggle() == allRadio) {
                     // create bill for every student
                     try {
+
+                        prepareBill();
                         billDao.createBill(bill);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -171,10 +173,15 @@ public class BillController implements Initializable {
 
     private Bill prepareBill() {
         bill.setTutitionFee(Double.valueOf(tuitionFee.getText().trim()));
+        TermDao termDao = new TermDao();
+        Term term = termDao.getCurrentTerm();
+        bill.setCreatedBy(term.getValue());
+        bill.setCreatedFor(term.getValue() + 1);
 
         // check if there are other items added to the bill
         if(billItems.size() > 0) {
             bill.setItems(billItems);
+            System.out.println("We have set the bill items");
         }
 
         return bill;
@@ -207,9 +214,9 @@ public class BillController implements Initializable {
     }
 
     private void checkBillTotal() {
-        Double total =0.0;
+        Double total = 0.0;
         for(Item t: billItems) {
-            total +=t.getCost();
+            total+= t.getCost();
         }
 
         // add the tuition fee

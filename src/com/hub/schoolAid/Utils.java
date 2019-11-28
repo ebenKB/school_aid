@@ -4,6 +4,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import controller.ClassOptionsController;
 import controller.LoginFormController;
 import controller.SchFeesSummaryController;
+import controller.TransactionSummaryController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -92,15 +93,18 @@ public class Utils {
         FXMLLoader fxmlLoader = new FXMLLoader(Utils.class.getResource("/view/schFeesSummary.fxml"));
         try {
             root = fxmlLoader.load();
-            SchFeesSummaryController controller = fxmlLoader.getController();
+            TransactionSummaryController controller = fxmlLoader.getController();
             controller.init(student);
             Scene scene = new Scene(root);
             javafx.stage.Stage stage = new Stage();
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UTILITY);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setMaximized(false);
             stage.show();
         } catch (Exception e) {
+            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("Error while showing form", "Form load error");
             return;
         }
     }
@@ -268,16 +272,31 @@ public class Utils {
         }
     }
 
-    public static String formatDate(LocalDate date) {
+    public static String formatDate(LocalDate date, Boolean isShort) {
         if(date == null)
             return "";
 
+        String newDate =null;
         int day = date.getDayOfMonth();
         String month = date.getMonth().toString();
         String dayName = date.getDayOfWeek().toString();
         int year = date.getYear();
-        return dayName+", "+month+ " "+ day+ ", "+ year;
+        if(!isShort) {
+            newDate = dayName+", "+month+ " "+ day+ ", "+ year;
+        } else {
+            char [] mChars = month.toCharArray();
+            char [] dChars = dayName.toCharArray();
+            // take the first three letters of the month name
+            month= String.valueOf(mChars[0])+ String.valueOf(mChars[1])+ String.valueOf(mChars[2])+".";
+
+            // take the first three letters of the day name
+            dayName = String.valueOf(dChars[0]) + String.valueOf(dChars[1])+ String.valueOf(dChars[2])+".";
+
+            newDate = dayName+" "+month+ " "+ day+ ", "+ year;
+        }
+        return newDate;
     }
+
 
     public static void dispose(ActionEvent event) {
         ((Node)(event).getSource()).getScene().getWindow().hide();

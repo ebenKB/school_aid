@@ -25,6 +25,13 @@ public class Stage {
     @ManyToMany(mappedBy = "classes", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<Staff> staffs;
 
+    // every stage has a current bill
+//    @ManyToOne(optional = true)
+//    private CurrentBill currentBill;
+
+    @ManyToOne(optional = true)
+    private Bill bill;
+
     //constructor
     public Stage () {
 
@@ -118,6 +125,30 @@ public class Stage {
     public void setStudents(List<Student> students) {
         this.students = students;
     }
+
+    public List<Staff> getStaffs() {
+        return staffs;
+    }
+
+    public void setStaffs(List<Staff> staffs) {
+        this.staffs = staffs;
+    }
+
+    public Bill getBill() {
+        return bill;
+    }
+
+    public void setBill(Bill bill) {
+        this.bill = bill;
+    }
+
+    //    public CurrentBill getCurrentBill() {
+//        return currentBill;
+//    }
+//
+//    public void setCurrentBill(CurrentBill currentBill) {
+//        this.currentBill = currentBill;
+//    }
 
     @Override
     public String toString() {

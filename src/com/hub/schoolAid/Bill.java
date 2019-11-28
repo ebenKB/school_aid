@@ -3,6 +3,7 @@ package com.hub.schoolAid;
 import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -23,8 +24,9 @@ public class Bill {
     private String academicYear; // the academic year for the bill
     private int createdBy; // the term value for the term that created the bill
     private int createdFor; // the term value for the term that the bill was created for
+    private LocalDate createdAt; // the date the bill was created
 
-    @ManyToMany(mappedBy = "bills")
+    @ManyToMany(cascade = {CascadeType.MERGE})
     private List<Student>students;
 
     public Long getId() {
@@ -89,5 +91,21 @@ public class Bill {
 
     public void setCreatedFor(int createdFor) {
         this.createdFor = createdFor;
+    }
+
+    public Double getTuitionFee() {
+        return tuitionFee;
+    }
+
+    public void setTuitionFee(Double tuitionFee) {
+        this.tuitionFee = tuitionFee;
+    }
+
+    public LocalDate getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
     }
 }

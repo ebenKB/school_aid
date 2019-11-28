@@ -21,8 +21,6 @@ public class StudentDao {
 
     //methods to interface with the database
     public Boolean addNewStudent(Student student) {
-
-        System.out.println("CALLING METHOD TO ADD STUDENT...");
         try{
             student.setAge(student.calcAge(student.getDob()));
 

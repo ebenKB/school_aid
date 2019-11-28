@@ -156,12 +156,7 @@ public class SchoolFeesFormController implements  Initializable {
         new Thread(task).start();
     }
     private void populateTableview() {
-        studentCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Student, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Student, String> param) {
-                return new SimpleStringProperty(param.getValue().toString());
-            }
-        });
+        studentCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().toString()));
 
         classCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Student, String>, ObservableValue<String>>() {
             @Override
@@ -413,14 +408,10 @@ public class SchoolFeesFormController implements  Initializable {
         });
 
         printStatement.setOnAction(event -> {
-//            try {
-//                PDFMaker pdfMaker =PDFMaker.getPDFMakerInstance();
-//                PDDocument doc = pdfMaker.generateSchoolFeesReport(selectedStudents);
-//                PDFMaker.savePDFToLocation(doc);
-//            } catch (Exception e) {
-//                Notification.getNotificationInstance().notifyError("An error occurred while generating the report", "Error");
-//            }
+            Student student = studentTableview.getSelectionModel().getSelectedItem();
+            PDFMaker.savePDFToLocation(PDFMaker.getPDFMakerInstance().generateStatement(student));
         });
+
         close.setOnAction(event -> Utils.closeEvent(event));
     }
 
