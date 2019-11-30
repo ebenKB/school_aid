@@ -4,6 +4,7 @@ import com.hub.schoolAid.*;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRadioButton;
 import com.sun.org.apache.regexp.internal.RE;
+import com.sun.tools.corba.se.idl.Util;
 import com.sun.tools.corba.se.idl.constExpr.Not;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -88,18 +89,24 @@ public class PaymentDashboardController implements Initializable {
     @FXML
     private VBox dateOptions;
 
+    @FXML
+    private Label infoLabel;
+
     private ObservableList<TransactionLogger>schoolFees = FXCollections.observableArrayList();
     private ObservableList<TransactionLogger>feedingFee = FXCollections.observableArrayList();
     private ObservableList<TransactionLogger>sales = FXCollections.observableArrayList();
     LocalDate logDate = LocalDate.now();
     LocalDate prevFrom= null;
     LocalDate prevTo = null;
+    String msgA= "Showing all transactions ";
+    String msgB = "for today. "+ Utils.formatDate(LocalDate.now(), false);
 
     private TransactionLoggerDao transactionLoggerDao = new TransactionLoggerDao();
 
     public void init() {
         feedingFee.addAll(transactionLoggerDao.getLog(LocalDate.now(), TransactionType.FEEDING_FEE));
         populateTableview(TransactionType.FEEDING_FEE);
+        infoLabel.setText(msgA + msgB);
     }
 
     @Override
@@ -130,7 +137,9 @@ public class PaymentDashboardController implements Initializable {
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                 if(newValue != null && newValue == selectDateRadio){
                     dateOptions.setVisible(true);
-                } else dateOptions.setVisible(false);
+                } else {
+                    dateOptions.setVisible(false);
+                }
             }
         });
 
@@ -170,6 +179,13 @@ public class PaymentDashboardController implements Initializable {
             } else if(typeToggle.getSelectedToggle() == salesRadio) {
                 fetchData(sales, TransactionType.SALES);
                 populateTableview(TransactionType.SALES);
+            }
+
+            // set the information label
+            if(momentToggle.getSelectedToggle() == selectDateRadio) {
+                infoLabel.setText("Showing transactions sorted from "+ Utils.formatDate(fromDate.getValue(), false)+ " to "+ Utils.formatDate(toDate.getValue(), false));
+            } else {
+                infoLabel.setText(msgA + msgB);
             }
         });
     }

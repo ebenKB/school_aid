@@ -27,6 +27,11 @@
                   <Font name="Arial Black" size="16.0" />
                </font>
             </Text>
+            <Label fx:id="infoLabel" layoutX="243.0" layoutY="14.0" prefHeight="54.0" prefWidth="642.0" textFill="#fcb503">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children></Pane>
       <Pane fx:id="separator" layoutY="83.0" prefHeight="9.0" prefWidth="1165.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="83.0" />
       <SplitPane dividerPositions="0.17884780739466896" layoutY="91.0" prefHeight="607.0" prefWidth="1165.0" AnchorPane.bottomAnchor="69.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0">
@@ -71,7 +76,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <Button fx:id="getRecords" layoutX="136.0" layoutY="479.0" mnemonicParsing="false" text="Get Records" />
+                  <Button fx:id="getRecords" layoutX="31.0" layoutY="479.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="198.0" text="Filter Records" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="21.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="601.0" prefWidth="903.0">
