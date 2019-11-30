@@ -130,12 +130,14 @@ public class TransactionLoggerDao {
         }catch (Exception e) {
             System.out.print("in the error block");
         } finally {
-            System.out.print("In the finally block");
+            em.close();
+            System.out.print("In the finally block -- CLOSING THE TRANSACTION");
         }
         return null;
     }
 
     public List<TransactionLogger> getLog(LocalDate from, LocalDate to, TransactionType type) {
+        System.out.println("This is the date: From: "+ from+ "To: " + to);
         try {
             em = HibernateUtil.getEntityManager();
             HibernateUtil.begin();

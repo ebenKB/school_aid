@@ -205,6 +205,7 @@ public class StudentDao {
         }
         finally {
            em.close();
+           HibernateUtil.close();
         }
     }
 

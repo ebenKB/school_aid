@@ -7,7 +7,8 @@ import java.util.Date;
 @Entity
 public class TransactionLogger {
     public TransactionLogger(){
-
+        // set the default status to 1
+        this.setStatus(1);
     }
 
     public TransactionLogger(Long transactionId_id,String description, String paidBy, LocalDate date, Double amount){
@@ -27,7 +28,7 @@ public class TransactionLogger {
     private String paidBy;
     private Long TransactionId; // refers to the unique id for the item that has been saved into the database.
     // the status of the transaction 1= NORMAL 0 = DELETED -1 = EDITED/UPDATED
-    private int status = 1 ;
+    private int status;
 
     @OneToOne
     private Student student;
