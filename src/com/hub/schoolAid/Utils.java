@@ -1,12 +1,6 @@
 package com.hub.schoolAid;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import controller.ClassOptionsController;
-import controller.LoginFormController;
-import controller.SchFeesSummaryController;
-import controller.TransactionSummaryController;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import controller.*;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -17,19 +11,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import org.apache.commons.io.FileUtils;
-
-import javax.imageio.IIOException;
-import javax.persistence.EntityManager;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -62,8 +48,17 @@ public class Utils {
     });
     }
 
-    public static void logPayment(Student student, String description, String paidBy, Double amount, TransactionType type){
-        TransactionLoggerDao.getTransactionLoggerDaoInstance().LogTransaction(student.getId(), paidBy, description, amount, type);
+    /**
+     *
+     * @param student the student whom the transaction was performed for
+     * @param description a brief description about the transaction
+     * @param paidBy the person who initiated the transaction / payment e.g someone who pays school fees
+     * @param amount the amount of the transaction
+     * @param type the type of transaction
+     * @param transId a unique id to identify the specific transaction that was performed. e.g student id or attendance id
+     */
+    public static void logPayment(Student student, String description, String paidBy, Double amount, TransactionType type, Long transId){
+        TransactionLoggerDao.getTransactionLoggerDaoInstance().LogTransaction(student, paidBy, description, amount, type, transId);
 //        TransactionLogger transactionLogger = new TransactionLogger(student.getId(),description,paidBy,date,amount);
 //        TransactionLoggerDao loggerDao = new TransactionLoggerDao();
 //        loggerDao.logTransaction(transactionLogger);
@@ -260,7 +255,6 @@ public class Utils {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/trial.fxml"));
             root= fxmlLoader.load();
             Scene scene = new Scene(root);
-
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.initStyle(StageStyle.UNDECORATED);
@@ -272,11 +266,29 @@ public class Utils {
         }
     }
 
+    public static void showTransactionLogs() {
+        Parent root;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Utils.class.getResource("/view/paymentDashboard.fxml"));
+            root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            PaymentDashboardController controller = fxmlLoader.getController();
+            controller.init();
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setMaximized(true);
+            stage.show();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static String formatDate(LocalDate date, Boolean isShort) {
         if(date == null)
             return "";
 
         String newDate =null;
+
         int day = date.getDayOfMonth();
         String month = date.getMonth().toString();
         String dayName = date.getDayOfWeek().toString();

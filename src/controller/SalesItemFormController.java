@@ -78,10 +78,15 @@ public class SalesItemFormController implements Initializable{
         });
 
         unitCostCol.setOnEditCommit(event -> {
-            event.getTableView().getItems().get(event.getTablePosition().getRow()).getItem().setCost(Double.valueOf(event.getNewValue()));
-            event.getTableView().getItems().get(event.getTablePosition().getRow()).setTotalcost((Double.valueOf(event.getNewValue()) *
-                    Double.valueOf(event.getTableView().getItems().get(event.getTablePosition().getRow()).getItem().getQty())));
-            prepareTable();
+
+            // fix this
+//            event.getTableView().getItems().get(event.getTablePosition().getRow()).getItem().setCost(Double.valueOf(event.getNewValue()));
+//
+//            event.getTableView().getItems().get(event.getTablePosition().getRow()).setTotalcost((Double.valueOf(event.getNewValue()) *
+//                    Double.valueOf(event.getTableView().getItems().get(event.getTablePosition().getRow()).getItem().getQty())));
+
+            // fix this
+//            prepareTable();
             if(!editedSales.contains(event.getRowValue())){
                 editedSales.add(event.getRowValue());
                 changeCounter++;
@@ -101,11 +106,14 @@ public class SalesItemFormController implements Initializable{
         });
 
         qtyCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        qtyCol.setOnEditCommit(event->{
-            event.getTableView().getItems().get(event.getTablePosition().getRow()).getItem().setQty(Integer.parseInt(event.getNewValue()));
-            event.getTableView().getItems().get(event.getTablePosition().getRow()).setTotalcost((Double.valueOf(event.getNewValue()) *
-                    Double.valueOf(event.getTableView().getItems().get(event.getTablePosition().getRow()).getItem().getCost())));
-            prepareTable();
+        qtyCol.setOnEditCommit(event-> {
+
+            // fix this
+//            event.getTableView().getItems().get(event.getTablePosition().getRow()).getItem().setQty(Integer.parseInt(event.getNewValue()));
+//            event.getTableView().getItems().get(event.getTablePosition().getRow()).setTotalcost((Double.valueOf(event.getNewValue()) *
+//                    Double.valueOf(event.getTableView().getItems().get(event.getTablePosition().getRow()).getItem().getCost())));
+
+//            prepareTable();  fix this
             if(!editedSales.contains(event.getRowValue())){
                 editedSales.add(event.getRowValue());
                 changeCounter++;
@@ -135,33 +143,37 @@ public class SalesItemFormController implements Initializable{
         salesDao =new SalesDao();
         List<Sales> sales =salesDao.getAllSales();
         salesData.addAll(sales);
-        prepareTable();
+        // fix this
+//        prepareTable();
     }
 
-    private void prepareTable(){
-        itemNameCol.setCellValueFactory(param ->{
-            return new SimpleStringProperty(param.getValue().getItem().getName());
-        });
 
-        unitCostCol.setCellValueFactory(param -> {
-            return new SimpleStringProperty(param.getValue().getItem().getCost().toString());
-        });
+// -- fix this
 
-        qtyCol.setCellValueFactory(param -> {
-            return  new SimpleStringProperty(String.valueOf(param.getValue().getItem().getQty()));
-        });
-
-        amountPaidCol.setCellValueFactory(new PropertyValueFactory<Sales,String>("amountPaid"));
-
-        totalCostCol.setCellValueFactory(new PropertyValueFactory<Sales,String>("totalcost"));
-
-        balCol.setCellValueFactory(param -> {
-         return new SimpleStringProperty(String.valueOf(param.getValue().getTotalcost() - param.getValue().getAmountPaid()));
-        });
-
-//        salesItemTableView.getItems().clear();
-        salesItemTableView.setItems(salesData);
-    }
+//    private void prepareTable(){
+//        itemNameCol.setCellValueFactory(param ->{
+//            return new SimpleStringProperty(param.getValue().getItem().getName());
+//        });
+//
+//        unitCostCol.setCellValueFactory(param -> {
+//            return new SimpleStringProperty(param.getValue().getItem().getCost().toString());
+//        });
+//
+//        qtyCol.setCellValueFactory(param -> {
+//            return  new SimpleStringProperty(String.valueOf(param.getValue().getItem().getQty()));
+//        });
+//
+//        amountPaidCol.setCellValueFactory(new PropertyValueFactory<Sales,String>("amountPaid"));
+//
+//        totalCostCol.setCellValueFactory(new PropertyValueFactory<Sales,String>("totalcost"));
+//
+//        balCol.setCellValueFactory(param -> {
+//         return new SimpleStringProperty(String.valueOf(param.getValue().getTotalcost() - param.getValue().getAmountPaid()));
+//        });
+//
+////        salesItemTableView.getItems().clear();
+//        salesItemTableView.setItems(salesData);
+//    }
 
     private void saveEditedSales(){
         salesDao=new SalesDao();

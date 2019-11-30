@@ -2,8 +2,11 @@
 
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -33,21 +36,15 @@
             </Text>
          </children>
       </AnchorPane>
-      <HBox layoutX="326.0" layoutY="701.0" spacing="20.0">
-         <children>
-            <Button fx:id="cancel" mnemonicParsing="false" prefHeight="34.0" prefWidth="86.0" text="Cancel" />
-            <Button fx:id="saveBill" mnemonicParsing="false" prefHeight="35.0" prefWidth="69.0" text="Save" />
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" layoutX="33.0" layoutY="588.0" prefHeight="45.0" prefWidth="256.0" AnchorPane.bottomAnchor="151.0" AnchorPane.rightAnchor="669.0">
+      <HBox alignment="CENTER" layoutX="33.0" layoutY="692.0" prefHeight="45.0" prefWidth="256.0" AnchorPane.bottomAnchor="47.0" AnchorPane.rightAnchor="669.0">
          <children>
             <Text fill="#0c5fee" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Bill" wrappingWidth="75.0537109375" />
             <TextField fx:id="totalBill" disable="true" prefHeight="45.0" prefWidth="172.0" promptText="Tuition fee" />
          </children>
       </HBox>
       <VBox layoutX="122.0" layoutY="248.0" spacing="20.0" />
-      <Button fx:id="addNewItem" layoutX="422.0" layoutY="597.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="86.0" text="New item" />
-      <TableView fx:id="itemsTableview" layoutX="33.0" layoutY="232.0" prefHeight="304.0" prefWidth="475.0">
+      <Button fx:id="addNewItem" layoutX="422.0" layoutY="616.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="86.0" text="New item" />
+      <TableView fx:id="itemsTableview" layoutX="33.0" layoutY="232.0" prefHeight="365.0" prefWidth="475.0">
         <columns>
           <TableColumn fx:id="itemCol" prefWidth="347.0" text="Item" />
           <TableColumn fx:id="costCol" minWidth="5.0" prefWidth="165.0" text="Cost" />
@@ -58,14 +55,19 @@
       </TableView>
       <AnchorPane fx:id="addItemPane" layoutX="10.0" layoutY="98.0" prefHeight="385.0" prefWidth="552.0" styleClass="darkPane" visible="false">
          <children>
-            <TextField fx:id="itemAmount" layoutX="103.0" layoutY="179.0" prefHeight="45.0" prefWidth="117.0" promptText="Amount" />
+            <TextField fx:id="itemAmount" layoutX="88.0" layoutY="170.0" prefHeight="45.0" prefWidth="117.0" promptText="Amount" />
             <HBox layoutX="326.0" layoutY="309.0" spacing="20.0">
                <children>
-                  <Button fx:id="canceltem" mnemonicParsing="false" prefHeight="27.0" prefWidth="69.0" text="Cancel" />
+                  <Button fx:id="canceltem" mnemonicParsing="false" prefHeight="27.0" prefWidth="69.0" text="close" />
                   <Button fx:id="saveItem" mnemonicParsing="false" prefHeight="27.0" prefWidth="69.0" text="Add" />
                </children>
             </HBox>
-            <TextField fx:id="itemName" layoutX="103.0" layoutY="93.0" prefHeight="45.0" prefWidth="382.0" promptText="Name of item" />
+            <ComboBox fx:id="itemsCombo" layoutX="84.0" layoutY="78.0" prefHeight="45.0" prefWidth="242.0" promptText="Select a bill item" />
+            <Hyperlink fx:id="addItem" layoutX="343.0" layoutY="88.0" text="New item" textFill="#359df2">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Hyperlink>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="566.0" prefHeight="784.0" prefWidth="398.0" styleClass="darkPane">
@@ -86,7 +88,28 @@
                   <JFXRadioButton fx:id="studentRadio" disable="true" focusTraversable="false" layoutX="10.0" layoutY="47.0" text="Select Student" textFill="#24e361" toggleGroup="$studentToggle" />
                </children>
             </VBox>
-            <CheckListView fx:id="studentListview" layoutX="30.0" layoutY="171.0" prefHeight="585.0" prefWidth="338.0" styleClass="darkPane" />
+            <CheckListView fx:id="studentListview" layoutX="30.0" layoutY="405.0" prefHeight="287.0" prefWidth="338.0" styleClass="darkPane" />
+            <HBox layoutX="181.0" layoutY="697.0" />
+            <HBox layoutX="184.0" layoutY="717.0" spacing="20.0">
+               <children>
+                  <Button fx:id="cancel" mnemonicParsing="false" prefHeight="34.0" prefWidth="86.0" text="Cancel" />
+                  <Button fx:id="saveBill" mnemonicParsing="false" prefHeight="35.0" prefWidth="87.0" text="Save Bill" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="40.0" layoutY="176.0" spacing="20.0">
+               <children>
+                  <Label text="From" textFill="#c9c9c9" />
+                  <TextField fx:id="startYear" prefHeight="34.0" prefWidth="103.0" promptText="Year" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="213.0" layoutY="176.0" prefHeight="35.0" prefWidth="158.0" spacing="20.0">
+               <children>
+                  <Label text="To" textFill="#c9c9c9" />
+                  <TextField fx:id="endYear" prefHeight="34.0" prefWidth="103.0" promptText="End Year" />
+               </children>
+            </HBox>
+            <Separator layoutX="39.0" layoutY="251.0" prefHeight="0.0" prefWidth="338.0" />
+            <ComboBox fx:id="termsCombo" layoutX="39.0" layoutY="301.0" prefHeight="45.0" prefWidth="248.0" promptText="Select a term" />
          </children>
       </AnchorPane>
    </children>

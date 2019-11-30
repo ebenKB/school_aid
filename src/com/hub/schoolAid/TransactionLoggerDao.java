@@ -24,19 +24,19 @@ public class TransactionLoggerDao {
         }
     }
 
-    public Boolean LogTransaction(Long trans_id, String transactionBy, String description, Double transactionAmount, TransactionType type) {
+    public Boolean LogTransaction(Student student, String transactionBy, String description, Double transactionAmount, TransactionType type, Long transId) {
        TransactionLogger transaction = new TransactionLogger();
        transaction.setDate(LocalDate.now());
        transaction.setAmount(transactionAmount);
-       transaction.setTransactionId(trans_id);
+       transaction.setTransactionId(transId);
        transaction.setDescription(description);
        transaction.setPaidBy(transactionBy);
        transaction.setTransactionType(type);
-       transaction.setStudent_id(trans_id);
+       transaction.setStudent(student);
 
-       System.out.println("This is the student who is doing the transaction"+ trans_id);
+       System.out.println("This is the student who is doing the transaction"+ student.getId());
 
-       // add a reciept number to to the transaction
+       // add a receipt number to to the transaction
         Receipt receipt = new Receipt();
         transaction.setReceipt(receipt);
 
@@ -60,9 +60,10 @@ public class TransactionLoggerDao {
         try {
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
-           Query query = em.createQuery("from TransactionLogger T where T.transactionType = ?1 and T.Student_id =?2 order by T.date desc ");
+           Query query = em.createQuery("from TransactionLogger T where T.transactionType = ?1 and T.student.id =?2 and T.status !=?3 order by T.date desc ");
            query.setParameter(1, type);
            query.setParameter(2, student_id);
+           query.setParameter(3, 0);
            List<TransactionLogger>transactions = query.getResultList();
            System.out.println("We got some transactions" + transactions.size());
            return transactions;
@@ -71,8 +72,8 @@ public class TransactionLoggerDao {
             return null;
         }
         finally {
-            em.close();
-            HibernateUtil.close();
+//            em.close();
+//            HibernateUtil.close();
         }
     }
 
@@ -85,8 +86,9 @@ public class TransactionLoggerDao {
         try {
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
-            Query query = em.createQuery("from TransactionLogger T where T.transactionType = ?1 order by T.date desc ");
+            Query query = em.createQuery("from TransactionLogger T where T.transactionType = ?1 and T.status !=?2 order by T.date desc ");
             query.setParameter(1, type);
+            query.setParameter(2, 0);
             return query.getResultList();
         } catch (Exception e) {
             return null;
@@ -96,13 +98,13 @@ public class TransactionLoggerDao {
         }
     }
 
-
     public List<TransactionLogger>getLog(Student student) {
         try {
             em = HibernateUtil.getEntityManager();
             HibernateUtil.begin();
-            Query query = em.createQuery("from TransactionLogger  T where T.Student_id =?1 order by T.transactionType asc");
+            Query query = em.createQuery("from TransactionLogger  T where T.student.id =?1 and T.status !=?2 order by T.transactionType asc");
             query.setParameter(1, student.getId());
+            query.setParameter(2, 0);
             return query.getResultList();
         }catch (Exception e) {
             e.printStackTrace();
@@ -110,6 +112,45 @@ public class TransactionLoggerDao {
         } finally {
             em.close();
             em.clear();
+        }
+    }
+
+    public List<TransactionLogger> getLog(LocalDate date, TransactionType type) {
+        try {
+            em =HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            Query query = em.createQuery("from TransactionLogger T where T.date = ?1 and T.transactionType =?2 and T.status !=?3 ");
+            query.setParameter(1, date);
+            query.setParameter(2, type);
+            query.setParameter(3, 0);
+            List<TransactionLogger> transactions =  query.getResultList();
+            System.out.print("we are returning to the calling function");
+            return transactions;
+
+        }catch (Exception e) {
+            System.out.print("in the error block");
+        } finally {
+            System.out.print("In the finally block");
+        }
+        return null;
+    }
+
+    public List<TransactionLogger> getLog(LocalDate from, LocalDate to, TransactionType type) {
+        try {
+            em = HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            Query query = em.createQuery("from TransactionLogger T where T.date >= ?1 and T.date <= ?2 and T.transactionType =?3 and T.status !=?4 order by T.date desc ");
+            query.setParameter(1, from);
+            query.setParameter(2, to);
+            query.setParameter(3, type);
+            query.setParameter(4, 0);
+            List<TransactionLogger>transactions = query.getResultList();
+            return transactions;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            em.close();
+            System.out.print("We are in the FINALLY BLOCK");
         }
     }
 }

@@ -2,6 +2,7 @@ package com.hub.schoolAid;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -14,7 +15,6 @@ public class BillDao {
      * @return
      */
     public Boolean createBill(Bill bill) throws Exception {
-
         // create the bill for all
         try {
             // fetch all students from the database
@@ -24,22 +24,18 @@ public class BillDao {
                 // update all classes with the new bill
 
                 List<Stage>stages = new ArrayList<>();
-//                CurrentBill currentBill = new CurrentBill();
-//                currentBill.setBill(bill);
                 StageDao stageDao = new StageDao();
                 stages.addAll(stageDao.getGetAllStage());
-                System.out.print("We are about to persist the current bill:...");
-//                CurrentBill newBill = HibernateUtil.save(CurrentBill.class, currentBill);
 
                 em = HibernateUtil.getEntityManager();
                 HibernateUtil.begin();
 
+                // update the stages
                 for(Stage s: stages) {
                     s.setBill(bill);
-//                    s.setCurrentBill(newBill);
+                    s.setFeesToPay((s.getFeesToPay() + bill.getTotalBill()));
                     em.merge(s);
                 }
-
                 HibernateUtil.commit();
             }
             return true;
@@ -65,7 +61,6 @@ public class BillDao {
             HibernateUtil.begin();
             List<Student>selectedStudents = new ArrayList<>();
 
-//            bill.setStudents(selectedStudents);
             // update the school fees amount to pay for all students for which the bill is being created for
             for(int i =0; i< entityCount; i++) {
                 Student st = students.get(i);
@@ -87,16 +82,14 @@ public class BillDao {
                 em.merge(st);
             }
             bill.setStudents(selectedStudents);
+            bill.setCreatedAt(LocalDate.now());
             em.persist(bill);
 
-            // update all the stage tuition fee to pay
-//            for(Stage stage: stageSet) {
-//                stage.setFeesToPay(bill.getTotalBill());
-//            }
             HibernateUtil.commit();
             return true;
         } catch (Exception e) {
             HibernateUtil.rollBack();
+            e.printStackTrace();
             throw new Exception(e);
         } finally {
             if(em == null) {
@@ -115,12 +108,14 @@ public class BillDao {
         try {
             StudentDao studentDao = new StudentDao();
             List<Student>students = new ArrayList<>();
+
             // find all classes involved in the stage
             em = HibernateUtil.getEntityManager();
             HibernateUtil.begin();
             for(Stage stage : stages) {
                 students.addAll(studentDao.getStudentFromClass(stage));
                 stage.setBill(bill);
+                stage.setFeesToPay((stage.getFeesToPay() + bill.getTotalBill()));
                 em.merge(stage);
             }
 
@@ -212,6 +207,17 @@ public class BillDao {
             return null;
         } finally {
             em.close();
+        }
+    }
+
+    public List<Bill> getBill() {
+        try {
+            em = HibernateUtil.getEntityManager();
+            HibernateUtil.getEntityManager();
+            Query query = em.createQuery("from Bill B order by B.createdAt desc");
+            return query.getResultList();
+        } catch (Exception e) {
+            return null;
         }
     }
 }

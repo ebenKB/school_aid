@@ -49,21 +49,18 @@ public class AttendanceTemporaryDao {
             em = HibernateUtil.getEntityManager();
             HibernateUtil.begin();
             for(int i=0; i< entityCount; i++){
-                System.out.println("LOOPING: "+ i);
                 Student student = students.get(i);
                 AttendanceTemporary at = setAttendanceData(student, date);
 
                 System.out.println(at.getStudent().toString());
                 // check if we have reached the batch size and merge the records
                 if(i > 0 && i % batchSize == 0) {
-                    System.out.println("PERSISITING TO DATABASE : " + batchSize);
                     em.flush();
                     em.clear();
                 }
 
                 em.merge(at);
             }
-            System.out.println("COMMITTING THE TRANSACTIONS");
             HibernateUtil.commit();
 
             // update the system date with the new date
@@ -211,7 +208,6 @@ public class AttendanceTemporaryDao {
 
     public Boolean checkInWithCoupon(List<AttendanceTemporary>attendanceTemporaryList) {
         try {
-            System.out.println("PERFORMING BATCH PROCESS ..."+ attendanceTemporaryList.size());
             int batchSize = 25;
             int totalRecords = attendanceTemporaryList.size();
             em= HibernateUtil.getEntityManager();
@@ -219,7 +215,6 @@ public class AttendanceTemporaryDao {
 
             // iterate the list
             for(int i=0; i< totalRecords; i++) {
-                System.out.println("WORKING ON ITERATION ONE: "+ i);
                 if(i > 0 && i % batchSize == 0) {
                     em.flush();
                     em.clear();
@@ -546,6 +541,19 @@ public class AttendanceTemporaryDao {
             return true;
         } else {
             System.out.println("We CANNOT CREATE ATTENDANCE"+ this.checkAttendanceInterval());
+            return false;
+        }
+    }
+
+    public Boolean setPaidNow(AttendanceTemporary at) {
+        try {
+            em = HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            at.setPaidNow(true);
+            HibernateUtil.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }

@@ -5,44 +5,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Embeddable
+//@Embeddable
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Double cost;
+//    private Double cost;
+
+//    private int qty;
+    @Column(unique = true)
     private String name;
-    private int qty;
-    private String description;
+
+//    private String description;
+
+    @OneToOne(mappedBy = "item")
+    private SaleOrder order;
 
 //    @OneToMany
 //    private List<Sales> sales =new ArrayList<>();
 
     //getters and setters
-    public Double getCost() {
-        return cost;
-    }
+//    public Double getCost() {
+//        return cost;
+//    }
 
-    public void setCost(Double cost) {
-        this.cost = cost;
-    }
+//    public void setCost(Double cost) {
+//        this.cost = cost;
+//    }
 
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        // change all names to uppercase
+        this.name = name.toUpperCase().trim();
     }
 
-    public int getQty() {
-        return qty;
-    }
+//    public int getQty() {
+//        return qty;
+//    }
 
-    public void setQty(int qty) {
-        this.qty = qty;
-    }
+//    public void setQty(int qty) {
+//        this.qty = qty;
+//    }
 
     public Long getId() {
         return id;
@@ -52,11 +59,16 @@ public class Item {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
-    }
+//    public String getDescription() {
+//        return description;
+//    }
+//
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
 
-    public void setDescription(String description) {
-        this.description = description;
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

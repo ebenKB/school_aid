@@ -25,8 +25,12 @@ public class TransactionLogger {
     private LocalDate date;
     private String Description;
     private String paidBy;
-    private Long Student_id;
     private Long TransactionId; // refers to the unique id for the item that has been saved into the database.
+    // the status of the transaction 1= NORMAL 0 = DELETED -1 = EDITED/UPDATED
+    private int status = 1 ;
+
+    @OneToOne
+    private Student student;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Receipt receipt;
@@ -90,12 +94,20 @@ public class TransactionLogger {
         this.receipt = receipt;
     }
 
-    public Long getStudent_id() {
-        return Student_id;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudent_id(Long student_id) {
-        Student_id = student_id;
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     //    public Long getStudent_id() {
@@ -114,11 +126,8 @@ public class TransactionLogger {
 //        Student_id = student_id;
 //    }
 
-
     @Override
     public String toString() {
         return this.getDescription()+ ","+ "with an amount of"+ this.getAmount() ;
     }
 }
-
-

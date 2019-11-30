@@ -18,10 +18,11 @@ public class Term {
     private Long id;
 
     private String name; // name is the name given to the term e.g first term or second term
-    private int value;
+    private int value; // the value of the term. This value is an integer
     private LocalDate start_date; // the date that the term started
     private LocalDate end_date; // the date that the term ended
-    private LocalDate today;    // the current day of the term
+    private LocalDate today; // the current day of the term
+
     /**
      *  0 means the term is
      *  1 means the term is current
@@ -99,5 +100,10 @@ public class Term {
 
     public void setEnd_date(LocalDate end_date) {
         this.end_date = end_date;
+    }
+
+    @Override
+    public String toString() {
+        return this.getName();
     }
 }

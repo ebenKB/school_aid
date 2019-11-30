@@ -35,7 +35,7 @@ public class TermDao {
         session.getTransaction().commit();
     }
 
-    public List<Term> getTerm() throws NoResultException{
+    public List<Term> getTerm() throws NoResultException {
        try{
            em=HibernateUtil.getEntityManager();
            HibernateUtil.begin();

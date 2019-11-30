@@ -560,11 +560,11 @@ public class StudentDao {
         return false;
     }
 
-    public Boolean payFeedingFee(Double amount, Student student){
-        System.out.println("We are paying school fees");
+    public Boolean payFeedingFee(Double amount, Student student) {
         if ( student == null || amount == 0 | amount < 0) {
             return false;
         }
+
         try {
             // accept the payment
             em= HibernateUtil.getEntityManager();

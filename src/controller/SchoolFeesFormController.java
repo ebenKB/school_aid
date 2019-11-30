@@ -408,8 +408,14 @@ public class SchoolFeesFormController implements  Initializable {
         });
 
         printStatement.setOnAction(event -> {
-            Student student = studentTableview.getSelectionModel().getSelectedItem();
-            PDFMaker.savePDFToLocation(PDFMaker.getPDFMakerInstance().generateStatement(student));
+            try {
+                Student student = studentTableview.getSelectionModel().getSelectedItem();
+                if(student != null) {
+                    PDFMaker.savePDFToLocation(PDFMaker.getPDFMakerInstance().generateStatement(student));
+                } else Notification.getNotificationInstance().notifyError("Please click on a student to select", "Empty selection");
+            } catch (NullPointerException e) {
+                Notification.getNotificationInstance().notifyError("No records found for student", "Empty Records");
+            }
         });
 
         close.setOnAction(event -> Utils.closeEvent(event));

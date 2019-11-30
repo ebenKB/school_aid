@@ -66,7 +66,7 @@
     -fx-background-color: derive(-fx-primary, 35%)
 }
 
-#separator, .separator {
+#separator, .custom-separator {
     -fx-background-color: -fx-yellow;
 }
 

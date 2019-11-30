@@ -124,8 +124,10 @@ public class FeedingFormController implements Initializable {
     private MenuItem studentDetailsMenu;
 
     @FXML
-    private Button testPrint;
+    private Button transactionLogs;
 
+    @FXML
+    private Button testPrint;
 
     private CheckBox selectAll = new CheckBox();
 
@@ -423,10 +425,8 @@ public class FeedingFormController implements Initializable {
 
         payFeedingMenu.setOnAction(event -> {
             try {
-                Student st = studentTableView.getSelectionModel().getSelectedItem().getStudent();
-//                AttendanceTemporary at = studentTableView.getSelectionModel().getSelectedItem();
-//                at.setPaidNow(true);
-                payFeedingFee(st);
+                AttendanceTemporary at = studentTableView.getSelectionModel().getSelectedItem();
+                payFeedingFee(at);
             } catch (Exception e) {
                 // log error here
                 e.printStackTrace();
@@ -459,6 +459,8 @@ public class FeedingFormController implements Initializable {
         testPrint.setOnAction(event -> {
             showPrintDialogue();
         });
+
+        transactionLogs.setOnAction(event -> Utils.showTransactionLogs());
 //        searchStudent.textProperty().addListener(((observable, oldValue, newValue) -> {
 //            filteredAtt.setPredicate( (Predicate< ? super  AttendanceTemporary>) at ->{
 //                if( newValue == null || newValue.isEmpty() ) {
@@ -475,7 +477,8 @@ public class FeedingFormController implements Initializable {
 //        studentTableView.setItems(sortedList);
     }
 
-    private void payFeedingFee(Student st){
+    private void payFeedingFee(AttendanceTemporary at){
+        Student st = at.getStudent();
         if(st.getPayFeeding()) {
             Optional<Pair<String, String>> result = salesDetailsFormController.showCustomTextInputDiag(st, "Pay Feeding Fees");
             result.ifPresent(pair -> {
@@ -488,7 +491,7 @@ public class FeedingFormController implements Initializable {
                         studentTableView.refresh();
                         Notification.getNotificationInstance().notifySuccess("Payment added for "+st.toString(), "Fees paid");
                         // log the transaction
-                        Utils.logPayment(st, "Feeding Fees", pair.getValue(), amount, TransactionType.FEEDING_FEE);
+                        Utils.logPayment(st, "Feeding Fees", pair.getValue(), amount, TransactionType.FEEDING_FEE, at.getId());
                     }
                 } else Notification.getNotificationInstance().notifyError("Fees payment cancelled", "Fees not added");
             });
@@ -638,6 +641,15 @@ private void resetFields() {
         unselectAll();
         setCounterLabel();
         studentTableView.refresh();
+}
+
+private void checkTotal() {
+    Double total = 0.0;
+    for(AttendanceTemporary at: attendanceTemporaries) {
+        if(at.hasPaidNow()) {
+            total+=at.getFeedingFee();
+        }
+    }
 }
 
 //private void activateSearch() {

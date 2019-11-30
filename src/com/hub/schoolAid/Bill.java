@@ -16,8 +16,11 @@ public class Bill {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    private List<Item>items;    // list of items contained in the bill e.g. sports dues, maintenance dues
+
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Item>items;    // list of items contained in the bill e.g. sports dues, maintenance dues
+    private List<BillItem> bill_items; // list of items contained in the bill
 
     private Double tuitionFee; // the total tuition fee for the bill
     private Double totalBill;  // the total cost of the bill
@@ -37,13 +40,13 @@ public class Bill {
         this.id = id;
     }
 
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
+//    public List<Item> getItems() {
+//        return items;
+//    }
+//
+//    public void setItems(List<Item> items) {
+//        this.items = items;
+//    }
 
     public Double getTutitionFee() {
         return tuitionFee;
@@ -91,6 +94,14 @@ public class Bill {
 
     public void setCreatedFor(int createdFor) {
         this.createdFor = createdFor;
+    }
+
+    public List<BillItem> getBill_items() {
+        return bill_items;
+    }
+
+    public void setBill_items(List<BillItem> bill_items) {
+        this.bill_items = bill_items;
     }
 
     public Double getTuitionFee() {

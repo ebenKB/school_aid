@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class AttendanceTemporary{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
  //   other attributes
 //    @ManyToOne(fetch = FetchType.EAGER)
@@ -18,7 +18,7 @@ public class AttendanceTemporary{
     private Double feedingFee;
     private LocalDate date;
     boolean present;
-    boolean paidNow = true;
+    boolean paidNow = false;
 
     // add a transient property to attendance temporary
     @Transient
@@ -27,11 +27,11 @@ public class AttendanceTemporary{
 
     //getters and setters
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

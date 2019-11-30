@@ -24,7 +24,9 @@ private EntityManager em;
 //        data.add(student);
         try{
             sales.setStudent(student);
-            sales.setItem(item);
+            // -- fix this
+
+//            sales.setItem(item);
 
             em =HibernateUtil.getEntityManager();
             HibernateUtil.begin();
@@ -92,12 +94,17 @@ private EntityManager em;
         }
     }
 
-    private void sellToMany(List<Student>students,Sales sales,Item item){
+    private void sellToMany(List<Student>students,Sales sales,Item item) {
         em=HibernateUtil.getEntityManager();
         HibernateUtil.begin();
         for(Student s:students){
             Sales newSale= new Sales();
-            newSale.setItem(item);
+
+            // fix this
+
+//            newSale.setItem(item);
+
+
             newSale.setStudent(s);
             newSale.setTotalcost(sales.getTotalcost());
             newSale.setAmountPaid(sales.getAmountPaid());
@@ -167,9 +174,15 @@ private EntityManager em;
            em=HibernateUtil.getEntityManager();
            HibernateUtil.begin();
            Sales s = (Sales) em.createQuery("from Sales  S where S.id =?").getSingleResult();
-           s.getItem().setCost(sales.getItem().getCost());
-           s.getItem().setQty(sales.getItem().getQty());
-           s.getItem().setName(sales.getItem().getName());
+
+
+            // fix this
+
+//           s.getItem().setCost(sales.getItem().getCost());
+//           s.getItem().setQty(sales.getItem().getQty());
+//           s.getItem().setName(sales.getItem().getName());
+
+
            HibernateUtil.commit();
            return  true;
        }catch (Exception e){

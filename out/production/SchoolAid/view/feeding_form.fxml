@@ -93,17 +93,17 @@
                   <Button fx:id="close" mnemonicParsing="false" prefHeight="36.0" prefWidth="80.0" text="Close" />
                </children>
             </HBox>
-            <HBox fx:id="detailsHbox" layoutX="453.0" layoutY="12.0" prefHeight="64.0" prefWidth="263.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="474.0">
+            <HBox fx:id="detailsHbox" layoutX="453.0" layoutY="12.0" prefHeight="64.0" prefWidth="260.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="567.0">
                <children>
                   <VBox spacing="5.0">
                      <children>
-                        <CheckBox fx:id="debitCheck" mnemonicParsing="false" selected="true" />
+                        <CheckBox fx:id="debitCheck" mnemonicParsing="false" selected="true" text="DEBIT" textFill="#ebe8e8" />
                         <TextField fx:id="totalDebt" disable="true" prefHeight="44.0" prefWidth="105.0" />
                      </children>
                   </VBox>
                   <VBox spacing="5.0">
                      <children>
-                        <CheckBox fx:id="creditCheck" mnemonicParsing="false" selected="true" />
+                        <CheckBox fx:id="creditCheck" mnemonicParsing="false" selected="true" text="CREDIT" textFill="WHITE" />
                         <TextField fx:id="totalCredit" disable="true" prefHeight="44.0" prefWidth="105.0" />
                      </children>
                   </VBox>
@@ -129,6 +129,7 @@
                   </Label>
                </children>
             </HBox>
+            <Button fx:id="transactionLogs" layoutX="91.0" layoutY="25.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="78.0" text="Logs" />
          </children>
       </AnchorPane>
    </children>

@@ -201,11 +201,17 @@ public class sale implements Initializable{
                     //create a new sale
                     Sales sale = new Sales();
                     Item item =new Item();
-                    item.setCost(Double.valueOf(unitCost.getText().trim()));
-                    item.setName(itemName.getText().trim());
 
-                    item.setQty(Integer.parseInt(qty.getText().trim()));
-                    sale.setTotalcost(item.getCost() * item.getQty());
+
+                    // fix this
+//                    item.setCost(Double.valueOf(unitCost.getText().trim()));
+//                    item.setName(itemName.getText().trim());
+//
+//                    item.setQty(Integer.parseInt(qty.getText().trim()));
+//                    sale.setTotalcost(item.getCost() * item.getQty());
+
+
+
 
                     Task task =  new Task() {
                         @Override

@@ -551,20 +551,22 @@ public class salesDetailsFormController implements Initializable{
                 return new SimpleStringProperty(sales.getStudent().toString());
             });
 
-            itemCol.setCellValueFactory(param -> {
-                Sales sales = param.getValue();
-                return new SimpleStringProperty(sales.getItem().getName());
-            });
+            // fix this
 
-            unitPriceCol.setCellValueFactory(param -> {
-                Sales sales =param.getValue();
-                return new SimpleStringProperty(sales.getItem().getCost().toString());
-            });
-
-            qtyCol.setCellValueFactory(param -> {
-                Sales sales  = param.getValue();
-                return new SimpleStringProperty(String.valueOf(sales.getItem().getQty()).toString());
-            });
+//            itemCol.setCellValueFactory(param -> {
+//                Sales sales = param.getValue();
+//                return new SimpleStringProperty(sales.getItem().getName());
+//            });
+//
+//            unitPriceCol.setCellValueFactory(param -> {
+//                Sales sales =param.getValue();
+//                return new SimpleStringProperty(sales.getItem().getCost().toString());
+//            });
+//
+//            qtyCol.setCellValueFactory(param -> {
+//                Sales sales  = param.getValue();
+//                return new SimpleStringProperty(String.valueOf(sales.getItem().getQty()).toString());
+//            });
 
             amntPaidCol.setCellValueFactory(param -> {
 //              if(param.getValue().getAmountPaid()==param.getValue().getTotalcost())
@@ -937,7 +939,7 @@ public class salesDetailsFormController implements Initializable{
                 studentDao.updateAccount(attendanceTemporary.getStudent().getAccount());
 
                 Utils.logPayment(attendanceTemporary.getStudent(),"Feeding Fee Payment for"+" "+
-                        attendanceTemporary.getStudent().toString(),pair.getValue(),amount, TransactionType.FEEDING_FEE);
+                        attendanceTemporary.getStudent().toString(),pair.getValue(),amount, TransactionType.FEEDING_FEE, attendanceTemporary.getId());
             });
         }
     }
@@ -954,7 +956,7 @@ public class salesDetailsFormController implements Initializable{
                     if(studentDao.paySchoolFee(st, amount)) {
                         Notification.getNotificationInstance().notifySuccess("Payment added for "+st.toString(), "Fees paid");
                         // log the transaction
-                        Utils.logPayment(st, "School Fees", pair.getValue(), amount, TransactionType.SCHOOL_FEES);
+                        Utils.logPayment(st, "School Fees", pair.getValue(), amount, TransactionType.SCHOOL_FEES, st.getId());
                     }
                 } else Notification.getNotificationInstance().notifyError("Fees payment cancelled", "Fees not added");
             });
@@ -1021,14 +1023,22 @@ public class salesDetailsFormController implements Initializable{
             input.setGraphic(imageView);
             input.setTitle("New Payment");
             input.setContentText("How much is the student paying?");
-            String description = "Add Payment for\n"+student.toString()+" "+"["+student.getStage().getName()+"]\n" +
-                    "as payment for "+sales.getItem().getName().toUpperCase();
-            input.setHeaderText(description);
+
+            // fix this
+//            String description = "Add Payment for\n"+student.toString()+" "+"["+student.getStage().getName()+"]\n" +
+//                    "as payment for "+sales.getItem().getName().toUpperCase();
+//            input.setHeaderText(description);
+
+
             Optional<String> result = input.showAndWait();
 
             if(result.isPresent() && result.get()!= null){
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"",ButtonType.YES,ButtonType.NO);
-                alert.setHeaderText("Are you sure you want to make payment of "+result.get()+"\nfor"+" "+sales.getItem().getName()+"\n");
+
+                // fix this
+                // alert.setHeaderText("Are you sure you want to make payment of "+result.get()+"\nfor"+" "+sales.getItem().getName()+"\n");
+
+
                 Optional<ButtonType>result2 = alert.showAndWait();
 
                 if(result2.isPresent() && result2.get() == ButtonType.YES) {
@@ -1037,7 +1047,9 @@ public class salesDetailsFormController implements Initializable{
                         protected Object call() {
                         salesDao.payForSales(sales, Double.valueOf(result.get()));
                         sales.setAmountPaid((sales.getAmountPaid()+Double.valueOf(result.get())));
-                        TransactionLoggerDao.getTransactionLoggerDaoInstance().LogTransaction(sales.getId(), sales.getStudent().toString(), description, sales.getAmountPaid(), TransactionType.SALES);
+
+                        // fix this
+//                        TransactionLoggerDao.getTransactionLoggerDaoInstance().LogTransaction(sales.getId(), sales.getStudent().toString(), description, sales.getAmountPaid(), TransactionType.SALES);
 
                         return null;
                         }

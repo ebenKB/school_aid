@@ -173,7 +173,7 @@
                                                 <TextField fx:id="feesBalance" editable="false" prefHeight="30.0" prefWidth="114.0" />
                                              </children>
                                           </HBox>
-                                          <Hyperlink fx:id="schFeesSummary" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="111.0" text="View summary" textFill="#0fa5eb">
+                                          <Hyperlink fx:id="schFeesSummary" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="111.0" styleClass="primary-link" text="View summary" textFill="#0fa5eb">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>

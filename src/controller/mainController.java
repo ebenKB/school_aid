@@ -479,6 +479,8 @@ public class mainController implements Initializable{
             Parent root;
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/showBills.fxml"));
             root = fxmlLoader.load();
+            ShowBillController controller = fxmlLoader.getController();
+            controller.init();
             Scene scene = new Scene(root);
             javafx.stage.Stage stage = new javafx.stage.Stage();
             stage.setScene(scene);

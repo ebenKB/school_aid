@@ -1,6 +1,8 @@
 package com.hub.schoolAid;
 
 import be.quodlibet.boxable.*;
+import com.sun.org.apache.bcel.internal.generic.ARETURN;
+import com.sun.org.apache.regexp.internal.RE;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -425,6 +427,13 @@ public class PDFMaker {
         cell.setFont(font);
     }
 
+    /**
+     * Display all the transactions
+     * @param logs the transaction logs
+     * @param baseTable the table that we are showing the transactions in
+     * @param accumulator it adds up the total amount of all the transactions
+     * @return the total amount of all the transactions
+     */
     private Double logTransactions(List<TransactionLogger> logs, BaseTable baseTable, Double accumulator) {
         if(logs.size() > 0) {
             // SET the table header rows
@@ -784,7 +793,6 @@ public class PDFMaker {
         for(Student st: students) {
             generateAccountReport(pdDocument, st);
         }
-
         savePDFToLocation(pdDocument);
     }
 
@@ -793,7 +801,6 @@ public class PDFMaker {
         for(Student st: students) {
             generateAccountReport(pdDocument, st);
         }
-
         savePDFToLocation(pdDocument);
     }
 
@@ -811,6 +818,59 @@ public class PDFMaker {
             itemList.put("Powdered Soap Only", "500g");
         }
             return itemList;
+    }
+
+    public PDDocument createBill(Bill bill) {
+        if(bill.getStudents().size() > 0) {
+            pdDocument = new PDDocument();
+
+            for(Student student: bill.getStudents()) {
+                // create a page an save the bill on it
+                PDPage page = new PDPage(PDRectangle.A4);
+                PDRectangle mediaBox = page.getMediaBox();
+                pdDocument.addPage(page);
+
+                // set page margins
+                float margin = 20;
+                float yStartNewPage = mediaBox.getHeight() - margin;
+                float yStart = (yStartNewPage - 105);
+
+                try {
+                    PDPageContentStream pageContentStream = new PDPageContentStream(pdDocument, page);
+                    String title = "BILL FOR"+ student.toString();
+                    prepPageWidthHeader(pageContentStream, margin, yStart, mediaBox, title);
+                    pageContentStream.close();
+
+                    // Display the records in a table
+                    float tableWidth = ((page.getMediaBox().getWidth() - (2 * margin)));
+                    BaseTable baseTable = new BaseTable(yStart - 30, yStartNewPage, 20, tableWidth, (margin), pdDocument, page, true, true);
+                    Row<PDPage> headerRow = baseTable.createRow(30f);
+                    createHeaderRow(headerRow, "ITEM", (float) 60);
+                    createHeaderRow(headerRow, "COST", (float) 40);
+                    baseTable.addHeaderRow(headerRow);
+
+                    // CREATE THE ACTUAL ROWS
+                    Row<PDPage> row = baseTable.createRow(24f);
+                    row.createCell(60, "Tuition Fee");
+                    row.createCell(40, bill.getTuitionFee().toString())
+                            .setAlign(HorizontalAlignment.CENTER);
+
+                    // display the records in a table
+                    for(BillItem billItem : bill.getBill_items()) {
+                        row = baseTable.createRow(24f);
+                        row.createCell(60, billItem.getItem().getName());
+                        row.createCell(40, billItem.getCost().toString())
+                            .setAlign(HorizontalAlignment.CENTER);
+                    }
+
+                    baseTable.draw();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+        return pdDocument;
     }
 
     private void generateAccountReport(PDDocument pdDocument, Student student) {

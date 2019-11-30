@@ -1,7 +1,5 @@
 package com.hub.schoolAid;
 
-
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -18,8 +16,12 @@ public class Sales {
 
     //other attributes
    //@OneToOne(orphanRemoval = true,cascade = CascadeType.ALL)
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private Item item;
+
+    // CONSIDER REFACTORING  - A sale has many orders
     @OneToOne(cascade = CascadeType.ALL)
-    private Item item;
+    private SaleOrder order;
 
     private Double amountPaid = 0.0;
     private Double totalcost  = 0.0;
@@ -64,13 +66,21 @@ public class Sales {
         this.totalcost = totalcost;
     }
 
-    public Item getItem() {
-        return item;
+    public SaleOrder getOrder() {
+        return order;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setOrder(SaleOrder order) {
+        this.order = order;
     }
+
+    //    public Item getItem() {
+//        return item;
+//    }
+//
+//    public void setItem(Item item) {
+//        this.item = item;
+//    }
 
     public Date getDate() {
         return date;
@@ -82,7 +92,8 @@ public class Sales {
 
     @Override
     public String toString() {
-        String msg = this.getItem().getName() + " for "+ this.getStudent().toString();
+//        String msg = this.getItem().getName() + " for "+ this.getStudent().toString();
+        String msg = this.getOrder().getItem().getName() + "for "+ this.getStudent().toString();
         return msg;
     }
 }

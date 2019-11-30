@@ -1011,7 +1011,11 @@ public class studentDetailsFormController implements Initializable{
                 total++;
                 payment+=s.getAmountPaid();
                 salesBal+=((s.getTotalcost() - s.getAmountPaid())* -1);
-                data.add(s.getItem().getName()+"\t"+ "("+s.getItem().getQty()+"piece(s)"+ "*"+s.getItem().getCost()+"="+s.getTotalcost()+")");
+
+                // fix this
+//                data.add(s.getItem().getName()+"\t"+ "("+s.getItem().getQty()+"piece(s)"+ "*"+s.getItem().getCost()+"="+s.getTotalcost()+")");
+
+                //---
             }
             salesBalance.setText(String.valueOf(salesBal));
         }
