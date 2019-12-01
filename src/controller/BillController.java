@@ -15,6 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.CheckListView;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 
 import java.net.URL;
 import java.util.Optional;
@@ -104,6 +106,7 @@ public class BillController implements Initializable {
     private ObservableList<BillItem> billItems = FXCollections.observableArrayList();
     private ObservableList<Item>items = FXCollections.observableArrayList();
     private ObservableList<Term>terms = FXCollections.observableArrayList();
+    private ValidationSupport validator = new ValidationSupport();
     private TermDao termDao = new TermDao();
     private JFXRadioButton radioButton;
 
@@ -253,12 +256,17 @@ public class BillController implements Initializable {
         });
 
         cancel.setOnAction(event -> Utils.closeEvent(event));
+
+        // enforce validation
+        validator.registerValidator(startYear, true, Validator.createEmptyValidator("Year is required"));
+        validator.registerValidator(endYear, true, Validator.createEmptyValidator("Year is required"));
     }
 
     private Bill prepareBill() {
         bill = new Bill();
         if(tuitionFee.getText().trim().length() > 0) {
-            bill.setTutitionFee(Double.valueOf(tuitionFee.getText().trim()));
+            // leave the balance as a negative value
+            bill.setTutitionFee(Double.valueOf(tuitionFee.getText().trim()) * -1);
         }
         TermDao termDao = new TermDao();
         Term term = termDao.getCurrentTerm();
@@ -269,7 +277,7 @@ public class BillController implements Initializable {
         if(billItems.size() > 0) {
            bill.setBill_items(billItems);
         }
-        bill.setTotalBill(checkBillTotal());
+        bill.setTotalBill((checkBillTotal() * -1));
         String year = startYear.getText().trim()+"/"+endYear.getText().trim();
 
         if(termsCombo.getSelectionModel().getSelectedItem()  != null) {
@@ -279,11 +287,12 @@ public class BillController implements Initializable {
         return bill;
     }
 
-    private Boolean createBillItem(){
+    private Boolean createBillItem() {
         // check if the fields are valid
         if(itemAmount.getText().trim().length() > 0 && selectedItem != null) {
             BillItem bill_item = new BillItem();
-            bill_item.setCost(Double.valueOf(itemAmount.getText().trim()));
+            // leave the cost as a negative value
+            bill_item.setCost((Double.valueOf(itemAmount.getText().trim()) * -1));
             bill_item.setItem(selectedItem);
             billItems.add(bill_item);
             populateBillTableview();
@@ -357,6 +366,13 @@ public class BillController implements Initializable {
         }
 
         // validate the start and end to pick only figures
+        if(!startYear.getText().trim().matches("[0-9]+")){
+            return false;
+        }
+
+        if(!endYear.getText().trim().matches("[0-9]+")) {
+            return false;
+        }
 
         return true;
     }

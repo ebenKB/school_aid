@@ -63,8 +63,6 @@ public class ManageStageController {
                 return null;
             }
         };
-
-
         task.setOnRunning(event -> MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Loading records"));
         task.setOnSucceeded(event -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
         task.setOnFailed(event -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());

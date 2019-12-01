@@ -360,15 +360,22 @@ public class PDFMaker {
             totalPayment = logTransactions(feesLog, baseTable, totalPayment);
 
             // set the summary for all the records
-            prepTransactionBal(baseTable, totalPayment, student, TransactionType.SCHOOL_FEES);
+            if(!feesLog.isEmpty()) {
+                prepTransactionBal(baseTable, totalPayment, student, TransactionType.SCHOOL_FEES);
+            }
 
             // -- [SECOND TABLE] create rows for the SCHOOL FEEDING FEE TRANSACTIONS
             totalPayment = logTransactions(feeding, baseTable, totalPayment);
-            prepTransactionBal(baseTable, totalPayment, student, TransactionType.FEEDING_FEE);
+            if(!feeding.isEmpty()) {
+                prepTransactionBal(baseTable, totalPayment, student, TransactionType.FEEDING_FEE);
+            }
 
             //--[THIRD TABLE] create rows for all sales transactions
             totalPayment = logTransactions(sales, baseTable, totalPayment);
-            prepTransactionBal(baseTable, totalPayment, student, TransactionType.SALES);
+            if(!sales.isEmpty()) {
+                prepTransactionBal(baseTable, totalPayment, student, TransactionType.SALES);
+            }
+
             baseTable.draw();
 
             pdPageContentStream.close();

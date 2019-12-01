@@ -27,7 +27,7 @@
                   <Font name="Arial Black" size="16.0" />
                </font>
             </Text>
-            <Label fx:id="infoLabel" layoutX="243.0" layoutY="14.0" prefHeight="54.0" prefWidth="642.0" textFill="#fcb503">
+            <Label fx:id="infoLabel" layoutX="243.0" layoutY="14.0" prefHeight="54.0" prefWidth="841.0" textFill="#fcb503">
                <font>
                   <Font size="14.0" />
                </font>

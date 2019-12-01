@@ -411,7 +411,6 @@ public class StudentDao {
 
         // get the new class for the student using the class value of the current class
         if (isPromotion) {
-            System.out.println("It is promotion");
             didUpdate = false;
             /**
              * find a student class for the student by finding the old class and add 1 to the class value
@@ -440,6 +439,7 @@ public class StudentDao {
             didUpdate = true;
         }
 
+        // check if the update was successful
         if (didUpdate) {
             try {
                 // update number on row
@@ -461,38 +461,33 @@ public class StudentDao {
 
                 // update the school fees for the student
                 if (student.getPaySchoolFees()) {
+                    // Get the bill for that the new class and check if the student is not part of the bill
+                    // then add the student to the bill
+
+                    if(isPromotion) {
+                        BillDao billDao = new BillDao();
+                        billDao.addStudentToBill(newStage.getBill(), student);
+                    }
+
+                    // Disable update for Student fees account when promoting students
                     student.getAccount().setFeeToPay(newStage.getFeesToPay());
                 }
-
                 // commit the records
                 em.getTransaction().commit();
             } catch (Exception e) {
                 HibernateUtil.rollBack();
+            } finally {
+                em.close();
+                HibernateUtil.close();
             }
         }
         return true;
     }
 
-//    private void updateStudentStageAttrs(Student s, Stage stage, EntityManager em) {
-//        String hql;
-//        Query query;
-//        hql ="from Class S where S.id = ?1";
-//        query = em.createQuery(hql);
-//        query.setParameter(1, stage.getId());
-//
-//        Stage newStage = (Stage) query.getSingleResult();
-//
-//        hql = "UPDATE students S set S.stage = ?1 where S.id = ?2";
-//        Query q = em.createQuery(hql)
-//                .setParameter(1, newStage)
-//                .setParameter(2, s.getId());
-//        q.executeUpdate();
-//    }
-
     /**
      *  promotes every student in the school to the next class
      */
-    public void promoteStudent()throws HibernateException{
+    public void promoteStudent()throws HibernateException {
         em=HibernateUtil.getEntityManager();
         HibernateUtil.begin();
         List<Student> students = em.createQuery("from students ").getResultList();
@@ -538,21 +533,19 @@ public class StudentDao {
             e.printStackTrace();
             return false;
         } finally {
-//            em.close();
-//            HibernateUtil.close();
+            em.close();
+            HibernateUtil.close();
         }
     }
 
     // when the student is paying school fees
     public Boolean paySchoolFee(Student st, Double amount) {
         if (st == null || !st.getPaySchoolFees()){
-            System.out.println("The student does not pay school fees");
             return false;
         }
 
         em=HibernateUtil.getEntityManager();
         StudentAccount acc = em.find(StudentAccount.class, st.getAccount().getId());
-//        acc.setFeeToPay((acc.getFeeToPay() + amount));
 
         // update the student's record with the total amount of fees paid.
         acc.setSchFeesPaid(acc.getSchFeesPaid() + amount);
@@ -607,17 +600,4 @@ public class StudentDao {
             return true;
         return false;
     }
-
-    // when you want to change the student's existing fees to a new amount;
-//    public Boolean setSchoolFeeToPay(Student st, Double amount) {
-//        if(amount.isNaN() || st.getPaySchoolFees())
-//            return false;
-//        em=HibernateUtil.getEntityManager();
-//        StudentAccount acc = em.find(StudentAccount.class, st);
-//        acc.setFeeToPay(amount);
-//        if(this.updateAccount(acc))
-//            return true;
-//        return false;
-//    }
-
 }

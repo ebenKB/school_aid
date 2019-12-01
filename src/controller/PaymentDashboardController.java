@@ -196,7 +196,7 @@ public class PaymentDashboardController implements Initializable {
              * This algorithm checks to make sure that data is not fetched unnecessarily form the database.
              * It fetches records only when the search params have changed
              */
-            if((container.isEmpty())|| (prevFrom == null ) || (prevTo== null) || (prevFrom.compareTo(fromDate.getValue()) != 0) || (prevTo.compareTo(toDate.getValue()) != 0)) {
+//            if((container.isEmpty()) || (prevFrom == null ) || (prevTo== null) || (prevFrom.compareTo(fromDate.getValue()) != 0) || (prevTo.compareTo(toDate.getValue()) != 0)) {
                 // check if the search is date range
                 if(fromDate.getValue()!= null && toDate.getValue() != null) {
                     // search by a range
@@ -218,12 +218,13 @@ public class PaymentDashboardController implements Initializable {
                 }
                 prevFrom = fromDate.getValue();
                 prevTo = toDate.getValue();
-            }
+//            }
         } else {
             // fetch records for today
-            if(container.isEmpty()) {
+//            if(container.isEmpty()) {
+                container.clear();
                 container.addAll(transactionLoggerDao.getLog(LocalDate.now(), type));
-            }
+//            }
         }
     }
 
@@ -248,23 +249,28 @@ public class PaymentDashboardController implements Initializable {
             return new SimpleStringProperty(msg);
         });
 
-        // check the type of date to send to the tableview
+        // check the type of date to send to the table view
         if(type == TransactionType.FEEDING_FEE) { // it is feeding fee
             if(! feedingFee.isEmpty()) {
                 transactionTableview.setItems(feedingFee);
+            } else {
+                transactionTableview.getItems().clear();
             }
         } else if(type == TransactionType.SALES) {
             if(!sales.isEmpty()) {
                 transactionTableview.setItems(sales);
+            } else {
+                transactionTableview.getItems().clear();
             }
         } else if (type == TransactionType.SCHOOL_FEES) {
             if(!schoolFees.isEmpty()) {
                 transactionTableview.setItems(schoolFees);
+            } else {
+                transactionTableview.getItems().clear();
             }
         }
         checkTotal();
     }
-
 //    public void fetchLogs(TransactionType type) {
 //        if(type  == TransactionType.FEEDING_FEE) {
 //            // check if the feeding fee is empty

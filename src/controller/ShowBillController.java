@@ -78,7 +78,10 @@ public class ShowBillController implements Initializable {
 
     private void populateBillsTableview() {
         stdCol.setCellValueFactory(param -> new SimpleStringProperty(String.valueOf(param.getValue().getStudents().size())));
-        billAmountCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTotalBill().toString()));
+        billAmountCol.setCellValueFactory(param -> {
+            Double amount = param.getValue().getTotalBill() * -1;
+            return new SimpleStringProperty(amount.toString());
+        });
         academicYearCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAcademicYear()));
         termCol.setCellValueFactory(param -> new SimpleStringProperty(String.valueOf(param.getValue().getCreatedFor())));
         dateCol.setCellValueFactory(param -> new SimpleStringProperty(Utils.formatDate(param.getValue().getCreatedAt(), true)));

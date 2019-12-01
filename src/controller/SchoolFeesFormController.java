@@ -169,7 +169,8 @@ public class SchoolFeesFormController implements  Initializable {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Student, String> param) {
                 Student student = param.getValue();
-                return new SimpleStringProperty(String.valueOf((student.getAccount().getSchFeesPaid() - student.getAccount().getSchFeesPaid())));
+                Double bal = student.getAccount().getFeeToPay() + student.getAccount().getSchFeesPaid();
+                return new SimpleStringProperty(String.valueOf((bal)));
             }
         });
 

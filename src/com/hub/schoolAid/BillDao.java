@@ -220,4 +220,53 @@ public class BillDao {
             return null;
         }
     }
+
+    public void addStudentToBill(Bill bill, Student student) {
+        try {
+            em = HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+            Query query = em.createQuery("from Bill B join B.students S where B.id =?1 and S.id = ?2");
+            query.setParameter(1, bill.getId());
+            query.setParameter(2, student.getId());
+            Object existing = query.getSingleResult();
+            if(existing == null) {
+                List<Student>list = bill.getStudents();
+                list.add(student);
+                bill.setStudents(list);
+                em.merge(bill);
+            }
+            HibernateUtil.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            HibernateUtil.rollBack();
+        } finally {
+            HibernateUtil.close();
+            em.close();
+        }
+    }
+
+    public void takeBillFromStudent(Bill bill, Student student) {
+        try {
+            em = HibernateUtil.getEntityManager();
+            HibernateUtil.begin();
+
+            // get all the students related to the bill
+            List<Student>students = bill.getStudents();
+
+            // remove the student from the bill
+            students.remove(student);
+
+            // add the update set of student to the bill
+            bill.setStudents(students);
+
+            // save the changes to the database
+            em.merge(bill);
+
+        }catch (Exception e) {
+            em.getTransaction().rollback();
+        } finally {
+            HibernateUtil.close();
+            em.close();
+        }
+    }
 }

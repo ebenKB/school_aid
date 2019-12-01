@@ -9,6 +9,7 @@
             Persistence unit for Hibernate User Guide
         </description>
 
+
         <provider> org.hibernate.jpa.HibernatePersistenceProvider </provider>
         <class>com.hub.schoolAid.Sales</class>
         <class>com.hub.schoolAid.Staff</class>
@@ -34,6 +35,7 @@
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+
 <!--            jdbc:mysql://localhost/SchoolDB-->
 <!--            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://remotemysql.com/p496rueDFN?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;useSSL=false" />-->
 <!--            <property name="javax.persistence.jdbc.user" value="p496rueDFN" />-->
@@ -50,6 +52,8 @@
                 <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/schooldb?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;useSSL=false" />
                 <property name="javax.persistence.jdbc.user" value="root" />
                 <property name="javax.persistence.jdbc.password" value="thishubkbs*" />
+
+<!--            <property name="hibernate.cache.use_query_cache" value="true" />-->
 
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.hbm2ddl.auto" value="update" />

@@ -1,5 +1,9 @@
 package com.hub.schoolAid;
 //import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+
+import com.sun.javafx.tools.packager.Log;
+import org.slf4j.Logger;
+
 import javax.persistence.*;
 import java.sql.Blob;
 import java.time.LocalDate;

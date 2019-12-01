@@ -69,11 +69,13 @@ public class TransactionLoggerDao {
            return transactions;
         } catch (Exception e) {
             e.printStackTrace();
+            em.close();
+            HibernateUtil.close();
             return null;
         }
         finally {
-//            em.close();
-//            HibernateUtil.close();
+            em.close();
+            HibernateUtil.close();
         }
     }
 
@@ -128,10 +130,11 @@ public class TransactionLoggerDao {
             return transactions;
 
         }catch (Exception e) {
-            System.out.print("in the error block");
+            em.close();
+            HibernateUtil.close();
         } finally {
             em.close();
-            System.out.print("In the finally block -- CLOSING THE TRANSACTION");
+            HibernateUtil.close();
         }
         return null;
     }
@@ -149,10 +152,20 @@ public class TransactionLoggerDao {
             List<TransactionLogger>transactions = query.getResultList();
             return transactions;
         } catch (Exception e) {
+            em.close();
+            HibernateUtil.close();
             return null;
         } finally {
             em.close();
-            System.out.print("We are in the FINALLY BLOCK");
+            HibernateUtil.close();
         }
+    }
+
+    public Boolean updateTransaction(TransactionLogger transaction) {
+        if(transaction == null){
+            return false;
+        }
+
+        return  false;
     }
 }
