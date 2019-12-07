@@ -438,8 +438,11 @@ public class studentController implements Initializable{
         classCombo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Stage>() {
             @Override
             public void changed(ObservableValue<? extends Stage> observable, Stage oldValue, Stage newValue) {
-                if(newValue !=null)
-                    fees.setText(String.valueOf(newValue.getFeesToPay()));
+                if(newValue !=null){
+//                    fees.setText(String.valueOf(newValue.getFeesToPay()));
+                    fees.setText(String.valueOf(newValue.getBill().getTotalBill()));
+                }
+
             }
         });
 

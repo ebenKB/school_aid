@@ -80,7 +80,9 @@ private EntityManager em;
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
             Stage newStage = em.find(Stage.class, stage.getId());
-            newStage.setFeesToPay(stage.getFeesToPay());
+
+//            newStage.setFeesToPay(stage.getFeesToPay());
+
             newStage.setName(stage.getName());
             newStage.setFeeding_fee(stage.getFeeding_fee());
             HibernateUtil.commit();

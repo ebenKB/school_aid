@@ -33,11 +33,11 @@ public class BillDao {
                 HibernateUtil.begin();
 
                 // update the stages
-                for(Stage s: stages) {
-                    s.setBill(bill);
-                    s.setFeesToPay((s.getFeesToPay() + bill.getTotalBill()));
-                    em.merge(s);
-                }
+//                for(Stage s: stages) {
+//                    s.setBill(bill);
+//                    s.setFeesToPay((s.getFeesToPay() + bill.getTotalBill()));
+//                    em.merge(s);
+//                }
                 HibernateUtil.commit();
             }
             return true;
@@ -117,7 +117,8 @@ public class BillDao {
             for(Stage stage : stages) {
                 students.addAll(studentDao.getStudentFromClass(stage));
                 stage.setBill(bill);
-                stage.setFeesToPay((stage.getFeesToPay() + bill.getTotalBill()));
+
+//                stage.setFeesToPay((stage.getFeesToPay() + bill.getTotalBill()));
                 em.merge(stage);
             }
 
@@ -346,10 +347,13 @@ public class BillDao {
                 query.setParameter(1, newFee);
                 query.setParameter(2, s.getAccount().getId());
                 query.executeUpdate();
+
+                // check whether there is any class associated with the bill and update the amount
             }
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
+            em.getTransaction().rollback();
             return false;
         }finally {
             em.close();
