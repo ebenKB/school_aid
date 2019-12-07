@@ -16,6 +16,10 @@ public class Bill {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    public Bill() {
+        this.isDeleted=false;
+    }
+
 //    @ManyToMany(cascade = CascadeType.ALL)
 //    private List<Item>items;    // list of items contained in the bill e.g. sports dues, maintenance dues
 
@@ -28,8 +32,9 @@ public class Bill {
     private int createdBy; // the term value for the term that created the bill
     private int createdFor; // the term value for the term that the bill was created for
     private LocalDate createdAt; // the date the bill was created
+    private Boolean isDeleted;
 
-    @ManyToMany(cascade = {CascadeType.MERGE})
+    @ManyToMany(cascade = { CascadeType.MERGE })
     private List<Student>students;
 
     public Long getId() {
@@ -39,14 +44,6 @@ public class Bill {
     public void setId(Long id) {
         this.id = id;
     }
-
-//    public List<Item> getItems() {
-//        return items;
-//    }
-//
-//    public void setItems(List<Item> items) {
-//        this.items = items;
-//    }
 
     public Double getTutitionFee() {
         return tuitionFee;
@@ -118,5 +115,13 @@ public class Bill {
 
     public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 }

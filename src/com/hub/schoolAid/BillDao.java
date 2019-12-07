@@ -1,5 +1,7 @@
 package com.hub.schoolAid;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.time.LocalDate;
@@ -245,7 +247,7 @@ public class BillDao {
         }
     }
 
-    public void takeBillFromStudent(Bill bill, Student student) {
+    public void removeStudentFromBill(Bill bill, Student student) {
         try {
             em = HibernateUtil.getEntityManager();
             HibernateUtil.begin();
@@ -266,6 +268,90 @@ public class BillDao {
             em.getTransaction().rollback();
         } finally {
             HibernateUtil.close();
+            em.close();
+        }
+    }
+
+    private Bill takeBillFromStudent(Bill bill) {
+        try {
+            List<Student>students = bill.getStudents();
+
+            // removes the bill from every student
+            bill.setStudents(null);
+        }catch (Exception e) {
+
+        }
+        return null;
+    }
+
+    public void deleteBill(Boolean isSoft, Bill bill) {
+        try {
+            em = HibernateUtil.getEntityManager();
+            em.getTransaction().begin();
+            List<Student>students = bill.getStudents();
+            Query query = em.createQuery("from Bill B where B.id = ?1");
+            query.setParameter(1, bill.getId());
+            Bill newBill = (Bill) query.getSingleResult();
+            newBill.setDeleted(true); // turn the bill off
+            em.merge(newBill);
+
+            StudentDao studentDao = new StudentDao();
+            // reverse the bill amount from the student's amount to pay
+            // PERFORM A BATCH UPDATE
+            int batchSize = students.size();
+            for (int i=0; i <= students.size(); i++) {
+                Double newAmount = (students.get(i).getAccount().getFeeToPay() - bill.getTotalBill());
+                System.out.println("Deducting from student account" + newAmount);
+                studentDao.updateSchoolFee(students.get(i), newAmount);
+                em.merge(students.get(i));
+                if(i > 0 && i%batchSize == 0) {
+                    // persist the records and clear the entity manager
+                    em.flush();
+                    em.clear();
+                }
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("an error occurred while deleting the item...");
+        } finally {
+            em.close();
+        }
+    }
+
+    /**
+     *
+     * @param newBill the bill that contains the new changes
+     * @return return true if the update was successful else return false
+     */
+    public Boolean updateBill(Bill newBill,Double oldTotal) {
+        try {
+            em = HibernateUtil.getEntityManager();
+            em.getTransaction().begin();
+            Bill bill = em.find(Bill.class, newBill.getId());
+            bill = newBill;
+            em.merge(bill);
+            // update the account for the students
+            for(Student s: newBill.getStudents()) {
+                // subtract the old balance from the student account
+                double feeToPay = s.getAccount().getFeeToPay();
+
+                // reverse the previous balance from the total amount for the student to pay
+                double newFee = feeToPay + oldTotal;
+
+                // add the new fee to the total amount for the student to pay
+                newFee+= newBill.getTotalBill();
+
+                // add the new account to the student account
+                Query query = em.createQuery("update StudentAccount  A set feeToPay=?1 where A.id =?2");
+                query.setParameter(1, newFee);
+                query.setParameter(2, s.getAccount().getId());
+                query.executeUpdate();
+            }
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }finally {
             em.close();
         }
     }

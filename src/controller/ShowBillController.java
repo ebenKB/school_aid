@@ -17,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.net.URL;
 import java.util.Optional;
@@ -55,6 +56,9 @@ public class ShowBillController implements Initializable {
 
     @FXML
     private ListView<BillItem> bill_items;
+
+    @FXML
+    private MenuItem editContextMenu;
 
     @FXML
     private Button printBill;
@@ -114,6 +118,15 @@ public class ShowBillController implements Initializable {
                 PDFMaker.savePDFToLocation(PDFMaker.getPDFMakerInstance().createBill(billTableview.getSelectionModel().getSelectedItem()));
             }
         });
+
+        editContextMenu.setOnAction(event -> {
+            // check if the selection is not empty
+            Bill bill = billTableview.getSelectionModel().getSelectedItem();
+            if(bill != null) {
+                showUpdateBill(bill);
+            }
+        });
+
         close.setOnAction(event -> Utils.closeEvent(event));
     }
 
@@ -131,6 +144,27 @@ public class ShowBillController implements Initializable {
             stage.show();
         } catch (Exception e) {
             Notification.getNotificationInstance().notifyError("An error occurred while loading the form", "error!");
+            e.printStackTrace();
+        }
+    }
+
+    public void showUpdateBill(Bill bill) {
+        Parent root;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/updateBill.fxml"));
+            root = fxmlLoader.load();
+            UpdateBillController controller = fxmlLoader.getController();
+            controller.initBill(bill);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setMaximized(false);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Edit existing bill");
+            stage.setResizable(false);
+            stage.show();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

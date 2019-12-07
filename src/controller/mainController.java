@@ -481,6 +481,7 @@ public class mainController implements Initializable{
             root = fxmlLoader.load();
             ShowBillController controller = fxmlLoader.getController();
             controller.init();
+//            tablePane.getChildren().setAll(root);
             Scene scene = new Scene(root);
             javafx.stage.Stage stage = new javafx.stage.Stage();
             stage.setScene(scene);

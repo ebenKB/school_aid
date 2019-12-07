@@ -344,6 +344,14 @@ public class Student {
        return  true;
     }
 
+    public List<Bill> getBills() {
+        return bills;
+    }
+
+    public void setBills(List<Bill> bills) {
+        this.bills = bills;
+    }
+
     public Boolean updateFeedingAccount(Double amount) {
         try {
             this.getAccount().setFeedingFeeCredit(this.getAccount().getFeedingFeeCredit() + amount);
