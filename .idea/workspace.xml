@@ -10,8 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/studentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/studentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporaryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporaryDao.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -104,7 +103,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentAccount.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="525">
-              <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
+              <caret line="55" selection-start-line="55" selection-end-line="55" />
             </state>
           </provider>
         </entry>
@@ -112,8 +111,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/studentController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="440" column="66" lean-forward="true" selection-start-line="440" selection-start-column="66" selection-end-line="440" selection-end-column="66" />
+            <state relative-caret-position="6030">
+              <caret line="440" column="66" selection-start-line="440" selection-start-column="66" selection-end-line="440" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -130,31 +129,36 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Student.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3615">
+            <state relative-caret-position="4860">
               <caret line="439" selection-start-line="439" selection-end-line="439" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
-              <caret line="131" column="9" lean-forward="true" selection-start-line="131" selection-start-column="9" selection-end-line="131" selection-end-column="9" />
+            <state relative-caret-position="1860">
+              <caret line="131" column="9" selection-start-line="131" selection-start-column="9" selection-end-line="131" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporaryDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="781">
+              <caret line="385" column="24" lean-forward="true" selection-start-line="385" selection-start-column="24" selection-end-line="385" selection-end-column="24" />
               <folding>
-                <element signature="e#0#110#1" expanded="true" />
-                <element signature="e#0#45#0" expanded="true" />
-                <element signature="e#0#125#0" expanded="true" />
-                <element signature="e#0#260#0" expanded="true" />
-                <element signature="e#0#60#0" expanded="true" />
-                <element signature="e#0#68#1" expanded="true" />
-                <element signature="e#0#36#0" expanded="true" />
-                <element signature="e#0#64#0" expanded="true" />
-                <element signature="e#0#42#1" expanded="true" />
-                <element signature="e#0#36#1" expanded="true" />
-                <element signature="e#0#36#1" expanded="true" />
-                <element signature="e#0#50#1" expanded="true" />
-                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#11042#11043#0" expanded="true" />
+                <element signature="e#11143#11144#0" expanded="true" />
+                <element signature="e#1#60#0" expanded="true" />
+                <element signature="e#0#84#1" expanded="true" />
+                <element signature="e#0#27#0" expanded="true" />
+                <element signature="e#1#49#0" expanded="true" />
+                <element signature="e#0#56#0" expanded="true" />
+                <element signature="e#0#393#0" expanded="true" />
+                <element signature="e#0#70#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -163,14 +167,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StageDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="63" column="44" lean-forward="true" selection-start-line="63" selection-start-column="44" selection-end-line="63" selection-end-column="44" />
-              <folding>
-                <element signature="e#0#39#1" expanded="true" />
-                <element signature="e#0#77#1" expanded="true" />
-                <element signature="e#0#43#1" expanded="true" />
-                <element signature="e#0#35#1" expanded="true" />
-              </folding>
+            <state relative-caret-position="840">
+              <caret line="63" column="44" selection-start-line="63" selection-start-column="44" selection-end-line="63" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -278,7 +276,6 @@
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TermDao.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Term.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/BillItem.java" />
-        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporaryDao.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporary.java" />
         <option value="$PROJECT_DIR$/src/controller/salesDetailsFormController.java" />
         <option value="$PROJECT_DIR$/src/stylesheet/main.css" />
@@ -305,13 +302,16 @@
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/PDFMaker.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java" />
         <option value="$PROJECT_DIR$/src/controller/studentController.java" />
+        <option value="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporaryDao.java" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+  <component name="ProjectFrameBounds">
+    <option name="x" value="85" />
+    <option name="y" value="66" />
     <option name="width" value="1920" />
-    <option name="height" value="1200" />
+    <option name="height" value="1134" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectReloadState">
@@ -904,11 +904,12 @@
       <workItem from="1575406244533" duration="3965000" />
       <workItem from="1575583163300" duration="1193000" />
       <workItem from="1575648500568" duration="27982000" />
+      <workItem from="1575886778288" duration="674000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2957174000" />
+    <option name="totallyTimeSpent" value="2957848000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -920,7 +921,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1200" extended-state="0" />
+    <frame x="85" y="66" width="1920" height="1134" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Capture Tool" order="0" />
@@ -928,7 +929,7 @@
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Persistence" order="4" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.20181043" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.20394036" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info id="Image Layers" order="7" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.2820513" side_tool="true" weight="0.17256637" />
@@ -1243,22 +1244,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporaryDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2439">
-          <caret line="539" column="12" selection-start-line="539" selection-start-column="12" selection-end-line="539" selection-end-column="94" />
-          <folding>
-            <element signature="e#1#60#0" expanded="true" />
-            <element signature="e#0#84#1" expanded="true" />
-            <element signature="e#0#27#0" expanded="true" />
-            <element signature="e#1#49#0" expanded="true" />
-            <element signature="e#0#56#0" expanded="true" />
-            <element signature="e#0#393#0" expanded="true" />
-            <element signature="e#0#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporary.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="267">
@@ -1417,23 +1402,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1935">
-          <caret line="148" column="76" selection-start-line="148" selection-start-column="76" selection-end-line="148" selection-end-column="76" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Student.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3615">
-          <caret line="439" selection-start-line="439" selection-end-line="439" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/ShowBillController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
@@ -1444,24 +1412,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/mainController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6510">
-          <caret line="483" column="23" selection-start-line="483" selection-start-column="23" selection-end-line="483" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/event/CompositeEventHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
           <caret line="85" column="25" selection-start-line="85" selection-start-column="25" selection-end-line="85" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/MyProgressIndicator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="59" column="31" selection-start-line="59" selection-start-column="31" selection-end-line="59" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -1478,13 +1432,6 @@
             <element signature="e#3179#3180#0" expanded="true" />
             <element signature="e#3214#3215#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentAccount.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
         </state>
       </provider>
     </entry>
@@ -1561,44 +1508,79 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StageDao.java">
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentAccount.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="63" column="44" lean-forward="true" selection-start-line="63" selection-start-column="44" selection-end-line="63" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#39#1" expanded="true" />
-            <element signature="e#0#77#1" expanded="true" />
-            <element signature="e#0#43#1" expanded="true" />
-            <element signature="e#0#35#1" expanded="true" />
-          </folding>
+        <state relative-caret-position="525">
+          <caret line="55" selection-start-line="55" selection-end-line="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/studentController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="440" column="66" lean-forward="true" selection-start-line="440" selection-start-column="66" selection-end-line="440" selection-end-column="66" />
+        <state relative-caret-position="6030">
+          <caret line="440" column="66" selection-start-line="440" selection-start-column="66" selection-end-line="440" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/MyProgressIndicator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="750">
+          <caret line="59" column="31" selection-start-line="59" selection-start-column="31" selection-end-line="59" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Student.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4860">
+          <caret line="439" selection-start-line="439" selection-end-line="439" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StageDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="63" column="44" selection-start-line="63" selection-start-column="44" selection-end-line="63" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/mainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6510">
+          <caret line="483" column="23" selection-start-line="483" selection-start-column="23" selection-end-line="483" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1935">
+          <caret line="148" column="76" selection-start-line="148" selection-start-column="76" selection-end-line="148" selection-end-column="76" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/StudentDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="131" column="9" lean-forward="true" selection-start-line="131" selection-start-column="9" selection-end-line="131" selection-end-column="9" />
+        <state relative-caret-position="1860">
+          <caret line="131" column="9" selection-start-line="131" selection-start-column="9" selection-end-line="131" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporaryDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="781">
+          <caret line="385" column="24" lean-forward="true" selection-start-line="385" selection-start-column="24" selection-end-line="385" selection-end-column="24" />
           <folding>
-            <element signature="e#0#110#1" expanded="true" />
-            <element signature="e#0#45#0" expanded="true" />
-            <element signature="e#0#125#0" expanded="true" />
-            <element signature="e#0#260#0" expanded="true" />
-            <element signature="e#0#60#0" expanded="true" />
-            <element signature="e#0#68#1" expanded="true" />
-            <element signature="e#0#36#0" expanded="true" />
-            <element signature="e#0#64#0" expanded="true" />
-            <element signature="e#0#42#1" expanded="true" />
-            <element signature="e#0#36#1" expanded="true" />
-            <element signature="e#0#36#1" expanded="true" />
-            <element signature="e#0#50#1" expanded="true" />
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#11042#11043#0" expanded="true" />
+            <element signature="e#11143#11144#0" expanded="true" />
+            <element signature="e#1#60#0" expanded="true" />
+            <element signature="e#0#84#1" expanded="true" />
+            <element signature="e#0#27#0" expanded="true" />
+            <element signature="e#1#49#0" expanded="true" />
+            <element signature="e#0#56#0" expanded="true" />
+            <element signature="e#0#393#0" expanded="true" />
+            <element signature="e#0#70#0" expanded="true" />
           </folding>
         </state>
       </provider>
