@@ -47,18 +47,16 @@ public class AttendanceTemporaryDao {
             int batchSize = 25;
             int entityCount = students.size();
             em = HibernateUtil.getEntityManager();
-            HibernateUtil.begin();
+            em.getTransaction().begin();
             for(int i=0; i< entityCount; i++){
                 Student student = students.get(i);
                 AttendanceTemporary at = setAttendanceData(student, date);
 
-                System.out.println(at.getStudent().toString());
                 // check if we have reached the batch size and merge the records
                 if(i > 0 && i % batchSize == 0) {
                     em.flush();
                     em.clear();
                 }
-
                 em.merge(at);
             }
             HibernateUtil.commit();
@@ -68,13 +66,10 @@ public class AttendanceTemporaryDao {
             termDao.updateCurrentDate(date);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             HibernateUtil.rollBack();
             return  false;
         } finally {
-            if(em == null){
-                em.close();
-            }
+            em.close();
         }
     }
 
@@ -136,7 +131,6 @@ public class AttendanceTemporaryDao {
                     attendanceTemporary.getStudent().setFeedingStatus(Student.FeedingStatus.PERIODIC);
                 }
             }
-
         } else {
             // the student does not pay feeding fee - MARK THE STUDENT PRESENT AND DO NOTHING
             attendanceTemporary.setFeedingFee(0.00);
@@ -153,6 +147,7 @@ public class AttendanceTemporaryDao {
             HibernateUtil.commit();
         } catch (Exception e) {
             HibernateUtil.rollBack();
+        } finally {
             em.close();
             HibernateUtil.close();
         }
@@ -169,17 +164,17 @@ public class AttendanceTemporaryDao {
         if (attendanceTemporary.getStudent().getPayFeeding()) {
 //            attendanceTemporary.setFeedingFee(attendanceTemporary.getStudent().getAccount().getFeedingFeeToPay());
 
-        if(isCheckIn) {
-            // debit the student with the amount supposed to be paid
-            attendanceTemporary.getStudent().debitFeedingAccount(attendanceTemporary.getFeedingFee());
-        } else {
-            attendanceTemporary.getStudent().updateFeedingAccount(attendanceTemporary.getFeedingFee());
-        }
+            if(isCheckIn) {
+                // debit the student with the amount supposed to be paid
+                attendanceTemporary.getStudent().debitFeedingAccount(attendanceTemporary.getFeedingFee());
+            } else {
+                attendanceTemporary.getStudent().updateFeedingAccount(attendanceTemporary.getFeedingFee());
+            }
 
             // check the new balance of the student
             if((attendanceTemporary.getStudent().getAccount().getFeedingFeeCredit() > 0) ||(attendanceTemporary.getStudent().getAccount().getFeedingFeeCredit() < 0)) {
                 attendanceTemporary.getStudent().setFeedingStatus(Student.FeedingStatus.PERIODIC);
-            } else if(attendanceTemporary.getStudent().getAccount().getFeedingFeeCredit() ==0) {
+            } else if(attendanceTemporary.getStudent().getAccount().getFeedingFeeCredit() == 0) {
                 attendanceTemporary.getStudent().setFeedingStatus(Student.FeedingStatus.DAILY);
             }
         }
@@ -203,6 +198,8 @@ public class AttendanceTemporaryDao {
 
         } catch (Exception e) {
             return false;
+        } finally {
+            em.close();
         }
     }
 
@@ -210,7 +207,7 @@ public class AttendanceTemporaryDao {
         try {
             int batchSize = 25;
             int totalRecords = attendanceTemporaryList.size();
-            em= HibernateUtil.getEntityManager();
+            em = HibernateUtil.getEntityManager();
             HibernateUtil.begin();
 
             // iterate the list
@@ -230,10 +227,10 @@ public class AttendanceTemporaryDao {
             return true;
         } catch (Exception e) {
             HibernateUtil.rollBack();
+            return false;
         } finally {
-//            em.clear();
+            em.close();
         }
-        return false;
     }
 
     public Boolean checkOutWithCoupon(List<AttendanceTemporary> attendanceTemporaryList) {
@@ -241,7 +238,7 @@ public class AttendanceTemporaryDao {
             int batchSize = 25;
             int totalRecords = attendanceTemporaryList.size();
             em = HibernateUtil.getEntityManager();
-            HibernateUtil.begin();
+            em.getTransaction().begin();
 
             // iterate the list
             for (int i=0; i < totalRecords; i++) {
@@ -255,13 +252,14 @@ public class AttendanceTemporaryDao {
                 em.merge(at);
                 em.merge(at.getStudent());
             }
-
             HibernateUtil.commit();
             return true;
         } catch (Exception e) {
-
+            return false;
+        } finally {
+            em.close();
         }
-        return false;
+
     }
 
     public Boolean checkOutWithCoupon() {
@@ -343,7 +341,7 @@ public class AttendanceTemporaryDao {
 //            System.out.println("We have closed the connection"+ em);
 //        }
 //    }
-    public  Boolean markAbsent(AttendanceTemporary attendanceTemporary){
+    public  Boolean markAbsent(AttendanceTemporary attendanceTemporary) {
         try {
             attendanceTemporary.setPresent(Boolean.FALSE);
 
@@ -389,38 +387,33 @@ public class AttendanceTemporaryDao {
             HibernateUtil.close();
         }
     }
+
     public List <AttendanceTemporary> getTempAttendance() {
         try {
             em=HibernateUtil.getEntityManager();
-            HibernateUtil.begin();
-            return em.createQuery(" from AttendanceTemporary A order by A.student.firstname asc ").getResultList();
-        } catch (Exception e) {
-            HibernateUtil.close();
-            em.clear();
-            e.printStackTrace();
-        } finally {
-            if (em == null) {
-                HibernateUtil.close();
-                em.clear();
-            }
-        }
-        return null;
-    }
-
-    public List<AttendanceTemporary> getTempAttendance(Stage stage){
-        try {
-            em = HibernateUtil.getEntityManager();
-            HibernateUtil.begin();
-            String hql = "from AttendanceTemporary  A where A.student.id = ?1 order by A.student.firstname asc";
-            Query query = em.createQuery(hql);
-            query.setParameter(1, stage.getId());
-            return query.getResultList();
+            em.getTransaction().begin();
+            List<AttendanceTemporary>results =  em.createQuery(" from AttendanceTemporary A order by A.student.firstname asc ").getResultList();
+            return results;
         } catch (Exception e) {
             return null;
         } finally {
-            if(em == null) {
-                em.close();
-            }
+            em.close();
+        }
+    }
+
+    public List<AttendanceTemporary> getTempAttendance(Stage stage) {
+        try {
+            em = HibernateUtil.getEntityManager();
+           em.getTransaction().begin();
+            String hql = "from AttendanceTemporary  A where A.student.id = ?1 order by A.student.firstname asc";
+            Query query = em.createQuery(hql);
+            query.setParameter(1, stage.getId());
+            List<AttendanceTemporary> results = query.getResultList();
+            return results;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            em.close();
         }
     }
 
@@ -433,7 +426,6 @@ public class AttendanceTemporaryDao {
             query.setFirstResult(1);
             query.setMaxResults(1);
             AttendanceTemporary at =(AttendanceTemporary) query.getSingleResult();
-
             if(at.getDate().equals(LocalDate.now()))
                 return true;
             return false;
@@ -450,7 +442,7 @@ public class AttendanceTemporaryDao {
     public Boolean deleteAllTempAttendance() {
         try {
             em=HibernateUtil.getEntityManager();
-            HibernateUtil.begin();
+            em.getTransaction().begin();
             List<AttendanceTemporary> list =getTempAttendance();
             for(AttendanceTemporary a:list){
                 em.remove(a);
@@ -460,34 +452,38 @@ public class AttendanceTemporaryDao {
         } catch (PersistenceException p) {
             p.printStackTrace();
             return false;
+        } finally {
+            em.close();
         }
     }
 
     public AttendanceTemporary getAttendance(int id) {
-        try{
+        try {
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
-            return (AttendanceTemporary) em.createQuery("from AttendanceTemporary where  +id+ like '"+id+"' ").getSingleResult();
-        }catch (PersistenceException p){
+            AttendanceTemporary at = (AttendanceTemporary) em.createQuery("from AttendanceTemporary where  +id+ like '"+id+"' ").getSingleResult();
+            return at;
+        } catch (PersistenceException p){
             p.printStackTrace();
             return null;
+        } finally {
+           em.close();
         }
     }
 
     public  List<AttendanceTemporary> getStudentAttendance(String name){
         try{
             em=HibernateUtil.getEntityManager();
-            return  em.createQuery("from AttendanceTemporary  at where LOWER(at.student.firstname) like '%"+name.toLowerCase()+"' or lower( at.student.firstname) like '+"+name.toLowerCase()+"%' " +
+            List<AttendanceTemporary> results =  em.createQuery("from AttendanceTemporary  at where LOWER(at.student.firstname) like '%"+name.toLowerCase()+"' or lower( at.student.firstname) like '+"+name.toLowerCase()+"%' " +
                     "or lower(at.student.lastname) like '%"+name.toLowerCase()+"' or lower(at.student.othername) like '%"+name+"' " +
                     "or lower(student.othername) like  '"+name+"' or lower(student.stage.name)  like  '"+name.toLowerCase()+"%'  " +
                     "or lower(student.stage.name)  like '%"+name.toLowerCase()+"' ").getResultList();
+            return results;
         }catch (Exception e) {
             return null;
         } finally {
-           if(em == null) {
-               em.close();
-               HibernateUtil.close();
-           }
+           em.close();
+           HibernateUtil.close();
         }
     }
 
@@ -503,7 +499,6 @@ public class AttendanceTemporaryDao {
             LocalDate date = TermDao.getCurrentDate(true);
 
             if(date == LocalDate.now()) {
-                System.out.println("Checking if can create attendance");
                 return diff;
             } else  {
 //                Use a singleton to return the current date
@@ -512,7 +507,6 @@ public class AttendanceTemporaryDao {
                 if ( (diff == 0) ||((diff > 0) && (diff < 15 && interval.getMonths() < 1 && interval.getYears() < 1)) ) {
                     return diff;
                 } else {
-                    System.out.println("DIFF, MONTH, YEAR INTERVAL: "+ diff+ " "+ interval.getMonths()+ " "+ interval.getYears() );
                     return -1;
                 }
             }
@@ -537,10 +531,8 @@ public class AttendanceTemporaryDao {
             return false;
         }
         if ( (this.checkAttendanceInterval(date) == 1)|| ((this.checkAttendanceInterval(date) > 0) && (this.checkAttendanceInterval(date) < 15))) {
-            System.out.println("We can create an attendance"+ this.checkAttendanceInterval());
             return true;
         } else {
-            System.out.println("We CANNOT CREATE ATTENDANCE"+ this.checkAttendanceInterval());
             return false;
         }
     }
@@ -555,6 +547,8 @@ public class AttendanceTemporaryDao {
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        } finally {
+            em.close();
         }
     }
 //    private Boolean canCreateNewAttendance() {

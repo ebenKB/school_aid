@@ -17,7 +17,8 @@ public class Stage {
     private int classValue;
     private int num_on_roll;
     private Double feeding_fee;
-    private Double feesToPay;
+
+//    private Double feesToPay;
 
     @ManyToMany
     private List<Course> course;
@@ -94,13 +95,17 @@ public class Stage {
         this.feeding_fee = feeding_fee;
     }
 
-    public Double getFeesToPay() {
-        return feesToPay;
-    }
 
-    public void setFeesToPay(Double feesToPay) {
-        this.feesToPay = feesToPay;
-    }
+
+//    public Double getFeesToPay() {
+//        return feesToPay;
+//    }
+//
+//    public void setFeesToPay(Double feesToPay) {
+//        this.feesToPay = feesToPay;
+//    }
+
+
 
     public List<Course> getCourse() {
         return course;

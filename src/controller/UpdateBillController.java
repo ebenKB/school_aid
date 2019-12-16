@@ -1,6 +1,7 @@
 package controller;
 
 import com.hub.schoolAid.*;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -131,21 +132,63 @@ public class UpdateBillController implements Initializable {
                         updatedItems.add(billItem);
                         num_of_changes++;
                     }
+
                     changeCounter.setText(String.valueOf(num_of_changes));
                     showChangeLabel();
                     billItemTableview.refresh();
 
-                    if(updatedBill== null){
+                    if (updatedBill == null) {
                         updatedBill = bill;
                     }
-                    checkBillTotal(updatedBill);
 
+                    checkBillTotal(updatedBill);
                     Notification.getNotificationInstance().notifySuccess("Bill item has been updated", "Success");
                 } catch (NumberFormatException e) {
                     Notification.getNotificationInstance().notifyError("Please enter only numbers", "Wrong input");
                 }
             } else {
                 Notification.getNotificationInstance().notifyError("Invalid input. Please check and try again", "Input error");
+            }
+        });
+
+        btnRemove.setOnAction(event -> {
+            BillItem billItem = billItemTableview.getSelectionModel().getSelectedItem();
+            if(billItem != null) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
+                alert.setTitle("Remove Bill item");
+                alert.setHeaderText("Are you sure you want to delete this bill item?\nIf you want to continue ");
+                Optional<ButtonType>result = alert.showAndWait();
+                if(result.isPresent() && result.get() == ButtonType.YES) {
+                    // remove the selected bill
+                    updatedBill=bill;
+
+                    updatedBill.getBill_items().remove(billItem);
+                    checkBillTotal(updatedBill);
+                    BillDao billDao = new BillDao();
+                    Task task = new Task() {
+                        @Override
+                        protected Object call() throws Exception {
+                            billDao.updateBill(updatedBill, previousTotal);
+                            billItemTableview.getItems().remove(billItem);
+                            billItemTableview.refresh();
+                            return null;
+                        }
+                    };
+                    task.setOnSucceeded(event1 -> {
+                        MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                Notification.getNotificationInstance().notifySuccess("Item has been deleted", "success");
+                            }
+                        });
+                    });
+                    task.setOnRunning(event1 -> MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Saving records"));
+                    task.setOnFailed(event1 -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+                    new Thread(task).start();
+                }
+            } else {
+                Notification.getNotificationInstance().notifyError("Please select an item to remove", "Empty selection");
             }
         });
 

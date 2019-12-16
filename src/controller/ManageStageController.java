@@ -74,7 +74,7 @@ public class ManageStageController {
             public void changed(ObservableValue<? extends Stage> observable, Stage oldValue, Stage newValue) {
                 className.setText(newValue.getName());
                 numOnRoll.setText(String.valueOf(newValue.getNum_on_roll()));
-                feesAmount.setText(newValue.getFeesToPay().toString());
+                feesAmount.setText(newValue.getBill().getTotalBill().toString());
                 feedingFee.setText(newValue.getFeeding_fee().toString());
                 selectedStage = newValue;
             }
@@ -131,7 +131,7 @@ public class ManageStageController {
         if (isValid()) {
             stage.setName(className.getText().trim());
             stage.setFeeding_fee(Double.valueOf(feedingFee.getText().trim()));
-            stage.setFeesToPay(Double.valueOf(feesAmount.getText().trim()));
+//            stage.setFeesToPay(Double.valueOf(feesAmount.getText().trim()));
         }
     }
 

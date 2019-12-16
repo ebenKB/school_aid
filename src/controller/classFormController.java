@@ -122,7 +122,8 @@ public class classFormController implements Initializable{
                 stage.setClassValue(getClassValue(stage.getName()));
                 stage.setNum_on_roll(0);
                 stage.setFeeding_fee(Double.valueOf(feeding_fee.getText().trim()));
-                stage.setFeesToPay(Double.valueOf(fees_to_pay.getText().trim()));
+
+//                stage.setFeesToPay(Double.valueOf(fees_to_pay.getText().trim()));
 
                 //show an alert to add a new stage
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"", ButtonType.YES,ButtonType.CANCEL);

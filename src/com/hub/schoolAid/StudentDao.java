@@ -22,31 +22,49 @@ public class StudentDao {
     //methods to interface with the database
     public Boolean addNewStudent(Student student) {
         try{
+            em=HibernateUtil.getEntityManager();
+            em.getTransaction().begin();
+
             student.setAge(student.calcAge(student.getDob()));
 
-            if(student.getPaySchoolFees()){
-                student.getAccount().setFeeToPay(((student.getStage().getFeesToPay())*-1));
-            }else{
+            if(student.getPaySchoolFees()) {
+                if(student.getStage().getBill() != null) {
+                    student.getAccount().setFeeToPay(((student.getStage().getBill().getTotalBill())));
+                }
+            } else {
                 student.getAccount().setFeeToPay(0.00);
             }
             student.getAccount().setFeedingFeeToPay(student.getStage().getFeeding_fee());
             student.setPayFeeding(true);
             student.setReg_date(LocalDate.now());
             student.setDeleted(false);
-            HibernateUtil.save(Student.class, student);
+            em.persist(student);
+//            HibernateUtil.save(Student.class, student);
+
+            // get the bill of the class that the student belongs to and add the student to the bill
+            Bill bill = student.getStage().getBill();
+            if(bill != null) {
+                // ADD THE STUDENT TO THE BILL
+//              Query query = em.createQuery("insert into bill_students (bills_id, students_student_id) values()");
+                bill.getStudents().add(student);
+                em.merge(bill);
+            } else {
+                System.out.println("Sorry the bill is null");
+            }
+            em.getTransaction().commit();
 
             stageDao = new StageDao();
             stageDao.addStudent(student.getStage());
             return true;
-
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         } finally {
             HibernateUtil.close();
+            em.close();
         }
-
     }
+
     /**
      *
      * @param new_student the student that we want to update
@@ -483,7 +501,7 @@ public class StudentDao {
                     }
 
                     // Disable update for Student fees account when promoting students
-                    student.getAccount().setFeeToPay(newStage.getFeesToPay());
+                    student.getAccount().setFeeToPay(newStage.getBill().getTotalBill());
                 }
                 // commit the records
                 em.getTransaction().commit();
@@ -609,7 +627,7 @@ public class StudentDao {
                 return false;
             em=HibernateUtil.getEntityManager();
             StudentAccount account = em.find(StudentAccount.class, st.getAccount().getId());
-            account.setFeeToPay((st.getStage().getFeesToPay() * -1));
+            account.setFeeToPay((st.getStage().getBill().getTotalBill()));
             // reset the amount paid to 0
             account.setSchFeesPaid(0.0);
             if(this.updateAccount(account))

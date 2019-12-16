@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
 import javafx.util.Callback;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -30,6 +31,8 @@ public class Utils {
         Alert alert  =new Alert(Alert.AlertType.CONFIRMATION,"", ButtonType.YES,ButtonType.NO);
         alert.setHeaderText("Are you sure you want to close the form?");
         alert.setTitle("Confirm");
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.initOwner( ((Node)(event).getSource()).getScene().getWindow());
         Optional<ButtonType>result = alert.showAndWait();
         if(result.isPresent() &&result.get() ==ButtonType.YES){
             ((Node)(event).getSource()).getScene().getWindow().hide();
@@ -312,6 +315,10 @@ public class Utils {
 
     public static void dispose(ActionEvent event) {
         ((Node)(event).getSource()).getScene().getWindow().hide();
+    }
+
+    public static Window getInitOwner(ActionEvent event){
+        return  ((Node)(event).getSource()).getScene().getWindow();
     }
  }
 

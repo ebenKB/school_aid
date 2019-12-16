@@ -418,28 +418,20 @@ public class studentController implements Initializable{
             } catch (Exception e){
                 e.printStackTrace();
                 System.out.println("an error occurred while converting the file"+ e);
+                Notification.getNotificationInstance().notifyError("an error occurred while converting the file", "Ërror");
             }
-//            FileChooser fileChooser=new FileChooser();
-//            javafx.stage.Stage stage = new javafx.stage.Stage();
-//             try {
-//                 path=fileChooser.showOpenDialog(stage).toURI();
-//
-//             }catch (NullPointerException e){
-//                 notification.notifyError("You didn't select any image","Empty selection");
-//             }
-//
-//            if(path==null){
-//                return;
-//            }
-//            image.setImage(new Image(path.toString()));
-
         });
 
         classCombo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Stage>() {
             @Override
             public void changed(ObservableValue<? extends Stage> observable, Stage oldValue, Stage newValue) {
-                if(newValue !=null)
-                    fees.setText(String.valueOf(newValue.getFeesToPay()));
+                if(newValue !=null && newValue.getBill() != null){
+//                    fees.setText(String.valueOf(newValue.getFeesToPay()));
+                    fees.setText(String.valueOf(newValue.getBill().getTotalBill()));
+                } else {
+                    fees.setText("0.00");
+                }
+
             }
         });
 
@@ -449,6 +441,11 @@ public class studentController implements Initializable{
                 FinalizeRecords();
             }
         });
+
+        cancel.setOnAction(e->{
+            Utils.closeEvent(e);
+        });
+
     }
 
     private Boolean prepareStudentRecords() {
@@ -534,10 +531,6 @@ public class studentController implements Initializable{
 
             } else student.setHasAllergy(false);
         } else student.setHasAllergy(false);
-
-        cancel.setOnAction(e->{
-            Utils.closeEvent(e);
-        });
 
         // check if there is an image for the student
         if(studentImage != null) {
@@ -713,7 +706,7 @@ public class studentController implements Initializable{
             stage.show();
 
             //make sure the user confirms the save action
-            save.setOnAction(event->{
+            save.setOnAction(event-> {
                 Alert confirm =new Alert(Alert.AlertType.WARNING,"",ButtonType.CANCEL, ButtonType.YES);
                 confirm.setTitle("Warning");
                 confirm.setHeaderText("We have found some students with the same details.");
@@ -732,12 +725,13 @@ public class studentController implements Initializable{
                 confirmCancel.setTitle("Clear Fields");
                 confirmCancel.setHeaderText("If you cancel, all fields will be cleared.\nClick YES to continue.");
                 Optional<ButtonType> confirm = confirmCancel.showAndWait();
-                if(confirm.isPresent() && confirm.get() ==ButtonType.YES){
+                if(confirm.isPresent() && confirm.get() == ButtonType.YES){
                     stage.close();
                     clearStdField();
                     clearParentField();
                 }
             });
+
             back.setOnAction(event->stage.close());
         }
     }
@@ -755,6 +749,7 @@ public class studentController implements Initializable{
                 return null;
             }
         };
+
         save.setOnRunning(event2 -> {
             MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Saving student...");
         });

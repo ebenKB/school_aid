@@ -7,6 +7,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,6 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 
 import java.net.URL;
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -59,6 +62,15 @@ public class ManageStudentController implements Initializable {
     private Button updateClass;
 
     @FXML
+    private TextField searchBox;
+
+    @FXML
+    private Hyperlink toggleHelp;
+
+    @FXML
+    private Pane helpPane;
+
+    @FXML
     private Button cancel;
 
     private CheckBox checkBox = new CheckBox();
@@ -67,6 +79,8 @@ public class ManageStudentController implements Initializable {
     private ObservableList<Student> students = FXCollections.observableArrayList();
     private ObservableList<Student> selectedStudents = FXCollections.observableArrayList();
     private ObservableList<Stage> stages = FXCollections.observableArrayList();
+    private FilteredList<Student> filteredData = new FilteredList <> (students, e ->true);
+    private SortedList<Student> sortedList = new SortedList<>(filteredData);
     private Boolean hasEnabledFields= false;
 
     public void init() {
@@ -110,11 +124,6 @@ public class ManageStudentController implements Initializable {
         if(students.size() > 0) {
             stdNameCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().toString()));
             stage.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getStage().getName()));
-//        classCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getStudent().getStage().toString()));
-//        conductCol.setCellFactory(TextFieldTableCell.forTableColumn());
-//        conductCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getConduct()));
-//        remarkCol.setCellFactory(TextFieldTableCell.forTableColumn());
-//        remarkCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getHeadTracherRemark()));
             addCheckBoxToTable(checkStudents);
             studentTableView.setItems(students);
         }
@@ -126,22 +135,26 @@ public class ManageStudentController implements Initializable {
             Task task = new Task() {
                 @Override
                 protected Object call() throws Exception {
-                    if(students.size() > 0) { // check if there are selected students to promote
-                        if(students.size() == 1) {
-                            studentDao.promoteStudent(students.get(0));
-                        } else {
-                            studentDao.updateStudentStage(selectedStudents, true);
-                        }
+                if(students.size() > 0) { // check if there are selected students to promote
+                    if(students.size() == 1) {
+                        studentDao.promoteStudent(students.get(0));
+                    } else {
+                        studentDao.updateStudentStage(selectedStudents, true);
                     }
-                    return null;
+                }
+                return null;
                 }
             };
             task.setOnRunning(event1 -> MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Updating student records"));
             task.setOnSucceeded(event1 -> {
                 MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
                 Notification.getNotificationInstance().notifySuccess("Students have been promoted", "Success");
+                clearSelection();
             });
-            task.setOnFailed(event1 -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+            task.setOnFailed(event1 -> {
+                MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+                clearSelection();
+            });
             new Thread(task).start();
         });
 
@@ -158,17 +171,24 @@ public class ManageStudentController implements Initializable {
                 }
             };
             task.setOnRunning(event1 -> MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Updating records"));
-            task.setOnSucceeded(event1 -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
-            task.setOnFailed(event1 -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+            task.setOnSucceeded(event1 -> {
+                MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+                clearSelection();
+            });
+            task.setOnFailed(event1 -> {
+                MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
+                clearSelection();
+            });
             new Thread(task).start();
         });
 
         setNewClass.setOnAction(event -> {
-            optionsPane.setVisible(true);
             if (selectedStudents.size() > 0) {
+                optionsPane.setVisible(true);
+                classListView.setVisible(true);
+
                 // check if the stages are empty
                 if (stages.isEmpty()) {
-                    System.out.println("We are fetching data");
                     StageDao stageDao = new StageDao();
                     stages.addAll(stageDao.getGetAllStage());
                 }
@@ -201,9 +221,16 @@ public class ManageStudentController implements Initializable {
                 Optional<ButtonType> result = alert.showAndWait();
                 if(result.isPresent() && result.get() == ButtonType.YES) {
                     studentDao.updateStudentStage(selectedStudents, classListView.getSelectionModel().getSelectedItem());
+                    Notification.getNotificationInstance().notifySuccess("Stage has been updated", "Success");
+                    classListView.setVisible(false);
+                    clearSelection();
+                } else {
+                    Notification.getNotificationInstance().notifyError("Error while updating class", "error");
                 }
             }
         });
+
+        searchBox.setOnKeyReleased(event -> Utils.searchStudentByName(searchBox,filteredData,sortedList,studentTableView));
 
         cancelUpdate.setOnAction(event -> optionsPane.setVisible(false));
 
@@ -250,12 +277,7 @@ public class ManageStudentController implements Initializable {
             }
         });
 
-//        classListView.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Stage>() {
-//            @Override
-//            public void onChanged(Change<? extends Stage> c) {
-//                System.out.println("We have selected some items");
-//            }
-//        });
+        toggleHelp.setOnAction(event -> helpPane.setVisible(!helpPane.isVisible()));
     }
 
     private void selectAll () {
@@ -316,5 +338,17 @@ public class ManageStudentController implements Initializable {
             }
         };
         column.setCellFactory(cellFactory);
+    }
+
+    private void clearSelection() {
+        Iterator<Student>iterator = selectedStudents.iterator();
+        if(selectedStudents.size() > 0) {
+            do {
+                Student s = iterator.next();
+                s.setSelected(false);
+            } while (iterator.hasNext());
+        }
+        selectedStudents.clear();
+        studentTableView.refresh();
     }
 }
