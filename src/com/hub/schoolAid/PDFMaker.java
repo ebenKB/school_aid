@@ -1063,8 +1063,8 @@ public class PDFMaker {
                     cell.setValign(VerticalAlignment.MIDDLE);
                     cell.setFontSize(12);
 
-                    cell = row4.createCell(smallSize,String.valueOf((student.getStage().getBill().getTotalBill())));
-                    total+=(student.getStage().getBill().getTotalBill());
+                    cell = row4.createCell(smallSize,String.valueOf((student.getAccount().getFeeToPay())));
+                    total+=(student.getAccount().getFeeToPay());
                     cell.setAlign(HorizontalAlignment.RIGHT);
                     cell.setValign(VerticalAlignment.MIDDLE);
                     cell.setFontSize(12);

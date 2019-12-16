@@ -165,17 +165,21 @@ public class TransactionSummaryController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         stdDetailsTabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
             @Override
-            public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+            public void changed(ObservableValue < ? extends Tab > observable, Tab oldValue, Tab newValue) {
                 if(newValue != null && newValue == feedingTab ){
-                    // check if the feeding logs is empty
-                    if(feedingLogs.isEmpty()) {
-                        // get the feeding logs
-                        feedingLogs.addAll(tlDao.getLog(TransactionType.FEEDING_FEE, student.getId()));
-                    }
-                    // check if the table has not been populated
-                    if(feedingLogsTableview.getItems().isEmpty()) {
-                        // populate the table view
-                        populateFeedingLogsTableview();
+                    try {
+                        // check if the feeding logs is empty
+                        if(feedingLogs.isEmpty()) {
+                            // get the feeding logs
+                            feedingLogs.addAll(tlDao.getLog(TransactionType.FEEDING_FEE, student.getId()));
+                        }
+                        // check if the table has not been populated
+                        if(feedingLogsTableview.getItems().isEmpty()) {
+                            // populate the table view
+                            populateFeedingLogsTableview();
+                        }
+                    } catch (Exception e) {
+                        Notification.getNotificationInstance().notifyError("Something went wrong", "error");
                     }
                 } else if(newValue != null && newValue == salesTab) {
                     populateSalesLogsTableview();

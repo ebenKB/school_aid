@@ -52,13 +52,11 @@ public class AttendanceTemporaryDao {
                 Student student = students.get(i);
                 AttendanceTemporary at = setAttendanceData(student, date);
 
-                System.out.println(at.getStudent().toString());
                 // check if we have reached the batch size and merge the records
                 if(i > 0 && i % batchSize == 0) {
                     em.flush();
                     em.clear();
                 }
-
                 em.merge(at);
             }
             HibernateUtil.commit();
@@ -68,13 +66,10 @@ public class AttendanceTemporaryDao {
             termDao.updateCurrentDate(date);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             HibernateUtil.rollBack();
             return  false;
         } finally {
-            if(em == null){
-                em.close();
-            }
+            em.close();
         }
     }
 
@@ -136,7 +131,6 @@ public class AttendanceTemporaryDao {
                     attendanceTemporary.getStudent().setFeedingStatus(Student.FeedingStatus.PERIODIC);
                 }
             }
-
         } else {
             // the student does not pay feeding fee - MARK THE STUDENT PRESENT AND DO NOTHING
             attendanceTemporary.setFeedingFee(0.00);
@@ -153,6 +147,7 @@ public class AttendanceTemporaryDao {
             HibernateUtil.commit();
         } catch (Exception e) {
             HibernateUtil.rollBack();
+        } finally {
             em.close();
             HibernateUtil.close();
         }
@@ -203,6 +198,8 @@ public class AttendanceTemporaryDao {
 
         } catch (Exception e) {
             return false;
+        } finally {
+            em.close();
         }
     }
 
@@ -230,10 +227,10 @@ public class AttendanceTemporaryDao {
             return true;
         } catch (Exception e) {
             HibernateUtil.rollBack();
+            return false;
         } finally {
             em.close();
         }
-        return false;
     }
 
     public Boolean checkOutWithCoupon(List<AttendanceTemporary> attendanceTemporaryList) {
@@ -255,7 +252,6 @@ public class AttendanceTemporaryDao {
                 em.merge(at);
                 em.merge(at.getStudent());
             }
-
             HibernateUtil.commit();
             return true;
         } catch (Exception e) {
@@ -345,7 +341,7 @@ public class AttendanceTemporaryDao {
 //            System.out.println("We have closed the connection"+ em);
 //        }
 //    }
-    public  Boolean markAbsent(AttendanceTemporary attendanceTemporary){
+    public  Boolean markAbsent(AttendanceTemporary attendanceTemporary) {
         try {
             attendanceTemporary.setPresent(Boolean.FALSE);
 
@@ -391,6 +387,7 @@ public class AttendanceTemporaryDao {
             HibernateUtil.close();
         }
     }
+
     public List <AttendanceTemporary> getTempAttendance() {
         try {
             em=HibernateUtil.getEntityManager();
@@ -404,7 +401,7 @@ public class AttendanceTemporaryDao {
         }
     }
 
-    public List<AttendanceTemporary> getTempAttendance(Stage stage){
+    public List<AttendanceTemporary> getTempAttendance(Stage stage) {
         try {
             em = HibernateUtil.getEntityManager();
            em.getTransaction().begin();
@@ -502,7 +499,6 @@ public class AttendanceTemporaryDao {
             LocalDate date = TermDao.getCurrentDate(true);
 
             if(date == LocalDate.now()) {
-                System.out.println("Checking if can create attendance");
                 return diff;
             } else  {
 //                Use a singleton to return the current date
@@ -511,7 +507,6 @@ public class AttendanceTemporaryDao {
                 if ( (diff == 0) ||((diff > 0) && (diff < 15 && interval.getMonths() < 1 && interval.getYears() < 1)) ) {
                     return diff;
                 } else {
-                    System.out.println("DIFF, MONTH, YEAR INTERVAL: "+ diff+ " "+ interval.getMonths()+ " "+ interval.getYears() );
                     return -1;
                 }
             }
@@ -536,10 +531,8 @@ public class AttendanceTemporaryDao {
             return false;
         }
         if ( (this.checkAttendanceInterval(date) == 1)|| ((this.checkAttendanceInterval(date) > 0) && (this.checkAttendanceInterval(date) < 15))) {
-            System.out.println("We can create an attendance"+ this.checkAttendanceInterval());
             return true;
         } else {
-            System.out.println("We CANNOT CREATE ATTENDANCE"+ this.checkAttendanceInterval());
             return false;
         }
     }
