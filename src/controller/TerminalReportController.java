@@ -124,7 +124,8 @@ public class TerminalReportController implements Initializable {
     PDDocument pdDocument;
 
     public void init() {
-        Task init =new Task() {
+        checkStudents.setGraphic(selectAll);  // add a button to select all records
+        Task init = new Task() {
             @Override
             protected Object call() throws Exception {
 
@@ -136,7 +137,7 @@ public class TerminalReportController implements Initializable {
                 terminalReportDao.createTerminalReport();
             }
             populateTable();
-            checkStudents.setGraphic(selectAll);  // add a button to select all records
+
             return null;
             }
         };
@@ -267,14 +268,10 @@ public class TerminalReportController implements Initializable {
         });
 
         generatePDF.setOnAction(e -> {
-
-            System.out.println("we want to do report");
             // check if we are generating reports for all students
             if(selectedReports.isEmpty()) {
-                System.out.print("No selection was made");
                 pdDocument= PDFMaker.getPDFMakerInstance().createReport();
             } else  if(selectedReports.size() > 0) { // check if we are generating reports for only selected students
-                System.out.println("we have selected" + selectedReports.size());
                 pdDocument= PDFMaker.getPDFMakerInstance().createReport(selectedReports);
                 PDFMaker.savePDFToLocation(pdDocument);
             }

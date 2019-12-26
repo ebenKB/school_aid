@@ -5,7 +5,9 @@ import javax.persistence.*;
 @Entity
 public class BillItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "bill_item_sequence", sequenceName = "bill_item_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "bill_item_sequence")
     private Long id;
 
     @OneToOne

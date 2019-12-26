@@ -9,7 +9,8 @@ import javax.persistence.*;
 @Embeddable
 public class Address {
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "address_sequence", sequenceName = "address_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "address_sequence")
     private Long id;
 
     //other attributes

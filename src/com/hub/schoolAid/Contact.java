@@ -3,12 +3,15 @@ package com.hub.schoolAid;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 public class Contact {
     private String phone;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "contact_sequence", sequenceName = "contact_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "contact_sequence")
     private Long id;
 
     public String getPhone() {

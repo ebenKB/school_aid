@@ -7,7 +7,9 @@ import javax.persistence.*;
 @Entity
 public class SaleOrder {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "sales_order_sequence", sequenceName = "sales_order_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "sales_order_sequence")
     private Long id;
 
     @OneToOne

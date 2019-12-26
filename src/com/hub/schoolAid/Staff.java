@@ -11,7 +11,9 @@ import java.util.List;
 @Entity
 public class Staff {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "staff_sequence", sequenceName = "staff_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "staff_sequence")
     private Long id;
 
     //other member variables

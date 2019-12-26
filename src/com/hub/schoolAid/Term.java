@@ -1,9 +1,6 @@
 package com.hub.schoolAid;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
@@ -14,7 +11,9 @@ import java.time.LocalDate;
 @Entity
 public class Term {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "term_sequence", sequenceName = "term_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "term_sequence")
     private Long id;
 
     private String name; // name is the name given to the term e.g first term or second term

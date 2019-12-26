@@ -14,7 +14,9 @@ public class App {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "app_sequence", sequenceName = "app_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "app_sequence")
     private Long id;
 
     //pop up messages give the user some guides on start up

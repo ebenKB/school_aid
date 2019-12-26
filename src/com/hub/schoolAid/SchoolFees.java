@@ -6,7 +6,9 @@ import java.time.LocalDate;
 @Entity
 public class SchoolFees {
     @javax.persistence.Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "school_fees_sequence", sequenceName = "school_fees_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "school_fees_sequence")
     private Long Id;
 
     private Double amount;

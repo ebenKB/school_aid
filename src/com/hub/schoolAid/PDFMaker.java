@@ -59,6 +59,7 @@ public class PDFMaker {
         pdDocument = new PDDocument();
         ObservableList <TerminalReport> reports = FXCollections.observableArrayList();
         assessmentList.addAll(assessmentDao.getAssessment());
+        System.out.println("Trying to create a report"+ assessmentList.size());
         reports.addAll(terminalReportDao.getReport());
         this.designReport(reports);
 
@@ -243,8 +244,6 @@ public class PDFMaker {
     }
 
     public PDDocument generateSchoolFeesReport(ObservableList<Student>students) throws  IOException {
-        System.out.println("We want to generate School fees report...");
-
         if(students.isEmpty())
             return null;
 
@@ -266,13 +265,7 @@ public class PDFMaker {
             //Set alignment and add school header
             String title = "SUMMARY OF SCHOOL FEES REPORT";
             prepPageWidthHeader(pdPageContentStream, margin, yStart, mediaBox, title);
-
-            // show date
-            // set the text
-//            pdPageContentStream.beginText();
-//            pdPageContentStream.newLineAtOffset(startX, startY - 20);
-//            pdPageContentStream.showText("Date: "+ LocalDate.now().toString());
-//            pdPageContentStream.endText();
+            
             createCenterText("Report Generated on : "+ LocalDate.now().toString(), mediaBox, margin, pdPageContentStream, false, 70.0);
 
             // Display the records in a table
@@ -392,7 +385,7 @@ public class PDFMaker {
             amountDue = student.getAccount().getFeeToPay();
         } else if(transactionType == TransactionType.FEEDING_FEE) {
             amountDue = 0.0;
-        }else if(transactionType == TransactionType.SALES) {
+        } else if(transactionType == TransactionType.SALES) {
             amountDue = 0.0;
         }
         Row<PDPage>pdPageRow = baseTable.createRow(30);
@@ -464,7 +457,6 @@ public class PDFMaker {
                 cell.setValign(VerticalAlignment.MIDDLE);
                 accumulator+=log.getAmount();
 
-
                 cell = row.createCell((float) 35, log.getDescription());
                 cell.setAlign(HorizontalAlignment.LEFT);
                 cell.setValign(VerticalAlignment.MIDDLE);
@@ -502,9 +494,9 @@ public class PDFMaker {
 
                     //student details\
                     String name = "Name: " + report.getStudent().toString().toUpperCase() + "                Class: " + report.getStudent().getStage().getName().toUpperCase();
-                    String term = "Term ends: 17th August 2019                Next Term Begins: 3rd September, 2019";
+                    String term = "Term ends: 20th December, 2019                Next Term Begins: 8th January, 2019";
 //                  String attendance = "Second Term Report        Attendance: .........out of.........";
-                    String attendance = "Second Term Report";
+                    String attendance = "First Term Report";
                     float nameGap = ((mediaBox.getWidth()) - (font.getStringWidth(name) / 1000));
 
 
@@ -521,48 +513,8 @@ public class PDFMaker {
                     float startY = mediaBox.getHeight() - (margin + 10) - titleHeight;
                     PDPageContentStream pageContentStream = new PDPageContentStream(pdDocument, pdPage);
 
+                    // add main page header
                     prepPageWidthHeader(pageContentStream, margin, yStart, mediaBox, "");
-
-
-
-//                 pageContentStream.addRect(0,mediaBox.getHeight()-50,mediaBox.getWidth(),(mediaBox.getHeight()-(mediaBox.getHeight()/1000)-50));
-//                 pageContentStream.beginText();
-
-                    //show school name
-//                 pageContentStream.newLineAtOffset(startX,startY);
-//                 pageContentStream.setFont(font,headerSize);
-//                 pageContentStream.setLeading(15f);
-//                 pageContentStream.showText(schName);
-//                 pageContentStream.newLine();
-//                 pageContentStream.endText();
-
-                    //show address
-//                 pageContentStream.beginText();
-//                 pageContentStream.setFont(regText,contentSize);
-//                 titleWidth = font.getStringWidth(address)/1000 * contentSize ;
-//                 titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * contentSize ;
-//
-//                 startX = (mediaBox.getWidth() -titleWidth) /2;
-//                 startY = mediaBox.getHeight() - (margin +30) - titleHeight;
-//
-//                 pageContentStream.newLineAtOffset(startX,startY);
-//                 pageContentStream.showText(address);
-//                 pageContentStream.newLine();
-//                 pageContentStream.endText();
-
-
-                    //show heading
-//                 pageContentStream.beginText();
-//                 pageContentStream.setFont(font,headerSize);
-//                 titleWidth = font.getStringWidth(heading)/1000 * headerSize ;
-//                 titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * headerSize ;
-//
-//                 startX = (mediaBox.getWidth() - titleWidth) /2;
-//                 startY = mediaBox.getHeight() - (margin + 50) - titleHeight;
-//                 pageContentStream.newLineAtOffset(startX,startY);
-//                 pageContentStream.showText(heading);
-//                 pageContentStream.newLine();
-//                 pageContentStream.endText();
 
                     //add student details
                     pageContentStream.beginText();
@@ -606,7 +558,7 @@ public class PDFMaker {
                     //add the conduct
                     pageContentStream.beginText();
                     String conduct = "Calm and Respectful";
-                    startY = mediaBox.getHeight() - (margin + 480) - titleHeight;
+                    startY = mediaBox.getHeight() - (margin + 485) - titleHeight;
                     pageContentStream.newLineAtOffset(startX, startY);
                     pageContentStream.setFont(regText, contentSize);
                     pageContentStream.setLeading(15f);
@@ -748,7 +700,6 @@ public class PDFMaker {
                     }
                     baseTable.draw();
                 //} // end class condition check
-                generateAccountReport(pdDocument,report.getStudent());
             }
         } catch (Exception e) {
 //                e.printStackTrace();
@@ -1053,6 +1004,9 @@ public class PDFMaker {
                     cell.setAlign(HorizontalAlignment.RIGHT);
                     cell.setValign(VerticalAlignment.MIDDLE);
                     cell.setFontSize(12);
+
+                    // add value to total
+                    total+=student.getAccount().getFeeToPay()*-1;
                 }
 
                 if(student.getPaySchoolFees()){
@@ -1063,11 +1017,14 @@ public class PDFMaker {
                     cell.setValign(VerticalAlignment.MIDDLE);
                     cell.setFontSize(12);
 
-                    cell = row4.createCell(smallSize,String.valueOf((student.getAccount().getFeeToPay())));
+                    cell = row4.createCell(smallSize,String.valueOf((student.getStage().getFeesToPay())));
                     total+=(student.getAccount().getFeeToPay());
                     cell.setAlign(HorizontalAlignment.RIGHT);
                     cell.setValign(VerticalAlignment.MIDDLE);
                     cell.setFontSize(12);
+
+                    // add value to total
+                    total+=student.getStage().getFeesToPay();
                 }
 
                 Row < PDPage > row5 = baseTable.createRow(30f);
@@ -1254,7 +1211,7 @@ public class PDFMaker {
      */
     private static  List<Assessment> searchAssessment(Long searchItem,List<Assessment> sortedAssessment) {
         System.out.println("------------------------------------------------------------------");
-        for (Assessment as:sortedAssessment) {
+        for (Assessment as : sortedAssessment) {
             System.out.println(as.getStudent().toString()+" ASS ID "+as.getId()+"STU ID: "+as.getStudent().getId());
         }
         System.out.println("------------------------------------------------------------------");

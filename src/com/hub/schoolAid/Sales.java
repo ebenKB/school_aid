@@ -10,7 +10,9 @@ import java.util.Date;
 @Entity
 public class Sales {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "sales_sequence", sequenceName = "sales_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "sales_sequence")
     @Column(name = "sales_id")
     private Long id;
 

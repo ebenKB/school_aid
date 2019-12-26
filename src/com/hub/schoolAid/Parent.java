@@ -10,7 +10,9 @@ import javax.persistence.*;
 @Embeddable
 public class Parent {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "parent_sequence", sequenceName = "parent_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "parent_sequence")
    // @Column(name = "id")
     private Long Id;
 

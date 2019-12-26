@@ -2,6 +2,7 @@ package com.hub.schoolAid;
 //import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 import com.sun.javafx.tools.packager.Log;
+import org.hibernate.annotations.GenericGenerator;
 import org.slf4j.Logger;
 
 import javax.persistence.*;
@@ -16,9 +17,15 @@ import java.util.Set;
 @Entity(name = "students")
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-//  @GenericGenerator(name="sequence_stu",strategy = "model.Student_Id_Generator")
-//  @GeneratedValue(generator = "sequence_stu")
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_sequence")
+
+
+    @SequenceGenerator(name = "student_sequence", sequenceName = "student_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "student_sequence")
+
+//   @GenericGenerator(name="student_sequence",strategy = "model.Student_Id_Generator")
+//   @GeneratedValue(generator = "student_sequence")
+
     @Column (name = "student_id")
     private Long Id;
 
@@ -116,14 +123,6 @@ public class Student {
 
     public void setParent(Parent parent) {
         this.parent = parent;
-    }
-
-    public Long getUserId() {
-        return Id;
-    }
-
-    public void setUserId(Long userId) {
-        this.Id = userId;
     }
 
     public String getFirstname() {

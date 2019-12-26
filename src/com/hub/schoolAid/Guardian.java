@@ -13,7 +13,9 @@ import java.util.List;
 )
 public class Guardian {
     @javax.persistence.Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "guardian_sequence", sequenceName = "guardian_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "guardian_sequence")
     private Long Id;
 
     @Column

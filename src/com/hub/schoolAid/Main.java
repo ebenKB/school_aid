@@ -51,19 +51,16 @@ public class Main extends Application {
                 AppSettingsController settingsController = new AppSettingsController();
                 if (appSettings != null) {
                     if (!appSettings.getHasInit()) {
-                        System.out.println("The app has not been initialized ...");
                         settingsController.showAppSettingsForm();
                     } else {
                         System.out.println("The app has init");
                         initializer.showLoginForm();
                     }
                 } else {
-                    System.out.println("The app is null");
                     settingsController.showAppSettingsForm();
-//                    appDao.setDefault();
                 }
 //                initializer.showLoginForm();
-            }else {
+            } else {
               Alert alert =new Alert(Alert.AlertType.ERROR,"", ButtonType.OK);
               alert.setTitle("Error");
               alert.setHeaderText("Error Connecting to Database");
@@ -92,8 +89,10 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        Receipt receipt = new Receipt();
-        receipt.generateReceipt();
-        launch(args);
+       try {
+           launch(args);
+       } catch (Exception e) {
+           System.out.println("APPLICATION LEVEL EXCEPTION OCCURRED...");
+       }
     }
 }

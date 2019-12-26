@@ -6,7 +6,9 @@ import java.time.LocalDate;
 @Entity
 public class AttendanceTemporary{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "attendance_sequence", sequenceName = "attendance_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "attendance_sequence")
     private Long id;
 
  //   other attributes

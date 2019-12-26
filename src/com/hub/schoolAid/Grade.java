@@ -1,9 +1,6 @@
 package com.hub.schoolAid;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Grade {
@@ -17,7 +14,9 @@ public class Grade {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "grade_sequence", sequenceName = "grade_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "grade_sequence")
     private Long id;
     private String name;
     private String remark;

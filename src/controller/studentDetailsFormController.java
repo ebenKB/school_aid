@@ -237,6 +237,7 @@ public class studentDetailsFormController implements Initializable{
                alert.setHeaderText("You are about to change the feeding fee for this student.\n" +
                        "If you change the feeding fee, the student will be charged with the new amount.\n" +
                        "Are you sure you want to continue ?");
+               alert.initOwner(Utils.getInitOwner(e));
                Optional<ButtonType>result =alert.showAndWait();
                if(result.isPresent() &&  result.get()==ButtonType.YES)
                    feedingAcc.setEditable(true);
@@ -710,21 +711,21 @@ public class studentDetailsFormController implements Initializable{
                                    if(input.get().equals(LoginFormController.user.getPassword())){
                                        feedingToggle.setSelected(Boolean.FALSE);
                                        student.setPayFeeding(false);
-//                                           Notification.getNotificationInstance().notifySuccess("");
-                                        updateFeedingFee();
-                                   }else{
+                                       updateFeedingFee();
+                                   } else {
                                        Notification.getNotificationInstance().notifyError("Wrong User password","Authentication Failed");
                                    }
                                }
                            }
-
                        } else {
                            if(!student.getPayFeeding()){
                                Alert alert = new Alert(Alert.AlertType.WARNING,"",ButtonType.NO,ButtonType.YES);
                                alert.setTitle("Pay Feeding Fee");
                                alert.setHeaderText("Turn on Feeding Fee");
-                               alert.setContentText("This student does not pay feeding. \nIf you turn this option on, the student will start paying feeding fee.\n" +
+                               alert.setContentText("This student does not pay feeding. " +
+                                       "\nIf you turn this option on, the student will start paying feeding fee.\n" +
                                        "Are you sure you want to Turn this option ON?");
+                               alert.initOwner(Utils.getInitOwnerFromMouseEvent(event));
                                Optional<ButtonType>result= alert.showAndWait();
                                if(result.isPresent() && result.get() ==ButtonType.YES){
                                    feedingToggle.setSelected(Boolean.TRUE);
@@ -757,7 +758,6 @@ public class studentDetailsFormController implements Initializable{
         });
 
         save.setOnAction(event -> {
-            System.out.println("we want to save");
             Task newRecs  =  new Task() {
                 @Override
                 protected Object call() {
@@ -846,6 +846,7 @@ public class studentDetailsFormController implements Initializable{
             alert.setTitle("Change Image");
             alert.setHeaderText("Your are about to change the image for"+" "+student.getFirstname()+"\nAre you sure you want to continue ?");
             Optional<ButtonType>result = alert.showAndWait();
+            alert.initOwner(Utils.getInitOwner(e));
             if(result.isPresent() && result.get() == ButtonType.YES){
                 URI path = ImageHandler.getImagePath();
                 if(path != null) {

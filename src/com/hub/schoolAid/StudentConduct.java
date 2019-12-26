@@ -1,14 +1,13 @@
 package com.hub.schoolAid;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class StudentConduct {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "student_conduct_sequence", sequenceName = "student_conduct_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "student_conduct_sequence")
     private Long id;
 
     private String conduct;

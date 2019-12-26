@@ -5,7 +5,9 @@ import javax.persistence.*;
 @Entity(name = "StudentAccount")
 public class StudentAccount {
     @javax.persistence.Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "student_account_sequence", sequenceName = "student_account_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "student_account_sequence")
     @Column(name = "account_id")
     private Long Id;
     private double feeToPay = 0.0; // school fee credit

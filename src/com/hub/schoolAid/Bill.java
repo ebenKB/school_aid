@@ -13,7 +13,9 @@ import java.util.List;
 @Entity
 public class Bill {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "bill_sequence", sequenceName = "bill_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "bill_sequence")
     private Long id;
 
     public Bill() {

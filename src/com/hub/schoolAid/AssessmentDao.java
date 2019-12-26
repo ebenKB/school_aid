@@ -126,12 +126,14 @@ public class AssessmentDao {
             em = HibernateUtil.getEntityManager();
             HibernateUtil.begin();
             Query q=em.createQuery("from Assessment A order by A.id asc ");
-            return q.getResultList();
+            List<Assessment> assessments = q.getResultList();
+            System.out.println("WE GOT ASSESSEMENTS"+ assessments.size());
+            return assessments;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
-        }finally {
-            em.close();
+        } finally {
+//            em.close();
         }
     }
 
@@ -142,13 +144,17 @@ public class AssessmentDao {
             HibernateUtil.begin();
             Query q;
             for (Student st : students) {
-                q = em.createQuery("from Assessment  A where A.student.id=?");
-                q.setParameter(0, st.getId());
-                assessments.add((Assessment) q.getSingleResult());
+                q = em.createQuery("from Assessment  A where A.student.id=?1");
+                q.setParameter(1, st.getId());
+                List resultList = q.getResultList();
+                Iterator iterator = resultList.iterator();
+                do {
+                    assessments.add((Assessment)iterator.next());
+                } while (iterator.hasNext());
             }
 
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         for(Assessment as: assessments) {
             System.out.print("Assessment to return "+ as.toString());

@@ -8,7 +8,9 @@ import java.util.List;
 //@Embeddable
 public class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "item_sequence", sequenceName = "item_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "item_sequence")
     private Long id;
 
 //    private Double cost;

@@ -9,7 +9,9 @@ import java.util.List;
 @Entity(name="Class")
 public class Stage {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "staff_sequence", sequenceName = "staff_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "staff_sequence")
     private Long id;
 
     //other fields variables
@@ -18,7 +20,7 @@ public class Stage {
     private int num_on_roll;
     private Double feeding_fee;
 
-//    private Double feesToPay;
+    private Double feesToPay;  // REMOVE - DELETE
 
     @ManyToMany
     private List<Course> course;
@@ -97,13 +99,15 @@ public class Stage {
 
 
 
-//    public Double getFeesToPay() {
-//        return feesToPay;
-//    }
-//
-//    public void setFeesToPay(Double feesToPay) {
-//        this.feesToPay = feesToPay;
-//    }
+    // DELETE
+    public Double getFeesToPay() {
+        return feesToPay;
+    }
+
+    // DELETE
+    public void setFeesToPay(Double feesToPay) {
+        this.feesToPay = feesToPay;
+    }
 
 
 

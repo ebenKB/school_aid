@@ -6,7 +6,10 @@ import javax.persistence.*;
 
 @Entity
 public class StudentDetails {
+
     @Id
+    @SequenceGenerator(name = "student_details_sequence", sequenceName = "student_details_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "student_details_sequence")
     private Long id;
 
     @OneToOne(cascade=CascadeType.ALL)

@@ -356,6 +356,7 @@ public class salesDetailsFormController implements Initializable{
                                 Alert alert =new Alert(Alert.AlertType.INFORMATION,"",ButtonType.OK);
                                 alert.setContentText("Indicate whether the student is paying now or later.");
                                 alert.setHeaderText("Payment option ?");
+                                alert.initOwner(Utils.getInitOwner(event));
                                 alert.show();
                             } else {
                                 //Creates an attendance temporary and assign it to st
@@ -379,6 +380,7 @@ public class salesDetailsFormController implements Initializable{
                                     alert.setTitle("Payment Info");
                                     alert.setHeaderText("Student's payment is"+at.getStudent().getFeedingStatus());
                                     alert.setContentText("If you continue, the student's feeding status will change\n and the student's account will be debited.");
+                                    alert.initOwner(Utils.getInitOwner(event));
                                     Optional<ButtonType>result = alert.showAndWait();
                                     if(result.isPresent() && result.get() == ButtonType.OK){
                                         confirmAttendance();
@@ -391,6 +393,7 @@ public class salesDetailsFormController implements Initializable{
                                     alert.setTitle("Payment");
                                     alert.setHeaderText("PAYMENT IN EXCESS");
                                     alert.setContentText("The student is paying more than they should pay.\n Are you sure you want to continue?");
+                                    alert.initOwner(Utils.getInitOwner(event));
                                     Optional<ButtonType>result = alert.showAndWait();
                                     if(result.isPresent() && result.get() ==ButtonType.YES){
                                         confirmAttendance();
@@ -411,6 +414,7 @@ public class salesDetailsFormController implements Initializable{
                                         alert.setHeaderText("NO BALANCE");
                                         alert.setContentText("This student does not have any balance in their Account." +
                                                 "\nIf you continue, the student will owe"+" "+(at.getStudent().getAccount().getFeedingFeeCredit()-at.getFeedingFee())+"\nDo you still want to mark the student present?");
+                                        alert.initOwner(Utils.getInitOwner(event));
                                         Optional<ButtonType>result = alert.showAndWait();
                                         if(result.isPresent() && result.get() ==ButtonType.NO)
                                             return;
@@ -421,6 +425,7 @@ public class salesDetailsFormController implements Initializable{
                                         alert.setHeaderText("Confirm Receipt of Payment");
                                         alert.setContentText("This student pays "+st.getFeedingStatus()+"\nAre you sure he is paying "+at.getFeedingFee()+" for today?\n" +
                                                 "If you continue the amount will be added to today's feeding fee\nDo you want to continue?");
+                                        alert.initOwner(Utils.getInitOwner(event));
                                         Optional<ButtonType>result =alert.showAndWait();
                                         if(result.isPresent() && result.get()==ButtonType.YES)
                                             confirmAttendance();
@@ -434,6 +439,7 @@ public class salesDetailsFormController implements Initializable{
                                     alert.setContentText("Are you sure the student is paying"+" "+at.getFeedingFee()+" "+"cedis today?\n" +
                                             "If you continue the money will be added to the feeding fee for today.\nAre you sure you have received the money?");
 
+                                    alert.initOwner(Utils.getInitOwner(event));
                                     Optional<ButtonType>result =alert.showAndWait();
                                     if(result.isPresent() && result.get() == ButtonType.YES){
                                         confirmAttendance();
@@ -535,7 +541,7 @@ public class salesDetailsFormController implements Initializable{
     }
 
     private void showAlertErrorAlert(String hd, String msg) {
-        Alert alert =new Alert(Alert.AlertType.ERROR,"",ButtonType.OK);
+        Alert alert = new Alert(Alert.AlertType.ERROR,"",ButtonType.OK);
         alert.setTitle("Error");
         alert.setHeaderText(hd);
         alert.setContentText(msg);

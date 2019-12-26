@@ -20,7 +20,9 @@ public class TransactionLogger {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "transaction_logger_sequence", sequenceName = "transaction_logger_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "transaction_logger_sequence")
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Double amount;
     private LocalDate date;

@@ -75,9 +75,6 @@ public class EditTerminalReportController implements Initializable{
             reportDao.updateTerminalReport(this.report);
             terminalReportController.updateReportTable(report);
         }
-//        else{
-//            infoLabel.setText("Please complete all fields");
-//        }
     }
 
     private void resetError(){

@@ -6,7 +6,10 @@ import java.util.List;
 @Entity
 public class Course {
     @javax.persistence.Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+
+    @SequenceGenerator(name = "course_sequence", sequenceName = "course_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "course_sequence")
     @Column(name = "subject_id")
     private Long Id;
 

@@ -1,14 +1,13 @@
 package com.hub.schoolAid;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Remark {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "remark_sequence", sequenceName = "remark_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "remark_sequence")
     private Long id;
 
     private String remark;

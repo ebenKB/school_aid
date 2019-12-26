@@ -1,9 +1,6 @@
 package com.hub.schoolAid;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -13,7 +10,9 @@ import java.io.Serializable;
 @Entity
 public class User implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "user_sequence")
     private Long id;
 
     //other field variables

@@ -1,4 +1,4 @@
-//package model;
+package com.hub.schoolAid;
 //
 //import com.google.gson.JsonObject;
 //import com.google.gson.JsonParser;
@@ -20,6 +20,54 @@
 ///**
 // * Created by HUBKB.S on 11/18/2017.
 // */
+
+import org.hibernate.HibernateException;
+import org.hibernate.MappingException;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
+import org.hibernate.id.enhanced.SequenceStyleGenerator;
+import org.hibernate.jpa.internal.util.ConfigurationHelper;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.type.LongType;
+import org.hibernate.type.Type;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Properties;
+
+public class Student_Id_Generator extends SequenceStyleGenerator {
+    public static final String VALUE_PREFIX_PARAMETER = "valuePrefix";
+    public static final String VALUE_PREFIX_DEFAULT = "";
+    LocalDate date = LocalDate.now();
+    char[] year = String.valueOf(date.getYear()).toCharArray();
+    private String valuePrefix=String.valueOf(date.getMonthValue())+year[year.length-1]+year[year.length-2];
+
+    public static final String NUMBER_FORMAT_PARAMETER = "numberFormat";
+    public static final String NUMBER_FORMAT_DEFAULT = "%d";
+    private String numberFormat;
+
+    @Override
+    public Serializable generate(SharedSessionContractImplementor session,
+                                 Object object) throws HibernateException {
+        return valuePrefix + String.format(numberFormat, super.generate(session, object));
+    }
+//
+//    @Override
+//    public void configure(Type type, Properties params, ServiceRegistry serviceRegistry) throws MappingException {
+//        super.configure(type, params, serviceRegistry);
+//    }
+
+//
+//        @Override
+//    public void configure(Type type, Properties params,
+//                          ServiceRegistry serviceRegistry) throws MappingException {
+//        super.configure(LongType.INSTANCE, params, serviceRegistry);
+//        valuePrefix = ConfigurationHelper.getString(VALUE_PREFIX_PARAMETER,
+//                params, VALUE_PREFIX_DEFAULT);
+//        numberFormat = ConfigurationHelper.getString(NUMBER_FORMAT_PARAMETER,
+//                params, NUMBER_FORMAT_DEFAULT);
+//    }
+
+}
 //public class Student_Id_Generator {
 //    @Override
 //    public Serializable generate(SessionImplementor sessionImplementor, Object o) throws HibernateException {

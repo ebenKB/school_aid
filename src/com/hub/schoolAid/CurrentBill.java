@@ -6,7 +6,9 @@ import java.util.List;
 @Entity
 public class CurrentBill {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "current_bill_sequence", sequenceName = "current_bill_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "current_bill_sequence")
     private Long id;
 
     @OneToOne

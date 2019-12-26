@@ -397,7 +397,10 @@ public class AttendanceTemporaryDao {
         } catch (Exception e) {
             return null;
         } finally {
-            em.close();
+            if(em == null)
+            {
+                em.close();
+            }
         }
     }
 

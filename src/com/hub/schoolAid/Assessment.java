@@ -14,7 +14,9 @@ public class Assessment {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "assessment_sequence", sequenceName = "assessment_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "assessment_sequence")
     private Long id;
     private Double classScore;
     private Double examScore;

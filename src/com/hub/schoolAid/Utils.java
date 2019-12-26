@@ -11,11 +11,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import javafx.util.Callback;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -290,14 +292,14 @@ public class Utils {
         if(date == null)
             return "";
 
-        String newDate =null;
+        String newDate = null;
 
         int day = date.getDayOfMonth();
         String month = date.getMonth().toString();
         String dayName = date.getDayOfWeek().toString();
         int year = date.getYear();
         if(!isShort) {
-            newDate = dayName+", "+month+ " "+ day+ ", "+ year;
+            newDate = dayName +", " + month+ " " + day+ ", " + year;
         } else {
             char [] mChars = month.toCharArray();
             char [] dChars = dayName.toCharArray();
@@ -318,6 +320,10 @@ public class Utils {
     }
 
     public static Window getInitOwner(ActionEvent event){
+        return  ((Node)(event).getSource()).getScene().getWindow();
+    }
+
+    public static Window getInitOwnerFromMouseEvent(MouseEvent event){
         return  ((Node)(event).getSource()).getScene().getWindow();
     }
  }

@@ -85,9 +85,13 @@ public class TerminalReportDao {
         try {
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
-            return em.createQuery("from TerminalReport ").getResultList();
-        }catch (Exception e){
+            List<TerminalReport> reports  = em.createQuery("from TerminalReport ").getResultList();
+            return reports;
+        } catch (Exception e){
+            e.printStackTrace();
             return  null;
+        } finally {
+//             em.close();
         }
     }
 
@@ -107,10 +111,9 @@ public class TerminalReportDao {
     public Boolean updateTerminalReport(TerminalReport report)  {
         try{
             em=HibernateUtil.getEntityManager();
-            HibernateUtil.begin();
+            em.getTransaction().begin();
             TerminalReport newReport = em.find(TerminalReport.class,report.getId());
             if(newReport != null){
-//                newReport.setAttendance(report.getAttendance());
                 newReport.setConduct(report.getConduct());
                 newReport.setHeadTracherRemark(report.getHeadTracherRemark());
                 newReport.setPromotedTo(report.getPromotedTo());

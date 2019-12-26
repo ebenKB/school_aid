@@ -12,7 +12,9 @@ public class Receipt {
         this.receiptNumber = this.generateReceipt();
     }
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "receipt_sequence", sequenceName = "receipt_sequence", allocationSize = 100)
+    @GeneratedValue(generator = "receipt_sequence")
     private Long id;
 
     private String receiptNumber;
