@@ -46,6 +46,7 @@ public class Student {
     private LocalDate dob;
     private String previousSchool;
     private boolean isActive; // indicates whether the student is still actively enrolling in the school
+    private Double schoolFeesBalance;
 
     // constructors
     public Student(){
