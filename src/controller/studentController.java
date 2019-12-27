@@ -425,11 +425,28 @@ public class studentController implements Initializable{
         classCombo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Stage>() {
             @Override
             public void changed(ObservableValue<? extends Stage> observable, Stage oldValue, Stage newValue) {
-                if(newValue !=null && newValue.getBill() != null){
+                if(newValue != null && newValue.getBill() != null){
 //                    fees.setText(String.valueOf(newValue.getFeesToPay()));
                     fees.setText(String.valueOf(newValue.getBill().getTotalBill()));
                 } else {
-                    fees.setText("0.00");
+                    // inform the user that the selected class does not have a bill
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "", ButtonType.YES, ButtonType.NO);
+                    alert.setHeaderText("No billing records found");
+                    alert.setContentText("The class you have selected does not have any billing records. \nIf you continue the student will be created without any bill. " +
+                            "\n You can create a bill for the selected class and return to this form to register the student." +
+                            "\nDo you want to register the student anyway?");
+                    alert.initOwner(classCombo.getScene().getWindow());
+                    alert.getDialogPane().setStyle("-fx-font-size: 14px");
+                    Optional<ButtonType>response =  alert.showAndWait();
+                    if(response.isPresent() && response.get() == ButtonType.YES){
+                        fees.setText("0.00");
+                    } else {
+                        classCombo.getScene().getWindow().hide();
+
+                        // show the form to create a new bill
+                        ShowBillController sbc = new ShowBillController();
+                        sbc.showCreateBillForm();
+                    }
                 }
 
             }
@@ -453,15 +470,6 @@ public class studentController implements Initializable{
         student.setFirstname(fname.getText().trim().toString().toUpperCase());
         student.setLastname(surname.getText().trim().toUpperCase());
         student.setOthername(oname.getText().trim().toUpperCase());
-
-//        details = new StudentDetails();
-//      details.setStudent(student);
-//        try{
-//            ImageHandler imageHandler =new ImageHandler();
-//            imageHandler.setStudentImage(details,path);
-//        }catch (Exception e){
-//            return false;
-//        }
 
         if(dob != null){
             student.setDob(dob.getValue());

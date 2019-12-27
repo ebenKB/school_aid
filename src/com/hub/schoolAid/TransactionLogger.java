@@ -25,6 +25,7 @@ public class TransactionLogger {
 //    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Double amount;
+    private Double bal_before_payment;
     private LocalDate date;
     private String Description;
     private String paidBy;
@@ -113,10 +114,6 @@ public class TransactionLogger {
         this.status = status;
     }
 
-    //    public Long getStudent_id() {
-//        return Student_id;
-//    }
-
     public Long getTransactionId() {
         return TransactionId;
     }
@@ -125,9 +122,13 @@ public class TransactionLogger {
         TransactionId = transactionId;
     }
 
-//    public void setStudent_id(Long student_id) {
-//        Student_id = student_id;
-//    }
+    public Double getBal_before_payment() {
+        return bal_before_payment;
+    }
+
+    public void setBal_before_payment(Double bal_before_payment) {
+        this.bal_before_payment = bal_before_payment;
+    }
 
     @Override
     public String toString() {

@@ -479,19 +479,20 @@ public class FeedingFormController implements Initializable {
 
     private void payFeedingFee(AttendanceTemporary at){
         Student st = at.getStudent();
+        Double bal_before_payment = st.getAccount().getFeedingFeeCredit();
         if(st.getPayFeeding()) {
             Optional<Pair<String, String>> result = salesDetailsFormController.showCustomTextInputDiag(st, "Pay Feeding Fees");
             result.ifPresent(pair -> {
                 Double amount = Double.valueOf(pair.getKey());
                 // take confirmation before adding the fees to the student account
-                Optional<ButtonType>confirm = Utils.showConfirmation("Confirm payment of feeding fees", "Payment for "+st.toString(), "Are you sure you want to confirm payment of feeding fees?");
+                Optional<ButtonType>confirm = Utils.showConfirmation("Confirm payment of feeding fees", "Payment for " + st.toString(), "Are you sure you want to confirm payment of feeding fees?");
                 studentDao = new StudentDao();
                 if(confirm.isPresent() && confirm.get() == ButtonType.YES) {
                     if(studentDao.payFeedingFee(amount, st)) {
                         studentTableView.refresh();
-                        Notification.getNotificationInstance().notifySuccess("Payment added for "+st.toString(), "Fees paid");
+                        Notification.getNotificationInstance().notifySuccess("Payment added for " + st.toString(), "Fees paid");
                         // log the transaction
-                        Utils.logPayment(st, "Feeding Fees", pair.getValue(), amount, TransactionType.FEEDING_FEE, at.getId());
+                        Utils.logPayment(st, "Feeding Fees", pair.getValue(), bal_before_payment, amount, TransactionType.FEEDING_FEE, at.getId());
                     }
                 } else Notification.getNotificationInstance().notifyError("Fees payment cancelled", "Fees not added");
             });

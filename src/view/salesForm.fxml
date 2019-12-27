@@ -77,15 +77,15 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <VBox fx:id="feesVBox" layoutX="73.0" layoutY="119.0" prefHeight="44.0" prefWidth="189.0" spacing="10.0" visible="false">
+      <VBox fx:id="feesVBox" layoutX="73.0" layoutY="119.0" prefHeight="74.0" prefWidth="282.0" spacing="10.0" visible="false">
          <children>
-            <RadioButton fx:id="allStudents" mnemonicParsing="false" selected="true" text="All students">
+            <RadioButton fx:id="allStudents" mnemonicParsing="false" prefHeight="18.0" prefWidth="284.0" selected="true" text="All students">
                <toggleGroup>
                   <ToggleGroup fx:id="fees" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="payFees" mnemonicParsing="false" text="Those Who Pay Fees" toggleGroup="$fees" />
-            <RadioButton fx:id="noFees" mnemonicParsing="false" text="Those Who Do Not Pay Fees" toggleGroup="$fees" />
+            <RadioButton fx:id="payFees" mnemonicParsing="false" prefHeight="18.0" prefWidth="283.0" text="Those Who Pay Fees" toggleGroup="$fees" />
+            <RadioButton fx:id="noFees" mnemonicParsing="false" prefHeight="18.0" prefWidth="282.0" text="Those Who Do Not Pay Fees" toggleGroup="$fees" />
          </children>
       </VBox>
    </children>

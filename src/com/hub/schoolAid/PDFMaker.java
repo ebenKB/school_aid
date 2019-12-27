@@ -999,7 +999,7 @@ public class PDFMaker {
                     cell.setValign(VerticalAlignment.MIDDLE);
                     cell.setFontSize(12);
 
-                    cell = row3.createCell(smallSize,String.valueOf((student.getAccount().getFeeToPay())*-1));
+                    cell = row3.createCell(smallSize,String.valueOf((student.getAccount().getFeeToPay()) * -1));
                     total+=(student.getAccount().getFeeToPay() * -1);
                     cell.setAlign(HorizontalAlignment.RIGHT);
                     cell.setValign(VerticalAlignment.MIDDLE);
@@ -1017,14 +1017,14 @@ public class PDFMaker {
                     cell.setValign(VerticalAlignment.MIDDLE);
                     cell.setFontSize(12);
 
-                    cell = row4.createCell(smallSize,String.valueOf((student.getStage().getFeesToPay())));
+                    cell = row4.createCell(smallSize,String.valueOf((student.getStage().getBill().getTotalBill())));
                     total+=(student.getAccount().getFeeToPay());
                     cell.setAlign(HorizontalAlignment.RIGHT);
                     cell.setValign(VerticalAlignment.MIDDLE);
                     cell.setFontSize(12);
 
                     // add value to total
-                    total+=student.getStage().getFeesToPay();
+                    total+=student.getStage().getBill().getTotalBill();
                 }
 
                 Row < PDPage > row5 = baseTable.createRow(30f);
@@ -1234,6 +1234,7 @@ public class PDFMaker {
         for(Assessment a:found){
             System.out.println(a.getStudent().toString());
         }
+
         System.out.println("*******************************************************************END RETURN");
 
         return found;

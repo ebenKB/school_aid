@@ -845,8 +845,8 @@ public class studentDetailsFormController implements Initializable{
             Alert alert =new Alert(Alert.AlertType.CONFIRMATION,"",ButtonType.YES,ButtonType.NO);
             alert.setTitle("Change Image");
             alert.setHeaderText("Your are about to change the image for"+" "+student.getFirstname()+"\nAre you sure you want to continue ?");
-            Optional<ButtonType>result = alert.showAndWait();
             alert.initOwner(Utils.getInitOwner(e));
+            Optional<ButtonType>result = alert.showAndWait();
             if(result.isPresent() && result.get() == ButtonType.YES){
                 URI path = ImageHandler.getImagePath();
                 if(path != null) {
@@ -1040,7 +1040,6 @@ public class studentDetailsFormController implements Initializable{
 
         if(student.getAccount().getFeedingFeeCredit() < 0)
             bal+=(student.getAccount().getFeedingFeeCredit());
-//             bal+=(student.getAccount().getFeedingFeeCredit() * -1);
 
         bal+= salesBal;  // sum up the balance
         balance.setText(String.valueOf(bal));

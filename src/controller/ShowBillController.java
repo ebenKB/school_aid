@@ -131,7 +131,7 @@ public class ShowBillController implements Initializable {
     }
 
     // show the form to create a new bill
-    private void showCreateBillForm() {
+    public void showCreateBillForm() {
         Parent root;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();

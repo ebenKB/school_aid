@@ -936,21 +936,25 @@ public class salesDetailsFormController implements Initializable{
     }
 
     private void makeAttendancePayment(AttendanceTemporary attendanceTemporary) {
+        Student student = attendanceTemporary.getStudent();
+        Double bal_before_payment=student.getAccount().getFeedingFeeCredit();
+
         if(attendanceTemporary != null) {
             Optional <Pair<String,String>> result = showCustomTextInputDiag(attendanceTemporary.getStudent(), "Pay Feeding Fee");
 
-            result.ifPresent(pair ->{
+            result.ifPresent(pair -> {
                 Double amount = Double.valueOf(pair.getKey());
-                attendanceTemporary.getStudent().addNewFeedingFeeCredit(amount);
-                studentDao.updateAccount(attendanceTemporary.getStudent().getAccount());
+                student.addNewFeedingFeeCredit(amount);
+                studentDao.updateAccount(student.getAccount());
 
-                Utils.logPayment(attendanceTemporary.getStudent(),"Feeding Fee Payment for"+" "+
-                        attendanceTemporary.getStudent().toString(),pair.getValue(),amount, TransactionType.FEEDING_FEE, attendanceTemporary.getId());
+                Utils.logPayment(attendanceTemporary.getStudent(),"Feeding Fee Payment for" + " " +
+                        attendanceTemporary.getStudent().toString(),pair.getValue(),bal_before_payment, amount, TransactionType.FEEDING_FEE, attendanceTemporary.getId());
             });
         }
     }
 
     public void paySchoolFees(Student st) {
+        Double bal_before_payment = st.getAccount().getSchFeesPaid();
         // check if the student pays school fees
         if(st.getPaySchoolFees()) {
             Optional<Pair <String, String>> result = showCustomTextInputDiag(st, "Pay School Fees");
@@ -962,7 +966,7 @@ public class salesDetailsFormController implements Initializable{
                     if(studentDao.paySchoolFee(st, amount)) {
                         Notification.getNotificationInstance().notifySuccess("Payment added for "+st.toString(), "Fees paid");
                         // log the transaction
-                        Utils.logPayment(st, "School Fees", pair.getValue(), amount, TransactionType.SCHOOL_FEES, st.getId());
+                        Utils.logPayment(st, "School Fees", pair.getValue(), bal_before_payment, amount, TransactionType.SCHOOL_FEES, st.getId());
                     }
                 } else Notification.getNotificationInstance().notifyError("Fees payment cancelled", "Fees not added");
             });
@@ -991,8 +995,8 @@ public class salesDetailsFormController implements Initializable{
             studentTableView.setItems(sortedList);
         } else if(salesRadio.isSelected()) {
             name.textProperty().addListener(((observable, oldValue, newValue) -> {
-                filteredSales.setPredicate( (Predicate < ? super Sales >) sale -> {
-                    if( newValue == null || newValue.isEmpty() ) {
+                filteredSales.setPredicate((Predicate < ? super Sales >) sale -> {
+                    if(newValue == null || newValue.isEmpty()) {
                         return  true;
                     }
 
@@ -1017,7 +1021,7 @@ public class salesDetailsFormController implements Initializable{
     }
 
     private void makePayment() { // pay for an item that has been sold to a student
-        try{
+        try {
             TextInputDialog input = new TextInputDialog();
             Sales sales = salesTableView.getSelectionModel().getSelectedItem();
             student= sales.getStudent();
@@ -1030,20 +1034,10 @@ public class salesDetailsFormController implements Initializable{
             input.setTitle("New Payment");
             input.setContentText("How much is the student paying?");
 
-            // fix this
-//            String description = "Add Payment for\n"+student.toString()+" "+"["+student.getStage().getName()+"]\n" +
-//                    "as payment for "+sales.getItem().getName().toUpperCase();
-//            input.setHeaderText(description);
-
-
             Optional<String> result = input.showAndWait();
 
             if(result.isPresent() && result.get()!= null){
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"",ButtonType.YES,ButtonType.NO);
-
-                // fix this
-                // alert.setHeaderText("Are you sure you want to make payment of "+result.get()+"\nfor"+" "+sales.getItem().getName()+"\n");
-
 
                 Optional<ButtonType>result2 = alert.showAndWait();
 
@@ -1053,9 +1047,6 @@ public class salesDetailsFormController implements Initializable{
                         protected Object call() {
                         salesDao.payForSales(sales, Double.valueOf(result.get()));
                         sales.setAmountPaid((sales.getAmountPaid()+Double.valueOf(result.get())));
-
-                        // fix this
-//                        TransactionLoggerDao.getTransactionLoggerDaoInstance().LogTransaction(sales.getId(), sales.getStudent().toString(), description, sales.getAmountPaid(), TransactionType.SALES);
 
                         return null;
                         }
@@ -1070,7 +1061,7 @@ public class salesDetailsFormController implements Initializable{
                     new Thread(payment).start();
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             //log the error
         }
     }
@@ -1149,12 +1140,10 @@ public class salesDetailsFormController implements Initializable{
             if(newValue==self) {
                 paidBy.setText(student.toString());
                 paidBy.setEditable(false);
-            }
-            else  if(newValue ==parent ) {
+            } else if(newValue ==parent ) {
                 paidBy.setText(student.getParent().getname());
                 paidBy.setEditable(false);
-            }
-            else if(newValue ==other) {
+            } else if(newValue ==other) {
                 paidBy.setText("");
                 paidBy.setEditable(true);
             }
@@ -1171,13 +1160,13 @@ public class salesDetailsFormController implements Initializable{
         return dialog.showAndWait();
     }
 
-    public  void showDrawer(){
+    public  void showDrawer() {
         drawer.setTranslateX(300);
         drawer.setVisible(true);
         drawer.open();
     }
 
-    public void hideDrawer(){
+    public void hideDrawer() {
 
     }
 }
