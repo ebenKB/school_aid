@@ -22,17 +22,11 @@ package com.hub.schoolAid;
 // */
 
 import org.hibernate.HibernateException;
-import org.hibernate.MappingException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.enhanced.SequenceStyleGenerator;
-import org.hibernate.jpa.internal.util.ConfigurationHelper;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.type.LongType;
-import org.hibernate.type.Type;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Properties;
 
 public class Student_Id_Generator extends SequenceStyleGenerator {
     public static final String VALUE_PREFIX_PARAMETER = "valuePrefix";
@@ -46,8 +40,7 @@ public class Student_Id_Generator extends SequenceStyleGenerator {
     private String numberFormat;
 
     @Override
-    public Serializable generate(SharedSessionContractImplementor session,
-                                 Object object) throws HibernateException {
+    public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
         return valuePrefix + String.format(numberFormat, super.generate(session, object));
     }
 //
@@ -183,4 +176,4 @@ public class Student_Id_Generator extends SequenceStyleGenerator {
 //        }
 //        return null;
 //    }
-//}
+// }

@@ -18,6 +18,7 @@ import javafx.stage.StageStyle;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 
+import javax.rmi.CORBA.Util;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -134,6 +135,8 @@ public class AppSettingsController implements Initializable {
                 }
             }
         });
+
+        cancel.setOnAction(event -> Utils.closeEvent(event));
     }
 
     private void createAppSettings() {

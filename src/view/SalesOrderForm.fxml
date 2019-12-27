@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.CheckComboBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="724.0" prefWidth="1093.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SalesFormController">
+   <children>
+      <AnchorPane prefHeight="659.0" prefWidth="973.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <SplitPane dividerPositions="0.2841429880843263" layoutX="248.0" layoutY="104.0" prefHeight="659.0" prefWidth="973.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <items>
+                <AnchorPane maxWidth="400.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <VBox layoutX="9.0" layoutY="148.0" spacing="30.0">
+                           <children>
+                              <JFXRadioButton fx:id="allStudentsRadio" text="All Students">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="optionsToggle" />
+                                 </toggleGroup></JFXRadioButton>
+                              <JFXRadioButton fx:id="payFeesRadio" prefHeight="17.0" prefWidth="234.0" text="Students who pay school fees" toggleGroup="$optionsToggle" />
+                              <JFXRadioButton fx:id="doNotPayFeesRadio" prefHeight="17.0" prefWidth="234.0" text="Students who do not pay school fees" toggleGroup="$optionsToggle" />
+                              <VBox spacing="10.0">
+                                 <children>
+                                    <JFXRadioButton fx:id="selectClassesRadio" text="Select classes" toggleGroup="$optionsToggle" />
+                                    <CheckComboBox fx:id="classesCombo" prefHeight="36.0" prefWidth="231.0">
+                                       <padding>
+                                          <Insets left="40.0" />
+                                       </padding>
+                                    </CheckComboBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <TextField fx:id="itemName" layoutX="28.0" layoutY="161.0" prefHeight="48.0" prefWidth="307.0" promptText="Name of item" />
+                        <TextField fx:id="itemCost" alignment="CENTER_RIGHT" layoutX="174.0" layoutY="228.0" prefHeight="48.0" prefWidth="161.0" promptText="Unit cost" />
+                        <TextField fx:id="quantity" alignment="CENTER_RIGHT" layoutX="174.0" layoutY="297.0" prefHeight="48.0" prefWidth="161.0" promptText="Quantity " />
+                        <TextField fx:id="totalCost" alignment="CENTER_RIGHT" editable="false" layoutX="35.0" layoutY="364.0" prefHeight="48.0" prefWidth="300.0" promptText="Total cost" />
+                        <Button fx:id="addOrder" layoutX="226.0" layoutY="538.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="115.0" text="Add order" />
+                        <Button fx:id="clear" layoutX="98.0" layoutY="538.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="115.0" text="Clear" />
+                        <Pane layoutX="468.0" layoutY="102.0" prefHeight="621.0" prefWidth="360.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="102.0">
+                           <children>
+                              <ListView fx:id="orderListview" layoutX="20.0" layoutY="26.0" prefHeight="484.0" prefWidth="315.0">
+                                 <contextMenu>
+                                    <ContextMenu>
+                                      <items>
+                                        <MenuItem mnemonicParsing="false" text="Remove order" />
+                                      </items>
+                                    </ContextMenu>
+                                 </contextMenu>
+                              </ListView>
+                              <Button fx:id="checkout" layoutX="192.0" layoutY="555.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="115.0" text="Checkout" />
+                              <Button fx:id="cancel" layoutX="59.0" layoutY="555.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="115.0" text="Cancel order" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+            <Pane prefHeight="104.0" prefWidth="973.0" styleClass="darkPane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Text fill="#c9c9c9" layoutX="34.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Sale" wrappingWidth="102.00000923871994">
+                     <font>
+                        <Font name="Arial Black" size="18.0" />
+                     </font>
+                  </Text>
+               </children></Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

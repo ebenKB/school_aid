@@ -32,6 +32,7 @@ public class App {
     private int currentCount;
     private Boolean isRegistered;
     private LocalDate lastOpened;
+    private String license = "";
 
 
     @Enumerated(EnumType.STRING)
@@ -150,5 +151,13 @@ public class App {
 
     public void setRegistered(Boolean registered) {
         isRegistered = registered;
+    }
+
+    public String getLicense() {
+        return license;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
     }
 }
