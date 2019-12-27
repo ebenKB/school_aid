@@ -14,6 +14,7 @@ public class StudentAccount {
     private double schFeesPaid =0.0; // amount that has been paid for school fees
     private double feedingFeeToPay = 0.0;
     private double feedingFeeCredit = 0.0;
+    private Double schoolFeesBalance;
 
     public Long getId() {
         return Id;
@@ -53,5 +54,13 @@ public class StudentAccount {
 
     public void setSchFeesPaid(double schFeesPaid) {
         this.schFeesPaid = schFeesPaid;
+    }
+
+    public Double getSchoolFeesBalance() {
+        return schoolFeesBalance;
+    }
+
+    public void setSchoolFeesBalance(Double schoolFeesBalance) {
+        this.schoolFeesBalance = schoolFeesBalance;
     }
 }
