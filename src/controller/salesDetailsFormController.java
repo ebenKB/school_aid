@@ -922,7 +922,7 @@ public class salesDetailsFormController implements Initializable{
                     this.getTableRow().getStyleClass().remove("owing");
                     this.getTableRow().getStyleClass().remove("not-owing");
                     if (!isEmpty()) {
-                        if(Double.valueOf(bal) < 0 ){
+                        if(Double.valueOf(bal) < 0 ) {
                             this.getTableRow().getStyleClass().add("owing");
                         } else if(Double.valueOf(bal) > 0 ){
                             this.getTableRow().getStyleClass().add("not-owing");
@@ -964,7 +964,7 @@ public class salesDetailsFormController implements Initializable{
                 Optional<ButtonType>confirm = Utils.showConfirmation("Confirm payment of school fees", "Payment for "+st.toString(), "Are you sure you want to confirm payment of school fees?");
                 if(confirm.isPresent() && confirm.get() == ButtonType.YES) {
                     if(studentDao.paySchoolFee(st, amount)) {
-                        Notification.getNotificationInstance().notifySuccess("Payment added for "+st.toString(), "Fees paid");
+                        Notification.getNotificationInstance().notifySuccess("Payment added for " + st.toString(), "Fees paid");
                         // log the transaction
                         Utils.logPayment(st, "School Fees", pair.getValue(), bal_before_payment, amount, TransactionType.SCHOOL_FEES, st.getId());
                     }

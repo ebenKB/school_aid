@@ -41,15 +41,18 @@ public class Student {
     private Boolean payFeeding;
     private Boolean paySchoolFees;
     private Boolean hasAllergy;
-    public enum FeedingStatus{DAILY,WEEKLY,MONTHLY,TERMLY,PERIODIC,SEMI_PERIODIC}
+    public enum FeedingStatus{ DAILY, WEEKLY, MONTHLY, TERMLY, PERIODIC, SEMI_PERIODIC }
     private LocalDate reg_date;
     private LocalDate dob;
     private String previousSchool;
+    private boolean isActive; // indicates whether the student is still actively enrolling in the school
 
-    //constructors
+    // constructors
     public Student(){
         setSelected(false);
         setDeleted(false);
+        setHasAllergy(false);
+        setActive(true);
     }
 
     public Student(Student student){
@@ -283,6 +286,14 @@ public class Student {
 
     public void setGuardian(List<Guardian> guardian) {
         this.guardian = guardian;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     //        public String getImage() {

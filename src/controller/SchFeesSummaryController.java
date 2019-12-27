@@ -57,7 +57,15 @@ public class SchFeesSummaryController implements Initializable{
         this.student = student;
         studentName.setText(student.toString());
         if (student.getPaySchoolFees()) {
-            totalFees.setText(String.valueOf(student.getAccount().getFeeToPay() * -1));
+            Double bal = student.getAccount().getFeeToPay();
+            if(bal != 0) {
+                totalFees.setText(String.valueOf(bal * -1));
+                System.out.println("The balance is not zero");
+            } else  if(bal == 0) {
+                totalFees.setText(String.valueOf(bal));
+                System.out.println("The balance is zero...");
+            }
+
 
             tlDao = new TransactionLoggerDao();
             logs.addAll(tlDao.getLog(TransactionType.SCHOOL_FEES, this.student.getId()));

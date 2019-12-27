@@ -112,9 +112,15 @@ public class TransactionSummaryController implements Initializable {
 
     public void init(Student student){
         this.student = student;
+        Double bal = student.getAccount().getFeeToPay();
         studentName.setText(student.toString());
         if (student.getPaySchoolFees()) {
-            totalFees.setText(String.valueOf(student.getAccount().getFeeToPay() * -1));
+            if(bal != 0) {
+                totalFees.setText(String.valueOf(bal * -1));
+
+            } else if (bal==0) {
+                totalFees.setText(String.valueOf(bal));
+            }
 
             tlDao = new TransactionLoggerDao();
             fees.addAll(tlDao.getLog(TransactionType.SCHOOL_FEES, this.student.getId()));

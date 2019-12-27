@@ -541,7 +541,9 @@ public class StudentDao {
             HibernateUtil.rollBack();
             return  false;
         } finally {
-            em.close();
+            if(em == null) {
+                em.close();
+            }
         }
     }
 

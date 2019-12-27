@@ -179,6 +179,9 @@ public class mainController implements Initializable{
     private MenuItem salesOverview;
 
     @FXML
+    private MenuItem paySchoolFees;
+
+    @FXML
     private TextField searchBox;
 
     @FXML
@@ -704,6 +707,16 @@ public class mainController implements Initializable{
                 if(!data.isEmpty()) {
                     searchBox.setDisable(false);
                 } else searchBox.setDisable(true);
+            }
+        });
+
+        paySchoolFees.setOnAction(event -> {
+            if(!studentTableView.getItems().isEmpty()) {
+                Student st = studentTableView.getSelectionModel().getSelectedItem();
+                if(st != null) {
+                    salesDetailsFormController sdc = new salesDetailsFormController();
+                    sdc.paySchoolFees(st);
+                }
             }
         });
 

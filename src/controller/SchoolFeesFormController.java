@@ -382,6 +382,8 @@ public class SchoolFeesFormController implements  Initializable {
             Student student = studentTableview.getSelectionModel().getSelectedItem();
             if(student != null) {
                 salesDetailsFormController.paySchoolFees(student);
+                // refresh the records
+                refresh();
             }
         });
 
@@ -400,6 +402,7 @@ public class SchoolFeesFormController implements  Initializable {
                     return null;
                 }
             };
+
             task.setOnRunning(e -> {
                 MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Creating report. Please wait...");
             });
@@ -438,6 +441,14 @@ public class SchoolFeesFormController implements  Initializable {
             task.setOnFailed(event -> progress.setVisible(false));
             new Thread(task).start();
         }
+    }
+
+    // get new items from the database and update the current records
+    private void refresh() {
+        StudentDao studentDao = new StudentDao();
+        students.clear();
+        students.addAll(studentDao.getAllStudents());
+        populateTableview();
     }
 }
 
