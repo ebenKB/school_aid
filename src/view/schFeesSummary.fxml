@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -17,11 +16,11 @@
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="645.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TransactionSummaryController">
    <children>
       <Pane layoutX="-2.0" layoutY="-3.0" prefHeight="71.0" prefWidth="645.0" styleClass="darkPane" stylesheets="@../stylesheet/main.css" />
-      <Text fill="WHITE" layoutX="114.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Summary of School Fees Transactions" textAlignment="CENTER" wrappingWidth="395.000005826354">
+      <Text fill="WHITE" layoutX="114.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Summary of Transactions / Payments" textAlignment="CENTER" wrappingWidth="395.000005826354">
          <font>
             <Font size="18.0" />
          </font></Text>
-      <Label fx:id="studentName" alignment="CENTER" layoutX="48.0" layoutY="93.0" prefHeight="27.0" prefWidth="566.0" textAlignment="CENTER">
+      <Label fx:id="studentName" alignment="CENTER" layoutX="48.0" layoutY="109.0" prefHeight="27.0" prefWidth="566.0" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="18.0" />
          </font>
@@ -40,88 +39,121 @@
             </Label>
          </children>
       </HBox>
-      <HBox layoutX="376.0" layoutY="752.0" spacing="20.0">
+      <HBox layoutX="399.0" layoutY="771.0" spacing="20.0">
          <children>
             <Button fx:id="close" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="close" />
-            <Button fx:id="printStatement" mnemonicParsing="false" prefHeight="35.0" prefWidth="129.0" text="Print Statement" />
+            <Button fx:id="printStatement" mnemonicParsing="false" prefHeight="35.0" prefWidth="104.0" text="Print Statement" />
          </children>
       </HBox>
-      <ScrollPane fx:id="scrollpane" layoutX="48.0" layoutY="240.0" prefHeight="399.0" prefWidth="547.0">
-         <content>
-            <VBox fx:id="summaryBox" prefHeight="395.0" prefWidth="540.0">
-               <children>
-                  <JFXTabPane fx:id="stdDetailsTabPane" prefHeight="412.0" prefWidth="540.0" styleClass="darkTabPane">
-                     <tabs>
-                        <Tab fx:id="schFeeTab" text="Fees Logs">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <TableView fx:id="feesLogTableView" prefHeight="365.0" prefWidth="547.0" styleClass="small-caption">
-                                      <columns>
-                                        <TableColumn fx:id="feeDate" prefWidth="184.0" text="DATE" />
-                                        <TableColumn fx:id="feeAmount" prefWidth="103.0" text="AMOUNT" />
-                                          <TableColumn fx:id="feeBy" prefWidth="256.0" text="PAID BY" />
-                                      </columns>
-                                    </TableView>
-                                 </children>
-                              </AnchorPane>
-                          </content>
-                        </Tab>
-                        <Tab fx:id="feedingTab" text="Feeding Logs">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <TableView fx:id="feedingLogsTableview" prefHeight="365.0" prefWidth="547.0" styleClass="small-caption">
-                                       <columns>
-                                          <TableColumn fx:id="feedingDate" prefWidth="177.0" text="DATE" />
-                                          <TableColumn fx:id="feedingAmount" prefWidth="114.0" text="AMOUNT" />
-                                          <TableColumn fx:id="feedingBy" prefWidth="252.0" text="PAID BY" />
-                                       </columns>
-                                    </TableView>
-                                 </children>
-                              </AnchorPane>
-                          </content>
-                        </Tab>
-                        <Tab fx:id="salesTab" text="Sales Logs">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <TableView fx:id="salesLogsTableview" prefHeight="365.0" prefWidth="547.0" styleClass="small-caption">
-                                       <columns>
-                                          <TableColumn fx:id="saleDate" prefWidth="212.0" text="DATE" />
-                                          <TableColumn fx:id="saleAmount" prefWidth="93.0" text="AMOUNT" />
-                                          <TableColumn fx:id="saleBy" prefWidth="238.0" text="PAID BY" />
-                                       </columns>
-                                    </TableView>
-                                 </children>
-                              </AnchorPane>
-                          </content>
-                        </Tab>
-                     </tabs>
-                  </JFXTabPane>
-               </children></VBox>
-         </content>
-      </ScrollPane>
-      <HBox alignment="CENTER" layoutX="308.0" layoutY="661.0" prefHeight="35.0" prefWidth="235.0" spacing="10.0">
+      <VBox fx:id="summaryBox" layoutX="53.0" layoutY="214.0" prefHeight="534.0" prefWidth="540.0">
          <children>
-            <Label text="Total Amount paid" />
-            <Label fx:id="grossTotal" alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="106.0" textFill="#f50303">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
+            <JFXTabPane fx:id="stdDetailsTabPane" prefHeight="545.0" prefWidth="540.0" styleClass="darkTabPane">
+               <tabs>
+                  <Tab fx:id="schFeeTab" text="Fees Logs">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="543.0">
+                           <children>
+                              <TableView fx:id="feesLogTableView" prefHeight="436.0" prefWidth="547.0" styleClass="small-caption">
+                                <columns>
+                                  <TableColumn fx:id="feeDate" prefWidth="184.0" text="DATE" />
+                                  <TableColumn fx:id="feeAmount" prefWidth="103.0" text="AMOUNT" />
+                                    <TableColumn fx:id="feeBy" prefWidth="256.0" text="PAID BY" />
+                                </columns>
+                              </TableView>
+                              <HBox layoutX="4.0" layoutY="444.0" spacing="80.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="35.0" prefWidth="215.0" spacing="10.0">
+                                       <children>
+                                          <Label prefHeight="17.0" prefWidth="59.0" text="Balance" />
+                                          <Label fx:id="schFeebalance" prefHeight="35.0" prefWidth="110.0" textFill="#f50303">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="35.0" prefWidth="235.0" spacing="10.0">
+                                       <children>
+                                          <Label text="Total Amount paid" />
+                                          <Label fx:id="grossTotal" prefHeight="35.0" prefWidth="106.0" textFill="#f50303">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab fx:id="feedingTab" text="Feeding Logs">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="feedingLogsTableview" prefHeight="435.0" prefWidth="547.0" styleClass="small-caption">
+                                 <columns>
+                                    <TableColumn fx:id="feedingDate" prefWidth="177.0" text="DATE" />
+                                    <TableColumn fx:id="feedingAmount" prefWidth="114.0" text="AMOUNT" />
+                                    <TableColumn fx:id="feedingBy" prefWidth="252.0" text="PAID BY" />
+                                 </columns>
+                              </TableView>
+                              <HBox alignment="CENTER" layoutX="14.0" layoutY="455.0" spacing="20.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="35.0" prefWidth="243.0" spacing="20.0">
+                                       <children>
+                                          <Text fill="#fcfcfc" strokeType="OUTSIDE" strokeWidth="0.0" text="Balance" wrappingWidth="56.1787109375">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Text>
+                                          <Label fx:id="feedingBalance" prefHeight="35.0" prefWidth="144.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" spacing="20.0">
+                                       <children>
+                                          <Text fill="#fcfcfc" strokeType="OUTSIDE" strokeWidth="0.0" text="Total amount paid">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Text>
+                                          <Label fx:id="totalFeeding" prefHeight="35.0" prefWidth="105.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab fx:id="salesTab" text="Sales Logs">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="salesLogsTableview" prefHeight="436.0" prefWidth="547.0" styleClass="small-caption">
+                                 <columns>
+                                    <TableColumn fx:id="saleDate" prefWidth="212.0" text="DATE" />
+                                    <TableColumn fx:id="saleAmount" prefWidth="93.0" text="AMOUNT" />
+                                    <TableColumn fx:id="saleBy" prefWidth="238.0" text="PAID BY" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
          </children>
-      </HBox>
-      <HBox alignment="CENTER" layoutX="48.0" layoutY="661.0" spacing="10.0">
-         <children>
-            <Label prefHeight="17.0" prefWidth="59.0" text="Balance" />
-            <Label fx:id="balance" alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="89.0" textFill="#f50303">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
+      </VBox>
       <Label fx:id="paysFees" alignment="CENTER" layoutX="94.0" layoutY="130.0" prefHeight="24.0" prefWidth="471.0" textFill="#ff0202" />
       <Pane fx:id="separator" layoutX="-1.0" layoutY="80.0" prefHeight="5.0" prefWidth="645.0" styleClass="separator" />
    </children>

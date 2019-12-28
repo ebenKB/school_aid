@@ -8,6 +8,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -92,7 +93,13 @@ public class TransactionSummaryController implements Initializable {
     private Label grossTotal;
 
     @FXML
-    private Label balance;
+    private Label schFeebalance;
+
+    @FXML
+    private Label feedingBalance;
+
+    @FXML
+    private Label totalFeeding;
 
     @FXML
     private Label paysFees;
@@ -102,6 +109,11 @@ public class TransactionSummaryController implements Initializable {
 
     @FXML
     private Button printStatement;
+
+    Double schoolFeesTotal = null;
+    Double schoolFeesBalance = null;
+    Double feedingBal=null;
+    Double feedingTotal = null;
 
     // set global variables for the logs
     private ObservableList<TransactionLogger> fees = FXCollections.observableArrayList();
@@ -127,12 +139,12 @@ public class TransactionSummaryController implements Initializable {
             Double gross = 0.00;
 
             for (TransactionLogger logger : fees) {
-//                createLabel(logger.getAmount(),logger.getPaidBy(), logger.getDate());
                 gross+=logger.getAmount();
             }
+
             populateFeesLogTable();
             grossTotal.setText(gross.toString());
-            balance.setText((String.valueOf((student.getAccount().getSchoolFeesBalance() + gross))));
+            schFeebalance.setText((String.valueOf((student.getAccount().getSchoolFeesBalance()))));
         } else {
             paysFees.setText("Does not pay school fees");
         }
@@ -176,7 +188,20 @@ public class TransactionSummaryController implements Initializable {
                         // check if the feeding logs is empty
                         if(feedingLogs.isEmpty()) {
                             // get the feeding logs
-                            feedingLogs.addAll(tlDao.getLog(TransactionType.FEEDING_FEE, student.getId()));
+                            List<TransactionLogger> logs = tlDao.getLog(TransactionType.FEEDING_FEE, student.getId());
+                            feedingLogs.addAll(logs);
+
+                            if(feedingBal == null || feedingTotal == null) {
+                                feedingBal =0.0;
+                                feedingTotal = 0.0;
+
+                                for(TransactionLogger l : logs) {
+                                    feedingTotal+=l.getAmount();
+                                }
+
+                                totalFeeding.setText(String.valueOf(feedingTotal));
+                                feedingBalance.setText(String.valueOf(student.getAccount().getFeedingFeeCredit()));
+                            }
                         }
                         // check if the table has not been populated
                         if(feedingLogsTableview.getItems().isEmpty()) {
@@ -195,8 +220,18 @@ public class TransactionSummaryController implements Initializable {
 
         //print statement
         printStatement.setOnAction(event -> {
-            // generate and pdf for the transaction logs
-            PDFMaker.savePDFToLocation(PDFMaker.getPDFMakerInstance().generateStatement(student));
+            Task task = new Task() {
+                @Override
+                protected Object call() throws Exception {
+                    // generate and pdf for the transaction logs
+                    PDFMaker.savePDFToLocation(PDFMaker.getPDFMakerInstance().generateStatement(student));
+                    return null;
+                }
+            };
+            task.setOnRunning(event1 -> MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Preparing account statement..."));
+            task.setOnFailed(event1 -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+            task.setOnSucceeded(event1 -> MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress());
+            new Thread(task).start();
         });
 
         close.setOnAction(event -> Utils.closeEvent(event));

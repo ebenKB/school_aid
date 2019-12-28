@@ -32,9 +32,9 @@
                </children>
             </HBox>
             <TextField fx:id="searchBox" layoutX="32.0" layoutY="37.0" prefHeight="38.0" prefWidth="383.0" promptText="Enter name or class to search" style="-fx-background-radius: 100;" />
-            <Text fill="#d3d0d0" layoutX="1043.0" layoutY="31.40234375" strokeType="OUTSIDE" strokeWidth="0.0" text="School Fees" textAlignment="CENTER" wrappingWidth="112.4033203125" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="14.0">
+            <Text fill="#d3d0d0" layoutX="1043.0" layoutY="31.40234375" strokeType="OUTSIDE" strokeWidth="0.0" text="School Fees" textAlignment="CENTER" wrappingWidth="128.4033203125" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="14.0">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Arial Black" size="18.0" />
                </font>
             </Text>
          </children>

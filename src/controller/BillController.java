@@ -289,12 +289,15 @@ public class BillController implements Initializable {
         if(billItems.size() > 0) {
            bill.setBill_items(billItems);
         }
+
         bill.setTotalBill((checkBillTotal() * -1));
         String year = startYear.getText().trim()+"/"+endYear.getText().trim();
 
         if(termsCombo.getSelectionModel().getSelectedItem()  != null) {
             bill.setCreatedFor(termsCombo.getSelectionModel().getSelectedItem().getValue());
+            System.out.println("This is the term we have selected"+ termsCombo.getSelectionModel().getSelectedItem().getValue());
         }
+
         bill.setAcademicYear(year);
         return bill;
     }
