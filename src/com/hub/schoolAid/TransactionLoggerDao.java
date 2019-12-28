@@ -24,7 +24,7 @@ public class TransactionLoggerDao {
         }
     }
 
-    public Boolean LogTransaction(Student student, String transactionBy, String description, Double bal_before_payment, Double transactionAmount, TransactionType type, Long transId) {
+    public Boolean LogTransaction(Student student, String transactionBy, String description, Double bal_before_payment, Double bal_after_payment, Double transactionAmount, TransactionType type, Long transId) {
        TransactionLogger transaction = new TransactionLogger();
        transaction.setDate(LocalDate.now());
        transaction.setAmount(transactionAmount);
@@ -34,6 +34,7 @@ public class TransactionLoggerDao {
        transaction.setTransactionType(type);
        transaction.setStudent(student);
        transaction.setBal_before_payment(bal_before_payment);
+       transaction.setBal_after_payment(bal_after_payment);
 
        // add a receipt number to to the transaction
         Receipt receipt = new Receipt();

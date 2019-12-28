@@ -62,8 +62,8 @@ public class Utils {
      * @param type the type of transaction
      * @param transId a unique id to identify the specific transaction that was performed. e.g student id or attendance id
      */
-    public static void logPayment(Student student, String description, String paidBy, Double bal_before_payment, Double amount, TransactionType type, Long transId){
-        TransactionLoggerDao.getTransactionLoggerDaoInstance().LogTransaction(student, paidBy, description, bal_before_payment, amount, type, transId);
+    public static void logPayment(Student student, String description, String paidBy, Double bal_before_payment, Double bal_after_payment, Double amount, TransactionType type, Long transId){
+        TransactionLoggerDao.getTransactionLoggerDaoInstance().LogTransaction(student, paidBy, description, bal_before_payment, bal_after_payment, amount, type, transId);
 //        TransactionLogger transactionLogger = new TransactionLogger(student.getId(),description,paidBy,date,amount);
 //        TransactionLoggerDao loggerDao = new TransactionLoggerDao();
 //        loggerDao.logTransaction(transactionLogger);

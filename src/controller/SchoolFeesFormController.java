@@ -180,7 +180,6 @@ public class SchoolFeesFormController implements  Initializable {
         // check if the data is not empty
         studentTableview.setItems(this.students);
         totalRecords.setText(String.valueOf(studentTableview.getItems().size()));
-        detailsVBox.getChildren().addAll(name,h,c,ad,ap,o);
     }
 
     private void setDetails(Student student) {
@@ -219,6 +218,8 @@ public class SchoolFeesFormController implements  Initializable {
             }
 
             detailsVBox.getStyleClass().add("details-wrapper");
+            detailsVBox.getChildren().clear();
+            detailsVBox.getChildren().addAll(name,h,c,ad,ap,o);
 //        } else {
 //            detailsVBox.setVisible(false);
 //            viewPaymentDetails.setVisible(false);
@@ -256,6 +257,7 @@ public class SchoolFeesFormController implements  Initializable {
 
                             // show the details of the student
                             setDetails(newValue);
+
                         } else {
                             imageLabel.setVisible(true);
                             studentImageview.setImage(null);
@@ -449,6 +451,7 @@ public class SchoolFeesFormController implements  Initializable {
         students.clear();
         students.addAll(studentDao.getAllStudents());
         populateTableview();
+        detailsVBox.getChildren().clear();
     }
 }
 

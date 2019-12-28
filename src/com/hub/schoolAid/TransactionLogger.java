@@ -26,6 +26,7 @@ public class TransactionLogger {
     private Long id;
     private Double amount;
     private Double bal_before_payment;
+    private Double bal_after_payment;
     private LocalDate date;
     private String Description;
     private String paidBy;
@@ -128,6 +129,14 @@ public class TransactionLogger {
 
     public void setBal_before_payment(Double bal_before_payment) {
         this.bal_before_payment = bal_before_payment;
+    }
+
+    public Double getBal_after_payment() {
+        return bal_after_payment;
+    }
+
+    public void setBal_after_payment(Double bal_after_payment) {
+        this.bal_after_payment = bal_after_payment;
     }
 
     @Override

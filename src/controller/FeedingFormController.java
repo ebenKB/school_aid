@@ -492,7 +492,7 @@ public class FeedingFormController implements Initializable {
                         studentTableView.refresh();
                         Notification.getNotificationInstance().notifySuccess("Payment added for " + st.toString(), "Fees paid");
                         // log the transaction
-                        Utils.logPayment(st, "Feeding Fees", pair.getValue(), bal_before_payment, amount, TransactionType.FEEDING_FEE, at.getId());
+                        Utils.logPayment(st, "Feeding Fees", pair.getValue(), bal_before_payment,st.getAccount().getFeedingFeeCredit(), amount, TransactionType.FEEDING_FEE, at.getId());
                     }
                 } else Notification.getNotificationInstance().notifyError("Fees payment cancelled", "Fees not added");
             });
@@ -522,6 +522,7 @@ public class FeedingFormController implements Initializable {
 //            e.printStackTrace();
 //        }
 //    }
+
     private void showPrintDialogue() {
         javafx.scene.Parent root;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/attendancePrintNode.fxml"));

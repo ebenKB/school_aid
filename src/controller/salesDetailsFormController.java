@@ -948,13 +948,13 @@ public class salesDetailsFormController implements Initializable{
                 studentDao.updateAccount(student.getAccount());
 
                 Utils.logPayment(attendanceTemporary.getStudent(),"Feeding Fee Payment for" + " " +
-                        attendanceTemporary.getStudent().toString(),pair.getValue(),bal_before_payment, amount, TransactionType.FEEDING_FEE, attendanceTemporary.getId());
+                        attendanceTemporary.getStudent().toString(),pair.getValue(),bal_before_payment,student.getAccount().getFeedingFeeCredit(), amount, TransactionType.FEEDING_FEE, attendanceTemporary.getId());
             });
         }
     }
 
     public void paySchoolFees(Student st) {
-        Double bal_before_payment = st.getAccount().getSchFeesPaid();
+        Double bal_before_payment = st.getAccount().getSchoolFeesBalance();
         // check if the student pays school fees
         if(st.getPaySchoolFees()) {
             Optional<Pair <String, String>> result = showCustomTextInputDiag(st, "Pay School Fees");
@@ -966,7 +966,7 @@ public class salesDetailsFormController implements Initializable{
                     if(studentDao.paySchoolFee(st, amount)) {
                         Notification.getNotificationInstance().notifySuccess("Payment added for " + st.toString(), "Fees paid");
                         // log the transaction
-                        Utils.logPayment(st, "School Fees", pair.getValue(), bal_before_payment, amount, TransactionType.SCHOOL_FEES, st.getId());
+                        Utils.logPayment(st, "School Fees", pair.getValue(), bal_before_payment, (bal_before_payment + amount), amount, TransactionType.SCHOOL_FEES, st.getId());
                     }
                 } else Notification.getNotificationInstance().notifyError("Fees payment cancelled", "Fees not added");
             });
