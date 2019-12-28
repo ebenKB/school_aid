@@ -112,7 +112,7 @@ public class TransactionSummaryController implements Initializable {
 
     public void init(Student student){
         this.student = student;
-        Double bal = student.getAccount().getFeeToPay();
+        Double bal = student.getAccount().getSchoolFeesBalance();
         studentName.setText(student.toString());
         if (student.getPaySchoolFees()) {
             if(bal != 0) {
@@ -124,7 +124,6 @@ public class TransactionSummaryController implements Initializable {
 
             tlDao = new TransactionLoggerDao();
             fees.addAll(tlDao.getLog(TransactionType.SCHOOL_FEES, this.student.getId()));
-            System.out.println("The logs are: "+ fees.size());
             Double gross = 0.00;
 
             for (TransactionLogger logger : fees) {
@@ -133,7 +132,7 @@ public class TransactionSummaryController implements Initializable {
             }
             populateFeesLogTable();
             grossTotal.setText(gross.toString());
-            balance.setText((String.valueOf((student.getAccount().getFeeToPay() + gross))));
+            balance.setText((String.valueOf((student.getAccount().getSchoolFeesBalance() + gross))));
         } else {
             paysFees.setText("Does not pay school fees");
         }

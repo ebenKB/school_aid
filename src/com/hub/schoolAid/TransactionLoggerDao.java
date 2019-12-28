@@ -33,6 +33,7 @@ public class TransactionLoggerDao {
        transaction.setPaidBy(transactionBy);
        transaction.setTransactionType(type);
        transaction.setStudent(student);
+       transaction.setBal_before_payment(bal_before_payment);
 
        // add a receipt number to to the transaction
         Receipt receipt = new Receipt();

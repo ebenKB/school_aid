@@ -26,7 +26,7 @@
             <Font name="Arial Black" size="18.0" />
          </font>
       </Label>
-      <HBox layoutX="48.0" layoutY="167.0" prefHeight="24.0" prefWidth="219.0" spacing="20.0">
+      <HBox layoutX="48.0" layoutY="167.0" prefHeight="24.0" prefWidth="219.0" spacing="20.0" visible="false">
          <children>
             <Label prefHeight="24.0" prefWidth="211.0" text="Amount Due:">
                <font>

@@ -169,7 +169,7 @@ public class SchoolFeesFormController implements  Initializable {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Student, String> param) {
                 Student student = param.getValue();
-                Double bal = student.getAccount().getFeeToPay() + student.getAccount().getSchFeesPaid();
+                Double bal = student.getAccount().getSchoolFeesBalance();
                 return new SimpleStringProperty(String.valueOf((bal)));
             }
         });
@@ -191,13 +191,13 @@ public class SchoolFeesFormController implements  Initializable {
             // clear all the labels before setting the items
             String cur = "GHC";
             String amntDue;
-            if (student.getAccount().getFeeToPay() < 0) {
-                amntDue = "Total School Fees : "+String.valueOf((student.getAccount().getFeeToPay() * -1 ))+"\n\n";
-            } else {
-                amntDue = "Total School Fees : "+String.valueOf((student.getAccount().getFeeToPay()))+"\n\n";
-            }
+//            if (student.getAccount().getSchoolFeesBalance() < 0) {
+//                amntDue = "Total School Fees : "+String.valueOf((student.getAccount().getSchoolFeesBalance() * -1 ))+"\n\n";
+//            } else {
+//                amntDue = "Total School Fees : "+String.valueOf((student.getAccount().getSchoolFeesBalance()))+"\n\n";
+//            }
 
-            Double balance = student.getAccount().getFeeToPay() + student.getAccount().getSchFeesPaid();
+            Double balance = student.getAccount().getSchoolFeesBalance();
             String owing = String.valueOf("Balance : "+ (balance))+"\n\n";
 
             // set the labels
@@ -206,7 +206,7 @@ public class SchoolFeesFormController implements  Initializable {
             name.getStyleClass().add("heading-label");
             c.setText(cur);
             c.getStyleClass().add("white-label");
-            ad.setText(amntDue);
+//            ad.setText(amntDue);
             ad.getStyleClass().add("white-label");
             ap.setText("Amount paid : "+ String.valueOf(student.getAccount().getSchFeesPaid())+"\n\n");
             ap.getStyleClass().add("white-label");

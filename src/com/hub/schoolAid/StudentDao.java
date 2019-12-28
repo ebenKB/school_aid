@@ -29,10 +29,9 @@ public class StudentDao {
 
             if(student.getPaySchoolFees()) {
                 if(student.getStage().getBill() != null) {
-                    student.getAccount().setFeeToPay(((student.getStage().getBill().getTotalBill())));
+                    // add the new bill amount to the current bill amount
+                    student.getAccount().setSchoolFeesBalance(((student.getStage().getBill().getTotalBill()) + student.getAccount().getSchoolFeesBalance()));
                 }
-            } else {
-                student.getAccount().setFeeToPay(0.00);
             }
             student.getAccount().setFeedingFeeToPay(student.getStage().getFeeding_fee());
             student.setPayFeeding(true);
@@ -501,7 +500,8 @@ public class StudentDao {
                     }
 
                     // Disable update for Student fees account when promoting students
-                    student.getAccount().setFeeToPay(newStage.getBill().getTotalBill());
+                    // the bill amount is expected to come as negative
+                    student.getAccount().setSchoolFeesBalance(newStage.getBill().getTotalBill() + student.getAccount().getSchoolFeesBalance());
                 }
                 // commit the records
                 em.getTransaction().commit();
@@ -530,10 +530,11 @@ public class StudentDao {
         try {
             em=HibernateUtil.getEntityManager();
             em.getTransaction().begin();
-            StudentAccount studentAccount=em.find(StudentAccount.class,account.getId());
-            studentAccount.setFeedingFeeCredit(account.getFeedingFeeCredit());
-            studentAccount.setFeeToPay(account.getFeeToPay());
-            studentAccount.setSchFeesPaid(account.getSchFeesPaid());
+            em.merge(account);
+//            StudentAccount studentAccount=em.find(StudentAccount.class,account.getId());
+//            studentAccount.setFeedingFeeCredit(account.getFeedingFeeCredit());
+//            studentAccount.setSchoolFeesBalance(account.getSchoolFeesBalance());
+//            studentAccount.setSchFeesPaid(account.getSchFeesPaid());
             HibernateUtil.commit();
             HibernateUtil.close();
             return true;
@@ -582,6 +583,8 @@ public class StudentDao {
 
         // update the student's record with the total amount of fees paid.
         acc.setSchFeesPaid(acc.getSchFeesPaid() + amount);
+        acc.setPreviousSchoolFeesBalance(acc.getSchoolFeesBalance());
+        acc.setSchoolFeesBalance(acc.getSchoolFeesBalance() + amount);
         if(this.updateAccount(acc))
             return true;
         return false;
@@ -615,7 +618,7 @@ public class StudentDao {
         else {
             em = HibernateUtil.getEntityManager();
             StudentAccount account = em.find(StudentAccount.class, st.getAccount().getId());
-            account.setFeeToPay( amount);
+            account.setSchoolFeesBalance( amount);
             if(this.updateAccount(account))
                 return true;
             return false;
@@ -629,7 +632,7 @@ public class StudentDao {
                 return false;
             em=HibernateUtil.getEntityManager();
             StudentAccount account = em.find(StudentAccount.class, st.getAccount().getId());
-            account.setFeeToPay((st.getStage().getBill().getTotalBill()));
+            account.setSchoolFeesBalance((st.getStage().getBill().getTotalBill()));
             // reset the amount paid to 0
             account.setSchFeesPaid(0.0);
             if(this.updateAccount(account))

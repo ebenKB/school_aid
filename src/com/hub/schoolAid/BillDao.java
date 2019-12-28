@@ -71,8 +71,9 @@ public class BillDao {
                 // check if the student pays school fees
                 if(st.getPaySchoolFees()) {
                     // update the student's account with the school fees to pay
-                    Double bal = st.getAccount().getFeeToPay();
-                    st.getAccount().setFeeToPay((bal + bill.getTotalBill()));
+                    Double bal = st.getAccount().getSchoolFeesBalance();
+                    st.getAccount().setPreviousSchoolFeesBalance(bal);
+                    st.getAccount().setSchoolFeesBalance((bal + bill.getTotalBill()));
                     selectedStudents.add(st);
                 }
                 // check if the batch size has been reached
@@ -83,6 +84,7 @@ public class BillDao {
                 }
                 em.merge(st);
             }
+
             bill.setStudents(selectedStudents);
             bill.setCreatedAt(LocalDate.now());
             em.persist(bill);
@@ -265,7 +267,7 @@ public class BillDao {
             // save the changes to the database
             em.merge(bill);
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             em.getTransaction().rollback();
         } finally {
             HibernateUtil.close();
@@ -301,7 +303,7 @@ public class BillDao {
             // PERFORM A BATCH UPDATE
             int batchSize = students.size();
             for (int i=0; i <= students.size(); i++) {
-                Double newAmount = (students.get(i).getAccount().getFeeToPay() - bill.getTotalBill());
+                Double newAmount = (students.get(i).getAccount().getSchoolFeesBalance() - bill.getTotalBill());
                 System.out.println("Deducting from student account" + newAmount);
                 studentDao.updateSchoolFee(students.get(i), newAmount);
                 em.merge(students.get(i));
@@ -334,7 +336,7 @@ public class BillDao {
             // update the account for the students
             for(Student s: newBill.getStudents()) {
                 // subtract the old balance from the student account
-                double feeToPay = s.getAccount().getFeeToPay();
+                double feeToPay = s.getAccount().getSchoolFeesBalance();
 
                 // reverse the previous balance from the total amount for the student to pay
                 double newFee = feeToPay + oldTotal;
@@ -343,7 +345,7 @@ public class BillDao {
                 newFee+= newBill.getTotalBill();
 
                 // add the new account to the student account
-                Query query = em.createQuery("update StudentAccount  A set feeToPay=?1 where A.id =?2");
+                Query query = em.createQuery("update StudentAccount  A set schoolFeesBalance=?1 where A.id =?2");
                 query.setParameter(1, newFee);
                 query.setParameter(2, s.getAccount().getId());
                 query.executeUpdate();

@@ -148,7 +148,7 @@ public class BillController implements Initializable {
                         stages.addAll(stageDao.getGetAllStage());
                         classCombo.getItems().addAll(stages);
 
-                        // hide the progess bar
+                        // hide the progress bar
                         stageProgess.setVisible(false);
                     }
                 } else if(newValue == studentRadio) {
@@ -171,6 +171,18 @@ public class BillController implements Initializable {
             }
         });
 
+        startYear.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(newValue != null  && newValue.trim().length() > 0) {
+                    int val = Integer.parseInt(newValue);
+                    int endVal = val + 1;
+                    endYear.setText(String.valueOf(endVal));
+                } else {
+                    endYear.setText("");
+                }
+            }
+        });
 
         tuitionFee.setOnKeyReleased(event -> checkBillTotal());
 
@@ -315,8 +327,8 @@ public class BillController implements Initializable {
         }
 
         // get the cost of all the items
-        for(BillItem t: billItems) {
-            total+= t.getCost();
+        for(BillItem t : billItems) {
+            total+= (t.getCost()*-1);
         }
 
         // add the tuition fee
@@ -327,7 +339,10 @@ public class BillController implements Initializable {
 
     private void populateBillTableview() {
         itemCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getItem().getName()));
-        costCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getCost().toString()));
+        costCol.setCellValueFactory(param -> {
+            Double amount = (param.getValue().getCost() * -1); // change the value to positive
+            return new SimpleStringProperty(amount.toString());
+        });
         itemsTableview.setItems(billItems);
     }
 
@@ -343,7 +358,7 @@ public class BillController implements Initializable {
     }
 
     private Boolean isValid(Bill bill) {
-        if(bill.getTotalBill() == null || bill.getBill_items()== null ||  (bill.getTotalBill() == 0 && bill.getBill_items().isEmpty())) {
+        if(bill.getTotalBill() == null || bill.getBill_items() == null ||  (bill.getTotalBill() == 0 && bill.getBill_items().isEmpty())) {
             return false;
         }
 
@@ -357,7 +372,7 @@ public class BillController implements Initializable {
             return false;
         }
 
-        if(endYear.getText().trim().length()< 1) {
+        if(endYear.getText().trim().length() < 1) {
             return false;
         }
 

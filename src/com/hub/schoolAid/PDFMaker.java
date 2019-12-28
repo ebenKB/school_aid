@@ -282,12 +282,12 @@ public class PDFMaker {
 
             // create rows for all the students
             for(Student st : students) {
-                Double bal = st.getAccount().getFeeToPay() - st.getAccount().getSchFeesPaid();
+                Double bal = st.getAccount().getSchoolFeesBalance();
                 Row<PDPage> row = baseTable.createRow(24f);
                 Cell<PDPage> cell;
                 String status;
 
-                if(st.getAccount().getFeeToPay() == 0) {
+                if(st.getAccount().getSchoolFeesBalance() == 0) {
                     status = "N/A";
                 }else if(bal < 0) {
                     status = "OWING";
@@ -296,7 +296,8 @@ public class PDFMaker {
                 } else status = "N/A";
 
                 row.createCell(36, st.toString());
-                row.createCell((float)16.6, st.getAccount().getFeeToPay() < 0 ? String.valueOf((st.getAccount().getFeeToPay() * -1)) : String.valueOf(st.getAccount().getFeeToPay()))
+                row.createCell((float)16.6, st.getAccount().getSchoolFeesBalance() < 0 ? String.valueOf((st.getAccount().getSchoolFeesBalance() * -1)) :
+                        String.valueOf(st.getAccount().getSchoolFeesBalance()))
                     .setAlign(HorizontalAlignment.CENTER);
                 row.createCell((float) 16.6, String.valueOf(st.getAccount().getSchFeesPaid()))
                     .setAlign(HorizontalAlignment.CENTER);
@@ -382,7 +383,7 @@ public class PDFMaker {
         double amountDue =0.0;
 
         if(transactionType == TransactionType.SCHOOL_FEES) {
-            amountDue = student.getAccount().getFeeToPay();
+            amountDue = student.getAccount().getSchoolFeesBalance();
         } else if(transactionType == TransactionType.FEEDING_FEE) {
             amountDue = 0.0;
         } else if(transactionType == TransactionType.SALES) {
@@ -401,21 +402,21 @@ public class PDFMaker {
         cell.setFont(font);
 
         // total fees
-        Row<PDPage>pdPageRow3 = baseTable.createRow(30);
-        cell = pdPageRow3.createCell( 25, "TOTAL FEES DUE");
-        cell.setAlign(HorizontalAlignment.LEFT);
-        cell.setValign(VerticalAlignment.MIDDLE);
-        cell.setFont(font);
-
-        // multiply the total fees due by -1 and change it to positive
-        cell = pdPageRow3.createCell(15,String.valueOf(student.getAccount().getFeeToPay() * -1));
-        cell.setAlign(HorizontalAlignment.RIGHT);
-        cell.setValign(VerticalAlignment.MIDDLE);
-        cell.setFont(font);
+//        Row<PDPage>pdPageRow3 = baseTable.createRow(30);
+//        cell = pdPageRow3.createCell( 25, "BALANCE");
+//        cell.setAlign(HorizontalAlignment.LEFT);
+//        cell.setValign(VerticalAlignment.MIDDLE);
+//        cell.setFont(font);
+//
+//        // multiply the total fees due by -1 and change it to positive
+//        cell = pdPageRow3.createCell(15,String.valueOf(student.getAccount().getSchoolFeesBalance() * -1));
+//        cell.setAlign(HorizontalAlignment.RIGHT);
+//        cell.setValign(VerticalAlignment.MIDDLE);
+//        cell.setFont(font);
 
         // check the balance
         Row<PDPage>pdPageRow2 = baseTable.createRow(30);
-        Double bal = student.getAccount().getFeeToPay() + acumulator;
+        Double bal = student.getAccount().getSchoolFeesBalance();
         cell = pdPageRow2.createCell( 25, "BALANCE");
         cell.setAlign(HorizontalAlignment.LEFT);
         cell.setValign(VerticalAlignment.MIDDLE);
@@ -991,7 +992,7 @@ public class PDFMaker {
                     cell.setFontSize(12);
                 }
 
-                if(student.getPaySchoolFees() && student.getAccount().getFeeToPay()< 0) {
+                if(student.getPaySchoolFees() && student.getAccount().getSchoolFeesBalance() < 0) {
                     Row < PDPage > row3 = baseTable.createRow(30f);
 
                     cell = row3.createCell(bigSize,"School Fees Arrears");
@@ -999,14 +1000,14 @@ public class PDFMaker {
                     cell.setValign(VerticalAlignment.MIDDLE);
                     cell.setFontSize(12);
 
-                    cell = row3.createCell(smallSize,String.valueOf((student.getAccount().getFeeToPay()) * -1));
-                    total+=(student.getAccount().getFeeToPay() * -1);
+                    cell = row3.createCell(smallSize,String.valueOf((student.getAccount().getSchoolFeesBalance()) * -1));
+                    total+=(student.getAccount().getSchoolFeesBalance() * -1);
                     cell.setAlign(HorizontalAlignment.RIGHT);
                     cell.setValign(VerticalAlignment.MIDDLE);
                     cell.setFontSize(12);
 
                     // add value to total
-                    total+=student.getAccount().getFeeToPay()*-1;
+                    total+=student.getAccount().getSchoolFeesBalance() * -1;
                 }
 
                 if(student.getPaySchoolFees()){
@@ -1018,7 +1019,7 @@ public class PDFMaker {
                     cell.setFontSize(12);
 
                     cell = row4.createCell(smallSize,String.valueOf((student.getStage().getBill().getTotalBill())));
-                    total+=(student.getAccount().getFeeToPay());
+                    total+=(student.getAccount().getSchoolFeesBalance());
                     cell.setAlign(HorizontalAlignment.RIGHT);
                     cell.setValign(VerticalAlignment.MIDDLE);
                     cell.setFontSize(12);

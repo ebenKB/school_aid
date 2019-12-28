@@ -143,6 +143,7 @@
                         <ContextMenu>
                           <items>
                               <MenuItem id="View Details" fx:id="viewStudentDetails" mnemonicParsing="false" text="View Details" />
+                              <MenuItem fx:id="paySchoolFees" mnemonicParsing="false" text="Pay School Fees" />
                             <MenuItem fx:id="delleteStudentContextMenu" mnemonicParsing="false" text="Delete Student" />
                           </items>
                         </ContextMenu>

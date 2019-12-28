@@ -1036,14 +1036,14 @@ public class studentDetailsFormController implements Initializable{
         //set the text fields
         saleItems.setText(String.valueOf(total));
         amountPaid.setText(String.valueOf(payment));
-        bal+=student.getAccount().getFeeToPay();
+        bal+=student.getAccount().getSchoolFeesBalance();
 
         if(student.getAccount().getFeedingFeeCredit() < 0)
             bal+=(student.getAccount().getFeedingFeeCredit());
 
         bal+= salesBal;  // sum up the balance
         balance.setText(String.valueOf(bal));
-        feesBalance.setText(String.valueOf(student.getAccount().getFeeToPay()));
+        feesBalance.setText(String.valueOf(student.getAccount().getSchoolFeesBalance()));
         feedingFeeCredit.setText(String.valueOf(student.getAccount().getFeedingFeeCredit()));
 
         if(bal < 0) {

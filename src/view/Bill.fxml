@@ -96,21 +96,22 @@
                   <Button fx:id="saveBill" mnemonicParsing="false" prefHeight="35.0" prefWidth="87.0" text="Save Bill" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="40.0" layoutY="176.0" spacing="20.0">
+            <HBox alignment="CENTER" layoutX="37.0" layoutY="218.0" spacing="20.0">
                <children>
                   <Label text="From" textFill="#c9c9c9" />
                   <TextField fx:id="startYear" prefHeight="34.0" prefWidth="103.0" promptText="Year" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="213.0" layoutY="176.0" prefHeight="35.0" prefWidth="158.0" spacing="20.0">
+            <HBox alignment="CENTER" layoutX="210.0" layoutY="218.0" prefHeight="35.0" prefWidth="158.0" spacing="20.0">
                <children>
                   <Label text="To" textFill="#c9c9c9" />
                   <TextField fx:id="endYear" prefHeight="34.0" prefWidth="103.0" promptText="End Year" />
                </children>
             </HBox>
-            <Separator layoutX="39.0" layoutY="251.0" prefHeight="0.0" prefWidth="338.0" />
-            <ComboBox fx:id="termsCombo" layoutX="39.0" layoutY="324.0" prefHeight="45.0" prefWidth="248.0" promptText="Select a term" />
-            <Label layoutX="39.0" layoutY="285.0" text="What term are you creating the bill for?" textFill="WHITE" />
+            <Separator layoutX="39.0" layoutY="274.0" prefHeight="0.0" prefWidth="338.0" />
+            <ComboBox fx:id="termsCombo" layoutX="39.0" layoutY="361.0" prefHeight="45.0" prefWidth="248.0" promptText="Select a term" />
+            <Label layoutX="39.0" layoutY="321.0" text="What term are you creating the bill for?" textFill="#ebebeb" />
+            <Text fill="#ebebeb" layoutX="37.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ACADEMIC YEAR" />
          </children>
       </AnchorPane>
    </children>

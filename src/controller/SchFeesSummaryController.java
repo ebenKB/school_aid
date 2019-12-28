@@ -52,12 +52,12 @@ public class SchFeesSummaryController implements Initializable{
     private ObservableList<TransactionLogger> logs = FXCollections.observableArrayList();
     private TransactionLoggerDao tlDao;
 
-    // set default values for the for
+    // set default values for the form
     public void init(Student student) {
         this.student = student;
         studentName.setText(student.toString());
         if (student.getPaySchoolFees()) {
-            Double bal = student.getAccount().getFeeToPay();
+            Double bal = student.getAccount().getSchoolFeesBalance();
             if(bal != 0) {
                 totalFees.setText(String.valueOf(bal * -1));
                 System.out.println("The balance is not zero");
@@ -77,7 +77,7 @@ public class SchFeesSummaryController implements Initializable{
                 gross+=logger.getAmount();
             }
             grossTotal.setText(gross.toString());
-            balance.setText((String.valueOf((student.getAccount().getFeeToPay() + gross))));
+            balance.setText((String.valueOf((student.getAccount().getSchoolFeesBalance() + gross))));
         } else {
             paysFees.setText("Does not pay school fees");
         }
