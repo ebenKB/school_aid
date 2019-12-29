@@ -672,6 +672,7 @@ public class studentController implements Initializable{
                 alert.setTitle("Duplicate Entry");
                 alert.setHeaderText(existing.size()+" "+"Student(s)found with the same details.");
                 alert.setContentText("Do you want to clear the fields and save another student?");
+                alert.initOwner(save.getScene().getWindow());
                 Optional<ButtonType> result = alert.showAndWait();
 
                 if(result.isPresent() && result.get() == ButtonType.YES)

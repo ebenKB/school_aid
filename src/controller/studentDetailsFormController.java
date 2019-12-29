@@ -871,8 +871,15 @@ public class studentDetailsFormController implements Initializable{
                 if(path != null) {
                     try {
                         byte [] imageBytes = ImageHandler.changeToBLOB(path);
-                        student.getPicture().setStudent_picture(imageBytes);
                         studentImage.setImage(new Image(path.toString()));
+                        if(student.getPicture() != null) {
+                            student.getPicture().setStudent_picture(imageBytes);
+                        } else {
+                            Picture picture = new Picture();
+                            picture.setStudent_picture(imageBytes);
+                            picture.setStudent(student);
+                            student.setPicture(picture);
+                        }
                         updateChangeCounter(1);
                         showChangesLabel();
                     } catch (Exception ex) {
