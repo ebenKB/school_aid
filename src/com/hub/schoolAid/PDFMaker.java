@@ -59,7 +59,6 @@ public class PDFMaker {
         pdDocument = new PDDocument();
         ObservableList <TerminalReport> reports = FXCollections.observableArrayList();
         assessmentList.addAll(assessmentDao.getAssessment());
-        System.out.println("Trying to create a report"+ assessmentList.size());
         reports.addAll(terminalReportDao.getReport());
         this.designReport(reports);
 
@@ -340,7 +339,7 @@ public class PDFMaker {
 
         try {
             PDPageContentStream pdPageContentStream = new PDPageContentStream(pdDocument, page);
-            String title = "ACCOUNT STATEMENT FOR "+ student.toString();
+            String title = "ACCOUNT STATEMENT FOR "+ student.toString()+",   "+student.getStage().getName().toUpperCase();
             prepPageWidthHeader(pdPageContentStream, margin, yStart, mediaBox, title);
 
             // Display the records in a table
@@ -384,6 +383,19 @@ public class PDFMaker {
 
         if(transactionType == TransactionType.SCHOOL_FEES) {
             amountDue = student.getAccount().getSchoolFeesBalance();
+            // check the balance
+            Row<PDPage>pdPageRow2 = baseTable.createRow(30);
+            Cell<PDPage>cell;
+            Double bal = student.getAccount().getSchoolFeesBalance();
+            cell = pdPageRow2.createCell( 25, "BALANCE");
+            cell.setAlign(HorizontalAlignment.LEFT);
+            cell.setValign(VerticalAlignment.MIDDLE);
+            cell.setFont(font);
+
+            cell = pdPageRow2.createCell(15, bal.toString());
+            cell.setAlign(HorizontalAlignment.RIGHT);
+            cell.setValign(VerticalAlignment.MIDDLE);
+            cell.setFont(font);
         } else if(transactionType == TransactionType.FEEDING_FEE) {
             amountDue = 0.0;
         } else if(transactionType == TransactionType.SALES) {
@@ -401,31 +413,7 @@ public class PDFMaker {
         cell.setValign(VerticalAlignment.MIDDLE);
         cell.setFont(font);
 
-        // total fees
-//        Row<PDPage>pdPageRow3 = baseTable.createRow(30);
-//        cell = pdPageRow3.createCell( 25, "BALANCE");
-//        cell.setAlign(HorizontalAlignment.LEFT);
-//        cell.setValign(VerticalAlignment.MIDDLE);
-//        cell.setFont(font);
-//
-//        // multiply the total fees due by -1 and change it to positive
-//        cell = pdPageRow3.createCell(15,String.valueOf(student.getAccount().getSchoolFeesBalance() * -1));
-//        cell.setAlign(HorizontalAlignment.RIGHT);
-//        cell.setValign(VerticalAlignment.MIDDLE);
-//        cell.setFont(font);
 
-        // check the balance
-        Row<PDPage>pdPageRow2 = baseTable.createRow(30);
-        Double bal = student.getAccount().getSchoolFeesBalance();
-        cell = pdPageRow2.createCell( 25, "BALANCE");
-        cell.setAlign(HorizontalAlignment.LEFT);
-        cell.setValign(VerticalAlignment.MIDDLE);
-        cell.setFont(font);
-
-        cell = pdPageRow2.createCell(15, bal.toString());
-        cell.setAlign(HorizontalAlignment.RIGHT);
-        cell.setValign(VerticalAlignment.MIDDLE);
-        cell.setFont(font);
     }
 
     /**
@@ -440,9 +428,11 @@ public class PDFMaker {
             // SET the table header rows
             Row<PDPage> headerRow = baseTable.createRow(30f);
             createHeaderRow(headerRow, "DATE", (float) 25);
-            createHeaderRow(headerRow, "AMOUNT PAID", (float) 15);
-            createHeaderRow(headerRow, "DESCRIPTION", (float) 35);
-            createHeaderRow(headerRow, "PAID BY", (float) 25);
+            createHeaderRow(headerRow, "PREVIOUS BAL.", (float) 10);
+            createHeaderRow(headerRow, "AMOUNT PAID", (float) 10);
+            createHeaderRow(headerRow, "NEW BAL", (float) 10);
+            createHeaderRow(headerRow, "DESCRIPTION", (float) 25);
+            createHeaderRow(headerRow, "PAID BY", (float) 20);
             baseTable.addHeaderRow(headerRow);
             accumulator = 0.0;
 
@@ -453,16 +443,24 @@ public class PDFMaker {
                 cell.setAlign(HorizontalAlignment.LEFT);
                 cell.setValign(VerticalAlignment.MIDDLE);
 
-                cell = row.createCell((float) 15, log.getAmount().toString());
+                cell = row.createCell((float)10, log.getBal_before_payment().toString());
+                cell.setAlign(HorizontalAlignment.CENTER);
+                cell.setValign(VerticalAlignment.MIDDLE);
+
+                cell = row.createCell((float) 10, log.getAmount().toString());
                 cell.setAlign(HorizontalAlignment.RIGHT);
                 cell.setValign(VerticalAlignment.MIDDLE);
                 accumulator+=log.getAmount();
 
-                cell = row.createCell((float) 35, log.getDescription());
+                cell = row.createCell((float)10, log.getBal_after_payment().toString());
+                cell.setAlign(HorizontalAlignment.RIGHT);
+                cell.setValign(VerticalAlignment.MIDDLE);
+
+                cell = row.createCell((float) 25, log.getDescription());
                 cell.setAlign(HorizontalAlignment.LEFT);
                 cell.setValign(VerticalAlignment.MIDDLE);
 
-                cell = row.createCell((float) 25, log.getPaidBy());
+                cell = row.createCell((float) 20, log.getPaidBy());
                 cell.setAlign(HorizontalAlignment.LEFT);
                 cell.setValign(VerticalAlignment.MIDDLE);
             }

@@ -541,8 +541,14 @@ public class studentController implements Initializable{
         } else student.setHasAllergy(false);
 
         // check if there is an image for the student
+//        if(studentImage != null) {
+//            student.setPicture(studentImage);
+//        }
+
         if(studentImage != null) {
-            student.setPicture(studentImage);
+            Picture picture = new Picture();
+            picture.setPicture(studentImage);
+//            student.setPicture(studentImage);
         }
 
         studentDao=new StudentDao();

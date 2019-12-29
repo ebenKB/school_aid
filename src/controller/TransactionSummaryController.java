@@ -75,6 +75,24 @@ public class TransactionSummaryController implements Initializable {
     private TableColumn<TransactionLogger, String> feedingBy;
 
     @FXML
+    private TableColumn<TransactionLogger, String> feedingNewBal;
+
+    @FXML
+    private TableColumn<TransactionLogger, String> feedingPreBal;
+
+    @FXML
+    private TableColumn<TransactionLogger, String> feeNewBal;
+
+    @FXML
+    private TableColumn<TransactionLogger, String> feePreBal;
+
+    @FXML
+    private TableColumn<TransactionLogger, String> salesPreBal;
+
+    @FXML
+    private TableColumn<TransactionLogger, String> salesNewBal;
+
+    @FXML
     private Tab salesTab;
 
     @FXML
@@ -155,6 +173,8 @@ public class TransactionSummaryController implements Initializable {
             feeDate.setCellValueFactory(param -> new SimpleStringProperty(Utils.formatDate(param.getValue().getDate(), true)));
             feeAmount.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAmount().toString()));
             feeBy.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getPaidBy()));
+            feePreBal.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getBal_before_payment().toString()));
+            feeNewBal.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getBal_after_payment().toString()));
             feesLogTableView.setItems(fees);
         }
     }
@@ -164,6 +184,8 @@ public class TransactionSummaryController implements Initializable {
             feedingDate.setCellValueFactory(param -> new SimpleStringProperty(Utils.formatDate(param.getValue().getDate(), true)));
             feedingAmount.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAmount().toString()));
             feedingBy.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getPaidBy()));
+            feedingPreBal.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getBal_before_payment().toString()));
+            feedingNewBal.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getBal_after_payment().toString()));
             feedingLogsTableview.setItems(feedingLogs);
         }
     }
@@ -174,6 +196,8 @@ public class TransactionSummaryController implements Initializable {
             saleDate.setCellValueFactory(param -> new SimpleStringProperty(Utils.formatDate(param.getValue().getDate(), true)));
             saleAmount.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAmount().toString()));
             saleBy.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getPaidBy()));
+            salesPreBal.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getBal_before_payment().toString()));
+            salesNewBal.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getBal_after_payment().toString()));
             salesLogsTableview.setItems(salesLogs);
         }
     }

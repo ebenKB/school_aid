@@ -13,13 +13,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="645.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TransactionSummaryController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1045.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TransactionSummaryController">
    <children>
-      <Pane layoutX="-2.0" layoutY="-3.0" prefHeight="71.0" prefWidth="645.0" styleClass="darkPane" stylesheets="@../stylesheet/main.css" />
-      <Text fill="WHITE" layoutX="114.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Summary of Transactions / Payments" textAlignment="CENTER" wrappingWidth="395.000005826354">
-         <font>
-            <Font size="18.0" />
-         </font></Text>
+      <Pane layoutX="-2.0" layoutY="-3.0" prefHeight="71.0" prefWidth="1045.0" styleClass="darkPane" stylesheets="@../stylesheet/main.css">
+         <children>
+            <Text fill="WHITE" layoutX="340.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Summary of Transactions / Payments" textAlignment="CENTER" wrappingWidth="395.000005826354">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+         </children></Pane>
       <Label fx:id="studentName" alignment="CENTER" layoutX="48.0" layoutY="109.0" prefHeight="27.0" prefWidth="566.0" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="18.0" />
@@ -39,28 +42,30 @@
             </Label>
          </children>
       </HBox>
-      <HBox layoutX="399.0" layoutY="771.0" spacing="20.0">
+      <HBox layoutX="776.0" layoutY="748.0" spacing="20.0">
          <children>
-            <Button fx:id="close" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="close" />
-            <Button fx:id="printStatement" mnemonicParsing="false" prefHeight="35.0" prefWidth="104.0" text="Print Statement" />
+            <Button fx:id="close" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" text="Close" />
+            <Button fx:id="printStatement" mnemonicParsing="false" prefHeight="35.0" prefWidth="129.0" text="Print Statement" />
          </children>
       </HBox>
-      <VBox fx:id="summaryBox" layoutX="53.0" layoutY="214.0" prefHeight="534.0" prefWidth="540.0">
+      <VBox fx:id="summaryBox" layoutX="53.0" layoutY="184.0" prefHeight="550.0" prefWidth="935.0">
          <children>
             <JFXTabPane fx:id="stdDetailsTabPane" prefHeight="545.0" prefWidth="540.0" styleClass="darkTabPane">
                <tabs>
-                  <Tab fx:id="schFeeTab" text="Fees Logs">
+                  <Tab fx:id="schFeeTab" text="SCHOOL FEES LOGS">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="543.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="941.0">
                            <children>
-                              <TableView fx:id="feesLogTableView" prefHeight="436.0" prefWidth="547.0" styleClass="small-caption">
+                              <TableView fx:id="feesLogTableView" layoutX="13.0" prefHeight="447.0" prefWidth="902.0" styleClass="small-caption">
                                 <columns>
-                                  <TableColumn fx:id="feeDate" prefWidth="184.0" text="DATE" />
-                                  <TableColumn fx:id="feeAmount" prefWidth="103.0" text="AMOUNT" />
-                                    <TableColumn fx:id="feeBy" prefWidth="256.0" text="PAID BY" />
+                                  <TableColumn fx:id="feeDate" prefWidth="194.0" text="DATE" />
+                                    <TableColumn fx:id="feePreBal" prefWidth="165.37921142578125" text="PREVIOUS BALANCE" />
+                                  <TableColumn fx:id="feeAmount" prefWidth="125.89654541015625" text="AMOUNT PAID" />
+                                    <TableColumn fx:id="feeNewBal" prefWidth="160.10345458984375" text="NEW BALANCE" />
+                                    <TableColumn fx:id="feeBy" prefWidth="258.13818359375" text="PAID BY" />
                                 </columns>
                               </TableView>
-                              <HBox layoutX="4.0" layoutY="444.0" spacing="80.0">
+                              <HBox layoutY="466.0" spacing="80.0">
                                  <children>
                                     <HBox alignment="CENTER" prefHeight="35.0" prefWidth="215.0" spacing="10.0">
                                        <children>
@@ -88,18 +93,20 @@
                         </AnchorPane>
                     </content>
                   </Tab>
-                  <Tab fx:id="feedingTab" text="Feeding Logs">
+                  <Tab fx:id="feedingTab" text="FEEDING FEE LOGS">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="feedingLogsTableview" prefHeight="435.0" prefWidth="547.0" styleClass="small-caption">
+                              <TableView fx:id="feedingLogsTableview" prefHeight="450.0" prefWidth="935.0" styleClass="small-caption">
                                  <columns>
-                                    <TableColumn fx:id="feedingDate" prefWidth="177.0" text="DATE" />
-                                    <TableColumn fx:id="feedingAmount" prefWidth="114.0" text="AMOUNT" />
-                                    <TableColumn fx:id="feedingBy" prefWidth="252.0" text="PAID BY" />
+                                    <TableColumn fx:id="feedingDate" prefWidth="206.137939453125" text="DATE" />
+                                    <TableColumn fx:id="feedingPreBal" prefWidth="202.862060546875" text="PREVIOUS BALANCE" />
+                                    <TableColumn fx:id="feedingAmount" prefWidth="135.3448486328125" text="AMOUNT" />
+                                    <TableColumn fx:id="feedingNewBal" prefWidth="206.0689697265625" text="NEW BALANCE" />
+                                    <TableColumn fx:id="feedingBy" prefWidth="181.9310302734375" text="PAID BY" />
                                  </columns>
                               </TableView>
-                              <HBox alignment="CENTER" layoutX="14.0" layoutY="455.0" spacing="20.0">
+                              <HBox alignment="CENTER_LEFT" layoutX="11.0" layoutY="469.0" prefHeight="34.0" prefWidth="924.0" spacing="300.0">
                                  <children>
                                     <HBox alignment="CENTER" prefHeight="35.0" prefWidth="243.0" spacing="20.0">
                                        <children>
@@ -135,15 +142,17 @@
                         </AnchorPane>
                     </content>
                   </Tab>
-                  <Tab fx:id="salesTab" text="Sales Logs">
+                  <Tab fx:id="salesTab" text="SALES LOGS">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="salesLogsTableview" prefHeight="436.0" prefWidth="547.0" styleClass="small-caption">
+                              <TableView fx:id="salesLogsTableview" prefHeight="461.0" prefWidth="935.0" styleClass="small-caption">
                                  <columns>
-                                    <TableColumn fx:id="saleDate" prefWidth="212.0" text="DATE" />
-                                    <TableColumn fx:id="saleAmount" prefWidth="93.0" text="AMOUNT" />
-                                    <TableColumn fx:id="saleBy" prefWidth="238.0" text="PAID BY" />
+                                    <TableColumn fx:id="saleDate" prefWidth="235.000244140625" text="DATE" />
+                                    <TableColumn fx:id="salesPreBal" prefWidth="157.413818359375" text="PREVIOUS BALANCE" />
+                                    <TableColumn fx:id="saleAmount" minWidth="8.1376953125" prefWidth="157.172607421875" text="AMOUNT" />
+                                    <TableColumn fx:id="salesNewBal" prefWidth="158.896484375" text="NEW BALANCE" />
+                                    <TableColumn fx:id="saleBy" prefWidth="223.103515625" text="PAID BY" />
                                  </columns>
                               </TableView>
                            </children>
@@ -154,7 +163,7 @@
             </JFXTabPane>
          </children>
       </VBox>
-      <Label fx:id="paysFees" alignment="CENTER" layoutX="94.0" layoutY="130.0" prefHeight="24.0" prefWidth="471.0" textFill="#ff0202" />
-      <Pane fx:id="separator" layoutX="-1.0" layoutY="80.0" prefHeight="5.0" prefWidth="645.0" styleClass="separator" />
+      <Label fx:id="paysFees" alignment="CENTER" layoutX="253.0" layoutY="121.0" prefHeight="34.0" prefWidth="532.0" textFill="#ff0202" />
+      <Pane fx:id="separator" layoutX="-1.0" layoutY="80.0" prefHeight="6.0" prefWidth="1045.0" styleClass="separator" />
    </children>
 </AnchorPane>
