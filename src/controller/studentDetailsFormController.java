@@ -863,7 +863,7 @@ public class studentDetailsFormController implements Initializable{
         changeImage.setOnAction(e-> {
             Alert alert =new Alert(Alert.AlertType.CONFIRMATION,"",ButtonType.YES,ButtonType.NO);
             alert.setTitle("Change Image");
-            alert.setHeaderText("Your are about to change the image for"+" "+student.getFirstname()+"\nAre you sure you want to continue ?");
+            alert.setHeaderText("Your are about to change the image for" + " " + student.getFirstname()+"\nAre you sure you want to continue ?");
             alert.initOwner(Utils.getInitOwner(e));
             Optional<ButtonType>result = alert.showAndWait();
             if(result.isPresent() && result.get() == ButtonType.YES){
@@ -872,12 +872,10 @@ public class studentDetailsFormController implements Initializable{
                     try {
                         byte [] imageBytes = ImageHandler.changeToBLOB(path);
                         student.getPicture().setStudent_picture(imageBytes);
-//                        student.setPicture(imageBytes);
                         studentImage.setImage(new Image(path.toString()));
                         updateChangeCounter(1);
                         showChangesLabel();
-                    } catch (IOException ex) {
-//                        ex.printStackTrace();
+                    } catch (Exception ex) {
                         Notification.getNotificationInstance().notifyError("Error processing image", "Error");
                     }
                 }

@@ -186,7 +186,7 @@
                                           <Font name="Arial Black" size="12.0" />
                                        </font>
                                     </Label>
-                                    <Separator opacity="0.2" prefHeight="3.0" prefWidth="800.0" />
+                                    <Separator opacity="0.2" prefHeight="3.0" prefWidth="500.0" />
                                  </children>
                               </VBox>
                               <HBox spacing="180.0">
@@ -219,12 +219,13 @@
                                     </VBox>
                                  </children>
                               </HBox>
-                              <VBox prefHeight="20.0" prefWidth="800.0" spacing="10.0">
+                              <VBox prefHeight="20.0" prefWidth="500.0" spacing="10.0">
                                  <children>
                                     <Label text="Sales" textFill="#f4dc01">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
-                                       </font></Label>
+                                       </font>
+                                    </Label>
                                     <Separator opacity="0.25" prefWidth="800.0" />
                                  </children>
                               </VBox>
@@ -255,7 +256,7 @@
                               <Pane fx:id="indicator" minHeight="-Infinity" prefHeight="8.0" prefWidth="320.0" />
                            </children>
                         </VBox>
-                        <JFXListView fx:id="salesListView" layoutX="411.0" layoutY="63.0" prefHeight="299.0" prefWidth="248.0" visible="false" />
+                        <JFXListView fx:id="salesListView" layoutX="603.0" layoutY="71.0" prefHeight="527.0" prefWidth="304.0" visible="false" AnchorPane.bottomAnchor="48.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="71.0" />
                         <CheckBox fx:id="checkListView" layoutX="411.0" layoutY="44.0" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="4.0" prefWidth="180.0" text="Show/Hide Sales Details" textFill="#f2efef" visible="false">
                            <font>
                               <Font size="14.0" />
@@ -269,7 +270,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="886.0">
                      <children>
-                        <VBox layoutX="13.0" layoutY="14.0" spacing="10.0">
+                        <VBox layoutX="56.0" layoutY="14.0" spacing="10.0">
                            <children>
                               <ToggleSwitch fx:id="feedingToggle" prefHeight="30.0" prefWidth="186.0" text="Pays Feeding Fee" textFill="#f7e207">
                                  <tooltip>
@@ -283,27 +284,27 @@
                               </ToggleSwitch>
                            </children>
                         </VBox>
-                        <CheckBox fx:id="editFeeding" layoutX="53.0" layoutY="109.0" mnemonicParsing="false" text="Click To Edit" textFill="WHITE" visible="false" />
-                        <JFXComboBox fx:id="paymentMode" disable="true" layoutX="26.0" layoutY="223.0" prefHeight="44.0" prefWidth="246.0" promptText="Payment Mode" />
-                        <HBox alignment="CENTER" layoutX="17.0" layoutY="118.0" spacing="20.0">
+                        <CheckBox fx:id="editFeeding" layoutX="70.0" layoutY="100.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="139.0" text="Click To Edit" textFill="WHITE" visible="false" />
+                        <JFXComboBox fx:id="paymentMode" disable="true" layoutX="51.0" layoutY="244.0" prefHeight="44.0" prefWidth="246.0" promptText="Payment Mode" />
+                        <HBox alignment="CENTER" layoutX="56.0" layoutY="137.0" spacing="20.0">
                            <children>
                               <Text fill="#f7e207" strokeType="OUTSIDE" strokeWidth="0.0" text="Feeding Fee Amount" />
                               <JFXTextField fx:id="feedingAcc" alignment="CENTER_RIGHT" editable="false" focusColor="#ffcd05" maxWidth="103.0" minWidth="103.0" prefHeight="38.0" prefWidth="103.0" />
                            </children>
                         </HBox>
-                        <Text fill="#f7e207" layoutX="24.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feeding Fee Status" />
+                        <Text fill="#f7e207" layoutX="56.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feeding Fee Status" />
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
          </tabs>
       </JFXTabPane>
-      <Label fx:id="infoLable" layoutX="237.0" layoutY="597.0" prefHeight="44.0" prefWidth="211.0" textFill="#ffcd05">
+      <Label fx:id="infoLable" layoutX="225.0" layoutY="685.0" prefHeight="44.0" prefWidth="211.0" textFill="#ffcd05">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER_LEFT" layoutX="43.0" layoutY="693.0" prefHeight="27.0" prefWidth="238.0" spacing="20.0">
+      <HBox alignment="CENTER_LEFT" layoutX="43.0" layoutY="693.0" prefHeight="27.0" prefWidth="238.0" spacing="20.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="43.0">
          <children>
             <FontAwesomeIconView fx:id="padlock" fill="#e8e8e8" glyphName="LOCK" size="26" wrappingWidth="14.0" />
             <CheckBox fx:id="btnEditable" mnemonicParsing="false" prefHeight="7.0" prefWidth="139.0" text=" Enable Editing" textFill="#f2efef">
@@ -316,7 +317,7 @@
             </CheckBox>
          </children>
       </HBox>
-      <HBox layoutX="715.0" layoutY="690.0" spacing="30.0">
+      <HBox layoutX="715.0" layoutY="690.0" spacing="30.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="46.0">
          <children>
             <JFXButton fx:id="close" prefHeight="30.0" prefWidth="54.0" text="Close">
                <tooltip>
