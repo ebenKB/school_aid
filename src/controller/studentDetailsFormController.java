@@ -18,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -173,9 +174,26 @@ public class studentDetailsFormController implements Initializable{
     @FXML
     private Hyperlink schFeesSummary;
 
-
     @FXML
     private JFXTextArea allergy;
+
+    @FXML
+    private VBox pickupContentWrapper;
+
+    @FXML
+    private VBox pickupDetails;
+
+    @FXML
+    private JFXTextField pickName_1;
+
+    @FXML
+    private JFXTextField pickContact_1;
+
+    @FXML
+    private JFXTextField pickName_2;
+
+    @FXML
+    private JFXTextField pickContact_2;
 
 
     //mainController mainController;
@@ -458,6 +476,7 @@ public class studentDetailsFormController implements Initializable{
 //
 //            }
 //        });
+
        paymentMode.focusedProperty().addListener(new ChangeListener<Boolean>() {
            Boolean changed=false;
            int numChanges=0;
@@ -985,6 +1004,22 @@ public class studentDetailsFormController implements Initializable{
             if(student.getHasAllergy()) {
                 allergy.setVisible(true);
                 allergy.setText(student.getAllergies().get(0).getAllergy());
+            }
+
+            if(student.getGuardian() != null) {
+                List<Guardian>guardians = student.getGuardian();
+                if(guardians.size() > 0) {
+                    pickupContentWrapper.setVisible(true);
+                    if(guardians.size() == 2) {
+                        pickName_1.setText(guardians.get(0).getFullname());
+                        pickContact_1.setText(guardians.get(0).getContact());
+                        pickName_2.setText(guardians.get(1).getFullname());
+                        pickContact_2.setText(guardians.get(1).getContact());
+                    } else {
+                        pickName_1.setText(guardians.get(0).getFullname());
+                        pickContact_1.setText(guardians.get(0).getContact());
+                    }
+                }
             }
         }
     }

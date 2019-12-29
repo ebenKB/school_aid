@@ -218,7 +218,6 @@ public class Utils {
         for (Student st: tableView.getItems()) {
             st.setSelected(true);
             selectedStudents.add(st);
-//            tableView.getSelectionModel().select(st);
         }
         tableView.refresh();
     }
@@ -227,7 +226,6 @@ public class Utils {
         for (Student st: students) {
             st.setSelected(false);
             selectedStudents.remove(st);
-//            tableView.getSelectionModel().clearSelection();
         }
         selectedStudents.clear();
         tableView.refresh();
@@ -304,11 +302,10 @@ public class Utils {
             char [] mChars = month.toCharArray();
             char [] dChars = dayName.toCharArray();
             // take the first three letters of the month name
-            month= String.valueOf(mChars[0])+ String.valueOf(mChars[1])+ String.valueOf(mChars[2])+".";
+            month = String.valueOf(mChars[0])+ String.valueOf(mChars[1]) + String.valueOf(mChars[2]) + ".";
 
             // take the first three letters of the day name
-            dayName = String.valueOf(dChars[0]) + String.valueOf(dChars[1])+ String.valueOf(dChars[2])+".";
-
+            dayName = String.valueOf(dChars[0]) + String.valueOf(dChars[1]) + String.valueOf(dChars[2]) + ".";
             newDate = dayName+" "+month+ " "+ day+ ", "+ year;
         }
         return newDate;

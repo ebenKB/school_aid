@@ -27,7 +27,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.ToggleSwitch?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="886.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.studentDetailsFormController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="735.0" prefWidth="955.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.studentDetailsFormController">
    <children>
       <HBox fx:id="changesLabel" layoutX="767.0" layoutY="48.0" prefHeight="50.0" prefWidth="64.0" visible="false">
          <children>
@@ -48,7 +48,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="660.0">
                      <children>
-                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="829.0">
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="925.0">
                            <children>
                               <ImageView fx:id="studentImage" fitHeight="206.0" fitWidth="238.0" layoutX="23.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -100,7 +100,33 @@
                                           <Font size="14.0" />
                                        </font>
                                     </JFXTextField>
-                                    <JFXTextArea fx:id="allergy" labelFloat="true" prefHeight="108.0" prefWidth="477.0" promptText="Student Allergy" visible="false" />
+                                    <JFXTextField fx:id="prevSchool" editable="false" focusColor="#ffcd05" labelFloat="true" layoutX="10.0" layoutY="224.0" maxWidth="471.0" minWidth="351.0" prefHeight="36.0" prefWidth="471.0" promptText="Previous School">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </JFXTextField>
+                                    <JFXTextArea fx:id="allergy" labelFloat="true" prefHeight="77.0" prefWidth="540.0" promptText="Student Allergy" visible="false" />
+                                    <VBox fx:id="pickupContentWrapper" prefHeight="146.0" prefWidth="546.0" spacing="30.0" visible="false">
+                                       <children>
+                                          <Label text="Who can pick up this student" />
+                                          <VBox fx:id="pickupDetails" spacing="40.0">
+                                             <children>
+                                                <HBox spacing="20.0">
+                                                   <children>
+                                                      <JFXTextField fx:id="pickName_1" prefHeight="28.0" prefWidth="278.0" promptText="Name of person" />
+                                                      <JFXTextField fx:id="pickContact_1" prefHeight="28.0" prefWidth="248.0" promptText="Contact of person" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox spacing="20.0">
+                                                   <children>
+                                                      <JFXTextField fx:id="pickName_2" prefHeight="28.0" prefWidth="278.0" promptText="Name of person" />
+                                                      <JFXTextField fx:id="pickContact_2" prefHeight="28.0" prefWidth="248.0" promptText="Contact of person" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
                                  </children>
                               </VBox>
                               <FontAwesomeIconView />
@@ -114,27 +140,6 @@
                                     <FontAwesomeIconView fill="WHITE" glyphName="EDIT" />
                                  </graphic>
                               </Hyperlink>
-                              <VBox fx:id="pickupContentWrapper" layoutX="284.0" layoutY="332.0" spacing="30.0">
-                                 <children>
-                                    <Label text="Who can pick up this student" />
-                                    <VBox fx:id="pickupDetails" spacing="40.0">
-                                       <children>
-                                          <HBox spacing="20.0">
-                                             <children>
-                                                <JFXTextField fx:id="pickName_1" prefHeight="28.0" prefWidth="278.0" promptText="Name of person" />
-                                                <JFXTextField fx:id="pickContact_1" prefHeight="28.0" prefWidth="248.0" promptText="Contact of person" />
-                                             </children>
-                                          </HBox>
-                                          <HBox spacing="20.0">
-                                             <children>
-                                                <JFXTextField fx:id="pickName_2" prefHeight="28.0" prefWidth="278.0" promptText="Name of person" />
-                                                <JFXTextField fx:id="pickContact_2" prefHeight="28.0" prefWidth="248.0" promptText="Contact of person" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </VBox>
                            </children>
                         </AnchorPane>
                      </children>
@@ -145,17 +150,17 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="596.0" prefWidth="886.0">
                      <children>
-                        <VBox layoutX="14.0" layoutY="66.0" prefHeight="390.0" prefWidth="325.0" spacing="20.0">
+                        <VBox layoutX="14.0" layoutY="66.0" prefHeight="390.0" prefWidth="418.0" spacing="30.0">
                            <children>
-                              <JFXTextField fx:id="parentName" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="246.0" minWidth="246.0" prefHeight="40.0" prefWidth="246.0" promptText="Name of Parent/Guardian" />
-                              <JFXTextField fx:id="parentOccupation" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="246.0" minWidth="246.0" prefHeight="40.0" prefWidth="246.0" promptText="Occupation of Parent/Guardian" />
-                              <JFXTextField fx:id="parentPhone" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="246.0" minWidth="246.0" prefHeight="40.0" prefWidth="246.0" promptText="Contact of Parent/Guardian" />
-                              <JFXTextField fx:id="parentAdd" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="246.0" minWidth="246.0" prefHeight="40.0" prefWidth="246.0" promptText="Address of Parent/Guardian" />
-                              <JFXTextArea fx:id="parentLandMark" editable="false" focusColor="WHITE" maxWidth="246.0" minWidth="246.0" prefHeight="93.0" prefWidth="246.0" promptText="Description of landmark" />
+                              <JFXTextField fx:id="parentName" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="420.0" minWidth="246.0" prefHeight="40.0" prefWidth="420.0" promptText="Name of Parent/Guardian" />
+                              <JFXTextField fx:id="parentOccupation" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="420.0" minWidth="246.0" prefHeight="40.0" prefWidth="420.0" promptText="Occupation of Parent/Guardian" />
+                              <JFXTextField fx:id="parentPhone" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="422.0" minWidth="246.0" prefHeight="40.0" prefWidth="422.0" promptText="Contact of Parent/Guardian" />
+                              <JFXTextField fx:id="parentAdd" editable="false" focusColor="#ffcd05" labelFloat="true" maxWidth="427.0" minWidth="246.0" prefHeight="40.0" prefWidth="427.0" promptText="Address of Parent/Guardian" />
+                              <JFXTextArea fx:id="parentLandMark" editable="false" focusColor="WHITE" maxWidth="419.0" minWidth="246.0" prefHeight="93.0" prefWidth="419.0" promptText="Description of landmark" />
                            </children>
                         </VBox>
-                        <Separator layoutX="357.0" layoutY="29.0" maxWidth="-Infinity" opacity="0.28" orientation="VERTICAL" prefHeight="317.0" prefWidth="1.0" />
-                        <JFXButton fx:id="sendSms" disable="true" layoutX="474.0" layoutY="188.0" prefHeight="44.0" prefWidth="174.0" text="Send Message To Parent">
+                        <Separator layoutX="486.0" layoutY="46.0" maxWidth="-Infinity" opacity="0.28" orientation="VERTICAL" prefHeight="528.0" prefWidth="0.0" />
+                        <JFXButton fx:id="sendSms" disable="true" layoutX="663.0" layoutY="76.0" prefHeight="44.0" prefWidth="174.0" text="Send Message To Parent">
                            <graphic>
                               <ImageView fitHeight="31.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -172,13 +177,13 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="620.0">
                      <children>
-                        <VBox fillWidth="false" layoutX="14.0" layoutY="44.0" prefHeight="371.0" prefWidth="734.0" spacing="19.0">
+                        <VBox fillWidth="false" layoutX="55.0" layoutY="44.0" prefHeight="565.0" prefWidth="693.0" spacing="30.0">
                            <children>
                               <VBox spacing="10.0">
                                  <children>
                                     <Label text="Fees" textFill="#f4dc01">
                                        <font>
-                                          <Font name="System Bold" size="12.0" />
+                                          <Font name="Arial Black" size="12.0" />
                                        </font>
                                     </Label>
                                     <Separator opacity="0.2" prefHeight="3.0" prefWidth="800.0" />
@@ -298,9 +303,9 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <HBox layoutX="14.0" layoutY="604.0" prefHeight="25.0" prefWidth="251.0" spacing="20.0">
+      <HBox alignment="CENTER_LEFT" layoutX="43.0" layoutY="693.0" prefHeight="27.0" prefWidth="238.0" spacing="20.0">
          <children>
-            <FontAwesomeIconView fx:id="padlock" fill="#e8e8e8" glyphName="LOCK" size="22" wrappingWidth="14.0" />
+            <FontAwesomeIconView fx:id="padlock" fill="#e8e8e8" glyphName="LOCK" size="26" wrappingWidth="14.0" />
             <CheckBox fx:id="btnEditable" mnemonicParsing="false" prefHeight="7.0" prefWidth="139.0" text=" Enable Editing" textFill="#f2efef">
                <font>
                   <Font size="14.0" />
@@ -311,7 +316,7 @@
             </CheckBox>
          </children>
       </HBox>
-      <HBox layoutX="660.0" layoutY="600.0" spacing="30.0">
+      <HBox layoutX="715.0" layoutY="690.0" spacing="30.0">
          <children>
             <JFXButton fx:id="close" prefHeight="30.0" prefWidth="54.0" text="Close">
                <tooltip>

@@ -582,7 +582,6 @@ public class mainController implements Initializable{
                     }catch (NullPointerException e){
                         imgLabel.setText("Image Does Not Exist");
                         studentImage.setVisible(Boolean.FALSE);
-                        e.printStackTrace();
                     }
                 }
             }
