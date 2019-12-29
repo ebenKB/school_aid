@@ -852,7 +852,8 @@ public class studentDetailsFormController implements Initializable{
                 if(path != null) {
                     try {
                         byte [] imageBytes = ImageHandler.changeToBLOB(path);
-                        student.setPicture(imageBytes);
+                        student.getPicture().setStudent_picture(imageBytes);
+//                        student.setPicture(imageBytes);
                         studentImage.setImage(new Image(path.toString()));
                         updateChangeCounter(1);
                         showChangesLabel();
@@ -964,7 +965,7 @@ public class studentDetailsFormController implements Initializable{
     private void setStudentTabDetails(){
         try{
             if (student.getPicture() != null) {
-                ImageHandler.setImage(student.getPicture(), studentImage);
+                ImageHandler.setImage(student.getPicture().getStudent_picture(), studentImage);
             }
         }catch (Exception e){
             imgInfoLabel.setText("Image not found");
@@ -1143,7 +1144,7 @@ public class studentDetailsFormController implements Initializable{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/previewImage.fxml"));
             root = fxmlLoader.load();
             PreviewImageController controller = new PreviewImageController();
-            controller.initialize(this.student.getPicture(), this.student);
+            controller.initialize(this.student.getPicture().getStudent_picture(), this.student);
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);

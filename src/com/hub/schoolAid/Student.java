@@ -29,8 +29,14 @@ public class Student {
     @Column (name = "student_id")
     private Long Id;
 
-    @Lob
-    private byte[] picture;
+//    @Lob
+//    private byte[] picture;
+
+    @OneToOne(mappedBy = "student", optional = true, cascade = CascadeType.ALL)
+    private Picture picture;
+
+    @OneToOne(mappedBy = "student", optional = true, cascade = CascadeType.ALL)
+    private PreviousSchool previousSchool;
 
     //other attributes of the student
     private String firstname;
@@ -44,7 +50,7 @@ public class Student {
     public enum FeedingStatus{ DAILY, WEEKLY, MONTHLY, TERMLY, PERIODIC, SEMI_PERIODIC }
     private LocalDate reg_date;
     private LocalDate dob;
-    private String previousSchool;
+//    private String previousSchool;
     private boolean isActive; // indicates whether the student is still actively enrolling in the school
 
     // constructors
@@ -64,7 +70,6 @@ public class Student {
 
     @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
     private Parent parent;
-
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Guardian> guardian;
@@ -192,13 +197,21 @@ public class Student {
         this.assessments = assessments;
     }
 
-    public String getPreviousSchool() {
+    public PreviousSchool getPreviousSchool() {
         return previousSchool;
     }
 
-    public void setPreviousSchool(String previousSchool) {
+    public void setPreviousSchool(PreviousSchool previousSchool) {
         this.previousSchool = previousSchool;
     }
+
+    //    public String getPreviousSchool() {
+//        return previousSchool;
+//    }
+//
+//    public void setPreviousSchool(String previousSchool) {
+//        this.previousSchool = previousSchool;
+//    }
 
     public Boolean getHasAllergy() {
         return hasAllergy;
@@ -272,13 +285,21 @@ public class Student {
         isDeleted = deleted;
     }
 
-    public byte[] getPicture() {
+    public Picture getPicture() {
         return picture;
     }
 
-    public void setPicture(byte[] picture) {
+    public void setPicture(Picture picture) {
         this.picture = picture;
     }
+
+    //    public byte[] getPicture() {
+//        return picture;
+//    }
+//
+//    public void setPicture(byte[] picture) {
+//        this.picture = picture;
+//    }
 
     public List<Guardian> getGuardian() {
         return guardian;

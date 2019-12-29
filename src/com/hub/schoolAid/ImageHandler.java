@@ -32,6 +32,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
  *
  */
 public class ImageHandler {
+    private static FileChooser fileChooser =null;
 
     /**
      * Resizes an image to a absolute width and height (the image may not be
@@ -47,6 +48,7 @@ public class ImageHandler {
             throws IOException {
         // reads input image
         File inputFile = new File(inputImagePath);
+
         BufferedImage inputImage = ImageIO.read(inputFile);
 
         // creates output image
@@ -121,16 +123,20 @@ public class ImageHandler {
     }
 
     public static  URI getImagePath(){
-        FileChooser fileChooser = new FileChooser();
-        try {
-            return fileChooser.showOpenDialog(new Stage()).toURI();
-        }catch (Exception e) {
-         return null;
-        }
+        URI newPath = null;
+        if(fileChooser == null) {
+            fileChooser = new FileChooser();
+            try {
+                newPath = fileChooser.showOpenDialog(new Stage()).toURI();
+                fileChooser =null;
+                return newPath;
+            }catch (Exception e) {
+                return null;
+            }
+        } else return newPath;
     }
 
     public static byte[] changeToBLOB(URI filePath) throws IOException {
-        System.out.println("This is the file path"+ filePath);
         byte[] fileContent = null;
         try {
             fileContent = FileUtils.readFileToByteArray(new File(filePath.getPath()));

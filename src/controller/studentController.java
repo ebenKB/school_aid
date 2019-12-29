@@ -334,6 +334,7 @@ public class studentController implements Initializable{
             Alert alert =new Alert(Alert.AlertType.WARNING,"",ButtonType.NO,ButtonType.YES);
             alert.setHeaderText("No Image selected");
             alert.setContentText("You did not select an image for this student.\nDo you want to continue without am image?");
+            alert.initOwner(uploadImg.getScene().getWindow());
             Optional<ButtonType>result = alert.showAndWait();
             return result.isPresent() && result.get() == ButtonType.YES;
         }
@@ -402,7 +403,7 @@ public class studentController implements Initializable{
 
         uploadImg.setOnAction(event -> {
             // get the image path
-            URI path = ImageHandler.getImagePath();
+            path = ImageHandler.getImagePath();
 
             // set the image to the image view
             if(path != null) {
@@ -413,12 +414,8 @@ public class studentController implements Initializable{
             try {
                 byte[] a = ImageHandler.changeToBLOB(path);
                 studentImage = a;
-
-//                student.setPicture(a);
             } catch (Exception e){
-                e.printStackTrace();
-                System.out.println("an error occurred while converting the file"+ e);
-                Notification.getNotificationInstance().notifyError("an error occurred while converting the file", "Ërror");
+                Notification.getNotificationInstance().notifyError("Invalid selection", "Error");
             }
         });
 
@@ -481,7 +478,11 @@ public class studentController implements Initializable{
 
         // check if the student has a previous school
         if(previousSchool.getText().trim().length() > 0) {
-            student.setPreviousSchool(previousSchool.getText().trim());
+            PreviousSchool prevSchool = new PreviousSchool();
+            prevSchool.setName(previousSchool.getText().trim());
+            prevSchool.setStudent(student);
+            student.setPreviousSchool(prevSchool);
+//            student.setPreviousSchool(previousSchool.getText().trim());
         }
 
         // prepare guardian information for the student
@@ -547,7 +548,9 @@ public class studentController implements Initializable{
 
         if(studentImage != null) {
             Picture picture = new Picture();
-            picture.setPicture(studentImage);
+            picture.setStudent_picture(studentImage);
+            picture.setStudent(student);
+            student.setPicture(picture);
 //            student.setPicture(studentImage);
         }
 
@@ -619,7 +622,7 @@ public class studentController implements Initializable{
         }
 
         // check if there is a contact
-        if(contact.getText().trim().length()>0) {
+        if(contact.getText().trim().length() > 0) {
             guardian.setContact(contact.getText().trim());
         }
         return guardian;

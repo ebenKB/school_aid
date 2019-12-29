@@ -253,7 +253,7 @@ public class SchoolFeesFormController implements  Initializable {
                         viewPaymentDetails.setVisible(true);
                         setDetails(newValue);
                         if(newValue.getPicture() != null) {
-                            ImageHandler.setImage(newValue.getPicture(), studentImageview);
+                            ImageHandler.setImage(newValue.getPicture().getStudent_picture(), studentImageview);
 
                             // show the details of the student
                             setDetails(newValue);

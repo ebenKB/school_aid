@@ -3,14 +3,12 @@ package com.hub.schoolAid;
 import javax.persistence.*;
 
 @Entity
-public class Picture {
+public class PreviousSchool {
     @Id
     @SequenceGenerator(name = "picture_sequence", sequenceName = "picture_sequence", allocationSize = 100)
     @GeneratedValue(generator = "picture_sequence")
     private Long id;
-
-    @Lob
-    private byte[] student_picture;
+    private String name;
 
     @OneToOne
     private Student student;
@@ -23,12 +21,12 @@ public class Picture {
         this.id = id;
     }
 
-    public byte[] getStudent_picture() {
-        return student_picture;
+    public String getName() {
+        return name;
     }
 
-    public void setStudent_picture(byte[] student_picture) {
-        this.student_picture = student_picture;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Student getStudent() {

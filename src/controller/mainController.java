@@ -564,7 +564,7 @@ public class mainController implements Initializable{
 //                    String img= Utils.studentImgPath+detailsDao.getImage(studentTableView.getSelectionModel().getSelectedItem());
 //                    String img= Utils.studentImgPath+studentTableView.getSelectionModel().getSelectedItem().getImage();
                     try{
-                        if(studentTableView.getSelectionModel().getSelectedItem().getPicture() != null){
+                        if(studentTableView.getSelectionModel().getSelectedItem().getPicture().getStudent_picture() != null){
 //                        URL url= getClass().getResource(studentTableView.getSelectionModel().getSelectedItem().getImage());
                             //                          URL url= getClass().getResource(studentTableView.getSelectionModel().getSelectedItem().getImage());
 //                            Image image = new Image(new FileInputStream(getClass().getResourceAsStream(img).toString()));
@@ -572,7 +572,7 @@ public class mainController implements Initializable{
 //
                             imgLabel.setText("");
 //                            studentImage.setImage(image);
-                            ImageHandler.setImage(studentTableView.getSelectionModel().getSelectedItem().getPicture(), studentImage);
+                            ImageHandler.setImage(studentTableView.getSelectionModel().getSelectedItem().getPicture().getStudent_picture(), studentImage);
 
                             studentImage.setVisible(Boolean.TRUE);
                         }else {
@@ -582,6 +582,7 @@ public class mainController implements Initializable{
                     }catch (NullPointerException e){
                         imgLabel.setText("Image Does Not Exist");
                         studentImage.setVisible(Boolean.FALSE);
+                        e.printStackTrace();
                     }
                 }
             }
