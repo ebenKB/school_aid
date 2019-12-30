@@ -104,6 +104,9 @@ public class StudentDao {
 //        newStd.setGender(new_student.getGender());
 //        new_student.setReg_date(LocalDate.now());
 //        newStd.getParent().setname(new_student.getParent().getname());
+//        newStd.setPreviousSchool(new_student.getPreviousSchool());
+//        newStd.setPicture(new_student.getPicture());
+//        HibernateUtil.commit();
     }
 
     private void setParentRecsToUpdate(Student newStd, Parent parent){

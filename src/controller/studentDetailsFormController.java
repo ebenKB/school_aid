@@ -178,6 +178,9 @@ public class studentDetailsFormController implements Initializable{
     private JFXTextArea allergy;
 
     @FXML
+    private JFXTextField prevSchool;
+
+    @FXML
     private VBox pickupContentWrapper;
 
     @FXML
@@ -208,7 +211,8 @@ public class studentDetailsFormController implements Initializable{
 //        studentImage.setImage(new Image(student.getImage().replace("/","'\'")));
         btnEditable.setOnMouseClicked(event -> {
             if(btnEditable.isSelected()){
-                newStudent=new Student();
+                newStudent = new Student();
+                newStudent.setPreviousSchool(student.getPreviousSchool());
                 newStudent.setAccount(student.getAccount());
                 newStudent.setParent(student.getParent());
                 padlock.setVisible(Boolean.FALSE);
@@ -222,13 +226,14 @@ public class studentDetailsFormController implements Initializable{
                 parentOccupation.setEditable(Boolean.TRUE);
                 parentLandMark.setEditable(Boolean.TRUE);
                 parentAdd.setEditable(Boolean.TRUE);
+                prevSchool.setEditable(true);
                 editFeeding.setVisible(Boolean.TRUE);
                 changeImage.setVisible(Boolean.TRUE);
                 paymentMode.setDisable(false);
                 infoLable.setText("In Editing Mode.");
                 infoLable.setTextFill(Color.valueOf("#3CCC13"));
-            }else{
-                newStudent=null;
+            } else {
+                newStudent = null;
                 padlock.setVisible(Boolean.TRUE);
                 fname.setEditable(Boolean.FALSE);
                 surname.setEditable(Boolean.FALSE);
@@ -240,6 +245,7 @@ public class studentDetailsFormController implements Initializable{
                 parentOccupation.setEditable(Boolean.FALSE);
                 parentLandMark.setEditable(Boolean.FALSE);
                 parentAdd.setEditable(Boolean.FALSE);
+                prevSchool.setEditable(false);
                 editFeeding.setVisible(Boolean.FALSE);
                 changeImage.setVisible(Boolean.FALSE);
                 paymentMode.setDisable(true);
@@ -248,7 +254,7 @@ public class studentDetailsFormController implements Initializable{
             }
         });
 
-        editFeeding.setOnAction(e->{
+        editFeeding.setOnAction(e-> {
             if(editFeeding.isSelected()){
                Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"",ButtonType.YES,ButtonType.NO);
                alert.setTitle("Enable editing");
@@ -356,6 +362,73 @@ public class studentDetailsFormController implements Initializable{
                 }else{
                     oname.setOnKeyTyped(event -> {
                         if(!btnEditable.isSelected()) {
+                            notifyEditLock();
+                        }
+                    });
+                }
+            }
+        });
+
+        prevSchool.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            Boolean changed=false;
+            int numChanges=0;
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(!newValue){ // the content of the textfield has not changed
+                    try {
+                        if(!prevSchool.getText().trim().equals(student.getPreviousSchool().getName())){
+                            changed=true;
+                            if(numChanges==0){
+                                numChanges=1;
+                                updateChangeCounter(numChanges);
+                                if(newStudent.getPreviousSchool() != null) {
+                                    System.out.println("THERE IS A PREVIOUS SCHOOL EXISTNG....");
+                                    newStudent.getPreviousSchool().setName(prevSchool.getText().trim());
+                                } else {
+                                    System.out.println("TRYING TO CREATE A PREVIOUS SCHOOOL...");
+                                    PreviousSchool previousSchool = new PreviousSchool();
+                                    previousSchool.setName(prevSchool.getText().trim());
+                                    previousSchool.setStudent(newStudent);
+                                    newStudent.setPreviousSchool(previousSchool);
+                                }
+                            }
+                            showChangesLabel();
+                        } else {
+                            if(changed){
+                                revertChanges(numChanges);
+                                newStudent.setPreviousSchool(null);
+                                changed=false;
+                                showChangesLabel();
+                                numChanges=0;
+                            }
+                        }
+
+                    } catch (NullPointerException n) {
+                        if(btnEditable.isSelected()) {
+                            if(prevSchool.getText().trim().length() > 0) {
+                                changed=true;
+                                if(numChanges == 0) {
+                                    updateChangeCounter(1);
+                                    PreviousSchool previousSchool = new PreviousSchool();
+                                    previousSchool.setName(prevSchool.getText().trim());
+                                    previousSchool.setStudent(newStudent);
+                                    newStudent.setPreviousSchool(previousSchool);
+                                    numChanges = 1;
+                                }
+                            } else {
+                                if(changed) {
+                                    revertChanges(1);
+                                    showChangesLabel();
+                                    changed=false;
+                                    numChanges =0;
+                                }
+                            }
+                            showChangesLabel();
+                        }
+                    }
+                }else{ // the user is typing
+                    prevSchool.setOnKeyTyped(event -> {
+                        if(!btnEditable.isSelected()) { // check if the user is allowed to edit the field
                             notifyEditLock();
                         }
                     });
@@ -500,7 +573,7 @@ public class studentDetailsFormController implements Initializable{
                            numChanges=0;
                        }
                    }
-               }else{
+               } else {
                    oname.setOnKeyTyped(event -> {
                        if(!btnEditable.isSelected()){
                            notifyEditLock();
@@ -509,6 +582,7 @@ public class studentDetailsFormController implements Initializable{
                }
            }
        });
+
         phone.setOnKeyTyped(event -> {
             promptEditNotAllowed();
         });
@@ -552,10 +626,10 @@ public class studentDetailsFormController implements Initializable{
                            parentChanges-=1;
                        }
                    }
-               }catch (NullPointerException n){
+               } catch (NullPointerException n){
                   allowParentChanges();
                }
-                }else{
+                } else {
                     parentName.setOnKeyTyped(event -> {
                         if(!btnEditable.isSelected()){
                             notifyEditLock();
@@ -590,7 +664,7 @@ public class studentDetailsFormController implements Initializable{
                             parentChanges-=1;
                         }
                     }
-                }else{
+                } else {
                     parentOccupation.setOnKeyTyped(event -> {
                         if(!btnEditable.isSelected()){
                             notifyEditLock();
@@ -668,7 +742,7 @@ public class studentDetailsFormController implements Initializable{
                            }
                        });
                    }
-               }catch (Exception e){
+               }catch (Exception e) {
 
                }
             }
@@ -726,7 +800,7 @@ public class studentDetailsFormController implements Initializable{
                                inputDialog.setHeaderText("Enter your password to continue...");
                                inputDialog.setContentText("To confirm this is you, we need to confirm your password");
                                Optional<String> input = inputDialog.showAndWait();
-                               if(input.isPresent() && input.get() !=null){
+                               if(input.isPresent() && input.get() != null){
                                    if(input.get().equals(LoginFormController.user.getPassword())){
                                        feedingToggle.setSelected(Boolean.FALSE);
                                        student.setPayFeeding(false);
@@ -783,15 +857,15 @@ public class studentDetailsFormController implements Initializable{
                     prepareRecordsToSave();
                     StudentDao studentDao=new StudentDao();
                     studentDao.updateStudentRecord(student);
-
                     return null;
                 }
             };
+
             newRecs.setOnRunning(e -> {
                 MyProgressIndicator.getMyProgressIndicatorInstance().showActionProgress("Preparing records to save...");
             });
 
-            newRecs.setOnSucceeded(e ->{
+            newRecs.setOnSucceeded(e -> {
                 MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
                 Notification.getNotificationInstance().notifySuccess("The record has been updated","Success!");
 //                MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
@@ -878,7 +952,8 @@ public class studentDetailsFormController implements Initializable{
                             Picture picture = new Picture();
                             picture.setStudent_picture(imageBytes);
                             picture.setStudent(student);
-                            student.setPicture(picture);
+                            PictureDao pictureDao = new PictureDao();
+                            student.setPicture(pictureDao.addNewPicture(picture, student.getId()));
                         }
                         updateChangeCounter(1);
                         showChangesLabel();
@@ -956,6 +1031,15 @@ public class studentDetailsFormController implements Initializable{
         if(newStudent.getOthername() !=null)
             student.setOthername(newStudent.getOthername());
 
+        // check if the student already had a previous school
+        if(student.getPreviousSchool() == null) {
+            System.out.println("The previous school is null");
+            PreviousSchoolDao psd = new PreviousSchoolDao();
+            student.setPreviousSchool(psd.addPreviousSchool(newStudent.getPreviousSchool(), student.getId()));
+        } else if(newStudent.getPreviousSchool() != null) {
+            student.setPreviousSchool(newStudent.getPreviousSchool());
+        }
+
         student.setFeedingStatus(newStudent.getFeedingStatus());
         //check if there is a new Image
  //        ImageHandler imageHandler =new ImageHandler();
@@ -1009,6 +1093,12 @@ public class studentDetailsFormController implements Initializable{
             if(student.getHasAllergy()) {
                 allergy.setVisible(true);
                 allergy.setText(student.getAllergies().get(0).getAllergy());
+            }
+
+
+            // check if the student has a previous school
+            if(student.getPreviousSchool() != null) {
+                prevSchool.setText(student.getPreviousSchool().getName());
             }
 
             if(student.getGuardian() != null) {
@@ -1127,7 +1217,7 @@ public class studentDetailsFormController implements Initializable{
     }
 
     private void showChangesLabel() {
-        if(counter>0) {
+        if(counter > 0) {
             changesCounter.setText(String.valueOf(counter));
             changesLabel.setVisible(Boolean.TRUE);
             save.setDisable(Boolean.FALSE);
@@ -1140,6 +1230,7 @@ public class studentDetailsFormController implements Initializable{
     private void updateChangeCounter(int i){
         counter +=i;
     }
+
     private void revertChanges(int num){
         counter -=num;
     }
