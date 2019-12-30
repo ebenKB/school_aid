@@ -645,7 +645,7 @@ public class studentDetailsFormController implements Initializable{
                        if(! parentAdd.getText().trim().equals(student.getParent().getAddress())){
                            changed=true;
                            parentChanges+=1;
-                           if(numChanges==0){
+                           if(numChanges == 0){
                                numChanges=1;
                                updateChangeCounter(numChanges);
                                newStudent.getParent().getAddress().setHomeAddress(parentAdd.getText().trim());
@@ -661,9 +661,9 @@ public class studentDetailsFormController implements Initializable{
                                parentChanges-=1;
                            }
                        }
-                   }else{
+                   } else {
                        parentAdd.setOnKeyTyped(event -> {
-                           if(!btnEditable.isSelected()){
+                           if(!btnEditable.isSelected()) {
                                notifyEditLock();
                            }
                        });

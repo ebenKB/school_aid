@@ -46,7 +46,7 @@ public class SalesFormController {
     private Button clear;
 
     @FXML
-    private ListView<?> orderListview;
+    private ListView <?> orderListview;
 
     @FXML
     private Button checkout;
