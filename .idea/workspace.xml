@@ -7,22 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/AppDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/AppDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/AttendanceTemporary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/HibernateUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/ImageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/ImageHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/ItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/ItemDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/PDFMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/PDFMaker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/PreviousSchool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/PreviousSchool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/Stage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/Stage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/StageDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/StageDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDetailsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/StudentDetailsDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLoggerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLoggerDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/AssessmentFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AssessmentFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/salesDetailsFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/salesDetailsFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/studentDetailsFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/studentDetailsFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/viewAttendanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/viewAttendanceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/AppSettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppSettingsController.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -257,7 +242,6 @@
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/SaleOrder.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Allergy.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/AdmissionNumberSequence.java" />
-        <option value="$PROJECT_DIR$/src/controller/AppSettingsController.java" />
         <option value="$PROJECT_DIR$/src/controller/studentController.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/Initializer.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/RemarkDao.java" />
@@ -291,6 +275,7 @@
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/TransactionLoggerDao.java" />
         <option value="$PROJECT_DIR$/src/com/hub/schoolAid/PDFMaker.java" />
         <option value="$PROJECT_DIR$/src/controller/AssessmentFormController.java" />
+        <option value="$PROJECT_DIR$/src/controller/AppSettingsController.java" />
       </list>
     </option>
   </component>
@@ -837,12 +822,12 @@
       <workItem from="1558614106918" duration="3696000" />
       <workItem from="1559664858711" duration="728000" />
       <workItem from="1559710941987" duration="5219000" />
-      <workItem from="1577658089899" duration="22561000" />
+      <workItem from="1577658089899" duration="22930000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2238685000" />
+    <option name="totallyTimeSpent" value="2239054000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -855,7 +840,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1200" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Capture Tool" order="0" />
       <window_info id="Designer" order="1" />

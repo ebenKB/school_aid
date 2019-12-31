@@ -115,6 +115,7 @@ public class AppSettingsController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
                 alert.setTitle("Save settings");
                 alert.setHeaderText("Are you sure you want to save the records?");
+                alert.initOwner(save.getScene().getWindow());
                 Optional<ButtonType>results = alert.showAndWait();
                 if(results.isPresent() && results.get() == ButtonType.YES) {
                     Task task = new Task() {
