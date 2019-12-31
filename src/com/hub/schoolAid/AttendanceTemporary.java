@@ -7,8 +7,8 @@ import java.time.LocalDate;
 public class AttendanceTemporary{
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "attendance_sequence", sequenceName = "attendance_sequence", allocationSize = 1)
-    @GeneratedValue(generator = "attendance_sequence")
+    @SequenceGenerator(name = "attendance_temp_sequence", sequenceName = "attendance_temp_sequence", allocationSize = 1)
+    @GeneratedValue(generator = "attendance_temp_sequence")
     private Long id;
 
  //   other attributes

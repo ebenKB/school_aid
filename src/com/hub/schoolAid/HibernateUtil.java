@@ -44,7 +44,6 @@ public class HibernateUtil {
     }
 
     private static void readFile(){
-        System.out.println("Reading file");
        try {
            FileReader fileReader = new FileReader("src/database.properties");
            String line = null;

@@ -65,7 +65,6 @@ public class TransactionLoggerDao {
            query.setParameter(2, student_id);
            query.setParameter(3, 0);
            List<TransactionLogger>transactions = query.getResultList();
-           System.out.println("We got some transactions" + transactions.size());
            return transactions;
         } catch (Exception e) {
             em.close();
@@ -138,7 +137,6 @@ public class TransactionLoggerDao {
     }
 
     public List<TransactionLogger> getLog(LocalDate from, LocalDate to, TransactionType type) {
-        System.out.println("This is the date: From: "+ from+ "To: " + to);
         try {
             em = HibernateUtil.getEntityManager();
             HibernateUtil.begin();

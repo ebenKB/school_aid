@@ -71,7 +71,6 @@ public class PDFMaker {
 //        pdDocument = new PDDocument();
         for(TerminalReport t: reports ) {
             students.add(t.getStudent());
-            System.out.println("adding student to stack"+ t.toString());
         }
 
         assessmentList.clear();
@@ -735,7 +734,6 @@ public class PDFMaker {
     }
 
     public static  void createAttendanceReport (LocalDate from,LocalDate to,List<Attendance> attendanceList){
-        System.out.println("We want to preapre report with FROM and TO");
 
         // loop through the attendance and compare the dates
         //  the attendance date should be greater than or equal to FROM but less than TO or equal to TO

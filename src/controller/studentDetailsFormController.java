@@ -382,7 +382,6 @@ public class studentDetailsFormController implements Initializable{
                                 numChanges=1;
                                 updateChangeCounter(numChanges);
                                 if(newStudent.getPreviousSchool() != null) {
-                                    System.out.println("THERE IS A PREVIOUS SCHOOL EXISTNG....");
                                     newStudent.getPreviousSchool().setName(prevSchool.getText().trim());
                                 } else {
                                     System.out.println("TRYING TO CREATE A PREVIOUS SCHOOOL...");
@@ -1033,7 +1032,6 @@ public class studentDetailsFormController implements Initializable{
 
         // check if the student already had a previous school
         if(student.getPreviousSchool() == null) {
-            System.out.println("The previous school is null");
             PreviousSchoolDao psd = new PreviousSchoolDao();
             student.setPreviousSchool(psd.addPreviousSchool(newStudent.getPreviousSchool(), student.getId()));
         } else if(newStudent.getPreviousSchool() != null) {

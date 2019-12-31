@@ -110,7 +110,7 @@ public class ImageHandler {
         }catch (NullPointerException e){
            Notification.getNotificationInstance().notifyError("You didn't select any image","Empty selection");
         }catch (Exception e) {
-            System.out.println("an error has occurred..."+ e);
+            Notification.getNotificationInstance().notifyError("an error occured", "error!");
         }
 
         if(path==null){

@@ -640,11 +640,10 @@ public class salesDetailsFormController implements Initializable{
 
                     // check if today is not SATURDAY OR SUNDAY
                     LocalDate date = termDao.getCurrentTerm().getToday();
-                    System.out.println("This is the day of the week "+ date.getDayOfWeek().toString());
                     if(date.getDayOfWeek().toString().toLowerCase().equals("sunday") || date.getDayOfWeek().toString().toLowerCase().equals("saturday")){
                         showCreateAttendaceForm();
                     } else {
-                        System.out.println("We have to create a new attendance sheet for the system..");
+
                     }
                 }
             });
@@ -688,7 +687,6 @@ public class salesDetailsFormController implements Initializable{
                         fetchSalesData(studentListView.getSelectionModel().getSelectedItem());
 
                     }else{
-                        System.out.println("you selected from attendance");
                         //show the attendance table
                         String name = studentListView.getSelectionModel().getSelectedItem().getFirstname();
 //                                    studentListView.getSelectionModel().getSelectedItem().getOthername()+
@@ -930,7 +928,7 @@ public class salesDetailsFormController implements Initializable{
                 }
             });
         } catch (Exception e) {
-            System.out.println("an error occurred");
+            Notification.getNotificationInstance().notifyError("an error occurred", "error");
         }
     }
 

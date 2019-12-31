@@ -122,11 +122,9 @@ public class viewAttendanceController implements Initializable{
             Optional<Pair<LocalDate,LocalDate>> result = showPDFDialog();
            result.ifPresent(pair -> {
                 if(pair.getKey() != null && pair.getValue() == null) {
-                    System.out.println("IN IF CONDITION: These are the values : "+ pair.getKey()+" " + pair.getValue());
                     PDFMaker.getPDFMakerInstance().createAttendanceReport(pair.getKey(),attendanceList);
                 } else {
                     PDFMaker.createAttendanceReport(pair.getKey(),pair.getValue(),attendanceList);
-                    System.out.println("IN ELSE CONDITION : These are the values : "+ pair.getKey()+" " + pair.getValue());
                 }
            });
         });

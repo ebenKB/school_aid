@@ -10,8 +10,8 @@ import java.util.List;
 public class Stage {
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "staff_sequence", sequenceName = "staff_sequence", allocationSize = 1)
-    @GeneratedValue(generator = "staff_sequence")
+    @SequenceGenerator(name = "stage_sequence", sequenceName = "stage_sequence", allocationSize = 1)
+    @GeneratedValue(generator = "stage_sequence")
     private Long id;
 
     //other fields variables

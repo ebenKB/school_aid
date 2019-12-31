@@ -68,10 +68,8 @@ public class StudentDetailsDao {
             StudentDetails newDetails = em.find(StudentDetails.class,student.getId());
 
             if(newDetails ==null  || newDetails.equals("")){
-                System.out.println("image is null");
                 addImage(student,details.getImage());
             }else {
-                System.out.println("this is the details we found"+ newDetails.getImage());
                 updateDetails(student,details);
             }
             return true;

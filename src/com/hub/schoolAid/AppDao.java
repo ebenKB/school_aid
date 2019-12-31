@@ -19,7 +19,6 @@ public class AppDao {
     public static App getAppSetting() {
         if(app ==  null) {
             try {
-                System.out.println("From the database");
                 em = HibernateUtil.getEntityManager();
                 HibernateUtil.begin();
                 Query query = em.createQuery("from app ");
@@ -29,7 +28,7 @@ public class AppDao {
             } finally {
                 em.close();
             }
-        } else System.out.println("Not from the database");
+        }
         return app;
     }
 

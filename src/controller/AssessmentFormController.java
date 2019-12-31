@@ -163,7 +163,6 @@ public class AssessmentFormController implements Initializable{
 
          if(tempAssessment.isEmpty()) {
              //we have to create assessment for the students
-             System.out.println("cannot loop. We have to create for all students..");
              for (Student std : tempStudents) {
                  createNewAssessment(std, newAssessments);
              }
@@ -177,9 +176,7 @@ public class AssessmentFormController implements Initializable{
                      if(assessment.getStudent().getId().equals(std.getId())) {
                          found = true;
                      } else if (!assessmentIterator.hasNext()) {
-                         System.out.println("searched to the end but not found");
                          createNewAssessment(std,newAssessments);
-                         System.out.println("created a new assessment to be assigned..");
                      }
                  }
              }

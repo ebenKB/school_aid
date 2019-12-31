@@ -53,7 +53,6 @@ public class Main extends Application {
                     if (!appSettings.getHasInit()) {
                         settingsController.showAppSettingsForm();
                     } else {
-                        System.out.println("The app has init");
                         initializer.showLoginForm();
                     }
                 } else {
@@ -89,10 +88,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-       try {
-           launch(args);
-       } catch (Exception e) {
-           System.out.println("APPLICATION LEVEL EXCEPTION OCCURRED...");
-       }
+        launch(args);
     }
 }

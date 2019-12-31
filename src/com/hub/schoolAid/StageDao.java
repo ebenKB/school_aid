@@ -22,9 +22,7 @@ private EntityManager em;
             String hql = "FROM  Class C order by C.classValue ASC";
             return em.createQuery(hql).getResultList();
         } catch (Exception e) {
-            System.out.println("This is em:"+em);
             HibernateUtil.close();
-            System.out.println("Deleted em:" + em);
             return null;
         }finally {
             if(em == null) {

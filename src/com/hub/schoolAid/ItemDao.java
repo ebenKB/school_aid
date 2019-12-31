@@ -56,9 +56,7 @@ public class ItemDao {
         try {
             // check if the item already exists
             Item existing = this.getItem(item.getName());
-            System.out.print("this is the item are about to create : "+ item.toString());
             if(existing != null) {
-                System.out.print("The bill item already exists");
                 return existing;
             }
             em = HibernateUtil.getEntityManager();
