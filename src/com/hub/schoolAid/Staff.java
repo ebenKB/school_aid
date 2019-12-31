@@ -12,7 +12,7 @@ import java.util.List;
 public class Staff {
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "staff_sequence", sequenceName = "staff_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "staff_sequence", sequenceName = "staff_sequence", allocationSize = 1)
     @GeneratedValue(generator = "staff_sequence")
     private Long id;
 

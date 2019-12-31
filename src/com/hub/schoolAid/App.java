@@ -15,7 +15,7 @@ public class App {
 
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "app_sequence", sequenceName = "app_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "app_sequence", sequenceName = "app_sequence", allocationSize = 1)
     @GeneratedValue(generator = "app_sequence")
     private Long id;
 

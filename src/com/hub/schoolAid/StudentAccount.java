@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class StudentAccount {
     @javax.persistence.Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "student_account_sequence", sequenceName = "student_account_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "student_account_sequence", sequenceName = "student_account_sequence", allocationSize = 1)
     @GeneratedValue(generator = "student_account_sequence")
     @Column(name = "account_id")
     private Long Id;

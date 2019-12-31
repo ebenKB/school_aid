@@ -16,12 +16,10 @@ public class StudentDetailsDao {
     }
 
     public Boolean addImage(Student student,String image){
-        System.out.println("in the add image func..");
         try{
               em = HibernateUtil.getEntityManager();
 //              HibernateUtil.begin();
               Student std = em.find(Student.class,student.getId());
-              System.out.println("we found this student"+std.toString());
 
               StudentDetails studentDetails = new StudentDetails();
               studentDetails.setStudent(std);

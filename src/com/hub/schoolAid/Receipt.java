@@ -13,7 +13,7 @@ public class Receipt {
     }
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "receipt_sequence", sequenceName = "receipt_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "receipt_sequence", sequenceName = "receipt_sequence", allocationSize = 1)
     @GeneratedValue(generator = "receipt_sequence")
     private Long id;
 

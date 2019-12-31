@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Parent {
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "parent_sequence", sequenceName = "parent_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "parent_sequence", sequenceName = "parent_sequence", allocationSize = 1)
     @GeneratedValue(generator = "parent_sequence")
    // @Column(name = "id")
     private Long Id;

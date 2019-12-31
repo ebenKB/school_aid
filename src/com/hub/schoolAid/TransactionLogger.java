@@ -20,7 +20,7 @@ public class TransactionLogger {
     }
 
     @Id
-    @SequenceGenerator(name = "transaction_logger_sequence", sequenceName = "transaction_logger_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "transaction_logger_sequence", sequenceName = "transaction_logger_sequence", allocationSize = 1)
     @GeneratedValue(generator = "transaction_logger_sequence")
 //    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

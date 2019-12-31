@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class StudentDetails {
 
     @Id
-    @SequenceGenerator(name = "student_details_sequence", sequenceName = "student_details_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "student_details_sequence", sequenceName = "student_details_sequence", allocationSize = 1)
     @GeneratedValue(generator = "student_details_sequence")
     private Long id;
 

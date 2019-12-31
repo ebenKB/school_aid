@@ -10,7 +10,7 @@ public class Contact {
 
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "contact_sequence", sequenceName = "contact_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "contact_sequence", sequenceName = "contact_sequence", allocationSize = 1)
     @GeneratedValue(generator = "contact_sequence")
     private Long id;
 

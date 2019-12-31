@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class SchoolFees {
     @javax.persistence.Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "school_fees_sequence", sequenceName = "school_fees_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "school_fees_sequence", sequenceName = "school_fees_sequence", allocationSize = 1)
     @GeneratedValue(generator = "school_fees_sequence")
     private Long Id;
 

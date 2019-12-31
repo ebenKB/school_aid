@@ -16,7 +16,7 @@ public class TerminalReport {
     
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "terminal_report_sequence", sequenceName = "terminal_report_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "terminal_report_sequence", sequenceName = "terminal_report_sequence", allocationSize = 1)
     @GeneratedValue(generator = "terminal_report_sequence")
     private Long id;
 

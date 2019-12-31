@@ -7,7 +7,7 @@ import java.util.List;
 public class CurrentBill {
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "current_bill_sequence", sequenceName = "current_bill_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "current_bill_sequence", sequenceName = "current_bill_sequence", allocationSize = 1)
     @GeneratedValue(generator = "current_bill_sequence")
     private Long id;
 

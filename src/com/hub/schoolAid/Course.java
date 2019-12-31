@@ -8,7 +8,7 @@ public class Course {
     @javax.persistence.Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
 
-    @SequenceGenerator(name = "course_sequence", sequenceName = "course_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "course_sequence", sequenceName = "course_sequence", allocationSize = 1)
     @GeneratedValue(generator = "course_sequence")
     @Column(name = "subject_id")
     private Long Id;

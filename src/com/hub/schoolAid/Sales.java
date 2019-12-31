@@ -11,7 +11,7 @@ import java.util.Date;
 public class Sales {
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "sales_sequence", sequenceName = "sales_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "sales_sequence", sequenceName = "sales_sequence", allocationSize = 1)
     @GeneratedValue(generator = "sales_sequence")
     @Column(name = "sales_id")
     private Long id;

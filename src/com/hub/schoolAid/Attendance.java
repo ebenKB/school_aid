@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class Attendance {
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "attendance_sequence", sequenceName = "attendance_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "attendance_sequence", sequenceName = "attendance_sequence", allocationSize = 1)
     @GeneratedValue(generator = "attendance_sequence")
     private Long id;
 

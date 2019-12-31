@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class Term {
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "term_sequence", sequenceName = "term_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "term_sequence", sequenceName = "term_sequence", allocationSize = 1)
     @GeneratedValue(generator = "term_sequence")
     private Long id;
 

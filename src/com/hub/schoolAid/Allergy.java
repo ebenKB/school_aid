@@ -7,7 +7,7 @@ import java.util.List;
 public class Allergy {
     @javax.persistence.Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "allergy_sequence", sequenceName = "allergy_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "allergy_sequence", sequenceName = "allergy_sequence", allocationSize = 1)
     @GeneratedValue(generator = "allergy_sequence")
     private Long Id;
 

@@ -9,7 +9,7 @@ import java.util.List;
 public class Item {
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "item_sequence", sequenceName = "item_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "item_sequence", sequenceName = "item_sequence", allocationSize = 1)
     @GeneratedValue(generator = "item_sequence")
     private Long id;
 

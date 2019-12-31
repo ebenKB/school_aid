@@ -20,7 +20,7 @@ public class AdmissionNumberSequence {
             this.suffix = "";
 
         // check if the prefix is empty
-        if(this.prefix.length()<1)
+        if(this.prefix.length() < 1)
             this.suffix = "";
 
         return prefix+suffix+countSeq;

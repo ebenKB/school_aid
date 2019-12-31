@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class PreviousSchool {
     @Id
-    @SequenceGenerator(name = "picture_sequence", sequenceName = "picture_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "picture_sequence", sequenceName = "picture_sequence", allocationSize = 1)
     @GeneratedValue(generator = "picture_sequence")
     private Long id;
     private String name;

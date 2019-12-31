@@ -15,7 +15,7 @@ public class Grade {
 
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "grade_sequence", sequenceName = "grade_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "grade_sequence", sequenceName = "grade_sequence", allocationSize = 1)
     @GeneratedValue(generator = "grade_sequence")
     private Long id;
     private String name;

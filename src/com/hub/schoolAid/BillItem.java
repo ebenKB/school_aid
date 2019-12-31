@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class BillItem {
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "bill_item_sequence", sequenceName = "bill_item_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "bill_item_sequence", sequenceName = "bill_item_sequence", allocationSize = 1)
     @GeneratedValue(generator = "bill_item_sequence")
     private Long id;
 

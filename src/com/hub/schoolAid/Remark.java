@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Remark {
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "remark_sequence", sequenceName = "remark_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "remark_sequence", sequenceName = "remark_sequence", allocationSize = 1)
     @GeneratedValue(generator = "remark_sequence")
     private Long id;
 

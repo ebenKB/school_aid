@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class SaleOrder {
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    @SequenceGenerator(name = "sales_order_sequence", sequenceName = "sales_order_sequence", allocationSize = 100)
+    @SequenceGenerator(name = "sales_order_sequence", sequenceName = "sales_order_sequence", allocationSize = 1)
     @GeneratedValue(generator = "sales_order_sequence")
     private Long id;
 
