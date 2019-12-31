@@ -90,7 +90,7 @@ public class LoginFormController implements Initializable{
                 stage.setTitle("");
                 stage.show();
             } catch (IOException e) {
-                e.printStackTrace();
+
             }
         });
 
@@ -136,7 +136,7 @@ public class LoginFormController implements Initializable{
                         //hide the old form
                         ((Node)(event).getSource()).getScene().getWindow().hide();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        Notification.getNotificationInstance().notifyError("Error while authenticating the user", "error");
                     }finally {
                         Initializer.isLoggedin=true;
                         Initializer.isLocked=false;

@@ -199,9 +199,9 @@ public class ImageHandler {
                 saveImage(imageSize,source,newdir);
                 details.setImage(String.valueOf(source.getFileName()));
             } catch (IOException e) {
-                e.printStackTrace();
+
             } catch (URISyntaxException e) {
-                e.printStackTrace();
+
             }
         }
     }
@@ -211,7 +211,6 @@ public class ImageHandler {
             Files.delete(Paths.get(Utils.studentImgPath+image));
             return true;
         } catch (IOException e) {
-//            e.printStackTrace();
             return false;
         }
     }

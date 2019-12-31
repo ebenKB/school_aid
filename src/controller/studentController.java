@@ -606,7 +606,7 @@ public class studentController implements Initializable{
                 student.setGuardian(guardians);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("an error occurred while preparing records", "error");
         }
     }
 

@@ -103,7 +103,6 @@ public class Utils {
             stage.setMaximized(false);
             stage.show();
         } catch (Exception e) {
-            e.printStackTrace();
             Notification.getNotificationInstance().notifyError("Error while showing form", "Form load error");
             return;
         }
@@ -248,7 +247,7 @@ public class Utils {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
         }
     }
 
@@ -265,7 +264,7 @@ public class Utils {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
         } catch (Exception e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
         }
     }
 
@@ -282,7 +281,7 @@ public class Utils {
             stage.setMaximized(true);
             stage.show();
         }catch (Exception e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
         }
     }
 

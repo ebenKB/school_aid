@@ -514,7 +514,6 @@ public class AttendanceTemporaryDao {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
             return -2;
         }
     }
@@ -548,7 +547,6 @@ public class AttendanceTemporaryDao {
             HibernateUtil.commit();
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         } finally {
             em.close();

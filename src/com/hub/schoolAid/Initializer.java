@@ -69,8 +69,7 @@ public class Initializer {
             translateTransition2.setToX(0);
             translateTransition2.setToZ(0);
             translateTransition2.play();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException e) {Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");e.printStackTrace();
 //            Logger.getLogger("Error with Login","");
         }
     }
@@ -109,7 +108,7 @@ public class Initializer {
             stage.setTitle("");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");;
         }
     }
 }

@@ -114,7 +114,6 @@ public class AssessmentDao {
            q.setParameter(0,student.getId());
            return q.getResultList();
        } catch (Exception e) {
-           e.printStackTrace();
            return null;
        }finally {
            em.close();
@@ -127,10 +126,8 @@ public class AssessmentDao {
             HibernateUtil.begin();
             Query q=em.createQuery("from Assessment A order by A.id asc ");
             List<Assessment> assessments = q.getResultList();
-            System.out.println("WE GOT ASSESSEMENTS"+ assessments.size());
             return assessments;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         } finally {
 //            em.close();
@@ -154,10 +151,7 @@ public class AssessmentDao {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
-        }
-        for(Assessment as: assessments) {
-            System.out.print("Assessment to return "+ as.toString());
+            Notification.getNotificationInstance().notifyError("An error occured while fetching assessment", "error");
         }
         return  assessments;
     }
@@ -180,7 +174,6 @@ public class AssessmentDao {
             HibernateUtil.commit();
             return  true;
         } catch (Exception e){
-            e.printStackTrace();
             return  false;
         }finally {
             em.close();
@@ -201,8 +194,6 @@ public class AssessmentDao {
 
            for (int i = 0; i < entityCount; i++) {
                 if (i > 0 && i % batchSize == 0) {
-//                    HibernateUtil.commit();
-//                    HibernateUtil.begin();
                     em.flush();
                     em.clear();
                 }

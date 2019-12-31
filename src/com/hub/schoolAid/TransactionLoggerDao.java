@@ -68,7 +68,6 @@ public class TransactionLoggerDao {
            System.out.println("We got some transactions" + transactions.size());
            return transactions;
         } catch (Exception e) {
-            e.printStackTrace();
             em.close();
             HibernateUtil.close();
             return null;
@@ -109,7 +108,6 @@ public class TransactionLoggerDao {
             query.setParameter(2, 0);
             return query.getResultList();
         }catch (Exception e) {
-            e.printStackTrace();
             return null;
         } finally {
             em.close();

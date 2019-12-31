@@ -29,7 +29,6 @@ public class RemarkDao {
                return null;
            }
        }catch (Exception e){
-           e.printStackTrace();
            return null;
        }finally {
            em.close();

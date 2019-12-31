@@ -42,7 +42,6 @@ public class BillDao {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             HibernateUtil.rollBack();
             throw new Exception(e);
         }
@@ -242,7 +241,6 @@ public class BillDao {
             }
             HibernateUtil.commit();
         } catch (Exception e) {
-            e.printStackTrace();
             HibernateUtil.rollBack();
         } finally {
             HibernateUtil.close();

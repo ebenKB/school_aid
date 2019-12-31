@@ -292,7 +292,6 @@ public class salesDetailsFormController implements Initializable{
             }
             totalFeeding.setText(total.toString());
         }catch (Exception e){
-            e.printStackTrace();
 //            Notification.getNotificationInstance().notifyError("An error occurred while preparing the table data","Error in Table field");
         }
     }
@@ -626,7 +625,7 @@ public class salesDetailsFormController implements Initializable{
             stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
         }
     }
 

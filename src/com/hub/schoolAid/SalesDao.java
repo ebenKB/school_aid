@@ -49,7 +49,6 @@ private EntityManager em;
             sellToMany(students,sales,item);
             return true;
         }catch (Exception e){
-            e.printStackTrace();
             return false;
         }
     }
@@ -66,7 +65,6 @@ private EntityManager em;
             sellToMany(students,sales,item);
             return true;
         }catch (Exception e){
-            e.printStackTrace();
             return false;
         }
     }
@@ -89,7 +87,6 @@ private EntityManager em;
             e.printStackTrace();
            return false;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }

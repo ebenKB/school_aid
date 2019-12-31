@@ -235,7 +235,6 @@ public class PDFMaker {
                     }
                     pdPageContentStream.close();
                 } catch (Exception e) {
-                    e.printStackTrace();
                     throw new Exception(e);
                 }
             }
@@ -373,7 +372,7 @@ public class PDFMaker {
 
             pdPageContentStream.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("Error while generating statement", "error");
         }
         return  pdDocument;
     }
@@ -726,7 +725,6 @@ public class PDFMaker {
                         }
                     } catch (IOException e) {
 
-                        e.printStackTrace();
                     }
             }
         });
@@ -822,7 +820,7 @@ public class PDFMaker {
 
                     baseTable.draw();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Notification.getNotificationInstance().notifyError("error while creating bill", "error");
                 }
 
             }
@@ -1115,7 +1113,7 @@ public class PDFMaker {
                 }
                 baseTable.draw();
             } catch (IOException e) {
-                e.printStackTrace();
+
             }
     }
 
@@ -1313,7 +1311,6 @@ public class PDFMaker {
            baseTable.draw();
 
        } catch (IOException e) {
-           e.printStackTrace();
        }
         return  pdPage;
     }

@@ -34,7 +34,6 @@ public class HibernateUtil {
             new UserDao().createDefaultAdmin();
             return true;
         }catch (Exception e){
-            e.printStackTrace();
             Alert alert =new Alert(Alert.AlertType.ERROR,"", ButtonType.OK);
             alert.setTitle("Error");
             alert.setHeaderText("Error Connecting to Database");
@@ -58,7 +57,7 @@ public class HibernateUtil {
 
            bufferedReader.close();
        } catch (IOException e) {
-        e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("error while reading file", "file error");
        }
     }
 
@@ -67,7 +66,7 @@ public class HibernateUtil {
            FileReader fileReader = new FileReader("");
 
        } catch (IOException e) {
-           e.printStackTrace();
+
        }
     }
 

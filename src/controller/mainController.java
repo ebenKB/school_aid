@@ -273,7 +273,7 @@ public class mainController implements Initializable{
             stage.setTitle("");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
         }
     }
 
@@ -288,7 +288,7 @@ public class mainController implements Initializable{
             stage.setTitle("");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
         }
     }
 
@@ -404,7 +404,7 @@ public class mainController implements Initializable{
             stage.setTitle("Terminal Report");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
         }
     }
 
@@ -426,7 +426,6 @@ public class mainController implements Initializable{
             stage.setTitle("Manage Students");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
             Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "Error");
         }
     }
@@ -632,7 +631,7 @@ public class mainController implements Initializable{
                 stage.setTitle("");
                 stage.show();
             } catch (IOException e) {
-                e.printStackTrace();
+                Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
             }
         });
 
@@ -647,7 +646,7 @@ public class mainController implements Initializable{
                 stage.setTitle("");
                 stage.show();
             } catch (IOException e) {
-                e.printStackTrace();
+                Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
             }
         });
 
@@ -839,7 +838,6 @@ public class mainController implements Initializable{
                         refresh();
                     }catch (HibernateException e){
                         notification.notifyError("Sorry! an error occurred while fetching students","Database Error");
-                        e.printStackTrace();
                     }
                 }else Notification.getNotificationInstance().notifyError("Action denied","Error");
             }
@@ -860,7 +858,7 @@ public class mainController implements Initializable{
             stage.initStyle(StageStyle.UTILITY);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
         }
     }
 
@@ -877,7 +875,7 @@ public class mainController implements Initializable{
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
         } catch (Exception e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
             }
         }
 
@@ -892,7 +890,7 @@ public class mainController implements Initializable{
             stage.setTitle("New Subject");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
         }
     }
 
@@ -909,7 +907,7 @@ public class mainController implements Initializable{
             stage.setTitle("Assessment Sheet");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
         }
     }
 
@@ -925,7 +923,7 @@ public class mainController implements Initializable{
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
         }
     }
 
@@ -941,7 +939,7 @@ public class mainController implements Initializable{
             stage.setTitle("New Grade");
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
         }
     }
 
@@ -961,7 +959,7 @@ public class mainController implements Initializable{
             stage.show();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
         }
     }
 
@@ -980,7 +978,7 @@ public class mainController implements Initializable{
             stage.initStyle(StageStyle.UTILITY);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
         }
     }
 

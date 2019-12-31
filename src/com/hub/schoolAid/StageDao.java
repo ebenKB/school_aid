@@ -70,7 +70,6 @@ private EntityManager em;
             HibernateUtil.commit();
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return  false;
         }
     }
@@ -193,7 +192,6 @@ private EntityManager em;
                 }
                 em.getTransaction().commit();
             } catch (Exception e) {
-                e.printStackTrace();
                 hasNext = false;
             }
         }

@@ -74,7 +74,6 @@ public class TerminalReportDao {
             if(HibernateUtil.getEntityManager().getTransaction().isActive()){
                 HibernateUtil.getEntityManager().getTransaction().rollback();
             }
-            e.printStackTrace();
             return  false;
         }finally {
             em.close();
@@ -88,7 +87,6 @@ public class TerminalReportDao {
             List<TerminalReport> reports  = em.createQuery("from TerminalReport ").getResultList();
             return reports;
         } catch (Exception e){
-            e.printStackTrace();
             return  null;
         } finally {
 //             em.close();

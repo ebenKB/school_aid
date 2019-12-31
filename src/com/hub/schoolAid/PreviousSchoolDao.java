@@ -22,7 +22,6 @@ public class PreviousSchoolDao {
             previousSchool.setStudent(st);
             return HibernateUtil.save(PreviousSchool.class, previousSchool);
         }catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }

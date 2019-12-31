@@ -144,7 +144,6 @@ public class ShowBillController implements Initializable {
             stage.show();
         } catch (Exception e) {
             Notification.getNotificationInstance().notifyError("An error occurred while loading the form", "error!");
-            e.printStackTrace();
         }
     }
 
@@ -165,7 +164,7 @@ public class ShowBillController implements Initializable {
             stage.setResizable(false);
             stage.show();
         } catch (Exception e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
         }
     }
 }

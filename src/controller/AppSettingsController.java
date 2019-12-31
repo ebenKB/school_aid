@@ -176,7 +176,7 @@ public class AppSettingsController implements Initializable {
             stage.initStyle(StageStyle.UTILITY);
             stage.show();
         }catch (Exception e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occured while loading form", "Error");
         }
     }
 }

@@ -429,7 +429,7 @@ public class FeedingFormController implements Initializable {
                 payFeedingFee(at);
             } catch (Exception e) {
                 // log error here
-                e.printStackTrace();
+                Notification.getNotificationInstance().notifyError("An error occurred", "error");
             }
         });
 
@@ -537,7 +537,7 @@ public class FeedingFormController implements Initializable {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
         }
     }
 
@@ -555,7 +555,7 @@ public class FeedingFormController implements Initializable {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
         } catch (IOException e) {
-//            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
         }
     }
     private void setCounterLabel() {

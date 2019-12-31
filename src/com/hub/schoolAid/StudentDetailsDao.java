@@ -43,7 +43,6 @@ public class StudentDetailsDao {
 //            HibernateUtil.close();
             return true;
         }catch (Exception e){
-            e.printStackTrace();
             return false;
         }
     }
@@ -58,13 +57,11 @@ public class StudentDetailsDao {
            HibernateUtil.close();
            return true;
        }catch (Exception e){
-           e.printStackTrace();
            return false;
        }
     }
 
     public Boolean updateDetilsIfExist(Student student,StudentDetails details){
-        System.out.println("in the update if exist function....");
         try {
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
@@ -79,7 +76,6 @@ public class StudentDetailsDao {
             }
             return true;
         }catch (Exception e){
-            e.printStackTrace();
             return false;
         }
     }

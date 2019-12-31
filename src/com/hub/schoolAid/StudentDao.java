@@ -56,7 +56,6 @@ public class StudentDao {
             stageDao.addStudent(student.getStage());
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         } finally {
             HibernateUtil.close();
@@ -74,7 +73,6 @@ public class StudentDao {
             setStdRecsToUpdate(new_student);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -126,8 +124,7 @@ public class StudentDao {
                     .setParameter(3,student.getStage().getName())
                     .getResultList();
             return  data;
-        }catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception e){
             return  null;
         } finally {
             em.close();
@@ -158,7 +155,6 @@ public class StudentDao {
              List<Student> list =em.createQuery(hql).getResultList();
              return list;
          }catch (HibernateException e){
-             e.printStackTrace();
              return null;
          }finally {
              em.close();
@@ -175,8 +171,7 @@ public class StudentDao {
 
            List<Student> list =em.createQuery(hql).getResultList();
            return list;
-       }catch (HibernateException e){
-           e.printStackTrace();
+       } catch (HibernateException e){
            return null;
        }
        finally {
@@ -222,8 +217,7 @@ public class StudentDao {
             em.getTransaction().begin();
             studentList = em.createQuery("from students order by firstname asc ").getResultList();
             return studentList;
-        }catch (HibernateException e){
-            e.printStackTrace();
+        } catch (HibernateException e){
             return null;
         } finally {
            em.close();
@@ -239,7 +233,6 @@ public class StudentDao {
                     .setParameter(0,payFees).getResultList();
             return studentList;
         } catch (HibernateException e) {
-            e.printStackTrace();
             return null;
         }
         finally {
@@ -320,7 +313,6 @@ public class StudentDao {
             HibernateUtil.close();
             return  true;
         } catch (Exception e) {
-            e.printStackTrace();
             return  false;
         } finally {
             em.close();
@@ -391,7 +383,6 @@ public class StudentDao {
             }
             throw e;
         } catch (Exception e){
-            e.printStackTrace();
             return status;
         }finally {
             em.close();
@@ -607,7 +598,6 @@ public class StudentDao {
             HibernateUtil.commit();
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         } finally {
             em.close();

@@ -1284,7 +1284,7 @@ public class studentDetailsFormController implements Initializable{
             stage.show();
 
         }catch (Exception e) {
-            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occured while loading form", "Error");
         }
     }
 

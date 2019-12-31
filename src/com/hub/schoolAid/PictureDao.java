@@ -19,7 +19,6 @@ public class PictureDao {
             picture.setStudent(st);
             return HibernateUtil.save(Picture.class, picture);
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
