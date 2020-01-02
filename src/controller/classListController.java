@@ -91,7 +91,7 @@ public class classListController implements Initializable{
            Alert alert = new Alert(Alert.AlertType.INFORMATION, "",ButtonType.OK, ButtonType.CANCEL);
            alert.setTitle("Synchronize Class size");
            alert.setContentText("Use this tool if you feel there is an error in the class size. \n It will check the various classes and update the number on row.\n If you want to continue to press OK");
-           alert.initOwner(Utils.getInitOwner(event));
+           alert.initOwner(close.getScene().getWindow());
            Optional<ButtonType> result = alert.showAndWait();
            if(result.isPresent() && result.get() == ButtonType.OK) {
                Task task = new Task() {

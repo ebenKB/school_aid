@@ -805,14 +805,16 @@ public class mainController implements Initializable{
                 }
 
                 String lowerVal = newValue.toLowerCase();
-                if(student.getFirstname().toLowerCase().contains(lowerVal)){
-                    return  true;
-                }else if(student.getLastname().toLowerCase().contains(lowerVal)) {
-                    return  true;
-                }else if(student.getLastname().toLowerCase().contains(lowerVal)) {
-                    return  true;
-                }else if (student.toString().toLowerCase().contains(lowerVal));
-                return false;
+                return Utils.checkIfStudent(lowerVal, student);
+
+//                if(student.getFirstname().toLowerCase().contains(lowerVal)){
+//                    return  true;
+//                }else if(student.getLastname().toLowerCase().contains(lowerVal)) {
+//                    return  true;
+//                }else if(student.getLastname().toLowerCase().contains(lowerVal)) {
+//                    return  true;
+//                }else if (student.toString().toLowerCase().contains(lowerVal));
+//                return false;
             });
         }));
 

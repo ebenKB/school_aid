@@ -103,6 +103,9 @@ public class studentController implements Initializable{
     private JFXTextField address;
 
     @FXML
+    private JFXTextField location;
+
+    @FXML
     private ImageView infoImageView;
 
     @FXML
@@ -188,7 +191,7 @@ public class studentController implements Initializable{
      */
     private void checkTextBoxLength(TextField textField,int min){
 
-        if(textField.getText().trim().matches("[a-zA-Z\\s\\$]+")){
+        if(textField.getText().trim().matches("[a-zA-Z]+\\s\\$-")){
             //check if the name is short
             if(textField.getText().trim().length()< min){
 
@@ -426,23 +429,25 @@ public class studentController implements Initializable{
 //                    fees.setText(String.valueOf(newValue.getFeesToPay()));
                     fees.setText(String.valueOf(newValue.getBill().getTotalBill()));
                 } else {
-                    // inform the user that the selected class does not have a bill
-                    Alert alert = new Alert(Alert.AlertType.WARNING, "", ButtonType.YES, ButtonType.NO);
-                    alert.setHeaderText("No billing records found");
-                    alert.setContentText("The class you have selected does not have any billing records. \nIf you continue the student will be created without any bill. " +
-                            "\n You can create a bill for the selected class and return to this form to register the student." +
-                            "\nDo you want to register the student anyway?");
-                    alert.initOwner(classCombo.getScene().getWindow());
-                    alert.getDialogPane().setStyle("-fx-font-size: 14px");
-                    Optional<ButtonType>response =  alert.showAndWait();
-                    if(response.isPresent() && response.get() == ButtonType.YES){
-                        fees.setText("0.00");
-                    } else {
-                        classCombo.getScene().getWindow().hide();
+                    if(newValue != null) {
+                        // inform the user that the selected class does not have a bill
+                        Alert alert = new Alert(Alert.AlertType.WARNING, "", ButtonType.YES, ButtonType.NO);
+                        alert.setHeaderText("No billing records found");
+                        alert.setContentText("The class you have selected does not have any billing records. \nIf you continue the student will be created without any bill. " +
+                                "\n You can create a bill for the selected class and return to this form to register the student." +
+                                "\nDo you want to register the student anyway?");
+                        alert.initOwner(classCombo.getScene().getWindow());
+                        alert.getDialogPane().setStyle("-fx-font-size: 14px");
+                        Optional<ButtonType>response =  alert.showAndWait();
+                        if(response.isPresent() && response.get() == ButtonType.YES){
+                            fees.setText("0.00");
+                        } else {
+                            classCombo.getScene().getWindow().hide();
 
-                        // show the form to create a new bill
-                        ShowBillController sbc = new ShowBillController();
-                        sbc.showCreateBillForm();
+                            // show the form to create a new bill
+                            ShowBillController sbc = new ShowBillController();
+                            sbc.showCreateBillForm();
+                        }
                     }
                 }
 
@@ -464,6 +469,7 @@ public class studentController implements Initializable{
 
     private Boolean prepareStudentRecords() {
         student =  new Student();
+        student.setStage(null);
         student.setFirstname(fname.getText().trim().toString().toUpperCase());
         student.setLastname(surname.getText().trim().toUpperCase());
         student.setOthername(oname.getText().trim().toUpperCase());
@@ -472,7 +478,7 @@ public class studentController implements Initializable{
             student.setDob(dob.getValue());
         }
 
-        if(classCombo.getSelectionModel().getSelectedItem() !=null){
+        if(classCombo.getSelectionModel().getSelectedItem() != null){
             student.setStage(classCombo.getSelectionModel().getSelectedItem());
         }
 
@@ -569,10 +575,18 @@ public class studentController implements Initializable{
         sexRadiobtn.getSelectedToggle().setSelected(false);
         allergyRadiobtn.getSelectedToggle().setSelected(false);
         classCombo.getSelectionModel().clearSelection();
+        student.setStage(null);
         allergy.clear();
         image.setImage(null);
         classCombo.getSelectionModel().clearSelection();
         studentImage = null;
+    }
+
+    private void clearGuardianInfo() {
+        guardian_1_name.clear();
+        guardian_1_contact.clear();
+        guardian_2_name.clear();
+        guardian_2_contact.clear();
     }
 
     private void clearParentField(){
@@ -581,6 +595,7 @@ public class studentController implements Initializable{
         occupation.clear();
         address.clear();
         landmark.clear();
+        relationshipToWard.clear();
         feedingCombo.getSelectionModel().select(Student.FeedingStatus.DAILY);
     }
 
@@ -762,7 +777,7 @@ public class studentController implements Initializable{
                     studentDao = new StudentDao();
                     studentDao.addNewStudent(student);
                 }catch (Exception e){
-                    notification.notifyError("Sorry! an error occurred.","Error");
+//                    notification.notifyError("Sorry! an error occurred.","Error");
                 }
                 return null;
             }
@@ -776,11 +791,13 @@ public class studentController implements Initializable{
             MyProgressIndicator.getMyProgressIndicatorInstance().hideProgress();
             notification.notifySuccess("You added a new student","Success");
             clearStdField();
+            clearGuardianInfo();
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"",ButtonType.YES,ButtonType.NO);
             alert.setTitle("Clear Fields");
             alert.setHeaderText("Do you want to clear the Parent fields?\nIf you want to save another student with the \n " +
                     "same parent, click NO otherwise click YES.");
+            alert.initOwner(uploadImg.getScene().getWindow());
             Optional<ButtonType>result = alert.showAndWait();
             if(result.isPresent() && result.get() == ButtonType.YES)
                 clearParentField();

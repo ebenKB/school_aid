@@ -61,10 +61,10 @@ public class classFormController implements Initializable{
         else if(stage.toLowerCase().equals("nursery two")){
             return 3;
         }
-        else if(stage.toLowerCase().equals("k.g.1") || stage.toLowerCase().equals("kg1") || stage.toLowerCase().equals("kg one")){
+        else if(stage.toLowerCase().equals("k.g.1") || stage.toLowerCase().equals("kg1") || stage.toLowerCase().equals("kg one") || stage.toLowerCase().equals("kindergarten one") ){
             return 4;
         }
-        else if(stage.toLowerCase().equals("k.g.2") || stage.toLowerCase().equals("kg2") || stage.toLowerCase().equals("kg two")){
+        else if(stage.toLowerCase().equals("k.g.2") || stage.toLowerCase().equals("kg2") || stage.toLowerCase().equals("kg two") || stage.toLowerCase().equals("kindergarten two")){
             return 5;
         }
         else if(stage.toLowerCase().equals("one") || stage.toLowerCase().equals("class one")|| stage.toLowerCase().equals("class 1")){
@@ -129,6 +129,7 @@ public class classFormController implements Initializable{
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"", ButtonType.YES,ButtonType.CANCEL);
                 alert.setContentText("You have created a new class by name: "+" "+stage.getName());
                 alert.setHeaderText("Do you want to save this class?");
+                alert.initOwner(save.getScene().getWindow());
                 Optional<ButtonType>result = alert.showAndWait();
 
                 if(result.isPresent() && result.get() == ButtonType.YES){

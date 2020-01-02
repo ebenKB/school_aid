@@ -49,12 +49,8 @@
          </contextMenu>
       </TableView>
       <Button fx:id="close" layoutX="997.0" layoutY="683.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="78.0" text="Close" AnchorPane.bottomAnchor="38.0" AnchorPane.rightAnchor="41.0" />
-      <ListView fx:id="bill_items" layoutX="824.0" layoutY="143.0" prefHeight="308.0" prefWidth="277.0" AnchorPane.bottomAnchor="307.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="143.0" />
-      <VBox layoutX="832.0" layoutY="113.0" AnchorPane.rightAnchor="214.0" AnchorPane.topAnchor="113.0">
-         <children>
-            <Label text="BILL ITEMS" />
-         </children>
-      </VBox>
+      <ListView fx:id="bill_items" layoutX="824.0" layoutY="185.0" prefHeight="266.0" prefWidth="277.0" AnchorPane.bottomAnchor="307.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="185.0" />
+      <VBox layoutX="832.0" layoutY="113.0" AnchorPane.rightAnchor="214.0" AnchorPane.topAnchor="113.0" />
       <Pane layoutX="820.0" layoutY="463.0" prefHeight="174.0" prefWidth="277.0" AnchorPane.bottomAnchor="121.0" AnchorPane.rightAnchor="19.0">
          <children>
             <HBox spacing="20.0">
@@ -73,5 +69,16 @@
             </HBox>
          </children>
       </Pane>
+      <Label layoutX="824.0" layoutY="158.0" text="BILL ITEMS" />
+      <HBox alignment="CENTER_LEFT" layoutX="824.0" layoutY="114.0" spacing="10.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="114.0">
+         <children>
+            <Label text="TUITION FEE" />
+            <Label fx:id="tuitionLabel" prefHeight="37.0" prefWidth="92.0" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Black" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

@@ -235,7 +235,11 @@ public class BillController implements Initializable {
                         // create bill for a class
                         bill = prepareBill();
                         if(isValid(bill)) {
-                            billDao.createBill(bill, selectedStages);
+                            if(billDao.createBill(bill, selectedStages)) {
+                                Notification.getNotificationInstance().notifySuccess("A new bill has been created", "Success");
+                            } else {
+                                Notification.getNotificationInstance().notifyError("An error occurred while creating the bill", "Error");
+                            }
                         }
                     } else if (studentToggle.getSelectedToggle() == studentToggle) {
                         // create a bill for selected students

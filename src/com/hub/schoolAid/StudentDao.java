@@ -22,7 +22,7 @@ public class StudentDao {
     //methods to interface with the database
     public Boolean addNewStudent(Student student) {
         try{
-            em=HibernateUtil.getEntityManager();
+            em = HibernateUtil.getEntityManager();
             em.getTransaction().begin();
 
             student.setAge(student.calcAge(student.getDob()));
@@ -38,7 +38,6 @@ public class StudentDao {
             student.setReg_date(LocalDate.now());
             student.setDeleted(false);
             em.persist(student);
-//            HibernateUtil.save(Student.class, student);
 
             // get the bill of the class that the student belongs to and add the student to the bill
             Bill bill = student.getStage().getBill();
@@ -48,7 +47,7 @@ public class StudentDao {
                 bill.getStudents().add(student);
                 em.merge(bill);
             } else {
-                System.out.println("Sorry the bill is null");
+                return false;
             }
             em.getTransaction().commit();
 

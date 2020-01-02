@@ -74,7 +74,9 @@ public class ManageStageController {
             public void changed(ObservableValue<? extends Stage> observable, Stage oldValue, Stage newValue) {
                 className.setText(newValue.getName());
                 numOnRoll.setText(String.valueOf(newValue.getNum_on_roll()));
-                feesAmount.setText(newValue.getBill().getTotalBill().toString());
+                if(newValue.getBill() != null) {
+                    feesAmount.setText(newValue.getBill().getTotalBill().toString());
+                }
                 feedingFee.setText(newValue.getFeeding_fee().toString());
                 selectedStage = newValue;
             }

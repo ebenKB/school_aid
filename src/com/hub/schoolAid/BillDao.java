@@ -108,6 +108,7 @@ public class BillDao {
      * @return return true if the transaction was successful else return false
      */
     public Boolean createBill (Bill bill, List<Stage>stages) {
+        System.out.println("Creating a bill for "+ stages.size());
         try {
             StudentDao studentDao = new StudentDao();
             List<Student>students = new ArrayList<>();
@@ -127,6 +128,7 @@ public class BillDao {
             createBill(students, bill);
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return  false;
         }
     }

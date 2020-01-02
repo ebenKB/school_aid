@@ -131,6 +131,7 @@ public class ImageHandler {
                 fileChooser =null;
                 return newPath;
             }catch (Exception e) {
+                fileChooser = null;
                 return null;
             }
         } else return newPath;

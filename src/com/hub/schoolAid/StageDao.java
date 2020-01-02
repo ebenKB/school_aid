@@ -20,14 +20,14 @@ private EntityManager em;
             em=HibernateUtil.getEntityManager();
             HibernateUtil.begin();
             String hql = "FROM  Class C order by C.classValue ASC";
-            return em.createQuery(hql).getResultList();
+            List<Stage>stages = em.createQuery(hql).getResultList();
+            return stages;
         } catch (Exception e) {
             HibernateUtil.close();
             return null;
         }finally {
-            if(em == null) {
-                em.close();
-            }
+            em.close();
+
         }
     }
 

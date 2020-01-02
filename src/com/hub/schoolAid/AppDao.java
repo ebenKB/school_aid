@@ -42,8 +42,8 @@ public class AppDao {
         } catch (Exception e) {;
             return  false;
         }
-
     }
+
 //    public static Boolean canShowPopUp(){
 //        session = HibernateUtil.getSession();
 //        session.beginTransaction();
@@ -148,17 +148,4 @@ public class AppDao {
             return true;
         }  else return false;
     }
-//    public App getAppSettings() {
-//        try {
-//            em = HibernateUtil.getEntityManager();
-//            HibernateUtil.begin();
-//            Query query = em.createQuery("from app ");
-//            return  (App) query.getSingleResult();
-//        }catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//        } finally {
-//            em.close();
-//        }
-//    }
 }

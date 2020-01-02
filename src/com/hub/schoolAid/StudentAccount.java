@@ -14,7 +14,7 @@ public class StudentAccount {
     private double schFeesPaid =0.0; // amount that has been paid for school fees
     private double feedingFeeToPay = 0.0;
     private double feedingFeeCredit = 0.0;
-    private Double schoolFeesBalance;
+    private Double schoolFeesBalance =0.0;
     private Double schoolFeesDiscount = 0.0;
     private Double previousSchoolFeesBalance = 0.0;
 
