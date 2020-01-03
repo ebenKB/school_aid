@@ -20,6 +20,7 @@ import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -73,6 +74,9 @@ public class ManageStudentController implements Initializable {
     @FXML
     private Button cancel;
 
+    @FXML
+    private Button setGroup;
+
     private CheckBox checkBox = new CheckBox();
     private CheckBox selectAll = new CheckBox();
     private StudentDao studentDao = new StudentDao();
@@ -82,8 +86,13 @@ public class ManageStudentController implements Initializable {
     private FilteredList<Student> filteredData = new FilteredList <> (students, e ->true);
     private SortedList<Student> sortedList = new SortedList<>(filteredData);
     private Boolean hasEnabledFields= false;
+    TableColumn<Student, String> groupCol;
 
     public void init() {
+        // add a new column for groups
+        groupCol = new TableColumn<>("Group");
+        studentTableView.getColumns().add(groupCol);
+
         // add a check box to select all
         checkStudents.setGraphic(selectAll);
         Task task = new Task() {
@@ -126,6 +135,13 @@ public class ManageStudentController implements Initializable {
             stage.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getStage().getName()));
             addCheckBoxToTable(checkStudents);
             studentTableView.setItems(students);
+
+            // check if the student has a group
+            groupCol.setCellValueFactory(param -> {
+                if(param.getValue().getCategory() != null) {
+                    return  new SimpleStringProperty(param.getValue().getCategory().getName());
+                } else return new SimpleStringProperty("N/A");
+            });
         }
     }
 
@@ -264,6 +280,7 @@ public class ManageStudentController implements Initializable {
                     demoteStudent.setDisable(false);
                     promoteStudent.setDisable(false);
                     setNewClass.setDisable(false);
+                    setGroup.setDisable(false);
 
                     // turn on the flag to show that this action has been performed
                     hasEnabledFields = true;
@@ -273,11 +290,29 @@ public class ManageStudentController implements Initializable {
                     promoteStudent.setDisable(true);
                     setNewClass.setDisable(true);
                     hasEnabledFields=false;
+                    setGroup.setDisable(true);
                 }
             }
         });
 
+        setGroup.setOnAction(event -> {
+            if(isOneStage(selectedStudents)) {
+                CategoryDao categoryDao = new CategoryDao();
+                categoryDao.attachCategory(selectedStudents, categoryDao.getCategory("A"));
+            }
+        });
+
         toggleHelp.setOnAction(event -> helpPane.setVisible(!helpPane.isVisible()));
+    }
+
+    private Boolean isOneStage(List<Student> studentList) {
+        // check if all the selected students are in the same
+        for(int i=0; i< studentList.size() - 1; i++) {
+            if(studentList.get(i).getStage().getId() !=studentList.get(i + 1).getStage().getId()){
+                return false;
+            }
+        }
+        return true;
     }
 
     private void selectAll () {

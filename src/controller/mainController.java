@@ -244,6 +244,9 @@ public class mainController implements Initializable{
     @FXML
     private Label trialLabel;
 
+    @FXML
+    private MenuItem classGroups;
+
     public static User user;
     private ObservableList<Student> data = FXCollections.observableArrayList();
     private FilteredList<Student> filteredData = new FilteredList <> (data, e ->true);
@@ -795,6 +798,9 @@ public class mainController implements Initializable{
         schoolFees.setOnAction(event -> showSchoolFees());
 
         studentBills.setOnAction(event -> showBill());
+
+        classGroups.setOnAction(event -> showGroup());
+
     }
 
     private void searchTable() {
@@ -1021,6 +1027,21 @@ public class mainController implements Initializable{
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+    }
+
+    private void showGroup() {
+        Parent root;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/showClassGroups.fxml"));
+        try {
+            root=fxmlLoader.load();
+            Scene scene =new Scene(root);
+            javafx.stage.Stage stage =new javafx.stage.Stage();
+            stage.setScene(scene);
+            stage.setTitle("New Group");
+            stage.show();
+        } catch (IOException e) {
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
+        }
     }
 }
 

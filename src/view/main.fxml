@@ -239,6 +239,7 @@
                               </MenuItem>
                               <MenuItem fx:id="viewAllClasses" mnemonicParsing="false" text="View All Classes" />
                               <MenuItem fx:id="editStage" mnemonicParsing="false" text="Edit Class Details" />
+                              <MenuItem fx:id="classGroups" mnemonicParsing="false" text="Class Groups" />
                            </items>
                            <graphic>
                               <ImageView fitHeight="38.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">

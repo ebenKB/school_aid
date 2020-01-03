@@ -32,6 +32,7 @@
             <Button fx:id="promoteStudent" disable="true" mnemonicParsing="false" prefHeight="23.0" prefWidth="109.0" text="Promote " />
             <Button fx:id="demoteStudent" disable="true" mnemonicParsing="false" text="Demote " />
             <Button fx:id="setNewClass" disable="true" mnemonicParsing="false" prefHeight="23.0" prefWidth="90.0" text="Set Class" />
+            <Button fx:id="setGroup" disable="true" mnemonicParsing="false" prefHeight="23.0" prefWidth="88.0" text="Set Group" />
          </children>
       </HBox>
       <Button fx:id="cancel" layoutX="946.0" layoutY="756.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="82.0" text="Cancel" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="184.0" />

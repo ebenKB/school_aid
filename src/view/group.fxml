@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="554.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CategoryController">
+   <children>
+      <Pane prefHeight="90.0" prefWidth="554.0" styleClass="darkPane">
+         <children>
+            <Text fill="#b2b2b2" layoutX="22.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Group">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <TextField fx:id="groupName" layoutX="120.0" layoutY="207.0" prefHeight="52.0" prefWidth="314.0" promptText="Group name" />
+      <HBox layoutX="304.0" layoutY="341.0" spacing="20.0">
+         <children>
+            <Button fx:id="cancel" mnemonicParsing="false" prefHeight="38.0" prefWidth="85.0" text="Cancel" />
+            <Button fx:id="save" mnemonicParsing="false" prefHeight="38.0" prefWidth="85.0" text="Save" />
+         </children>
+      </HBox>
+      <Text layoutX="120.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What is the name of the group?" />
+   </children>
+</AnchorPane>

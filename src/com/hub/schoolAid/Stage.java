@@ -25,6 +25,9 @@ public class Stage {
     @ManyToMany
     private List<Course> course;
 
+    @OneToMany
+    private List<Category>categories;
+
     @ManyToMany(mappedBy = "classes", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<Staff> staffs;
 
@@ -98,7 +101,6 @@ public class Stage {
     }
 
 
-
     // DELETE
     public Double getFeesToPay() {
         return feesToPay;
@@ -108,7 +110,6 @@ public class Stage {
     public void setFeesToPay(Double feesToPay) {
         this.feesToPay = feesToPay;
     }
-
 
 
     public List<Course> getCourse() {
@@ -149,6 +150,14 @@ public class Stage {
 
     public void setBill(Bill bill) {
         this.bill = bill;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
     //    public CurrentBill getCurrentBill() {

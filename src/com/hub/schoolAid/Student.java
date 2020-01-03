@@ -78,6 +78,10 @@ public class Student {
 //    @JoinColumn(name = "class_id")
     private Stage stage;
 
+    @ManyToOne(optional = true)
+    @JoinTable(name="student_category")
+    private Category category;
+
     @OneToOne(orphanRemoval = true,cascade = CascadeType.ALL)
     @JoinColumn(name = "student_acc")
     private StudentAccount account;
@@ -291,6 +295,14 @@ public class Student {
 
     public void setPicture(Picture picture) {
         this.picture = picture;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     //    public byte[] getPicture() {
