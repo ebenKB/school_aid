@@ -25,7 +25,7 @@ public class Stage {
     @ManyToMany
     private List<Course> course;
 
-    @OneToMany
+    @ManyToMany
     private List<Category>categories;
 
     @ManyToMany(mappedBy = "classes", cascade = { CascadeType.PERSIST, CascadeType.MERGE })

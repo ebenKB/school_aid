@@ -159,85 +159,141 @@ public class PDFMaker {
     public PDDocument createAttendanceReport(List<com.hub.schoolAid.Stage> stages) throws Exception {
 
             PDDocument pdDocument = new PDDocument();
-            List<Student>  students;
+//            List<Student>  students = null;
             StudentDao studentDao = new StudentDao();
 
             // create a new page for every class
             for(com.hub.schoolAid.Stage stage : stages) {
-                PDPage page = new PDPage(PDRectangle.A4);
-                PDRectangle mediaBox = page.getMediaBox();
-                pdDocument.addPage(page);
-
-                PDPageContentStream pdPageContentStream = new PDPageContentStream(pdDocument, page);
-
-                // set page margins
-                float margin = 20;
-                float yStartNewPage = mediaBox.getHeight() - margin;
-                float yStart = (yStartNewPage - 105);
-
-                //Set alignment and add school header
-                String title = "FEEDING FEE REPORT FOR "+ stage.toString().toUpperCase();
-                prepPageWidthHeader(pdPageContentStream, margin, yStart, mediaBox, title);
-                createCenterText("Report Generated on : "+ Utils.formatDate(LocalDate.now(), false), mediaBox, margin, pdPageContentStream, false, 70.0);
-//                createCenterText("FEEDING REPORT FOR "+ stage.toString().toUpperCase(), mediaBox, margin, pdPageContentStream );
-
-                // fetch the records from the database
-                try {
-                    students = studentDao.getStudentFromClass(stage);
-                    if (students.size() > 0) {
-                        // Display the records in a table
-                        float tableWidth = page.getMediaBox().getWidth() - (2 * margin);
-                        BaseTable baseTable = new BaseTable(yStart - 30, yStartNewPage, 20, tableWidth, (margin), pdDocument, page, true, true);
-                        Row<PDPage> headerRow = baseTable.createRow(30f);
-
-                        createHeaderRow(headerRow, "STUDENT", (float) 30);
-                        createHeaderRow(headerRow, "BALANCE", (float) 15);
-                        createHeaderRow(headerRow, "COUPONS LEFT", (float) 15);
-                        createHeaderRow(headerRow, "MON", (float) 8);
-                        createHeaderRow(headerRow, "TUE", (float) 8);
-                        createHeaderRow(headerRow, "WED", (float) 8);
-                        createHeaderRow(headerRow, "THUR", (float) 8);
-                        createHeaderRow(headerRow, "FRI", (float) 8);
-                        baseTable.addHeaderRow(headerRow);
-
-                        // create rows for the table
-                        for (Student s : students) {
-                            Row<PDPage> row = baseTable.createRow(24f);
-                            Cell<PDPage> cell;
-
-                            cell = row.createCell(30, s.getFirstname() == null ? " " : s.getFirstname() + " " + s.getLastname() + " " + s.getOthername());
-                            cell.setAlign(HorizontalAlignment.LEFT);
-                            cell.setValign(VerticalAlignment.MIDDLE);
-
-                            cell = row.createCell(15, String.valueOf(s.getAccount().getFeedingFeeCredit()));
-                            cell.setAlign(HorizontalAlignment.CENTER);
-                            cell.setValign(VerticalAlignment.MIDDLE);
-
-                            int coupons;
-                            Double bal = s.getAccount().getFeedingFeeCredit();
-                            if(bal<0){
-                                coupons = 0;
-                            } else {
-                                coupons = (int) (bal / s.getAccount().getFeedingFeeToPay());
-                            }
-
-                            row.createCell(15, String.valueOf(coupons))
-                                    .setAlign(HorizontalAlignment.CENTER);
-                            getEmptyPageCellForFeeding(row);
-                            getEmptyPageCellForFeeding(row);
-                            getEmptyPageCellForFeeding(row);
-                            getEmptyPageCellForFeeding(row);
-                            getEmptyPageCellForFeeding(row);
-                        }
-                        // draw the table
-                        baseTable.draw();
+                // check if the class has groups or partitions
+                if(stage.getCategories() != null && !stage.getCategories().isEmpty()) {
+                    // group the students into categories
+                    List<Category>categories = stage.getCategories();
+                    for(Category c: categories) {
+                        System.out.println("FOUND PARTITION FOR THIS CLASS: "+ stage.getName());
+                        pdDocument = createNewPageForFeedingTemplate(pdDocument,stage,studentDao, c);
                     }
-                    pdPageContentStream.close();
-                } catch (Exception e) {
-                    throw new Exception(e);
+                } else {
+                    System.out.println("No PARTITION FOR THIS CLASS: "+ stage.getName());
+                    // fetch students just by classes
+                    pdDocument = createNewPageForFeedingTemplate(pdDocument,stage,studentDao);
                 }
             }
             return pdDocument;
+    }
+
+    private PDDocument createNewPageForFeedingTemplate(PDDocument pdDocument, com.hub.schoolAid.Stage stage, StudentDao studentDao, Category c) throws  Exception {
+        PDPage page = new PDPage(PDRectangle.A4);
+        PDRectangle mediaBox = page.getMediaBox();
+        pdDocument.addPage(page);
+
+        PDPageContentStream pdPageContentStream = new PDPageContentStream(pdDocument, page);
+        List<Student>  students;
+
+        // set page margins
+        float margin = 20;
+        float yStartNewPage = mediaBox.getHeight() - margin;
+        float yStart = (yStartNewPage - 105);
+
+        //Set alignment and add school header
+        String title = "FEEDING FEE REPORT FOR "+ stage.toString().toUpperCase()+" "+c.getName();
+        prepPageWidthHeader(pdPageContentStream, margin, yStart, mediaBox, title);
+        createCenterText("Report Generated on : "+ Utils.formatDate(LocalDate.now(), false), mediaBox, margin, pdPageContentStream, false, 70.0);
+        //createCenterText("FEEDING REPORT FOR "+ stage.toString().toUpperCase(), mediaBox, margin, pdPageContentStream );
+
+        try {
+            // fetch the records from the database
+            students = studentDao.getStudentFromClass(stage, c);
+            // create feeding template for students
+            createFeedingTemplateForStudents(students, page,pdDocument, margin, yStart, yStartNewPage);
+            pdPageContentStream.close();
+            return  pdDocument;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception(e);
+        }
+    }
+
+    private PDDocument createNewPageForFeedingTemplate(PDDocument pdDocument, com.hub.schoolAid.Stage stage, StudentDao studentDao) throws  Exception {
+        PDPage page = new PDPage(PDRectangle.A4);
+        PDRectangle mediaBox = page.getMediaBox();
+        pdDocument.addPage(page);
+
+        PDPageContentStream pdPageContentStream = new PDPageContentStream(pdDocument, page);
+        List<Student>  students;
+
+        // set page margins
+        float margin = 20;
+        float yStartNewPage = mediaBox.getHeight() - margin;
+        float yStart = (yStartNewPage - 105);
+
+        //Set alignment and add school header
+        String title = "FEEDING FEE REPORT FOR "+ stage.toString().toUpperCase();
+        prepPageWidthHeader(pdPageContentStream, margin, yStart, mediaBox, title);
+        createCenterText("Report Generated on : "+ Utils.formatDate(LocalDate.now(), false), mediaBox, margin, pdPageContentStream, false, 70.0);
+        //createCenterText("FEEDING REPORT FOR "+ stage.toString().toUpperCase(), mediaBox, margin, pdPageContentStream );
+
+        try {
+            // fetch the records from the database
+            students = studentDao.getStudentFromClass(stage);
+            // create feeding template for students
+            createFeedingTemplateForStudents(students, page, pdDocument, margin, yStart, yStartNewPage);
+            pdPageContentStream.close();
+            return pdDocument;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception(e);
+        }
+    }
+
+    private void createFeedingTemplateForStudents(List<Student>students, PDPage page,PDDocument pdDocument, float margin, float yStart, float yStartNewPage) throws Exception{
+        if (students.size() > 0) {
+            // Display the records in a table
+            float tableWidth = page.getMediaBox().getWidth() - (2 * margin);
+            BaseTable baseTable = new BaseTable(yStart - 30, yStartNewPage, 20, tableWidth, (margin), pdDocument, page, true, true);
+            Row<PDPage> headerRow = baseTable.createRow(30f);
+
+            createHeaderRow(headerRow, "STUDENT", (float) 30);
+            createHeaderRow(headerRow, "BALANCE", (float) 15);
+            createHeaderRow(headerRow, "COUPONS LEFT", (float) 15);
+            createHeaderRow(headerRow, "MON", (float) 8);
+            createHeaderRow(headerRow, "TUE", (float) 8);
+            createHeaderRow(headerRow, "WED", (float) 8);
+            createHeaderRow(headerRow, "THUR", (float) 8);
+            createHeaderRow(headerRow, "FRI", (float) 8);
+            baseTable.addHeaderRow(headerRow);
+
+            // create rows for the table
+            for (Student s : students) {
+                Row<PDPage> row = baseTable.createRow(24f);
+                Cell<PDPage> cell;
+
+                cell = row.createCell(30, s.getFirstname() == null ? " " : s.getFirstname() + " " + s.getLastname() + " " + s.getOthername());
+                cell.setAlign(HorizontalAlignment.LEFT);
+                cell.setValign(VerticalAlignment.MIDDLE);
+
+                cell = row.createCell(15, String.valueOf(s.getAccount().getFeedingFeeCredit()));
+                cell.setAlign(HorizontalAlignment.CENTER);
+                cell.setValign(VerticalAlignment.MIDDLE);
+
+                int coupons;
+                Double bal = s.getAccount().getFeedingFeeCredit();
+                if(bal<0){
+                    coupons = 0;
+                } else {
+                    coupons = (int) (bal / s.getAccount().getFeedingFeeToPay());
+                }
+
+                row.createCell(15, String.valueOf(coupons))
+                        .setAlign(HorizontalAlignment.CENTER);
+                getEmptyPageCellForFeeding(row);
+                getEmptyPageCellForFeeding(row);
+                getEmptyPageCellForFeeding(row);
+                getEmptyPageCellForFeeding(row);
+                getEmptyPageCellForFeeding(row);
+            }
+            // draw the table
+            baseTable.draw();
+        }
     }
 
     public PDDocument generateSchoolFeesReport(ObservableList<Student>students) throws  IOException {

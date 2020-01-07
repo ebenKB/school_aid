@@ -8,9 +8,13 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 
 import java.net.URL;
 import java.util.List;
@@ -35,6 +39,9 @@ public class classListController implements Initializable{
 
     @FXML
     private MenuItem autoUpdateClassSize;
+
+    @FXML
+    private MenuItem createPartition;
 
     @FXML
     private JFXButton close;
@@ -111,5 +118,26 @@ public class classListController implements Initializable{
                new Thread(task).start();
            }
        });
+
+       createPartition.setOnAction(event -> showPartitionForm());
+    }
+
+    private void showPartitionForm() {
+        Parent root;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/assignGroups.fxml"));
+        try {
+            root=fxmlLoader.load();
+            AssignGroupController controller = fxmlLoader.getController();
+            controller.init(data);
+            Scene scene = new Scene(root);
+            javafx.stage.Stage stage = new javafx.stage.Stage();
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(createPartition.getParentPopup().getOwnerWindow());
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Notification.getNotificationInstance().notifyError("An error occurred while showing the form", "error");
+        }
     }
 }

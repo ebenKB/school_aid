@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.CheckListView?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="589.0" stylesheets="@../stylesheet/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AssignGroupController">
+   <children>
+      <Pane prefHeight="77.0" prefWidth="589.0" styleClass="darkPane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text fill="#e8dfdf" layoutX="32.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assign Groups">
+               <font>
+                  <Font name="Arial Black" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <HBox layoutX="29.0" layoutY="140.0" prefHeight="420.0" prefWidth="512.0" spacing="30.0" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="140.0">
+         <children>
+            <CheckListView fx:id="stageListview" focusTraversable="false" prefHeight="380.0" prefWidth="240.0" />
+            <CheckListView fx:id="groupListview" focusTraversable="false" prefHeight="484.0" prefWidth="241.0" />
+         </children>
+      </HBox>
+      <Text layoutX="29.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Classes" />
+      <Text layoutX="301.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Groups" />
+      <HBox layoutX="390.0" layoutY="585.0" spacing="30.0" AnchorPane.bottomAnchor="88.0" AnchorPane.rightAnchor="48.0">
+         <children>
+            <Button fx:id="cancel" focusTraversable="false" mnemonicParsing="false" text="Cancel" />
+            <Button fx:id="assign" focusTraversable="false" mnemonicParsing="false" text="Assign" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -195,6 +195,26 @@ public class StudentDao {
            }
         }
     }
+
+    public List<Student> getStudentFromClass(Stage newStage, Category category) throws Exception {
+        try{
+            if(em==null || !em.isOpen()) {
+                em=HibernateUtil.getEntityManager();
+                em.getTransaction().begin();
+            }
+            List<Student> results = em.createQuery("FROM students S WHERE S.stage.id =?1 and S.category.id =?2 order by S.firstname asc ")
+                    .setParameter(1,newStage.getId())
+                    .setParameter(2, category.getId())
+                    .getResultList();
+            return results;
+        }catch (HibernateException e){
+            throw new HibernateException(e);
+        } finally {
+            if(em == null) {
+                em.close();
+            }
+        }
+    }
     /**
      *
      * @param stage the name of the class to get students from

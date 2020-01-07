@@ -49,4 +49,9 @@ public class Category {
     public void setStudents(List<Student> students) {
         this.students = students;
     }
+
+    @Override
+    public String toString() {
+        return this.getName();
+    }
 }

@@ -25,7 +25,7 @@ public class CategoryDao {
         em = HibernateUtil.getEntityManager();
         em.getTransaction().begin();
         try {
-            return em.createQuery("from Category ").getResultList();
+            return em.createQuery("from Category").getResultList();
         } catch (Exception e) {
             return null;
         } finally {
@@ -82,6 +82,33 @@ public class CategoryDao {
         }
     }
 
+    public Boolean attachCategory(List<Stage>stages, List<Category>categories) {
+        try {
+            em= HibernateUtil.getEntityManager();
+            em.getTransaction().begin();
+
+            // add the categories to the stages
+            for(Stage stage : stages) {
+                stage.getCategories().addAll(categories);
+                em.merge(stage);
+            }
+
+            // set the stage to the categories
+            for(Category c: categories){
+                c.setStages(stages);
+                em.merge(c);
+            }
+            HibernateUtil.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            HibernateUtil.rollBack();
+            return false;
+        } finally {
+            em.close();
+        }
+    }
+
     public Boolean attachCategory(Student student, Category category) {
         try {
             em = HibernateUtil.getEntityManager();
@@ -116,6 +143,8 @@ public class CategoryDao {
             return true;
         } catch (Exception e) {
             return false;
+        } finally {
+            em.close();
         }
     }
 }

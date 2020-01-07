@@ -48,6 +48,12 @@ public class ManageStudentController implements Initializable {
     private TableColumn<Student, String> stage;
 
     @FXML
+    private Pane categoryPane;
+
+    @FXML
+    private ListView<Category> categoryListview;
+
+    @FXML
     private Button promoteStudent;
 
     @FXML
@@ -76,6 +82,12 @@ public class ManageStudentController implements Initializable {
 
     @FXML
     private Button setGroup;
+
+    @FXML
+    private Button assignGroup;
+
+    @FXML
+    private Button cancelSetCat;
 
     private CheckBox checkBox = new CheckBox();
     private CheckBox selectAll = new CheckBox();
@@ -296,15 +308,40 @@ public class ManageStudentController implements Initializable {
         });
 
         setGroup.setOnAction(event -> {
-            if(isOneStage(selectedStudents)) {
-                CategoryDao categoryDao = new CategoryDao();
-                categoryDao.attachCategory(selectedStudents, categoryDao.getCategory("A"));
+            categoryPane.setVisible(true);
+            populateCatListview();
+//            if(isOneStage(selectedStudents)) {
+//                CategoryDao categoryDao = new CategoryDao();
+//                categoryDao.attachCategory(selectedStudents, categoryDao.getCategory("A"));
+//            }
+        });
+
+        assignGroup.setOnAction(event -> {
+            if(categoryListview.getSelectionModel().getSelectedItem() != null) {
+                CategoryDao categoryDao =new CategoryDao();
+                if(categoryDao.attachCategory(selectedStudents, categoryListview.getSelectionModel().getSelectedItem())){
+                    Notification.getNotificationInstance().notifySuccess("Students have been moved to the group", "Success");
+                    categoryPane.setVisible(false);
+                    studentTableView.refresh();
+                } else {
+                    Notification.getNotificationInstance().notifyError("error while moving students to group", "Error");
+                }
             }
         });
+
+        cancelSetCat.setOnAction(event -> categoryPane.setVisible(false));
 
         toggleHelp.setOnAction(event -> helpPane.setVisible(!helpPane.isVisible()));
     }
 
+    private void populateCatListview() {
+        if(categoryListview.getItems().isEmpty()) {
+            CategoryDao categoryDao = new CategoryDao();
+            List<Category>categories = categoryDao.getCategory();
+            categoryListview.getItems().addAll(categories);
+        }
+    }
+    
     private Boolean isOneStage(List<Student> studentList) {
         // check if all the selected students are in the same
         for(int i=0; i< studentList.size() - 1; i++) {
