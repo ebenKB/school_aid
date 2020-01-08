@@ -14,7 +14,7 @@ public class App {
     }
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
+//  @GeneratedValue(strategy = GenerationType.AUTO)
     @SequenceGenerator(name = "app_sequence", sequenceName = "app_sequence", allocationSize = 1)
     @GeneratedValue(generator = "app_sequence")
     private Long id;
@@ -33,7 +33,6 @@ public class App {
     private Boolean isRegistered;
     private LocalDate lastOpened;
     private String license = "";
-
 
     @Enumerated(EnumType.STRING)
     private FeedingType feedingType;

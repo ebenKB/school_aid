@@ -72,6 +72,9 @@ public class AssessmentFormController implements Initializable{
     private TableColumn<Assessment, String> remarkCol;
 
     @FXML
+    private Label classAverage;
+
+    @FXML
     private Label subjectLabel;
 
     @FXML
@@ -110,6 +113,7 @@ public class AssessmentFormController implements Initializable{
     private  ObservableList <Pair<Course,Stage>> coursesLoaded = FXCollections.observableArrayList();
     FilteredList<Assessment> filteredAtt = new FilteredList<>(tempAssessment, e ->true);
     SortedList<Assessment> sortedList = new SortedList<>(filteredAtt);
+    private Double classTotal = 0.0;
 
 
     private Boolean hasInit=false;
@@ -166,7 +170,7 @@ public class AssessmentFormController implements Initializable{
              for (Student std : tempStudents) {
                  createNewAssessment(std, newAssessments);
              }
-         }else {
+         } else {
              for (Student std : tempStudents) {
                  Boolean found = false;
                  Iterator<Assessment> assessmentIterator = tempAssessment.iterator();
@@ -186,7 +190,7 @@ public class AssessmentFormController implements Initializable{
              Task task =new Task() {
                  @Override
                  protected Object call() throws Exception {
-                     System.out.println("creating and saving assessments");
+                    // check if we can save the new assessments
                      if(assessmentDao.createAssessment(newAssessments)) {
                          tempAssessment.addAll(newAssessments);
                          assessments.addAll(newAssessments);
@@ -296,7 +300,20 @@ public class AssessmentFormController implements Initializable{
         assmntLabel.setVisible(Boolean.TRUE);
         totalStudents.setText(String.valueOf(tempAssessment.size()));
 
+        computeClassAverage();
     }
+
+    private void computeClassAverage() {
+        classTotal = 0.0;
+        for (Assessment as: tempAssessment){
+            classTotal += (as.getClassScore() + as.getExamScore());
+        }
+
+        System.out.println("This is the total : " + classTotal);
+        Double avg = (classTotal / tempAssessment.size());
+        classAverage.setText(String.valueOf(avg));
+    }
+
     private void setTableViewColumns(){
         initAssessmentTable();
     }
@@ -304,6 +321,13 @@ public class AssessmentFormController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         activateSearch();
+
+        tempAssessment.addListener(new ListChangeListener<Assessment>() {
+            @Override
+            public void onChanged(Change<? extends Assessment> c) {
+                computeClassAverage();
+            }
+        });
 
         Task init = new Task() {
             @Override

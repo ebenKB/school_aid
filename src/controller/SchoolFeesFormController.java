@@ -185,45 +185,35 @@ public class SchoolFeesFormController implements  Initializable {
     private void setDetails(Student student) {
         // check if multiple students are not selected
 //        if(selectedStudents.size() == 1) {
-            detailsVBox.setVisible(true);
-            viewPaymentDetails.setVisible(true);
-            // clear all the labels before setting the items
-            String cur = "GHC";
-            String amntDue;
-//            if (student.getAccount().getSchoolFeesBalance() < 0) {
-//                amntDue = "Total School Fees : "+String.valueOf((student.getAccount().getSchoolFeesBalance() * -1 ))+"\n\n";
-//            } else {
-//                amntDue = "Total School Fees : "+String.valueOf((student.getAccount().getSchoolFeesBalance()))+"\n\n";
-//            }
+        detailsVBox.setVisible(true);
+        viewPaymentDetails.setVisible(true);
+        // clear all the labels before setting the items
+        String cur = "GHC";
+        String amntDue;
 
-            Double balance = student.getAccount().getSchoolFeesBalance();
-            String owing = String.valueOf("Balance : "+ (balance))+"\n\n";
+        Double balance = student.getAccount().getSchoolFeesBalance();
+        String owing = String.valueOf("Balance : "+ (balance))+"\n\n";
 
-            // set the labels
-            h.getStyleClass().add("heading-label");
-            name.setText(studentTableview.getSelectionModel().getSelectedItem().toString()+"\n\n");
-            name.getStyleClass().add("heading-label");
-            c.setText(cur);
-            c.getStyleClass().add("white-label");
-//            ad.setText(amntDue);
-            ad.getStyleClass().add("white-label");
-            ap.setText("Amount paid : "+ String.valueOf(student.getAccount().getSchFeesPaid())+"\n\n");
-            ap.getStyleClass().add("white-label");
-            o.setText(owing);
-            // check if the student is owing
-            if(balance < 0) {
-                o.getStyleClass().add("owing-label");
-            } else {
-                o.getStyleClass().add("credit-label");
-            }
+        // set the labels
+        h.getStyleClass().add("heading-label");
+        name.setText(studentTableview.getSelectionModel().getSelectedItem().toString()+"\n\n");
+        name.getStyleClass().add("heading-label");
+        c.setText(cur);
+        c.getStyleClass().add("white-label");
+        ad.getStyleClass().add("white-label");
+        ap.setText("Amount paid : "+ String.valueOf(student.getAccount().getSchFeesPaid())+"\n\n");
+        ap.getStyleClass().add("white-label");
+        o.setText(owing);
+        // check if the student is owing
+        if(balance!= null && balance < 0) {
+            o.getStyleClass().add("owing-label");
+        } else {
+            o.getStyleClass().add("credit-label");
+        }
 
-            detailsVBox.getStyleClass().add("details-wrapper");
-            detailsVBox.getChildren().clear();
-            detailsVBox.getChildren().addAll(name,h,c,ad,ap,o);
-//        } else {
-//            detailsVBox.setVisible(false);
-//            viewPaymentDetails.setVisible(false);
-//        }
+        detailsVBox.getStyleClass().add("details-wrapper");
+        detailsVBox.getChildren().clear();
+        detailsVBox.getChildren().addAll(name,h,c,ad,ap,o);
     }
 
     private void enableButtons() {
