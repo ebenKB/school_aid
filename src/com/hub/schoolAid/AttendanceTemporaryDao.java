@@ -148,7 +148,7 @@ public class AttendanceTemporaryDao {
         } catch (Exception e) {
             HibernateUtil.rollBack();
         } finally {
-            em.close();
+//            em.close();
             HibernateUtil.close();
         }
     }
