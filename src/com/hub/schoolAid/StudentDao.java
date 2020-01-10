@@ -577,11 +577,12 @@ public class StudentDao {
                 }
             }
             return true;
-        }catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception e) {
             return false;
         } finally {
-            em.close();
+            if(em.isOpen()){
+                em.close();
+            }
         }
     }
 

@@ -41,9 +41,6 @@ public class PreviewImageController implements Initializable {
     void initialize(byte [] imagebytes, Student student) {
         this.student = student;
         this.imagebytes = imagebytes;
-        System.out.println("this is the student we have received"+ this.student.toString());
-
-//        infoLabel.setText("KKKKKKK......");
     }
 
 //    void setFields(){

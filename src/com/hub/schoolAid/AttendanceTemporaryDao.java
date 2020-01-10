@@ -242,7 +242,7 @@ public class AttendanceTemporaryDao {
 
             // iterate the list
             for (int i=0; i < totalRecords; i++) {
-                if (i > 0 && i% batchSize == 0) {
+                if (i > 0 && i % batchSize == 0) {
                     em.flush();
                     em.clear();
                 }
@@ -259,7 +259,6 @@ public class AttendanceTemporaryDao {
         } finally {
             em.close();
         }
-
     }
 
     public Boolean checkOutWithCoupon() {

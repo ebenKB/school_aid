@@ -50,14 +50,14 @@
 <!--            <property name="javax.persistence.jdbc.user" value="eben" />-->
 <!--            <property name="javax.persistence.jdbc.password" value="thishubkbs*"/>-->
 
-                <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/schooldbnew?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;useSSL=false" />
-                <property name="javax.persistence.jdbc.user" value="root" />
+                <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/schooldb?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;useSSL=false" />
+                <property name="javax.persistence.jdbc.user" value="eben" />
                 <property name="javax.persistence.jdbc.password" value="thishubkbs*" />
 
 <!--            <property name="hibernate.cache.use_query_cache" value="true" />-->
 
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+<!--            <property name="hibernate.show_sql" value="true"/>-->
+<!--            <property name="hibernate.hbm2ddl.auto" value="update"/>-->
             <property name="connection.autoReconnect" value="true"/>
             <property name="javax.persistence.jdbc.dialect" value="org.hibernate.dialect.MySQL55Dialect"/>
             <property name="hibernate.connection.provider_class" value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider" />

@@ -760,7 +760,6 @@ public class salesDetailsFormController implements Initializable{
         resetFeedingBal.setOnAction(event -> {
             AttendanceTemporary attendanceTemporary = studentTableView.getSelectionModel().getSelectedItem();
             if(attendanceTemporary != null){
-                System.out.println("this is the student we are passing"+ attendanceTemporary.getStudent().toString());
                 resetFeeding(attendanceTemporary.getStudent());
 
                 populateStudentTable();
